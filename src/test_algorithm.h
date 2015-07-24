@@ -3,7 +3,20 @@
 
 
 
+#	include <iostream>
 
+
+
+template <typename ContainerT>
+inline void print_container(ContainerT const& container) {
+	for (auto& element : container) {
+		std::cout << element << ", ";
+	}
+	std::cout << std::endl;
+}
+
+
+void test_algorithm();
 
 
 

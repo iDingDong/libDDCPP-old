@@ -1,14 +1,18 @@
 #include <iostream>
 #include "standard/DDAlgorithm.hpp"
 #include "test_memory.h"
+#include "test_algorithm.h"
 
 bool greater(int x, int y) {
 	return y < x;
 }
 
 int main() {
-#if 1
+#if 0
 	test_memory();
+#endif
+#if 1 
+	test_algorithm();
 #endif
 #if 0
 	using DD::min;
