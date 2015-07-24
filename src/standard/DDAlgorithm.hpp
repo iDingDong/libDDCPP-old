@@ -21,6 +21,7 @@
 #	include "bits/DD_count_if.hpp"
 #	include "bits/DD_is_partitioned_by.hpp"
 #	include "bits/DD_is_sorted.hpp"
+#	include "bits/DD_is_sorted_until.hpp"
 #	include "bits/DD_fill.hpp"
 #	include "bits/DD_generate.hpp"
 #	include "bits/DD_copy.hpp"

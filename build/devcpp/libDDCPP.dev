@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=161
+UnitCount=163
 
 [VersionInfo]
 Major=1
@@ -1653,6 +1653,26 @@ BuildCmd=
 FileName=..\..\src\test_algorithm.h
 CompileCpp=1
 Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit162]
+FileName=..\..\src\standard\bits\DD_is_sorted.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit163]
+FileName=..\..\src\standard\bits\DD_is_sorted_until.hpp
+CompileCpp=1
+Folder=standard/bits
 Compile=1
 Link=1
 Priority=1000
