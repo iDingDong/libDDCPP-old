@@ -9,11 +9,11 @@
 
 
 DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicator, typename _ValueT>
+template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT, typename _ValueT>
 ProcessType replace_if(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
-	_UnaryPredicator __predicator,
+	_UnaryPredicatorT __predicator,
 	_ValueT __value
 ) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end && __predicator(*__begin)) {
 	for (; __begin != __end; ++__begin) {

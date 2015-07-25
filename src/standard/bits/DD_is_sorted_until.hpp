@@ -25,11 +25,11 @@ struct _IsSortedUntil {
 		return __begin_;
 	}
 	
-	template <typename _UndirectionalIteratorT_, typename _BinaryFunctionT_>
+	template <typename _UndirectionalIteratorT_, typename _BinaryPredicatorT_>
 	static _UndirectionalIteratorT_ _is_sorted_until(
 		_UndirectionalIteratorT_ __begin_,
 		_UndirectionalIteratorT_ const& __end_,
-		_BinaryFunctionT_ const& __less_
+		_BinaryPredicatorT_ const& __less_
 	) DD_NOEXCEPT_AS(++__begin_ != __end_ && __less_(*__begin_ DD_COMMA *__begin_) DD_COMMA _UndirectionalIteratorT_(__begin_)) {
 		if (__begin_ != __end_) {
 			for (_UndirectionalIteratorT_ __front_(__begin_); ++__begin_ != __end_ && !__less_(*__begin_, *__front_); ) {
@@ -56,11 +56,11 @@ struct _IsSortedUntil<true> {
 		return __begin_;
 	}
 	
-	template <typename _FreeAccessIteratorT_, typename _BinaryFunctionT_>
+	template <typename _FreeAccessIteratorT_, typename _BinaryPredicatorT_>
 	static _FreeAccessIteratorT_ _is_sorted_until(
 		_FreeAccessIteratorT_ __begin_,
 		_FreeAccessIteratorT_ const& __end_,
-		_BinaryFunctionT_ const& __less_
+		_BinaryPredicatorT_ const& __less_
 	) DD_NOEXCEPT_AS(++__begin_ < __end_ && __less_(*__begin_ DD_COMMA *(__begin_ - 1))) {
 		while (++__begin_ < __end_ && !__less_(*__begin_, *(__begin_ - 1))) {
 		}
@@ -85,11 +85,11 @@ inline _UndirectionalIteratorT is_sorted_until(
 	return detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end);
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryFunctionT>
+template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
 inline _UndirectionalIteratorT is_sorted_until(
 	_UndirectionalIteratorT const& __begin,
 	_UndirectionalIteratorT const& __end,
-	_BinaryFunctionT const& __less
+	_BinaryPredicatorT const& __less
 ) DD_NOEXCEPT_AS(detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end DD_COMMA __less)) {
 	return detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end, __less);
 }

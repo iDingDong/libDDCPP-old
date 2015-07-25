@@ -9,11 +9,11 @@
 
 
 DD_BEGIN
-template <typename _BidirectionalIteratorT, typename _UnaryPredicator>
+template <typename _BidirectionalIteratorT, typename _UnaryPredicatorT>
 _BidirectionalIteratorT partition_by(
 	_BidirectionalIteratorT __begin,
 	_BidirectionalIteratorT __end,
-	_UnaryPredicator const& __predicator
+	_UnaryPredicatorT const& __predicator
 ) DD_NOEXCEPT_IF(noexcept(__predicator(*--++__begin)) && noexcept(swap_target(__begin, __end))) {
 	while (__begin != __end) {
 		while (__predicator(*__begin)) {

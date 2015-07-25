@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=163
+UnitCount=165
 
 [VersionInfo]
 Major=1
@@ -1671,6 +1671,26 @@ BuildCmd=
 
 [Unit163]
 FileName=..\..\src\standard\bits\DD_is_sorted_until.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit164]
+FileName=..\..\src\standard\bits\DD_partition_point.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit165]
+FileName=..\..\src\standard\bits\DD_partition_point_by.hpp
 CompileCpp=1
 Folder=standard/bits
 Compile=1

@@ -9,11 +9,11 @@
 
 
 DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicator>
+template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
 DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count_if(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
-	_UnaryPredicator const& __predicator
+	_UnaryPredicatorT const& __predicator
 ) DD_NOEXCEPT_AS(++__begin != __end && __predicator(*__begin)) {
 #	if __cplusplus >= 201103L
 	auto _result = DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT)();

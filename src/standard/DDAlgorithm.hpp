@@ -19,7 +19,10 @@
 #	endif
 #	include "bits/DD_count.hpp"
 #	include "bits/DD_count_if.hpp"
+#	include "bits/DD_is_partitioned.hpp"
 #	include "bits/DD_is_partitioned_by.hpp"
+#	include "bits/DD_partition_point.hpp"
+#	include "bits/DD_partition_point_by.hpp"
 #	include "bits/DD_is_sorted.hpp"
 #	include "bits/DD_is_sorted_until.hpp"
 #	include "bits/DD_fill.hpp"

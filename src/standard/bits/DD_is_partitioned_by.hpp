@@ -9,11 +9,11 @@
 
 
 DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicator>
+template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
 ValidityType is_partitioned_by(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
-	_UnaryPredicator const& predicator
+	_UnaryPredicatorT const& __predicator
 ) DD_NOEXCEPT_AS(++__begin != __end && __predicator(*__begin)) {
 	for (; __begin != __end; ++__begin) {
 		if (!__predicator(*__begin)) {
