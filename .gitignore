@@ -3,6 +3,7 @@
 *.exe
 *.pch
 *.dll
+*.layout
 
 #ignore thumbnails created by windows
 Thumbs.db
