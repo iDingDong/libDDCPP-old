@@ -1,4 +1,4 @@
-//	standard/bits/DD_AllocationFailure.hpp
+//	DDCPP/standard/bits/DD_AllocationFailure.hpp
 #ifndef _DD_ALLOCATION_FAILURE_HPP_INCLUDED
 #	define _DD_ALLOCATION_FAILURE_HPP_INCLUDED 1
 

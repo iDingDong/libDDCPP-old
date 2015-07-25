@@ -1,4 +1,4 @@
-//	standard\DDCompare.hpp
+//	DDCPP/standard\DDCompare.hpp
 #ifndef _DDCOMPARE_HPP_INCLUDED
 #	define _DDCOMPARE_HPP_INCLUDED 1
 

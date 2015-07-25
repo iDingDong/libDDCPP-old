@@ -1,4 +1,4 @@
-//	standard/bits/DDMeta.hpp
+//	DDCPP/standard/bits/DDMeta.hpp
 #ifndef _DD_META_HPP_INCLUDED
 #	define _DD_META_HPP_INCLUDED
 

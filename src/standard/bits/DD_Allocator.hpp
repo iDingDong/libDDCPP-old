@@ -1,4 +1,4 @@
-//	standard/bits/DD_Allocator.hpp
+//	DDCPP/standard/bits/DD_Allocator.hpp
 #ifndef _DD_ALLOCATOR_HPP_INCLUDED
 #	define _DD_ALLOCATOR_HPP_INCLUDED 1
 

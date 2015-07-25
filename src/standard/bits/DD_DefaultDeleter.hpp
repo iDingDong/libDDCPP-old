@@ -1,4 +1,4 @@
-//	standard/bits/DD_DefualtDeleter.hpp
+//	DDCPP/standard/bits/DD_DefualtDeleter.hpp
 #ifndef _DD_DEFAULT_DELETER_HPP_INCLUDED
 #	define _DD_DEFAULT_DELETER_HPP_INCLUDED 1
 

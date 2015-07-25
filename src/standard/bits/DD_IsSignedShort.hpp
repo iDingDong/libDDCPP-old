@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsSignedShort.hpp
+//	DDCPP/standard/bits/DD_IsSignedShort.hpp
 #ifndef _DD_IS_SIGNED_SHORT_HPP_INCLUDED
 #	define _DD_IS_SIGNED_SHORT_HPP_INCLUDED 1
 

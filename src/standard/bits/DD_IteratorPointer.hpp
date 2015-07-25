@@ -1,4 +1,4 @@
-//	standard/bits/DD_IteratorPointer.hpp
+//	DDCPP/standard/bits/DD_IteratorPointer.hpp
 #ifndef _DD_ITERATOR_POINTER_HPP_INCLUDED
 #	define _DD_ITERATOR_POINTER_HPP_INCLUDED 1
 

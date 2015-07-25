@@ -1,4 +1,4 @@
-//	standard/bits/DD_select_sort.hpp
+//	DDCPP/standard/bits/DD_select_sort.hpp
 #ifndef _DD_SELECT_SORT_HPP_INCLUDED
 #	define _DD_SELECT_SORT_HPP_INCLUDED
 

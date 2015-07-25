@@ -1,4 +1,4 @@
-//	standard/bits/DD_list_definitions,hpp
+//	DDCPP/standard/bits/DD_list_definitions,hpp
 #ifndef _DD_LIST_DEFINITIONS_HPP_INCLUDED
 #	define _DD_LIST_DEFINITIONS_HPP_INCLUDED 1
 

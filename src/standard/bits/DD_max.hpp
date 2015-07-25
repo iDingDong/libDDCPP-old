@@ -1,4 +1,4 @@
-//	standard/bits/DD_max.hpp
+//	DDCPP/standard/bits/DD_max.hpp
 #ifndef _DD_MAX_HPP_INCLUDED
 #	define _DD_MAX_HPP_INCLUDED 1
 

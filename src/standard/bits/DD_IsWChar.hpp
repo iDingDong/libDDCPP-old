@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsWChar.hpp
+//	DDCPP/standard/bits/DD_IsWChar.hpp
 #ifndef _DD_IS_W_CHAR_HPP_INCLUDED
 #	define _DD_IS_W_CHAR_HPP_INCLUDED 1
 

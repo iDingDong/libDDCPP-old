@@ -1,4 +1,4 @@
-//	standard/bits/DD_CompatStlContainer.hpp
+//	DDCPP/standard/bits/DD_CompatStlContainer.hpp
 #ifndef _DD_COMPAT_STL_CONTAINER_HPP_INCLUDED
 #	define _DD_COMPAT_STL_CONTAINER_HPP_INCLUDED 1
 

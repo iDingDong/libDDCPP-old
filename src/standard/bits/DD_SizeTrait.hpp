@@ -1,4 +1,4 @@
-//	standard/bits/DD_SizeTrait.hpp
+//	DDCPP/standard/bits/DD_SizeTrait.hpp
 #ifndef _DD_SIZE_TRAIT_HPP_INCLUDED
 #	define _DD_SIZE_TRAIT_HPP_INCLUDED 1
 

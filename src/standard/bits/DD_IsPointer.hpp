@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsPointer.hpp
+//	DDCPP/standard/bits/DD_IsPointer.hpp
 #ifndef _DD_IS_POINTER_HPP_INCLUDED
 #	define _DD_IS_POINTER_HPP_INCLUDED 1
 

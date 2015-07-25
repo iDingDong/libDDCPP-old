@@ -1,4 +1,4 @@
-//	standard/bits/DD_relationship_operators.hpp
+//	DDCPP/standard/bits/DD_relationship_operators.hpp
 #ifndef _DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED
 #	define _DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED 1
 

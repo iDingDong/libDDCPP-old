@@ -1,4 +1,4 @@
-//	standard/bits/DD_TypeList.hpp
+//	DDCPP/standard/bits/DD_TypeList.hpp
 #ifndef _DD_TYPE_LIST_HPP_INCLUDED
 #	define _DD_TYPE_LIST_HPP_INCLUDED 1
 

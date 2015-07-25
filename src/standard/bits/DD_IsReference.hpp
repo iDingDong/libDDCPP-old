@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsReference.hpp
+//	DDCPP/standard/bits/DD_IsReference.hpp
 #ifndef _DD_IS_REFERENCE_HPP_INCLUDED
 #	define _DD_IS_REFERENCE_HPP_INCLUDED 1
 

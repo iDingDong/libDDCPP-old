@@ -1,4 +1,4 @@
-//	standard/bits/DD_dereference.hpp
+//	DDCPP/standard/bits/DD_dereference.hpp
 #ifndef _DD_DEREFERENCE_HPP_INCLUDED
 #	define _DD_DEREFERENCE_HPP_INCLUDED 1
 

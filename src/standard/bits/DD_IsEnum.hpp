@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsEnum.hpp
+//	DDCPP/standard/bits/DD_IsEnum.hpp
 #ifndef _DD_IS_ENUM_HPP_INCLUDED
 #	define _DD_IS_ENUM_HPP_INCLUDED 1
 

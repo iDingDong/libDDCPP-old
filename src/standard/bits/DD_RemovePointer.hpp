@@ -1,4 +1,4 @@
-//	standard/bits/DD_RemovePointer.hpp
+//	DDCPP/standard/bits/DD_RemovePointer.hpp
 #ifndef _DD_REMOVE_POINTER_HPP_INCLUDED
 #	define _DD_REMOVE_POINTER_HPP_INCLUDED 1
 

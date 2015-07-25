@@ -1,4 +1,4 @@
-//	standard/bits/DD_RemoveReference.hpp
+//	DDCPP/standard/bits/DD_RemoveReference.hpp
 #ifndef _DD_REMOVE_REFERENCE_HPP_INCLUDED
 #	define _DD_REMOVE_REFERENCE_HPP_INCLUDED 1
 

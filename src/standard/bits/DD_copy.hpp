@@ -1,4 +1,4 @@
-//	standard/bits/DD_copy.hpp
+//	DDCPP/standard/bits/DD_copy.hpp
 #ifndef _DD_COPY_HPP_INCLUDED
 #	define _DD_COPY_HPP_INCLUDED 1
 

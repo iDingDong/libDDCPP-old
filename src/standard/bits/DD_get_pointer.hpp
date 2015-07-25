@@ -1,4 +1,4 @@
-//	standard/bits/DD_get_pointer.hpp
+//	DDCPP/standard/bits/DD_get_pointer.hpp
 #ifndef _DD_GET_POINTER_HPP_INCLUDED
 #	define _DD_GET_POINTER_HPP_INCLUDED 1
 

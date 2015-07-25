@@ -1,4 +1,4 @@
-//	standard/bits/DD_merge.hpp
+//	DDCPP/standard/bits/DD_merge.hpp
 #ifndef _DD_MERGE_HPP_INCLUDED
 #	define _DD_MERGE_HPP_INCLUDED 1
 

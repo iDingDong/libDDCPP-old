@@ -1,4 +1,4 @@
-//	standard/bits/DD_Trait.hpp
+//	DDCPP/standard/bits/DD_Trait.hpp
 #ifndef _DD_TRAIT_HPP_INCLUDED
 #	define _DD_TRAIT_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_length_difference.hpp
+//	DDCPP/standard/bits/DD_length_difference.hpp
 #ifndef _DD_LENGTH_DIFFERENCE_HPP_INCLUDED
 #	define _DD_LENGTH_DIFFERENCE_HPP_INCLUDED 1
 

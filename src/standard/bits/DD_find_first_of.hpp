@@ -1,4 +1,4 @@
-//	standard/bits/DD_find_first_of.hpp
+//	DDCPP/standard/bits/DD_find_first_of.hpp
 #ifndef _DD_FIRST_OF_HPP_INCLUDED
 #	define _DD_FIRST_OF_HPP_INCLUDED 1
 

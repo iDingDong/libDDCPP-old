@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsDouble.hpp
+//	DDCPP/standard/bits/DD_IsDouble.hpp
 #ifndef _DD_IS_DOUBLE_HPP_INCLUDED
 #	define _DD_IS_DOUBLE_HPP_INCLUDED
 

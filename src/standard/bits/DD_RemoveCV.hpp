@@ -1,4 +1,4 @@
-//	standard/bits/DD_RemoveCV.hpp
+//	DDCPP/standard/bits/DD_RemoveCV.hpp
 #ifndef _DD_REMOVE_C_V_HPP_INCLUDED
 #	define _DD_REMOVE_C_V_HPP_INCLUDED 1
 

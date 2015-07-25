@@ -1,4 +1,4 @@
-//	standard/bits/DD_ParasiticPointer.hpp
+//	DDCPP/standard/bits/DD_ParasiticPointer.hpp
 #ifndef _DD_INTRUSIVE_POINTER_HPP_INCLUDED
 #	define _DD_INTRUSIVE_POINTER_HPP_INCLUDED 1
 

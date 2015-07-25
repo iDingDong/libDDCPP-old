@@ -1,4 +1,4 @@
-//	standard/bits/DD_InitializerList.hpp
+//	DDCPP/standard/bits/DD_InitializerList.hpp
 #ifndef _DD_INITIALIZER_LIST_HPP_INCLUDED
 #	define _DD_INITIALIZER_LIST_HPP_INCLUDED 1
 

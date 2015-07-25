@@ -1,4 +1,4 @@
-//	standard/bits/DD_ArrayIterator.hpp
+//	DDCPP/standard/bits/DD_ArrayIterator.hpp
 #ifndef _DD_ARRAY_ITERATOR_HPP_INCLUDED
 #	define _DD_ARRAY_ITERATOR_HPP_INCLUDED 1
 

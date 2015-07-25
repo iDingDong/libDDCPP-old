@@ -1,4 +1,4 @@
-//	standard/bits/DD_IntegeralConstant.hpp
+//	DDCPP/standard/bits/DD_IntegeralConstant.hpp
 #ifndef _DD_INTERGRAL_CONSTANT_HPP_INCLUDED
 #	define _DD_INTERGRAL_CONSTANT_HPP_INCLUDED 1
 

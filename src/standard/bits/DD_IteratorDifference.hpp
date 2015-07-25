@@ -1,4 +1,4 @@
-//	standard/bits/DD_IteratorDifference.hpp
+//	DDCPP/standard/bits/DD_IteratorDifference.hpp
 #ifndef _DD_ITERATOR_DIFFERENCE_HPP_INCLUDED
 #	define _DD_ITERATOR_DIFFERENCE_HPP_INCLUDED 1
 

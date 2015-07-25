@@ -1,4 +1,4 @@
-//	standard/bits/DD_And.hpp
+//	DDCPP/standard/bits/DD_And.hpp
 #ifndef _DD_AND_HPP_INCLUDED
 #	define _DD_AND_HPP_INCLUDED 1
 

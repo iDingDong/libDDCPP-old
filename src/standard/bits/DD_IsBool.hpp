@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsBool.hpp
+//	DDCPP/standard/bits/DD_IsBool.hpp
 #ifndef _DD_IS_BOOL_HPP_INCLUDED
 #	define _DD_IS_BOOL_HPP_INCLUDED 1
 

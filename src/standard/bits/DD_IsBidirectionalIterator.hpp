@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsBidirectionalIterator.hpp
+//	DDCPP/standard/bits/DD_IsBidirectionalIterator.hpp
 #ifndef _DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED
 #	define _DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED 1
 

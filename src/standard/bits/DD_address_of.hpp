@@ -1,4 +1,4 @@
-//	standard/bits/DD_address_of.hpp
+//	DDCPP/standard/bits/DD_address_of.hpp
 #ifndef _DD_ADDRESS_OF_HPP_INCLUDED
 #	define _DD_ADDRESS_OF_HPP_INCLUDED 1
 

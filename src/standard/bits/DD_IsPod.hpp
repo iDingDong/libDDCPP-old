@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsPod.hpp
+//	DDCPP/standard/bits/DD_IsPod.hpp
 #ifndef _DD_IS_POD_HPP_INCLUDED
 #	define _DD_IS_POD_HPP_INCLUDED 1
 

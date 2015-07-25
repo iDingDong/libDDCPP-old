@@ -1,4 +1,4 @@
-//	standard/bits/DD_is_sorted.hpp
+//	DDCPP/standard/bits/DD_is_sorted.hpp
 #ifndef _DD_IS_SORTED_HPP_INCLUDED
 #	define _DD_IS_SORTED_HPP_INCLUDED 1
 

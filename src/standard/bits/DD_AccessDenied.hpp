@@ -1,4 +1,4 @@
-//	standard/bits/DD_AccessDenied.hpp
+//	DDCPP/standard/bits/DD_AccessDenied.hpp
 #ifndef _DD_ACCESS_DENIED_HPP_INCLUDED
 #	define _DD_ACCESS_DENIED_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsConst.hpp
+//	DDCPP/standard/bits/DD_IsConst.hpp
 #ifndef _DD_IS_CONST_HPP_INCLUDED
 #	define _DD_IS_CONST_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_IteratorTrait.hpp
+//	DDCPP/standard/bits/DD_IteratorTrait.hpp
 #ifndef _DD_ITERATOR_TRAIT_HPP_INCLUDED
 #	define _DD_ITERATOR_TRAIT_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_release.hpp
+//	DDCPP/standard/bits/DD_release.hpp
 #ifndef _DD_RELEASE_HPP_INCLUDED
 #	define _DD_RELEASE_HPP_INCLUDED 1
 

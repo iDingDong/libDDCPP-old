@@ -1,4 +1,4 @@
-//	standard/bits/DD_UniquePointer.hpp
+//	DDCPP/standard/bits/DD_UniquePointer.hpp
 #ifndef _DD_UNIQUE_POINTER_HPP_INCLUDED
 #	define _DD_UNIQUE_POINTER_HPP_INCLUDED 1
 

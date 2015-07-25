@@ -1,4 +1,4 @@
-//	standard/bits/DD_Exception.hpp
+//	DDCPP/standard/bits/DD_Exception.hpp
 #ifndef _DD_EXCEPTION_HPP_INCLUDED
 #	define _DD_EXCEPTION_HPP_INCLUDED 1
 

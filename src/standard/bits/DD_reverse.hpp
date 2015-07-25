@@ -1,4 +1,4 @@
-//	standard/bits/DD_reverse.hpp
+//	DDCPP/standard/bits/DD_reverse.hpp
 #ifndef _DD_REVERSE_HPP_INCLUDED
 #	define _DD_REVERSE_HPP_INCLUDED 1
 

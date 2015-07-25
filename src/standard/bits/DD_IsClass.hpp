@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsClass.hpp
+//	DDCPP/standard/bits/DD_IsClass.hpp
 #ifndef _DD_IS_CLASS_HPP_INCLUDED
 #	define _DD_IS_CLASS_HPP_INCLUDED 1
 

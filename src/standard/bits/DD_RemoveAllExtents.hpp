@@ -1,4 +1,4 @@
-//	standard/bits/DD_RemoveAllExtents.hpp
+//	DDCPP/standard/bits/DD_RemoveAllExtents.hpp
 #ifndef _DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED
 #	define _DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED 1
 

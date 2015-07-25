@@ -1,4 +1,4 @@
-//	standard/bits/DD_partition_by.hpp
+//	DDCPP/standard/bits/DD_partition_by.hpp
 #ifndef _DD_PARTITION_BY_HPP_INCLUDED
 #	define _DD_PARTITION_BY_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsTriviallyDestructible
+//	DDCPP/standard/bits/DD_IsTriviallyDestructible
 #ifndef _DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED
 #	define _DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED 1
 

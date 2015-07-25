@@ -1,4 +1,4 @@
-//	standard/bits/DD_Conditional.hpp
+//	DDCPP/standard/bits/DD_Conditional.hpp
 #ifndef _DD_CONDITIONAL_HPP_INCLUDED
 #	define _DD_CONDITIONAL_HPP_INCLUDED 1
 

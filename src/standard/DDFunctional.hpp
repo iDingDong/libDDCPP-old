@@ -1,4 +1,4 @@
-//	standard/DDFunctional.hpp
+//	DDCPP/standard/DDFunctional.hpp
 #ifndef _DDFUNCTIONAL_HPP_INCLUDED
 #	define _DDFUNCTIONAL_HPP_INCLUDED 1
 

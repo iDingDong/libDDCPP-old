@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsVoid.hpp
+//	DDCPP/standard/bits/DD_IsVoid.hpp
 #ifndef _DD_IS_VOID_HPP_INCLUDED
 #	define _DD_IS_VOID_HPP_INCLUDED 1
 

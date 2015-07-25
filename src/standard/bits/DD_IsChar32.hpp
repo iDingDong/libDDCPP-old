@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsChar32.hpp
+//	DDCPP/standard/bits/DD_IsChar32.hpp
 #ifndef _DD_IS_CHAR_32_HPP_INCLUDED
 #	define _DD_IS_CHAR_32_HPP_INCLUDED 1
 

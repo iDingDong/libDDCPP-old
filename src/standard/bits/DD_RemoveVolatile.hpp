@@ -1,4 +1,4 @@
-//	standard/bits/DD_RemoveVolatile.hpp
+//	DDCPP/standard/bits/DD_RemoveVolatile.hpp
 #ifndef _DD_REMOVE_VOLATILE_HPP_INCLUDED
 #	define _DD_REMOVE_VOLATILE_HPP_INCLUDED 1
 

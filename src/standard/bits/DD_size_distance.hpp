@@ -1,4 +1,4 @@
-//	standard/bits/DD_size_distance.hpp
+//	DDCPP/standard/bits/DD_size_distance.hpp
 #ifndef _DD_SIZE_DISTANCE_HPP_INCLUDED
 #	define _DD_SIZE_DISTANCE_HPP_INCLUDED 1
 

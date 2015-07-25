@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsBaseOf.hpp
+//	DDCPP/standard/bits/DD_IsBaseOf.hpp
 #ifndef _DD_IS_BASE_OF_HPP_INCLUDED
 #	define _DD_IS_BASE_OF_HPP_INCLUDED 1
 

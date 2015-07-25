@@ -1,4 +1,4 @@
-//	standard/bits/DDAlgorithm.hpp
+//	DDCPP/standard/bits/DDAlgorithm.hpp
 #ifndef _DDALGORITHM_HPP_INCLUDED
 #	define _DDALGORITHM_HPP_INCLUDED 1
 
@@ -10,7 +10,9 @@
 #	include "bits/DD_equal.hpp"
 #	include "bits/DD_mismatch.hpp"
 #	include "bits/DD_find.hpp"
+#	include "bits/DD_find_not.hpp"
 #	include "bits/DD_find_if.hpp"
+#	include "bits/DD_find_if_not.hpp"
 #	include "bits/DD_find_first_of.hpp"
 #	if __cplusplus < 201103L
 #		include "bits/DD_find_min"

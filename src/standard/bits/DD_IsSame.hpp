@@ -1,4 +1,4 @@
-//	standard/bits/ DD_IsSame.hpp
+//	DDCPP/standard/bits/ DD_IsSame.hpp
 #ifndef _DD_IS_SAME_HPP_INCLUDED
 #	define _DD_IS_SAME_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsScalar.hpp
+//	DDCPP/standard/bits/DD_IsScalar.hpp
 #ifndef _DD_IS_SCALAR_HPP_INCLUDED
 #	define _DD_IS_SCALAR_HPP_INCLUDED 1
 

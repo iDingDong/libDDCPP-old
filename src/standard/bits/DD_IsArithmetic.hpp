@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsArithmetic.hpp
+//	DDCPP/standard/bits/DD_IsArithmetic.hpp
 #ifndef _DD_IS_ARITHMETIC_HPP_INCLUDED
 #	define _DD_IS_ARITHMETIC_HPP_INCLUDED 1
 

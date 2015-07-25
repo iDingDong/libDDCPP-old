@@ -1,4 +1,4 @@
-//	standard/bits/DD_generate.hpp
+//	DDCPP/standard/bits/DD_generate.hpp
 #ifndef _DD_GENERATE_HPP_INCLUDED
 #	define _DD_GENERATE_HPP_INCLUDED 1
 

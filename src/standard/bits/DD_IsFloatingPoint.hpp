@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsFloatingPoint.hpp
+//	DDCPP/standard/bits/DD_IsFloatingPoint.hpp
 #ifndef _DD_IS_FLOATING_POINT_HPP_INCLUDED
 #	define _DD_IS_FLOATING_POINT_HPP_INCLUDED 1
 

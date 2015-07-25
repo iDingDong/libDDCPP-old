@@ -1,4 +1,4 @@
-//	standard/bits/DD_GetPackBack.hpp
+//	DDCPP/standard/bits/DD_GetPackBack.hpp
 #ifndef _DD_GET_PACK_BACK_HPP_INCLUDED
 #	define _DD_GET_PACK_BACK_TYPE_HPP_INCLUDED 1
 

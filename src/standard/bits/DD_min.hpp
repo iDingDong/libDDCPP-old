@@ -1,4 +1,4 @@
-//	standard/bits/DD_min.hpp
+//	DDCPP/standard/bits/DD_min.hpp
 #ifndef _DD_MIN_HPP_INCLUDED
 #	define _DD_MIN_HPP_INCLUDED 1
 

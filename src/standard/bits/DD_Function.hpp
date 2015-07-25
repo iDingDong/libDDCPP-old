@@ -1,4 +1,4 @@
-//	standard/bits/DD_Function.hpp
+//	DDCPP/standard/bits/DD_Function.hpp
 #ifndef _DD_FUNCTION_HPP_INCLUDED
 #	define _DD_FUNCTION_HPP_INCLUDED 1
 

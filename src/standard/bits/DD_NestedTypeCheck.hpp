@@ -1,4 +1,4 @@
-//	standard/bits/DD_NestedTypeCheck.hpp
+//	DDCPP/standard/bits/DD_NestedTypeCheck.hpp
 #ifndef _DD_NESTED_TYPE_CHECK_HPP_INCLUDED
 #	define _DD_NESTED_TYPE_CHECK_HPP_INCLUDED 1
 

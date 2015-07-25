@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsSignedLongLong.hpp
+//	DDCPP/standard/bits/DD_IsSignedLongLong.hpp
 #ifndef _DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED
 #	define _DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED 1
 

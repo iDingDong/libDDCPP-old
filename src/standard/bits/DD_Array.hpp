@@ -1,4 +1,4 @@
-//	standard/bits/DD_Array.hpp
+//	DDCPP/standard/bits/DD_Array.hpp
 #ifndef _DD_ARRAY_HPP_INCLUDED
 #	define _DD_ARRAY_HPP_INCLUDED 1
 

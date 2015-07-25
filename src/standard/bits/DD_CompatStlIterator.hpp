@@ -1,4 +1,4 @@
-//	standard/bits/DD_CompatStlIterator.hpp
+//	DDCPP/standard/bits/DD_CompatStlIterator.hpp
 #ifndef _DD_COMPAT_STL_ITERATOR_HPP_INCLUDED
 #	define _DD_COMPAT_STL_ITERATOR_HPP_INCLUDED 1
 

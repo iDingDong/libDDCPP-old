@@ -1,4 +1,4 @@
-//	standard/DDCompatibility.hpp
+//	DDCPP/standard/DDCompatibility.hpp
 #ifndef _DDCOMPATIBILITY_HPP_INCLUDED
 #	define _DDCOMPATIBILITY_HPP_INCLUDED 1
 

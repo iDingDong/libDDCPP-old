@@ -1,4 +1,4 @@
-//	standard/bits/DD_equal.hpp
+//	DDCPP/standard/bits/DD_equal.hpp
 #ifndef _DD_EQUAL_HPP_INCLUDED
 #	define _DD_EQUAL_HPP_INCLUDED 1
 

@@ -1,4 +1,4 @@
-//	standard/bits/DD_global_definitions.hpp
+//	DDCPP/standard/bits/DD_global_definitions.hpp
 #ifndef _DD_GLOBAL_DEFINITIONS_HPP_INCLUDED
 #	define _DD_GLOBAL_DEFINITIONS_HPP_INCLUDED 1
 

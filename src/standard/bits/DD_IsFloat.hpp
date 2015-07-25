@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsFloat.hpp
+//	DDCPP/standard/bits/DD_IsFloat.hpp
 #ifndef _DD_IS_FLOAT_HPP_INCLUDED
 #	define _DD_IS_FLOAT_HPP_INCLUDED
 

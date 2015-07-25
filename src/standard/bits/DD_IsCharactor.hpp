@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsCharactor.hpp
+//	DDCPP/standard/bits/DD_IsCharactor.hpp
 #ifndef _DD_IS_CHARACTOR_HPP_INCLUDED
 #	define _DD_IS_CHARACTOR_HPP_INCLUDED 1
 

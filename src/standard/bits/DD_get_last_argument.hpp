@@ -1,4 +1,4 @@
-//	standard/bits/DD_get_last_argument.hpp
+//	DDCPP/standard/bits/DD_get_last_argument.hpp
 #ifndef _DD_GET_LAST_ARGUMENT_HPP_INCLUDED
 #	define _DD_GET_LAST_ARGUMENT_HPP_INCLUDED 1
 

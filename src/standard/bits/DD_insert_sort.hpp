@@ -1,4 +1,4 @@
-//	standard/bits/DD_insert_sort.hpp
+//	DDCPP/standard/bits/DD_insert_sort.hpp
 #ifndef _DD_INSERT_SORT_HPP_INCLUDED
 #	define _DD_INSERT_SORT_HPP_INCLUDED
 

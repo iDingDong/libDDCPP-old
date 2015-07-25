@@ -1,4 +1,4 @@
-//	standard/bits/DD_IsVolatile.hpp
+//	DDCPP/standard/bits/DD_IsVolatile.hpp
 #ifndef _DD_IS_Volatile_HPP_INCLUDED
 #	define _DD_IS_Volatile_HPP_INCLUDED 1
 
