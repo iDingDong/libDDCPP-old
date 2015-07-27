@@ -146,6 +146,11 @@ CounterType constexpr operator ""_DD_Counter(unsigned long long counter) {
 
 
 #	endif
+CheckType DD_CONSTANT on = true;
+CheckType DD_CONSTANT off = false;
+
+
+
 DD_END
 
 
