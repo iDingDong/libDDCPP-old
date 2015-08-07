@@ -4,7 +4,8 @@
 
 
 
-#	include "bits/DD_Functor.hpp"
+#	include "bits/DD_FunctorLess.hpp"
+#	include "bits/DD_FunctorGreater.hpp"
 
 
 

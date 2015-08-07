@@ -8,10 +8,10 @@ bool greater(int x, int y) {
 }
 
 int main() {
-#if 0
+#if 1
 	test_memory();
 #endif
-#if 1 
+#if 0 
 	test_algorithm();
 #endif
 #if 0

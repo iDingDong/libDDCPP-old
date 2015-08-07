@@ -9,30 +9,13 @@
 
 
 DD_BEGIN
-template <typename _ResultT, typename _ArgumentT>
-struct UnaryFunctor {
-	DD_ALIAS(ResultType, _ResultT)
-	DD_ALIAS(ArgumentType, _ArgumentT)
-	
-	
-};
-
-
-
-template <typename _ResultT, typename _ArgumentT1, typename _ArgumentT2>
-struct BinaryFunctor {
-	DD_ALIAS(ResultType, _ResultT)
-	DD_ALIAS(FirstArgumentType, _ArgumentT1)
-	DD_ALIAS(SecondArgumentType, _ArgumentT2)
-	
-	
-};
-
-
-
 #	if __cplusplus >= 201103L
 template <typename _ResultT, typename... _ArgumentsT>
 struct Functor {
+#	else
+template <typename _ResultT>
+struct Functor {
+#	endif
 	DD_ALIAS(ResultType, _ResultT)
 	
 	
@@ -41,7 +24,11 @@ struct Functor {
 
 
 template <typename _ResultT, typename _ArgumentT>
-struct Functor<_ResultT, _ArgumentT> : UnaryFunctor<_ResultT, _ArgumentT> {
+#	if __cplusplus >= 201103L
+struct UnaryFunctor : Functor<_ResultT, _ArgumentT> {
+#	else
+struct UnaryFunctor : Functor<_ResultT> {
+#	endif
 	DD_ALIAS(ResultType, _ResultT)
 	DD_ALIAS(ArgumentType, _ArgumentT)
 	
@@ -51,7 +38,11 @@ struct Functor<_ResultT, _ArgumentT> : UnaryFunctor<_ResultT, _ArgumentT> {
 
 
 template <typename _ResultT, typename _ArgumentT1, typename _ArgumentT2>
-struct Functor<_ResultT, _ArgumentT1, _ArgumentT2> : BinaryFunctor<_ResultT, _ArgumentT1, _ArgumentT2> {
+#	if __cplusplus >= 201103L
+struct BinaryFunctor : Functor<_ResultT, _ArgumentT1, _ArgumentT2> {
+#	else
+struct BinaryFunctor : Functor<_ResultT> {
+#	endif
 	DD_ALIAS(ResultType, _ResultT)
 	DD_ALIAS(FirstArgumentType, _ArgumentT1)
 	DD_ALIAS(SecondArgumentType, _ArgumentT2)
@@ -61,7 +52,6 @@ struct Functor<_ResultT, _ArgumentT1, _ArgumentT2> : BinaryFunctor<_ResultT, _Ar
 
 
 
-#	endif
 DD_END
 
 

@@ -17,11 +17,7 @@
 
 DD_DETAIL_BEGIN
 template <typename _ObjectT>
-#	if __cplusplus >= 201103L
 struct _IsFunction : StdIntegralConstant<std::is_function<_ObjectT>> {
-#	else
-struct _IsFunction : FalseType {
-#	endif
 };
 
 

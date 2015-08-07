@@ -125,7 +125,7 @@ struct ParasiticPointer<_ValueT, void> {
 	
 	public:
 	LengthType get_reference_count() const DD_NOEXCEPT {
-		return _m_pointer->reference_count;
+		return _m_pointer->first;
 	}
 	
 	
