@@ -10,6 +10,7 @@
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
 #	endif
+#	include "DD_debugger_definitions.hpp"
 #	include "DD_address_of.hpp"
 
 

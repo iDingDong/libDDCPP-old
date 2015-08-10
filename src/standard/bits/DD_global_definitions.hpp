@@ -10,8 +10,8 @@
 
 #	define _DDCPP 1000
 
-#	define DDCPP_ON 1
-#	define DDCPP_OFF 0
+#	define DD_ON 1
+#	define DD_OFF 0
 
 #	if !defined(DDCPP_DEFAULT_WARNING_OPTION)
 #		define DDCPP_DEFAULT_WARNING_OPTION DD_OFF
@@ -30,27 +30,37 @@
 #	endif
 
 #	if !defined(DDCPP_COMPAT_DEPRECATION)
-#		define DDCPP_COMPAT_DEPRECATION DDCPP_OFF
+#		define DDCPP_COMPAT_DEPRECATION DD_OFF
 #	endif
 
 #	if !defined(DDCPP_COMPAT_STL)
-#		define DDCPP_COMPAT_STL DDCPP_ON
+#		define DDCPP_COMPAT_STL DD_ON
 #	endif
+
+
 
 #	if !defined(__cplusplus)
 #		error Compiler should support ISO C++.
 #	elif __cplusplus < 201103L && DDCPP_VERSION_WARNING
-#		warning ISO/IEC 14882:2011 or a later version support is recommended. Define 'DDCPP_VERSION_WARNING' as 'DDCPP_OFF' to ignore this warning.
+#		warning ISO/IEC 14882:2011 or a later version support is recommended. Define 'DDCPP_VERSION_WARNING' as 'DD_OFF' to ignore this warning.
 #	endif
+
 
 #	define DD_BEGIN namespace DD {
 #	define DD_END }
+
 #	define DD_DETAIL_BEGIN DD_BEGIN namespace detail {
 #	define DD_DETAIL_END } DD_END
 
+#	define DD_USER_DEFINITION_BEGIN DD_DETAIL_BEGIN namespace user_definition {
+#	define DD_USER_DEFINITION_END } DD_DETAIL_END
+
+
 #	define DD_TO_STRING(literal) #literal
 
+
 #	define DD_BACKUP_CODE 0
+
 
 #	include "DD_compatibility_definitions.hpp"
 

@@ -148,13 +148,21 @@ struct Variant {
 	public:
 	template <typename _ValueT_>
 	_ValueT_& to() DD_NOEXCEPT {
+		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
 		return static_cast<detail::_VariantHolder<_ValueT_>&>(*_m_holder_pointer).m_value;
 	}
 	
 	public:
 	template <typename _ValueT_>
 	_ValueT_ const& to() const DD_NOEXCEPT {
+		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
 		return static_cast<detail::_VariantHolder<_ValueT_> const&>(*_m_holder_pointer).m_value;
+	}
+	
+	
+	public:
+	TypeInfo const& get_type() const {
+		return _m_holder_pointer->get_type();
 	}
 	
 	

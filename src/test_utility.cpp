@@ -1,5 +1,6 @@
 #include "test_utility.h"
 #define TEST_OBJECT_AUTO_PROMPT 0
+#define DDCPP_DEBUG DD_ON
 #include "test_object.hpp"
 #include <iostream>
 #include "standard/DDUtility.hpp"
@@ -15,11 +16,19 @@ void test_utility() {
 	{
 		{
 			DD::Variant variant_1((Test()));
+			if (variant_1.get_type() != typeid(Test)) {
+				throw "DD::Variant test failed.";
+			}
 			variant_1 = 2;
 			if (variant_1.to<int>() != 2) {
 				throw "DD::Variant test failed.";
 			}
 			variant_1 = Test();
+			Test tst = variant_1.to<Test>();
+			variant_1 = 3.3;
+			if (variant_1.to<double>() < 3.0) {
+				throw "DD::Variant test failed.";
+			}
 		}
 		if (Test::count != 0) {
 			throw "DD::Variant test failed.";

@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=178
+UnitCount=179
 
 [VersionInfo]
 Major=1
@@ -1829,4 +1829,14 @@ Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+
+[Unit179]
+FileName=..\..\src\standard\bits\DD_debugger_definitions.hpp
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+CompileCpp=1
 
