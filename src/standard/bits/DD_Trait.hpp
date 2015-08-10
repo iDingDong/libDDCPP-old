@@ -21,10 +21,15 @@
 #		include "DD_IsNoexceptMoveAssignable.hpp"
 #	endif
 #	include "DD_AddCV.hpp"
-#	include "DD_RemoveReference.hpp"
 #	include "DD_RemovePointer.hpp"
-#	include "DD_RemoveExtent.hpp"
 #	include "DD_RemoveAllExtents.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_Decay.hpp"
+#	else
+#		include "DD_AddPointer.hpp"
+#		include "DD_RemoveReference.hpp"
+#		include "DD_RemoveExtent.hpp"
+#	endif
 
 
 
@@ -90,6 +95,7 @@ struct Trait {
 	DD_ALIAS(ConstAdded, DD_MODIFY_TRAIT(AddConst, ObjectType))
 	DD_ALIAS(VolatileAdded, DD_MODIFY_TRAIT(AddVolatile, ObjectType))
 	DD_ALIAS(CVAdded, DD_MODIFY_TRAIT(AddCV, ObjectType))
+	DD_ALIAS(PointerAdded, DD_MODIFY_TRAIT(AddPointer, ObjectType))
 	DD_ALIAS(ReferenceRemoved, DD_MODIFY_TRAIT(RemoveReference, ObjectType))
 	DD_ALIAS(PointerRemoved, DD_MODIFY_TRAIT(RemovePointer, ObjectType))
 	DD_ALIAS(ExtentRemoved, DD_MODIFY_TRAIT(RemoveExtent, ObjectType))
@@ -97,6 +103,9 @@ struct Trait {
 	DD_ALIAS(ConstRemoved, DD_MODIFY_TRAIT(RemoveConst, ObjectType))
 	DD_ALIAS(VolatileRemoved, DD_MODIFY_TRAIT(RemoveVolatile, ObjectType))
 	DD_ALIAS(CVRemoved, DD_MODIFY_TRAIT(RemoveCV, ObjectType))
+#	if __cplusplus >= 201103L
+	using Decayed = DecayType<ObjectType>;
+#	endif
 	
 	
 };

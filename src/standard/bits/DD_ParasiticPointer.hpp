@@ -76,7 +76,7 @@ struct ParasiticPointer<_ValueT, void> {
 	explicit constexpr ParasiticPointer(
 		ConstructTag _tag,
 		_ArgumentsT_&&... __arguments_
-	) DD_NOEXCEPT_AS(new ParasitiferValueType{1 DD_COMMA ValueType(__arguments_...)}) : _m_pointer(new ParasitiferValueType{1, ValueType(__arguments_...)}) {
+	) DD_NOEXCEPT_AS(new ParasitiferValueType(1 DD_COMMA ValueType(__arguments_...))) : _m_pointer(new ParasitiferValueType(1, ValueType(__arguments_...))) {
 	};
 #	else
 	public:

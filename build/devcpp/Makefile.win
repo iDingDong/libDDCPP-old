@@ -4,14 +4,14 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = ../../src/main.o ../../src/test_memory.o ../../src/test_algorithm.o
-LINKOBJ  = ../../src/main.o ../../src/test_memory.o ../../src/test_algorithm.o
+OBJ      = ../../src/main.o ../../src/test_memory.o ../../src/test_algorithm.o ../../src/test_utility.o
+LINKOBJ  = ../../src/main.o ../../src/test_memory.o ../../src/test_algorithm.o ../../src/test_utility.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = libDDCPP.exe
-CXXFLAGS = $(CXXINCS) -g3 -std=c++11 -O0 -fno-elide-constructors
-CFLAGS   = $(INCS) -g3 -std=c++11 -O0 -fno-elide-constructors
+CXXFLAGS = $(CXXINCS) -g3 -std=c++11 -Wall -O0 -fno-elide-constructors
+CFLAGS   = $(INCS) -g3 -std=c++11 -Wall -O0 -fno-elide-constructors
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -32,3 +32,6 @@ $(BIN): $(OBJ)
 
 ../../src/test_algorithm.o: ../../src/test_algorithm.cpp
 	$(CPP) -c ../../src/test_algorithm.cpp -o ../../src/test_algorithm.o $(CXXFLAGS)
+
+../../src/test_utility.o: ../../src/test_utility.cpp
+	$(CPP) -c ../../src/test_utility.cpp -o ../../src/test_utility.o $(CXXFLAGS)

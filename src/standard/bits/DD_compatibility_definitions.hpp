@@ -43,9 +43,17 @@
 #	endif
 
 #	if __cplusplus >= 201103L
+#		define DD_TRAIT_MODIFIER(_ARG_Modifier) template <typename _MACRO_ObjectT> using _ARG_Modifier##Type = typename _ARG_Modifier<_MACRO_ObjectT>::Type;
 #		define DD_MODIFY_TRAIT(_ARG_Modifier, _ARG_Target) _ARG_Modifier##Type<_ARG_Target>
 #	else
+#		define DD_TRAIT_MODIFIER(_ARG_Modifier)
 #		define DD_MODIFY_TRAIT(_ARG_Modifier, _ARG_Target) typename _ARG_Modifier<_ARG_Target>::Type
+#	endif
+
+#	if __cplusplus >= 201103L
+#		define DD_IN_CLASS_INITIALIZE(_ARG_Expression) = _ARG_Expression
+#	else
+#		define DD_IN_CLASS_INITIALIZE(_ARG_Expression)
 #	endif
 
 #	if __cplusplus >= 201103L
@@ -60,6 +68,14 @@
 #		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class)
 #		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) private: _ARG_Class& operator =(_ARG_Class const& _origin);
 #		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class)
+#	endif
+
+#	if __cplusplus >= 201103L
+#		define DD_FINAL final
+#		define DD_OVERRIDE override
+#	else
+#		define DD_FINAL
+#		define DD_OVERRIDE
 #	endif
 
 

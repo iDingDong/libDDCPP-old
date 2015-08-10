@@ -2,30 +2,46 @@
 #include "standard/DDAlgorithm.hpp"
 #include "test_memory.h"
 #include "test_algorithm.h"
+#include "test_utility.h"
 
 bool greater(int x, int y) {
 	return y < x;
 }
 
 int main() {
-#if 1
-	test_memory();
-#endif
-#if 0 
-	test_algorithm();
+	try {
+#if 0
+		test_memory();
 #endif
 #if 0
-	using DD::min;
-	using DD::max;
-	using DD::min_max;
-	std::cout << min(1, 5, 3, 7, -2, 4) << std::endl;
-	std::cout << min(1, 5, 3, 7, -2, 4, greater) << std::endl;
-	std::cout << max(1, 5, 3, 7, -2, 4) << std::endl;
-	std::cout << max(1, 5, 3, 7, -2, 4, greater) << std::endl;
-	auto mm1 = min_max(1, 5, 3, 7, -2, 4);
-	std::cout << mm1.first << ", " << mm1.second << std::endl;
-	auto mm2 = min_max(1, 5, 3, 7, -2, 4, greater);
-	std::cout << mm2.first << ", " << mm2.second << std::endl;
-	return 0;
+		test_algorithm();
 #endif
+#if 1
+		test_utility();
+#endif
+#if 1
+		{
+			using DD::min;
+			using DD::max;
+			using DD::min_max;
+			auto mm1 = min_max(1, 5, 3, 7, -2, 4);
+			auto mm2 = min_max(1, 5, 3, 7, -2, 4, greater);
+			if (min(1, 5, 3, 7, -2, 4) != -2 ||
+				min(1, 5, 3, 7, -2, 4, greater) != 7 ||
+				max(1, 5, 3, 7, -2, 4) != 7 ||
+				max(1, 5, 3, 7, -2, 4, greater) != -2 ||
+				mm1.first != -2 ||
+				mm1.second != 7 ||
+				mm2.first != 7 ||
+				mm2.second != -2) {
+				throw "DD::min/DD::max/DD::min_max test failed.";
+			}
+		}
+#endif
+		std::cout << "All tests successfully operated.";
+	} catch (char const* prompt) {
+		std::cout << prompt;
+	}
+	std::cout << std::endl;
+	return 0;
 }

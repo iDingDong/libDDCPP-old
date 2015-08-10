@@ -48,13 +48,10 @@ struct RemoveReference<_ValueT&&> {
 
 
 #	endif
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using RemoveReferenceType = typename RemoveReference<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(RemoveReference)
 
 
 
-#	endif
 DD_END
 
 

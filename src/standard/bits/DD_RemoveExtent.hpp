@@ -46,13 +46,10 @@ struct RemoveExtent<_ValueT[]> {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using RemoveExtentType = typename RemoveExtent<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(RemoveExtent)
 
 
 
-#	endif
 DD_END
 
 

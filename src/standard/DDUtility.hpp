@@ -4,12 +4,14 @@
 
 
 
+#	include "bits/DD_UnusedIgnorer.hpp"
+#	include "bits/DD_Uncopiable.hpp"
+#	include "bits/DD_Dereferenceable.hpp"
 #	if __cplusplus >= 201103L
 #		include "bits/DD_Tuple.hpp"
-#	else
-#		include "bits/DD_Pair.hpp"
 #	endif
-#	include "bits/DD_swap.hpp"
+#	include "bits/DD_Pair.hpp"
+#	include "bits/DD_Variant.hpp"
 
 
 

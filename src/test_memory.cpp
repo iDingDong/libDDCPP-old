@@ -10,10 +10,10 @@
 
 
 std::mutex g_mutex;
-DD::ParasiticPointer<Test> g_ip(DD::construct_tag);
+//DD::ParasiticPointer<Test> g_ip(DD::construct_tag);
 
 
-
+/*
 void th1_main() {
 	while (true) {
 		std::cout << "out: " << g_ip.get_reference_count() << std::endl;
@@ -25,7 +25,7 @@ void th1_main() {
 		std::cout << "end: " << g_ip.get_reference_count() << std::endl;
 	}
 } 
-
+*/
 
 
 void test_memory() {
@@ -42,7 +42,7 @@ void test_memory() {
 		std::cout << "End Sign." << std::endl;
 	}
 #endif
-#if 1
+#if 0
 	{
 		std::thread th1(th1_main);
 		th1.detach();
