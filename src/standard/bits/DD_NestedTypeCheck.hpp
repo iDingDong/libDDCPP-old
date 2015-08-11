@@ -5,10 +5,11 @@
 
 
 #	include "DD_Nil.hpp"
-#	include "DD_IntegralConstant.hpp"
 #	include "DD_meta_definitions.hpp"
-#	include "DD_SizeTrait.hpp"
-#	include "DD_Matcher.hpp"
+#	if __cplusplus < 201103L
+#		include "DD_SizeTrait.hpp"
+#	endif
+#	include "DD_IntegralConstant.hpp"
 
 
 
@@ -19,7 +20,7 @@
 			struct _##_ARG_Checker {\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static ValidityType constexpr _match(Matcher<typename _MACRO_ObjectT_::__VA_ARGS__>*) noexcept(true) {\
+				static ValidityType constexpr _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::__VA_ARGS__>*) noexcept(true) {\
 					return true;\
 				}\
 				\
@@ -52,7 +53,7 @@
 			struct _ARG_Checker {\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static typename _MACRO_ObjectT_::_ARG_Target _match(Matcher<typename _MACRO_ObjectT_::_ARG_Target>*) noexcept(true);\
+				static typename _MACRO_ObjectT_::_ARG_Target _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*) noexcept(true);\
 				\
 				private:\
 				template <typename _MACRO_ObjectT_>\
@@ -60,7 +61,7 @@
 				\
 				\
 				public:\
-				using Type = decltype(_ARG_Checker<_MACRO_ObjectT>::_match<_MACRO_ObjectT>(nil_pointer));\
+				using Type = decltype(_match<_MACRO_ObjectT>(nil_pointer));\
 				\
 				\
 			};
@@ -70,7 +71,7 @@
 			template <typename _MACRO_ObjectT>\
 			struct _##_ARG_Checker {\
 				template <typename _MACRO_ObjectT_>\
-				static SizeTrait<1> _match(Matcher<typename _MACRO_ObjectT_::_ARG_Target>*);\
+				static SizeTrait<1> _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*);\
 				\
 				template <typename _MACRO_ObjectT_>\
 				static SizeTrait<2> _match(...);\
@@ -131,6 +132,17 @@
 				\
 			};
 #	endif
+
+
+
+DD_DETAIL_BEGIN
+template <typename ObjectT>
+struct _NestedTypeMatcher {
+};
+
+
+
+DD_DETAIL_END
 
 
 

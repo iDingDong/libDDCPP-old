@@ -9,9 +9,7 @@
 
 
 DD_BEGIN
-template <typename ObjectT>
-struct Matcher {
-};
+
 
 
 

@@ -5,12 +5,25 @@
 
 
 #	if __cplusplus >= 201103L
+#		include "DD_MemberFunctionCheck.hpp"
 #		include "DD_IsNoexceptMoveConstructible.hpp"
 #		include "DD_IsNoexceptMoveAssignable.hpp"
 #		include "DD_move.hpp"
 #	else
 #		include "DD_global_definitions.hpp"
 #	endif
+
+
+
+DD_DETAIL_BEGIN
+#	if __cplusplus >= 201103L
+DD_MEMBER_FUNCTION_CHECK(_HasSwap, swap, ProcessType, _MACRO_ObjectT_&)
+#	else
+#	endif
+
+
+
+DD_DETAIL_END
 
 
 

@@ -6,6 +6,8 @@
 
 #	define DD_COMMA ,
 
+#	define DD_REQUIRES_CPP2011(_ARG_member)\
+
 #	if __cplusplus >= 201103L
 #		define DD_STATIC_ASSERT(_ARG_condition, _ARG_Prompt) static_assert(_ARG_condition, _ARG_Prompt)
 #	else
