@@ -11,12 +11,10 @@
 DD_BEGIN
 template <typename _ObjectT1, typename _ObjectT2 = _ObjectT1>
 struct LessThanComparable {
-	public:
 	DD_ALIAS(Type1, _ObjectT1)
 	DD_ALIAS(Type2, _ObjectT2)
 	
 	
-	public:
 	friend ValidityType operator <(
 		Type2 const& __object_1,
 		Type1 const& __object_2
@@ -25,7 +23,6 @@ struct LessThanComparable {
 	}
 	
 	
-	public:
 	friend ValidityType operator <=(
 		Type1 const& __object_1,
 		Type2 const& __object_2
@@ -33,7 +30,6 @@ struct LessThanComparable {
 		return !static_cast<ValidityType>(__object_1 > __object_2);
 	}
 	
-	public:
 	friend ValidityType operator <=(
 		Type2 const& __object_1,
 		Type1 const& __object_2
@@ -42,7 +38,6 @@ struct LessThanComparable {
 	}
 	
 	
-	public:
 	friend ValidityType operator >(
 		Type2 const& __object_1,
 		Type1 const& __object_2
@@ -51,7 +46,6 @@ struct LessThanComparable {
 	}
 	
 	
-	public:
 	friend ValidityType operator >=(
 		Type1 const& __object_1,
 		Type2 const& __object_2
@@ -59,7 +53,6 @@ struct LessThanComparable {
 		return !static_cast<ValidityType>(__object_1 < __object_2);
 	}
 	
-	public:
 	friend ValidityType operator >=(
 		Type2 const& __object_1,
 		Type1 const& __object_2
@@ -74,11 +67,9 @@ struct LessThanComparable {
 
 template <typename _ObjectT>
 struct LessThanComparable<_ObjectT> {
-	public:
 	DD_ALIAS(Type, _ObjectT)
 	
 	
-	public:
 	friend ValidityType operator <=(
 		Type const& _object_1,
 		Type const& _object_2
@@ -87,7 +78,6 @@ struct LessThanComparable<_ObjectT> {
 	}
 	
 	
-	public:
 	friend ValidityType operator >(
 		Type const& _object_1,
 		Type const& _object_2
@@ -96,8 +86,6 @@ struct LessThanComparable<_ObjectT> {
 	}
 	
 	
-	public:
-	public:
 	friend ValidityType operator >=(
 		Type const& _object_1,
 		Type const& _object_2

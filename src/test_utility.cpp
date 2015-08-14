@@ -5,6 +5,11 @@
 #include <iostream>
 #include "standard/DDUtility.hpp"
 
+class A {
+};
+class B : public A {
+};
+
 void test_utility() {
 	{
 		DD::Pair<int, double> idp1(1, 3.3);

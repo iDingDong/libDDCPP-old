@@ -16,10 +16,45 @@
 
 
 DD_DETAIL_BEGIN
-#	if __cplusplus >= 201103L
 DD_MEMBER_FUNCTION_CHECK(_HasSwap, swap, ProcessType, _MACRO_ObjectT_&)
+
+
+
+template <ValidityType _has_swap_c>
+struct _Swap {
+	template <typename _ObjectT_>
+	static ProcessType _swap(
+		_ObjectT_& __object_1_,
+		_ObjectT_& __object_2_
+	) DD_NOEXCEPT_AS(__object_1_ = move(__object_2_) DD_COMMA _ObjectT_(move(__object_1_))) {
+#	if __cplusplus >= 201103L
+		auto __temp_(move(__object_1_));
+		__object_1_ = move(__object_2_);
+		__object_2_ = move(__temp_);
 #	else
+		_ObjectT __temp_(__object_1_);
+		__object_1_ = __object_2_;
+		__object_2_ = __temp_;
 #	endif
+	}
+	
+	
+};
+
+
+
+template <>
+struct _Swap<true> {
+	template <typename _ObjectT_>
+	static ProcessType _swap(
+		_ObjectT_& __object_1_,
+		_ObjectT_& __object_2_
+	) DD_NOEXCEPT_AS(__object_1_.swap(__object_2_)) {
+		__object_1_.swap(__object_2_);
+	}
+	
+	
+};
 
 
 
@@ -29,18 +64,11 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename _ObjectT>
-inline ProcessType swap(_ObjectT& __object_1, _ObjectT& __object_2) DD_NOEXCEPT_IF(
-	noexcept(_ObjectT(move(__object_1))) && noexcept(__object_1 = move(__object_2))
-) {
-#	if __cplusplus >= 201103L
-	auto __temp(move(__object_1));
-	__object_1 = move(__object_2);
-	__object_2 = move(__temp);
-#	else
-	_ObjectT __temp(__object_1);
-	__object_1 = __object_2;
-	__object_2 = __temp;
-#	endif
+inline ProcessType swap(
+	_ObjectT& __object_1,
+	_ObjectT& __object_2
+) DD_NOEXCEPT_AS(detail::_Swap<detail::_HasSwap<_ObjectT>::value>::_swap(__object_1 DD_COMMA __object_2)) {
+	detail::_Swap<detail::_HasSwap<_ObjectT>::value>::_swap(__object_1, __object_2);
 }
 
 
@@ -50,11 +78,10 @@ template <typename _ObjectT, LengthType _length_c>
 inline ProcessType swap(ArrayType<_ObjectT, _length_c>& __array_1, ArrayType<_ObjectT, _length_c>& __array_2) noexcept(
 	noexcept(swap(*__array_1, *__array_2))
 ) {
-	for (auto i = 0_DD_Counter; i < _length_c; ++i) {
 #	else
 inline ProcessType swap(_ObjectT(&__array_1)[_length_c], _ObjectT(&__array_2)[_length_c]) {
-	for (CounterType i = 0; i < _length_c; ++i) {
 #	endif
+	for (LengthType i = 0; i < _length_c; ++i) {
 		swap(__array_1[i], __array_2[i]);
 	}
 }
