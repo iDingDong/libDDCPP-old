@@ -34,7 +34,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsSignedLongLong = AndType<detail::_IsSignedLongLong<RemoveCVType<_ObjectsT>>...>;
+using IsSignedLongLong = AndType<_detail::_IsSignedLongLong<RemoveCVType<_ObjectsT>>...>;
 
 
 

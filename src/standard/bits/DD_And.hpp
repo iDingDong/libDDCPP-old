@@ -42,7 +42,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ConditionsT>
-using And = detail::_And<_ConditionsT...>;
+using And = _detail::_And<_ConditionsT...>;
 template <typename... _ConditionsT>
 using AndType = typename And<_ConditionsT...>::Type;
 #	else

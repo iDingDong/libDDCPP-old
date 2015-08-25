@@ -58,7 +58,7 @@ _UndirectionalIteratorT2 DD_CONSTEXPR copy(
 	_UndirectionalIteratorT1 const& __end,
 	_UndirectionalIteratorT2 const& __result_end
 ) {
-	return detail::_Copy<false>::_copy(__begin, __end, __result_end);// Imperfect realization
+	return _detail::_Copy<false>::_copy(__begin, __end, __result_end);// Imperfect realization
 }
 
 

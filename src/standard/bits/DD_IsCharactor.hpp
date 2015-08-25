@@ -39,7 +39,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsCharactor = AndType<detail::_IsCharactor<_ObjectsT>...>;
+using IsCharactor = AndType<_detail::_IsCharactor<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
 struct IsCharactor : BoolConstant<IsChar<_ObjectT>::value || IsUnsignedChar<_ObjectT>::value || IsSignedChar<_ObjectT>::value || IsWChar<_ObjectT>::value> {

@@ -50,7 +50,7 @@
 #	if DDCPP_ENABLE_ASSERT
 #		if DDCPP_ENABLE_ASSERTION_HANDLER
 #			define DD_ASSERT(_ARG_Expression, _ARG_Prompt)\
-				((_ARG_Expression) ? (void)0 : ::DD::detail::user_definition::assertion_handler(\
+				((_ARG_Expression) ? (void)0 : ::DD::_detail::user_definition::assertion_handler(\
 					#_ARG_Expression,\
 					(_ARG_Prompt),\
 					DD_CURRENT_FUNCTION,\

@@ -172,7 +172,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsFunction = AndType<detail::_IsFunction<_ObjectsT>...>;
+using IsFunction = AndType<_detail::_IsFunction<_ObjectsT>...>;
 
 
 

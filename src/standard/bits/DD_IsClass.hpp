@@ -41,7 +41,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsClass = AndType<BoolConstant<detail::_IsClass<_ObjectsT>::value>...>;
+using IsClass = AndType<BoolConstant<_detail::_IsClass<_ObjectsT>::value>...>;
 
 
 

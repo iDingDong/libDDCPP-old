@@ -81,9 +81,9 @@ DD_DETAIL_END
 DD_BEGIN
 template <typename _UndirectionalIteratorT>
 inline ProcessType insert_sort(_UndirectionalIteratorT const& __begin, _UndirectionalIteratorT const& __end) DD_NOEXCEPT_AS(
-	detail::_InsertSort<_UndirectionalIteratorT DD_COMMA IsBidirectionalIterator<_UndirectionalIteratorT>::value>::_insert_sort(__begin, __end)
+	_detail::_InsertSort<_UndirectionalIteratorT DD_COMMA IsBidirectionalIterator<_UndirectionalIteratorT>::value>::_insert_sort(__begin, __end)
 ) {
-	detail::_InsertSort<_UndirectionalIteratorT, IsBidirectionalIterator<_UndirectionalIteratorT>::value>::_insert_sort(__begin, __end);
+	_detail::_InsertSort<_UndirectionalIteratorT, IsBidirectionalIterator<_UndirectionalIteratorT>::value>::_insert_sort(__begin, __end);
 }
 
 

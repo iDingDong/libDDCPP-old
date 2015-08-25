@@ -46,13 +46,10 @@ struct RemoveAllExtents<_ValueT[]> {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using RemoveAllExtentsType = typename RemoveAllExtents<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(RemoveAllExtents)
 
 
 
-#	endif
 DD_END
 
 

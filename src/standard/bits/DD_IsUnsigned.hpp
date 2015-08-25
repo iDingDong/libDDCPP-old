@@ -32,10 +32,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsUnsigned = AndType<detail::_IsUnsigned<_ObjectsT, IsArithmetic<_ObjectsT>::value>...>;
+using IsUnsigned = AndType<_detail::_IsUnsigned<_ObjectsT, IsArithmetic<_ObjectsT>::value>...>;
 #	else
 template <typename _ObjectT>
-struct IsUnsigned : detail::_IsUnsigned<_ObjectT, IsArithmetic<_ObjectT>::value> {
+struct IsUnsigned : _detail::_IsUnsigned<_ObjectT, IsArithmetic<_ObjectT>::value> {
 };
 #	endif
 

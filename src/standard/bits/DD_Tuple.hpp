@@ -117,27 +117,27 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ValuesT>
-using Tuple = detail::_Tuple<0, _ValuesT...>;
+using Tuple = _detail::_Tuple<0, _ValuesT...>;
 
 
 
 template <SubscriptType _index_c, typename _ValueT>
-inline _ValueT& get_value(detail::_Tuple<_index_c, _ValueT>& __tuple) {
+inline _ValueT& get_value(_detail::_Tuple<_index_c, _ValueT>& __tuple) {
 	return __tuple.get_value();
 }
 
 template <SubscriptType _index_c, typename _ValueT>
-inline _ValueT const& get_value(detail::_Tuple<_index_c, _ValueT> const& __tuple) {
+inline _ValueT const& get_value(_detail::_Tuple<_index_c, _ValueT> const& __tuple) {
 	return __tuple.get_value();
 }
 
 template <typename _ValueT, SubscriptType _index_c>
-inline _ValueT& get_value(detail::_Tuple<_index_c, _ValueT>& __tuple) {
+inline _ValueT& get_value(_detail::_Tuple<_index_c, _ValueT>& __tuple) {
 	return __tuple.get_value();
 }
 
 template <typename _ValueT, SubscriptType _index_c>
-inline _ValueT const& get_value(detail::_Tuple<_index_c, _ValueT> const& __tuple) {
+inline _ValueT const& get_value(_detail::_Tuple<_index_c, _ValueT> const& __tuple) {
 	return __tuple.get_value();
 }
 

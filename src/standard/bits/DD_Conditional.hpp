@@ -34,12 +34,12 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-using Conditional = detail::_Conditional<_condition_c, _ThenT, _ElseT>;
+using Conditional = _detail::_Conditional<_condition_c, _ThenT, _ElseT>;
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
 using ConditionalType = typename Conditional<_condition_c, _ThenT, _ElseT>::Type;
 #	else
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-struct Conditional : detail::_Conditional<_condition_c, _ThenT, _ElseT> {
+struct Conditional : _detail::_Conditional<_condition_c, _ThenT, _ElseT> {
 };
 #	endif
 

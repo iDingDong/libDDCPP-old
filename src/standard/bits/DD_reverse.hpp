@@ -53,8 +53,8 @@ template <typename _BidirectionalIteratorT>
 inline ProcessType reverse(
 	_BidirectionalIteratorT const& __begin,
 	_BidirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin DD_COMMA __end)) {
-	detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin, __end);
+) DD_NOEXCEPT_AS(_detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin DD_COMMA __end)) {
+	_detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin, __end);
 }
 
 

@@ -34,7 +34,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsChar16 = AndType<detail::_IsChar16<RemoveCVType<_ObjectsT>>...>;
+using IsChar16 = AndType<_detail::_IsChar16<RemoveCVType<_ObjectsT>>...>;
 
 
 

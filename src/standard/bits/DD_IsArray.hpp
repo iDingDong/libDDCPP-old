@@ -45,10 +45,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsArray = AndType<detail::_IsArray<_ObjectsT>...>;
+using IsArray = AndType<_detail::_IsArray<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
-struct IsArray : detail::_IsArray<_ObjectT> {
+struct IsArray : _detail::_IsArray<_ObjectT> {
 };
 #	endif
 

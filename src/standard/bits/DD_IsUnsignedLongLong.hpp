@@ -38,7 +38,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsUnsignedLongLong = AndType<detail::_IsUnsignedLongLong<RemoveCVType<_ObjectsT>>...>;
+using IsUnsignedLongLong = AndType<_detail::_IsUnsignedLongLong<RemoveCVType<_ObjectsT>>...>;
 
 
 

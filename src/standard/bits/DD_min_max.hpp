@@ -113,8 +113,8 @@ template <typename _ObjectT, typename... _ObjectsT>
 inline Pair<_ObjectT const&> constexpr min_max(
 	_ObjectT const& __object,
 	_ObjectsT const&... __objects
-) noexcept(noexcept(detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...))) {
-	return detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...);
+) noexcept(noexcept(_detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...))) {
+	return _detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...);
 }
 
 template <typename _ObjectT>

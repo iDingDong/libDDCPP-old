@@ -29,7 +29,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsFloatingPoint = AndType<detail::_IsFloatingPoint<_ObjectsT>...>;
+using IsFloatingPoint = AndType<_detail::_IsFloatingPoint<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
 struct IsFloatingPoint : BoolConstant<IsFloat<_ObjectT>::value || IsDouble<_ObjectT>::value || IsLongDouble<_ObjectT>::value> {

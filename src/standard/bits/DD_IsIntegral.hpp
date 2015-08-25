@@ -52,7 +52,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsIntegral = AndType<detail::_IsIntegral<_ObjectsT>...>;
+using IsIntegral = AndType<_detail::_IsIntegral<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
 struct IsIntegral : BoolConstant<

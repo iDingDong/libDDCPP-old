@@ -38,10 +38,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsVolatile = AndType<detail::_IsVolatile<_ObjectsT>...>;
+using IsVolatile = AndType<_detail::_IsVolatile<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
-struct IsVolatile : detail::_IsVolatile<_ObjectT> {
+struct IsVolatile : _detail::_IsVolatile<_ObjectT> {
 };
 #	endif
 

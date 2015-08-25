@@ -38,10 +38,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsVoid = AndType<detail::_IsVoid<_ObjectsT>...>;
+using IsVoid = AndType<_detail::_IsVoid<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
-struct IsVoid : detail::_IsVoid<_ObjectT> {
+struct IsVoid : _detail::_IsVoid<_ObjectT> {
 };
 #	endif
 

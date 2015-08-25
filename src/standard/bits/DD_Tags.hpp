@@ -10,12 +10,17 @@
 
 DD_BEGIN
 struct Tag {
-} constexpr tag;
+} DD_CONSTANT tag;
+
+
+
+struct DefaultTag : Tag {
+} DD_CONSTANT default_tag;
 
 
 
 struct ConstructTag : Tag {
-} constexpr construct_tag;
+} DD_CONSTANT construct_tag;
 
 
 

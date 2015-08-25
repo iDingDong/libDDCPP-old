@@ -38,10 +38,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsConst = AndType<detail::_IsConst<_ObjectsT>...>;
+using IsConst = AndType<_detail::_IsConst<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
-struct IsConst : detail::_IsConst<_ObjectT> {
+struct IsConst : _detail::_IsConst<_ObjectT> {
 };
 #	endif
 

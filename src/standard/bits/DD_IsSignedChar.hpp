@@ -33,10 +33,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsSignedChar = AndType<detail::_IsSignedChar<RemoveCVType<_ObjectsT>>...>;
+using IsSignedChar = AndType<_detail::_IsSignedChar<RemoveCVType<_ObjectsT>>...>;
 #	else
 template <typename _ObjectT>
-struct IsSignedChar : detail::_IsSignedChar<typename RemoveCV<_ObjectT>::Type> {
+struct IsSignedChar : _detail::_IsSignedChar<typename RemoveCV<_ObjectT>::Type> {
 };
 #	endif
 

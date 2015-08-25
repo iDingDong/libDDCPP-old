@@ -21,7 +21,7 @@ DD_DETAIL_END
 #	endif
 DD_BEGIN
 #	if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename detail::_IteratorReference<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename _detail::_IteratorReference<_MACRO_ObjectT>::Type)
 #	else
 DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename IteratorValue<_MACRO_ObjectT>::Type&)
 #	endif

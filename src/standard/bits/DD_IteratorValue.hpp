@@ -54,7 +54,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename detail::_IteratorValue<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename _detail::_IteratorValue<_MACRO_ObjectT>::Type)
 #		else
 DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, RemoveReferenceType<decltype(*_MACRO_ObjectT())>)
 #		endif
@@ -65,10 +65,10 @@ template <typename _IteratorT>
 using IteratorValueType = typename IteratorValue<_IteratorT>::Type;
 #	else
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename detail::_IteratorValue<typename RemoveCV<_MACRO_ObjectT>::Type>::Type);
+DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename _detail::_IteratorValue<typename RemoveCV<_MACRO_ObjectT>::Type>::Type);
 #		else
 template <typename _IteratorT>
-struct IteratorValue : detail::_IteratorValue<typename RemoveCV<_IteratorT>::Type> {
+struct IteratorValue : _detail::_IteratorValue<typename RemoveCV<_IteratorT>::Type> {
 };
 #		endif
 #	endif

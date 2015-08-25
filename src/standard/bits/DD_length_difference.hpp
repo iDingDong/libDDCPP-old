@@ -56,12 +56,12 @@ DD_BEGIN
 template <typename _UndirectionalIteratorT>
 #	if __cplusplus >= 201103L
 inline auto length_difference(_UndirectionalIteratorT const& __begin, _UndirectionalIteratorT const& __end) noexcept(
-	noexcept(detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end))
-) -> decltype(detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end)) {
+	noexcept(_detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end))
+) -> decltype(_detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end)) {
 #	else
 typename IteratorDifference<_UndirectionalIteratorT>::Type length_difference(_UndirectionalIteratorT const& __begin, _UndirectionalIteratorT const& __end) {
 #	endif
-	return detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end);
+	return _detail::_LengthDifference<_UndirectionalIteratorT, IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_length_difference(__begin, __end);
 }
 
 

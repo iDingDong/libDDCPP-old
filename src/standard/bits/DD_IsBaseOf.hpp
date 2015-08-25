@@ -60,7 +60,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename _BaseT, typename... _DerivedsT>
-using IsBaseOf = AndType<BoolConstant<detail::_IsBaseOf<_BaseT, _DerivedsT>::value>...>;
+using IsBaseOf = AndType<BoolConstant<_detail::_IsBaseOf<_BaseT, _DerivedsT>::value>...>;
 
 
 

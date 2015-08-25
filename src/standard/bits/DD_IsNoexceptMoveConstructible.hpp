@@ -28,7 +28,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsNoexceptMoveConstructible = AndType<detail::_IsNoexceptMoveConstructible<_ObjectsT>...>;
+using IsNoexceptMoveConstructible = AndType<_detail::_IsNoexceptMoveConstructible<_ObjectsT>...>;
 
 
 

@@ -90,8 +90,8 @@ template <typename _ObjectT, typename... _ArgumentsT>
 inline _ObjectT constexpr const& min(
 	_ObjectT const& __object,
 	_ArgumentsT const&... __arguments
-) noexcept(noexcept(detail::_Min<IsSame<_ObjectT, _ArgumentsT...>::value>::_min(__object, __arguments...))) {
-	return detail::_Min<IsSame<_ObjectT, _ArgumentsT...>::value>::_min(__object, __arguments...);
+) noexcept(noexcept(_detail::_Min<IsSame<_ObjectT, _ArgumentsT...>::value>::_min(__object, __arguments...))) {
+	return _detail::_Min<IsSame<_ObjectT, _ArgumentsT...>::value>::_min(__object, __arguments...);
 }
 
 template <typename _ObjectT>

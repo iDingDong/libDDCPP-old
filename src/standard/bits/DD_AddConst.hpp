@@ -28,13 +28,10 @@ struct AddConst {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using AddConstType = typename AddConst<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(AddConst)
 
 
 
-#	endif
 DD_END
 
 

@@ -49,7 +49,7 @@
 #	define DD_BEGIN namespace DD {
 #	define DD_END }
 
-#	define DD_DETAIL_BEGIN DD_BEGIN namespace detail {
+#	define DD_DETAIL_BEGIN DD_BEGIN namespace _detail {
 #	define DD_DETAIL_END } DD_END
 
 #	define DD_USER_DEFINITION_BEGIN DD_DETAIL_BEGIN namespace user_definition {

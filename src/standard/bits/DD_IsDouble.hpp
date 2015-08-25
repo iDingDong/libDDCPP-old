@@ -33,10 +33,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsDouble = AndType<detail::_IsDouble<RemoveCVType<_ObjectsT>>...>;
+using IsDouble = AndType<_detail::_IsDouble<RemoveCVType<_ObjectsT>>...>;
 #	else
 template <typename _ObjectT>
-struct IsDouble : detail::_IsDouble<typename RemoveCV<_ObjectT>::Type> {
+struct IsDouble : _detail::_IsDouble<typename RemoveCV<_ObjectT>::Type> {
 };
 #	endif
 

@@ -38,10 +38,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsReference = AndType<detail::_IsReference<_ObjectsT>...>;
+using IsReference = AndType<_detail::_IsReference<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
-struct IsReference : detail::_IsReference<_ObjectT> {
+struct IsReference : _detail::_IsReference<_ObjectT> {
 };
 #	endif
 

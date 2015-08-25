@@ -90,8 +90,8 @@ template <typename _ObjectT, typename... _ArgumentsT>
 inline _ObjectT constexpr const& max(
 	_ObjectT const& __object,
 	_ArgumentsT const&... __arguments
-) noexcept(noexcept(detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...))) {
-	return detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...);
+) noexcept(noexcept(_detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...))) {
+	return _detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...);
 }
 
 template <typename _ObjectT>

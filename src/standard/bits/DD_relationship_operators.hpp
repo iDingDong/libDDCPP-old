@@ -8,7 +8,12 @@
 
 
 
-DD_BEGIN
+#	define DD_RELATIONSHIP_OPERATORS_BEGIN DD_BEGIN namespace relationship_operators {
+#	define DD_RELATIONSHIP_OPERATORS_END } DD_END
+
+
+
+DD_RELATIONSHIP_OPERATORS_BEGIN
 template <typename _ObjectT>
 ValidityType DD_CONSTEXPR operator !=(_ObjectT const& __object_1, _ObjectT const& __object_2) DD_NOEXCEPT_AS(__object_1 == __object_2) {
 	return !(__object_1 == __object_2);
@@ -34,7 +39,12 @@ ValidityType DD_CONSTEXPR operator >=(_ObjectT const& __object_1, _ObjectT const
 
 
 
-DD_END
+DD_RELATIONSHIP_OPERATORS_END
+
+
+
+#	undef DD_RELATIONSHIP_OPERATORS_BEGIN
+#	undef DD_RELATIONSHIP_OPERATORS_END
 
 
 

@@ -54,10 +54,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsPointer = AndType<detail::_IsPointer<RemoveCVType<_ObjectsT>>...>;
+using IsPointer = AndType<_detail::_IsPointer<RemoveCVType<_ObjectsT>>...>;
 #	else
 template <typename _ObjectT>
-struct IsPointer : detail::_IsPointer<typename RemoveCV<_ObjectT>::type> {
+struct IsPointer : _detail::_IsPointer<typename RemoveCV<_ObjectT>::type> {
 };
 #	endif
 

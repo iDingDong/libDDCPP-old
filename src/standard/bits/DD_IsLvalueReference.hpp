@@ -35,7 +35,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsLvalueReference = AndType<detail::_IsLvalueReference<_ObjectsT>...>;
+using IsLvalueReference = AndType<_detail::_IsLvalueReference<_ObjectsT>...>;
 
 
 

@@ -8,12 +8,4 @@
 
 
 
-#	define DD_MATH_BEGIN DD_BEGIN namespace math {
-#	define DD_MATH_END DD_END }
-
-#	define DD_MATH_DETAIL_BEGIN DD_MATH_BEGIN namespace detail {
-#	define DD_MATH_DETAIL_END DD_MATH_END }
-
-
-
 #endif

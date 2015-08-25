@@ -52,10 +52,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsSame = detail::_IsSame<_ObjectsT...>;
+using IsSame = _detail::_IsSame<_ObjectsT...>;
 #	else
 template <typename _ObjectT1, typename _ObjectT2>
-struct IsSame : detail::_IsSame<_ObjectT1, _ObjectT2> {
+struct IsSame : _detail::_IsSame<_ObjectT1, _ObjectT2> {
 };
 #	endif
 

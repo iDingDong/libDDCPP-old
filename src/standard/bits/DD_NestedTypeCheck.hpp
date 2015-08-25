@@ -20,19 +20,19 @@
 			struct _##_ARG_Checker {\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static ValidityType constexpr _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::__VA_ARGS__>*) noexcept(true) {\
+				static ::DD::ValidityType constexpr _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::__VA_ARGS__>*) noexcept(true) {\
 					return true;\
 				}\
 				\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static ValidityType constexpr _match(...) noexcept(true) {\
+				static ::DD::ValidityType constexpr _match(...) noexcept(true) {\
 					return false;\
 				}\
 				\
 				\
 				public:\
-				static ValidityType constexpr value = _match<_MACRO_ObjectT>(nil_pointer);\
+				static ::DD::ValidityType constexpr value = _match<_MACRO_ObjectT>(::DD::nil_pointer);\
 				\
 				\
 			};\
@@ -44,7 +44,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			using _ARG_Checker = BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
+			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
 
 
 
@@ -53,7 +53,7 @@
 			struct _ARG_Checker {\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static typename _MACRO_ObjectT_::_ARG_Target _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*) noexcept(true);\
+				static typename _MACRO_ObjectT_::_ARG_Target _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*) noexcept(true);\
 				\
 				private:\
 				template <typename _MACRO_ObjectT_>\
@@ -61,7 +61,7 @@
 				\
 				\
 				public:\
-				using Type = decltype(_match<_MACRO_ObjectT>(nil_pointer));\
+				using Type = decltype(_match<_MACRO_ObjectT>(::DD::nil_pointer));\
 				\
 				\
 			};
@@ -71,13 +71,13 @@
 			template <typename _MACRO_ObjectT>\
 			struct _##_ARG_Checker {\
 				template <typename _MACRO_ObjectT_>\
-				static SizeTrait<1> _match(::DD::detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*);\
+				static SizeTrait<1> _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*);\
 				\
 				template <typename _MACRO_ObjectT_>\
 				static SizeTrait<2> _match(...);\
 				\
 				\
-				static ValidityType const value = sizeof(_match<_MACRO_ObjectT>(0)) == sizeof(SizeTrait<1>);\
+				static ::DD::ValidityType const value = sizeof(_match<_MACRO_ObjectT>(0)) == sizeof(SizeTrait<1>);\
 				\
 				\
 			};\
@@ -89,7 +89,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker : BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
+			struct _ARG_Checker : ::DD::BoolConstant<_MACRO__detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
 			};
 
 
@@ -124,9 +124,9 @@
 			\
 			template <typename _MACRO_ObjectT>\
 			struct _ARG_Checker {\
-				typedef typename _MACRO_detail::_##_ARG_Checker<\
+				typedef typename _MACRO__detail::_##_ARG_Checker<\
 					_MACRO_ObjectT,\
-					_MACRO_detail::_CHECK_##_ARG_Checker<_MACRO_ObjectT>::value\
+					_MACRO__detail::_CHECK_##_ARG_Checker<_MACRO_ObjectT>::value\
 				>::Type Type;\
 				\
 				\

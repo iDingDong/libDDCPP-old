@@ -21,7 +21,7 @@ DD_DETAIL_END
 #	endif
 DD_BEGIN
 #	if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename detail::_IteratorPointer<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename _detail::_IteratorPointer<_MACRO_ObjectT>::Type)
 #	else
 DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename IteratorValue<_MACRO_ObjectT>::Type*)
 #	endif

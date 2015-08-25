@@ -1,6 +1,6 @@
-// math/bits/DD_math_Complex.hpp
-#ifndef _DD_MATH_COMPLEX_HPP
-#	define _DD_MATH_COMPLEX_HPP 1
+// math/bits/DD_Complex.hpp
+#ifndef _DD_COMPLEX_HPP
+#	define _DD_COMPLEX_HPP 1
 
 
 
@@ -8,12 +8,12 @@
 
 
 
-DD_MATH_BEGIN
+DD_BEGIN
 
 
 
 
-DD_MATH_END
+DD_END
 
 
 

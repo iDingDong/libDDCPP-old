@@ -46,10 +46,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsNilPointer = AndType<detail::_IsNilPointer<RemoveCVType<_ObjectsT>>...>;
+using IsNilPointer = AndType<_detail::_IsNilPointer<RemoveCVType<_ObjectsT>>...>;
 #	else
 template <typename _ObjectT>
-struct IsNilPointer : detail::_IsNilPointer<typename RemoveCV<_ObjectT>::Type> {
+struct IsNilPointer : _detail::_IsNilPointer<typename RemoveCV<_ObjectT>::Type> {
 };
 #	endif
 

@@ -136,15 +136,15 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename _ValueT, typename _AllocatorT = Allocator<ListNode>>
-struct List : detail::_ListBase<_ValueT> {
+struct List : _detail::_ListBase<_ValueT> {
 };
 
 
 
 template <typename _ValueT, ValidityType _manage_pool_c>
-struct List<_ValueT, Allocator<ListNode, _manage_pool_c>> : detail::_ListBase<_ValueT> {
+struct List<_ValueT, Allocator<ListNode, _manage_pool_c>> : _detail::_ListBase<_ValueT> {
 	public:
-	DD_ALIAS(BaseType, detail::_ListBase<_ValueT>)
+	DD_ALIAS(BaseType, _detail::_ListBase<_ValueT>)
 	DD_ALIAS(ThisType, List<_ValueT DD_COMMA Allocator<ListNode DD_COMMA _manage_pool_c>>)
 	DD_ALIAS(ValueType, _ValueT)
 	DD_ALIAS(AllocatorType, Allocator<ListNode DD_COMMA _manage_pool_c>)

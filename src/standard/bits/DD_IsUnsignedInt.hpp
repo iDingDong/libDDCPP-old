@@ -33,10 +33,10 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
-using IsUnsignedInt = AndType<detail::_IsUnsignedInt<RemoveCVType<_ObjectsT>>...>;
+using IsUnsignedInt = AndType<_detail::_IsUnsignedInt<RemoveCVType<_ObjectsT>>...>;
 #	else
 template <typename _ObjectT>
-struct IsUnsignedInt : detail::_IsUnsignedInt<typename RemoveCV<_ObjectT>::Type> {
+struct IsUnsignedInt : _detail::_IsUnsignedInt<typename RemoveCV<_ObjectT>::Type> {
 };
 #	endif
 

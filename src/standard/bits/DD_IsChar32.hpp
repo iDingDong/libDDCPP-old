@@ -34,7 +34,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsChar32 = AndType<detail::_IsChar32<RemoveCVType<_ObjectsT>>...>;
+using IsChar32 = AndType<_detail::_IsChar32<RemoveCVType<_ObjectsT>>...>;
 
 
 

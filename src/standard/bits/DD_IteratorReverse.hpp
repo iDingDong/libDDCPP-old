@@ -221,7 +221,7 @@ DD_DETAIL_END
 
 
 DD_BEGIN
-DD_NESTED_TYPE_TRAIT(IteratorReverse, ReverseType, detail::_ReverseIterator<_MACRO_ObjectT>)
+DD_NESTED_TYPE_TRAIT(IteratorReverse, ReverseType, _detail::_ReverseIterator<_MACRO_ObjectT>)
 
 
 

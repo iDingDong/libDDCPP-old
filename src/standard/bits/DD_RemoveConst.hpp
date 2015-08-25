@@ -37,13 +37,10 @@ struct RemoveConst<_ObjectT const> {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using RemoveConstType = typename RemoveConst<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(RemoveConst)
 
 
 
-#	endif
 DD_END
 
 

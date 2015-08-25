@@ -31,19 +31,19 @@
 				\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static ValidityType constexpr _match(_Matcher<_MACRO_ObjectT_, &_MACRO_ObjectT_::_ARG_target>*) noexcept {\
+				static ::DD::ValidityType constexpr _match(_Matcher<_MACRO_ObjectT_, &_MACRO_ObjectT_::_ARG_target>*) noexcept {\
 					return true;\
 				}\
 				\
 				private:\
 				template <typename _MACRO_ObjectT_>\
-				static ValidityType constexpr _match(...) noexcept {\
+				static ::DD::ValidityType constexpr _match(...) noexcept {\
 					return false;\
 				}\
 				\
 				\
 				public:\
-				static ValidityType constexpr value = _match<_MACRO_ObjectT>(nil_pointer);\
+				static ::DD::ValidityType constexpr value = _match<_MACRO_ObjectT>(::DD::nil_pointer);\
 				\
 				\
 			};\
@@ -55,7 +55,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			using _ARG_Checker = BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
+			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
 #	else
 #		define DD_MEMBER_FUNCTION_CHECK(_ARG_Checker, _ARG_target, _ARG_ReturnType, _ARG_ArgumentsType)\
 			DD_MACRO_DETAIL_BEGIN\
@@ -76,7 +76,7 @@
 				static SizeTrait<2> _match(...) throw();\
 				\
 				\
-				static ValidityType const value = sizeof(_match<_MACRO_ObjectT>(0)) == sizeof(SizeTrait<1>);\
+				static ::DD::ValidityType const value = sizeof(_match<_MACRO_ObjectT>(0)) == sizeof(SizeTrait<1>);\
 				\
 				\
 			};\
@@ -88,7 +88,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker : BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
+			struct _ARG_Checker : ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
 			};
 #	endif
 

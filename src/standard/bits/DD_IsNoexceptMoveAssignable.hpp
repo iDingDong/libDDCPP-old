@@ -27,7 +27,7 @@ DD_DETAIL_END
 
 DD_BEGIN
 template <typename... _ObjectsT>
-using IsNoexceptMoveAssignable = AndType<detail::_IsNoexceptMoveAssignable<_ObjectsT>...>;
+using IsNoexceptMoveAssignable = AndType<_detail::_IsNoexceptMoveAssignable<_ObjectsT>...>;
 
 
 

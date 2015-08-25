@@ -67,8 +67,8 @@ template <typename _ObjectT>
 inline ProcessType swap(
 	_ObjectT& __object_1,
 	_ObjectT& __object_2
-) DD_NOEXCEPT_AS(detail::_Swap<detail::_HasSwap<_ObjectT>::value>::_swap(__object_1 DD_COMMA __object_2)) {
-	detail::_Swap<detail::_HasSwap<_ObjectT>::value>::_swap(__object_1, __object_2);
+) DD_NOEXCEPT_AS(_detail::_Swap<_detail::_HasSwap<_ObjectT>::value>::_swap(__object_1 DD_COMMA __object_2)) {
+	_detail::_Swap<_detail::_HasSwap<_ObjectT>::value>::_swap(__object_1, __object_2);
 }
 
 

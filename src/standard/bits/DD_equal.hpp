@@ -229,7 +229,7 @@ inline ValidityType equal(
 	_UndirectionalIteratorT1 const& __end_1,
 	_UndirectionalIteratorT2 const& __begin_2
 ) DD_NOEXCEPT_AS(
-	detail::_Equal<
+	_detail::_Equal<
 		AndType<
 			IsPod<IteratorValueType<_UndirectionalIteratorT1>> DD_COMMA
 			IsPointer<_UndirectionalIteratorT1 DD_COMMA _UndirectionalIteratorT2> DD_COMMA
@@ -240,7 +240,7 @@ inline ValidityType equal(
 		>::value
 	>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2)
 ) {
-	return detail::_Equal<
+	return _detail::_Equal<
 #	if __cplusplus >= 201103L
 		AndType<
 			IsPod<IteratorValueType<_UndirectionalIteratorT1>>,
@@ -266,7 +266,7 @@ inline ValidityType equal(
 	_UndirectionalIteratorT2 const& __begin_2,
 	_UndirectionalIteratorT2 const& __end_2
 ) DD_NOEXCEPT_AS(
-	detail::_Equal<
+	_detail::_Equal<
 		AndType<
 			IsPod<IteratorValueType<_UndirectionalIteratorT1>> DD_COMMA
 			IsPointer<_UndirectionalIteratorT1 DD_COMMA _UndirectionalIteratorT2> DD_COMMA
@@ -277,7 +277,7 @@ inline ValidityType equal(
 		>::value
 	>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2 DD_COMMA __end_2)
 ) {
-	return detail::_Equal<
+	return _detail::_Equal<
 #	if __cplusplus >= 201103L
 		AndType<
 			IsPod<IteratorValueType<_UndirectionalIteratorT1>>,
@@ -302,8 +302,8 @@ inline ValidityType equal(
 	_UndirectionalIteratorT1 const& __end_1,
 	_UndirectionalIteratorT2 const& __begin_2,
 	_BinaryPredicator const& __equal
-) DD_NOEXCEPT_AS(detail::_Equal<false>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2 DD_COMMA __equal)) {
-	return detail::_Equal<false>::_equal(__begin_1, __end_1, __begin_2, __equal);
+) DD_NOEXCEPT_AS(_detail::_Equal<false>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2 DD_COMMA __equal)) {
+	return _detail::_Equal<false>::_equal(__begin_1, __end_1, __begin_2, __equal);
 }
 
 template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _BinaryPredicator>
@@ -313,8 +313,8 @@ inline ValidityType equal(
 	_UndirectionalIteratorT2 const& __begin_2,
 	_UndirectionalIteratorT2 const& __end_2,
 	_BinaryPredicator const& __equal
-) DD_NOEXCEPT_AS(detail::_Equal<false>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2 DD_COMMA __end_2 DD_COMMA __equal)) {
-	return detail::_Equal<false>::_equal(__begin_1, __end_1, __begin_2, __end_2, __equal);
+) DD_NOEXCEPT_AS(_detail::_Equal<false>::_equal(__begin_1 DD_COMMA __end_1 DD_COMMA __begin_2 DD_COMMA __end_2 DD_COMMA __equal)) {
+	return _detail::_Equal<false>::_equal(__begin_1, __end_1, __begin_2, __end_2, __equal);
 }
 
 

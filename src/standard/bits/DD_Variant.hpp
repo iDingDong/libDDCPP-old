@@ -100,7 +100,7 @@ struct Variant {
 	
 	
 	private:
-	UniquePointer<detail::_VariantHolderBase> _m_holder_pointer;
+	UniquePointer<_detail::_VariantHolderBase> _m_holder_pointer;
 	
 	
 #	if __cplusplus >= 201103L
@@ -124,10 +124,10 @@ struct Variant {
 	public:
 	template <typename _ValueT_>
 #	if __cplusplus >= 201103L
-	Variant(_ValueT_&& __value_) : _m_holder_pointer(new detail::_VariantHolder<DecayType<_ValueT_>>(forward<_ValueT_>(__value_))) {
+	Variant(_ValueT_&& __value_) : _m_holder_pointer(new _detail::_VariantHolder<DecayType<_ValueT_>>(forward<_ValueT_>(__value_))) {
 	}
 #	else
-	Variant(_ValueT_ const& __value_) : _m_holder_pointer(new detail::_VariantHolder<_ValueT_>(__value_)) {
+	Variant(_ValueT_ const& __value_) : _m_holder_pointer(new _detail::_VariantHolder<_ValueT_>(__value_)) {
 	}
 #	endif
 	
@@ -149,14 +149,14 @@ struct Variant {
 	template <typename _ValueT_>
 	_ValueT_& to() DD_NOEXCEPT {
 		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
-		return static_cast<detail::_VariantHolder<_ValueT_>&>(*_m_holder_pointer).m_value;
+		return static_cast<_detail::_VariantHolder<_ValueT_>&>(*_m_holder_pointer).m_value;
 	}
 	
 	public:
 	template <typename _ValueT_>
 	_ValueT_ const& to() const DD_NOEXCEPT {
 		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
-		return static_cast<detail::_VariantHolder<_ValueT_> const&>(*_m_holder_pointer).m_value;
+		return static_cast<_detail::_VariantHolder<_ValueT_> const&>(*_m_holder_pointer).m_value;
 	}
 	
 	

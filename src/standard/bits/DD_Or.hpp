@@ -42,7 +42,7 @@ DD_DETAIL_END
 DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ConditionsT>
-using Or = detail::_Or<_ConditionsT...>;
+using Or = _detail::_Or<_ConditionsT...>;
 template <typename... _ConditionsT>
 using OrType = typename Or<_ConditionsT...>::Type;
 #	else

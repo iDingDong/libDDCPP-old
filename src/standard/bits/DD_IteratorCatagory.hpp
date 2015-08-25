@@ -52,21 +52,21 @@ DD_DETAIL_END
 
 
 DD_BEGIN
-DD_ALIAS(FixedIterator, detail::_FixedIterator)
-DD_ALIAS(UndirectionalIterator, detail::_UndirectionalIterator)
-DD_ALIAS(BidirectionalIterator, detail::_BidirectionalIterator)
-DD_ALIAS(FreeAccessIterator, detail::_FreeAccessIterator)
+DD_ALIAS(FixedIterator, _detail::_FixedIterator)
+DD_ALIAS(UndirectionalIterator, _detail::_UndirectionalIterator)
+DD_ALIAS(BidirectionalIterator, _detail::_BidirectionalIterator)
+DD_ALIAS(FreeAccessIterator, _detail::_FreeAccessIterator)
 
 
 
 #	if __cplusplus >= 201103L
 template <typename _IteratorT>
-using IteratorCatagory = detail::_IteratorCatagory<RemoveCVType<_IteratorT>>;
+using IteratorCatagory = _detail::_IteratorCatagory<RemoveCVType<_IteratorT>>;
 template <typename _IteratorT>
 using IteratorCatagoryType = typename IteratorCatagory<_IteratorT>::Type;
 #	else
 template <typename _IteratorT>
-struct IteratorCatagory : detail::_IteratorCatagory<typename RemoveCV<_IteratorT>::Type> {
+struct IteratorCatagory : _detail::_IteratorCatagory<typename RemoveCV<_IteratorT>::Type> {
 };
 #	endif
 

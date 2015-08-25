@@ -81,8 +81,8 @@ template <typename _UndirectionalIteratorT>
 inline _UndirectionalIteratorT is_sorted_until(
 	_UndirectionalIteratorT const& __begin,
 	_UndirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end)) {
-	return detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end);
+) DD_NOEXCEPT_AS(_detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end)) {
+	return _detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end);
 }
 
 template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
@@ -90,8 +90,8 @@ inline _UndirectionalIteratorT is_sorted_until(
 	_UndirectionalIteratorT const& __begin,
 	_UndirectionalIteratorT const& __end,
 	_BinaryPredicatorT const& __less
-) DD_NOEXCEPT_AS(detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end DD_COMMA __less)) {
-	return detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end, __less);
+) DD_NOEXCEPT_AS(_detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end DD_COMMA __less)) {
+	return _detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end, __less);
 }
 
 

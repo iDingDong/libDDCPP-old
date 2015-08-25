@@ -1,8 +1,10 @@
 #include <iostream>
 #include "standard/DDAlgorithm.hpp"
+#include "test_meta.h"
 #include "test_memory.h"
 #include "test_algorithm.h"
 #include "test_utility.h"
+#include "test_math.h"
 
 bool greater(int x, int y) {
 	return y < x;
@@ -17,9 +19,9 @@ int main() {
 		test_algorithm();
 #endif
 #if 1
+		test_meta();
 		test_utility();
-#endif
-#if 1
+		test_math();
 		{
 			using DD::min;
 			using DD::max;
