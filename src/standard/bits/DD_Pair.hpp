@@ -38,11 +38,6 @@ struct Pair : LessThanComparable<Pair<_ValueT1, _ValueT2>>, EqualityComparable<P
 	
 	public:
 	constexpr Pair(ThisType&& _origin) = default;
-#	else
-	public:
-	Pair() {
-	}
-#	endif
 	
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
@@ -51,6 +46,16 @@ struct Pair : LessThanComparable<Pair<_ValueT1, _ValueT2>>, EqualityComparable<P
 		_ValueT2_&& __value_2_
 	) DD_NOEXCEPT_IF(noexcept(FirstValueType(__value_1_)) && noexcept(SecondValueType(__value_2_))) : first(__value_1_), second(__value_2_) {
 	}
+#	else
+	public:
+	Pair() {
+	}
+	
+	public:
+	template <typename _ValueT1_, typename _ValueT2_>
+	Pair(_ValueT1_ const& __value_1_, _ValueT2 const& __value_2_) : first(__value_1_), second(__value_2_) {
+	}
+#	endif
 	
 	
 	public:
@@ -98,19 +103,24 @@ struct Pair<_ValueT, _ValueT> : LessThanComparable<Pair<_ValueT, _ValueT>>, Equa
 	
 	public:
 	constexpr Pair(ThisType&& _origin) = default;
+	
+	public:
+	template <typename _ValueT1_, typename _ValueT2_>
+	constexpr Pair(
+		_ValueT1_&& __value_1_,
+		_ValueT2_&& __value_2_
+	) noexcept(noexcept(FirstValueType(__value_1_)) && noexcept(SecondValueType(__value_2_))) : first(__value_1_), second(__value_2_) {
+	}
 #	else
 	public:
 	Pair() {
 	}
-#	endif
 	
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
-	DD_CONSTEXPR Pair(
-		_ValueT1_&& __value_1_,
-		_ValueT2_&& __value_2_
-	) DD_NOEXCEPT_AS(noexcept(FirstValueType(__value_1_)) && noexcept(SecondValueType(__value_2_))) : first(__value_1_), second(__value_2_) {
+	Pair(_ValueT1_ const& __value_1_, _ValueT2 const& __value_2_) : first(__value_1_), second(__value_2_) {
 	}
+#	endif
 	
 	
 	public:
