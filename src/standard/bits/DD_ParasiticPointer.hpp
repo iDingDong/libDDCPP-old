@@ -133,12 +133,14 @@ struct ParasiticPointer<_ValueT, void> {
 	ThisType& operator =(ThisType const& _origin) DD_NOEXCEPT {
 		ThisType _temp(_origin);
 		swap(_temp);
+		return *this;
 	}
 	
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& _origin) DD_NOEXCEPT {
 		swap(_origin);
+		return *this;
 	}
 	
 #	endif

@@ -6,7 +6,9 @@
 
 #	include "DD_Nil.hpp"
 #	include "DD_meta_definitions.hpp"
-#	if __cplusplus < 201103L
+#	if __cplusplus >= 201103L
+#		include "DD_VoidType.hpp"
+#	else
 #		include "DD_SizeTrait.hpp"
 #	endif
 #	include "DD_IntegralConstant.hpp"
@@ -16,25 +18,14 @@
 #	if __cplusplus >= 201103L
 #		define DD_NESTED_TYPE_CHECK(_ARG_Checker, ...)\
 			DD_MACRO_DETAIL_BEGIN\
+			template <typename _MACRO_ObjectT, typename _VoidT>\
+			struct _##_ARG_Checker : ::DD::FalseType {\
+			};\
+			\
+			\
+			\
 			template <typename _MACRO_ObjectT>\
-			struct _##_ARG_Checker {\
-				private:\
-				template <typename _MACRO_ObjectT_>\
-				static ::DD::ValidityType constexpr _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::__VA_ARGS__>*) noexcept(true) {\
-					return true;\
-				}\
-				\
-				private:\
-				template <typename _MACRO_ObjectT_>\
-				static ::DD::ValidityType constexpr _match(...) noexcept(true) {\
-					return false;\
-				}\
-				\
-				\
-				public:\
-				static ::DD::ValidityType constexpr value = _match<_MACRO_ObjectT>(::DD::nil_pointer);\
-				\
-				\
+			struct _##_ARG_Checker<_MACRO_ObjectT, ::DD::VoidType<typename _MACRO_ObjectT::__VA_ARGS__>> : ::DD::TrueType {\
 			};\
 			\
 			\
@@ -44,8 +35,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
-
+			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT, ::DD::VoidType<>>::value>;
 
 
 #		define DD_NESTED_TYPE_TRAIT(_ARG_Checker, _ARG_Target, ...)\
@@ -65,6 +55,8 @@
 				\
 				\
 			};
+
+
 #	else
 #		define DD_NESTED_TYPE_CHECK(_ARG_Checker, _ARG_Target)\
 			DD_MACRO_DETAIL_BEGIN\
@@ -131,6 +123,8 @@
 				\
 				\
 			};
+
+
 #	endif
 
 

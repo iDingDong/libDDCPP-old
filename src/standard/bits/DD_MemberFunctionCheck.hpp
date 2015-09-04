@@ -56,6 +56,8 @@
 			\
 			template <typename _MACRO_ObjectT>\
 			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value>;
+
+
 #	else
 #		define DD_MEMBER_FUNCTION_CHECK(_ARG_Checker, _ARG_target, _ARG_ReturnType, _ARG_ArgumentsType)\
 			DD_MACRO_DETAIL_BEGIN\
@@ -90,6 +92,8 @@
 			template <typename _MACRO_ObjectT>\
 			struct _ARG_Checker : ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
 			};
+
+
 #	endif
 
 

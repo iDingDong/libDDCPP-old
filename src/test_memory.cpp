@@ -1,5 +1,5 @@
 #include "test_memory.h"
-#define TEST_OBJECT_AUTO_PROMPT 1
+#define TEST_OBJECT_AUTO_PROMPT 0
 #include "test_object.hpp"
 #include <iostream>
 #include <thread>
@@ -29,32 +29,34 @@ void th1_main() {
 
 
 void test_memory() {
-#if 0 
 	{
-		DD::ParasiticPointer<Test> ip_0(DD::construct_tag);
 		{
-			std::cout << "Into block." << std::endl;
-			auto ip_1 = DD::make_parasitic<Test>();
-			ip_0 = ip_1;
-			std::cout << "End of block." << std::endl;
-		}
-		std::cout << "Out of block." << std::endl;
-		std::cout << "End Sign." << std::endl;
-	}
-#endif
-#if 0
-	{
-		std::thread th1(th1_main);
-		th1.detach();
-		for (unsigned n = 10; n; -- n) {
-			std::cout << "main out: " << g_ip.get_reference_count() << std::endl;
-			{
-				//std::lock_guard<std::mutex> lock(g_mutex);
-				auto ip_0 = g_ip;
-				std::cout << "main in: " << g_ip.get_reference_count() << std::endl;
+			DD::ParasiticPointer<Test> ip_0(DD::construct_tag);
+			if (
+				ip_0.get_reference_count() != 1 ||
+				ip_0->count != 1
+			) {
+				throw "'DD::ParasiticPointer' test failed.";
 			}
-			std::cout << "main end: " << g_ip.get_reference_count() << std::endl;
+			{
+				auto ip_1 = DD::make_parasitic<Test>();
+				ip_0 = ip_1;
+				if (
+					ip_0.get_reference_count() != 2 ||
+					ip_0->count != 1
+				) {
+					throw "'DD::ParasiticPointer' test failed.";
+				}
+			}
+			if (
+				ip_0.get_reference_count() != 1 ||
+				ip_0->count != 1
+			) {
+				throw "'DD::ParasiticPointer' test failed.";
+			}
+		}
+		if (Test::count != 0) {
+			throw "'DD::ParasiticPointer' test failed.";
 		}
 	}
-#endif
 }

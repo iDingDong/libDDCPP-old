@@ -9,12 +9,35 @@
 
 
 DD_BEGIN
-template <SizeType size>
-union FreeList {
-	FreeList* next;
-	SizeTrait<size> memory;
+template <LengthType _length_c>
+struct FreeList {
+	DD_STATIC_ASSERT(_length_c > 0, "Length of 'DD::FreeList' should be no less than 1.")
 	
 	
+	static DD_CONSTANT LengthType length = _length_c;
+	
+	static DD_CONSTANT SizeType unit = sizeof(void*);
+	static DD_CONSTANT SizeType size = length * unit;
+	
+	
+	union {
+		FreeList* next;
+		SizeTrait<size> memory;
+	};
+	
+	
+	void* get_memory() DD_NOEXCEPT {
+		return &memory;
+	}
+	
+	
+};
+
+
+
+template <LengthType _length_c>
+inline void* get_memory(FreeList<_length_c>& _free_list) DD_NOEXCEPT_AS(static_cast<void*>(_free_list.get_memory())) {
+	return _free_list.get_memory();
 };
 
 

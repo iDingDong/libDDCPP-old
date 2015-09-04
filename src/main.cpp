@@ -13,14 +13,12 @@ bool greater(int x, int y) {
 int main() {
 	try {
 #if 0
-		test_memory();
-#endif
-#if 0
 		test_algorithm();
 #endif
 #if 1
 		test_meta();
 		test_utility();
+		test_memory();
 		test_math();
 		{
 			using DD::min;
