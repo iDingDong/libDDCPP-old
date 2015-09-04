@@ -89,7 +89,7 @@
 			\
 			\
 			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker : ::DD::BoolConstant<_MACRO__detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
+			struct _ARG_Checker : ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
 			};
 
 
@@ -124,9 +124,9 @@
 			\
 			template <typename _MACRO_ObjectT>\
 			struct _ARG_Checker {\
-				typedef typename _MACRO__detail::_##_ARG_Checker<\
+				typedef typename _MACRO_detail::_##_ARG_Checker<\
 					_MACRO_ObjectT,\
-					_MACRO__detail::_CHECK_##_ARG_Checker<_MACRO_ObjectT>::value\
+					_MACRO_detail::_CHECK_##_ARG_Checker<_MACRO_ObjectT>::value\
 				>::Type Type;\
 				\
 				\

@@ -1,4 +1,4 @@
-//	standard/bits/DD_Range.hpp
+//	DDCPP/standard/bits/DD_Range.hpp
 #ifndef _DD_RANGE_HPP_INCLUDED
 #	define _DD_RANGE_HPP_INCLUDED 1
 
@@ -6,13 +6,86 @@
 
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
+#	else
+#		include "DD_Iterator.hpp"
 #	endif
 #	include "DD_IteratorReverse.hpp"
-#	include "DD_Pair.hpp"
+#	include "DD_Pair.hpp" 
+
+
+
+#	if !defined(DDCPP_CONSIDER_CSTRING_AS_RANGE)
+#		define DDCPP_CONSIDER_CSTRING_AS_RANGE DD_OFF
+#	endif
 
 
 
 DD_BEGIN
+template <typename _RangeT>
+#	if __cplusplus >= 201402L
+auto begin(_RangeT& __range) noexcept(noexcept(__range.begin())) {
+#	elif __cplusplus >= 201103L
+auto begin(_RangeT& __range) noexcept(noexcept(__range.begin())) ->decltype(__range.begin()) {
+#	else
+typename Iterator<_RangeT>::Type begin(_RangeT& __range) {
+#	endif
+	return __range.begin();
+}
+
+template <typename _RangeT>
+#	if __cplusplus >= 201402L
+auto begin(_RangeT const& __range) noexcept(noexcept(__range.begin())) {
+#	elif __cplusplus >= 201103L
+auto begin(_RangeT const& __range) noexcept(noexcept(__range.begin())) ->decltype(__range.begin()) {
+#	else
+typename Iterator<_RangeT>::Type begin(_RangeT const& __range) {
+#	endif
+	return __range.begin();
+}
+
+template <typename _ValueT, LengthType _length_c>
+#	if __cplusplus >= 201103L 
+_ValueT constexpr* begin(ArrayType<_ValueT, _length_c>& _array) noexcept {
+#	else
+_ValueT* begin(_ValueT (&_array)[_length_c]) throw() {
+#	endif
+	return _array;
+}
+
+
+template <typename _RangeT>
+#	if __cplusplus >= 201402L
+auto end(_RangeT& __range) noexcept(noexcept(__range.end())) {
+#	elif __cplusplus >= 201103L
+auto end(_RangeT& __range) noexcept(noexcept(__range.end())) ->decltype(__range.end()) {
+#	else
+typename Iterator<_RangeT>::Type end(_RangeT& __range) {
+#	endif
+	return __range.end();
+}
+
+template <typename _RangeT>
+#	if __cplusplus >= 201402L
+auto end(_RangeT const& __range) noexcept(noexcept(__range.end())) {
+#	elif __cplusplus >= 201103L
+auto end(_RangeT const& __range) noexcept(noexcept(__range.end())) ->decltype(__range.end()) {
+#	else
+typename Iterator<_RangeT>::Type end(_RangeT const& __range) {
+#	endif
+	return __range.end();
+}
+
+template <typename _ValueT, LengthType _length_c>
+#	if _cplusplus >= 201103L 
+_ValueT constexpr* end(ArrayType<_ValueT, _length_c>& _array) noexcept {
+#	else
+_ValueT* end(_ValueT (&_array)[_length_c]) throw() {
+#	endif
+	return _array + _length_c;
+}
+
+
+
 template <typename _IteratorT>
 struct Range {
 	public:
@@ -52,6 +125,13 @@ struct Range {
 	Range(_IteratorT1_ const& __begin_, _IteratorT2_ const& __end) : _m_range(__begin_, __end_) {
 	}
 #	endif
+	
+	public: 
+	template <typename _RangeT_>
+	Range(_RangeT_ const& _range_) DD_NOEXCEPT_AS(
+		Pair<Iterator>(::DD::begin(_range_), ::DD::end(_range_))
+	) : _m_range(::DD::begin(_range_), ::DD::end(_range_)) {
+	}
 	
 	
 #	if __cplusplus >= 201103L

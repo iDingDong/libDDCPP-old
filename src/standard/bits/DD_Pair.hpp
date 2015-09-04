@@ -8,8 +8,7 @@
 //#	if __cplusplus >= 201103L
 //#		include "DD_forward.hpp"
 //#	endif
-#	include "DD_EqualityComparable.hpp"
-#	include "DD_LessThanComparable.hpp"
+#	include "DD_Comparable.hpp"
 #	include "DD_swap.hpp"
 #	include "DD_dereference.hpp"
 
@@ -17,7 +16,7 @@
 
 DD_BEGIN
 template <typename _ValueT1, typename _ValueT2 = _ValueT1>
-struct Pair : LessThanComparable<Pair<_ValueT1, _ValueT2>>, EqualityComparable<Pair<_ValueT1, _ValueT2>> {
+struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 	public:
 	DD_ALIAS(ThisType, Pair<_ValueT1 DD_COMMA _ValueT2>)
 	DD_ALIAS(FirstValueType, _ValueT1)
@@ -80,9 +79,9 @@ struct Pair : LessThanComparable<Pair<_ValueT1, _ValueT2>>, EqualityComparable<P
 
 
 template <typename _ValueT>
-struct Pair<_ValueT, _ValueT> : LessThanComparable<Pair<_ValueT, _ValueT>>, EqualityComparable<Pair<_ValueT, _ValueT>> {
+struct Pair<_ValueT> : Comparable<Pair<_ValueT>> {
 	public:
-	DD_ALIAS(ThisType, Pair<_ValueT DD_COMMA _ValueT>)
+	DD_ALIAS(ThisType, Pair<_ValueT>)
 	DD_ALIAS(ValueType, _ValueT)
 	
 	DD_ALIAS(FirstValueType, ValueType)

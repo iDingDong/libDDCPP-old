@@ -34,6 +34,9 @@ struct IntegralConstant {
 template <bool _value_c>
 using BoolConstant = IntegralConstant<bool, _value_c>;
 
+template <SizeType _size_c>
+using SizeConstant = IntegralConstant<SizeType, _size_c>;
+
 template <DifferenceType _difference_c>
 using DifferenceConstant = IntegralConstant<DifferenceType, _difference_c>;
 
@@ -44,6 +47,12 @@ using StdBoolConstant = BoolConstant<_IntegralT::value>;
 #	else
 template <bool _value_c>
 struct BoolConstant : IntegralConstant<bool, _value_c> {
+};
+
+
+
+template <SizeType _size_c>
+struct SizeConstant : IntegralConstant<SizeType, _size_c> {
 };
 
 

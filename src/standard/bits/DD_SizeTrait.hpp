@@ -8,10 +8,6 @@
 
 
 
-#	if __cplusplus < 201103L || DDCPP_COMPAT_DEPRECATION
-#		if __cplusplus >= 201103L && DDCPP_DEPRECATION_WARNING
-#			warning 'DD_SizeTrait.hpp' is deprecated with ISO/IEC 14882:2011 or a later version support.
-#		endif
 DD_BEGIN
 template <SizeType _size_c>
 struct SizeTrait {
@@ -25,5 +21,4 @@ DD_END
 
 
 
-#	endif
 #endif

@@ -6,6 +6,7 @@
 
 #	include "bits/DD_size_distance.hpp"
 #	include "bits/DD_DefaultDeleter.hpp"
+#	include "bits/DD_FreeList.hpp"
 #	if __cplusplus >= 201103L
 #		include "bits/DD_make_unique.hpp"
 #		include "bits/DD_make_parasitic.hpp"

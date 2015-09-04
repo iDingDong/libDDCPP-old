@@ -75,14 +75,14 @@ inline ProcessType swap(
 
 template <typename _ObjectT, LengthType _length_c>
 #	if __cplusplus >= 201103L
-inline ProcessType swap(ArrayType<_ObjectT, _length_c>& __array_1, ArrayType<_ObjectT, _length_c>& __array_2) noexcept(
-	noexcept(swap(*__array_1, *__array_2))
+inline ProcessType swap(ArrayType<_ObjectT, _length_c>& _array_1, ArrayType<_ObjectT, _length_c>& _array_2) noexcept(
+	noexcept(swap(*_array_1, *_array_2))
 ) {
 #	else
-inline ProcessType swap(_ObjectT(&__array_1)[_length_c], _ObjectT(&__array_2)[_length_c]) {
+inline ProcessType swap(_ObjectT (&_array_1)[_length_c], _ObjectT (&_array_2)[_length_c]) {
 #	endif
 	for (LengthType i = 0; i < _length_c; ++i) {
-		swap(__array_1[i], __array_2[i]);
+		swap(_array_1[i], _array_2[i]);
 	}
 }
 
