@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=205
+UnitCount=206
 
 [VersionInfo]
 Major=1
@@ -2092,6 +2092,16 @@ BuildCmd=
 
 [Unit205]
 FileName=..\..\src\standard\bits\DD_VoidType.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit206]
+FileName=..\..\src\standard\bits\DD_BuildInTypes.hpp
 CompileCpp=1
 Folder=standard/bits
 Compile=1

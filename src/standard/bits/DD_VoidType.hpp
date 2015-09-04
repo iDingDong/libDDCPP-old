@@ -17,7 +17,7 @@
 #	if __cplusplus < 201402L
 DD_DETAIL_BEGIN
 template <typename... _ObjectsT>
-struct _MakeVoid {
+struct _VoidTypeWorkaround {
 	using Type = void;
 	
 	
@@ -31,12 +31,11 @@ DD_DETAIL_END
 
 #	endif
 DD_BEGIN
-
 template <typename... _ObjectsT>
 #	if __cplusplus >= 201402L
 using VoidType = void;
 #	else
-using VoidType = typename _detail::_MakeVoid<_ObjectsT...>::Type;
+using VoidType = typename _detail::_VoidTypeWorkaround<_ObjectsT...>::Type;
 #	endif
 
 

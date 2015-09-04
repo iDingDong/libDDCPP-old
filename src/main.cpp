@@ -1,4 +1,5 @@
 #include <iostream>
+#include "standard/DDGlobal.hpp"
 #include "standard/DDAlgorithm.hpp"
 #include "test_meta.h"
 #include "test_memory.h"
