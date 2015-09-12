@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_Tags.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
@@ -13,7 +14,7 @@
 
 
 DD_BEGIN
-template <typename _ValueT, typename _DeleterT = void>
+template <typename _ValueT, typename _DeleterT = DefaultTag>
 struct UniquePointer {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>)
@@ -163,9 +164,9 @@ struct UniquePointer {
 
 
 template <typename _ValueT>
-struct UniquePointer<_ValueT, void> {
+struct UniquePointer<_ValueT, DefaultTag> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>)
+	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>)
 	DD_ALIAS(ValueType, _ValueT)
 	DD_ALIAS(DeleterType, void)
 	

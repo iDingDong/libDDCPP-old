@@ -23,11 +23,11 @@ _UndirectionalIteratorT find_max(
 	return __max;
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicator>
+template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
 _UndirectionalIteratorT find_max(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
-	_BinaryPredicator const& __less
+	_BinaryPredicatorT const& __less
 ) DD_NOEXCEPT_AS(++__begin != __end && __less(*__begin, *__begin)) {
 	_UndirectionalIteratorT __max = __begin;
 	for (; __begin != __end; ++__begin) {

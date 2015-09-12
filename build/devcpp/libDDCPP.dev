@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=206
+UnitCount=208
 
 [VersionInfo]
 Major=1
@@ -2102,6 +2102,26 @@ BuildCmd=
 
 [Unit206]
 FileName=..\..\src\standard\bits\DD_BuildInTypes.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit207]
+FileName=..\..\src\standard\bits\DD_RangeWorkaround.hpp
+CompileCpp=1
+Folder=standard/bits
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit208]
+FileName=..\..\src\standard\bits\DD_print.hpp
 CompileCpp=1
 Folder=standard/bits
 Compile=1

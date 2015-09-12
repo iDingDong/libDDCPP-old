@@ -23,11 +23,11 @@ _UndirectionalIteratorT find_min(
 	return __min;
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicator>
+template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
 _UndirectionalIteratorT find_min(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
-	_BinaryPredicator const& __less
+	_BinaryPredicatorT const& __less
 ) DD_NOEXCEPT_AS(++__begin != __end && __less(*__begin, *__begin)) {
 	_UndirectionalIteratorT __min = __begin;
 	for (; __begin != __end; ++__begin) {

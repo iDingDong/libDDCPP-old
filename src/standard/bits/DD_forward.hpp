@@ -23,7 +23,7 @@ inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>& __object) noexcept {
 
 template <typename _ObjectT>
 inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>&& __object) noexcept {
-	static_assert(!IsLvalueReference<_ObjectT>::value, "Template argument substituting '_ObjectT' is an lvalue reference type");
+	static_assert(!IsLvalueReference<_ObjectT>::value, "Template argument substituting '_ObjectT' is an lvalue reference type.");
 	return static_cast<_ObjectT&&>(__object);
 }
 

@@ -29,12 +29,12 @@ DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
 	return _result;
 }
 
-template <typename _UndirectionalIteratorT, typename _ValueT, typename _BinaryPredicator>
+template <typename _UndirectionalIteratorT, typename _ValueT, typename _BinaryPredicatorT>
 DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
 	_ValueT const& __value,
-	_BinaryPredicator const& __equal
+	_BinaryPredicatorT const& __equal
 ) DD_NOEXCEPT_AS(++__begin != __end && __equal(*__begin, __value)) {
 #	if __cplusplus >= 201103L
 	auto _result = DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT)();

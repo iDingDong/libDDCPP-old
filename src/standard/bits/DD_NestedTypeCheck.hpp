@@ -54,7 +54,12 @@
 				using Type = decltype(_match<_MACRO_ObjectT>(::DD::nil_pointer));\
 				\
 				\
-			};
+			};\
+			\
+			\
+			\
+			template <typename _ARG_ObjectT>\
+			using _ARG_Checker##Type = typename _ARG_Checker<_ARG_ObjectT>::Type;
 
 
 #	else

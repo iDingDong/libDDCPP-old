@@ -23,12 +23,12 @@ ProcessType replace(
 	}
 }
 
-template <typename _UndirectionalIteratorT, typename _ValueT1, typename _BinaryPredicator, typename _ValueT2>
+template <typename _UndirectionalIteratorT, typename _ValueT1, typename _BinaryPredicatorT, typename _ValueT2>
 ProcessType replace(
 	_UndirectionalIteratorT __begin,
 	_UndirectionalIteratorT const& __end,
 	_ValueT1 __old,
-	_BinaryPredicator const& __equal,
+	_BinaryPredicatorT const& __equal,
 	_ValueT2 __value
 ) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end && __equal(*__begin, __old)) {
 	for (; __begin != __end; ++__begin) {

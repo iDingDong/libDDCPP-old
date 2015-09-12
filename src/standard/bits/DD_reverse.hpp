@@ -59,6 +59,15 @@ inline ProcessType reverse(
 
 
 
+template <typename _BidirectionalRangeT>
+inline ProcessType reverse(
+	_BidirectionalRangeT& __range
+) DD_NOEXCEPT_AS(reverse(DD_SPLIT_RANGE(__range))) {
+	reverse(DD_SPLIT_RANGE(__range));
+}
+
+
+
 DD_END
 
 

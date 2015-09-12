@@ -144,6 +144,7 @@ struct Array {
 	
 	
 	ReferenceType operator [](LengthType _index) DD_NOEXCEPT {
+		DD_ASSERT(_index < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return array[_index];
 	}
 	

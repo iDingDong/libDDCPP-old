@@ -32,13 +32,13 @@ _UndirectionalIteratorT3 merge(
 	return copy(__begin_1, __end_1, __result_begin);
 }
 
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _UndirectionalIteratorT3, typename _BinaryPredicator>
+template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _UndirectionalIteratorT3, typename _BinaryPredicatorT>
 _UndirectionalIteratorT3 merge(
 	_UndirectionalIteratorT1 __begin_1,
 	_UndirectionalIteratorT1 const& __end_1,
 	_UndirectionalIteratorT2 __begin_2,
 	_UndirectionalIteratorT2 const& __end_2,
-	_BinaryPredicator const& __less,
+	_BinaryPredicatorT const& __less,
 	_UndirectionalIteratorT3 __result_begin
 ) DD_NOEXCEPT_AS(copy(__begin_1, __end_1, __result_begin) DD_COMMA copy(__begin_2, __end_2, __result_begin) DD_COMMA __less(*__begin_1, *__begin_2)) {
 	for (; __begin_2 != __end_2; ++__result_begin) {

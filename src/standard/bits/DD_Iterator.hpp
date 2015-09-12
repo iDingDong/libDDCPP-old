@@ -12,15 +12,20 @@
 
 
 
-#	if __cplusplus < 201103L
 DD_DETAIL_BEGIN
+#	if DDCPP_COMPAT_STL
+DD_NESTED_TYPE_TRAIT(_IteratorOfStl, _RangeT::iterator, void)
+
+
+
+#	endif
 template <typename _RangeT>
 struct _Iterator {
-#		if DDCPP_COMPAT_STL
-	typedef typename _RangeT::Iterator Type;
-#		else
-	typedef typename _RangeT::Iterator Type;
-#		endif
+#	if DDCPP_COMPAT_STL
+	DD_ALIAS(Type, DD_MODIFY_TRAIT(_IteratorOfStl, _RangeT))
+#	else
+	DD_ALIAS(Type, void)
+#	endif
 	
 	
 };
@@ -29,7 +34,7 @@ struct _Iterator {
 
 template <typename _ValueT, LengthType _length_c>
 struct _Iterator<_ValueT[_length_c]> {
-	typedef _ValueT* Type;
+	DD_ALIAS(Type, _ValueT*)
 	
 	
 };
@@ -38,7 +43,7 @@ struct _Iterator<_ValueT[_length_c]> {
 
 template <typename _ValueT>
 struct _Iterator<_ValueT[]> {
-	typedef _ValueT* Type;
+	DD_ALIAS(Type, _ValueT*)
 	
 	
 };
@@ -47,7 +52,7 @@ struct _Iterator<_ValueT[]> {
 
 template <typename _ValueT>
 struct _Iterator<_ValueT*> {
-	typedef _ValueT* Type;
+	DD_ALIAS(Type, _ValueT*)
 	
 	
 };
@@ -58,23 +63,12 @@ DD_DETAIL_END
 
 
 
-#	elif DDCPP_COMPAT_STL
-DD_DETAIL_BEGIN
-DD_NESTED_TYPE_TRAIT(_Iterator, iterator, RemoveReferenceType<decltype(*_MACRO_ObjectT())>)
-
-
-
-DD_DETAIL_END
-
-
-
-#	endif
 DD_BEGIN
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<_MACRO_ObjectT>::Type)
 #		else
-DD_NESTED_TYPE_TRAIT(Iterator, Iterator, RemoveReferenceType<decltype(*_MACRO_ObjectT())>)
+DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<_MACRO_ObjectT>::Type)
 #		endif
 
 

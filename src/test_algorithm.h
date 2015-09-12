@@ -3,16 +3,16 @@
 
 
 
-#	include <iostream>
+#	include "standard/bits/DD_print.hpp"
 
 
 
 template <typename ContainerT>
 inline void print_container(ContainerT const& container) {
 	for (auto& element : container) {
-		std::cout << element << ", ";
+		DD_PRINT element, ", ";
 	}
-	std::cout << std::endl;
+	DD_PRINT DD::end_line;
 }
 
 
@@ -20,4 +20,4 @@ void test_algorithm();
 
 
 
-#endif 
+#endif
