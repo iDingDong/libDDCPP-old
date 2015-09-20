@@ -22,8 +22,8 @@ struct AddVolatile {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 

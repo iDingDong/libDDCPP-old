@@ -1,4 +1,4 @@
-// standard/bits/DD_absolute.hpp
+//	DDCPP/standard/bits/DD_absolute.hpp
 #ifndef _DD_ABSOLUTE_HPP
 #	define _DD_ABSOLUTE_HPP 1
 

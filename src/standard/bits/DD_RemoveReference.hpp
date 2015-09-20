@@ -22,8 +22,8 @@ struct RemoveReference {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 
@@ -31,8 +31,8 @@ struct RemoveReference {
 template <typename _ValueT>
 struct RemoveReference<_ValueT&> {
 	DD_ALIAS(Type, _ValueT)
-	
-	
+
+
 };
 
 
@@ -41,8 +41,8 @@ struct RemoveReference<_ValueT&> {
 template <typename _ValueT>
 struct RemoveReference<_ValueT&&> {
 	using Type = _ValueT;
-	
-	
+
+
 };
 
 

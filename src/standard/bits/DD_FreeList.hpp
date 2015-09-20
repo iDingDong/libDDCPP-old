@@ -8,29 +8,41 @@
 
 
 
+DD_DETAIL_BEGIN
+struct _FreeListBase {
+	_FreeListBase* next;
+
+
+};
+
+
+
+DD_DETAIL_END
+
+
+
 DD_BEGIN
 template <LengthType _length_c>
-struct FreeList {
+struct FreeList : _detail::_FreeListBase {
 	DD_STATIC_ASSERT(_length_c > 0, "Length of 'DD::FreeList' should be no less than 1.")
-	
-	
+
+
 	static DD_CONSTANT LengthType length = _length_c;
-	
+
 	static DD_CONSTANT SizeType unit = sizeof(void*);
 	static DD_CONSTANT SizeType size = length * unit;
-	
-	
-	union {
-		FreeList* next;
-		SizeTrait<size> memory;
-	};
-	
-	
+
+	static DD_CONSTANT SizeType _expansion_size = size - unit;
+
+
+	SizeTrait<_expansion_size> memory;
+
+
 	void* get_memory() DD_NOEXCEPT {
 		return &memory;
 	}
-	
-	
+
+
 };
 
 

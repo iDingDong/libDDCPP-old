@@ -12,8 +12,8 @@ DD_BEGIN
 struct UnusedIgnorer {
 	public:
 	DD_ALIAS(ThisType, UnusedIgnorer)
-	
-	
+
+
 	public:
 #	if __cplusplus >= 201103L
 	template <typename... _ObjectsT_>
@@ -24,15 +24,15 @@ struct UnusedIgnorer {
 	ProcessType operator ()(_ObjectT_ const& __object_) const throw() {
 	}
 #	endif
-	
-	
+
+
 	public:
 	template <typename _ObjectT_>
 	ThisType const& operator ,(_ObjectT_ const& __object_) const DD_NOEXCEPT {
 		return *this;
 	};
-	
-	
+
+
 } DD_CONSTANT ignore_unused;
 
 

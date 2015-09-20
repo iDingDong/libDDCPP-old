@@ -17,12 +17,12 @@ struct NilType {
 struct NilPointerType {
 #	if __cplusplus >= 201103L
 	constexpr NilPointerType() noexcept(true) = default;
-	
+
 	constexpr NilPointerType(NilPointerType const& _origin) = default;
-	
+
 	constexpr NilPointerType(NilPointerType&& _origin) = default;
-	
-	
+
+
 #	endif
 	template <typename _ValueT>
 	DD_CONSTEXPR operator _ValueT*() const DD_NOEXCEPT {
@@ -33,8 +33,8 @@ struct NilPointerType {
 		return PointerType();
 #	endif
 	}
-	
-	
+
+
 };
 
 

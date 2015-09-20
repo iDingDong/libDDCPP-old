@@ -22,25 +22,25 @@ struct _IsBaseOf {
 	struct _Host {
 		DD_CONSTEXPR operator _BaseT_*() const DD_NOEXCEPT;
 		DD_CONSTEXPR operator _DerivedT_*() DD_NOEXCEPT;
-		
-		
+
+
 	};
-	
-	
+
+
 	static FalseType constexpr _match(_BaseT*, int) noexcept;
-	
+
 	template <typename IntT_>
 	static TrueType constexpr _match(_DerivedT*, IntT_) noexcept {
 		return true;
 	}
-	
-	
+
+
 	static ValidityType constexpr value = OrType<
 		AndType<decltype(_IsBaseOf<_BaseT, _DerivedT>::_match(_Host<_BaseT, _DerivedT>(), int())), IsClass<_BaseT, _DerivedT>>,
 		StdIntegralConstant<std::is_base_of<_BaseT, _DerivedT>>
 	>::value;
-	
-	
+
+
 };
 
 
@@ -48,8 +48,8 @@ struct _IsBaseOf {
 template <typename _ObjectT>
 struct _IsBaseOf<_ObjectT, _ObjectT> {
 	static ValidityType constexpr value = IsClass<_ObjectT>::value || std::is_base_of<_ObjectT, _ObjectT>::value;
-	
-	
+
+
 };
 
 

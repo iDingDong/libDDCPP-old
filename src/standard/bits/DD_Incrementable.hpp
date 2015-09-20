@@ -13,21 +13,21 @@ template <typename _ObjectT>
 struct Incrementable {
 	public:
 	DD_ALIAS(Type, _ObjectT)
-	
-	
+
+
 	public:
 	friend Type operator ++(Type& _object, int) DD_NOEXCEPT_AS(++_object, Type(_object)) {
 		Type _temp(_object);
 		++_object;
 		return _temp;
 	}
-	
-	
+
+
 };
 
 
 
-DD_END 
+DD_END
 
 
 

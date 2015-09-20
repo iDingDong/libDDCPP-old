@@ -1,4 +1,4 @@
-// math/bits/DD_math_definitions.hpp
+//	DDCPP/math/bits/DD_math_definitions.hpp
 #ifndef _DD_MATH_DEFINITIONS_HPP
 #	define _DD_MATH_DEFINITIONS_HPP 1
 

@@ -24,8 +24,8 @@ struct GetPackBack : GetPackBack<_ObjectsT...> {
 template <typename _ObjectT>
 struct GetPackBack<_ObjectT> {
 	using Type = _ObjectT;
-	
-	
+
+
 };
 
 

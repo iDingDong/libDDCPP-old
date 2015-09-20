@@ -16,37 +16,37 @@ struct ListIterator {
 	public:
 	DD_ALIAS(ThisType, ListIterator<_NodeT>)
 	DD_ALIAS(NodeType, _NodeT)
-	
+
 	public:
 	DD_ALIAS(NodeConstType, NodeType const)
 	DD_ALIAS(NodeReferenceType, NodeType&)
 	DD_ALIAS(NodeConstReferenceType, NodeConstType&)
 	DD_ALIAS(NodePointerType, NodeType*)
 	DD_ALIAS(NodeConstPointerType, NodeConstType*)
-	
+
 	public:
 	DD_ALIAS(ValueType, typename NodeType::ValueType)
-	
+
 	public:
 	DD_ITERATOR_DECLARATIONS
 	DD_ALIAS(CatagoryType, BidirectionalIterator)
-	
-	
+
+
 	private:
 #	if __cplusplus >= 201103L
 	NodePointerType _m_pointer = NodePointerType();
 #	else
 	NodePointerType _m_pointer;
 #	endif
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr ListIterator() = default;
-	
+
 	public:
 	constexpr ListIterator(ThisType const& _origin) = default;
-	
+
 	public:
 	constexpr ListIterator(ThisType&& _origin) = default;
 #	else
@@ -54,12 +54,12 @@ struct ListIterator {
 	ListIterator() throw() : _m_pointer() {
 	};
 #	endif
-	
+
 	public:
 	DD_CONSTEXPR ListIterator(NodePointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
 	}
-	
-	
+
+
 	public:
 	ProcessType swap_target(ThisType& _target) DD_NOEXCEPT {
 		//assert(_m_pointer && _target)
@@ -84,66 +84,66 @@ struct ListIterator {
 			_temp->previous = _m_pointer;
 		}
 	}
-	
-	
+
+
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
 		return address_of(this->_m_pointer->value);
 	}
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType const& _origin) = default;
-	
+
 	public:
 	ThisType& operator =(ThisType&& _origin) = default;
-	
-	
+
+
 #	endif
 	public:
 	ThisType& operator ++() DD_NOEXCEPT {
 		this->_m_pointer = this->_m_pointer->next;
 		return *this;
 	}
-	
+
 	public:
 	ThisType operator ++(int) DD_NOEXCEPT {
 		return ThisType(release(this->_m_pointer, this->m_pointer->next));
 	}
-	
-	
+
+
 	public:
 	ThisType& operator --() DD_NOEXCEPT {
 		this->_m_pointer = this->_m_pointer->previous;
 		return *this;
 	}
-	
+
 	public:
 	ThisType operator --(int) DD_NOEXCEPT {
 		return ThisType(release(this->_m_pointer, this->m_pointer->previous));
 	}
-	
-	
+
+
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
 		return this->_m_pointer->value;
 	}
-	
-	
+
+
 	public:
 	ReferenceType operator ->() const DD_NOEXCEPT {
 		return this->get_pointer();
 	}
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	explicit operator ValidityType() const noexcept {
 		return this->_m_pointer;
 	}
-	
-	
+
+
 #	endif
 };
 

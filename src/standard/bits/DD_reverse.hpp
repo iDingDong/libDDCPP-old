@@ -21,8 +21,8 @@ struct _Reverse {
 			swap_target(__begin_, __end_);
 		}
 	}
-	
-	
+
+
 };
 
 
@@ -38,13 +38,13 @@ struct _Reverse<true> {
 			swap_target(__begin_, __end_);
 		}
 	}
-	
-	
-}; 
+
+
+};
 
 
 
-DD_DETAIL_END 
+DD_DETAIL_END
 
 
 

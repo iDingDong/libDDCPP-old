@@ -18,8 +18,8 @@ struct EnableIf {
 template <typename _ObjectT>
 struct EnableIf<true, _ObjectT> {
 	DD_ALIAS(Type, _ObjectT)
-	
-	
+
+
 };
 
 

@@ -42,7 +42,7 @@ struct _Equal {
 			}
 			return __begin_2__ == __end_2__;
 		}
-		
+
 		template <typename _UndirectionalIteratorT1__, typename _UndirectionalIteratorT2__, typename _BinaryPredicator__>
 		static ValidityType _equal(
 			_UndirectionalIteratorT1__ __begin_1__,
@@ -60,11 +60,11 @@ struct _Equal {
 			}
 			return __begin_2__ == __end_2__;
 		}
-		
-		
+
+
 	};
-	
-	
+
+
 	template <int _workaround_c_>
 	struct __Equal<true, _workaround_c_> {
 		template <typename _FreeAccessIteratorT1__, typename _FreeAccessIteratorT2__>
@@ -89,7 +89,7 @@ struct _Equal {
 			}
 			return true;
 		}
-		
+
 		template <typename _FreeAccessIteratorT1__, typename _FreeAccessIteratorT2__, typename _BinaryPredicator__>
 		static ValidityType _equal(
 			_FreeAccessIteratorT1__ const& __begin_1__,
@@ -113,11 +113,11 @@ struct _Equal {
 			}
 			return true;
 		}
-		
-		
+
+
 	};
-	
-	
+
+
 	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_>
 	static ValidityType _equal(
 		_UndirectionalIteratorT1_ __begin_1_,
@@ -131,7 +131,7 @@ struct _Equal {
 		}
 		return true;
 	}
-	
+
 	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_>
 	static ValidityType _equal(
 		_UndirectionalIteratorT1_ const& __begin_1_,
@@ -151,7 +151,7 @@ struct _Equal {
 #	endif
 		>::_equal(__begin_1_, __end_1_, __begin_2_, __end_2_);
 	}
-	
+
 	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_, typename _BinaryPredicator_>
 	static ValidityType _equal(
 		_UndirectionalIteratorT1_ __begin_1_,
@@ -166,7 +166,7 @@ struct _Equal {
 		}
 		return true;
 	}
-	
+
 	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_, typename _BinaryPredicator_>
 	static ValidityType _equal(
 		_UndirectionalIteratorT1_ const& __begin_1_,
@@ -187,8 +187,8 @@ struct _Equal {
 #	endif
 		>::_equal(__begin_1_, __end_1_, __begin_2_, __end_2_, __equal_);
 	}
-	
-	
+
+
 };
 
 
@@ -203,7 +203,7 @@ struct _Equal<true> {
 	) DD_NOEXCEPT {
 		return !std::memcmp(get_pointer(__begin_1_), get_pointer(__begin_2_), size_distance(__begin_1_, __end_1_));
 	}
-	
+
 	template <typename _PointerT1_, typename _PointerT2_>
 	static ValidityType _equal(
 		_PointerT1_ const& __begin_1_,
@@ -214,8 +214,8 @@ struct _Equal<true> {
 		SizeType _size = size_distance(__begin_1_, __end_1_);
 		return _size == size_distance(__begin_2_, __end_2_) && !std::memcmp(get_pointer(__begin_1_), get_pointer(__begin_2_), _size);
 	}
-	
-	
+
+
 };
 
 
@@ -326,8 +326,8 @@ struct _EqualDispatcher {
 	) DD_NOEXCEPT_AS(::DD::_detail::_equal(__begin_1_ DD_COMMA __end_1_ DD_COMMA __begin_2_)) {
 		return ::DD::_detail::_equal(__begin_1_, __end_1_, __begin_2_);
 	}
-	
-	
+
+
 };
 
 
@@ -342,8 +342,8 @@ struct _EqualDispatcher<true> {
 	) DD_NOEXCEPT_AS(::DD::_detail::_equal(DD_SPLIT_RANGE(__range_1_) DD_COMMA DD_SPLIT_RANGE(__range_2_) DD_COMMA __equal_)) {
 		return ::DD::_detail::_equal(DD_SPLIT_RANGE(__range_1_), DD_SPLIT_RANGE(__range_2_), __equal_);
 	}
-	
-	
+
+
 };
 
 

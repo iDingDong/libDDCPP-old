@@ -22,8 +22,8 @@ struct AddConst {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 

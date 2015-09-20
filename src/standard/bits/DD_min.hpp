@@ -26,7 +26,7 @@ struct _Min {
 	) noexcept {
 		return __object_;
 	}
-	
+
 	template <typename _ObjectT_, typename _BinaryPredicatorT_>
 	static _ObjectT_ constexpr const& _min(
 		_ObjectT_ const& __object_1_,
@@ -35,7 +35,7 @@ struct _Min {
 	) noexcept(noexcept(__less_(__object_2_, __object_1_))) {
 		return __less_(__object_2_, __object_1_) ? __object_2_ : __object_1_;
 	}
-	
+
 	template <typename _ObjectT_, typename... _ArgumentsT_>
 	static _ObjectT_ constexpr const& _min(
 		_ObjectT_ const& __object_,
@@ -43,8 +43,8 @@ struct _Min {
 	) noexcept(noexcept(_min(__object_, _min(__arguments_...), get_last_argument(__arguments_...)))) {
 		return _min(__object_, _min(__arguments_...), get_last_argument(__arguments_...));
 	}
-	
-	
+
+
 };
 
 
@@ -57,7 +57,7 @@ struct _Min<true> {
 	) noexcept {
 		return __object_;
 	}
-	
+
 	template <typename _ObjectT_>
 	static _ObjectT_ constexpr const& _min(
 		_ObjectT_ const& __object_1_,
@@ -65,7 +65,7 @@ struct _Min<true> {
 	) noexcept(noexcept(__object_2_ < __object_1_)) {
 		return __object_2_ < __object_1_ ? __object_2_ : __object_1_;
 	};
-	
+
 	template <typename _ObjectT_, typename... _ObjectsT_>
 	static _ObjectT_ constexpr const& _min(
 		_ObjectT_ const& __object_,
@@ -73,8 +73,8 @@ struct _Min<true> {
 	) noexcept(noexcept(_min(__object_, _min(__objects_...)))) {
 		return _min(__object_, _min(__objects_...));
 	}
-	
-	
+
+
 };
 
 

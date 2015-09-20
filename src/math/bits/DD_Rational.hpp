@@ -30,8 +30,8 @@ DD_RATIONAL_BEGIN
 struct Default : DefaultTag {
 	DD_ALIAS(NumeratorType, unsigned)
 	DD_ALIAS(Denominator, int)
-	
-	
+
+
 };
 
 
@@ -39,8 +39,8 @@ struct Default : DefaultTag {
 struct DefaultAccurate : DefaultTag {
 	DD_ALIAS(NumeratorType, int)
 	DD_ALIAS(Denominator, unsigned)
-	
-	
+
+
 };
 
 
@@ -48,8 +48,8 @@ struct DefaultAccurate : DefaultTag {
 struct DefaultChar : Default {
 	DD_ALIAS(NumeratorType, unsigned char)
 	DD_ALIAS(Denominator, signed char)
-	
-	
+
+
 };
 
 
@@ -57,8 +57,8 @@ struct DefaultChar : Default {
 struct DefaultCharAccurate : DefaultAccurate {
 	DD_ALIAS(NumeratorType, signed char)
 	DD_ALIAS(Denominator, unsigned char)
-	
-	
+
+
 };
 
 
@@ -66,8 +66,8 @@ struct DefaultCharAccurate : DefaultAccurate {
 struct DefaultShort : Default {
 	DD_ALIAS(NumeratorType, unsigned short)
 	DD_ALIAS(Denominator, short)
-	
-	
+
+
 };
 
 
@@ -75,8 +75,8 @@ struct DefaultShort : Default {
 struct DefaultShortAccurate : DefaultAccurate {
 	DD_ALIAS(NumeratorType, short)
 	DD_ALIAS(Denominator, unsigned short)
-	
-	
+
+
 };
 
 
@@ -84,8 +84,8 @@ struct DefaultShortAccurate : DefaultAccurate {
 struct DefaultLong : Default {
 	DD_ALIAS(NumeratorType, unsigned long)
 	DD_ALIAS(Denominator, long)
-	
-	
+
+
 };
 
 
@@ -93,8 +93,8 @@ struct DefaultLong : Default {
 struct DefaultLongAccurate : DefaultAccurate {
 	DD_ALIAS(NumeratorType, long)
 	DD_ALIAS(Denominator, unsigned long)
-	
-	
+
+
 };
 
 
@@ -103,8 +103,8 @@ struct DefaultLongAccurate : DefaultAccurate {
 struct DefaultLongLong : Default {
 	using NumeratorType = unsigned long long;
 	using Denominator = long long;
-	
-	
+
+
 };
 
 
@@ -112,8 +112,8 @@ struct DefaultLongLong : Default {
 struct DefaultLongLongAccurate : DefaultAccurate {
 	using NumeratorType = long long;
 	using Denominator = unsigned long long;
-	
-	
+
+
 };
 
 
@@ -170,22 +170,22 @@ struct _Rational :
 	DD_ALIAS(ThisType, _Rational<_NumeratorT DD_COMMA _DenominatorT DD_COMMA _is_divided_by_unsigned_c>)
 	DD_ALIAS(NumeratorType, _NumeratorT)
 	DD_ALIAS(DenominatorType, _DenominatorT)
-	
+
 	public:
 	DD_ALIAS(ValueType, Pair<NumeratorType DD_COMMA DenominatorType>)
-	
-	
+
+
 	private:
 	ValueType _m_value DD_IN_CLASS_INITIALIZE(ValueType(NumeratorType() DD_COMMA DenominatorType(1)));
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr _Rational() = default;
-	
+
 	public:
 	constexpr _Rational(ThisType const& _origin) = default;
-	
+
 	public:
 	constexpr _Rational(ThisType&& _origin) = default;
 #	else
@@ -193,16 +193,16 @@ struct _Rational :
 	_Rational() : _m_numerator(), _m_value(NumeratorType(), DenominatorType(1)) {
 	}
 #	endif
-	
+
 	public:
 	DD_CONSTEXPR _Rational(ValueType const& _value) : _m_value(_value) {
 	}
-	
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr _Rational(ValueType _value) noexcept(noexcept(ValueType(move(_value)))) : _m_value(move(_value)) {
 	};
-	
+
 	public:
 	template <typename _NumeratorT_, typename _DenominatorT_>
 	constexpr _Rational(_NumeratorT_&& __numerator_, _DenominatorT_&& __denominator_) noexcept(
@@ -213,23 +213,23 @@ struct _Rational :
 	public:
 	_Rational(ValueType const& _value) : _m_value(_value) {
 	}
-	
+
 	public:
 	template <typename _NumeratorT_, typename _DenominatorT_>
 	_Rational (_NumeratorT_ const& __numerator, _DenominatorT_ const& __denominator_) : _m_value(__numerator, __denominator_) {
 	}
 #	endif
-	
+
 #	if __cplusplus >= 201103L
 	public:
 	~_Rational() = default;
-	
-	
+
+
 #	endif
 	public:
-	
-	
-	
+
+
+
 };
 
 
@@ -243,8 +243,8 @@ struct _Rational<_NumeratorT, _DenominatorT, true> :
 	Comparable<_Rational<_NumeratorT, _DenominatorT, true>>
 {
 	public:
-	
-	
+
+
 };
 
 

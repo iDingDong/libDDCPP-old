@@ -16,19 +16,19 @@ struct Exception {
 #	else
 	PromptType _m_prompt;
 #	endif
-	
-	
+
+
 	public:
 #	if __cplusplus >= 201103L
 	Exception() DD_NOEXCEPT = default;
-	
+
 	public:
 	Exception(Exception const& _origin) DD_NOEXCEPT = default;
 #	else
 	Exception() DD_NOEXCEPT : _m_prompt() {
 	};
 #	endif
-	
+
 	public:
 	DD_CONSTEXPR Exception(PromptType _prompt) DD_NOEXCEPT : _m_prompt(_prompt) {
 	}
@@ -41,19 +41,19 @@ struct Exception {
 	virtual ~Exception() DD_NOEXCEPT {
 	}
 #	endif
-	
-	
+
+
 	public:
 	virtual PromptType get_prompt() const DD_NOEXCEPT {
 		return this->_m_prompt;
 	}
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	Exception& operator =(Exception const& _origin) DD_NOEXCEPT = default;
-	
-	
+
+
 #	endif
 };
 
@@ -63,4 +63,4 @@ DD_END
 
 
 
-#endif 
+#endif

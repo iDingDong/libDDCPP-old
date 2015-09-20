@@ -33,7 +33,7 @@ using IsFloatingPoint = AndType<_detail::_IsFloatingPoint<_ObjectsT>...>;
 #	else
 template <typename _ObjectT>
 struct IsFloatingPoint : BoolConstant<IsFloat<_ObjectT>::value || IsDouble<_ObjectT>::value || IsLongDouble<_ObjectT>::value> {
-}; 
+};
 #	endif
 
 

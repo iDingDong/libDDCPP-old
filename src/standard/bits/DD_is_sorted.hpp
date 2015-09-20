@@ -27,7 +27,7 @@ struct _IsSorted {
 		}
 		return true;
 	}
-	
+
 	template <typename _UndirectionalIteratorT_, typename _BinaryPredicatorT_>
 	static ValidityType _is_sorted(
 		_UndirectionalIteratorT_ __begin_,
@@ -44,8 +44,8 @@ struct _IsSorted {
 		}
 		return true;
 	}
-	
-	
+
+
 };
 
 
@@ -64,7 +64,7 @@ struct _IsSorted<true> {
 		}
 		return true;
 	}
-	
+
 	template <typename _FreeAccessIteratorT_, typename _BinaryPredicatorT_>
 	static ValidityType _is_sorted(
 		_FreeAccessIteratorT_ __begin_,
@@ -78,8 +78,8 @@ struct _IsSorted<true> {
 		}
 		return true;
 	}
-	
-	
+
+
 };
 
 
@@ -112,4 +112,4 @@ DD_END
 
 
 
-#endif 
+#endif

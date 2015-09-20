@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Iterator.hpp
 #ifndef _DD_ITERATOR_HPP_INCLUDED
-#	define _DD_ITERATOR_HPP_INCLUDED 1 
+#	define _DD_ITERATOR_HPP_INCLUDED 1
 
 
 
@@ -26,8 +26,8 @@ struct _Iterator {
 #	else
 	DD_ALIAS(Type, void)
 #	endif
-	
-	
+
+
 };
 
 
@@ -35,8 +35,8 @@ struct _Iterator {
 template <typename _ValueT, LengthType _length_c>
 struct _Iterator<_ValueT[_length_c]> {
 	DD_ALIAS(Type, _ValueT*)
-	
-	
+
+
 };
 
 
@@ -44,8 +44,8 @@ struct _Iterator<_ValueT[_length_c]> {
 template <typename _ValueT>
 struct _Iterator<_ValueT[]> {
 	DD_ALIAS(Type, _ValueT*)
-	
-	
+
+
 };
 
 
@@ -53,8 +53,8 @@ struct _Iterator<_ValueT[]> {
 template <typename _ValueT>
 struct _Iterator<_ValueT*> {
 	DD_ALIAS(Type, _ValueT*)
-	
-	
+
+
 };
 
 

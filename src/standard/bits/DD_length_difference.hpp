@@ -27,8 +27,8 @@ struct _LengthDifference {
 		}
 		return _result;
 	}
-	
-	
+
+
 };
 
 
@@ -42,8 +42,8 @@ struct _LengthDifference<_FreeAccessIterator, true> {
 #	endif
 		return __end - __begin;
 	}
-	
-	
+
+
 };
 
 

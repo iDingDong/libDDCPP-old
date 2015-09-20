@@ -26,8 +26,8 @@ DD_DETAIL_END
 DD_BEGIN
 template <typename... _ValuesT>
 struct Dynamic {
-	
-	
+
+
 };
 
 

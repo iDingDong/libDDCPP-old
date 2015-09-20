@@ -22,8 +22,8 @@ struct RemoveExtent {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 
@@ -31,8 +31,8 @@ struct RemoveExtent {
 template <typename _ValueT, LengthType _length_c>
 struct RemoveExtent<_ValueT[_length_c]> {
 	DD_ALIAS(Type, _ValueT)
-	
-	
+
+
 };
 
 
@@ -40,8 +40,8 @@ struct RemoveExtent<_ValueT[_length_c]> {
 template <typename _ValueT>
 struct RemoveExtent<_ValueT[]> {
 	DD_ALIAS(Type, _ValueT)
-	
-	
+
+
 };
 
 

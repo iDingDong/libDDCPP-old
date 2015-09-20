@@ -12,7 +12,7 @@ DD_BEGIN
 template <SizeType _size_c>
 struct SizeTrait {
 	char value[_size_c];
-	
+
 };
 
 

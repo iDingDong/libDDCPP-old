@@ -22,8 +22,8 @@ struct RemoveVolatile {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 
@@ -31,8 +31,8 @@ struct RemoveVolatile {
 template <typename _ObjectT>
 struct RemoveVolatile<_ObjectT volatile> {
 	DD_ALIAS(Type, _ObjectT)
-	
-	
+
+
 };
 
 

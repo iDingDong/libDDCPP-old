@@ -104,6 +104,20 @@ void test_algorithm() {
 			throw "'DD::find_first_of' test failed.";
 		}
 	}
+	{
+		DD::Array<int, 5> temp1 = arr1;
+		DD::Array<int, 5> temp2 = arr1;
+		int result_1[5] = {1, 2, 3, 4, 5};
+		int result_2[5] = {5, 4, 3, 2, 1};
+		DD::insert_sort(temp1);
+		DD::insert_sort(temp2, greater<int>);
+		if (
+			!DD::equal(temp1, result_1) &&
+			!DD::equal(temp2, result_2)
+		) {
+			throw "'DD::insert_sort' test failed.";
+		}
+	}
 	
 	
 	/*

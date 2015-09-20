@@ -19,8 +19,8 @@ DD_DETAIL_BEGIN
 template <typename... _ObjectsT>
 struct _VoidTypeWorkaround {
 	using Type = void;
-	
-	
+
+
 };
 
 

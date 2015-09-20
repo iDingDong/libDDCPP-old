@@ -4,13 +4,31 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	if __cplusplus < 201103L
+#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::Function'.
+
+
+
+#	endif
+#	include <functional>
+
+#	include "DD_Functor.hpp"
+
 
 
 
 DD_BEGIN
-template <typename FunctionT>
+template <typename _FunctionT>
 struct Function {
+	static_assert(false, "Only non-variable-argument functions are accepted by 'DD::Function'.");
+
+
+};
+
+
+
+template <typename _ResultT, typename... _ArgumentsT>
+struct Function<_ResultT(_ArgumentsT...)> : Functor<_ResultT, _ArgumentsT...>, std::function<_ResultT(_ArgumentsT...)> {
 };
 
 

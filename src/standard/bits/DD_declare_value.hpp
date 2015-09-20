@@ -19,8 +19,8 @@ template <typename _ObjectT>
 struct _declare_value_protector {
 	static constexpr ValidityType value = false;
 	static AddRvalueReferenceType<_ObjectT> _declare_value() noexcept;
-	
-	
+
+
 };
 
 

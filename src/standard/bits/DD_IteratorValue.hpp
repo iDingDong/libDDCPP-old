@@ -21,8 +21,8 @@ struct _IteratorValue {
 #		else
 	typedef typename _IteratorT::ValueType Type;
 #		endif
-	
-	
+
+
 };
 
 
@@ -30,8 +30,8 @@ struct _IteratorValue {
 template <typename _ValueT>
 struct _IteratorValue<_ValueT*> {
 	typedef _ValueT Type;
-	
-	
+
+
 };
 
 

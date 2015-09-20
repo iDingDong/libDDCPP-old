@@ -1,4 +1,4 @@
-// standard/bits/DD_square_root.hpp
+//	DDCPP/standard/bits/DD_square_root.hpp
 #ifndef _DD_SQUARE_ROOT_HPP
 #	define _DD_SQUARE_ROOT_HPP 1
 
@@ -25,8 +25,8 @@ struct _SquareRoot {
 #	endif
 		throw false;
 	}
-	
-	
+
+
 };
 
 
@@ -59,8 +59,8 @@ struct _SquareRoot<_ResultT, true> {
 		} while (__high - __low > 1);
 		return __low;
 	}
-	
-	
+
+
 };
 
 

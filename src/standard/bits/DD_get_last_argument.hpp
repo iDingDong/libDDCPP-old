@@ -24,7 +24,10 @@ _Argument&& get_last_argument(_Argument&& __argument) noexcept {
 
 
 template <typename _Argument, typename... _ArgumentsT>
-GetPackBackType<_Argument, _ArgumentsT...>&& get_last_argument(_Argument&& __argument, _ArgumentsT&&... __arguments) noexcept {
+GetPackBackType<_Argument, _ArgumentsT...>&& get_last_argument(
+	_Argument&& __argument,
+	_ArgumentsT&&... __arguments
+) noexcept {
 	return get_last_argument(forward<_ArgumentsT>(__arguments)...);
 }
 

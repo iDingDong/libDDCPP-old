@@ -106,7 +106,7 @@ enum class Direction {
 	unknown,
 	forward,
 	backward
-	
+
 };
 #	else
 struct Direction {
@@ -114,12 +114,12 @@ struct Direction {
 	static Direction const unknown;
 	static Direction const forward;
 	static Direction const backward;
-	
-	
+
+
 	public:
 	int _m_value;
-	
-	
+
+
 };
 
 

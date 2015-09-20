@@ -27,7 +27,7 @@ struct _MinMax {
 	) noexcept {
 		return Pair<_ObjectT_ const&>{__object_, __object_};
 	}
-	
+
 	public:
 	template <typename _ObjectT_, typename _BinaryPredicatorT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -37,7 +37,7 @@ struct _MinMax {
 	) noexcept(noexcept(__less_(__object_1_, __object_2_))) {
 		return __less_(__object_2_, __object_1_) ? Pair<_ObjectT_ const&>{__object_2_, __object_1_} : Pair<_ObjectT_ const&>{__object_1_, __object_2_};
 	}
-	
+
 	private:
 	template <typename _ObjectT_, typename _BinaryPredicatorT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -47,7 +47,7 @@ struct _MinMax {
 	) noexcept(noexcept(__object_ < __object_)) {
 		return __less_(_pair.first, __object_) ? Pair<_ObjectT_ const&>{_pair.first, __less_(__object_, _pair.second) ? _pair.second : __object_} : Pair<_ObjectT_ const&>{__object_, _pair.second};
 	}
-	
+
 	public:
 	template <typename _ObjectT_, typename... _ObjectsT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -69,7 +69,7 @@ struct _MinMax<true> {
 	) noexcept {
 		return Pair<_ObjectT_ const&>{__object_, __object_};
 	}
-	
+
 	public:
 	template <typename _ObjectT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -78,7 +78,7 @@ struct _MinMax<true> {
 	) noexcept(noexcept(__object_1_ < __object_2_)) {
 		return __object_2_ < __object_1_ ? Pair<_ObjectT_ const&>{__object_2_, __object_1_} : Pair<_ObjectT_ const&>{__object_1_, __object_2_};
 	}
-	
+
 	private:
 	template <typename _ObjectT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -87,7 +87,7 @@ struct _MinMax<true> {
 	) noexcept(noexcept(__object_ < __object_)) {
 		return _pair.first < __object_ ? Pair<_ObjectT_ const&>{_pair.first, __object_ < _pair.second ? _pair.second : __object_} : Pair<_ObjectT_ const&>{__object_, _pair.second};
 	}
-	
+
 	public:
 	template <typename _ObjectT_, typename... _ObjectsT_>
 	static Pair<_ObjectT_ const&> constexpr _min_max(
@@ -96,8 +96,8 @@ struct _MinMax<true> {
 	) noexcept(noexcept(_min_max(__objects_...))) {
 		return _min_max(__object_, _min_max(__objects_...));
 	}
-	
-	
+
+
 };
 
 

@@ -19,8 +19,8 @@ DD_BEGIN
 template <typename... _ObjectsT>
 struct Common {
 	using Type = void;
-	
-	
+
+
 };
 
 
@@ -28,8 +28,8 @@ struct Common {
 template <typename _ObjectT>
 struct Common<_ObjectT> {
 	using Type = DecayType<_ObjectT>;
-	
-	
+
+
 };
 
 
@@ -37,8 +37,8 @@ struct Common<_ObjectT> {
 template <typename _ObjectT1, typename _ObjectT2>
 struct Common<_ObjectT1, _ObjectT2> {
 	using Type = DecayType<decltype(true ? declare_value<_ObjectT1> : declare_value<_ObjectT2>)>;
-	
-	
+
+
 };
 
 
@@ -46,8 +46,8 @@ struct Common<_ObjectT1, _ObjectT2> {
 template <typename _ObjectT1, typename _ObjectT2, typename... _ObjectsT>
 struct Common<_ObjectT1, _ObjectT2, _ObjectsT...> {
 	using Type = typename Common<_ObjectT1, typename Common<_ObjectT2, _ObjectsT...>::Type>::Type;
-	
-	
+
+
 };
 
 

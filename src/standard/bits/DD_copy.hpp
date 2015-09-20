@@ -25,8 +25,8 @@ struct _Copy {
 		}
 		return __result_begin_;
 	}
-	
-	
+
+
 };
 
 
@@ -41,8 +41,8 @@ struct _Copy<true> {
 	) DD_NOEXCEPT_AS(std::memmove(__result_begin_, __begin_, size_distance(__begin_, __end_))) {
 		return std::memmove(__result_begin_, __begin_, size_distance(__begin_, __end_)), __result_begin_ + (__end_ - __begin_);
 	}
-	
-	
+
+
 };
 
 

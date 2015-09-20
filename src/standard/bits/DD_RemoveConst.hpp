@@ -22,8 +22,8 @@ struct RemoveConst {
 #	else
 	typedef _ObjectT Type;
 #	endif
-	
-	
+
+
 };
 
 
@@ -31,8 +31,8 @@ struct RemoveConst {
 template <typename _ObjectT>
 struct RemoveConst<_ObjectT const> {
 	DD_ALIAS(Type, _ObjectT)
-	
-	
+
+
 };
 
 

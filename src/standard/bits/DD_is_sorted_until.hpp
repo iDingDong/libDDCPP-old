@@ -24,7 +24,7 @@ struct _IsSortedUntil {
 		}
 		return __begin_;
 	}
-	
+
 	template <typename _UndirectionalIteratorT_, typename _BinaryPredicatorT_>
 	static _UndirectionalIteratorT_ _is_sorted_until(
 		_UndirectionalIteratorT_ __begin_,
@@ -38,8 +38,8 @@ struct _IsSortedUntil {
 		}
 		return __begin_;
 	}
-	
-	
+
+
 };
 
 
@@ -55,7 +55,7 @@ struct _IsSortedUntil<true> {
 		}
 		return __begin_;
 	}
-	
+
 	template <typename _FreeAccessIteratorT_, typename _BinaryPredicatorT_>
 	static _FreeAccessIteratorT_ _is_sorted_until(
 		_FreeAccessIteratorT_ __begin_,
@@ -66,8 +66,8 @@ struct _IsSortedUntil<true> {
 		}
 		return __begin_;
 	}
-	
-	
+
+
 };
 
 
@@ -100,4 +100,4 @@ DD_END
 
 
 
-#endif 
+#endif

@@ -33,8 +33,8 @@ struct Decay {
 			RemoveCVType<_TempT>
 		>
 	>;
-	
-	
+
+
 };
 
 

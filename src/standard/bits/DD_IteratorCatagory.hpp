@@ -32,8 +32,8 @@ struct _FreeAccessIterator : _BidirectionalIterator {
 template <typename _IteratorT>
 struct _IteratorCatagory {
 	DD_ALIAS(Type, typename _IteratorT::CatagoryType)
-	
-	
+
+
 };
 
 
@@ -41,8 +41,8 @@ struct _IteratorCatagory {
 template <typename _ValueT>
 struct _IteratorCatagory<_ValueT*> {
 	DD_ALIAS(Type, _FreeAccessIterator)
-	
-	
+
+
 };
 
 

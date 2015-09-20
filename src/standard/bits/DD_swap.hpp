@@ -37,8 +37,8 @@ struct _Swap {
 		__object_2_ = __temp_;
 #	endif
 	}
-	
-	
+
+
 };
 
 
@@ -52,8 +52,8 @@ struct _Swap<true> {
 	) DD_NOEXCEPT_AS(__object_1_.swap(__object_2_)) {
 		__object_1_.swap(__object_2_);
 	}
-	
-	
+
+
 };
 
 

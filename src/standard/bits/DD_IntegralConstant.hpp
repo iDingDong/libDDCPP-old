@@ -13,19 +13,19 @@ template <typename _ValueT, _ValueT _value_c>
 struct IntegralConstant {
 	DD_ALIAS(ValueType, _ValueT)
 	static ValueType DD_CONSTANT value = _value_c;
-	
+
 #	if __cplusplus >= 201103L
 	using Type = IntegralConstant<_ValueT, _value_c>;
-	
-	
+
+
 	constexpr operator ValueType() const noexcept(true) {
 		return value;
 	}
 #	else
 	typedef IntegralConstant<_ValueT, _value_c> Type;
 #	endif
-	
-	
+
+
 };
 
 

@@ -21,23 +21,23 @@ struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 	DD_ALIAS(ThisType, Pair<_ValueT1 DD_COMMA _ValueT2>)
 	DD_ALIAS(FirstValueType, _ValueT1)
 	DD_ALIAS(SecondValueType, _ValueT2)
-	
-	
+
+
 	public:
 	FirstValueType first;
 	SecondValueType second;
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr Pair() = default;
-	
+
 	public:
 	constexpr Pair(ThisType const& _origin) = default;
-	
+
 	public:
 	constexpr Pair(ThisType&& _origin) = default;
-	
+
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
 	DD_CONSTEXPR Pair(
@@ -49,30 +49,30 @@ struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 	public:
 	Pair() {
 	}
-	
+
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
 	Pair(_ValueT1_ const& __value_1_, _ValueT2 const& __value_2_) : first(__value_1_), second(__value_2_) {
 	}
 #	endif
-	
-	
+
+
 	public:
 	ProcessType swap(ThisType& _target) DD_NOEXCEPT_AS(swap(first, _target.first) DD_COMMA swap(second, _target.second)) {
 		using DD::swap;
 		swap(first, _target.first);
 		swap(second, _target.second);
 	}
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType const& _origin) = default;
-	
+
 	public:
 	ThisType& operator =(ThisType&& _origin) = default;
-	
-	
+
+
 #	endif
 };
 
@@ -83,26 +83,26 @@ struct Pair<_ValueT> : Comparable<Pair<_ValueT>> {
 	public:
 	DD_ALIAS(ThisType, Pair<_ValueT>)
 	DD_ALIAS(ValueType, _ValueT)
-	
+
 	DD_ALIAS(FirstValueType, ValueType)
 	DD_ALIAS(SecondValueType, ValueType)
-	
-	
+
+
 	public:
 	FirstValueType first;
 	SecondValueType second;
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr Pair() = default;
-	
+
 	public:
 	constexpr Pair(ThisType const& _origin) = default;
-	
+
 	public:
 	constexpr Pair(ThisType&& _origin) = default;
-	
+
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
 	constexpr Pair(
@@ -114,36 +114,36 @@ struct Pair<_ValueT> : Comparable<Pair<_ValueT>> {
 	public:
 	Pair() {
 	}
-	
+
 	public:
 	template <typename _ValueT1_, typename _ValueT2_>
 	Pair(_ValueT1_ const& __value_1_, _ValueT2 const& __value_2_) : first(__value_1_), second(__value_2_) {
 	}
 #	endif
-	
-	
+
+
 	public:
 	ProcessType swap() DD_NOEXCEPT_AS(DD::swap(first, second)) {
 		using DD::swap;
 		swap(first, second);
 	}
-	
+
 	public:
 	ProcessType swap(ThisType& _target) DD_NOEXCEPT_AS(DD::swap(first, _target.first)) {
 		using DD::swap;
 		swap(first, _target.first);
 		swap(second, _target.second);
 	}
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType const& _origin) = default;
-	
+
 	public:
 	ThisType& operator =(ThisType&& _origin) = default;
-	
-	
+
+
 #	endif
 };
 
@@ -162,7 +162,7 @@ inline Pair<DD_MODIFY_TRAIT(IteratorReference, _PointerT1), DD_MODIFY_TRAIT(Iter
 ) noexcept(noexcept(Pair<DD_MODIFY_TRAIT(IteratorReference, _PointerT1), DD_MODIFY_TRAIT(IteratorReference, _PointerT2)>{dereference(_pair.first), dereference(_pair.second)})) {
 	return Pair<DD_MODIFY_TRAIT(IteratorReference, _PointerT1), DD_MODIFY_TRAIT(IteratorReference, _PointerT2)>{dereference(_pair.first), dereference(_pair.second)};
 }
-	
+
 
 
 

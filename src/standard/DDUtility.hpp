@@ -7,11 +7,11 @@
 #	include "bits/DD_UnusedIgnorer.hpp"
 #	include "bits/DD_Uncopiable.hpp"
 #	include "bits/DD_Dereferenceable.hpp"
-#	if __cplusplus >= 201103L
-#		include "bits/DD_Tuple.hpp"
-#	endif
 #	include "bits/DD_Range.hpp"
 #	include "bits/DD_Variant.hpp"
+#	if __cplusplus >= 201103L
+#		include "bits/DD_bind.hpp"
+#	endif
 
 
 

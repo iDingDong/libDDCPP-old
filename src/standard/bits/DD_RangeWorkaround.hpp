@@ -19,8 +19,8 @@ DD_END
 template <typename _ObjectT, typename _is_range_c>
 struct _IteratorSwitch {
 	typedef _ObjectT Type;
-	
-	
+
+
 };
 
 
@@ -28,8 +28,8 @@ struct _IteratorSwitch {
 template <typename _ObjectT>
 struct _IteratorSwitch<true> {
 	typedef typename Iterator<_ObjectT>::Type Type;
-	
-	
+
+
 };
 
 
@@ -42,8 +42,8 @@ DD_BEGIN
 template <typename _ObjectT>
 struct IteratorSwitch {
 	typedef _detail::_IteratorSwitch<_ObjectT, IsRange<_ObjectT>> Type;
-	
-	
+
+
 };
 
 

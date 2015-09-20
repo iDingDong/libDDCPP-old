@@ -18,8 +18,8 @@ DD_DETAIL_BEGIN
 struct _VariantHolderBase {
 	public:
 	DD_ALIAS(ThisType, _VariantHolderBase)
-	
-	
+
+
 	public:
 #	if __cplusplus >= 201103L
 	virtual ~_VariantHolderBase() = default;
@@ -27,19 +27,19 @@ struct _VariantHolderBase {
 	virtual ~_VariantHolderBase() throw() {
 	}
 #	endif
-	
-	
+
+
 	public:
 #	if __cplusplus >= 201103L
 	virtual UniquePointer<ThisType> get_clone() const = 0;
 #	else
 	virtual ThisType* get_clone() const = 0;
 #	endif
-	
+
 	public:
 	virtual TypeInfo const& get_type() const = 0;
-	
-	
+
+
 };
 
 
@@ -50,12 +50,12 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 	DD_ALIAS(ThisType, _VariantHolder<_ValueT>)
 	DD_ALIAS(SuperType, _VariantHolderBase)
 	DD_ALIAS(ValueType, _ValueT)
-	
-	
+
+
 	public:
 	ValueType m_value;
-	
-	
+
+
 	public:
 	template <typename _ValueT_>
 #	if __cplusplus >= 201103L
@@ -65,8 +65,8 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 	_VariantHolder(_ValueT_ const& _value) : m_value(_value) {
 	}
 #	endif
-	
-	
+
+
 	public:
 #	if __cplusplus >= 201103L
 	UniquePointer<SuperType> get_clone() const override {
@@ -77,14 +77,14 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 		return new ValueType(m_value);
 	}
 #	endif
-	
-	
+
+
 	public:
 	TypeInfo const& get_type() const DD_OVERRIDE {
 		return typeid(m_value);
 	}
-	
-	
+
+
 };
 
 
@@ -97,12 +97,12 @@ DD_BEGIN
 struct Variant {
 	public:
 	DD_ALIAS(ThisType, Variant)
-	
-	
+
+
 	private:
 	UniquePointer<_detail::_VariantHolderBase> _m_holder_pointer;
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr Variant() = default;
@@ -111,15 +111,15 @@ struct Variant {
 	Variant() : _m_holder_pointer() {
 	}
 #	endif
-	
+
 	public:
 	Variant(ThisType const& _origin) : _m_holder_pointer(_origin._m_holder_pointer->get_clone()) {
 	}
-	
+
 #	if __cplusplus >= 201103L
 	public:
 	constexpr Variant(ThisType&& _origin) = default;
-	
+
 #	endif
 	public:
 	template <typename _ValueT_>
@@ -130,53 +130,53 @@ struct Variant {
 	Variant(_ValueT_ const& __value_) : _m_holder_pointer(new _detail::_VariantHolder<_ValueT_>(__value_)) {
 	}
 #	endif
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	public:
 	~Variant() = default;
-	
-	
+
+
 #	endif
 	public:
 	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
 		using DD::swap;
 		swap(_m_holder_pointer, _target._m_holder_pointer);
 	}
-	
-	
+
+
 	public:
 	template <typename _ValueT_>
 	_ValueT_& to() DD_NOEXCEPT {
 		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
 		return static_cast<_detail::_VariantHolder<_ValueT_>&>(*_m_holder_pointer).m_value;
 	}
-	
+
 	public:
 	template <typename _ValueT_>
 	_ValueT_ const& to() const DD_NOEXCEPT {
 		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
 		return static_cast<_detail::_VariantHolder<_ValueT_> const&>(*_m_holder_pointer).m_value;
 	}
-	
-	
+
+
 	public:
 	TypeInfo const& get_type() const {
 		return _m_holder_pointer->get_type();
 	}
-	
-	
+
+
 	public:
 	ThisType& operator =(ThisType const& _origin) {
 		ThisType _temp(_origin);
 		swap(_temp);
 		return *this;
 	}
-	
+
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& _origin) = default;
-	
+
 #	endif
 	public:
 	template <typename _ValueT_>
@@ -190,8 +190,8 @@ struct Variant {
 		swap(_temp);
 		return *this;
 	}
-	
-	
+
+
 };
 
 

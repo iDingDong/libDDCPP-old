@@ -12,39 +12,39 @@ DD_BEGIN
 struct Uncopiable {
 	public:
 	DD_ALIAS(ThisType, Uncopiable)
-	
-	
+
+
 #	if __cplusplus >= 201103L
 	protected:
 	Uncopiable() = default;
-	
+
 	public:
 	Uncopiable(ThisType const&) = delete;
-	
+
 	protected:
 	~Uncopiable() = default;
-	
-	
+
+
 	public:
 	ThisType& operator =(ThisType const&) = delete;
 #	else
 	protected:
 	Uncopiable() throw() {
 	}
-	
+
 	private:
 	Uncopiable(ThisType const&);
-	
+
 	protected:
 	~Uncopiable() throw() {
 	}
-	
-	
+
+
 	private:
 	ThisType& operator =(ThisType const&);
 #	endif
-	
-	
+
+
 };
 
 

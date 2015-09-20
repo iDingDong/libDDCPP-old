@@ -37,7 +37,7 @@ DD_BEGIN
 template <typename _ObjectT>
 struct Trait {
 	DD_ALIAS(ObjectType, _ObjectT)
-	
+
 	DD_ALIAS(IsVoid, DD::IsVoid<ObjectType>)
 	DD_ALIAS(IsBool, DD::IsBool<ObjectType>)
 	DD_ALIAS(IsUnsignedChar, DD::IsUnsignedChar<ObjectType>)
@@ -84,14 +84,14 @@ struct Trait {
 	template <typename... _ObjectsT_>
 	using IsBaseOf = DD::IsBaseOf<ObjectType, _ObjectsT_...>;
 #	else
-	
-	
+
+
 	template <typename _ObjectT_>
 	struct IsSame : DD::IsSame<ObjectType, _ObjectT_> {
 	};
-	
+
 #	endif
-	
+
 	DD_ALIAS(ConstAdded, DD_MODIFY_TRAIT(AddConst, ObjectType))
 	DD_ALIAS(VolatileAdded, DD_MODIFY_TRAIT(AddVolatile, ObjectType))
 	DD_ALIAS(CVAdded, DD_MODIFY_TRAIT(AddCV, ObjectType))
@@ -106,8 +106,8 @@ struct Trait {
 #	if __cplusplus >= 201103L
 	using Decayed = DecayType<ObjectType>;
 #	endif
-	
-	
+
+
 };
 
 
