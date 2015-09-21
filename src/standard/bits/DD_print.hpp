@@ -10,15 +10,15 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct FlushTag : Tag {
 } DD_CONSTANT flush;
 
@@ -69,7 +69,7 @@ struct Print {
 
 
 
-DD_END
+_DD_END
 
 
 

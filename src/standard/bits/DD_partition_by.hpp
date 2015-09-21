@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _BidirectionalIteratorT, typename _UnaryPredicatorT>
 _BidirectionalIteratorT partition_by(
 	_BidirectionalIteratorT __begin,
@@ -34,7 +34,7 @@ _BidirectionalIteratorT partition_by(
 
 
 
-DD_END
+_DD_END
 
 
 

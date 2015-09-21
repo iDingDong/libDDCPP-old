@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
 ValidityType is_partitioned_by(
 	_UndirectionalIteratorT __begin,
@@ -30,7 +30,7 @@ ValidityType is_partitioned_by(
 
 
 
-DD_END
+_DD_END
 
 
 

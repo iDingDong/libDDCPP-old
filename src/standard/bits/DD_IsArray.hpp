@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsArray : StdBoolConstant<std::is_array<_ObjectT>> {
@@ -38,11 +38,11 @@ struct _IsArray<_ValueT[_length_c]> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsArray = AndType<_detail::_IsArray<_ObjectsT>...>;
@@ -54,7 +54,7 @@ struct IsArray : _detail::_IsArray<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIterator1, typename _UndirectionalIterator2>
 _UndirectionalIterator1 find_first_of(
 	_UndirectionalIterator1 __begin,
@@ -55,7 +55,7 @@ inline DD_MODIFY_TRAIT(Iterator, _UndirectionalRangeT1) find_first_of(
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -9,7 +9,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _UndirectionalIteratorT, ValidityType _is_free_access_iterator>
 struct _LengthDifference {
 	static DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) _length_difference(
@@ -48,11 +48,11 @@ struct _LengthDifference<_FreeAccessIterator, true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 #	if __cplusplus >= 201103L
 inline auto length_difference(_UndirectionalIteratorT const& __begin, _UndirectionalIteratorT const& __end) noexcept(
@@ -66,7 +66,7 @@ typename IteratorDifference<_UndirectionalIteratorT>::Type length_difference(_Un
 
 
 
-DD_END
+_DD_END
 
 
 

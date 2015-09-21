@@ -9,16 +9,16 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _ValueT>
 _UndirectionalIteratorT find(
 	_UndirectionalIteratorT __begin,
@@ -63,7 +63,7 @@ inline DD_MODIFY_TRAIT(Iterator, _UndirectionalRangeT) find(
 
 
 
-DD_END
+_DD_END
 
 
 

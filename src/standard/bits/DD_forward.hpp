@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>& __object) noexcept {
 	return static_cast<_ObjectT&&>(__object);
@@ -29,7 +29,7 @@ inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>&& __object) noexcept {
 
 
 
-DD_END
+_DD_END
 
 
 

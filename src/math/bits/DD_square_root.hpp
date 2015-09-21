@@ -10,7 +10,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ResultT, ValidityType _has_integral_result_c = IsIntegral<_ResultT>::value>
 struct _SquareRoot {
 	template <typename _NumberT>
@@ -65,11 +65,11 @@ struct _SquareRoot<_ResultT, true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ResultT, typename _NumberT>
 inline _ResultT DD_CONSTEXPR square_root(
 	_NumberT const& __number
@@ -79,7 +79,7 @@ inline _ResultT DD_CONSTEXPR square_root(
 
 
 
-DD_END
+_DD_END
 
 
 

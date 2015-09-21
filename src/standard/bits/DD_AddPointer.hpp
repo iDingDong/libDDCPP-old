@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct AddPointer {
 	DD_ALIAS(Type, DD_MODIFY_TRAIT(RemoveReference, _ObjectT)*)
@@ -22,7 +22,7 @@ DD_TRAIT_MODIFIER(AddPointer)
 
 
 
-DD_END
+_DD_END
 
 
 

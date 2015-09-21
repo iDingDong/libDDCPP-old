@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _ValueT1, typename _ValueT2>
 ProcessType replace(
 	_UndirectionalIteratorT __begin,
@@ -40,7 +40,7 @@ ProcessType replace(
 
 
 
-DD_END
+_DD_END
 
 
 

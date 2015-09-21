@@ -16,13 +16,13 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT>
 using InitializerList = std::initializer_list<_ValueT>;
 
 
 
-DD_END
+_DD_END
 
 
 

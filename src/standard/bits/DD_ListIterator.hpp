@@ -10,7 +10,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _NodeT>
 struct ListIterator {
 	public:
@@ -156,7 +156,7 @@ inline ProcessType swap_target(ListIterator<_NodeT>& _list_iterator_1, ListItera
 
 
 
-DD_END
+_DD_END
 
 
 

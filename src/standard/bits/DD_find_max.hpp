@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 _UndirectionalIteratorT find_max(
 	_UndirectionalIteratorT __begin,
@@ -40,7 +40,7 @@ _UndirectionalIteratorT find_max(
 
 
 
-DD_END
+_DD_END
 
 
 

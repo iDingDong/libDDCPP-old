@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct Dereferenceable {
 	public:
@@ -25,7 +25,7 @@ struct Dereferenceable {
 
 
 
-DD_END
+_DD_END
 
 
 

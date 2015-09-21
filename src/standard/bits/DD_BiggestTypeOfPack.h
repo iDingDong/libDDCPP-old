@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 struct BiggestTypeOfPack {
 	DD_ALIAS(Type, void)
@@ -52,7 +52,7 @@ struct BiggestTypeOfPack<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

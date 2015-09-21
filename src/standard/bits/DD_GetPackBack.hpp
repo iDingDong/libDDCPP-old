@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT, typename... _ObjectsT>
 struct GetPackBack : GetPackBack<_ObjectsT...> {
 };
@@ -35,7 +35,7 @@ using GetPackBackType = typename GetPackBack<_ObjectT, _ObjectsT...>::Type;
 
 
 
-DD_END
+_DD_END
 
 
 

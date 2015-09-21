@@ -21,8 +21,8 @@
 
 
 
-#	define DD_RATIONAL_BEGIN DD_BEGIN namespace rational {
-#	define DD_RATIONAL_END } DD_END
+#	define DD_RATIONAL_BEGIN _DD_BEGIN namespace rational {
+#	define DD_RATIONAL_END } _DD_END
 
 
 
@@ -128,7 +128,7 @@ DD_RATIONAL_END
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 #	if __cplusplus >= 201402L
 template <typename _NumeratorT, typename _DenominatorT>
 Pair<_NumeratorT, _DenominatorT> constexpr _normalize(
@@ -249,11 +249,11 @@ struct _Rational<_NumeratorT, _DenominatorT, true> :
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _NumeratorT, typename _DenominatorT = _NumeratorT>
 #	if __cplusplus >= 201103L
 using Rational = _detail::_Rational<_NumeratorT, _DenominatorT>;
@@ -264,7 +264,7 @@ struct Rational : _detail::_Rational<_NumeratorT, _DenominatorT> {
 
 
 
-DD_END
+_DD_END
 
 
 

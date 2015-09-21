@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT>
 struct ArrayIterator {
 	public:
@@ -191,7 +191,7 @@ inline ValidityType DD_CONSTEXPR operator <(ArrayIterator<_ValueT> const& _array
 
 
 
-DD_END
+_DD_END
 
 
 

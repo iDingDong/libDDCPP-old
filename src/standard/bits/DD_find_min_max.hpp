@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 Pair<_UndirectionalIteratorT> find_min_max(
 	_UndirectionalIteratorT __begin,
@@ -46,7 +46,7 @@ Pair<_UndirectionalIteratorT> find_min_max(
 
 
 
-DD_END
+_DD_END
 
 
 

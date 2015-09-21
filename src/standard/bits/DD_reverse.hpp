@@ -9,7 +9,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _is_free_access_iterator_c>
 struct _Reverse {
 	template <typename _BidirectionalIteratorT_>
@@ -44,11 +44,11 @@ struct _Reverse<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _BidirectionalIteratorT>
 inline ProcessType reverse(
 	_BidirectionalIteratorT const& __begin,
@@ -68,7 +68,7 @@ inline ProcessType reverse(
 
 
 
-DD_END
+_DD_END
 
 
 

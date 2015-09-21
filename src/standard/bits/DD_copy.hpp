@@ -11,7 +11,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _is_memmoveable_c>
 struct _Copy {
 	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_>
@@ -47,11 +47,11 @@ struct _Copy<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2>
 _UndirectionalIteratorT2 DD_CONSTEXPR copy(
 	_UndirectionalIteratorT1 const& __begin,
@@ -63,7 +63,7 @@ _UndirectionalIteratorT2 DD_CONSTEXPR copy(
 
 
 
-DD_END
+_DD_END
 
 
 

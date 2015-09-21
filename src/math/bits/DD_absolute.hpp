@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _NumberT>
 inline _NumberT absolute(
 	_NumberT const& __number
@@ -19,7 +19,7 @@ inline _NumberT absolute(
 
 
 
-DD_END
+_DD_END
 
 
 

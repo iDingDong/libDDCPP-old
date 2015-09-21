@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct Tag {
 } DD_CONSTANT tag;
 
@@ -24,7 +24,7 @@ struct ConstructTag : Tag {
 
 
 
-DD_END
+_DD_END
 
 
 

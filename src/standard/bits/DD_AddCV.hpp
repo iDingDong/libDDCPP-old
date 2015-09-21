@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename _ObjectT>
 using AddCV = AddConst<AddVolatileType<_ObjectT>>;
@@ -22,7 +22,7 @@ struct AddCV : AddConst<typename AddVolatile<_ObjectT>::Type> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT>
 _ValueT DD_CONSTEXPR* address_of(_ValueT& __object) DD_NOEXCEPT {
 	return reinterpret_cast<_ValueT*>(&const_cast<char&>(reinterpret_cast<char const volatile&>(__object)));
@@ -16,7 +16,7 @@ _ValueT DD_CONSTEXPR* address_of(_ValueT& __object) DD_NOEXCEPT {
 
 
 
-DD_END
+_DD_END
 
 
 

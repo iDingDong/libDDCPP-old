@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _UnaryFunctionT>
 inline ProcessType for_each(
 	_UndirectionalIteratorT __begin,
@@ -32,7 +32,7 @@ inline ProcessType for_each(
 
 
 
-DD_END
+_DD_END
 
 
 

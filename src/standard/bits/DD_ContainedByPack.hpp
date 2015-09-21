@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT, typename... _ListObjectsT>
 struct ContainedByPack : FalseType {
 };
@@ -31,7 +31,7 @@ struct ContainedByPack<_ObjectT, _ListObjectT, _ListObjectsT...> : OrType<
 
 
 
-DD_END
+_DD_END
 
 
 

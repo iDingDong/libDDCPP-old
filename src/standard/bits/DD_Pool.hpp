@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <ValidityType _is_thread_safe_c>
 class Pool {
 
@@ -24,7 +24,7 @@ class Pool<true> {
 
 
 
-DD_END
+_DD_END
 
 
 

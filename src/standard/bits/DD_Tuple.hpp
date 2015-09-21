@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <SubscriptType _index_c, typename... _ValuesT>
 struct _Tuple {
 	public:
@@ -200,11 +200,11 @@ inline ValidityType constexpr operator ==(
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ValuesT>
 using Tuple = _detail::_Tuple<0, _ValuesT...>;
 
@@ -214,7 +214,7 @@ using _detail::get_value;
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct RemoveExtent {
 #	if __cplusplus >= 201402L
@@ -50,7 +50,7 @@ DD_TRAIT_MODIFIER(RemoveExtent)
 
 
 
-DD_END
+_DD_END
 
 
 

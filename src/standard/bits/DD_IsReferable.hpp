@@ -16,7 +16,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct IsReferable : OrType<std::is_object<_ObjectT>, IsReference<_ObjectT>> {
 };
@@ -35,7 +35,7 @@ struct IsReferable<_ResultT(_ArgumentsT... ...)> : TrueType {
 
 
 
-DD_END
+_DD_END
 
 
 

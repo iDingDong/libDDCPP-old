@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2>
 Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
 	_UndirectionalIteratorT1 __begin_1,
@@ -67,7 +67,7 @@ Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
 
 
 
-DD_END
+_DD_END
 
 
 

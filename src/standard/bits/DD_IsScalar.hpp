@@ -16,13 +16,13 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsScalar = AndType<OrType<IsArithmetic<_ObjectsT>, IsPointer<_ObjectsT>, IsEnum<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

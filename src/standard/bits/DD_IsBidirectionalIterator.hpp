@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _IteratorsT>
 using IsBidirectionalIterator = IsBaseOf<BidirectionalIterator, IteratorCatagoryType<_IteratorsT>...>;
@@ -21,7 +21,7 @@ struct IsBidirectionalIterator : IsBaseOf<BidirectionalIterator, typename Iterat
 
 
 
-DD_END
+_DD_END
 
 
 

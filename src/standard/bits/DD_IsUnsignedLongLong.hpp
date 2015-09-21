@@ -19,7 +19,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsUnsignedLongLong : FalseType {
 };
@@ -32,17 +32,17 @@ struct _IsUnsignedLongLong<unsigned long long> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsUnsignedLongLong = AndType<_detail::_IsUnsignedLongLong<RemoveCVType<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

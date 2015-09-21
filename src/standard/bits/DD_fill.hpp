@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _ValueT>
 ProcessType fill(
 	_UndirectionalIteratorT __begin,
@@ -22,7 +22,7 @@ ProcessType fill(
 
 
 
-DD_END
+_DD_END
 
 
 

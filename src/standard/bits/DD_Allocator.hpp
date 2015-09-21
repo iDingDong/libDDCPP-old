@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT = void>
 class Allocator {
 	public:
@@ -66,7 +66,7 @@ class Allocator<void> {
 
 
 
-DD_END
+_DD_END
 
 
 

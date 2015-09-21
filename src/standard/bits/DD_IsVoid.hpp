@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsVoid : StdBoolConstant<std::is_void<_ObjectT>> {
@@ -31,11 +31,11 @@ struct _IsVoid<void> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsVoid = AndType<_detail::_IsVoid<_ObjectsT>...>;
@@ -47,7 +47,7 @@ struct IsVoid : _detail::_IsVoid<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -11,15 +11,25 @@
 
 
 
-DD_BEGIN
-//template <typename _ValueT, LengthType _length_c_1, LengthType _length_c_2, LengthType... _lengths_c>
-//struct Array : Array<Array<_length_c>>
+_DD_DETAIL_BEGIN
+#	if __cplusplus >= 201103L
+template <typename _ValueT, LengthType _length_c, LengthType... _lengths_c>
+struct _Array : _Array<_Array<_ValueT, _lengths_c...>, _length_c> {
+};
 
 
 
+
+#	endif
+#	if __cplusplus >= 201103L
 template <typename _ValueT, LengthType _length_c>
-struct Array {
-	DD_ALIAS(ThisType, Array<_ValueT DD_COMMA _length_c>)
+struct _Array<_ValueT, _length_c> {
+#	else
+template <typename _ValueT, LengthType _length_c>
+struct _Array {
+#	endif
+	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA _length_c>)
+	DD_ALIAS(LowerType, _ValueT)
 	DD_ALIAS(ValueType, _ValueT)
 	static LengthType DD_CONSTANT length_constant = _length_c;
 
@@ -189,14 +199,11 @@ struct Array {
 
 
 template <typename _ValueT>
-struct Array<_ValueT, 0> {
+struct _Array<_ValueT, 0> {
+	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA 0>)
+	DD_ALIAS(LowerType, _ValueT)
 	DD_ALIAS(ValueType, _ValueT)
 	static LengthType DD_CONSTANT length_constant = 0;
-#	if __cplusplus >= 201103L
-	using ThisType = Array<_ValueT, 0>;
-#	else
-	typedef Array<_ValueT, 0> ThisType;
-#	endif
 
 	DD_ALIAS(ReferenceType, ValueType&)
 	DD_ALIAS(ConstReferenceType, ValueType const&)
@@ -281,7 +288,23 @@ struct Array<_ValueT, 0> {
 
 
 
-DD_END
+_DD_DETAIL_END
+
+
+
+_DD_BEGIN
+#	if __cplusplus >= 201103L
+template <typename _ValueT, LengthType _length_c, LengthType... _lengths_c>
+using Array = _detail::_Array<_ValueT, _length_c, _lengths_c...>;
+#	else
+template <typename _ValueT, LengthType _length_c>
+struct Array : _detail::_Array<_ValueT, _length_c> {
+};
+#	endif
+
+
+
+_DD_END
 
 
 

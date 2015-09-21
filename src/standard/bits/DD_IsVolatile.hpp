@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsVolatile : StdBoolConstant<std::is_volatile<_ObjectT>> {
@@ -31,11 +31,11 @@ struct _IsVolatile<_ObjectT volatile> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsVolatile = AndType<_detail::_IsVolatile<_ObjectsT>...>;
@@ -47,7 +47,7 @@ struct IsVolatile : _detail::_IsVolatile<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

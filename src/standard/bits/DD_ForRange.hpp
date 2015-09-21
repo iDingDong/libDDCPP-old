@@ -16,7 +16,7 @@
 #	if __cplusplus >= 201103L
 #		define DD_FOR_RANGE(_ARG_element, ...) for (_ARG_element : __VA_ARGS__)
 #	else
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 struct _AutoAnyBase {
 	DD_CONSTEXPR operator ValidityType() const DD_NOEXCEPT {
 		return false;
@@ -70,7 +70,7 @@ typename IteratorReference<_ValueT>::Type const& _dereference(auto_any_base cons
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 

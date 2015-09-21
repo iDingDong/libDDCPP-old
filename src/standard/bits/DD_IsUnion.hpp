@@ -16,13 +16,13 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsUnion = AndType<StdIntegralConstant<std::is_union<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

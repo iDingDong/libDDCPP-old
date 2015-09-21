@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _IntegerT>
 inline _IntegerT DD_CONSTEXPR greatest_common_divisor(
 	_IntegerT __integer_1,
@@ -29,7 +29,7 @@ inline _IntegerT DD_CONSTEXPR greatest_common_divisor(
 
 
 
-DD_END
+_DD_END
 
 
 

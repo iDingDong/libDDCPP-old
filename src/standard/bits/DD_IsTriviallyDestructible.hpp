@@ -16,13 +16,13 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsTriviallyDestructible = AndType<StdBoolConstant<std::is_trivially_destructible<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -21,7 +21,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _is_trivially_equal_predicatable_c>
 struct _Equal {
 	template <ValidityType _is_free_access_iterator_c_, int _workaround_c_ = 0>
@@ -348,11 +348,11 @@ struct _EqualDispatcher<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT1, typename _ObjectT2, typename _ObjectT3>
 inline ValidityType equal(
 	_ObjectT1 const& __object_1,
@@ -393,7 +393,7 @@ inline ValidityType equal(
 
 
 
-DD_END
+_DD_END
 
 
 

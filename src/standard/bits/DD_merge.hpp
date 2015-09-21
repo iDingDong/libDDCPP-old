@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _UndirectionalIteratorT3>
 _UndirectionalIteratorT3 merge(
 	_UndirectionalIteratorT1 __begin_1,
@@ -58,7 +58,7 @@ _UndirectionalIteratorT3 merge(
 
 
 
-DD_END
+_DD_END
 
 
 

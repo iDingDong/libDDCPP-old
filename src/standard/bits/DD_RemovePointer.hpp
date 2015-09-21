@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct RemovePointer {
 #	if __cplusplus >= 201402L
@@ -71,7 +71,7 @@ using RemovePointerType = typename RemovePointer<_ValueT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

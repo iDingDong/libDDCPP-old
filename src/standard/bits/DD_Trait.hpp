@@ -33,7 +33,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct Trait {
 	DD_ALIAS(ObjectType, _ObjectT)
@@ -112,7 +112,7 @@ struct Trait {
 
 
 
-DD_END
+_DD_END
 
 
 

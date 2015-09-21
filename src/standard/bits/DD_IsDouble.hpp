@@ -13,7 +13,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsDouble : FalseType {
 };
@@ -26,11 +26,11 @@ struct _IsDouble<double> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsDouble = AndType<_detail::_IsDouble<RemoveCVType<_ObjectsT>>...>;
@@ -42,7 +42,7 @@ struct IsDouble : _detail::_IsDouble<typename RemoveCV<_ObjectT>::Type> {
 
 
 
-DD_END
+_DD_END
 
 
 

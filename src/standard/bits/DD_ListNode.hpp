@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT>
 struct ListNode {
 	DD_ALIAS(ThisType, ListNode<_ValueT>)
@@ -29,7 +29,7 @@ struct ListNode {
 
 
 
-DD_END
+_DD_END
 
 
 

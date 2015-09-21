@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 inline RemoveReferenceType<_ObjectT>&& move(_ObjectT&& _object) DD_NOEXCEPT {
 	return static_cast<RemoveReferenceType<_ObjectT>&&>(_object);
@@ -22,7 +22,7 @@ inline RemoveReferenceType<_ObjectT>&& move(_ObjectT&& _object) DD_NOEXCEPT {
 
 
 
-DD_END
+_DD_END
 
 
 

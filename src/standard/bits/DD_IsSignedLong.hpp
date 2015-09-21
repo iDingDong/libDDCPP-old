@@ -13,7 +13,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsSignedLong : FalseType {
 };
@@ -26,11 +26,11 @@ struct _IsSignedLong<signed long> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsSignedLong = AndType<_detail::_IsSignedLong<RemoveCVType<_ObjectsT>>...>;
@@ -42,7 +42,7 @@ struct IsSignedLong : _detail::_IsSignedLong<typename RemoveCV<_ObjectT>::Type> 
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -10,7 +10,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_ALIAS(Char, char)
 DD_ALIAS(UnsignedChar, unsigned char)
 DD_ALIAS(SignedChar, signed char)
@@ -51,7 +51,7 @@ typedef SignedLongInt SignedInt64;
 
 
 
-DD_END
+_DD_END
 
 
 

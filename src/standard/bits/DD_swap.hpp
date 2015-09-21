@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 DD_MEMBER_FUNCTION_CHECK(_HasSwap, swap, ProcessType, _MACRO_ObjectT_&)
 
 
@@ -58,11 +58,11 @@ struct _Swap<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 inline ProcessType swap(
 	_ObjectT& __object_1,
@@ -88,7 +88,7 @@ inline ProcessType swap(_ObjectT (&_array_1)[_length_c], _ObjectT (&_array_2)[_l
 
 
 
-DD_END
+_DD_END
 
 
 

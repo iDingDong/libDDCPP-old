@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
 DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count_if(
 	_UndirectionalIteratorT __begin,
@@ -31,7 +31,7 @@ DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count_if(
 
 
 
-DD_END
+_DD_END
 
 
 

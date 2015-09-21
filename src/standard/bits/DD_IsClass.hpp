@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsClass {
 	template <typename _ObjectT_>
@@ -35,17 +35,17 @@ struct _IsClass {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsClass = AndType<BoolConstant<_detail::_IsClass<_ObjectsT>::value>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

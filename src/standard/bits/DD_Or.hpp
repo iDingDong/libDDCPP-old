@@ -9,7 +9,7 @@
 
 
 #	if __cplusplus >= 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename... ContidionsT>
 struct _Or : FalseType {
 };
@@ -34,12 +34,12 @@ struct _Or<_ConditionT> : BoolConstant<_ConditionT::value> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ConditionsT>
 using Or = _detail::_Or<_ConditionsT...>;
@@ -53,7 +53,7 @@ struct Or : BoolConstant<_ConditionT1::value && _ConditionT2::value> {
 
 
 
-DD_END
+_DD_END
 
 
 

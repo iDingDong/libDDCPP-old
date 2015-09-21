@@ -16,7 +16,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsPointer : StdBoolConstant<std::is_pointer<_ObjectT>> {
@@ -47,11 +47,11 @@ struct _IsPointer<std::nullptr_t> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsPointer = AndType<_detail::_IsPointer<RemoveCVType<_ObjectsT>>...>;
@@ -63,7 +63,7 @@ struct IsPointer : _detail::_IsPointer<typename RemoveCV<_ObjectT>::type> {
 
 
 
-DD_END
+_DD_END
 
 
 

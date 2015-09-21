@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 _UndirectionalIteratorT find_min(
 	_UndirectionalIteratorT __begin,
@@ -40,7 +40,7 @@ _UndirectionalIteratorT find_min(
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct NilType {
 };
 
@@ -57,7 +57,7 @@ NilPointerType DD_CONSTANT nil_pointer;
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -46,14 +46,14 @@
 #	endif
 
 
-#	define DD_BEGIN namespace DD {
-#	define DD_END }
+#	define _DD_BEGIN namespace DD {
+#	define _DD_END }
 
-#	define DD_DETAIL_BEGIN DD_BEGIN namespace _detail {
-#	define DD_DETAIL_END } DD_END
+#	define _DD_DETAIL_BEGIN _DD_BEGIN namespace _detail {
+#	define _DD_DETAIL_END } _DD_END
 
-#	define DD_USER_DEFINITION_BEGIN DD_DETAIL_BEGIN namespace user_definition {
-#	define DD_USER_DEFINITION_END } DD_DETAIL_END
+#	define DD_USER_DEFINITION_BEGIN _DD_DETAIL_BEGIN namespace user_definition {
+#	define DD_USER_DEFINITION_END } _DD_DETAIL_END
 
 
 #	define DD_TO_STRING(literal) #literal
@@ -66,7 +66,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_ALIAS(ProcessType, void)
 
 DD_ALIAS(ValidityType, bool)
@@ -161,7 +161,7 @@ CheckType DD_CONSTANT off = false;
 
 
 
-DD_END
+_DD_END
 
 
 

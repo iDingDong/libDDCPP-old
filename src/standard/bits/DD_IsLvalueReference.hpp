@@ -16,7 +16,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsLvalueReference : StdBoolConstant<std::is_lvalue_reference<_ObjectT>> {
 };
@@ -29,17 +29,17 @@ struct _IsLvalueReference<_ObjectT&> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsLvalueReference = AndType<_detail::_IsLvalueReference<_ObjectsT>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

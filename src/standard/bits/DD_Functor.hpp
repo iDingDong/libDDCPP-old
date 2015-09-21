@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename _ResultT, typename... _ArgumentsT>
 struct Functor {
@@ -52,7 +52,7 @@ struct BinaryFunctor : Functor<_ResultT> {
 
 
 
-DD_END
+_DD_END
 
 
 

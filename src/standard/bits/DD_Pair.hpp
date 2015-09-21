@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT1, typename _ValueT2 = _ValueT1>
 struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 	public:
@@ -186,7 +186,7 @@ inline ValidityType DD_CONSTEXPR operator <(
 
 
 
-DD_END
+_DD_END
 
 
 

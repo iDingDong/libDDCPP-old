@@ -26,7 +26,7 @@
 
 
 #	if __cplusplus >= 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 using _IsIntegral = OrType<
 	IsBool<_ObjectT>,
@@ -44,12 +44,12 @@ using _IsIntegral = OrType<
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsIntegral = AndType<_detail::_IsIntegral<_ObjectsT>...>;
@@ -70,7 +70,7 @@ struct IsIntegral : BoolConstant<
 
 
 
-DD_END
+_DD_END
 
 
 

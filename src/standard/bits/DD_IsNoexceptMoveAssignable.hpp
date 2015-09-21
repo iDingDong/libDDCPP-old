@@ -14,24 +14,24 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsNoexceptMoveAssignable : StdBoolConstant<std::is_nothrow_move_assignable<_ObjectT>> {
 };
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsNoexceptMoveAssignable = AndType<_detail::_IsNoexceptMoveAssignable<_ObjectsT>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

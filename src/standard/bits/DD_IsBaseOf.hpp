@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _BaseT, typename _DerivedT>
 struct _IsBaseOf {
 	template <typename _BaseT_, typename _DerivedT_>
@@ -54,17 +54,17 @@ struct _IsBaseOf<_ObjectT, _ObjectT> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _BaseT, typename... _DerivedsT>
 using IsBaseOf = AndType<BoolConstant<_detail::_IsBaseOf<_BaseT, _DerivedsT>::value>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

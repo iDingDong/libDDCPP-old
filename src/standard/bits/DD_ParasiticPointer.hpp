@@ -11,7 +11,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename _DeleterT = void>
 struct ParasiticPointer {
 };
@@ -167,7 +167,7 @@ struct ParasiticPointer<_ValueT, void> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _PointerT>
 inline _PointerT DD_CONSTEXPR release(_PointerT& __pointer, _PointerT __new_pointer = _PointerT(), _PointerT __workaround = _PointerT()) DD_NOEXCEPT {
 	return __workaround = __pointer, __pointer = __new_pointer, __workaround;
@@ -16,7 +16,7 @@ inline _PointerT DD_CONSTEXPR release(_PointerT& __pointer, _PointerT __new_poin
 
 
 
-DD_END
+_DD_END
 
 
 

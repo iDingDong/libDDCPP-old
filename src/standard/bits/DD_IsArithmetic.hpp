@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsArithmetic = AndType<OrType<IsIntegral<_ObjectsT>, IsFloatingPoint<_ObjectsT>, StdIntegralConstant<std::is_arithmetic<_ObjectsT>>>...>;
@@ -21,7 +21,7 @@ struct IsArithmetic : BoolConstant<IsIntegral<_ObjectT>::value || IsFloatingPoin
 
 
 
-DD_END
+_DD_END
 
 
 

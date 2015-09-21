@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsNilPointer : StdBoolConstant<std::is_null_pointer<_ObjectT>> {
@@ -39,11 +39,11 @@ struct _IsNilPointer<std::nullptr_t> : TrueType {
 
 
 #	endif
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsNilPointer = AndType<_detail::_IsNilPointer<RemoveCVType<_ObjectsT>>...>;
@@ -55,7 +55,7 @@ struct IsNilPointer : _detail::_IsNilPointer<typename RemoveCV<_ObjectT>::Type> 
 
 
 
-DD_END
+_DD_END
 
 
 

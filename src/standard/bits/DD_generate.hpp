@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _Generator>
 ProcessType generate(
 	_UndirectionalIteratorT __begin,
@@ -22,7 +22,7 @@ ProcessType generate(
 
 
 
-DD_END
+_DD_END
 
 
 

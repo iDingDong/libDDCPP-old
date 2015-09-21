@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _BidirectionalIteratorT, typename _ValueT>
 _BidirectionalIteratorT partition(
 	_BidirectionalIteratorT __begin,
@@ -58,7 +58,7 @@ _BidirectionalIteratorT partition(
 
 
 
-DD_END
+_DD_END
 
 
 

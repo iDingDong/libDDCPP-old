@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 ProcessType select_sort(_UndirectionalIteratorT __begin, _UndirectionalIteratorT const& __end) DD_NOEXCEPT_IF(
 	noexcept(__begin != __end) &&
@@ -33,7 +33,7 @@ ProcessType select_sort(_UndirectionalIteratorT __begin, _UndirectionalIteratorT
 
 
 
-DD_END
+_DD_END
 
 
 

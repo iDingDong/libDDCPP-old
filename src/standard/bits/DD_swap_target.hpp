@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _PointerT>
 inline ProcessType swap_target(
 	_PointerT const& __pointer_1,
@@ -20,7 +20,7 @@ inline ProcessType swap_target(
 
 
 
-DD_END
+_DD_END
 
 
 

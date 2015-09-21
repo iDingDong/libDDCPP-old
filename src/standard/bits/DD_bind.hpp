@@ -16,14 +16,14 @@
 
 
 
-#	define DD_PLACE_HOLDER_BEGIN DD_BEGIN namespace place_holder {
-#	define DD_PLACE_HOLDER_END } DD_END
+#	define _DD_PLACE_HOLDER_BEGIN _DD_BEGIN namespace place_holder {
+#	define _DD_PLACE_HOLDER_END } _DD_END
 
-#	define DD_GENERATE_PLACE_HOLDER(_ARG_index) DD_PLACE_HOLDER_BEGIN static PlaceHolder<_ARG_index> constexpr _##_ARG_index; DD_PLACE_HOLDER_END
+#	define DD_GENERATE_PLACE_HOLDER(_ARG_index) _DD_PLACE_HOLDER_BEGIN static PlaceHolder<_ARG_index> constexpr _##_ARG_index; _DD_PLACE_HOLDER_END
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <SubscriptType... _subscripts_c>
 struct _Indexs {
 };
@@ -117,17 +117,17 @@ struct _BindFunctor : Functor<typename _ResultOf<_FunctionT>::Type, _ArgumentsT.
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_PLACE_HOLDER_BEGIN
+_DD_PLACE_HOLDER_BEGIN
 template <SubscriptType _index_c>
 using PlaceHolder = ::DD::_detail::_PlaceHolder<_index_c>;
 
 
 
-DD_PLACE_HOLDER_END
+_DD_PLACE_HOLDER_END
 
 
 
@@ -166,7 +166,7 @@ DD_GENERATE_PLACE_HOLDER(31)
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _FunctionT, typename... _ArgumentsT>
 inline _detail::_BindFunctor<_FunctionT, _ArgumentsT...> bind(
 	_FunctionT&& __function,
@@ -177,12 +177,12 @@ inline _detail::_BindFunctor<_FunctionT, _ArgumentsT...> bind(
 
 
 
-DD_END
+_DD_END
 
 
 
-#	undef DD_PLACE_HOLDER_BEGIN
-#	undef DD_PLACE_HOLDER_END
+#	undef _DD_PLACE_HOLDER_BEGIN
+#	undef _DD_PLACE_HOLDER_END
 
 
 

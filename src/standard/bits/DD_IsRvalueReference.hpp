@@ -16,7 +16,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsRvalueReference : StdBoolConstant<std::is_rvalue_reference<_ObjectT>> {
 };
@@ -29,17 +29,17 @@ struct _IsRvalueReference<_ObjectT&&> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsRvalueReference = AndType<_detail::_IsRvalueReference<_ObjectsT>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

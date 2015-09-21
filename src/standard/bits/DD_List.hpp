@@ -18,7 +18,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ValueT>
 struct _ListBase {
 	protected:
@@ -130,11 +130,11 @@ struct _ListBase {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename _AllocatorT = Allocator<ListNode>>
 struct List : _detail::_ListBase<_ValueT> {
 };
@@ -236,7 +236,7 @@ struct List<_ValueT, Allocator<ListNode, _manage_pool_c>> : _detail::_ListBase<_
 
 
 
-DD_END
+_DD_END
 
 
 

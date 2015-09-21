@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct UnusedIgnorer {
 	public:
 	DD_ALIAS(ThisType, UnusedIgnorer)
@@ -37,7 +37,7 @@ struct UnusedIgnorer {
 
 
 
-DD_END
+_DD_END
 
 
 

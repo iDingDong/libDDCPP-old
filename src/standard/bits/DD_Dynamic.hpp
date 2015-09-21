@@ -15,15 +15,15 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ValuesT>
 struct Dynamic {
 
@@ -32,7 +32,7 @@ struct Dynamic {
 
 
 
-DD_END
+_DD_END
 
 
 

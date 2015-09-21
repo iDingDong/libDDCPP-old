@@ -29,7 +29,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_BINARY_OPERATOR(Addable, +)
 DD_BINARY_OPERATOR(Subtractable, -)
 DD_BINARY_OPERATOR(Multipliable, *)
@@ -40,7 +40,7 @@ DD_BINARY_OPERATOR(Andable, &)
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -17,7 +17,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _FunctionT>
 struct Function {
 	static_assert(false, "Only non-variable-argument functions are accepted by 'DD::Function'.");
@@ -33,7 +33,7 @@ struct Function<_ResultT(_ArgumentsT...)> : Functor<_ResultT, _ArgumentsT...>, s
 
 
 
-DD_END
+_DD_END
 
 
 

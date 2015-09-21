@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename... _ArgumentsT>
 inline UniquePointer<_ValueT, void> make_unique(_ArgumentsT&&... __arguments) {
 	return UniquePointer<_ValueT, void>(new _ValueT(__arguments...));
@@ -22,7 +22,7 @@ inline UniquePointer<_ValueT, void> make_unique(_ArgumentsT&&... __arguments) {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -9,17 +9,17 @@
 
 
 #	if DDCPP_COMPAT_STL
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 DD_NESTED_TYPE_TRAIT(_IteratorReference, reference, typename IteratorValue<_MACRO_ObjectT>::Type&)
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename _detail::_IteratorReference<_MACRO_ObjectT>::Type)
 #	else
@@ -35,7 +35,7 @@ using IteratorReferenceType = typename IteratorReference<_IteratorT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

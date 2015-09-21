@@ -134,14 +134,14 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename ObjectT>
 struct _NestedTypeMatcher {
 };
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 

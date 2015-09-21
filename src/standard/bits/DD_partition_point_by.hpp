@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
 _UndirectionalIteratorT partition_point_by(
 	_UndirectionalIteratorT __begin,
@@ -23,7 +23,7 @@ _UndirectionalIteratorT partition_point_by(
 
 
 
-DD_END
+_DD_END
 
 
 

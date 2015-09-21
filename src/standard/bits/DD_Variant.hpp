@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 struct _VariantHolderBase {
 	public:
 	DD_ALIAS(ThisType, _VariantHolderBase)
@@ -89,11 +89,11 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct Variant {
 	public:
 	DD_ALIAS(ThisType, Variant)
@@ -196,7 +196,7 @@ struct Variant {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsChar16 : FalseType {
 };
@@ -28,17 +28,17 @@ struct _IsChar16<char16_t> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsChar16 = AndType<_detail::_IsChar16<RemoveCVType<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

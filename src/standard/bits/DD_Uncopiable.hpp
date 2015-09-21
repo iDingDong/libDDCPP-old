@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct Uncopiable {
 	public:
 	DD_ALIAS(ThisType, Uncopiable)
@@ -49,7 +49,7 @@ struct Uncopiable {
 
 
 
-DD_END
+_DD_END
 
 
 

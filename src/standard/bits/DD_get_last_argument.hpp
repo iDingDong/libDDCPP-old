@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _Argument>
 _Argument&& get_last_argument(_Argument&& __argument) noexcept {
 	return forward<_Argument>(__argument);
@@ -33,7 +33,7 @@ GetPackBackType<_Argument, _ArgumentsT...>&& get_last_argument(
 
 
 
-DD_END
+_DD_END
 
 
 

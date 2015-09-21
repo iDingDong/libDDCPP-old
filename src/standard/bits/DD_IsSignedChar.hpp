@@ -13,7 +13,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsSignedChar : FalseType {
 };
@@ -26,11 +26,11 @@ struct _IsSignedChar<signed char> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsSignedChar = AndType<_detail::_IsSignedChar<RemoveCVType<_ObjectsT>>...>;
@@ -42,7 +42,7 @@ struct IsSignedChar : _detail::_IsSignedChar<typename RemoveCV<_ObjectT>::Type> 
 
 
 
-DD_END
+_DD_END
 
 
 

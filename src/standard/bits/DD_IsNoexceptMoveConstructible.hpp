@@ -15,24 +15,24 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsNoexceptMoveConstructible : OrType<StdBoolConstant<std::is_nothrow_move_constructible<_ObjectT>>> {
 };
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsNoexceptMoveConstructible = AndType<_detail::_IsNoexceptMoveConstructible<_ObjectsT>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

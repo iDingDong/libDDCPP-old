@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 struct TypeList {
 	public:
@@ -100,7 +100,7 @@ struct TypeList<_ObjectT, _ObjectsT...> {
 
 
 
-DD_END
+_DD_END
 
 
 

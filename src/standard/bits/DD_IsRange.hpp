@@ -23,7 +23,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 DD_MEMBER_FUNCTION_CHECK(_HasBegin, begin, DD_MODIFY_TRAIT(Iterator, _MACRO_ObjectT_), )
 
 
@@ -81,11 +81,11 @@ struct _IsRange<_ValueT* const volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePoi
 
 
 #	endif
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsRange = AndType<_detail::_IsRange<_ObjectsT>...>;
@@ -97,7 +97,7 @@ struct IsRange : _detail::_IsRange<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

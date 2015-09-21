@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _ValueT>
 DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
 	_UndirectionalIteratorT __begin,
@@ -52,7 +52,7 @@ DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
 
 
 
-DD_END
+_DD_END
 
 
 

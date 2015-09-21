@@ -16,7 +16,7 @@
 
 
 #	if __cplusplus >= 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _use_default_compare>
 struct _MinMax {
 	public:
@@ -102,12 +102,12 @@ struct _MinMax<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename _ObjectT, typename... _ObjectsT>
 inline Pair<_ObjectT const&> constexpr min_max(
@@ -152,7 +152,7 @@ inline inline Pair<_ObjectT const&> constexpr min_max(
 
 
 
-DD_END
+_DD_END
 
 
 

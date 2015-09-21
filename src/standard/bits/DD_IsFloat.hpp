@@ -13,7 +13,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsFloat : FalseType {
 };
@@ -26,11 +26,11 @@ struct _IsFloat<float> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsFloat = AndType<_detail::_IsFloat<RemoveCVType<_ObjectsT>>...>;
@@ -42,7 +42,7 @@ struct IsFloat : _detail::_IsFloat<typename RemoveCV<_ObjectT>::Type> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _IntegerT>
 inline _IntegerT DD_CONSTEXPR lowest_common_multiple(
 	_IntegerT const& __integer_1,
@@ -19,7 +19,7 @@ inline _IntegerT DD_CONSTEXPR lowest_common_multiple(
 
 
 
-DD_END
+_DD_END
 
 
 

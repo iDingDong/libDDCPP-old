@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename... _ArgumentsT>
 ParasiticPointer<_ValueT> make_parasitic(_ArgumentsT&&... __arguments) DD_NOEXCEPT_AS(typename ParasiticPointer<_ValueT>::ParasitiferValueType(0 DD_COMMA _ValueT(__arguments...))) {
 	return ParasiticPointer<_ValueT>(new typename ParasiticPointer<_ValueT>::ParasitiferValueType(0, _ValueT(__arguments...)));
@@ -22,7 +22,7 @@ ParasiticPointer<_ValueT> make_parasitic(_ArgumentsT&&... __arguments) DD_NOEXCE
 
 
 
-DD_END
+_DD_END
 
 
 

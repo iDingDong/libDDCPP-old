@@ -16,13 +16,13 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsEnum = AndType<StdBoolConstant<std::is_enum<_ObjectsT>>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

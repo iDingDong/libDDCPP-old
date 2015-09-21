@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _PointerT1, typename _PointerT2>
 inline SizeType DD_CONSTEXPR size_distance(
 	_PointerT1 const& __begin,
@@ -19,7 +19,7 @@ inline SizeType DD_CONSTEXPR size_distance(
 
 
 
-DD_END
+_DD_END
 
 
 

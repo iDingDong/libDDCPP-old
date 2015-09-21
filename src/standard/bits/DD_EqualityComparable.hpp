@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT1, typename _ObjectT2 = _ObjectT1>
 struct EqualityComparable {
 	DD_ALIAS(Type1, _ObjectT1)
@@ -59,7 +59,7 @@ struct EqualityComparable<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

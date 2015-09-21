@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct Exception {
 	private:
 #	if __cplusplus >= 201103L
@@ -59,7 +59,7 @@ struct Exception {
 
 
 
-DD_END
+_DD_END
 
 
 

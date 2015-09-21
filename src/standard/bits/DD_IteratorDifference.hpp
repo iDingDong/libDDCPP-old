@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_NESTED_TYPE_TRAIT(IteratorDifference, DifferenceType, DD::DifferenceType)
 
 
@@ -20,7 +20,7 @@ using IteratorDifferenceType = typename IteratorDifference<_IteratorT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

@@ -11,7 +11,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _PointerT>
 #	if __cplusplus >= 201402L
 inline auto DD_CONSTEXPR get_pointer(_PointerT const& __pointer) DD_NOEXCEPT {
@@ -25,7 +25,7 @@ inline typename IteratorPointer<_PointerT>::Type get_pointer(_PointerT const& __
 
 
 
-DD_END
+_DD_END
 
 
 

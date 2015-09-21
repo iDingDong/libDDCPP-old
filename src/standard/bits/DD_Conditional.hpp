@@ -8,7 +8,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
 struct _Conditional {
 	DD_ALIAS(Type, _ElseT)
@@ -27,11 +27,11 @@ struct _Conditional<true, _ThenT, _ElseT> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
 using Conditional = _detail::_Conditional<_condition_c, _ThenT, _ElseT>;
@@ -45,7 +45,7 @@ struct Conditional : _detail::_Conditional<_condition_c, _ThenT, _ElseT> {
 
 
 
-DD_END
+_DD_END
 
 
 

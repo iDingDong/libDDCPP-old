@@ -12,7 +12,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 #	if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(_IteratorOfStl, _RangeT::iterator, void)
 
@@ -59,11 +59,11 @@ struct _Iterator<_ValueT*> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<_MACRO_ObjectT>::Type)
@@ -87,7 +87,7 @@ struct Iterator : _detail::_Iterator<typename RemoveCV<_RangeT>::Type> {
 
 
 
-DD_END
+_DD_END
 
 
 

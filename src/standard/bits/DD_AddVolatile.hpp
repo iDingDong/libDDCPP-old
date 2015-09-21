@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct AddVolatile {
 #	if __cplusplus >= 201402L
@@ -35,7 +35,7 @@ using AddVolatileType = typename AddVolatile<_ObjectT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

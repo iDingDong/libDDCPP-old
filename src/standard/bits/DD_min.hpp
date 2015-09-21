@@ -16,7 +16,7 @@
 
 
 #	if __cplusplus >= 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _use_default_compare_c>
 struct _Min {
 	template <typename _ObjectT_, typename _BinaryPredicatorT_>
@@ -79,12 +79,12 @@ struct _Min<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename _ObjectT, typename... _ArgumentsT>
 inline _ObjectT constexpr const& min(
@@ -129,7 +129,7 @@ inline _ObjectT const& min(
 
 
 
-DD_END
+_DD_END
 
 
 

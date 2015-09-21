@@ -15,7 +15,7 @@
 
 
 #	if __cplusplus < 201402L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename... _ObjectsT>
 struct _VoidTypeWorkaround {
 	using Type = void;
@@ -25,12 +25,12 @@ struct _VoidTypeWorkaround {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 #	if __cplusplus >= 201402L
 using VoidType = void;
@@ -40,7 +40,7 @@ using VoidType = typename _detail::_VoidTypeWorkaround<_ObjectsT...>::Type;
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct RemoveVolatile {
 #	if __cplusplus >= 201402L
@@ -44,7 +44,7 @@ using RemoveVolatileType = typename RemoveVolatile<_ObjectT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

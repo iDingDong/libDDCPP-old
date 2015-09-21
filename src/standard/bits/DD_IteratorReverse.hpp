@@ -20,7 +20,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _IteratorT>
 struct _ReverseIterator {
 	public:
@@ -216,11 +216,11 @@ inline ValidityType DD_CONSTEXPR operator <(
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_NESTED_TYPE_TRAIT(IteratorReverse, ReverseType, _detail::_ReverseIterator<_MACRO_ObjectT>)
 
 
@@ -232,7 +232,7 @@ using IteratorReverseType = typename IteratorReverse<_IteratorT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 

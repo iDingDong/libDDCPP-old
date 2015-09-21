@@ -8,7 +8,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 struct _FixedIterator {
 };
 
@@ -47,11 +47,11 @@ struct _IteratorCatagory<_ValueT*> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 DD_ALIAS(FixedIterator, _detail::_FixedIterator)
 DD_ALIAS(UndirectionalIterator, _detail::_UndirectionalIterator)
 DD_ALIAS(BidirectionalIterator, _detail::_BidirectionalIterator)
@@ -72,7 +72,7 @@ struct IteratorCatagory : _detail::_IteratorCatagory<typename RemoveCV<_Iterator
 
 
 
-DD_END
+_DD_END
 
 
 

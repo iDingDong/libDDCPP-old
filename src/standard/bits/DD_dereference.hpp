@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _PointerT>
 inline DD_MODIFY_TRAIT(IteratorReference, _PointerT) DD_CONSTEXPR dereference(_PointerT const& __pointer) DD_NOEXCEPT_AS(*__pointer) {
 	return *__pointer;
@@ -16,7 +16,7 @@ inline DD_MODIFY_TRAIT(IteratorReference, _PointerT) DD_CONSTEXPR dereference(_P
 
 
 
-DD_END
+_DD_END
 
 
 

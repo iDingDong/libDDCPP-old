@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _FreeAccessIteratorT, typename _ValueT>
 _FreeAccessIteratorT binary_find(
 	_FreeAccessIteratorT const& __begin,
@@ -104,7 +104,7 @@ inline DD_MODIFY_TRAIT(Iterator, _FreeAccessRangeT) binary_find(
 
 
 
-DD_END
+_DD_END
 
 
 

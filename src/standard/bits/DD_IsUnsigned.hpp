@@ -8,7 +8,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT, ValidityType _is_arithmetic_c>
 #	if __cplusplus >= 201103L
 struct _IsUnsigned : StdBoolConstant<std::is_unsigned<_ObjectT>> {
@@ -25,11 +25,11 @@ struct _IsUnsigned<_ObjectT, true> : BoolConstant<_ObjectT(0) < _ObjectT(-1)> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsUnsigned = AndType<_detail::_IsUnsigned<_ObjectsT, IsArithmetic<_ObjectsT>::value>...>;
@@ -41,7 +41,7 @@ struct IsUnsigned : _detail::_IsUnsigned<_ObjectT, IsArithmetic<_ObjectT>::value
 
 
 
-DD_END
+_DD_END
 
 
 

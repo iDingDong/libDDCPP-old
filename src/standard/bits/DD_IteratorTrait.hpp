@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _IteratorT>
 struct IteratorTrait : Trait<_IteratorT> {
 	DD_ALIAS(IteratorType, _IteratorT);
@@ -33,7 +33,7 @@ struct IteratorTrait : Trait<_IteratorT> {
 
 
 
-DD_END
+_DD_END
 
 
 

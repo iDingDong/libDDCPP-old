@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 struct Common {
 	using Type = void;
@@ -57,7 +57,7 @@ using CommonType = typename Common<_ObjectsT...>::Type;
 
 
 
-DD_END
+_DD_END
 
 
 

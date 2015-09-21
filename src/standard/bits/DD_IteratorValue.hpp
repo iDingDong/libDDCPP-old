@@ -13,7 +13,7 @@
 
 
 #	if __cplusplus < 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _IteratorT>
 struct _IteratorValue {
 #		if DDCPP_COMPAT_STL
@@ -36,22 +36,22 @@ struct _IteratorValue<_ValueT*> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	elif DDCPP_COMPAT_STL
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 DD_NESTED_TYPE_TRAIT(_IteratorValue, value_type, RemoveReferenceType<decltype(*_MACRO_ObjectT())>)
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename _detail::_IteratorValue<_MACRO_ObjectT>::Type)
@@ -75,7 +75,7 @@ struct IteratorValue : _detail::_IteratorValue<typename RemoveCV<_IteratorT>::Ty
 
 
 
-DD_END
+_DD_END
 
 
 

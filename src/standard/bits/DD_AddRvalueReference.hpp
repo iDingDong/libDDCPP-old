@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT, ValidityType _is_referenceable_c>
 struct _AddRvalueReference {
 	DD_ALIAS(Type, _ObjectT)
@@ -34,11 +34,11 @@ struct _AddRvalueReference<_ObjectT, true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct AddRvalueReference {
 	DD_ALIAS(Type, typename _detail::_AddRvalueReference<_ObjectT DD_COMMA IsReferable<_ObjectT>::value>::Type)
@@ -52,7 +52,7 @@ DD_TRAIT_MODIFIER(AddRvalueReference)
 
 
 
-DD_END
+_DD_END
 
 
 

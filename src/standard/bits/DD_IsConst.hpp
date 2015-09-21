@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 struct _IsConst : StdBoolConstant<std::is_const<_ObjectT>> {
@@ -31,11 +31,11 @@ struct _IsConst<_ObjectT const> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsConst = AndType<_detail::_IsConst<_ObjectsT>...>;
@@ -47,7 +47,7 @@ struct IsConst : _detail::_IsConst<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

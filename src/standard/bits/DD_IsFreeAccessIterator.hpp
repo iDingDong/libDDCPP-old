@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _IteratorsT>
 using IsFreeAccessIterator = IsBaseOf<FreeAccessIterator, IteratorCatagoryType<_IteratorsT>...>;
@@ -21,7 +21,7 @@ struct IsFreeAccessIterator : IsBaseOf<FreeAccessIterator, typename IteratorCata
 
 
 
-DD_END
+_DD_END
 
 
 

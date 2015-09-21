@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _ValueT>
 _UndirectionalIteratorT find_not(
 	_UndirectionalIteratorT __begin,
@@ -53,7 +53,7 @@ inline DD_MODIFY_TRAIT(Iterator, _UndirectionalRangeT) find_not(
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 #	if __cplusplus >= 201103L
 using _IsReference = OrType<IsLvalueReference<_ObjectT>, IsRvalueReference<_ObjectT>>;
@@ -31,11 +31,11 @@ struct _IsReference<_ObjectT&> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsReference = AndType<_detail::_IsReference<_ObjectsT>...>;
@@ -47,7 +47,7 @@ struct IsReference : _detail::_IsReference<_ObjectT> {
 
 
 
-DD_END
+_DD_END
 
 
 

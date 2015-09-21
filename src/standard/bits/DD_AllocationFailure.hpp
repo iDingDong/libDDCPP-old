@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 struct AllocationFailure : Exception {
 #	if __cplusplus >= 201103L
 	public:
@@ -37,7 +37,7 @@ struct AllocationFailure : Exception {
 
 
 
-DD_END
+_DD_END
 
 
 

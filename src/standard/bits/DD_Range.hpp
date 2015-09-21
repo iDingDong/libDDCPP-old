@@ -28,7 +28,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _RangeT>
 #	if __cplusplus >= 201402L
 auto begin(_RangeT& __range) noexcept(noexcept(__range.begin())) {
@@ -181,7 +181,7 @@ struct Range {
 
 
 
-DD_END
+_DD_END
 
 
 

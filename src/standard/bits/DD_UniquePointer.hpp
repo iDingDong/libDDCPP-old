@@ -13,7 +13,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename _DeleterT = DefaultTag>
 struct UniquePointer {
 	public:
@@ -421,7 +421,7 @@ inline ProcessType swap(
 
 
 
-DD_END
+_DD_END
 
 
 

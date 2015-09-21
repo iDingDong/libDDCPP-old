@@ -13,7 +13,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _is_bidirectional_iterator_c>
 struct _InsertSort {
 	template <typename _UndirectionalIteratorT_>
@@ -152,11 +152,11 @@ struct _InsertSort<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 inline ProcessType insert_sort(
 	_UndirectionalIteratorT const& __begin,
@@ -203,7 +203,7 @@ inline ProcessType insert_sort(
 
 
 
-DD_END
+_DD_END
 
 
 

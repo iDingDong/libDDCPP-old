@@ -9,7 +9,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <ValidityType _is_free_access_iterator>
 struct _IsSortedUntil {
 	template <typename _UndirectionalIteratorT_>
@@ -72,11 +72,11 @@ struct _IsSortedUntil<true> {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT>
 inline _UndirectionalIteratorT is_sorted_until(
 	_UndirectionalIteratorT const& __begin,
@@ -96,7 +96,7 @@ inline _UndirectionalIteratorT is_sorted_until(
 
 
 
-DD_END
+_DD_END
 
 
 

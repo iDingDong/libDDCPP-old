@@ -14,7 +14,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, typename _AllocatorT = Allocator<_ValueT>>
 struct Vessel {
 	public:
@@ -136,7 +136,7 @@ struct Vessel<_ValueT, Allocator<_ValueT>> {
 
 
 
-DD_END
+_DD_END
 
 
 

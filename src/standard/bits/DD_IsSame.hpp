@@ -14,7 +14,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 struct _IsSame : TrueType {
@@ -45,11 +45,11 @@ struct _IsSame<_ObjectT, _ObjectT> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsSame = _detail::_IsSame<_ObjectsT...>;
@@ -61,7 +61,7 @@ struct IsSame : _detail::_IsSame<_ObjectT1, _ObjectT2> {
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT, _ValueT _value_c>
 struct IntegralConstant {
 	DD_ALIAS(ValueType, _ValueT)
@@ -75,7 +75,7 @@ DD_ALIAS(FalseType, BoolConstant<false>)
 
 
 
-DD_END
+_DD_END
 
 
 

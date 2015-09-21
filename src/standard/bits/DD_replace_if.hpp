@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT, typename _ValueT>
 ProcessType replace_if(
 	_UndirectionalIteratorT __begin,
@@ -25,7 +25,7 @@ ProcessType replace_if(
 
 
 
-DD_END
+_DD_END
 
 
 

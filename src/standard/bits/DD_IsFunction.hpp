@@ -15,7 +15,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 struct _IsFunction : StdIntegralConstant<std::is_function<_ObjectT>> {
 };
@@ -166,17 +166,17 @@ struct _IsFunction<_ResultT(_ArgumentsT... ...) const volatile&&> : TrueType {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename... _ObjectsT>
 using IsFunction = AndType<_detail::_IsFunction<_ObjectsT>...>;
 
 
 
-DD_END
+_DD_END
 
 
 

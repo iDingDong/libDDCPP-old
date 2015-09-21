@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ObjectT>
 struct Incrementable {
 	public:
@@ -27,7 +27,7 @@ struct Incrementable {
 
 
 
-DD_END
+_DD_END
 
 
 

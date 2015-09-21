@@ -15,18 +15,18 @@
 
 
 #	if __cplusplus >= 201103L
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ObjectT>
 using _IsFloatingPoint = OrType<IsFloat<_ObjectT>, IsDouble<_ObjectT>, IsLongDouble<_ObjectT>, StdBoolConstant<std::is_floating_point<_ObjectT>>>;
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
 #	endif
-DD_BEGIN
+_DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename... _ObjectsT>
 using IsFloatingPoint = AndType<_detail::_IsFloatingPoint<_ObjectsT>...>;
@@ -38,7 +38,7 @@ struct IsFloatingPoint : BoolConstant<IsFloat<_ObjectT>::value || IsDouble<_Obje
 
 
 
-DD_END
+_DD_END
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <typename _ValueT>
 class DefaultDeleter {
 	public:
@@ -35,7 +35,7 @@ class DefaultDeleter {
 
 
 
-DD_END
+_DD_END
 
 
 

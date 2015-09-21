@@ -8,7 +8,7 @@
 
 
 
-DD_DETAIL_BEGIN
+_DD_DETAIL_BEGIN
 struct _FreeListBase {
 	_FreeListBase* next;
 
@@ -17,11 +17,11 @@ struct _FreeListBase {
 
 
 
-DD_DETAIL_END
+_DD_DETAIL_END
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <LengthType _length_c>
 struct FreeList : _detail::_FreeListBase {
 	DD_STATIC_ASSERT(_length_c > 0, "Length of 'DD::FreeList' should be no less than 1.")
@@ -54,7 +54,7 @@ inline void* get_memory(FreeList<_length_c>& _free_list) DD_NOEXCEPT_AS(static_c
 
 
 
-DD_END
+_DD_END
 
 
 

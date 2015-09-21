@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN
+_DD_BEGIN
 template <ValidityType _is_valid_c, typename _ObjectT>
 struct EnableIf {
 };
@@ -31,7 +31,7 @@ using EnableIfType = typename EnableIf<_is_valid_c, _ObjectT>::Type;
 
 
 #	endif
-DD_END
+_DD_END
 
 
 
