@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\standard">
+      <UniqueIdentifier>{275a6e1c-3517-4f17-a2d9-f4dbd22264f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\standard\bits">
+      <UniqueIdentifier>{7e46825a-48fa-4ff6-93bd-5934b39e4658}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDAlgorithm.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDArray.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDCompare.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDCompatibility.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDError.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDFunctional.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDGlobal.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDIterator.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDMemory.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDMeta.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDTrait.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\DDUtility.hpp">
+      <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AccessDenied.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AddConst.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AddCV.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AddPointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_address_of.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AddRvalueReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AddVolatile.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AllocationFailure.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Allocator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_And.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Array.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ArrayIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_AtPack.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_BiggestTypeOfPack.h">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_binary_find.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_BinaryOperators.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_bind.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_BuildInTypes.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Common.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Comparable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_compatibility_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_CompatStlContainer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_CompatStlIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Conditional.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ContainedByPack.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_container_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_copy.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_count.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_count_if.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_debugger_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Decay.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_declare_value.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_DefaultDeleter.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_dereference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Dereferenceable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Dynamic.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_EnableIf.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_equal.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_EqualityComparable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Exception.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_fill.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_first_of.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_if.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_if_not.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_max.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_min.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_min_max.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_find_not.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_for_each.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ForRange.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_forward.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_FreeList.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Function.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Functor.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_FunctorGreater.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_FunctorLess.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_generate.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_get_last_argument.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_get_pointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_GetPackBack.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_global_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Incrementable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_InitializerList.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_insert_sort.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IntegralConstant.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_is_partitioned.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_is_partitioned_by.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_is_sorted.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_is_sorted_until.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsArithmetic.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsArray.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsBaseOf.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsBidirectionalIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsBool.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsChar.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsChar16.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsChar32.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsCharactor.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsClass.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsConst.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsDouble.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsEnum.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsFloat.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsFloatingPoint.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsFreeAccessIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsFunction.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsIntegral.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsLongDouble.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsLvalueReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsNilPointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsNoexceptMoveAssignable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsNoexceptMoveConstructible.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsPod.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsPointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsRange.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsReferable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsRvalueReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSame.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsScalar.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSignedChar.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSignedInt.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSignedLong.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSignedLongLong.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsSignedShort.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsTriviallyDestructible.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUndirectionalIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnion.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsigned.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsignedChar.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsignedInt.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsignedLong.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsignedLongLong.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsUnsignedShort.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsVoid.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsVolatile.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IsWChar.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Iterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_iterator_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorCatagory.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorDifference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorPointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorReverse.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorTrait.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_IteratorValue.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_length_difference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_less.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_LessThanComparable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_List.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ListIterator.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ListNode.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_make_parasitic.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_make_unique.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Matcher.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_max.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_MemberFunctionCheck.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_merge.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_meta_definitions.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_min.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_min_max.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_mismatch.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_move.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_NestedTypeCheck.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Nil.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Or.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Pair.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_ParasiticPointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_partition.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_partition_by.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_partition_point.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_partition_point_by.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Pool.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_print.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Range.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RangeWorkaround.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_relationship_operators.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_release.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveAllExtents.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveConst.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveCV.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveExtent.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemovePointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveReference.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_RemoveVolatile.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_replace.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_replace_if.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_reverse.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_select_sort.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_size_distance.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_SizeTrait.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_sort.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_swap.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_swap_target.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Tags.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Trait.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Tuple.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_TypeInfo.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_TypeList.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Uncopiable.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_UniquePointer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_UnusedIgnorer.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Variant.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_Vessel.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\standard\bits\DD_VoidType.hpp">
+      <Filter>Header Files\standard\bits</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\test_algorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\test_math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\test_memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\test_meta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\test_utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
