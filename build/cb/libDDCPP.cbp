@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Project1" />
+		<Option title="libDDCPP" />
 		<Option execution_dir="D:/Develop/Repositories/libDDCPP/build/devcpp/" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
@@ -90,6 +90,7 @@
 		<Unit filename="../../src/standard/bits/DD_IsIntegral.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsLongDouble.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsLvalueReference.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsMemberFunctionPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNilPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveAssignable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveConstructible.hpp" />
@@ -139,6 +140,7 @@
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ReferenceWrapper.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveAllExtents.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveCV.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveConst.hpp" />
@@ -150,6 +152,7 @@
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />
+		<Unit filename="../../src/standard/bits/DD_TypeInfo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_TypeList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Uncopiable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />

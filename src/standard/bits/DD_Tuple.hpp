@@ -5,17 +5,51 @@
 
 
 #	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for'DD::Tuple'.
+#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::Tuple'.
 
 
 
 #	endif
+#	include "DD_Decay.hpp"
+#	include "DD_ReferenceWrapper.hpp"
 #	include "DD_forward.hpp"
 #	include "DD_TypeList.hpp"
 
 
 
 _DD_DETAIL_BEGIN
+template <typename _ObjectT>
+struct _StripReferenceWrapper {
+	using Type = _ObjectT;
+
+
+};
+
+
+
+template <typename _ObjectT>
+struct _StripReferenceWrapper<ReferenceWrapper<_ObjectT>> {
+	using Type = _ObjectT&;
+
+
+};
+
+
+
+template <typename _ObjectT>
+struct _DecayAndStrip {
+	using Type = typename _StripReferenceWrapper<DecayType<_ObjectT>>::Type;
+
+
+};
+
+
+
+template <typename _ObjectT>
+using _DecayAndStripType = typename _DecayAndStrip<_ObjectT>::_Type;
+
+
+
 template <SubscriptType _index_c, typename... _ValuesT>
 struct _Tuple {
 	public:
@@ -38,9 +72,7 @@ struct _Tuple<_index_c, _ValueT, _ValuesT...> : _Tuple<_index_c, _ValueT>, _Tupl
 	static SubscriptType constexpr index = _index_c;
 	using TypeList = TypeList<_ValueT, _ValuesT...>;
 	using ValueType = _ValueT;
-
-	public:
-	static LengthType constexpr length_constant = sizeof...(_ValuesT) + 1;
+	static LengthType constexpr length = RestType::length + 1;
 
 
 	public:
@@ -85,6 +117,7 @@ struct _Tuple<_index_c, _ValueT> {
 	static SubscriptType constexpr index = _index_c;
 	using TypeList = TypeList<_ValueT>;
 	using ValueType = _ValueT;
+	static LengthType constexpr length = 1;
 
 	public:
 	using ReferenceType = ValueType&;
@@ -138,6 +171,14 @@ struct _Tuple<_index_c, _ValueT> {
 
 };
 
+
+
+template <typename... _ValuesT>
+_Tuple<0, _DecayAndStripType<_ValuesT>...> make_tuple(_ValuesT&&... __elements) noexcept(
+	noexcept(_Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...))
+) {
+	return _Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...);
+}
 
 
 template <SubscriptType _index_c, typename _ValueT>
@@ -211,6 +252,7 @@ using Tuple = _detail::_Tuple<0, _ValuesT...>;
 
 
 using _detail::get_value;
+using _detail::make_tuple;
 
 
 
