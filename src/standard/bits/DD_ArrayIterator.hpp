@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_ValueTypeNested.hpp"
 #	include "DD_IteratorTrait.hpp"
 
 
@@ -13,11 +14,9 @@ template <typename _ValueT>
 struct ArrayIterator {
 	public:
 	DD_ALIAS(ThisType, ArrayIterator<_ValueT>)
-	DD_ALIAS(ValueType, _ValueT)
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
 	public:
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(PointerType, ValueType*)
 	DD_ALIAS(DifferenceType, DD::DifferenceType)
 	DD_ALIAS(CatagoryType, FreeAccessIterator)
 
