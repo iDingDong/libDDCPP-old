@@ -10,6 +10,10 @@ inline int func(int x, int y) {
 }
 
 class A {
+	public:
+	int func(int x, int y) const {
+		return x - y;
+	}
 };
 class B : public A {
 };
@@ -72,10 +76,14 @@ void test_utility() {
 		*/
 	}
 	{
-		auto testBinded = DD::bind(func, DD::place_holder::_0, 1234);
+		using namespace ::DD::place_holder;
+		auto testBinded_1 = DD::bind(func, _0, 1234);
+		auto testBinded_2 = DD::bind(&A::func, _1, 1234, _0);
 		if (
-			testBinded(1111) != 2345 ||
-			testBinded(4321) != 5555
+			testBinded_1(1111) != 1111 + 1234 ||
+			testBinded_1(4321) != 4321 + 1234 ||
+			testBinded_2(1000, A()) != 1234 - 1000 ||
+			testBinded_2(2000, A()) != 1234 - 2000
 		) {
 			throw "'DD::bind' test failed.";
 		}

@@ -84,6 +84,33 @@ struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...)> {
 
 
 
+template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
+struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) const> {
+	using Type = _ResultT;
+
+
+};
+
+
+
+template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
+struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) volatile> {
+	using Type = _ResultT;
+
+
+};
+
+
+
+template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
+struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) const volatile> {
+	using Type = _ResultT;
+
+
+};
+
+
+
 template <typename _ArgumentT, typename... _ArgumentsT>
 inline _ArgumentT&& select(_ArgumentT&& __argument, Tuple<_ArgumentsT...> const& _arguments_pack) noexcept {
 	return forward<_ArgumentT>(__argument);
@@ -111,14 +138,12 @@ struct _BindCall<true, _Indexs<0, _indexs_c...>> {
 		_FunctionT_ const& __function_,
 		Tuple<_ArgumentT_, _ArgumentsT1_...> const& __arguments_1_,
 		Tuple<_ArgumentsT2_...> const& __arguments_2_
-	) noexcept(noexcept(forward<_ArgumentT_>(get_value<0>(__arguments_1_)).__function_(select(
-			forward<_ArgumentsT1_>(get_value<_indexs_c>(__arguments_1_)),
-			move(__arguments_2_)
-	)...))) {
-		return forward<_ArgumentT_>(get_value<0>(__arguments_1_)).__function_(select(
-			forward<_ArgumentsT1_>(get_value<_indexs_c>(__arguments_1_)),
-			move(__arguments_2_)
-		)...);
+	) noexcept(noexcept((select(get_value<0>(__arguments_1_), __arguments_2_).*__function_)(
+		select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...
+	))) {
+		return (select(get_value<0>(__arguments_1_), __arguments_2_).*__function_)(
+			select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...
+		);
 	}
 
 
@@ -133,9 +158,7 @@ struct _BindCall<false, _Indexs<_indexs_c...>> {
 		_FunctionT_ const& __function_,
 		Tuple<_ArgumentsT1_...> const& __arguments_1_,
 		Tuple<_ArgumentsT2_...> const& __arguments_2_
-	) noexcept(
-		noexcept(__function_(select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...))
-	) {
+	) noexcept(noexcept(__function_(select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...))) {
 		return __function_(select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...);
 	}
 
