@@ -48,10 +48,10 @@
 		<Unit filename="../../src/standard/bits/DD_AtPack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BiggestTypeOfPack.h" />
 		<Unit filename="../../src/standard/bits/DD_BinaryOperators.hpp" />
+		<Unit filename="../../src/standard/bits/DD_BinaryTreeNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BuildInTypes.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Common.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Comparable.hpp" />
-		<Unit filename="../../src/standard/bits/DD_CompatStlContainer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_CompatStlIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Conditional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ContainedByPack.hpp" />
@@ -158,6 +158,7 @@
 		<Unit filename="../../src/standard/bits/DD_Uncopiable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UnusedIgnorer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ValueTypeNested.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Variant.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Vessel.hpp" />
 		<Unit filename="../../src/standard/bits/DD_VoidType.hpp" />

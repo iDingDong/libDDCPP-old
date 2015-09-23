@@ -5,7 +5,7 @@
 
 
 #	include "DD_debugger_definitions.hpp"
-#	include "DD_CompatStlContainer.hpp"
+#	include "DD_ValueTypeNested.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_ArrayIterator.hpp"
 
@@ -26,25 +26,17 @@ template <typename _ValueT, LengthType _length_c>
 struct _Array<_ValueT, _length_c> {
 #	else
 template <typename _ValueT, LengthType _length_c>
-struct _Array {
+struct _Array : ValueTypeNested<_ValueT> {
 #	endif
 	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA _length_c>)
 	DD_ALIAS(LowerType, _ValueT)
-	DD_ALIAS(ValueType, _ValueT)
 	static LengthType DD_CONSTANT length_constant = _length_c;
-
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(ConstReferenceType, ValueType const&)
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ConstPointerType, ValueType const*)
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
 	DD_ALIAS(Iterator, PointerType)
 	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type)
 	DD_ALIAS(ConstIterator, ConstPointerType)
 	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type)
-
-	public:
-	DD_COMPAT_STL_CONTAINER
 
 #	if __cplusplus >= 201103L
 	using ArrayType = DD::ArrayType<ValueType, length_constant>;
@@ -202,20 +194,13 @@ template <typename _ValueT>
 struct _Array<_ValueT, 0> {
 	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA 0>)
 	DD_ALIAS(LowerType, _ValueT)
-	DD_ALIAS(ValueType, _ValueT)
 	static LengthType DD_CONSTANT length_constant = 0;
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(ConstReferenceType, ValueType const&)
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ConstPointerType, ValueType const*)
-
-	DD_ALIAS(Iterator, ArrayIterator<ValueType>)
+	DD_ALIAS(Iterator, PointerType)
 	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type)
-	DD_ALIAS(ConstIterator, ArrayIterator<ValueType const>)
+	DD_ALIAS(ConstIterator, ConstPointerType)
 	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type)
-
-	DD_COMPAT_STL_CONTAINER
 
 
 	static LengthType DD_CONSTEXPR get_length() DD_NOEXCEPT {
