@@ -5,7 +5,7 @@
 
 
 #	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for'DD::bind'.
+#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::bind'.
 
 
 
@@ -55,7 +55,7 @@ struct _PlaceHolder {
 
 
 template <typename _FunctionT>
-struct _ResultOf : _ResultOf<decltype(&_FunctionT::operator())> {
+struct _ResultOf : _ResultOf<decltype(&_FunctionT::operator ())> {
 };
 
 
@@ -107,7 +107,7 @@ struct _BindCall;
 template <SubscriptType... _indexs_c>
 struct _BindCall<true, _Indexs<0, _indexs_c...>> {
 	template <typename _FunctionT_, typename _ArgumentT_, typename... _ArgumentsT1_, typename... _ArgumentsT2_>
-	typename _ResultOf<_FunctionT_>::Type _call(
+	static typename _ResultOf<_FunctionT_>::Type _call(
 		_FunctionT_ const& __function_,
 		Tuple<_ArgumentT_, _ArgumentsT1_...> const& __arguments_1_,
 		Tuple<_ArgumentsT2_...> const& __arguments_2_
@@ -129,14 +129,14 @@ struct _BindCall<true, _Indexs<0, _indexs_c...>> {
 template <SubscriptType... _indexs_c>
 struct _BindCall<false, _Indexs<_indexs_c...>> {
 	template <typename _FunctionT_, typename... _ArgumentsT1_, typename... _ArgumentsT2_>
-	typename _ResultOf<_FunctionT_>::Type _call(
+	static typename _ResultOf<_FunctionT_>::Type _call(
 		_FunctionT_ const& __function_,
 		Tuple<_ArgumentsT1_...> const& __arguments_1_,
 		Tuple<_ArgumentsT2_...> const& __arguments_2_
 	) noexcept(
-		noexcept(__function_(select(forward<_ArgumentsT1_>(get_value<_indexs_c>(__arguments_1_)), move(__arguments_2_))...))
+		noexcept(__function_(select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...))
 	) {
-		return __function_(select(forward<_ArgumentsT1_>(get_value<_indexs_c>(__arguments_1_)), move(__arguments_2_))...);
+		return __function_(select(get_value<_indexs_c>(__arguments_1_), __arguments_2_)...);
 	}
 
 

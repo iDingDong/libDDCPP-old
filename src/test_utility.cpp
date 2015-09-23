@@ -5,6 +5,10 @@
 #include <iostream>
 #include "standard/DDUtility.hpp"
 
+inline int func(int x, int y) {
+	return x + y;
+}
+
 class A {
 };
 class B : public A {
@@ -66,5 +70,14 @@ void test_utility() {
 			throw "'DD::Tuple' test failed.";
 		}
 		*/
+	}
+	{
+		auto testBinded = DD::bind(func, DD::place_holder::_0, 1234);
+		if (
+			testBinded(1111) != 2345 ||
+			testBinded(4321) != 5555
+		) {
+			throw "'DD::bind' test failed.";
+		}
 	}
 }

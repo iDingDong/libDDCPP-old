@@ -46,7 +46,7 @@ struct _DecayAndStrip {
 
 
 template <typename _ObjectT>
-using _DecayAndStripType = typename _DecayAndStrip<_ObjectT>::_Type;
+using _DecayAndStripType = typename _DecayAndStrip<_ObjectT>::Type;
 
 
 
@@ -174,7 +174,7 @@ struct _Tuple<_index_c, _ValueT> {
 
 
 template <typename... _ValuesT>
-_Tuple<0, _DecayAndStripType<_ValuesT>...> make_tuple(_ValuesT&&... __elements) noexcept(
+_Tuple<0, _DecayAndStripType<_ValuesT>...> constexpr make_tuple(_ValuesT&&... __elements) noexcept(
 	noexcept(_Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...))
 ) {
 	return _Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...);

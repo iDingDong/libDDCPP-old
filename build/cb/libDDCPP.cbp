@@ -148,6 +148,7 @@
 		<Unit filename="../../src/standard/bits/DD_RemovePointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveVolatile.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />

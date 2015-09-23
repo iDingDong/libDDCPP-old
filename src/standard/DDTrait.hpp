@@ -10,6 +10,7 @@
 #		include "bits/DD_Or.hpp"
 #		include "bits/DD_And.hpp"
 #	endif
+#	include "bits/DD_Result.hpp"
 #	include "bits/DD_Trait.hpp"
 
 
