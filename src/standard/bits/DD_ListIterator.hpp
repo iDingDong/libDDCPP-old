@@ -14,22 +14,22 @@ _DD_BEGIN
 template <typename _NodeT>
 struct ListIterator {
 	public:
-	DD_ALIAS(ThisType, ListIterator<_NodeT>)
-	DD_ALIAS(NodeType, _NodeT)
+	DD_ALIAS(ThisType, ListIterator<_NodeT>);
+	DD_ALIAS(NodeType, _NodeT);
 
 	public:
-	DD_ALIAS(NodeConstType, NodeType const)
-	DD_ALIAS(NodeReferenceType, NodeType&)
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&)
-	DD_ALIAS(NodePointerType, NodeType*)
-	DD_ALIAS(NodeConstPointerType, NodeConstType*)
+	DD_ALIAS(NodeConstType, NodeType const);
+	DD_ALIAS(NodeReferenceType, NodeType&);
+	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
+	DD_ALIAS(NodePointerType, NodeType*);
+	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
 	public:
-	DD_ALIAS(ValueType, typename NodeType::ValueType)
+	DD_ALIAS(ValueType, typename NodeType::ValueType);
 
 	public:
 	DD_ITERATOR_DECLARATIONS
-	DD_ALIAS(CatagoryType, BidirectionalIterator)
+	DD_ALIAS(CatagoryType, BidirectionalIterator);
 
 
 	private:

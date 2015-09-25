@@ -10,22 +10,25 @@
 
 _DD_BEGIN
 struct Exception {
+	public:
+	DD_ALIAS(ThisType, Exception);
+
+
 	private:
-#	if __cplusplus >= 201103L
-	PromptType _m_prompt = "Unknown Error. ";
-#	else
-	PromptType _m_prompt;
-#	endif
+	PromptType _m_prompt DD_IN_CLASS_INITIALIZE("Unknown Error. ");
 
+
+#	if __cplusplus >= 201103L
+	public:
+	Exception() = default;
 
 	public:
-#	if __cplusplus >= 201103L
-	Exception() DD_NOEXCEPT = default;
+	Exception(Exception const& _origin) = default;
 
 	public:
-	Exception(Exception const& _origin) DD_NOEXCEPT = default;
 #	else
-	Exception() DD_NOEXCEPT : _m_prompt() {
+	public:
+	Exception() throw() : _m_prompt() {
 	};
 #	endif
 
@@ -36,22 +39,22 @@ struct Exception {
 
 #	if __cplusplus >= 201103L
 	public:
-	virtual ~Exception() DD_NOEXCEPT = default;
+	virtual ~Exception() = default;
 #	else
-	virtual ~Exception() DD_NOEXCEPT {
+	virtual ~Exception() throw() {
 	}
 #	endif
 
 
 	public:
 	virtual PromptType get_prompt() const DD_NOEXCEPT {
-		return this->_m_prompt;
+		return _m_prompt;
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	Exception& operator =(Exception const& _origin) DD_NOEXCEPT = default;
+	Exception& operator =(Exception const& _origin) = default;
 
 
 #	endif

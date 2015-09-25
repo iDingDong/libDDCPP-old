@@ -11,7 +11,7 @@
 
 
 _DD_BEGIN
-DD_ALIAS(TypeInfo, std::type_info)
+DD_ALIAS(TypeInfo, std::type_info);
 
 
 

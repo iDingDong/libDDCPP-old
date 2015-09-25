@@ -17,14 +17,14 @@ _DD_BEGIN
 template <typename _ValueT, typename _DeleterT = DefaultTag>
 struct UniquePointer {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>)
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(DeleterType, _DeleterT)
+	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>);
+	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(DeleterType, _DeleterT);
 
 	public:
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(DifferenceType, DD::DifferenceType)
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
@@ -166,14 +166,14 @@ struct UniquePointer {
 template <typename _ValueT>
 struct UniquePointer<_ValueT, DefaultTag> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>)
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(DeleterType, void)
+	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>);
+	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(DeleterType, void);
 
 	public:
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(DifferenceType, DD::DifferenceType)
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
@@ -290,14 +290,14 @@ struct UniquePointer<_ValueT, DefaultTag> {
 template <typename _ValueT>
 struct UniquePointer<_ValueT[], void> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>)
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(DeleterType, void)
+	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>);
+	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(DeleterType, void);
 
 	public:
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(DifferenceType, DD::DifferenceType)
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:

@@ -11,7 +11,7 @@
 _DD_BEGIN
 struct UnusedIgnorer {
 	public:
-	DD_ALIAS(ThisType, UnusedIgnorer)
+	DD_ALIAS(ThisType, UnusedIgnorer);
 
 
 	public:

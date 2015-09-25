@@ -21,20 +21,20 @@ struct ParasiticPointer {
 template <typename _ValueT>
 struct ParasiticPointer<_ValueT, void> {
 	public:
-	DD_ALIAS(ThisType, ParasiticPointer<_ValueT DD_COMMA void>)
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(DeleterType, void)
+	DD_ALIAS(ThisType, ParasiticPointer<_ValueT DD_COMMA void>);
+	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(DeleterType, void);
 
 	public:
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(DifferenceType, DD::DifferenceType)
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 	public:
-	DD_ALIAS(ParasitiferValueType, Pair<LengthType DD_COMMA ValueType>)
-	DD_ALIAS(ParasitiferReferenceType, ParasitiferValueType&)
-	DD_ALIAS(ParasitiferPointerType, ParasitiferValueType*)
-	DD_ALIAS(ParasitiferDifferenceType, DD::DifferenceType)
+	DD_ALIAS(ParasitiferValueType, Pair<LengthType DD_COMMA ValueType>);
+	DD_ALIAS(ParasitiferReferenceType, ParasitiferValueType&);
+	DD_ALIAS(ParasitiferPointerType, ParasitiferValueType*);
+	DD_ALIAS(ParasitiferDifferenceType, DD::DifferenceType);
 
 
 	private:

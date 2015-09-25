@@ -11,23 +11,23 @@
 
 
 _DD_BEGIN
-DD_ALIAS(Char, char)
-DD_ALIAS(UnsignedChar, unsigned char)
-DD_ALIAS(SignedChar, signed char)
-DD_ALIAS(UnsignedShortInt, unsigned short int)
-DD_ALIAS(SignedShortInt, signed short int)
-DD_ALIAS(UnsignedInt, unsigned int)
-DD_ALIAS(SignedInt, signed int)
-DD_ALIAS(UnsignedLongInt, unsigned long int)
-DD_ALIAS(SignedLongInt, signed long int)
+DD_ALIAS(Char, char);
+DD_ALIAS(UnsignedChar, unsigned char);
+DD_ALIAS(SignedChar, signed char);
+DD_ALIAS(UnsignedShortInt, unsigned short int);
+DD_ALIAS(SignedShortInt, signed short int);
+DD_ALIAS(UnsignedInt, unsigned int);
+DD_ALIAS(SignedInt, signed int);
+DD_ALIAS(UnsignedLongInt, unsigned long int);
+DD_ALIAS(SignedLongInt, signed long int);
 #	if __cplusplus >= 201103L
 using UnsignedLongLongInt = unsigned long long int;
 using SignedLongLongInt = signed long long int;
 #	endif
 
-DD_ALIAS(Float, float)
-DD_ALIAS(Double, double)
-DD_ALIAS(LongDouble, long double)
+DD_ALIAS(Float, float);
+DD_ALIAS(Double, double);
+DD_ALIAS(LongDouble, long double);
 
 #	if __cplusplus >= 201103L
 using UnsignedInt8 = std::uint8_t;

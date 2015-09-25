@@ -11,7 +11,7 @@
 _DD_BEGIN
 template <typename _ValueT, _ValueT _value_c>
 struct IntegralConstant {
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ValueType, _ValueT);
 	static ValueType DD_CONSTANT value = _value_c;
 
 #	if __cplusplus >= 201103L
@@ -70,8 +70,8 @@ struct StdIntegralConstant : IntegralConstant<typename _IntegralT::value_type, _
 
 
 
-DD_ALIAS(TrueType, BoolConstant<true>)
-DD_ALIAS(FalseType, BoolConstant<false>)
+DD_ALIAS(TrueType, BoolConstant<true>);
+DD_ALIAS(FalseType, BoolConstant<false>);
 
 
 

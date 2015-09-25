@@ -11,7 +11,7 @@
 _DD_BEGIN
 struct Uncopiable {
 	public:
-	DD_ALIAS(ThisType, Uncopiable)
+	DD_ALIAS(ThisType, Uncopiable);
 
 
 #	if __cplusplus >= 201103L

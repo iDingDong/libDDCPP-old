@@ -11,8 +11,8 @@
 _DD_BEGIN
 template <typename _ObjectT1, typename _ObjectT2 = _ObjectT1>
 struct LessThanComparable {
-	DD_ALIAS(Type1, _ObjectT1)
-	DD_ALIAS(Type2, _ObjectT2)
+	DD_ALIAS(Type1, _ObjectT1);
+	DD_ALIAS(Type2, _ObjectT2);
 
 
 	friend ValidityType operator <(
@@ -67,7 +67,7 @@ struct LessThanComparable {
 
 template <typename _ObjectT>
 struct LessThanComparable<_ObjectT> {
-	DD_ALIAS(Type, _ObjectT)
+	DD_ALIAS(Type, _ObjectT);
 
 
 	friend ValidityType operator <=(

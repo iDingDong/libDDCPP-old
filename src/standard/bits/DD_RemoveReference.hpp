@@ -30,7 +30,7 @@ struct RemoveReference {
 
 template <typename _ValueT>
 struct RemoveReference<_ValueT&> {
-	DD_ALIAS(Type, _ValueT)
+	DD_ALIAS(Type, _ValueT);
 
 
 };

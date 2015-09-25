@@ -39,9 +39,9 @@
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) using _ARG_Alias = _ARG_Origin;
+#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) using _ARG_Alias = _ARG_Origin
 #	else
-#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) typedef _ARG_Origin _ARG_Alias;
+#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) typedef _ARG_Origin _ARG_Alias
 #	endif
 
 #	if __cplusplus >= 201103L

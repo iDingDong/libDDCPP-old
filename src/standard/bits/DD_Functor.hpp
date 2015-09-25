@@ -16,7 +16,7 @@ struct Functor {
 template <typename _ResultT>
 struct Functor {
 #	endif
-	DD_ALIAS(ResultType, _ResultT)
+	DD_ALIAS(ResultType, _ResultT);
 
 
 };
@@ -29,8 +29,8 @@ struct UnaryFunctor : Functor<_ResultT, _ArgumentT> {
 #	else
 struct UnaryFunctor : Functor<_ResultT> {
 #	endif
-	DD_ALIAS(ResultType, _ResultT)
-	DD_ALIAS(ArgumentType, _ArgumentT)
+	DD_ALIAS(ResultType, _ResultT);
+	DD_ALIAS(ArgumentType, _ArgumentT);
 
 
 };
@@ -43,9 +43,9 @@ struct BinaryFunctor : Functor<_ResultT, _ArgumentT1, _ArgumentT2> {
 #	else
 struct BinaryFunctor : Functor<_ResultT> {
 #	endif
-	DD_ALIAS(ResultType, _ResultT)
-	DD_ALIAS(FirstArgumentType, _ArgumentT1)
-	DD_ALIAS(SecondArgumentType, _ArgumentT2)
+	DD_ALIAS(ResultType, _ResultT);
+	DD_ALIAS(FirstArgumentType, _ArgumentT1);
+	DD_ALIAS(SecondArgumentType, _ArgumentT2);
 
 
 };

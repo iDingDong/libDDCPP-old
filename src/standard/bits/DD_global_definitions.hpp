@@ -67,19 +67,19 @@
 
 
 _DD_BEGIN
-DD_ALIAS(ProcessType, void)
+DD_ALIAS(ProcessType, void);
 
-DD_ALIAS(ValidityType, bool)
-DD_ALIAS(CheckType, bool)
+DD_ALIAS(ValidityType, bool);
+DD_ALIAS(CheckType, bool);
 
-DD_ALIAS(SizeType, std::size_t)
-DD_ALIAS(LengthType, SizeType)
-DD_ALIAS(QuantityType, SizeType)
+DD_ALIAS(SizeType, std::size_t);
+DD_ALIAS(LengthType, SizeType);
+DD_ALIAS(QuantityType, SizeType);
 
-DD_ALIAS(PointerDifferenceType, std::ptrdiff_t)
-DD_ALIAS(DifferenceType, PointerDifferenceType)
-DD_ALIAS(CounterType, PointerDifferenceType)
-DD_ALIAS(SubscriptType, PointerDifferenceType)
+DD_ALIAS(PointerDifferenceType, std::ptrdiff_t);
+DD_ALIAS(DifferenceType, PointerDifferenceType);
+DD_ALIAS(CounterType, PointerDifferenceType);
+DD_ALIAS(SubscriptType, PointerDifferenceType);
 
 #	if __cplusplus >= 201103L
 template <typename ValueT>
@@ -92,12 +92,12 @@ template <typename ValueT>
 using PointerType = ValueT*;
 
 #	endif
-DD_ALIAS(GlobalPointerType, void*)
+DD_ALIAS(GlobalPointerType, void*);
 
-DD_ALIAS(CStringType, char*)
+DD_ALIAS(CStringType, char*);
 
-DD_ALIAS(CStringConstType, char const*)
-DD_ALIAS(PromptType, CStringConstType)
+DD_ALIAS(CStringConstType, char const*);
+DD_ALIAS(PromptType, CStringConstType);
 
 
 

@@ -17,7 +17,7 @@
 _DD_DETAIL_BEGIN
 struct _VariantHolderBase {
 	public:
-	DD_ALIAS(ThisType, _VariantHolderBase)
+	DD_ALIAS(ThisType, _VariantHolderBase);
 
 
 	public:
@@ -47,9 +47,9 @@ struct _VariantHolderBase {
 template <typename _ValueT>
 struct _VariantHolder DD_FINAL : _VariantHolderBase {
 	public:
-	DD_ALIAS(ThisType, _VariantHolder<_ValueT>)
-	DD_ALIAS(SuperType, _VariantHolderBase)
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ThisType, _VariantHolder<_ValueT>);
+	DD_ALIAS(SuperType, _VariantHolderBase);
+	DD_ALIAS(ValueType, _ValueT);
 
 
 	public:
@@ -96,7 +96,7 @@ _DD_DETAIL_END
 _DD_BEGIN
 struct Variant {
 	public:
-	DD_ALIAS(ThisType, Variant)
+	DD_ALIAS(ThisType, Variant);
 
 
 	private:

@@ -11,10 +11,10 @@
 
 #	if DDCPP_COMPAT_STL
 #		define DD_COMPAT_STL_ITERATOR\
-			DD_ALIAS(value_type, ValueType)\
-			DD_ALIAS(reference, ReferenceType)\
-			DD_ALIAS(pointer, PointerType)\
-			DD_ALIAS(difference_type, DifferenceType)
+			DD_ALIAS(value_type, ValueType);\
+			DD_ALIAS(reference, ReferenceType);\
+			DD_ALIAS(pointer, PointerType);\
+			DD_ALIAS(difference_type, DifferenceType);
 #	else
 #		define DD_COMPAT_STL_ITERATOR
 #	endif

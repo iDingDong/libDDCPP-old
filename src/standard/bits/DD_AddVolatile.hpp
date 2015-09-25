@@ -28,13 +28,10 @@ struct AddVolatile {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using AddVolatileType = typename AddVolatile<_ObjectT>::Type;
+DD_TRAIT_MODIFIER(AddVolatile)
 
 
 
-#	endif
 _DD_END
 
 

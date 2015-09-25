@@ -28,25 +28,25 @@ struct _Array<_ValueT, _length_c> {
 template <typename _ValueT, LengthType _length_c>
 struct _Array : ValueTypeNested<_ValueT> {
 #	endif
-	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA _length_c>)
-	DD_ALIAS(LowerType, _ValueT)
+	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA _length_c>);
+	DD_ALIAS(LowerType, _ValueT);
 	static LengthType DD_CONSTANT length_constant = _length_c;
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_VALUE_TYPE_NESTED(_ValueT);
 
-	DD_ALIAS(Iterator, PointerType)
-	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type)
-	DD_ALIAS(ConstIterator, ConstPointerType)
-	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type)
+	DD_ALIAS(Iterator, PointerType);
+	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type);
+	DD_ALIAS(ConstIterator, ConstPointerType);
+	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type);
 
 #	if __cplusplus >= 201103L
 	using ArrayType = DD::ArrayType<ValueType, length_constant>;
 #	else
 	typedef ValueType ArrayType[length_constant];
 #	endif
-	DD_ALIAS(ArrayRefernce, ArrayType&)
-	DD_ALIAS(ArrayConstReference, ArrayType const&)
-	DD_ALIAS(ArrayPointer, ArrayType*)
-	DD_ALIAS(ArrayConstPointer, ArrayType const*)
+	DD_ALIAS(ArrayRefernce, ArrayType&);
+	DD_ALIAS(ArrayConstReference, ArrayType const&);
+	DD_ALIAS(ArrayPointer, ArrayType*);
+	DD_ALIAS(ArrayConstPointer, ArrayType const*);
 
 
 	ArrayType array;
@@ -192,15 +192,15 @@ struct _Array : ValueTypeNested<_ValueT> {
 
 template <typename _ValueT>
 struct _Array<_ValueT, 0> {
-	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA 0>)
-	DD_ALIAS(LowerType, _ValueT)
+	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA 0>);
+	DD_ALIAS(LowerType, _ValueT);
 	static LengthType DD_CONSTANT length_constant = 0;
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_VALUE_TYPE_NESTED(_ValueT);
 
-	DD_ALIAS(Iterator, PointerType)
-	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type)
-	DD_ALIAS(ConstIterator, ConstPointerType)
-	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type)
+	DD_ALIAS(Iterator, PointerType);
+	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type);
+	DD_ALIAS(ConstIterator, ConstPointerType);
+	DD_ALIAS(ConstReverseIterator, typename IteratorReverse<ConstIterator>::Type);
 
 
 	static LengthType DD_CONSTEXPR get_length() DD_NOEXCEPT {

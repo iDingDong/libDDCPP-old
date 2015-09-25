@@ -41,19 +41,15 @@ struct Vessel {
 template <typename _ValueT>
 struct Vessel<_ValueT, Allocator<_ValueT>> {
 	public:
-#	if __cplusplus >= 201103L
-	using ThisType = Vessel<_ValueT, Allocator<_ValueT>>;
-#	else
-	typedef Vessel<_ValueT, Allocator<_ValueT>> ThisType;
-#	endif
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(AllocatorType, Allocator<_ValueT>)
+	DD_ALIAS(ThisType = Vessel<_ValueT DD_COMMA Allocator<_ValueT>>);
+	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(AllocatorType, Allocator<_ValueT>);
 
 	public:
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(ConstReferenceType, ValueType const&)
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ConstPointerType, ValueType const*)
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(ConstReferenceType, ValueType const&);
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ConstPointerType, ValueType const*);
 
 
 	private:

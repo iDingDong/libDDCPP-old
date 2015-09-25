@@ -24,15 +24,15 @@ _DD_DETAIL_BEGIN
 template <typename _IteratorT>
 struct _ReverseIterator {
 	public:
-	DD_ALIAS(ReverseType, _IteratorT)
-	DD_ALIAS(ThisType, _ReverseIterator<ReverseType>)
+	DD_ALIAS(ReverseType, _IteratorT);
+	DD_ALIAS(ThisType, _ReverseIterator<ReverseType>);
 
 	public:
-	DD_ALIAS(ValueType, typename IteratorValue<ReverseType>::Type)
-	DD_ALIAS(ReferenceType, typename IteratorReference<ReverseType>::Type)
-	DD_ALIAS(PointerType, typename IteratorPointer<ReverseType>::Type)
-	DD_ALIAS(DifferenceType, typename IteratorDifference<ReverseType>::Type)
-	DD_ALIAS(CatagoryType, typename IteratorCatagory<ReverseType>::Type)
+	DD_ALIAS(ValueType, typename IteratorValue<ReverseType>::Type);
+	DD_ALIAS(ReferenceType, typename IteratorReference<ReverseType>::Type);
+	DD_ALIAS(PointerType, typename IteratorPointer<ReverseType>::Type);
+	DD_ALIAS(DifferenceType, typename IteratorDifference<ReverseType>::Type);
+	DD_ALIAS(CatagoryType, typename IteratorCatagory<ReverseType>::Type);
 	DD_COMPAT_STL_ITERATOR
 
 

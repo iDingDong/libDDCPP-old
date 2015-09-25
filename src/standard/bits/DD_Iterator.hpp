@@ -22,9 +22,9 @@ DD_NESTED_TYPE_TRAIT(_IteratorOfStl, _RangeT::iterator, void)
 template <typename _RangeT>
 struct _Iterator {
 #	if DDCPP_COMPAT_STL
-	DD_ALIAS(Type, DD_MODIFY_TRAIT(_IteratorOfStl, _RangeT))
+	DD_ALIAS(Type, DD_MODIFY_TRAIT(_IteratorOfStl, _RangeT));
 #	else
-	DD_ALIAS(Type, void)
+	DD_ALIAS(Type, void);
 #	endif
 
 
@@ -34,7 +34,7 @@ struct _Iterator {
 
 template <typename _ValueT, LengthType _length_c>
 struct _Iterator<_ValueT[_length_c]> {
-	DD_ALIAS(Type, _ValueT*)
+	DD_ALIAS(Type, _ValueT*);
 
 
 };
@@ -43,7 +43,7 @@ struct _Iterator<_ValueT[_length_c]> {
 
 template <typename _ValueT>
 struct _Iterator<_ValueT[]> {
-	DD_ALIAS(Type, _ValueT*)
+	DD_ALIAS(Type, _ValueT*);
 
 
 };
@@ -52,7 +52,7 @@ struct _Iterator<_ValueT[]> {
 
 template <typename _ValueT>
 struct _Iterator<_ValueT*> {
-	DD_ALIAS(Type, _ValueT*)
+	DD_ALIAS(Type, _ValueT*);
 
 
 };

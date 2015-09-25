@@ -9,11 +9,11 @@
 
 
 #	define DD_ITERATOR_DECLARATIONS\
-		DD_ALIAS(ConstValueType, ValueType const)\
-		DD_ALIAS(ReferenceType, ValueType&)\
-		DD_ALIAS(ConstReferenceType, ConstValueType&)\
-		DD_ALIAS(PointerType, ValueType*)\
-		DD_ALIAS(ConstPointerType, ConstValueType*)\
+		DD_ALIAS(ConstValueType, ValueType const);\
+		DD_ALIAS(ReferenceType, ValueType&);\
+		DD_ALIAS(ConstReferenceType, ConstValueType&);\
+		DD_ALIAS(PointerType, ValueType*);\
+		DD_ALIAS(ConstPointerType, ConstValueType*);\
 
 
 

@@ -10,11 +10,11 @@
 
 #	if DD_COMPAT_STL
 #		define DD_VALUE_TYPE_NESTED_COMPAT_STL\
-			DD_ALIAS(value_type, ValueType)\
-			DD_ALIAS(reference, ReferenceType)\
-			DD_ALIAS(const_reference, ConstReferenceType)\
-			DD_ALIAS(pointer, PointerType)\
-			DD_ALIAS(const_pointer, ConstPointerType)
+			DD_ALIAS(value_type, ValueType);\
+			DD_ALIAS(reference, ReferenceType);\
+			DD_ALIAS(const_reference, ConstReferenceType);\
+			DD_ALIAS(pointer, PointerType);\
+			DD_ALIAS(const_pointer, ConstPointerType);
 #	else
 #		define DD_VALUE_TYPE_NESTED_COMPAT_STL
 #	endif

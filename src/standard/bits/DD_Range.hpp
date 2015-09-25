@@ -97,10 +97,10 @@ _ValueT* end(_ValueT (&_array)[_length_c]) throw() {
 template <typename _IteratorT>
 struct Range {
 	public:
-	DD_ALIAS(ThisType, Range<_IteratorT>)
-	DD_ALIAS(Iterator, _IteratorT)
+	DD_ALIAS(ThisType, Range<_IteratorT>);
+	DD_ALIAS(Iterator, _IteratorT);
 
-	DD_ALIAS(ReverseIterator, IteratorReverse<Iterator>)
+	DD_ALIAS(ReverseIterator, IteratorReverse<Iterator>);
 
 
 	private:

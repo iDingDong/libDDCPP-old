@@ -18,7 +18,7 @@
 _DD_BEGIN
 template <typename... _ObjectsT>
 struct BiggestTypeOfPack {
-	DD_ALIAS(Type, void)
+	DD_ALIAS(Type, void);
 
 
 };
@@ -27,7 +27,7 @@ struct BiggestTypeOfPack {
 
 template <typename _ObjectT1, typename _ObjectT2, typename... _ObjectsT>
 struct BiggestTypeOfPack<_ObjectT1, _ObjectT2, _ObjectsT...> {
-	DD_ALIAS(Type, typename BiggestTypeOfPack<BiggestTypeOfPack<_ObjectT1 DD_COMMA _ObjectT2> DD_COMMA _ObjectsT...>::Type)
+	DD_ALIAS(Type, typename BiggestTypeOfPack<BiggestTypeOfPack<_ObjectT1 DD_COMMA _ObjectT2> DD_COMMA _ObjectsT...>::Type);
 
 
 };
@@ -36,7 +36,7 @@ struct BiggestTypeOfPack<_ObjectT1, _ObjectT2, _ObjectsT...> {
 
 template <typename _ObjectT1, typename _ObjectT2>
 struct BiggestTypeOfPack<_ObjectT1, _ObjectT2> {
-	DD_ALIAS(Type, typename Conditional<sizeof(_ObjectT1) < sizeof(_ObjectT2) DD_COMMA _ObjectT2 DD_COMMA _ObjectT1>::Type)
+	DD_ALIAS(Type, typename Conditional<sizeof(_ObjectT1) < sizeof(_ObjectT2) DD_COMMA _ObjectT2 DD_COMMA _ObjectT1>::Type);
 
 
 };
@@ -45,7 +45,7 @@ struct BiggestTypeOfPack<_ObjectT1, _ObjectT2> {
 
 template <typename _ObjectT>
 struct BiggestTypeOfPack<_ObjectT> {
-	DD_ALIAS(Type, _ObjectT)
+	DD_ALIAS(Type, _ObjectT);
 
 
 };

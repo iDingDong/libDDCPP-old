@@ -9,29 +9,29 @@
 
 
 _DD_DETAIL_BEGIN
-struct _FixedIterator {
+struct FixedIterator {
 };
 
 
 
-struct _UndirectionalIterator : _FixedIterator {
+struct UndirectionalIterator : FixedIterator {
 };
 
 
 
-struct _BidirectionalIterator : _UndirectionalIterator {
+struct BidirectionalIterator : UndirectionalIterator {
 };
 
 
 
-struct _FreeAccessIterator : _BidirectionalIterator {
+struct FreeAccessIterator : BidirectionalIterator {
 };
 
 
 
 template <typename _IteratorT>
 struct _IteratorCatagory {
-	DD_ALIAS(Type, typename _IteratorT::CatagoryType)
+	DD_ALIAS(Type, typename _IteratorT::CatagoryType);
 
 
 };
@@ -40,7 +40,7 @@ struct _IteratorCatagory {
 
 template <typename _ValueT>
 struct _IteratorCatagory<_ValueT*> {
-	DD_ALIAS(Type, _FreeAccessIterator)
+	DD_ALIAS(Type, FreeAccessIterator);
 
 
 };
@@ -52,10 +52,10 @@ _DD_DETAIL_END
 
 
 _DD_BEGIN
-DD_ALIAS(FixedIterator, _detail::_FixedIterator)
-DD_ALIAS(UndirectionalIterator, _detail::_UndirectionalIterator)
-DD_ALIAS(BidirectionalIterator, _detail::_BidirectionalIterator)
-DD_ALIAS(FreeAccessIterator, _detail::_FreeAccessIterator)
+using _detail::FixedIterator;
+using _detail::UndirectionalIterator;
+using _detail::BidirectionalIterator;
+using _detail::FreeAccessIterator;
 
 
 

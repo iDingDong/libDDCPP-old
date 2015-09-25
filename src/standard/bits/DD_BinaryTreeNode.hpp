@@ -23,7 +23,7 @@ struct EmptyBinaryTreeNode {
 
 template <typename _ValueT>
 struct BinaryTreeNode : EmptyBinaryTreeNode, ValueTypeNested<_ValueT> {
-	DD_ALIAS(ThisType, BinaryTree<_ValueT>)
+	DD_ALIAS(ThisType, BinaryTree<_ValueT>);
 
 
 	ValueType value;

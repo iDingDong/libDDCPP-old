@@ -11,8 +11,8 @@
 #	define DD_BINARY_OPERATOR(_ARG_Operator, _ARG_symbol)\
 	template <typename _MACRO_ObjectT1, typename _MACRO_ObjectT2 = _MACRO_ObjectT1>\
 	struct _ARG_Operator {\
-		DD_ALIAS(Type1, _MACRO_ObjectT1)\
-		DD_ALIAS(Type2, _MACRO_ObjectT2)\
+		DD_ALIAS(Type1, _MACRO_ObjectT1);\
+		DD_ALIAS(Type2, _MACRO_ObjectT2);\
 		\
 		\
 		friend Type1 operator _ARG_symbol(\

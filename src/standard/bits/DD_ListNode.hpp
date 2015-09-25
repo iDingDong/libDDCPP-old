@@ -1,16 +1,28 @@
-//	DDCPP/standard/bits/DD_ListNode.hpp
-#ifndef _DD_LIST_NODE_HPP_INCLUDED
-#	define _DD_LIST_NODE_HPP_INCLUDED 1
+//	standard/bits/DD_ListNode.hpp
+#ifndef _DD_LIST_NODE_HPP
+#	define _DD_LIST_NODE_HPP 1
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_ValueTypeNested.hpp"
 
 
 
-_DD_BEGIN
+DD_BEGIN
+struct EmptyListNode {
+	DD_ALIAS(ThisType, EmptyListNode)
+
+
+	ThisType* previous;
+	ThisType* next;
+
+
+};
+
+
+
 template <typename _ValueT>
-struct ListNode {
+struct ListNode : EmptyListNode {
 	DD_ALIAS(ThisType, ListNode<_ValueT>)
 	DD_ALIAS(ValueType, _ValueT)
 
@@ -20,8 +32,6 @@ struct ListNode {
 	DD_ALIAS(ConstPointerType, ValueType*)
 
 
-	ThisType* previous;
-	ThisType* next;
 	ValueType value;
 
 
@@ -29,7 +39,7 @@ struct ListNode {
 
 
 
-_DD_END
+DD_END
 
 
 

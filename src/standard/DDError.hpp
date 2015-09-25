@@ -4,6 +4,7 @@
 
 
 
+#	include "bits/DD_AccessDenied.hpp"
 #	include "bits/DD_AllocationFailure.hpp"
 
 

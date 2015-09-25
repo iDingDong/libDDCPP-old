@@ -12,18 +12,15 @@ _DD_BEGIN
 template <typename _ValueT>
 class DefaultDeleter {
 	public:
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ValueType, _ValueT);
 
 
-	public:
 #	if __cplusplus >= 201103L
-	DD_CONSTEXPR DefaultDeleter() DD_NOEXCEPT = default;
-#	else
-	DefaultDeleter() DD_NOEXCEPT {
-	};
+	public:
+	DD_CONSTEXPR DefaultDeleter() = default;
+
+
 #	endif
-
-
 	public:
 	ProcessType operator ()(_ValueT* _pointer) DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");

@@ -13,12 +13,15 @@ _DD_BEGIN
 #	if __cplusplus >= 201103L
 template <typename _ObjectT>
 using AddCV = AddConst<AddVolatileType<_ObjectT>>;
-DD_TRAIT_MODIFIER(AddCV)
 #	else
 template <typename _ObjectT>
 struct AddCV : AddConst<typename AddVolatile<_ObjectT>::Type> {
 };
 #	endif
+
+
+
+DD_TRAIT_MODIFIER(AddCV)
 
 
 

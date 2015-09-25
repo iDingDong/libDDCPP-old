@@ -30,7 +30,7 @@ struct EndLineTag : Tag {
 
 
 struct Print {
-	DD_ALIAS(ThisType, Print)
+	DD_ALIAS(ThisType, Print);
 
 
 #	if __cplusplus >= 201103L

@@ -30,7 +30,7 @@ struct RemoveConst {
 
 template <typename _ObjectT>
 struct RemoveConst<_ObjectT const> {
-	DD_ALIAS(Type, _ObjectT)
+	DD_ALIAS(Type, _ObjectT);
 
 
 };

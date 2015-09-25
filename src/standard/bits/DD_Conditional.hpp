@@ -11,7 +11,7 @@
 _DD_DETAIL_BEGIN
 template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
 struct _Conditional {
-	DD_ALIAS(Type, _ElseT)
+	DD_ALIAS(Type, _ElseT);
 
 
 };
@@ -20,7 +20,7 @@ struct _Conditional {
 
 template <typename _ThenT, typename _ElseT>
 struct _Conditional<true, _ThenT, _ElseT> {
-	DD_ALIAS(Type, _ThenT)
+	DD_ALIAS(Type, _ThenT);
 
 
 };

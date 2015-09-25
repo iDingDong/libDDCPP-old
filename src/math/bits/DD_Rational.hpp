@@ -28,8 +28,8 @@
 
 DD_RATIONAL_BEGIN
 struct Default : DefaultTag {
-	DD_ALIAS(NumeratorType, unsigned)
-	DD_ALIAS(Denominator, int)
+	DD_ALIAS(NumeratorType, unsigned);
+	DD_ALIAS(Denominator, int);
 
 
 };
@@ -37,8 +37,8 @@ struct Default : DefaultTag {
 
 
 struct DefaultAccurate : DefaultTag {
-	DD_ALIAS(NumeratorType, int)
-	DD_ALIAS(Denominator, unsigned)
+	DD_ALIAS(NumeratorType, int);
+	DD_ALIAS(Denominator, unsigned);
 
 
 };
@@ -46,8 +46,8 @@ struct DefaultAccurate : DefaultTag {
 
 
 struct DefaultChar : Default {
-	DD_ALIAS(NumeratorType, unsigned char)
-	DD_ALIAS(Denominator, signed char)
+	DD_ALIAS(NumeratorType, unsigned char);
+	DD_ALIAS(Denominator, signed char);
 
 
 };
@@ -55,8 +55,8 @@ struct DefaultChar : Default {
 
 
 struct DefaultCharAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, signed char)
-	DD_ALIAS(Denominator, unsigned char)
+	DD_ALIAS(NumeratorType, signed char);
+	DD_ALIAS(Denominator, unsigned char);
 
 
 };
@@ -64,8 +64,8 @@ struct DefaultCharAccurate : DefaultAccurate {
 
 
 struct DefaultShort : Default {
-	DD_ALIAS(NumeratorType, unsigned short)
-	DD_ALIAS(Denominator, short)
+	DD_ALIAS(NumeratorType, unsigned short);
+	DD_ALIAS(Denominator, short);
 
 
 };
@@ -73,8 +73,8 @@ struct DefaultShort : Default {
 
 
 struct DefaultShortAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, short)
-	DD_ALIAS(Denominator, unsigned short)
+	DD_ALIAS(NumeratorType, short);
+	DD_ALIAS(Denominator, unsigned short);
 
 
 };
@@ -82,8 +82,8 @@ struct DefaultShortAccurate : DefaultAccurate {
 
 
 struct DefaultLong : Default {
-	DD_ALIAS(NumeratorType, unsigned long)
-	DD_ALIAS(Denominator, long)
+	DD_ALIAS(NumeratorType, unsigned long);
+	DD_ALIAS(Denominator, long);
 
 
 };
@@ -91,8 +91,8 @@ struct DefaultLong : Default {
 
 
 struct DefaultLongAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, long)
-	DD_ALIAS(Denominator, unsigned long)
+	DD_ALIAS(NumeratorType, long);
+	DD_ALIAS(Denominator, unsigned long);
 
 
 };
@@ -167,12 +167,12 @@ struct _Rational :
 	Comparable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>
 {
 	public:
-	DD_ALIAS(ThisType, _Rational<_NumeratorT DD_COMMA _DenominatorT DD_COMMA _is_divided_by_unsigned_c>)
-	DD_ALIAS(NumeratorType, _NumeratorT)
-	DD_ALIAS(DenominatorType, _DenominatorT)
+	DD_ALIAS(ThisType, _Rational<_NumeratorT DD_COMMA _DenominatorT DD_COMMA _is_divided_by_unsigned_c>);
+	DD_ALIAS(NumeratorType, _NumeratorT);
+	DD_ALIAS(DenominatorType, _DenominatorT);
 
 	public:
-	DD_ALIAS(ValueType, Pair<NumeratorType DD_COMMA DenominatorType>)
+	DD_ALIAS(ValueType, Pair<NumeratorType DD_COMMA DenominatorType>);
 
 
 	private:

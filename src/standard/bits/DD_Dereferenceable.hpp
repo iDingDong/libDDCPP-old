@@ -12,7 +12,7 @@ _DD_BEGIN
 template <typename _ObjectT>
 struct Dereferenceable {
 	public:
-	DD_ALIAS(Type, _ObjectT)
+	DD_ALIAS(Type, _ObjectT);
 
 
 	public:

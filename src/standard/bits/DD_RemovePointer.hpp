@@ -30,7 +30,7 @@ struct RemovePointer {
 
 template <typename _ValueT>
 struct RemovePointer<_ValueT*> {
-	DD_ALIAS(Type, _ValueT)
+	DD_ALIAS(Type, _ValueT);
 
 
 };
@@ -39,7 +39,7 @@ struct RemovePointer<_ValueT*> {
 
 template <typename _ValueT>
 struct RemovePointer<_ValueT* const> {
-	DD_ALIAS(Type, _ValueT)
+	DD_ALIAS(Type, _ValueT);
 
 
 };
@@ -48,7 +48,7 @@ struct RemovePointer<_ValueT* const> {
 
 template <typename _ValueT>
 struct RemovePointer<_ValueT* volatile> {
-	DD_ALIAS(Type, _ValueT)
+	DD_ALIAS(Type, _ValueT);
 
 
 };
@@ -57,7 +57,7 @@ struct RemovePointer<_ValueT* volatile> {
 
 template <typename _ValueT>
 struct RemovePointer<_ValueT* const volatile> {
-	DD_ALIAS(Type, _ValueT)
+	DD_ALIAS(Type, _ValueT);
 
 
 };

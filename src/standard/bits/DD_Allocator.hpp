@@ -19,13 +19,13 @@ _DD_BEGIN
 template <typename _ValueT = void>
 class Allocator {
 	public:
-	DD_ALIAS(ThisType, Allocator<_ValueT>)
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ThisType, Allocator<_ValueT>);
+	DD_ALIAS(ValueType, _ValueT);
 
 	public:
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(SizeType, DD::SizeType)
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(SizeType, DD::SizeType);
 
 
 };
@@ -35,12 +35,12 @@ class Allocator {
 template <>
 class Allocator<void> {
 	public:
-	DD_ALIAS(ThisType, Allocator<void>)
-	DD_ALIAS(ValueType, void)
+	DD_ALIAS(ThisType, Allocator<void>);
+	DD_ALIAS(ValueType, void);
 
 	public:
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(SizeType, DD::SizeType)
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(SizeType, DD::SizeType);
 
 
 	static PointerType allocate(SizeType _size) {

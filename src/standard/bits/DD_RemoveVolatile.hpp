@@ -30,7 +30,7 @@ struct RemoveVolatile {
 
 template <typename _ObjectT>
 struct RemoveVolatile<_ObjectT volatile> {
-	DD_ALIAS(Type, _ObjectT)
+	DD_ALIAS(Type, _ObjectT);
 
 
 };

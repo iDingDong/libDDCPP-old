@@ -13,12 +13,12 @@ _DD_BEGIN
 template <typename _ValueT>
 struct ArrayIterator {
 	public:
-	DD_ALIAS(ThisType, ArrayIterator<_ValueT>)
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_ALIAS(ThisType, ArrayIterator<_ValueT>);
+	DD_VALUE_TYPE_NESTED(_ValueT);
 
 	public:
-	DD_ALIAS(DifferenceType, DD::DifferenceType)
-	DD_ALIAS(CatagoryType, FreeAccessIterator)
+	DD_ALIAS(DifferenceType, DD::DifferenceType);
+	DD_ALIAS(CatagoryType, FreeAccessIterator);
 
 	public:
 	DD_COMPAT_STL_ITERATOR

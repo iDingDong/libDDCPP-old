@@ -16,7 +16,7 @@ _FreeAccessIteratorT binary_find(
 	_FreeAccessIteratorT const& __end,
 	_ValueT const& __value
 ) DD_NOEXCEPT_AS(__begin[0] < __value) {
-	DD_ALIAS(_IndexType, DD_MODIFY_TRAIT(IteratorDifference, _FreeAccessIteratorT))
+	DD_ALIAS(_IndexType, DD_MODIFY_TRAIT(IteratorDifference, _FreeAccessIteratorT));
 	_IndexType __lower_bound = _IndexType();
 	_IndexType __higher_bound = __end - __begin - 1;
 	for (_IndexType __current; __lower_bound <= __higher_bound; ) {
@@ -39,7 +39,7 @@ _FreeAccessIteratorT binary_find(
 	_ValueT const& __value,
 	_BinaryPredicatorT const& __less
 ) DD_NOEXCEPT_AS(__less(__begin[0], __value)) {
-	DD_ALIAS(_IndexType, DD_MODIFY_TRAIT(IteratorDifference, _FreeAccessIteratorT))
+	DD_ALIAS(_IndexType, DD_MODIFY_TRAIT(IteratorDifference, _FreeAccessIteratorT));
 	_IndexType __lower_bound = _IndexType();
 	_IndexType __higher_bound = __end - __begin - 1;
 	for (_IndexType __current; __lower_bound <= __higher_bound; ) {

@@ -18,9 +18,9 @@ _DD_BEGIN
 template <typename _ValueT1, typename _ValueT2 = _ValueT1>
 struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 	public:
-	DD_ALIAS(ThisType, Pair<_ValueT1 DD_COMMA _ValueT2>)
-	DD_ALIAS(FirstValueType, _ValueT1)
-	DD_ALIAS(SecondValueType, _ValueT2)
+	DD_ALIAS(ThisType, Pair<_ValueT1 DD_COMMA _ValueT2>);
+	DD_ALIAS(FirstValueType, _ValueT1);
+	DD_ALIAS(SecondValueType, _ValueT2);
 
 
 	public:
@@ -81,11 +81,11 @@ struct Pair : Comparable<Pair<_ValueT1, _ValueT2>> {
 template <typename _ValueT>
 struct Pair<_ValueT> : Comparable<Pair<_ValueT>> {
 	public:
-	DD_ALIAS(ThisType, Pair<_ValueT>)
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ThisType, Pair<_ValueT>);
+	DD_ALIAS(ValueType, _ValueT);
 
-	DD_ALIAS(FirstValueType, ValueType)
-	DD_ALIAS(SecondValueType, ValueType)
+	DD_ALIAS(FirstValueType, ValueType);
+	DD_ALIAS(SecondValueType, ValueType);
 
 
 	public:

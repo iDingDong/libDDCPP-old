@@ -14,6 +14,12 @@ class A {
 	int func(int x, int y) const {
 		return x - y;
 	}
+
+	public:
+	operator ()(int x, int y) const {
+		return x * y;
+	}
+
 };
 class B : public A {
 };
@@ -77,13 +83,16 @@ void test_utility() {
 	}
 	{
 		using namespace ::DD::place_holder;
-		auto testBinded_1 = DD::bind(func, _0, 1234);
-		auto testBinded_2 = DD::bind(&A::func, _1, 1234, _0);
+		auto testBinded_1 = DD::bind(func, _0, 123);
+		auto testBinded_2 = DD::bind(&A::func, _1, 123, _0);
+		auto testBinded_3 = DD::bind(A(), 123, _0);
 		if (
-			testBinded_1(1111) != 1111 + 1234 ||
-			testBinded_1(4321) != 4321 + 1234 ||
-			testBinded_2(1000, A()) != 1234 - 1000 ||
-			testBinded_2(2000, A()) != 1234 - 2000
+			testBinded_1(111) != 111 + 123 ||
+			testBinded_1(432) != 432 + 123 ||
+			testBinded_2(100, A()) != 123 - 100 ||
+			testBinded_2(200, A()) != 123 - 200 ||
+			testBinded_3(222) != 123 * 222 ||
+			testBinded_3(321) != 123 * 321
 		) {
 			throw "'DD::bind' test failed.";
 		}
