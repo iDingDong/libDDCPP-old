@@ -4,32 +4,45 @@
 
 
 
-#	include "DD_Exception.hpp"
+#	include "DD_Illogic.hpp"
 
 
 
 _DD_BEGIN
-struct AccessDenied : Exception {
+struct AccessDenied : Illogic {
+	public:
+	DD_ALIAS(SuperType, Illogic);
+	DD_ALIAS(ThisType, AccessDenied);
+
+
 #	if __cplusplus >= 201103L
 	public:
-	DD_CONSTEXPR AccessDenied() DD_NOEXCEPT = default;
+	constexpr AccessDenied() = default;
 
 	public:
-	DD_CONSTEXPR AccessDenied(AccessDenied const& _origin) DD_NOEXCEPT = default;
+	constexpr AccessDenied(ThisType const& _origin) = default;
+
+	public:
+	constexpr AccessDenied(ThisType&& _origin) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR AccessDenied(PromptType _prompt) DD_NOEXCEPT : Exception(_prompt) {
+	DD_CONSTEXPR AccessDenied(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~AccessDenied() DD_NOEXCEPT override = default;
+	~AccessDenied() override = default;
 
+
+#	endif
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType const& _origin) = default;
 
 	public:
-	AccessDenied& operator =(AccessDenied const& _origin) noexcept(true) = default;
+	ThisType& operator =(ThisType&& _origin) = default;
 
 
 #	endif

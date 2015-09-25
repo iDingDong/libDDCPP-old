@@ -20,10 +20,13 @@ struct Exception {
 
 #	if __cplusplus >= 201103L
 	public:
-	Exception() = default;
+	constexpr Exception() = default;
 
 	public:
-	Exception(Exception const& _origin) = default;
+	constexpr Exception(ThisType const& _origin) = default;
+
+	public:
+	constexpr Exception(ThisType&& _origin) = default;
 
 	public:
 #	else
@@ -37,8 +40,8 @@ struct Exception {
 	}
 
 
-#	if __cplusplus >= 201103L
 	public:
+#	if __cplusplus >= 201103L
 	virtual ~Exception() = default;
 #	else
 	virtual ~Exception() throw() {
@@ -54,7 +57,10 @@ struct Exception {
 
 #	if __cplusplus >= 201103L
 	public:
-	Exception& operator =(Exception const& _origin) = default;
+	ThisType& operator =(ThisType const& _origin) = default;
+
+	public:
+	ThisType& operator =(ThisType&& _origin) = default;
 
 
 #	endif

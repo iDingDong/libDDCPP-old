@@ -572,8 +572,8 @@
 1442752949 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatstlcontainer.hpp
 	"DD_compatibility_definitions.hpp"
 
-1442850598 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
-	"DD_Exception.hpp"
+1443160589 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
+	"DD_Illogic.hpp"
 
 1443158957 d:\develop\repositories\libddcpp\src\standard\bits\dd_exception.hpp
 	"DD_global_definitions.hpp"
@@ -720,7 +720,7 @@
 	"DD_debugger_definitions.hpp"
 	"DD_address_of.hpp"
 
-1442850598 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
+1443160711 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_Exception.hpp"
 
 1442850601 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
@@ -812,7 +812,7 @@
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
 
-1442850600 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
+1443158906 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_global_definitions.hpp"
 
 1442850599 d:\develop\repositories\libddcpp\src\standard\bits\dd_freelist.hpp
@@ -824,7 +824,7 @@
 1442850599 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1442850597 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+1443160155 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
 	"DD_Tags.hpp"
 	"DD_address_of.hpp"
 	"DD_release.hpp"
@@ -861,7 +861,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_Trait.hpp"
 
-1442989650 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1443088119 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	<iostream>
@@ -892,4 +892,7 @@
 
 1443159620 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_global_definitions.hpp"
+
+1443160717 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
+	"DD_Exception.hpp"
 

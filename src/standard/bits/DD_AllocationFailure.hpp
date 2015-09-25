@@ -10,26 +10,39 @@
 
 _DD_BEGIN
 struct AllocationFailure : Exception {
+	public:
+	DD_ALIAS(SuperType, Exception);
+	DD_ALIAS(ThisType, AllocationFailure);
+
+
 #	if __cplusplus >= 201103L
 	public:
-	DD_CONSTEXPR AllocationFailure() DD_NOEXCEPT = default;
+	constexpr AllocationFailure() = default;
 
 	public:
-	DD_CONSTEXPR AllocationFailure(AllocationFailure const& _origin) DD_NOEXCEPT = default;
+	constexpr AllocationFailure(ThisType const& _origin) = default;
+
+	public:
+	constexpr AllocationFailure(ThisType&& _origin) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR AllocationFailure(PromptType _prompt) DD_NOEXCEPT : Exception(_prompt) {
+	DD_CONSTEXPR AllocationFailure(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~AllocationFailure() DD_NOEXCEPT override = default;
+	~AllocationFailure() override = default;
 
+
+#	endif
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType const& _origin) = default;
 
 	public:
-	AllocationFailure& operator =(AllocationFailure const& _origin) noexcept(true) = default;
+	ThisType& operator =(ThisType&& _origin) = default;
 
 
 #	endif

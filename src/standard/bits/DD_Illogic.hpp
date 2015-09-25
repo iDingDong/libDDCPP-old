@@ -1,5 +1,5 @@
-//	DDCPP/standard/bits/DD_Ilogic.hpp
-#ifndef _DD_ILOGIC_HPP_INCLUDED
+//	DDCPP/standard/bits/DD_Illogic.hpp
+#ifndef _DD_IlLOGIC_HPP_INCLUDED
 #	define _DD_ILOGIC_HPP_INCLUDED 1
 
 
@@ -9,27 +9,40 @@
 
 
 _DD_BEGIN
-struct Ilogic : Exception {
+struct Illogic : Exception {
+	public:
+	DD_ALIAS(SuperType, Exception);
+	DD_ALIAS(ThisType, Illogic);
+
+
 #	if __cplusplus >= 201103L
 	public:
-	DD_CONSTEXPR Ilogic() DD_NOEXCEPT = default;
+	constexpr Illogic() = default;
 
 	public:
-	DD_CONSTEXPR Ilogic(AllocationFailure const& _origin) DD_NOEXCEPT = default;
+	constexpr Illogic(ThisType const& _origin) = default;
+
+	public:
+	constexpr Illogic(ThisType&& _origin) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR Ilogic(PromptType _prompt) DD_NOEXCEPT : Exception(_prompt) {
+	DD_CONSTEXPR Illogic(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~Ilogic() DD_NOEXCEPT override = default;
+	~Illogic() override = default;
 
+
+#	endif
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType const& _origin) = default;
 
 	public:
-	Ilogic& operator =(AllocationFailure const& _origin) noexcept(true) = default;
+	ThisType& operator =(ThisType&& _origin) = default;
 
 
 #	endif
