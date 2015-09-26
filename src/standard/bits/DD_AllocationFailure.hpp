@@ -4,14 +4,14 @@
 
 
 
-#	include "DD_Exception.hpp"
+#	include "DD_RunTimeError.hpp"
 
 
 
 _DD_BEGIN
-struct AllocationFailure : Exception {
+struct AllocationFailure : RunTimeError {
 	public:
-	DD_ALIAS(SuperType, Exception);
+	DD_ALIAS(SuperType, RunTimeError);
 	DD_ALIAS(ThisType, AllocationFailure);
 
 
