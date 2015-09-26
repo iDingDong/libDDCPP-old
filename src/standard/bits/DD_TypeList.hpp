@@ -15,20 +15,79 @@
 
 
 
-_DD_BEGIN
+_DD_DETAIL_BEGIN
+template <typename... _ObjectsT>
+struct TypeList;
+
+
+
+template <typename _TypeListT1, typename _TypeListT2>
+struct _ConcatTypeList;
+
+
+
+template <typename... _ObjectsT1, typename... _ObjectsT2>
+struct _ConcatTypeList<TypeList<_ObjectsT1...>, TypeList<_ObjectsT2...>> {
+	using Type = TypeList<_ObjectsT1..., _ObjectsT2...>;
+
+
+};
+
+
+
+template <typename _TypeListT1, typename _TypeListT2>
+using _ConcatTypeListType = typename _ConcatTypeList<_TypeListT1, _TypeListT2>::Type;
+
+
+
+template <typename _TypeListT>
+struct _RemoveTypeListBack;
+
+
+
+template <typename _ObjectT, typename... _ObjectsT>
+struct _RemoveTypeListBack<TypeList<_ObjectT, _ObjectsT...>> {
+	using Type = _ConcatTypeListType<
+		TypeList<_ObjectT>,
+		typename _RemoveTypeListBack<TypeList<_ObjectsT...>>::Type
+	>;
+
+
+};
+
+
+
+template <typename _ObjectT>
+struct _RemoveTypeListBack<TypeList<_ObjectT>> {
+	using Type = TypeList<>;
+
+
+};
+
+
+
+template <typename _TypeListT>
+using _RemoveTypeListBackType = typename _RemoveTypeListBack<_TypeListT>::Type;
+
+
+
 template <typename... _ObjectsT>
 struct TypeList {
 	public:
-	static LengthType constexpr length = 0;
+	using ThisType = TypeList<_ObjectsT...>;
+	static LengthType constexpr length = sizeof...(_ObjectsT);
 
 
 	public:
 	template <typename... _ObjectsT_>
-	using PushBack = TypeList<_ObjectsT_...>;
+	using PushFront = _ConcatTypeListType<ThisType, TypeList<_ObjectsT_...>>;
 
 	public:
 	template <typename... _ObjectsT_>
-	using PushFront = TypeList<_ObjectsT_...>;
+	using PushBack = _ConcatTypeListType<TypeList<_ObjectsT_...>, ThisType>;
+
+	public:
+	using Clear = TypeList<>;
 
 
 	private:
@@ -57,7 +116,8 @@ struct TypeList {
 template <typename _ObjectT, typename... _ObjectsT>
 struct TypeList<_ObjectT, _ObjectsT...> {
 	public:
-	static LengthType constexpr length = sizeof...(_ObjectsT) + 1;
+	using ThisType = TypeList<_ObjectT, _ObjectsT...>;
+	static LengthType constexpr length = TypeList<_ObjectsT...>::length + 1;
 
 
 	public:
@@ -67,11 +127,20 @@ struct TypeList<_ObjectT, _ObjectsT...> {
 
 	public:
 	template <typename... _ObjectsT_>
-	using PushBack = TypeList<_ObjectsT..., _ObjectsT_...>;
+	using PushFront = _ConcatTypeListType<ThisType, TypeList<_ObjectsT_...>>;
 
 	public:
 	template <typename... _ObjectsT_>
-	using PushFront = TypeList<_ObjectsT_..., _ObjectsT...>;
+	using PushBack = _ConcatTypeListType<TypeList<_ObjectsT_...>, ThisType>;
+
+	public:
+	using PopFront = TypeList<_ObjectsT...>;
+
+	public:
+	using PopBack = _RemoveTypeListBackType<ThisType>;
+
+	public:
+	using Clear = TypeList<>;
 
 
 	private:
@@ -97,6 +166,15 @@ struct TypeList<_ObjectT, _ObjectsT...> {
 
 
 };
+
+
+
+_DD_DETAIL_END
+
+
+
+_DD_BEGIN
+using _detail::TypeList;
 
 
 
