@@ -6,6 +6,7 @@
 
 #	include <cstdlib>
 
+#	include "DD_ValueTypeNested.hpp"
 #	include "DD_AllocationFailure.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
@@ -15,17 +16,12 @@
 
 
 
-_DD_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ValueT = void>
 class Allocator {
 	public:
 	DD_ALIAS(ThisType, Allocator<_ValueT>);
-	DD_ALIAS(ValueType, _ValueT);
-
-	public:
-	DD_ALIAS(ReferenceType, ValueType&);
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(SizeType, DD::SizeType);
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
 
 };
@@ -63,6 +59,15 @@ class Allocator<void> {
 
 
 };
+
+
+
+_DD_DETAIL_END
+
+
+
+_DD_BEGIN
+using _detail::Allocator;
 
 
 

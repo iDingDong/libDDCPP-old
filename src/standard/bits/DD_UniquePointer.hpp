@@ -4,7 +4,9 @@
 
 
 
+#	include "DD_ValueTypeNested.hpp"
 #	include "DD_Tags.hpp"
+#	include "DD_Dereferenceable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
@@ -13,47 +15,38 @@
 
 
 
-_DD_BEGIN
+_DD_DETAIL_BEGIN
 template <typename _ValueT, typename _DeleterT = DefaultTag>
 struct UniquePointer {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>);
-	DD_ALIAS(ValueType, _ValueT);
 	DD_ALIAS(DeleterType, _DeleterT);
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
-	public:
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ReferenceType, ValueType&);
+
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
+	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
+	DeleterType _m_deleter DD_IN_CLASS_INITIALIZE(DeleterType());
+
+
+	public:
 #	if __cplusplus >= 201103L
-	PointerType _m_pointer = PointerType();
-	DeleterType _m_deleter = DeleterType();
+	constexpr UniquePointer() = default;
 #	else
-	PointerType _m_pointer;
-	DeleterType _m_deleter;
+	UniquePointer() DD_NOEXCEPT : _m_pointer(), _m_deleter() {
+	}
 #	endif
 
+	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
 
 #	if __cplusplus >= 201103L
-	public:
-	constexpr UniquePointer() = default;
-
-	public:
-	UniquePointer(ThisType const&) = delete;
-
 	public:
 	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()), _m_deleter(forward<DeleterType>(_origin._m_deleter)) {
 	}
-#	else
-	public:
-	UniquePointer() DD_NOEXCEPT : _m_pointer(), _m_deleter() {
-	}
 
-	private:
-	UniquePointer(ThisType const&);// Deleted by undefined private declaration
 #	endif
 
 	public:
@@ -63,12 +56,16 @@ struct UniquePointer {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename _DeleterT_>
-	constexpr UniquePointer(_DeleterT_&& _deleter) noexcept(noexcept(DeleterType(forward<_DeleterT_>(_deleter)))) : _m_deleter(forward<_DeleterT_>(_deleter)) {
+	constexpr UniquePointer(_DeleterT_&& _deleter) noexcept(
+		noexcept(DeleterType(forward<_DeleterT_>(_deleter)))
+	) : _m_deleter(forward<_DeleterT_>(_deleter)) {
 	}
 
 	public:
 	template <typename _DeleterT_>
-	constexpr UniquePointer(PointerType _pointer, _DeleterT_&& _deleter) noexcept(noexcept(DeleterType(forward<_DeleterT_>(_deleter)))) : _m_pointer(_pointer), _m_deleter(forward<_DeleterT_>(_deleter)) {
+	constexpr UniquePointer(PointerType _pointer, _DeleterT_&& _deleter) noexcept(
+		noexcept(DeleterType(forward<_DeleterT_>(_deleter)))
+	) : _m_pointer(_pointer), _m_deleter(forward<_DeleterT_>(_deleter)) {
 	}
 #	else
 	public:
@@ -98,11 +95,7 @@ struct UniquePointer {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-#	if __cplusplus >= 201103L
-		auto _temp(_m_pointer);
-#	else
 		PointerType _temp(_m_pointer);
-#	endif
 		_m_pointer = PointerType();
 		return _temp;
 	}
@@ -128,17 +121,14 @@ struct UniquePointer {
 	}
 
 
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType const&) = delete;
+	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
 
+#	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& _origin) noexcept(true) {
 		swap(_origin);
 	}
-#	else
-	private:
-	ThisType& operator =(ThisType const&);
+
 #	endif
 
 	public:
@@ -167,39 +157,32 @@ template <typename _ValueT>
 struct UniquePointer<_ValueT, DefaultTag> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>);
-	DD_ALIAS(ValueType, _ValueT);
 	DD_ALIAS(DeleterType, void);
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
 	public:
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ReferenceType, ValueType&);
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
-#	if __cplusplus >= 201103L
-	PointerType _m_pointer = PointerType();
-#	else
-	PointerType _m_pointer;
-#	endif
+	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
-
-	public:
-	UniquePointer(ThisType const&) = delete;
-
-	public:
-	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
-	}
 #	else
 	UniquePointer() throw() : _m_pointer() {
 	}
+#	endif
 
-	private:
-	UniquePointer(ThisType const&);// Deleted by undefined private declaration
+	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
+
+#	if __cplusplus >= 201103L
+	public:
+	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
+	}
+
 #	endif
 
 	public:
@@ -222,11 +205,7 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-#	if __cplusplus >= 201103L
-		auto temp(_m_pointer);
-#	else
 		PointerType temp(_m_pointer);
-#	endif
 		_m_pointer = PointerType();
 		return temp;
 	}
@@ -252,17 +231,14 @@ struct UniquePointer<_ValueT, DefaultTag> {
 	}
 
 
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType const&) = delete;
+	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
 
+#	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& _origin) noexcept(true) {
 		swap(_origin);
 	}
-#	else
-	private:
-	ThisType& operator =(ThisType const&);
+
 #	endif
 
 	public:
@@ -288,42 +264,35 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 
 template <typename _ValueT>
-struct UniquePointer<_ValueT[], void> {
+struct UniquePointer<_ValueT[], DefaultTag> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>);
-	DD_ALIAS(ValueType, _ValueT);
 	DD_ALIAS(DeleterType, void);
+	DD_VALUE_TYPE_NESTED(_ValueT)
 
 	public:
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ReferenceType, ValueType&);
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
-#	if __cplusplus >= 201103L
-	PointerType _m_pointer = PointerType();
-#	else
-	PointerType _m_pointer;
-#	endif
+	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
-
-	public:
-	UniquePointer(ThisType const& _origin) = delete;
-
-	public:
-	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
-	}
 #	else
 	UniquePointer() throw() : _m_pointer() {
 	}
+#	endif
 
-	private:
-	UniquePointer(ThisType const&);// Deleted by undefined private declaration
+	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
+
+#	if __cplusplus >= 201103L
+	public:
+	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
+	}
+
 #	endif
 
 	public:
@@ -346,11 +315,7 @@ struct UniquePointer<_ValueT[], void> {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-#	if __cplusplus >= 201103L
-		auto _temp(_m_pointer);
-#	else
 		PointerType _temp(_m_pointer);
-#	endif
 		_m_pointer = PointerType();
 		return _temp;
 	}
@@ -376,17 +341,14 @@ struct UniquePointer<_ValueT[], void> {
 	}
 
 
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType const&) = delete;
+	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
 
+#	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& _origin) noexcept {
 		swap(_origin);
 	}
-#	else
-	private:
-	ThisType& operator =(ThisType const&);
+
 #	endif
 
 	public:
@@ -418,6 +380,15 @@ inline ProcessType swap(
 ) DD_NOEXCEPT {
 	_unique_pointer_1.swap(_unique_pointer_2);
 }
+
+
+
+_DD_DETAIL_END
+
+
+
+_DD_BEGIN
+using _detail::UniquePointer;
 
 
 
