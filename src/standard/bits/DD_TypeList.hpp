@@ -87,6 +87,10 @@ struct TypeList {
 	using PushBack = _ConcatTypeListType<TypeList<_ObjectsT_...>, ThisType>;
 
 	public:
+	template <typename _TypeListT>
+	using Concat = _ConcatTypeListType<ThisType, _TypeListT>;
+
+	public:
 	using Clear = TypeList<>;
 
 
@@ -138,6 +142,10 @@ struct TypeList<_ObjectT, _ObjectsT...> {
 
 	public:
 	using PopBack = _RemoveTypeListBackType<ThisType>;
+
+	public:
+	template <typename _TypeListT>
+	using Concat = _ConcatTypeListType<ThisType, _TypeListT>;
 
 	public:
 	using Clear = TypeList<>;
