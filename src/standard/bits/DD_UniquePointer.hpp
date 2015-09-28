@@ -6,7 +6,6 @@
 
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_Tags.hpp"
-#	include "DD_Dereferenceable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
@@ -87,6 +86,18 @@ struct UniquePointer {
 
 
 	public:
+	PointerType get_pointer() const DD_NOEXCEPT {
+		return _m_pointer;
+	}
+
+
+	public:
+	ValidityType is_valid() const DD_NOEXCEPT {
+		return get_pointer();
+	}
+
+
+	public:
 	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
 		destroy();
 		_m_pointer = _pointer;
@@ -95,7 +106,7 @@ struct UniquePointer {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType _temp(_m_pointer);
+		PointerType _temp(get_pointer());
 		_m_pointer = PointerType();
 		return _temp;
 	}
@@ -109,15 +120,9 @@ struct UniquePointer {
 	}
 
 
-	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
-	}
-
-
 	private:
 	ProcessType destroy() const DD_NOEXCEPT {
-		_m_deleter(_m_pointer);
+		_m_deleter(get_pointer());
 	}
 
 
@@ -139,16 +144,24 @@ struct UniquePointer {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return *_m_pointer;
+		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		return _m_pointer;
+		return get_pointer();
 	}
 
 
+#	if __cplusplus >= 201103L
+	public:
+	operator ValidityType() const DD_NOEXCEPT {
+		return is_valid();
+	}
+
+
+#	endif
 };
 
 
@@ -197,6 +210,18 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 
 	public:
+	PointerType get_pointer() const DD_NOEXCEPT {
+		return _m_pointer;
+	}
+
+
+	public:
+	ValidityType is_valid() const DD_NOEXCEPT {
+		return get_pointer();
+	}
+
+
+	public:
 	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
 		destroy();
 		_m_pointer = _pointer;
@@ -205,7 +230,7 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType temp(_m_pointer);
+		PointerType temp(get_pointer());
 		_m_pointer = PointerType();
 		return temp;
 	}
@@ -218,16 +243,10 @@ struct UniquePointer<_ValueT, DefaultTag> {
 	}
 
 
-	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
-	}
-
-
 	private:
 	ProcessType destroy() const DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
-		delete _m_pointer;
+		delete get_pointer();
 	}
 
 
@@ -249,16 +268,24 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return *_m_pointer;
+		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		return _m_pointer;
+		return get_pointer();
 	}
 
 
+#	if __cplusplus >= 201103L
+	public:
+	operator ValidityType() const DD_NOEXCEPT {
+		return is_valid();
+	}
+
+
+#	endif
 };
 
 
@@ -307,6 +334,18 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 
 
 	public:
+	PointerType get_pointer() const DD_NOEXCEPT {
+		return _m_pointer;
+	}
+
+
+	public:
+	ValidityType is_valid() const DD_NOEXCEPT {
+		return get_pointer();
+	}
+
+
+	public:
 	ProcessType reset(PointerType target = PointerType()) DD_NOEXCEPT {
 		destroy();
 		_m_pointer = target;
@@ -315,7 +354,7 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType _temp(_m_pointer);
+		PointerType _temp(get_pointer());
 		_m_pointer = PointerType();
 		return _temp;
 	}
@@ -328,16 +367,10 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 	}
 
 
-	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
-	}
-
-
 	private:
 	ProcessType destroy() const DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
-		delete[] _m_pointer;
+		delete[] get_pointer();
 	}
 
 
@@ -359,16 +392,24 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return *_m_pointer;
+		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		return _m_pointer;
+		return get_pointer();
 	}
 
 
+#	if __cplusplus >= 201103L
+	public:
+	operator ValidityType() const DD_NOEXCEPT {
+		return is_valid();
+	}
+
+
+#	endif
 };
 
 

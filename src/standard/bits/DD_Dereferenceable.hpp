@@ -5,6 +5,7 @@
 
 
 #	include "DD_address_of.hpp"
+#	include "DD_IteratorPointer.hpp"
 
 
 
@@ -16,7 +17,7 @@ struct Dereferenceable {
 
 
 	public:
-	Type* operator ->() DD_NOEXCEPT_AS(address_of(*static_cast<Type const&>(Type()))) {
+	DD_MODIFY_TRAIT(IteratorPointer, Type) operator ->() DD_NOEXCEPT_AS(address_of(*Type())) {
 		return address_of(*static_cast<Type const&>(*this));
 	}
 
