@@ -29,7 +29,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	private:
 	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
-	DeleterType _m_deleter DD_IN_CLASS_INITIALIZE(DeleterType());
+	DeleterType mutable _m_deleter DD_IN_CLASS_INITIALIZE(DeleterType());
 
 
 	public:
@@ -93,7 +93,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	public:
-	DeleterType get_deleter() const DD_NOEXCEPT {
+	DeleterType& get_deleter() const DD_NOEXCEPT {
 		return _m_deleter;
 	}
 
@@ -129,7 +129,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	private:
 	ProcessType destroy() const DD_NOEXCEPT {
-		_m_deleter(get_pointer());
+		get_deleter(get_pointer());
 	}
 
 
@@ -151,12 +151,14 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return get_pointer();
 	}
 
@@ -275,12 +277,14 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return get_pointer();
 	}
 
@@ -399,12 +403,14 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return get_pointer();
 	}
 
