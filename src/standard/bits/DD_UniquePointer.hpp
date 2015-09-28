@@ -82,7 +82,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	public:
 	~UniquePointer() DD_NOEXCEPT {
-		destroy();
+		destruct();
 	}
 
 
@@ -106,7 +106,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	public:
 	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
-		destroy();
+		destruct();
 		_m_pointer = _pointer;
 	}
 
@@ -128,7 +128,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	private:
-	ProcessType destroy() const DD_NOEXCEPT {
+	ProcessType destruct() const DD_NOEXCEPT {
 		get_deleter(get_pointer());
 	}
 
@@ -214,7 +214,7 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 	public:
 	~UniquePointer() DD_NOEXCEPT {
-		destroy();
+		destruct();
 	}
 
 
@@ -232,7 +232,7 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 	public:
 	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
-		destroy();
+		destruct();
 		_m_pointer = _pointer;
 	}
 
@@ -253,7 +253,7 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 
 	private:
-	ProcessType destroy() const DD_NOEXCEPT {
+	ProcessType destruct() const DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
 		delete get_pointer();
 	}
@@ -340,7 +340,7 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 	public:
 	~UniquePointer() DD_NOEXCEPT {
-		destroy();
+		destruct();
 	}
 
 
@@ -358,7 +358,7 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 	public:
 	ProcessType reset(PointerType target = PointerType()) DD_NOEXCEPT {
-		destroy();
+		destruct();
 		_m_pointer = target;
 	}
 
@@ -379,7 +379,7 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 
 	private:
-	ProcessType destroy() const DD_NOEXCEPT {
+	ProcessType destruct() const DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
 		delete[] get_pointer();
 	}

@@ -10,6 +10,7 @@
 #	include "DD_AllocationFailure.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
+#		include "DD_forward.hpp"
 #	endif
 #	include "DD_debugger_definitions.hpp"
 #	include "DD_address_of.hpp"
@@ -35,6 +36,9 @@ class Allocator<void> {
 	DD_ALIAS(ValueType, void);
 
 	public:
+	DD_ALIAS(Basic, Allocator<void>);
+
+	public:
 	DD_ALIAS(PointerType, ValueType*);
 	DD_ALIAS(SizeType, DD::SizeType);
 
@@ -56,6 +60,21 @@ class Allocator<void> {
 	static ProcessType deallocate(PointerType _pointer, SizeType _size) DD_NOEXCEPT {
 		::operator delete(_pointer);
 	}
+
+
+#	if __cplusplus >= 201103L
+	template <typename _ValueT_, typename... _ArgumentsT_>
+	static void construct(_ValueT_* _pointer, _ArgumentsT_&&... __arguments_) noexcept(
+		noexcept(new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...))
+	) {
+		new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...);
+	}
+#	else
+	template <typename _ValueT_>
+	static void construct(_ValueT_* _pointer, _ValueT_ const& __value_) {
+		new (_pointer) _ValueT_(__value_);
+	}
+#	endif
 
 
 };

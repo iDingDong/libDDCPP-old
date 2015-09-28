@@ -10,6 +10,7 @@
 #	include "bits/DD_Range.hpp"
 #	include "bits/DD_Variant.hpp"
 #	if __cplusplus >= 201103L
+#		include "bits/DD_Function.hpp"
 #		include "bits/DD_bind.hpp"
 #	endif
 

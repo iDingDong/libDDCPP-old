@@ -60,17 +60,24 @@
 
 #	if __cplusplus >= 201103L
 #		define DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class) _ARG_Class() = delete;
-#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) _ARG_Class(_ARG_Class const& _origin) = delete;
-#		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class) _ARG_Class(_ARG_Class&& _origin) = delete;
-#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) _ARG_Class& operator =(_ARG_Class const& _origin) = delete;
-#		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class) _ARG_Class& operator =(_ARG_Class&& _origin) = delete;
+#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) _ARG_Class(ThisType const& _origin) = delete;
+#		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class) _ARG_Class(ThisType&& _origin) = delete;
+#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) ThisType& operator =(ThisType const& _origin) = delete;
+#		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class) ThisType& operator =(ThisType&& _origin) = delete;
 #	else
 #		define DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class) private: _ARG_Class();
-#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) private: _ARG_Class(_ARG_Class const& _origin);
+#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) private: _ARG_Class(ThisType const& _origin);
 #		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class)
-#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) private: _ARG_Class& operator =(_ARG_Class const& _origin);
+#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) private: ThisType& operator =(ThisType const& _origin);
 #		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class)
 #	endif
+#	define DD_DELETE_ALL_CONSTRUCTORS(_ARG_Class)\
+		DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class)\
+		DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class)\
+		DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class)
+#	define DD_DELETE_ALL_ASSIGNMENTS(_ARG_Class)\
+		DD_DELETE_COPY_ASSIGNMENT(_ARG_Class)\
+		DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class)
 
 #	if __cplusplus >= 201103L
 #		define DD_FINAL final
