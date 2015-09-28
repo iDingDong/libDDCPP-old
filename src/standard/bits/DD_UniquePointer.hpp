@@ -93,6 +93,12 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	public:
+	DeleterType get_deleter() const DD_NOEXCEPT {
+		return _m_deleter;
+	}
+
+
+	public:
 	ValidityType is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
