@@ -31,9 +31,9 @@ struct _VariantHolderBase {
 
 	public:
 #	if __cplusplus >= 201103L
-	virtual UniquePointer<ThisType> get_clone() const = 0;
+	virtual UniquePointer<ThisType> _get_clone() const = 0;
 #	else
-	virtual ThisType* get_clone() const = 0;
+	virtual ThisType* _get_clone() const = 0;
 #	endif
 
 	public:
@@ -69,11 +69,11 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 
 	public:
 #	if __cplusplus >= 201103L
-	UniquePointer<SuperType> get_clone() const override {
+	UniquePointer<SuperType> _get_clone() const override {
 		return UniquePointer<SuperType>(new ThisType(m_value));
 	}
 #	else
-	SuperType* get_clone() const {
+	SuperType* _get_clone() const {
 		return new ValueType(m_value);
 	}
 #	endif
@@ -113,7 +113,7 @@ struct Variant {
 #	endif
 
 	public:
-	Variant(ThisType const& _origin) : _m_holder_pointer(_origin._m_holder_pointer->get_clone()) {
+	Variant(ThisType const& _origin) : _m_holder_pointer(_origin._m_holder_pointer->_get_clone()) {
 	}
 
 #	if __cplusplus >= 201103L

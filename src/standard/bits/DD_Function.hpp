@@ -11,6 +11,8 @@
 
 #	endif
 #	include "DD_Decay.hpp"
+#	include "DD_move.hpp"
+#	include "DD_release.hpp"
 #	include "DD_Allocator.hpp"
 #	include "DD_Functor.hpp"
 
@@ -26,22 +28,28 @@ template <typename _AllocatorT, typename _ResultT, typename... _ArgumentsT>
 struct _FunctionHolderBase {
 	public:
 	using ThisType = _FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT...>;
+	using AllocatorType = _AllocatorT;
 
 
 	public:
 	friend Function<_ResultT(_ArgumentsT...)>;
+	friend AllocatorType;
+
+
+	protected:
+	constexpr _FunctionHolderBase() = default;
+
+	private:
+	DD_DELETE_COPY_CONSTRUCTOR(_FunctionHolderBase)
+	DD_DELETE_MOVE_CONSTRUCTOR(_FunctionHolderBase)
+
+
+	protected:
+	virtual ~_FunctionHolderBase() = default;
 
 
 	private:
-	DD_DELETE_ALL_CONSTRUCTORS(_FunctionHolderBase)
-
-
-	private:
-	virtual ~_FunctionHolderBase() = 0;
-
-
-	private:
-	virtual _FunctionHolderBase* _get_clone(_AllocatorT& __allocator) = 0;
+	virtual ThisType* _get_clone(_AllocatorT& __allocator) const = 0;
 
 
 	private:
@@ -60,8 +68,13 @@ template <typename _FunctionT, typename _AllocatorT, typename _ResultT, typename
 struct _FunctionHolder : _FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT...> {
 	public:
 	using ThisType = _FunctionHolder<_FunctionT, _AllocatorT, _ResultT, _ArgumentsT...>;
+	using SuperType = _FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT...>;
 	using FunctionType = _FunctionT;
 	using AllocatorType = _AllocatorT;
+
+
+	public:
+	friend AllocatorType;
 
 
 	public:
@@ -69,14 +82,15 @@ struct _FunctionHolder : _FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT.
 
 
 	private:
-	_FunctionT _m_function;
+	FunctionType _m_function;
 
 
 	private:
 	_FunctionHolder() = delete;
 
 	private:
-	constexpr _FunctionHolder(ThisType const& _origin) = default;
+	constexpr _FunctionHolder(ThisType const& _origin) noexcept(noexcept(FunctionType(_origin._m_function))) : _m_function(_origin._m_function) {
+	};
 
 	private:
 	_FunctionHolder(ThisType&& _origin) = delete;
@@ -94,8 +108,8 @@ struct _FunctionHolder : _FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT.
 
 
 	private:
-	_FunctionHolderBase<_AllocatorT, _ResultT, _ArgumentsT...>* get_clone(_AllocatorT& __allocator) override {
-		ThisType* _pointer = __allocator.AllocatorType::Basic::allocate(sizeof(ThisType));
+	SuperType* _get_clone(_AllocatorT& __allocator) const override {
+		ThisType* _pointer = static_cast<ThisType*>(__allocator.AllocatorType::Basic::allocate(sizeof(ThisType)));
 		try {
 			__allocator.AllocatorType::Basic::construct(_pointer, *this);
 		} catch (...) {
@@ -140,18 +154,18 @@ struct Function<_ResultT(_ArgumentsT...), _AllocatorT> : Functor<_ResultT, _Argu
 	constexpr Function() = default;
 
 	public:
-	constexpr Function(ThisType const& _origin) : _m_allocator(_origin.get_allocator()), _m_holder(_origin._m_holder->get_clone(get_allocator())) {
+	constexpr Function(ThisType const& _origin) : _m_allocator(_origin.get_allocator()), _m_holder(_origin._m_holder->_get_clone(get_allocator())) {
 	}
 
 	public:
-	constexpr Function(ThisType&& _origin) {
+	constexpr Function(ThisType&& _origin) : _m_allocator(move(_origin.get_allocator())), _m_holder(release(_origin._m_holder)) {
 	}
 
 	public:
 	template <typename _FunctionT_, typename _AllocatorT_>
 	constexpr Function(_FunctionT_&& __function_, _AllocatorT_&& __allocator_) noexcept(
 		noexcept(AllocatorType(forward<_AllocatorT_>(__allocator_))) &&
-		noexcept(HolderPoinerType(_make_holder(forward<_FunctionT_>(__function_))))
+		noexcept(HolderPointerType(ThisType()._make_holder(forward<_FunctionT_>(__function_))))
 	) : _m_allocator(forward<_AllocatorT_>(__allocator_)), _m_holder(_make_holder(forward<_FunctionT_>(__function_))) {
 	}
 
@@ -170,8 +184,25 @@ struct Function<_ResultT(_ArgumentsT...), _AllocatorT> : Functor<_ResultT, _Argu
 
 
 	public:
+	ValidityType constexpr is_valid() const noexcept {
+		return _m_holder;
+	}
+
+
+	public:
 	AllocatorType& get_allocator() const noexcept {
 		return _m_allocator;
+	}
+
+
+	public:
+	void swap(ThisType& _target) noexcept(
+		noexcept(swap(get_allocator(), _target.get_allocator())) &&
+		noexcept(swap(_m_holder, _target._m_holder))
+	) {
+		using ::DD::swap;
+		swap(get_allocator(), _target.get_allocator());
+		swap(_m_holder, _target._m_holder);
 	}
 
 
@@ -192,8 +223,8 @@ struct Function<_ResultT(_ArgumentsT...), _AllocatorT> : Functor<_ResultT, _Argu
 	private:
 	template <typename _FunctionT_>
 	HolderPointerType _make_holder(_FunctionT_&& __function_) {
-		using _ResultHolderType = _FunctionHolder<DecayType<_FunctionT_>, AllocatorType, _ResultT, _ArgumentsT...>;
-		_ResultHolderType _holder = get_allocator().AllocatorType::Basic::allocate(sizeof(_ResultHolderType));
+		using _ResultHolderType = _FunctionHolder<DecayType<_FunctionT_>, AllocatorType, _ResultT, _ArgumentsT...>*;
+		_ResultHolderType _holder = static_cast<_ResultHolderType>(get_allocator().AllocatorType::Basic::allocate(sizeof(_ResultHolderType)));
 		try {
 			get_allocator().AllocatorType::Basic::construct(_holder, forward<_FunctionT_>(__function_));
 		} catch (...) {
@@ -206,7 +237,9 @@ struct Function<_ResultT(_ArgumentsT...), _AllocatorT> : Functor<_ResultT, _Argu
 
 	private:
 	void destruct() noexcept {
-		get_allocator().AllocatorType::Basic::destruct(_m_holder);
+		if (is_valid()) {
+			get_allocator().AllocatorType::Basic::destruct(_m_holder);
+		}
 		get_allocator().AllocatorType::Basic::deallocate(_m_holder);
 	}
 

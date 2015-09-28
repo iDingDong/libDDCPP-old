@@ -87,7 +87,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
+	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
 		return _m_pointer;
 	}
 
@@ -99,7 +99,7 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	public:
-	ValidityType is_valid() const DD_NOEXCEPT {
+	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
 
@@ -219,13 +219,13 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 
 	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
+	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
 		return _m_pointer;
 	}
 
 
 	public:
-	ValidityType is_valid() const DD_NOEXCEPT {
+	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
 
@@ -345,13 +345,13 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 
 	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
+	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
 		return _m_pointer;
 	}
 
 
 	public:
-	ValidityType is_valid() const DD_NOEXCEPT {
+	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
 

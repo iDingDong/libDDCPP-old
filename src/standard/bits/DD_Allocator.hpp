@@ -64,17 +64,23 @@ class Allocator<void> {
 
 #	if __cplusplus >= 201103L
 	template <typename _ValueT_, typename... _ArgumentsT_>
-	static void construct(_ValueT_* _pointer, _ArgumentsT_&&... __arguments_) noexcept(
+	static ProcessType construct(_ValueT_* _pointer, _ArgumentsT_&&... __arguments_) noexcept(
 		noexcept(new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...))
 	) {
 		new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...);
 	}
 #	else
 	template <typename _ValueT_>
-	static void construct(_ValueT_* _pointer, _ValueT_ const& __value_) {
+	static ProcessType construct(_ValueT_* _pointer, _ValueT_ const& __value_) {
 		new (_pointer) _ValueT_(__value_);
 	}
 #	endif
+
+
+	template <typename _ValueT_>
+	static ProcessType destruct(_ValueT_* _pointer) {
+		_pointer->~_ValueT_();
+	}
 
 
 };

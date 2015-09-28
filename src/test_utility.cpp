@@ -97,4 +97,12 @@ void test_utility() {
 			throw "'DD::bind' test failed.";
 		}
 	}
+	{
+		DD::Function<int(int, int)> testFunc = func;
+		if (
+			func(123, 321) != 123 + 321
+		) {
+			throw "'DD::Function' test failed.";
+		}
+	}
 }
