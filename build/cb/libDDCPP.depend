@@ -572,10 +572,10 @@
 1442752949 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatstlcontainer.hpp
 	"DD_compatibility_definitions.hpp"
 
-1443160589 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
+1443160952 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
 	"DD_Illogic.hpp"
 
-1443158957 d:\develop\repositories\libddcpp\src\standard\bits\dd_exception.hpp
+1443160950 d:\develop\repositories\libddcpp\src\standard\bits\dd_exception.hpp
 	"DD_global_definitions.hpp"
 
 1443158781 d:\develop\repositories\libddcpp\src\standard\bits\dd_arrayiterator.hpp
@@ -698,8 +698,9 @@
 1443159985 d:\develop\repositories\libddcpp\src\standard\bits\dd_uncopiable.hpp
 	"DD_global_definitions.hpp"
 
-1443158913 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereferenceable.hpp
+1443420111 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereferenceable.hpp
 	"DD_address_of.hpp"
+	"DD_IteratorPointer.hpp"
 
 1442986044 d:\develop\repositories\libddcpp\src\standard\bits\dd_tuple.hpp
 	"DD_Decay.hpp"
@@ -707,21 +708,24 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1443159985 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+1443421279 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+	"DD_ValueTypeNested.hpp"
 	"DD_Tags.hpp"
+	"DD_Comparable.hpp"
 	"DD_forward.hpp"
 	"DD_Allocator.hpp"
 	"DD_swap.hpp"
 
-1443160124 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1443348556 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
+	"DD_ValueTypeNested.hpp"
 	"DD_AllocationFailure.hpp"
 	"DD_IsTriviallyDestructible.hpp"
 	"DD_debugger_definitions.hpp"
 	"DD_address_of.hpp"
 
-1443160711 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
-	"DD_Exception.hpp"
+1443250277 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
+	"DD_RunTimeError.hpp"
 
 1442850601 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
 	<type_traits>
@@ -845,7 +849,7 @@
 	"bits/DD_TypeList.hpp"
 	"bits/DD_get_last_argument.hpp"
 
-1442850598 d:\develop\repositories\libddcpp\src\standard\bits\dd_typelist.hpp
+1443329499 d:\develop\repositories\libddcpp\src\standard\bits\dd_typelist.hpp
 	"DD_GetPackBack.hpp"
 	"DD_ContainedByPack.hpp"
 
@@ -893,6 +897,9 @@
 1443159620 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_global_definitions.hpp"
 
-1443160717 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
+1443160952 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
+	"DD_Exception.hpp"
+
+1443250255 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 

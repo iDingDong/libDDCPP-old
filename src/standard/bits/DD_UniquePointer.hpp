@@ -6,6 +6,7 @@
 
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_Tags.hpp"
+#	include "DD_Comparable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
@@ -16,7 +17,7 @@
 
 _DD_DETAIL_BEGIN
 template <typename _ValueT, typename _DeleterT = DefaultTag>
-struct UniquePointer {
+struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>);
 	DD_ALIAS(DeleterType, _DeleterT);
@@ -156,7 +157,7 @@ struct UniquePointer {
 
 #	if __cplusplus >= 201103L
 	public:
-	operator ValidityType() const DD_NOEXCEPT {
+	explicit operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 
@@ -167,7 +168,7 @@ struct UniquePointer {
 
 
 template <typename _ValueT>
-struct UniquePointer<_ValueT, DefaultTag> {
+struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>);
 	DD_ALIAS(DeleterType, void);
@@ -280,7 +281,7 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 #	if __cplusplus >= 201103L
 	public:
-	operator ValidityType() const DD_NOEXCEPT {
+	explicit operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 
@@ -291,7 +292,7 @@ struct UniquePointer<_ValueT, DefaultTag> {
 
 
 template <typename _ValueT>
-struct UniquePointer<_ValueT[], DefaultTag> {
+struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>);
 	DD_ALIAS(DeleterType, void);
@@ -404,7 +405,7 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 
 #	if __cplusplus >= 201103L
 	public:
-	operator ValidityType() const DD_NOEXCEPT {
+	explicit operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 
@@ -415,11 +416,21 @@ struct UniquePointer<_ValueT[], DefaultTag> {
 
 
 template <typename _ValueT, typename _DeleterT>
-inline ProcessType swap(
-	UniquePointer<_ValueT, _DeleterT>& _unique_pointer_1,
-	UniquePointer<_ValueT, _DeleterT>& _unique_pointer_2
-) DD_NOEXCEPT {
-	_unique_pointer_1.swap(_unique_pointer_2);
+inline ValidityType operator ==(
+	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_1,
+	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_2
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(_unique_pointer_1.get_pointer() == _unique_pointer_2.get_pointer())) {
+	return _unique_pointer_1.get_pointer() == _unique_pointer_2.get_pointer();
+}
+
+
+
+template <typename _ValueT, typename _DeleterT>
+inline ValidityType operator <(
+	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_1,
+	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_2
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(_unique_pointer_1.get_pointer() < _unique_pointer_2.get_pointer())) {
+	return _unique_pointer_1.get_pointer() < _unique_pointer_2.get_pointer();
 }
 
 
