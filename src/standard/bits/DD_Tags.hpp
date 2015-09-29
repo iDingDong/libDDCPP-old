@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Tags.hpp
-#ifndef _DD_TAGS_HPP_INCLUDED
-#	define _DD_TAGS_HPP_INCLUDED 1
+#ifndef DD_TAGS_HPP_INCLUDED_
+#	define DD_TAGS_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct Tag {
 } DD_CONSTANT tag;
 
@@ -24,7 +24,7 @@ struct ConstructTag : Tag {
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RemoveReference.hpp
-#ifndef _DD_REMOVE_REFERENCE_HPP_INCLUDED
-#	define _DD_REMOVE_REFERENCE_HPP_INCLUDED 1
+#ifndef DD_REMOVE_REFERENCE_HPP_INCLUDED_
+#	define DD_REMOVE_REFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct RemoveReference {
 #	if __cplusplus >= 201402L
-	using Type = std::remove_reference_t<_ObjectT>;
+	using Type = std::remove_reference_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::remove_reference<_ObjectT>::type;
+	using Type = typename std::remove_reference<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -28,9 +28,9 @@ struct RemoveReference {
 
 
 
-template <typename _ValueT>
-struct RemoveReference<_ValueT&> {
-	DD_ALIAS(Type, _ValueT);
+template <typename ValueT_>
+struct RemoveReference<ValueT_&> {
+	DD_ALIAS(Type, ValueT_);
 
 
 };
@@ -38,9 +38,9 @@ struct RemoveReference<_ValueT&> {
 
 
 #	if __cplusplus >= 201103L
-template <typename _ValueT>
-struct RemoveReference<_ValueT&&> {
-	using Type = _ValueT;
+template <typename ValueT_>
+struct RemoveReference<ValueT_&&> {
+	using Type = ValueT_;
 
 
 };
@@ -52,7 +52,7 @@ DD_TRAIT_MODIFIER(RemoveReference)
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_replace_if.hpp
-#ifndef _DD_REPLACE_IF_HPP_INCLUDED
-#	define _DD_REPLACE_IF_HPP_INCLUDED 1
+#ifndef DD_REPLACE_IF_HPP_INCLUDED_
+#	define DD_REPLACE_IF_HPP_INCLUDED_ 1
 
 
 
@@ -8,24 +8,24 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT, typename _ValueT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_, typename ValueT_>
 ProcessType replace_if(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_UnaryPredicatorT __predicator,
-	_ValueT __value
-) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end && __predicator(*__begin)) {
-	for (; __begin != __end; ++__begin) {
-		if (__predicator(*__begin)) {
-			*__begin = __value;
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	UnaryPredicatorT_ predicator__,
+	ValueT_ value__
+) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && predicator__(*begin__)) {
+	for (; begin__ != end__; ++begin__) {
+		if (predicator__(*begin__)) {
+			*begin__ = value__;
 		}
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

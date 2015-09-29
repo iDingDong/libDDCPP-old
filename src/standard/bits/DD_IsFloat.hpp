@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsFloat.hpp
-#ifndef _DD_IS_FLOAT_HPP_INCLUDED
-#	define _DD_IS_FLOAT_HPP_INCLUDED
+#ifndef DD_IS_FLOAT_HPP_INCLUDED_
+#	define DD_IS_FLOAT_HPP_INCLUDED_
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsFloat : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsFloat_ : FalseType {
 };
 
 
 
 template <>
-struct _IsFloat<float> : TrueType {
+struct IsFloat_<float> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsFloat = AndType<_detail::_IsFloat<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsFloat = AndType<detail_::IsFloat_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsFloat : _detail::_IsFloat<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsFloat : detail_::IsFloat_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

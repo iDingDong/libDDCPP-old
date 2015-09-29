@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_merge.hpp
-#ifndef _DD_MERGE_HPP_INCLUDED
-#	define _DD_MERGE_HPP_INCLUDED 1
+#ifndef DD_MERGE_HPP_INCLUDED_
+#	define DD_MERGE_HPP_INCLUDED_ 1
 
 
 
@@ -8,57 +8,57 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _UndirectionalIteratorT3>
-_UndirectionalIteratorT3 merge(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2,
-	_UndirectionalIteratorT2 const& __end_2,
-	_UndirectionalIteratorT3 __result_begin
-) DD_NOEXCEPT_AS(copy(__begin_1, __end_1, __result_begin) DD_COMMA copy(__begin_2, __end_2, __result_begin) DD_COMMA *__begin_1 < *__begin_2) {
-	for (; __begin_2 != __end_2; ++__result_begin) {
-		if (__begin_1 == __end_1) {
-			return copy(__begin_2, __end_2, __result_begin);
+DD_BEGIN_
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename UndirectionalIteratorT3_>
+UndirectionalIteratorT3_ merge(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ const& end_2__,
+	UndirectionalIteratorT3_ result_begin__
+) DD_NOEXCEPT_AS(copy(begin_1__, end_1__, result_begin__) DD_COMMA copy(begin_2__, end_2__, result_begin__) DD_COMMA *begin_1__ < *begin_2__) {
+	for (; begin_2__ != end_2__; ++result_begin__) {
+		if (begin_1__ == end_1__) {
+			return copy(begin_2__, end_2__, result_begin__);
 		}
-		if (*__begin_1 < *__begin_2) {
-			*__result_begin = *__begin_1;
-			++__begin_1;
+		if (*begin_1__ < *begin_2__) {
+			*result_begin__ = *begin_1__;
+			++begin_1__;
 		} else {
-			*__result_begin = *__begin_2;
-			++__begin_1;
+			*result_begin__ = *begin_2__;
+			++begin_1__;
 		}
 	}
-	return copy(__begin_1, __end_1, __result_begin);
+	return copy(begin_1__, end_1__, result_begin__);
 }
 
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _UndirectionalIteratorT3, typename _BinaryPredicatorT>
-_UndirectionalIteratorT3 merge(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2,
-	_UndirectionalIteratorT2 const& __end_2,
-	_BinaryPredicatorT const& __less,
-	_UndirectionalIteratorT3 __result_begin
-) DD_NOEXCEPT_AS(copy(__begin_1, __end_1, __result_begin) DD_COMMA copy(__begin_2, __end_2, __result_begin) DD_COMMA __less(*__begin_1, *__begin_2)) {
-	for (; __begin_2 != __end_2; ++__result_begin) {
-		if (__begin_1 == __end_1) {
-			return copy(__begin_2, __end_2, __result_begin);
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename UndirectionalIteratorT3_, typename BinaryPredicatorT_>
+UndirectionalIteratorT3_ merge(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ const& end_2__,
+	BinaryPredicatorT_ const& less__,
+	UndirectionalIteratorT3_ result_begin__
+) DD_NOEXCEPT_AS(copy(begin_1__, end_1__, result_begin__) DD_COMMA copy(begin_2__, end_2__, result_begin__) DD_COMMA less__(*begin_1__, *begin_2__)) {
+	for (; begin_2__ != end_2__; ++result_begin__) {
+		if (begin_1__ == end_1__) {
+			return copy(begin_2__, end_2__, result_begin__);
 		}
-		if (__less(*__begin_1, *__begin_2)) {
-			*__result_begin = *__begin_1;
-			++__begin_1;
+		if (less__(*begin_1__, *begin_2__)) {
+			*result_begin__ = *begin_1__;
+			++begin_1__;
 		} else {
-			*__result_begin = *__begin_2;
-			++__begin_1;
+			*result_begin__ = *begin_2__;
+			++begin_1__;
 		}
 	}
-	return copy(__begin_1, __end_1, __result_begin);
+	return copy(begin_1__, end_1__, result_begin__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

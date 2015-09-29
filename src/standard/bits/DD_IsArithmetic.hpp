@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsArithmetic.hpp
-#ifndef _DD_IS_ARITHMETIC_HPP_INCLUDED
-#	define _DD_IS_ARITHMETIC_HPP_INCLUDED 1
+#ifndef DD_IS_ARITHMETIC_HPP_INCLUDED_
+#	define DD_IS_ARITHMETIC_HPP_INCLUDED_ 1
 
 
 
@@ -9,19 +9,19 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsArithmetic = AndType<OrType<IsIntegral<_ObjectsT>, IsFloatingPoint<_ObjectsT>, StdIntegralConstant<std::is_arithmetic<_ObjectsT>>>...>;
+template <typename... ObjectsT_>
+using IsArithmetic = AndType<OrType<IsIntegral<ObjectsT_>, IsFloatingPoint<ObjectsT_>, StdIntegralConstant<std::is_arithmetic<ObjectsT_>>>...>;
 #	else
-template <typename _ObjectT>
-struct IsArithmetic : BoolConstant<IsIntegral<_ObjectT>::value || IsFloatingPoint<_ObjectT>::value> {
+template <typename ObjectT_>
+struct IsArithmetic : BoolConstant<IsIntegral<ObjectT_>::value || IsFloatingPoint<ObjectT_>::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

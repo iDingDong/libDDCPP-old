@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsNoexceptMoveAssignable.hpp
-#ifndef _DD_IS_NOEXCEPT_MOVE_ASSIGNABLE_HPP_INCLUDED
-#	define _DD_IS_NOEXCEPT_MOVE_ASSIGNABLE_HPP_INCLUDED 1
+#ifndef DD_IS_NOEXCEPT_MOVE_ASSIGNABLE_HPP_INCLUDED_
+#	define DD_IS_NOEXCEPT_MOVE_ASSIGNABLE_HPP_INCLUDED_ 1
 
 
 #	if __cplusplus < 201103L
@@ -14,24 +14,24 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsNoexceptMoveAssignable : StdBoolConstant<std::is_nothrow_move_assignable<_ObjectT>> {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsNoexceptMoveAssignable_ : StdBoolConstant<std::is_nothrow_move_assignable<ObjectT_>> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsNoexceptMoveAssignable = AndType<_detail::_IsNoexceptMoveAssignable<_ObjectsT>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsNoexceptMoveAssignable = AndType<detail_::IsNoexceptMoveAssignable_<ObjectsT_>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

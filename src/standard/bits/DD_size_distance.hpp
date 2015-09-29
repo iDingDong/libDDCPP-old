@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_size_distance.hpp
-#ifndef _DD_SIZE_DISTANCE_HPP_INCLUDED
-#	define _DD_SIZE_DISTANCE_HPP_INCLUDED 1
+#ifndef DD_SIZE_DISTANCE_HPP_INCLUDED_
+#	define DD_SIZE_DISTANCE_HPP_INCLUDED_ 1
 
 
 
@@ -8,18 +8,18 @@
 
 
 
-_DD_BEGIN
-template <typename _PointerT1, typename _PointerT2>
+DD_BEGIN_
+template <typename PointerT1_, typename PointerT2_>
 inline SizeType DD_CONSTEXPR size_distance(
-	_PointerT1 const& __begin,
-	_PointerT2 const& __end
-) DD_NOEXCEPT_IF(noexcept(get_pointer(__begin)) && noexcept(get_pointer(__end))) {
-	return reinterpret_cast<char const*>(get_pointer(__end)) - reinterpret_cast<char const*>(get_pointer(__begin));
+	PointerT1_ const& begin__,
+	PointerT2_ const& end__
+) DD_NOEXCEPT_IF(noexcept(get_pointer(begin__)) && noexcept(get_pointer(end__))) {
+	return reinterpret_cast<char const*>(get_pointer(end__)) - reinterpret_cast<char const*>(get_pointer(begin__));
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

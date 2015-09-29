@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_BinaryOperators.hpp
-#ifndef _DD_BINARY_OPERATORS_HPP_INCLUDED
-#	define _DD_BINARY_OPERATORS_HPP_INCLUDED 1
+#ifndef DD_BINARY_OPERATORS_HPP_INCLUDED_
+#	define DD_BINARY_OPERATORS_HPP_INCLUDED_ 1
 
 
 
@@ -8,20 +8,20 @@
 
 
 
-#	define DD_BINARY_OPERATOR(_ARG_Operator, _ARG_symbol)\
-	template <typename _MACRO_ObjectT1, typename _MACRO_ObjectT2 = _MACRO_ObjectT1>\
-	struct _ARG_Operator {\
-		DD_ALIAS(Type1, _MACRO_ObjectT1);\
-		DD_ALIAS(Type2, _MACRO_ObjectT2);\
+#	define DD_BINARY_OPERATOR(ARG_Operator_, ARG_symbol_)\
+	template <typename MACRO_ObjectT1_, typename MACRO_ObjectT2_ = MACRO_ObjectT1_>\
+	struct ARG_Operator_ {\
+		DD_ALIAS(Type1, MACRO_ObjectT1_);\
+		DD_ALIAS(Type2, MACRO_ObjectT2_);\
 		\
 		\
-		friend Type1 operator _ARG_symbol(\
-			Type1 const& _object_1,\
-			Type2 const& _object_2\
-		) DD_NOEXCEPT_AS(const_cast<Type1>(_object_1 _ARG_symbol##= _object_2) DD_COMMA Type1(_object_1)) {\
-			Type1 _temp(_object_1);\
-			_temp _ARG_symbol##= _object_2;\
-			return _temp;\
+		friend Type1 operator ARG_symbol_(\
+			Type1 const& object_1_,\
+			Type2 const& object_2_\
+		) DD_NOEXCEPT_AS(const_cast<Type1>(object_1_ ARG_symbol_##= object_2_) DD_COMMA Type1(object_1_)) {\
+			Type1 temp_(object_1_);\
+			temp_ ARG_symbol_##= object_2_;\
+			return temp_;\
 		}\
 		\
 		\
@@ -29,7 +29,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 DD_BINARY_OPERATOR(Addable, +)
 DD_BINARY_OPERATOR(Subtractable, -)
 DD_BINARY_OPERATOR(Multipliable, *)
@@ -40,7 +40,7 @@ DD_BINARY_OPERATOR(Andable, &)
 
 
 
-_DD_END
+DD_END_
 
 
 

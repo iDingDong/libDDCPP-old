@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_is_partitioned.hpp
-#ifndef _DD_IS_PARTITIONED_HPP_INCLUDED
-#	define _DD_IS_PARTITIONED_HPP_INCLUDED 1
+#ifndef DD_IS_PARTITIONED_HPP_INCLUDED_
+#	define DD_IS_PARTITIONED_HPP_INCLUDED_ 1
 
 
 
@@ -8,20 +8,20 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _ValueT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename ValueT_>
 ValidityType is_partitioned(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT const& __value
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin < __value) {
-	for (; __begin != __end; ++__begin) {
-		if (!(*__begin < __value)) {
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < value__) {
+	for (; begin__ != end__; ++begin__) {
+		if (!(*begin__ < value__)) {
 			break;
 		}
 	}
-	while (++__begin != __end) {
-		if (*__begin < __value) {
+	while (++begin__ != end__) {
+		if (*begin__ < value__) {
 			return false;
 		}
 	}
@@ -30,7 +30,7 @@ ValidityType is_partitioned(
 
 
 
-_DD_END
+DD_END_
 
 
 

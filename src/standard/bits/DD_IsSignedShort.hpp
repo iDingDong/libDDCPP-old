@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsSignedShort.hpp
-#ifndef _DD_IS_SIGNED_SHORT_HPP_INCLUDED
-#	define _DD_IS_SIGNED_SHORT_HPP_INCLUDED 1
+#ifndef DD_IS_SIGNED_SHORT_HPP_INCLUDED_
+#	define DD_IS_SIGNED_SHORT_HPP_INCLUDED_ 1
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsSignedShort : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsSignedShort_ : FalseType {
 };
 
 
 
 template <>
-struct _IsSignedShort<signed short> : TrueType {
+struct IsSignedShort_<signed short> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsSignedShort = AndType<_detail::_IsSignedShort<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsSignedShort = AndType<detail_::IsSignedShort_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsSignedShort : _detail::_IsSignedShort<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsSignedShort : detail_::IsSignedShort_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

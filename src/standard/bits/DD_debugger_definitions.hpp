@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_debugger_definitions.hpp
-#ifndef _DD_DEBUGGER_DEFINITIONS_HPP_INCLUDED
-#	define _DD_DEBUGGER_DEFINITIONS_HPP_INCLUDED 1
+#ifndef DD_DEBUGGER_DEFINITIONS_HPP_INCLUDED_
+#	define DD_DEBUGGER_DEFINITIONS_HPP_INCLUDED_ 1
 
 
 
@@ -41,7 +41,7 @@
 
 #	define DD_ASSERTION_HANDLER_DEFINITION_BEGIN\
 		DD_USER_DEFINITION_BEGIN\
-		ProcessType assertion_handler(CStringConstType _expression, CStringConstType _prompt, CStringConstType _function, CStringConstType _file, long _line) {
+		ProcessType assertion_handler(CStringConstType expression_, CStringConstType prompt_, CStringConstType function_, CStringConstType file_, long line_) {
 #	define DD_ASSERTION_HANDLER_DEFINITION_END\
 		}\
 		DD_USER_DEFINITION_END
@@ -49,26 +49,26 @@
 
 #	if DDCPP_ENABLE_ASSERT
 #		if DDCPP_ENABLE_ASSERTION_HANDLER
-#			define DD_ASSERT(_ARG_Expression, _ARG_Prompt)\
-				((_ARG_Expression) ? (void)0 : ::DD::_detail::user_definition::assertion_handler(\
-					#_ARG_Expression,\
-					(_ARG_Prompt),\
+#			define DD_ASSERT(ARG_Expression_, ARG_Prompt_)\
+				((ARG_Expression_) ? (void)0 : ::DD::detail_::user_definition::assertion_handler(\
+					#ARG_Expression_,\
+					(ARG_Prompt_),\
 					DD_CURRENT_FUNCTION,\
 					DD_CURRENT_FILE,\
 					DD_CURRENT_LINE\
 				));
 #		else
 #			include <cassert>
-#			define DD_ASSERT(_ARG_Expression, _ARG_Prompt) assert((_ARG_Expression) && (_ARG_Prompt));
+#			define DD_ASSERT(ARG_Expression_, ARG_Prompt_) assert((ARG_Expression_) && (ARG_Prompt_));
 #		endif
 #	else
-#		define DD_ASSERT(_ARG_Expression, _ARG_Prompt)
+#		define DD_ASSERT(ARG_Expression_, ARG_Prompt_)
 #	endif
 
 
 
 DD_USER_DEFINITION_BEGIN
-ProcessType assertion_handler(CStringConstType _expression, CStringConstType _prompt, CStringConstType _function, CStringConstType _file, long _line);
+ProcessType assertion_handler(CStringConstType expression_, CStringConstType prompt_, CStringConstType function_, CStringConstType file_, long line_);
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_NestedTypeCheck.hpp
-#ifndef _DD_NESTED_TYPE_CHECK_HPP_INCLUDED
-#	define _DD_NESTED_TYPE_CHECK_HPP_INCLUDED 1
+#ifndef DD_NESTED_TYPE_CHECK_HPP_INCLUDED_
+#	define DD_NESTED_TYPE_CHECK_HPP_INCLUDED_ 1
 
 
 
@@ -16,16 +16,16 @@
 
 
 #	if __cplusplus >= 201103L
-#		define DD_NESTED_TYPE_CHECK(_ARG_Checker, ...)\
+#		define DD_NESTED_TYPE_CHECK(ARG_Checker_, ...)\
 			DD_MACRO_DETAIL_BEGIN\
-			template <typename _MACRO_ObjectT, typename _VoidT>\
-			struct _##_ARG_Checker : ::DD::FalseType {\
+			template <typename MACRO_ObjectT_, typename VoidT_>\
+			struct ARG_Checker_##_ : ::DD::FalseType {\
 			};\
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT>\
-			struct _##_ARG_Checker<_MACRO_ObjectT, ::DD::VoidType<typename _MACRO_ObjectT::__VA_ARGS__>> : ::DD::TrueType {\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_##_<MACRO_ObjectT_, ::DD::VoidType<typename MACRO_ObjectT_::__VA_ARGS__>> : ::DD::TrueType {\
 			};\
 			\
 			\
@@ -34,47 +34,47 @@
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT>\
-			using _ARG_Checker = ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT, ::DD::VoidType<>>::value>;
+			template <typename MACRO_ObjectT_>\
+			using ARG_Checker_ = ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_, ::DD::VoidType<>>::value>;
 
 
-#		define DD_NESTED_TYPE_TRAIT(_ARG_Checker, _ARG_Target, ...)\
-			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker {\
+#		define DD_NESTED_TYPE_TRAIT(ARG_Checker_, ARG_Target_, ...)\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_ {\
 				private:\
-				template <typename _MACRO_ObjectT_>\
-				static typename _MACRO_ObjectT_::_ARG_Target _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*) noexcept(true);\
+				template <typename MACRO_ObjectT__>\
+				static typename MACRO_ObjectT__::ARG_Target_ match_(::DD::detail_::NestedTypeMatcher_<typename MACRO_ObjectT__::ARG_Target_>*) noexcept(true);\
 				\
 				private:\
-				template <typename _MACRO_ObjectT_>\
-				static __VA_ARGS__ _match(...) noexcept(true);\
+				template <typename MACRO_ObjectT__>\
+				static __VA_ARGS__ match_(...) noexcept(true);\
 				\
 				\
 				public:\
-				using Type = decltype(_match<_MACRO_ObjectT>(::DD::nil_pointer));\
+				using Type = decltype(match_<MACRO_ObjectT_>(::DD::nil_pointer));\
 				\
 				\
 			};\
 			\
 			\
 			\
-			template <typename _ARG_ObjectT>\
-			using _ARG_Checker##Type = typename _ARG_Checker<_ARG_ObjectT>::Type;
+			template <typename ARG_ObjectT_>\
+			using ARG_Checker_##Type = typename ARG_Checker_<ARG_ObjectT_>::Type;
 
 
 #	else
-#		define DD_NESTED_TYPE_CHECK(_ARG_Checker, _ARG_Target)\
+#		define DD_NESTED_TYPE_CHECK(ARG_Checker_, ARG_Target_)\
 			DD_MACRO_DETAIL_BEGIN\
-			template <typename _MACRO_ObjectT>\
-			struct _##_ARG_Checker {\
-				template <typename _MACRO_ObjectT_>\
-				static SizeTrait<1> _match(::DD::_detail::_NestedTypeMatcher<typename _MACRO_ObjectT_::_ARG_Target>*);\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_##_ {\
+				template <typename MACRO_ObjectT__>\
+				static SizeTrait<1> match_(::DD::detail_::NestedTypeMatcher_<typename MACRO_ObjectT__::ARG_Target_>*);\
 				\
-				template <typename _MACRO_ObjectT_>\
-				static SizeTrait<2> _match(...);\
+				template <typename MACRO_ObjectT__>\
+				static SizeTrait<2> match_(...);\
 				\
 				\
-				static ::DD::ValidityType const value = sizeof(_match<_MACRO_ObjectT>(0)) == sizeof(SizeTrait<1>);\
+				static ::DD::ValidityType const value = sizeof(match_<MACRO_ObjectT_>(0)) == sizeof(SizeTrait<1>);\
 				\
 				\
 			};\
@@ -85,30 +85,30 @@
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker : ::DD::BoolConstant<_MACRO_detail::_##_ARG_Checker<_MACRO_ObjectT>::value> {\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_ : ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_>::value> {\
 			};
 
 
 
-#		define DD_NESTED_TYPE_TRAIT(_ARG_Checker, _ARG_Target, _ARG_Default)\
+#		define DD_NESTED_TYPE_TRAIT(ARG_Checker_, ARG_Target_, ARG_Default_)\
 			DD_MACRO_DETAIL_BEGIN\
-			DD_NESTED_TYPE_CHECK(_CHECK_##_ARG_Checker, _ARG_Target)\
+			DD_NESTED_TYPE_CHECK(CHECK_##ARG_Checker_##_, ARG_Target_)\
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT, ValidityType _MACRO_has_target_c>\
-			struct _##_ARG_Checker {\
-				typedef _ARG_Default Type;\
+			template <typename MACRO_ObjectT_, ValidityType MACRO_has_target_c_>\
+			struct ARG_Checker_##_ {\
+				typedef ARG_Default_ Type;\
 				\
 				\
 			};\
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT>\
-			struct _##_ARG_Checker<_MACRO_ObjectT, true> {\
-				typedef typename _MACRO_ObjectT::_ARG_Target Type;\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_##_<MACRO_ObjectT_, true> {\
+				typedef typename MACRO_ObjectT_::ARG_Target_ Type;\
 				\
 				\
 			};\
@@ -119,11 +119,11 @@
 			\
 			\
 			\
-			template <typename _MACRO_ObjectT>\
-			struct _ARG_Checker {\
-				typedef typename _MACRO_detail::_##_ARG_Checker<\
-					_MACRO_ObjectT,\
-					_MACRO_detail::_CHECK_##_ARG_Checker<_MACRO_ObjectT>::value\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_ {\
+				typedef typename MACRO_detail_::_##ARG_Checker_<\
+					MACRO_ObjectT_,\
+					MACRO_detail_::CHECK_##ARG_Checker_##_<MACRO_ObjectT_>::value\
 				>::Type Type;\
 				\
 				\
@@ -134,14 +134,14 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 template <typename ObjectT>
-struct _NestedTypeMatcher {
+struct NestedTypeMatcher_ {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 

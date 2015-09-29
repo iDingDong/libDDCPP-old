@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RemoveAllExtents.hpp
-#ifndef _DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED
-#	define _DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED 1
+#ifndef DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED_
+#	define DD_REMOVE_ALL_EXTENTS_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct RemoveAllExtents {
 #	if __cplusplus >= 201402L
-	using Type = std::remove_all_extents_t<_ObjectT>;
+	using Type = std::remove_all_extents_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::remove_all_extents<_ObjectT>::type;
+	using Type = typename std::remove_all_extents<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -28,18 +28,18 @@ struct RemoveAllExtents {
 
 
 
-template <typename _ValueT, LengthType _length_c>
-struct RemoveAllExtents<_ValueT[_length_c]> {
-	DD_ALIAS(Type, typename RemoveAllExtents<_ValueT>::Type);
+template <typename ValueT_, LengthType length_c_>
+struct RemoveAllExtents<ValueT_[length_c_]> {
+	DD_ALIAS(Type, typename RemoveAllExtents<ValueT_>::Type);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct RemoveAllExtents<_ValueT[]> {
-	DD_ALIAS(Type, typename RemoveAllExtents<_ValueT>::Type);
+template <typename ValueT_>
+struct RemoveAllExtents<ValueT_[]> {
+	DD_ALIAS(Type, typename RemoveAllExtents<ValueT_>::Type);
 
 
 };
@@ -50,7 +50,7 @@ DD_TRAIT_MODIFIER(RemoveAllExtents)
 
 
 
-_DD_END
+DD_END_
 
 
 

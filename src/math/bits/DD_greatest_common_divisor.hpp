@@ -1,6 +1,6 @@
 //	DDCPP/math/bits/DD_greatest_common_divisor.hpp
-#ifndef _DD_GREATEST_COMMON_DIVISOR_HPP_INCLUDED
-#	define _DD_GREATEST_COMMON_DIVISOR_HPP_INCLUDED 1
+#ifndef DD_GREATEST_COMMON_DIVISOR_HPP_INCLUDED_
+#	define DD_GREATEST_COMMON_DIVISOR_HPP_INCLUDED_ 1
 
 
 
@@ -8,28 +8,28 @@
 
 
 
-_DD_BEGIN
-template <typename _IntegerT>
-inline _IntegerT DD_CONSTEXPR greatest_common_divisor(
-	_IntegerT __integer_1,
+DD_BEGIN_
+template <typename IntegerT_>
+inline IntegerT_ DD_CONSTEXPR greatest_common_divisor(
+	IntegerT_ integer_1__,
 #	if __cplusplus >= 201402L || __cplusplus < 201103L
-	_IntegerT __integer_2
-) DD_NOEXCEPT_IF(noexcept(__IntegerT()) && noexcept(__integer_1 = __integer_2 DD_COMMA __integer_2 % __integer_2)) {
-	for (_IntegerT __temp; __temp = __integer_1 % __integer_2; ) {
-		__integer_1 = __integer_2;
-		__integer_2 = __temp;
+	IntegerT_ integer_2__
+) DD_NOEXCEPT_IF(noexcept(IntegerT__()) && noexcept(integer_1__ = integer_2__ DD_COMMA integer_2__ % integer_2__)) {
+	for (IntegerT_ temp__; temp__ = integer_1__ % integer_2__; ) {
+		integer_1__ = integer_2__;
+		integer_2__ = temp__;
 	}
-	return __integer_2;
+	return integer_2__;
 #	else
-	_IntegerT const& __integer_2
-) noexcept(noexcept(static_cast<bool>((__integer_1 %= __integer_2)))) {
-	return (__integer_1 %= __integer_2) ? greatest_common_divisor(__integer_2, __integer_1) : __integer_2;
+	IntegerT_ const& integer_2__
+) noexcept(noexcept(static_cast<bool>((integer_1__ %= integer_2__)))) {
+	return (integer_1__ %= integer_2__) ? greatest_common_divisor(integer_2__, integer_1__) : integer_2__;
 #	endif
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

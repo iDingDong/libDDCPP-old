@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_make_unique.hpp
-#ifndef _DD_MAKE_UNIQUE_HPP_INCLUDED
-#	define _DD_MAKE_UNIQUE_HPP_INCLUDED 1
+#ifndef DD_MAKE_UNIQUE_HPP_INCLUDED_
+#	define DD_MAKE_UNIQUE_HPP_INCLUDED_ 1
 
 
 
@@ -14,15 +14,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT, typename... _ArgumentsT>
-inline UniquePointer<_ValueT, void> make_unique(_ArgumentsT&&... __arguments) {
-	return UniquePointer<_ValueT, void>(new _ValueT(__arguments...));
+DD_BEGIN_
+template <typename ValueT_, typename... ArgumentsT_>
+inline UniquePointer<ValueT_, void> make_unique(ArgumentsT_&&... arguments__) {
+	return UniquePointer<ValueT_, void>(new ValueT_(arguments__...));
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

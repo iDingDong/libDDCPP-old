@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_sort.hpp
-#ifndef _DD_SORT_HPP_INCLUDED
-#	define _DD_SORT_HPP_INCLUDED 1
+#ifndef DD_SORT_HPP_INCLUDED_
+#	define DD_SORT_HPP_INCLUDED_ 1
 
 
 
@@ -8,19 +8,19 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 
 
 
-_DD_END
+DD_END_
 
 
 

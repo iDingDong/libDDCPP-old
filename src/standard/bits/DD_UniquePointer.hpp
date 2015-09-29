@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_UniquePointer.hpp
-#ifndef _DD_UNIQUE_POINTER_HPP_INCLUDED
-#	define _DD_UNIQUE_POINTER_HPP_INCLUDED 1
+#ifndef DD_UNIQUE_POINTER_HPP_INCLUDED_
+#	define DD_UNIQUE_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -15,28 +15,28 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ValueT, typename _DeleterT = DefaultTag>
-struct UniquePointer : Comparable<_ValueT, _DeleterT> {
+DD_DETAIL_BEGIN_
+template <typename ValueT_, typename DeleterT_ = DefaultTag>
+struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA _DeleterT>);
-	DD_ALIAS(DeleterType, _DeleterT);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA DeleterT_>);
+	DD_ALIAS(DeleterType, DeleterT_);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
-	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
-	DeleterType mutable _m_deleter DD_IN_CLASS_INITIALIZE(DeleterType());
+	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
+	DeleterType mutable m_deleter_ DD_IN_CLASS_INITIALIZE(DeleterType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
 #	else
-	UniquePointer() DD_NOEXCEPT : _m_pointer(), _m_deleter() {
+	UniquePointer() DD_NOEXCEPT : m_pointer_(), m_deleter_() {
 	}
 #	endif
 
@@ -44,38 +44,38 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()), _m_deleter(forward<DeleterType>(_origin._m_deleter)) {
+	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()), m_deleter_(forward<DeleterType>(origin_.m_deleter_)) {
 	}
 
 #	endif
 
 	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
+	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	template <typename _DeleterT_>
-	constexpr UniquePointer(_DeleterT_&& _deleter) noexcept(
-		noexcept(DeleterType(forward<_DeleterT_>(_deleter)))
-	) : _m_deleter(forward<_DeleterT_>(_deleter)) {
+	template <typename DeleterT__>
+	constexpr UniquePointer(DeleterT__&& deleter_) noexcept(
+		noexcept(DeleterType(forward<DeleterT__>(deleter_)))
+	) : m_deleter_(forward<DeleterT__>(deleter_)) {
 	}
 
 	public:
-	template <typename _DeleterT_>
-	constexpr UniquePointer(PointerType _pointer, _DeleterT_&& _deleter) noexcept(
-		noexcept(DeleterType(forward<_DeleterT_>(_deleter)))
-	) : _m_pointer(_pointer), _m_deleter(forward<_DeleterT_>(_deleter)) {
+	template <typename DeleterT__>
+	constexpr UniquePointer(PointerType pointer_, DeleterT__&& deleter_) noexcept(
+		noexcept(DeleterType(forward<DeleterT__>(deleter_)))
+	) : m_pointer_(pointer_), m_deleter_(forward<DeleterT__>(deleter_)) {
 	}
 #	else
 	public:
-	template <typename _DeleterT_>
-	UniquePointer(_DeleterT_ const& _deleter) : _m_pointer(), _m_deleter(_deleter) {
+	template <typename DeleterT__>
+	UniquePointer(DeleterT__ const& deleter_) : m_pointer_(), m_deleter_(deleter_) {
 	}
 
 	public:
-	template <typename _DeleterT_>
-	constexpr UniquePointer(PointerType _pointer, _DeleterT_ const& _deleter) : _m_pointer(_pointer), _m_deleter(_deleter) {
+	template <typename DeleterT__>
+	constexpr UniquePointer(PointerType pointer_, DeleterT__ const& deleter_) : m_pointer_(pointer_), m_deleter_(deleter_) {
 	}
 #	endif
 
@@ -88,13 +88,13 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
+		return m_pointer_;
 	}
 
 
 	public:
 	DeleterType& get_deleter() const DD_NOEXCEPT {
-		return _m_deleter;
+		return m_deleter_;
 	}
 
 
@@ -105,25 +105,25 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 	public:
-	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
+	ProcessType reset(PointerType pointer_ = PointerType()) DD_NOEXCEPT {
 		destruct();
-		_m_pointer = _pointer;
+		m_pointer_ = pointer_;
 	}
 
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType _temp(get_pointer());
-		_m_pointer = PointerType();
-		return _temp;
+		PointerType temp_(get_pointer());
+		m_pointer_ = PointerType();
+		return temp_;
 	}
 
 
 	public:
-	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
+	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
-		swap(_m_pointer, _target._m_pointer);
-		swap(_m_deleter, _target._m_deleter);
+		swap(m_pointer_, target_.m_pointer_);
+		swap(m_deleter_, target_.m_deleter_);
 	}
 
 
@@ -137,15 +137,15 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) noexcept(true) {
-		swap(_origin);
+	ThisType& operator =(ThisType&& origin_) noexcept(true) {
+		swap(origin_);
 	}
 
 #	endif
 
 	public:
-	ThisType& operator =(PointerType _pointer) DD_NOEXCEPT {
-		reset(_pointer);
+	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
+		reset(pointer_);
 	}
 
 
@@ -175,26 +175,26 @@ struct UniquePointer : Comparable<_ValueT, _DeleterT> {
 
 
 
-template <typename _ValueT>
-struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
+template <typename ValueT_>
+struct UniquePointer<ValueT_, DefaultTag> : Comparable<ValueT_, DefaultTag> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA DefaultTag>);
+	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA DefaultTag>);
 	DD_ALIAS(DeleterType, void);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	public:
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
-	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
+	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
 #	else
-	UniquePointer() throw() : _m_pointer() {
+	UniquePointer() throw() : m_pointer_() {
 	}
 #	endif
 
@@ -202,13 +202,13 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
+	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()) {
 	}
 
 #	endif
 
 	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
+	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	}
 
 
@@ -220,7 +220,7 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
+		return m_pointer_;
 	}
 
 
@@ -231,24 +231,24 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 
 	public:
-	ProcessType reset(PointerType _pointer = PointerType()) DD_NOEXCEPT {
+	ProcessType reset(PointerType pointer_ = PointerType()) DD_NOEXCEPT {
 		destruct();
-		_m_pointer = _pointer;
+		m_pointer_ = pointer_;
 	}
 
 
 	public:
 	PointerType release() DD_NOEXCEPT {
 		PointerType temp(get_pointer());
-		_m_pointer = PointerType();
+		m_pointer_ = PointerType();
 		return temp;
 	}
 
 
 	public:
-	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
+	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
-		swap(_m_pointer, _target._m_pointer);
+		swap(m_pointer_, target_.m_pointer_);
 	}
 
 
@@ -263,15 +263,15 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) noexcept(true) {
-		swap(_origin);
+	ThisType& operator =(ThisType&& origin_) noexcept(true) {
+		swap(origin_);
 	}
 
 #	endif
 
 	public:
-	ThisType& operator =(PointerType _pointer) DD_NOEXCEPT {
-		reset(_pointer);
+	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
+		reset(pointer_);
 	}
 
 
@@ -301,26 +301,26 @@ struct UniquePointer<_ValueT, DefaultTag> : Comparable<_ValueT, DefaultTag> {
 
 
 
-template <typename _ValueT>
-struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> {
+template <typename ValueT_>
+struct UniquePointer<ValueT_[], DefaultTag> : Comparable<ValueT_[], DefaultTag> {
 	public:
-	DD_ALIAS(ThisType, UniquePointer<_ValueT DD_COMMA void>);
+	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA void>);
 	DD_ALIAS(DeleterType, void);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	public:
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 
 	private:
-	PointerType _m_pointer DD_IN_CLASS_INITIALIZE(PointerType());
+	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
 #	else
-	UniquePointer() throw() : _m_pointer() {
+	UniquePointer() throw() : m_pointer_() {
 	}
 #	endif
 
@@ -328,13 +328,13 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr UniquePointer(ThisType&& _origin) noexcept : _m_pointer(_origin.release()) {
+	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()) {
 	}
 
 #	endif
 
 	public:
-	DD_CONSTEXPR UniquePointer(PointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
+	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	}
 
 
@@ -346,7 +346,7 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return _m_pointer;
+		return m_pointer_;
 	}
 
 
@@ -359,22 +359,22 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 	public:
 	ProcessType reset(PointerType target = PointerType()) DD_NOEXCEPT {
 		destruct();
-		_m_pointer = target;
+		m_pointer_ = target;
 	}
 
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType _temp(get_pointer());
-		_m_pointer = PointerType();
-		return _temp;
+		PointerType temp_(get_pointer());
+		m_pointer_ = PointerType();
+		return temp_;
 	}
 
 
 	public:
-	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
+	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
-		swap(_m_pointer, _target._m_pointer);
+		swap(m_pointer_, target_.m_pointer_);
 	}
 
 
@@ -389,15 +389,15 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) noexcept {
-		swap(_origin);
+	ThisType& operator =(ThisType&& origin_) noexcept {
+		swap(origin_);
 	}
 
 #	endif
 
 	public:
-	ThisType& operator =(PointerType _pointer) DD_NOEXCEPT {
-		reset(_pointer);
+	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
+		reset(pointer_);
 	}
 
 
@@ -427,36 +427,36 @@ struct UniquePointer<_ValueT[], DefaultTag> : Comparable<_ValueT[], DefaultTag> 
 
 
 
-template <typename _ValueT, typename _DeleterT>
-inline ValidityType operator ==(
-	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_1,
-	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_2
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(_unique_pointer_1.get_pointer() == _unique_pointer_2.get_pointer())) {
-	return _unique_pointer_1.get_pointer() == _unique_pointer_2.get_pointer();
+template <typename ValueT_, typename DeleterT_>
+inline ValidityType DD_CONSTEXPR operator ==(
+	UniquePointer<ValueT_, DeleterT_> const& unique_pointer_1_,
+	UniquePointer<ValueT_, DeleterT_> const& unique_pointer_2_
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(unique_pointer_1_.get_pointer() == unique_pointer_2_.get_pointer())) {
+	return unique_pointer_1_.get_pointer() == unique_pointer_2_.get_pointer();
 }
 
 
 
-template <typename _ValueT, typename _DeleterT>
-inline ValidityType operator <(
-	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_1,
-	UniquePointer<_ValueT, _DeleterT> const& _unique_pointer_2
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(_unique_pointer_1.get_pointer() < _unique_pointer_2.get_pointer())) {
-	return _unique_pointer_1.get_pointer() < _unique_pointer_2.get_pointer();
+template <typename ValueT_, typename DeleterT_>
+inline ValidityType DD_CONSTEXPR operator <(
+	UniquePointer<ValueT_, DeleterT_> const& unique_pointer_1_,
+	UniquePointer<ValueT_, DeleterT_> const& unique_pointer_2_
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(unique_pointer_1_.get_pointer() < unique_pointer_2_.get_pointer())) {
+	return unique_pointer_1_.get_pointer() < unique_pointer_2_.get_pointer();
 }
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-using _detail::UniquePointer;
+DD_BEGIN_
+using detail_::UniquePointer;
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorDifference.hpp
-#ifndef _DD_ITERATOR_DIFFERENCE_HPP_INCLUDED
-#	define _DD_ITERATOR_DIFFERENCE_HPP_INCLUDED 1
+#ifndef DD_ITERATOR_DIFFERENCE_HPP_INCLUDED_
+#	define DD_ITERATOR_DIFFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -8,19 +8,19 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 DD_NESTED_TYPE_TRAIT(IteratorDifference, DifferenceType, DD::DifferenceType)
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _IteratorT>
-using IteratorDifferenceType = typename IteratorDifference<_IteratorT>::Type;
+template <typename IteratorT_>
+using IteratorDifferenceType = typename IteratorDifference<IteratorT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

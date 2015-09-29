@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_generate.hpp
-#ifndef _DD_GENERATE_HPP_INCLUDED
-#	define _DD_GENERATE_HPP_INCLUDED 1
+#ifndef DD_GENERATE_HPP_INCLUDED_
+#	define DD_GENERATE_HPP_INCLUDED_ 1
 
 
 
@@ -8,21 +8,21 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _Generator>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename Generator_>
 ProcessType generate(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_Generator const& __generator
-) DD_NOEXCEPT_AS(*++__begin = __generator() DD_COMMA __begin != __end) {
-	for (; __begin != __end; ++__begin) {
-		*__begin = __generator();
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	Generator_ const& generator__
+) DD_NOEXCEPT_AS(*++begin__ = generator__() DD_COMMA begin__ != end__) {
+	for (; begin__ != end__; ++begin__) {
+		*begin__ = generator__();
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

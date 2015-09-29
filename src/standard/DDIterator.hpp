@@ -1,6 +1,6 @@
 //	DDCPP/standard/DDIterator.hpp
-#ifndef _DDITERATOR_HPP_INCLUDED
-#	define _DDITERATOR_HPP_INCLUDED 1
+#ifndef DDITERATOR_HPP_INCLUDED_
+#	define DDITERATOR_HPP_INCLUDED_ 1
 
 
 

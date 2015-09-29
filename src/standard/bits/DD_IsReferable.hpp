@@ -1,6 +1,6 @@
 //	standard/bits/DD_IsReferable.hpp(Undone)
-#ifndef _DD_IS_REFERABLE_HPP_INCLUDED
-#	define _DD_IS_REFERABLE_HPP_INCLUDED 1
+#ifndef DD_IS_REFERABLE_HPP_INCLUDED_
+#	define DD_IS_REFERABLE_HPP_INCLUDED_ 1
 
 
 
@@ -16,26 +16,26 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
-struct IsReferable : OrType<std::is_object<_ObjectT>, IsReference<_ObjectT>> {
+DD_BEGIN_
+template <typename ObjectT_>
+struct IsReferable : OrType<std::is_object<ObjectT_>, IsReference<ObjectT_>> {
 };
 
 
 
-template <typename _ResultT, typename... _ArgumentsT>
-struct IsReferable<_ResultT(_ArgumentsT...)> : TrueType {
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsReferable<ResultT_(ArgumentsT_...)> : TrueType {
 };
 
 
 
-template <typename _ResultT, typename... _ArgumentsT>
-struct IsReferable<_ResultT(_ArgumentsT... ...)> : TrueType {
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsReferable<ResultT_(ArgumentsT_... ...)> : TrueType {
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

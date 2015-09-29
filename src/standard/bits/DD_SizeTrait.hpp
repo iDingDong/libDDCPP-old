@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_SizeTrait.hpp
-#ifndef _DD_SIZE_TRAIT_HPP_INCLUDED
-#	define _DD_SIZE_TRAIT_HPP_INCLUDED 1
+#ifndef DD_SIZE_TRAIT_HPP_INCLUDED_
+#	define DD_SIZE_TRAIT_HPP_INCLUDED_ 1
 
 
 
@@ -8,16 +8,16 @@
 
 
 
-_DD_BEGIN
-template <SizeType _size_c>
+DD_BEGIN_
+template <SizeType size_c_>
 struct SizeTrait {
-	char value[_size_c];
+	char value[size_c_];
 
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

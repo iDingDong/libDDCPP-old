@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsSignedInt.hpp
-#ifndef _DD_IS_SIGNED_INT_HPP_INCLUDED
-#	define _DD_IS_SIGNED_INT_HPP_INCLUDED 1
+#ifndef DD_IS_SIGNED_INT_HPP_INCLUDED_
+#	define DD_IS_SIGNED_INT_HPP_INCLUDED_ 1
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsSignedInt : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsSignedInt_ : FalseType {
 };
 
 
 
 template <>
-struct _IsSignedInt<signed int> : TrueType {
+struct IsSignedInt_<signed int> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsSignedInt = AndType<_detail::_IsSignedInt<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsSignedInt = AndType<detail_::IsSignedInt_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsSignedInt : _detail::_IsSignedInt<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsSignedInt : detail_::IsSignedInt_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

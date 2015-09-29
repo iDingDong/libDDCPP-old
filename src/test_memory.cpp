@@ -1,5 +1,4 @@
 #include "test_memory.h"
-#define TEST_OBJECT_AUTO_PROMPT 0
 #include "test_object.hpp"
 #include <iostream>
 #include <thread>
@@ -24,7 +23,7 @@ void th1_main() {
 		}
 		std::cout << "end: " << g_ip.get_reference_count() << std::endl;
 	}
-} 
+}
 */
 
 

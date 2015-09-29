@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_DefualtDeleter.hpp
-#ifndef _DD_DEFAULT_DELETER_HPP_INCLUDED
-#	define _DD_DEFAULT_DELETER_HPP_INCLUDED 1
+#ifndef DD_DEFAULT_DELETER_HPP_INCLUDED_
+#	define DD_DEFAULT_DELETER_HPP_INCLUDED_ 1
 
 
 
@@ -8,11 +8,11 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT>
+DD_BEGIN_
+template <typename ValueT_>
 class DefaultDeleter {
 	public:
-	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(ValueType, ValueT_);
 
 
 #	if __cplusplus >= 201103L
@@ -22,9 +22,9 @@ class DefaultDeleter {
 
 #	endif
 	public:
-	ProcessType operator ()(_ValueT* _pointer) DD_NOEXCEPT {
+	ProcessType operator ()(ValueT_* pointer_) DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");
-		delete _pointer;
+		delete pointer_;
 	}
 
 
@@ -32,7 +32,7 @@ class DefaultDeleter {
 
 
 
-_DD_END
+DD_END_
 
 
 

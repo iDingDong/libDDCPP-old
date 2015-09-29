@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Decay.hpp
-#ifndef _DD_DECAY_HPP_INCLUDED
-#	define _DD_DECAY_HPP_INCLUDED 1
+#ifndef DD_DECAY_HPP_INCLUDED_
+#	define DD_DECAY_HPP_INCLUDED_ 1
 
 
 
@@ -20,17 +20,17 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct Decay {
-	using _TempT = RemoveReferenceType<_ObjectT>;
+	using TempT_ = RemoveReferenceType<ObjectT_>;
 	using Type = ConditionalType<
-		IsArray<_TempT>::value,
-		RemoveExtentType<_TempT>*,
+		IsArray<TempT_>::value,
+		RemoveExtentType<TempT_>*,
 		ConditionalType<
-			IsFunction<_TempT>::value,
-			AddPointerType<_TempT>,
-			RemoveCVType<_TempT>
+			IsFunction<TempT_>::value,
+			AddPointerType<TempT_>,
+			RemoveCVType<TempT_>
 		>
 	>;
 
@@ -43,7 +43,7 @@ DD_TRAIT_MODIFIER(Decay)
 
 
 
-_DD_END
+DD_END_
 
 
 

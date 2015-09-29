@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorPointer.hpp
-#ifndef _DD_ITERATOR_POINTER_HPP_INCLUDED
-#	define _DD_ITERATOR_POINTER_HPP_INCLUDED 1
+#ifndef DD_ITERATOR_POINTER_HPP_INCLUDED_
+#	define DD_ITERATOR_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -9,33 +9,33 @@
 
 
 #	if DDCPP_COMPAT_STL
-_DD_DETAIL_BEGIN
-DD_NESTED_TYPE_TRAIT(_IteratorPointer, pointer, typename IteratorValue<_MACRO_ObjectT>::Type*)
+DD_DETAIL_BEGIN_
+DD_NESTED_TYPE_TRAIT(IteratorPointer_, pointer, typename IteratorValue<MACRO_ObjectT_>::Type*)
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename _detail::_IteratorPointer<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename detail_::IteratorPointer_<MACRO_ObjectT_>::Type)
 #	else
-DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename IteratorValue<_MACRO_ObjectT>::Type*)
+DD_NESTED_TYPE_TRAIT(IteratorPointer, PointerType, typename IteratorValue<MACRO_ObjectT_>::Type*)
 #	endif
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _IteratorT>
-using IteratorPointerType = typename IteratorPointer<_IteratorT>::Type;
+template <typename IteratorT_>
+using IteratorPointerType = typename IteratorPointer<IteratorT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

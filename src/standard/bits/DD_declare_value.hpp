@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_declare_value.hpp
-#ifndef _DD_DECLARE_VALUE_HPP_INCLUDED
-#	define _DD_DECLARE_VALUE_HPP_INCLUDED 1
+#ifndef DD_DECLARE_VALUE_HPP_INCLUDED_
+#	define DD_DECLARE_VALUE_HPP_INCLUDED_ 1
 
 
 
@@ -14,31 +14,31 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _declare_value_protector {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct declare_value_protector_ {
 	static constexpr ValidityType value = false;
-	static AddRvalueReferenceType<_ObjectT> _declare_value() noexcept;
+	static AddRvalueReferenceType<ObjectT_> declare_value_() noexcept;
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
-AddRvalueReferenceType<_ObjectT> declare_value() noexcept {
-	static_assert(_detail::_declare_value_protector<_ObjectT>::value, "DD::declare_value is forbidden to be evaluated.");
-	return _detail::_declare_value_protector<_ObjectT>::_declare_value();
+DD_BEGIN_
+template <typename ObjectT_>
+AddRvalueReferenceType<ObjectT_> declare_value() noexcept {
+	static_assert(detail_::declare_value_protector_<ObjectT_>::value, "DD::declare_value is forbidden to be evaluated.");
+	return detail_::declare_value_protector_<ObjectT_>::declare_value_();
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

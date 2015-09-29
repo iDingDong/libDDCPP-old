@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RemoveConst.hpp
-#ifndef _DD_REMOVE_CONST_HPP_INCLUDED
-#	define _DD_REMOVE_CONST_HPP_INCLUDED 1
+#ifndef DD_REMOVE_CONST_HPP_INCLUDED_
+#	define DD_REMOVE_CONST_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct RemoveConst {
 #	if __cplusplus >= 201402L
-	using Type = std::remove_const_t<_ObjectT>;
+	using Type = std::remove_const_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::remove_const<_ObjectT>::type;
+	using Type = typename std::remove_const<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -28,9 +28,9 @@ struct RemoveConst {
 
 
 
-template <typename _ObjectT>
-struct RemoveConst<_ObjectT const> {
-	DD_ALIAS(Type, _ObjectT);
+template <typename ObjectT_>
+struct RemoveConst<ObjectT_ const> {
+	DD_ALIAS(Type, ObjectT_);
 
 
 };
@@ -41,7 +41,7 @@ DD_TRAIT_MODIFIER(RemoveConst)
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_partition.hpp
-#ifndef _DD_PARTITION_HPP_INCLUDED
-#	define _DD_PARTITION_HPP_INCLUDED 1
+#ifndef DD_PARTITION_HPP_INCLUDED_
+#	define DD_PARTITION_HPP_INCLUDED_ 1
 
 
 
@@ -8,57 +8,57 @@
 
 
 
-_DD_BEGIN
-template <typename _BidirectionalIteratorT, typename _ValueT>
-_BidirectionalIteratorT partition(
-	_BidirectionalIteratorT __begin,
-	_BidirectionalIteratorT __end,
-	_ValueT __key
-) DD_NOEXCEPT_IF(noexcept(*--++__begin < __key) && noexcept(swap_target(__begin, __end))) {
-	while (__begin != __end) {
-		while (*__begin < __key) {
-			++__begin;
-			if (__begin == __end) {
-				return __begin;
+DD_BEGIN_
+template <typename BidirectionalIteratorT_, typename ValueT_>
+BidirectionalIteratorT_ partition(
+	BidirectionalIteratorT_ begin__,
+	BidirectionalIteratorT_ end__,
+	ValueT_ key__
+) DD_NOEXCEPT_IF(noexcept(*--++begin__ < key__) && noexcept(swap_target(begin__, end__))) {
+	while (begin__ != end__) {
+		while (*begin__ < key__) {
+			++begin__;
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		while (!(*--__end < __key)) {
-			if (__begin == __end) {
-				return __begin;
+		while (!(*--end__ < key__)) {
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		swap_target(__begin, __end);
+		swap_target(begin__, end__);
 	}
-	return __begin;
+	return begin__;
 }
 
-template <typename _BidirectionalIteratorT, typename _ValueT, typename _BinaryPredicatorT>
-_BidirectionalIteratorT partition(
-	_BidirectionalIteratorT __begin,
-	_BidirectionalIteratorT __end,
-	_ValueT __key,
-	_BinaryPredicatorT __less
-) DD_NOEXCEPT_IF(noexcept(__less(*--++__begin, __key)) && noexcept(swap_target(__begin, __end))) {
-	while (__begin != __end) {
-		while (__less(*__begin, __key)) {
-			++__begin;
-			if (__begin == __end) {
-				return __begin;
+template <typename BidirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+BidirectionalIteratorT_ partition(
+	BidirectionalIteratorT_ begin__,
+	BidirectionalIteratorT_ end__,
+	ValueT_ key__,
+	BinaryPredicatorT_ less__
+) DD_NOEXCEPT_IF(noexcept(less__(*--++begin__, key__)) && noexcept(swap_target(begin__, end__))) {
+	while (begin__ != end__) {
+		while (less__(*begin__, key__)) {
+			++begin__;
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		while (!__less(*--__end, __key)) {
-			if (__begin == __end) {
-				return __begin;
+		while (!less__(*--end__, key__)) {
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		swap_target(__begin, __end);
+		swap_target(begin__, end__);
 	}
-	return __begin;
+	return begin__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

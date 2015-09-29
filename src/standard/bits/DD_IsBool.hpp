@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsBool.hpp
-#ifndef _DD_IS_BOOL_HPP_INCLUDED
-#	define _DD_IS_BOOL_HPP_INCLUDED 1
+#ifndef DD_IS_BOOL_HPP_INCLUDED_
+#	define DD_IS_BOOL_HPP_INCLUDED_ 1
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsBool : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsBool_ : FalseType {
 };
 
 
 
 template <>
-struct _IsBool<bool> : TrueType {
+struct IsBool_<bool> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsBool = AndType<_detail::_IsBool<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsBool = AndType<detail_::IsBool_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsBool : _detail::_IsBool<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsBool : detail_::IsBool_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

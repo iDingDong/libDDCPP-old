@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsBidirectionalIterator.hpp
-#ifndef _DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED
-#	define _DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED_
+#	define DD_IS_BIDIRECTIONAL_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -9,19 +9,19 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _IteratorsT>
-using IsBidirectionalIterator = IsBaseOf<BidirectionalIterator, IteratorCatagoryType<_IteratorsT>...>;
+template <typename... IteratorsT_>
+using IsBidirectionalIterator = IsBaseOf<BidirectionalIterator, IteratorCatagoryType<IteratorsT_>...>;
 #	else
-template <typename _IteratorT>
-struct IsBidirectionalIterator : IsBaseOf<BidirectionalIterator, typename IteratorCatagory<_IteratorT>::Type> {
+template <typename IteratorT_>
+struct IsBidirectionalIterator : IsBaseOf<BidirectionalIterator, typename IteratorCatagory<IteratorT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_BuildInTypes.hpp
-#ifndef _DD_BUILD_IN_TYPES_HPP_INCLUDED
-#	define _DD_BUILD_IN_TYPES_HPP_INCLUDED 1
+#ifndef DD_BUILD_IN_TYPES_HPP_INCLUDED_
+#	define DD_BUILD_IN_TYPES_HPP_INCLUDED_ 1
 
 
 
@@ -10,7 +10,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 DD_ALIAS(Char, char);
 DD_ALIAS(UnsignedChar, unsigned char);
 DD_ALIAS(SignedChar, signed char);
@@ -38,7 +38,7 @@ using UnsignedInt32 = std::uint32_t;
 using SignedInt32 = std::int32_t;
 using UnsignedInt64 = std::uint64_t;
 using SignedInt64 = std::int64_t;
-#	elif defined(_WIN64)
+#	elif defined(WIN64_)
 typedef UnsignedChar UnsignedInt8;
 typedef SignedChar SignedInt8;
 typedef UnsignedShort UnsignedInt16;
@@ -51,7 +51,7 @@ typedef SignedLongInt SignedInt64;
 
 
 
-_DD_END
+DD_END_
 
 
 

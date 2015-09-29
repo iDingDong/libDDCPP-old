@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_GetPackBack.hpp
-#ifndef _DD_GET_PACK_BACK_HPP_INCLUDED
-#	define _DD_GET_PACK_BACK_HPP_INCLUDED 1
+#ifndef DD_GET_PACK_BACK_HPP_INCLUDED_
+#	define DD_GET_PACK_BACK_HPP_INCLUDED_ 1
 
 
 
@@ -14,28 +14,28 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT, typename... _ObjectsT>
-struct GetPackBack : GetPackBack<_ObjectsT...> {
+DD_BEGIN_
+template <typename ObjectT_, typename... ObjectsT_>
+struct GetPackBack : GetPackBack<ObjectsT_...> {
 };
 
 
 
-template <typename _ObjectT>
-struct GetPackBack<_ObjectT> {
-	using Type = _ObjectT;
+template <typename ObjectT_>
+struct GetPackBack<ObjectT_> {
+	using Type = ObjectT_;
 
 
 };
 
 
 
-template <typename _ObjectT, typename... _ObjectsT>
-using GetPackBackType = typename GetPackBack<_ObjectT, _ObjectsT...>::Type;
+template <typename ObjectT_, typename... ObjectsT_>
+using GetPackBackType = typename GetPackBack<ObjectT_, ObjectsT_...>::Type;
 
 
 
-_DD_END
+DD_END_
 
 
 

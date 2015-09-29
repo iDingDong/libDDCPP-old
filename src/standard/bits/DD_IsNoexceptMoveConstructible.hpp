@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsNoexceptMoveConstructible.hpp
-#ifndef _DD_IS_NOEXCEPT_MOVE_CONSTRUCTIBLE_HPP_INCLUDED
-#	define _DD_IS_NOEXCEPT_MOVE_CONSTRUCTIBLE_HPP_INCLUDED 1
+#ifndef DD_IS_NOEXCEPT_MOVE_CONSTRUCTIBLE_HPP_INCLUDED_
+#	define DD_IS_NOEXCEPT_MOVE_CONSTRUCTIBLE_HPP_INCLUDED_ 1
 
 
 #	if __cplusplus < 201103L
@@ -15,24 +15,24 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsNoexceptMoveConstructible : OrType<StdBoolConstant<std::is_nothrow_move_constructible<_ObjectT>>> {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsNoexceptMoveConstructible_ : OrType<StdBoolConstant<std::is_nothrow_move_constructible<ObjectT_>>> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsNoexceptMoveConstructible = AndType<_detail::_IsNoexceptMoveConstructible<_ObjectsT>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsNoexceptMoveConstructible = AndType<detail_::IsNoexceptMoveConstructible_<ObjectsT_>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

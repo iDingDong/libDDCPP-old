@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_count.hpp
-#ifndef _DD_COUNT_HPP_INCLUDED
-#	define _DD_COUNT_HPP_INCLUDED 1
+#ifndef DD_COUNT_HPP_INCLUDED_
+#	define DD_COUNT_HPP_INCLUDED_ 1
 
 
 
@@ -8,51 +8,51 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _ValueT>
-DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT const& __value
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin == __value) {
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename ValueT_>
+DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ == value__) {
 #	if __cplusplus >= 201103L
-	auto _result = DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT)();
+	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
 #	else
-	typedef DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) _ResultType;
-	_ResultType _result = _ResultType();
+	typedef DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) ResultType_;
+	ResultType_ result_ = ResultType_();
 #	endif
-	for (; __begin != __end; ++__begin) {
-		if (*__begin == __value) {
-			++_result;
+	for (; begin__ != end__; ++begin__) {
+		if (*begin__ == value__) {
+			++result_;
 		}
 	}
-	return _result;
+	return result_;
 }
 
-template <typename _UndirectionalIteratorT, typename _ValueT, typename _BinaryPredicatorT>
-DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT const& __value,
-	_BinaryPredicatorT const& __equal
-) DD_NOEXCEPT_AS(++__begin != __end && __equal(*__begin, __value)) {
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT_ const& value__,
+	BinaryPredicatorT_ const& equal__
+) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, value__)) {
 #	if __cplusplus >= 201103L
-	auto _result = DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT)();
+	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
 #	else
-	typedef DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) _ResultType;
-	_ResultType _result = _ResultType();
+	typedef DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) ResultType_;
+	ResultType_ result_ = ResultType_();
 #	endif
-	for (; __begin != __end; ++__begin) {
-		if (__equal(*__begin, __value)) {
-			++_result;
+	for (; begin__ != end__; ++begin__) {
+		if (equal__(*begin__, value__)) {
+			++result_;
 		}
 	}
-	return _result;
+	return result_;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

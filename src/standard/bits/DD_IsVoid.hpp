@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsVoid.hpp
-#ifndef _DD_IS_VOID_HPP_INCLUDED
-#	define _DD_IS_VOID_HPP_INCLUDED 1
+#ifndef DD_IS_VOID_HPP_INCLUDED_
+#	define DD_IS_VOID_HPP_INCLUDED_ 1
 
 
 
@@ -14,40 +14,40 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsVoid : StdBoolConstant<std::is_void<_ObjectT>> {
+struct IsVoid_ : StdBoolConstant<std::is_void<ObjectT_>> {
 #	else
-struct _IsVoid : FalseType {
+struct IsVoid_ : FalseType {
 #	endif
 };
 
 
 
 template <>
-struct _IsVoid<void> : TrueType {
+struct IsVoid_<void> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsVoid = AndType<_detail::_IsVoid<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsVoid = AndType<detail_::IsVoid_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsVoid : _detail::_IsVoid<_ObjectT> {
+template <typename ObjectT_>
+struct IsVoid : detail_::IsVoid_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

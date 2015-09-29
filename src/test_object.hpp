@@ -1,5 +1,5 @@
-#ifndef _TEST_OBJECT_HPP
-#	define _TEST_OBJECT_HPP 1
+#ifndef TEST_OBJECT_HPP_
+#	define TEST_OBJECT_HPP_ 1
 
 
 
@@ -18,7 +18,7 @@ struct TestImpl {
 	static std::size_t count;
 	static std::size_t history_count;
 	std::size_t const id;
-	
+
 	TestImpl() throw() : id(history_count++) {
 		++count;
 #	if TEST_OBJECT_AUTO_PROMPT
@@ -26,7 +26,7 @@ struct TestImpl {
 #	endif
 		auto_prompt();
 	}
-	
+
 	TestImpl(TestImpl const&) throw() : id(history_count++) {
 		++count;
 #	if TEST_OBJECT_AUTO_PROMPT
@@ -34,7 +34,7 @@ struct TestImpl {
 #	endif
 		auto_prompt();
 	}
-	
+
 #	if __cplusplus >= 201103L
 	TestImpl(TestImpl&&) throw() : id(history_count++) {
 		++count;
@@ -43,9 +43,9 @@ struct TestImpl {
 #	endif
 		auto_prompt();
 	}
-	
+
 #	endif
-	
+
 	~TestImpl() throw() {
 		--count;
 #	if TEST_OBJECT_AUTO_PROMPT
@@ -53,14 +53,14 @@ struct TestImpl {
 #	endif
 		auto_prompt();
 	}
-	
+
 	void auto_prompt() throw() {
 #	if TEST_OBJECT_AUTO_PROMPT
 		std::cout << count << " test objects.\n" << std::endl;
 #	endif
 	}
-	
-	
+
+
 };
 
 

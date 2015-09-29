@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_mismatch.hpp
-#ifndef _DD_MISMATCH_HPP_INCLUDED
-#	define _DD_MISMATCH_HPP_INCLUDED 1
+#ifndef DD_MISMATCH_HPP_INCLUDED_
+#	define DD_MISMATCH_HPP_INCLUDED_ 1
 
 
 
@@ -8,66 +8,66 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2>
-Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2
-) DD_NOEXCEPT_AS(__begin_1 != __end_1 && *++__begin_1 == *++__begin_2) {
-	while (__begin_1 != __end_1 && *__begin_1 == *__begin_2) {
-		++__begin_1;
-		++__begin_2;
+DD_BEGIN_
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> mismatch(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__
+) DD_NOEXCEPT_AS(begin_1__ != end_1__ && *++begin_1__ == *++begin_2__) {
+	while (begin_1__ != end_1__ && *begin_1__ == *begin_2__) {
+		++begin_1__;
+		++begin_2__;
 	}
-	return Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2>{__begin_1, __begin_2};
+	return Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_>{begin_1__, begin_2__};
 }
 
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2>
-Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2,
-	_UndirectionalIteratorT2 const& __end_2
-) DD_NOEXCEPT_AS(__begin_1 != __end_1 && __begin_2 != __end_2 && *++__begin_1 == *++__begin_2) {
-	while (__begin_1 != __end_1 && __begin_2 != __end_2 && *__begin_1 == *__begin_2) {
-		++__begin_1;
-		++__begin_2;
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> mismatch(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ const& end_2__
+) DD_NOEXCEPT_AS(begin_1__ != end_1__ && begin_2__ != end_2__ && *++begin_1__ == *++begin_2__) {
+	while (begin_1__ != end_1__ && begin_2__ != end_2__ && *begin_1__ == *begin_2__) {
+		++begin_1__;
+		++begin_2__;
 	}
-	return Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2>{__begin_1, __begin_2};
+	return Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_>{begin_1__, begin_2__};
 }
 
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _BinaryPredicatorT>
-Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2,
-	_BinaryPredicatorT const& __equal
-) DD_NOEXCEPT_AS(__begin_1 != __end_1 && __equal(*++__begin_1, *++__begin_2)) {
-	while (__begin_1 != __end_1 && __equal(*__begin_1, *__begin_2)) {
-		++__begin_1;
-		++__begin_2;
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicatorT_>
+Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> mismatch(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	BinaryPredicatorT_ const& equal__
+) DD_NOEXCEPT_AS(begin_1__ != end_1__ && equal__(*++begin_1__, *++begin_2__)) {
+	while (begin_1__ != end_1__ && equal__(*begin_1__, *begin_2__)) {
+		++begin_1__;
+		++begin_2__;
 	}
-	return Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2>{__begin_1, __begin_2};
+	return Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_>{begin_1__, begin_2__};
 }
 
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2, typename _BinaryPredicatorT>
-Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2> mismatch(
-	_UndirectionalIteratorT1 __begin_1,
-	_UndirectionalIteratorT1 const& __end_1,
-	_UndirectionalIteratorT2 __begin_2,
-	_UndirectionalIteratorT2 const& __end_2,
-	_BinaryPredicatorT const& __equal
-) DD_NOEXCEPT_AS(__begin_1 != __end_1 && __begin_2 != __end_2 && __equal(*++__begin_1, *++__begin_2)) {
-	while (__begin_1 != __end_1 && __begin_2 != __end_2 && __equal(*__begin_1, *__begin_2)) {
-		++__begin_1;
-		++__begin_2;
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicatorT_>
+Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> mismatch(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ const& end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ const& end_2__,
+	BinaryPredicatorT_ const& equal__
+) DD_NOEXCEPT_AS(begin_1__ != end_1__ && begin_2__ != end_2__ && equal__(*++begin_1__, *++begin_2__)) {
+	while (begin_1__ != end_1__ && begin_2__ != end_2__ && equal__(*begin_1__, *begin_2__)) {
+		++begin_1__;
+		++begin_2__;
 	}
-	return Pair<_UndirectionalIteratorT1, _UndirectionalIteratorT2>{__begin_1, __begin_2};
+	return Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_>{begin_1__, begin_2__};
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_TypeList.hpp
-#ifndef _DD_TYPE_LIST_HPP_INCLUDED
-#	define _DD_TYPE_LIST_HPP_INCLUDED 1
+#ifndef DD_TYPE_LIST_HPP_INCLUDED_
+#	define DD_TYPE_LIST_HPP_INCLUDED_ 1
 
 
 
@@ -15,41 +15,41 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename... _ObjectsT>
+DD_DETAIL_BEGIN_
+template <typename... ObjectsT_>
 struct TypeList;
 
 
 
-template <typename _TypeListT1, typename _TypeListT2>
-struct _ConcatTypeList;
+template <typename TypeListT1_, typename TypeListT2_>
+struct ConcatTypeList_;
 
 
 
-template <typename... _ObjectsT1, typename... _ObjectsT2>
-struct _ConcatTypeList<TypeList<_ObjectsT1...>, TypeList<_ObjectsT2...>> {
-	using Type = TypeList<_ObjectsT1..., _ObjectsT2...>;
+template <typename... ObjectsT1_, typename... ObjectsT2_>
+struct ConcatTypeList_<TypeList<ObjectsT1_...>, TypeList<ObjectsT2_...>> {
+	using Type = TypeList<ObjectsT1_..., ObjectsT2_...>;
 
 
 };
 
 
 
-template <typename _TypeListT1, typename _TypeListT2>
-using _ConcatTypeListType = typename _ConcatTypeList<_TypeListT1, _TypeListT2>::Type;
+template <typename TypeListT1_, typename TypeListT2_>
+using ConcatTypeListType_ = typename ConcatTypeList_<TypeListT1_, TypeListT2_>::Type;
 
 
 
-template <typename _TypeListT>
-struct _RemoveTypeListBack;
+template <typename TypeListT_>
+struct RemoveTypeListBack_;
 
 
 
-template <typename _ObjectT, typename... _ObjectsT>
-struct _RemoveTypeListBack<TypeList<_ObjectT, _ObjectsT...>> {
-	using Type = _ConcatTypeListType<
-		TypeList<_ObjectT>,
-		typename _RemoveTypeListBack<TypeList<_ObjectsT...>>::Type
+template <typename ObjectT_, typename... ObjectsT_>
+struct RemoveTypeListBack_<TypeList<ObjectT_, ObjectsT_...>> {
+	using Type = ConcatTypeListType_<
+		TypeList<ObjectT_>,
+		typename RemoveTypeListBack_<TypeList<ObjectsT_...>>::Type
 	>;
 
 
@@ -57,8 +57,8 @@ struct _RemoveTypeListBack<TypeList<_ObjectT, _ObjectsT...>> {
 
 
 
-template <typename _ObjectT>
-struct _RemoveTypeListBack<TypeList<_ObjectT>> {
+template <typename ObjectT_>
+struct RemoveTypeListBack_<TypeList<ObjectT_>> {
 	using Type = TypeList<>;
 
 
@@ -66,50 +66,50 @@ struct _RemoveTypeListBack<TypeList<_ObjectT>> {
 
 
 
-template <typename _TypeListT>
-using _RemoveTypeListBackType = typename _RemoveTypeListBack<_TypeListT>::Type;
+template <typename TypeListT_>
+using RemoveTypeListBackType_ = typename RemoveTypeListBack_<TypeListT_>::Type;
 
 
 
-template <typename... _ObjectsT>
+template <typename... ObjectsT_>
 struct TypeList {
 	public:
-	using ThisType = TypeList<_ObjectsT...>;
-	static LengthType constexpr length = sizeof...(_ObjectsT);
+	using ThisType = TypeList<ObjectsT_...>;
+	static LengthType constexpr length = sizeof...(ObjectsT_);
 
 
 	public:
-	template <typename... _ObjectsT_>
-	using PushFront = _ConcatTypeListType<ThisType, TypeList<_ObjectsT_...>>;
+	template <typename... ObjectsT__>
+	using PushFront = ConcatTypeListType_<ThisType, TypeList<ObjectsT__...>>;
 
 	public:
-	template <typename... _ObjectsT_>
-	using PushBack = _ConcatTypeListType<TypeList<_ObjectsT_...>, ThisType>;
+	template <typename... ObjectsT__>
+	using PushBack = ConcatTypeListType_<TypeList<ObjectsT__...>, ThisType>;
 
 	public:
-	template <typename _TypeListT>
-	using Concat = _ConcatTypeListType<ThisType, _TypeListT>;
+	template <typename TypeListT_>
+	using Concat = ConcatTypeListType_<ThisType, TypeListT_>;
 
 	public:
 	using Clear = TypeList<>;
 
 
 	private:
-	template <typename... _ObjectsT_>
+	template <typename... ObjectsT__>
 	struct Contains : TrueType {
 	};
 
 
 	private:
-	template <typename _ObjectT_, typename... _ObjectsT_>
-	struct Contains<_ObjectT_, _ObjectsT_...> : FalseType {
+	template <typename ObjectT__, typename... ObjectsT__>
+	struct Contains<ObjectT__, ObjectsT__...> : FalseType {
 	};
 
 
 	public:
-	template <typename... _ObjectsT_>
+	template <typename... ObjectsT__>
 	static ValidityType constexpr contains() noexcept {
-		return Contains<TypeList<_ObjectsT_...>>::value;
+		return Contains<TypeList<ObjectsT__...>>::value;
 	}
 
 
@@ -117,59 +117,59 @@ struct TypeList {
 
 
 
-template <typename _ObjectT, typename... _ObjectsT>
-struct TypeList<_ObjectT, _ObjectsT...> {
+template <typename ObjectT_, typename... ObjectsT_>
+struct TypeList<ObjectT_, ObjectsT_...> {
 	public:
-	using ThisType = TypeList<_ObjectT, _ObjectsT...>;
-	static LengthType constexpr length = TypeList<_ObjectsT...>::length + 1;
-
-
-	public:
-	using Front = _ObjectT;
-	using Back = GetPackBackType<_ObjectT, _ObjectsT...>;
+	using ThisType = TypeList<ObjectT_, ObjectsT_...>;
+	static LengthType constexpr length = TypeList<ObjectsT_...>::length + 1;
 
 
 	public:
-	template <typename... _ObjectsT_>
-	using PushFront = _ConcatTypeListType<ThisType, TypeList<_ObjectsT_...>>;
+	using Front = ObjectT_;
+	using Back = GetPackBackType<ObjectT_, ObjectsT_...>;
+
 
 	public:
-	template <typename... _ObjectsT_>
-	using PushBack = _ConcatTypeListType<TypeList<_ObjectsT_...>, ThisType>;
+	template <typename... ObjectsT__>
+	using PushFront = ConcatTypeListType_<ThisType, TypeList<ObjectsT__...>>;
 
 	public:
-	using PopFront = TypeList<_ObjectsT...>;
+	template <typename... ObjectsT__>
+	using PushBack = ConcatTypeListType_<TypeList<ObjectsT__...>, ThisType>;
 
 	public:
-	using PopBack = _RemoveTypeListBackType<ThisType>;
+	using PopFront = TypeList<ObjectsT_...>;
 
 	public:
-	template <typename _TypeListT>
-	using Concat = _ConcatTypeListType<ThisType, _TypeListT>;
+	using PopBack = RemoveTypeListBackType_<ThisType>;
+
+	public:
+	template <typename TypeListT_>
+	using Concat = ConcatTypeListType_<ThisType, TypeListT_>;
 
 	public:
 	using Clear = TypeList<>;
 
 
 	private:
-	template <typename... _ObjectsT_>
+	template <typename... ObjectsT__>
 	struct Contains : TrueType {
 	};
 
 
 	private:
-	template <typename _ObjectT_, typename... _ObjectsT_>
-	struct Contains<_ObjectT_, _ObjectsT_...> : AndType<
-		ContainedByPack<_ObjectT_, _ObjectT, _ObjectsT...>,
-		Contains<_ObjectsT_...>
+	template <typename ObjectT__, typename... ObjectsT__>
+	struct Contains<ObjectT__, ObjectsT__...> : AndType<
+		ContainedByPack<ObjectT__, ObjectT_, ObjectsT_...>,
+		Contains<ObjectsT__...>
 	> {
 	};
 
 
 	public:
-	template <typename... _ObjectsT_>
+	template <typename... ObjectsT__>
 	static ValidityType constexpr contains() noexcept {
-		return Contains<TypeList<_ObjectsT_...>>::value;
+		return Contains<TypeList<ObjectsT__...>>::value;
 	}
 
 
@@ -177,16 +177,16 @@ struct TypeList<_ObjectT, _ObjectsT...> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-using _detail::TypeList;
+DD_BEGIN_
+using detail_::TypeList;
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 // standard/bits/DD_for_each.hpp
-#ifndef _DD_FOR_EACH_HPP_INCLUDED
-#	define _DD_FOR_EACH_HPP_INCLUDED 1
+#ifndef DD_FOR_EACH_HPP_INCLUDED_
+#	define DD_FOR_EACH_HPP_INCLUDED_ 1
 
 
 
@@ -8,31 +8,31 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryFunctionT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename UnaryFunctionT_>
 inline ProcessType for_each(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_UnaryFunctionT const& _function
-) DD_NOEXCEPT_AS(++__begin != __end, operation(*__begin)) {
-	for (; __begin != __end; ++__begin) {
-		_function(*__begin);
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	UnaryFunctionT_ const& function_
+) DD_NOEXCEPT_AS(++begin__ != end__, operation(*begin__)) {
+	for (; begin__ != end__; ++begin__) {
+		function_(*begin__);
 	}
 }
 
 
 
-template <typename _UndirectionalRangeT, typename _UnaryFunctionT>
+template <typename UndirectionalRangeT_, typename UnaryFunctionT_>
 inline ProcessType for_each(
-	_UndirectionalRangeT const& __range,
-	_UnaryFunctionT const& _function
-) DD_NOEXCEPT(for_each(DD_SPLIT_RANGE(__range), _function)) {
-	for_each(DD_SPLIT_RANGE(__range), _function);
+	UndirectionalRangeT_ const& range__,
+	UnaryFunctionT_ const& function_
+) DD_NOEXCEPT(for_each(DD_SPLIT_RANGE(range__), function_)) {
+	for_each(DD_SPLIT_RANGE(range__), function_);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

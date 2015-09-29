@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_VoidType.hpp
-#ifndef _DD_VOID_TYPE_HPP_INCLUDED
-#	define _DD_VOID_TYPE_HPP_INCLUDED 1
+#ifndef DD_VOID_TYPE_HPP_INCLUDED_
+#	define DD_VOID_TYPE_HPP_INCLUDED_ 1
 
 
 
@@ -15,9 +15,9 @@
 
 
 #	if __cplusplus < 201402L
-_DD_DETAIL_BEGIN
-template <typename... _ObjectsT>
-struct _VoidTypeWorkaround {
+DD_DETAIL_BEGIN_
+template <typename... ObjectsT_>
+struct VoidTypeWorkaround_ {
 	using Type = void;
 
 
@@ -25,22 +25,22 @@ struct _VoidTypeWorkaround {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
-template <typename... _ObjectsT>
+DD_BEGIN_
+template <typename... ObjectsT_>
 #	if __cplusplus >= 201402L
 using VoidType = void;
 #	else
-using VoidType = typename _detail::_VoidTypeWorkaround<_ObjectsT...>::Type;
+using VoidType = typename detail_::VoidTypeWorkaround_<ObjectsT_...>::Type;
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

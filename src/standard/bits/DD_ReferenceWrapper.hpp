@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ReferenceWrapper.hpp
-#ifndef _DD_REFERENCE_WRAPPER_HPP
-#	define _DD_REFERENCE_WRAPPER_HPP 1
+#ifndef DD_REFERENCE_WRAPPER_HPP_
+#	define DD_REFERENCE_WRAPPER_HPP_ 1
 
 
 
@@ -16,13 +16,13 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
-using ReferenceWrapper = std::reference_wrapper<_ObjectT>;
+DD_BEGIN_
+template <typename ObjectT_>
+using ReferenceWrapper = std::reference_wrapper<ObjectT_>;
 
 
 
-_DD_END
+DD_END_
 
 
 

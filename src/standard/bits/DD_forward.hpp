@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_forward.hpp
-#ifndef _DD_FORWARD_HPP_INCLUDED
-#	define _DD_FORWARD_HPP_INCLUDED 1
+#ifndef DD_FORWARD_HPP_INCLUDED_
+#	define DD_FORWARD_HPP_INCLUDED_ 1
 
 
 
@@ -15,21 +15,21 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
-inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>& __object) noexcept {
-	return static_cast<_ObjectT&&>(__object);
+DD_BEGIN_
+template <typename ObjectT_>
+inline ObjectT_&& forward(RemoveReferenceType<ObjectT_>& object__) noexcept {
+	return static_cast<ObjectT_&&>(object__);
 }
 
-template <typename _ObjectT>
-inline _ObjectT&& forward(RemoveReferenceType<_ObjectT>&& __object) noexcept {
-	static_assert(!IsLvalueReference<_ObjectT>::value, "Template argument substituting '_ObjectT' is an lvalue reference type.");
-	return static_cast<_ObjectT&&>(__object);
+template <typename ObjectT_>
+inline ObjectT_&& forward(RemoveReferenceType<ObjectT_>&& object__) noexcept {
+	static_assert(!IsLvalueReference<ObjectT_>::value, "Template argument substituting 'ObjectT_' is an lvalue reference type.");
+	return static_cast<ObjectT_&&>(object__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Functor.hpp
-#ifndef _DD_FUNCTOR_HPP_INCLUDED
-#	define _DD_FUNCTOR_HPP_INCLUDED 1
+#ifndef DD_FUNCTOR_HPP_INCLUDED_
+#	define DD_FUNCTOR_HPP_INCLUDED_ 1
 
 
 
@@ -8,51 +8,51 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ResultT, typename... _ArgumentsT>
+template <typename ResultT_, typename... ArgumentsT_>
 struct Functor {
 #	else
-template <typename _ResultT>
+template <typename ResultT_>
 struct Functor {
 #	endif
-	DD_ALIAS(ResultType, _ResultT);
+	DD_ALIAS(ResultType, ResultT_);
 
 
 };
 
 
 
-template <typename _ResultT, typename _ArgumentT>
+template <typename ResultT_, typename ArgumentT_>
 #	if __cplusplus >= 201103L
-struct UnaryFunctor : Functor<_ResultT, _ArgumentT> {
+struct UnaryFunctor : Functor<ResultT_, ArgumentT_> {
 #	else
-struct UnaryFunctor : Functor<_ResultT> {
+struct UnaryFunctor : Functor<ResultT_> {
 #	endif
-	DD_ALIAS(ResultType, _ResultT);
-	DD_ALIAS(ArgumentType, _ArgumentT);
+	DD_ALIAS(ResultType, ResultT_);
+	DD_ALIAS(ArgumentType, ArgumentT_);
 
 
 };
 
 
 
-template <typename _ResultT, typename _ArgumentT1, typename _ArgumentT2>
+template <typename ResultT_, typename ArgumentT1_, typename ArgumentT2_>
 #	if __cplusplus >= 201103L
-struct BinaryFunctor : Functor<_ResultT, _ArgumentT1, _ArgumentT2> {
+struct BinaryFunctor : Functor<ResultT_, ArgumentT1_, ArgumentT2_> {
 #	else
-struct BinaryFunctor : Functor<_ResultT> {
+struct BinaryFunctor : Functor<ResultT_> {
 #	endif
-	DD_ALIAS(ResultType, _ResultT);
-	DD_ALIAS(FirstArgumentType, _ArgumentT1);
-	DD_ALIAS(SecondArgumentType, _ArgumentT2);
+	DD_ALIAS(ResultType, ResultT_);
+	DD_ALIAS(FirstArgumentType, ArgumentT1_);
+	DD_ALIAS(SecondArgumentType, ArgumentT2_);
 
 
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

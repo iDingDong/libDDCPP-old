@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_min_max.hpp
-#ifndef _DD_MIN_MAX_HPP_INCLUDED
-#	define _DD_MIN_MAX_HPP_INCLUDED 1
+#ifndef DD_MIN_MAX_HPP_INCLUDED_
+#	define DD_MIN_MAX_HPP_INCLUDED_ 1
 
 
 
@@ -16,85 +16,85 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <ValidityType _use_default_compare>
-struct _MinMax {
+DD_DETAIL_BEGIN_
+template <ValidityType use_default_compare_>
+struct MinMax_ {
 	public:
-	template <typename _ObjectT_, typename _BinaryPredicatorT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_,
-		_BinaryPredicatorT_ const& __less_
+	template <typename ObjectT__, typename BinaryPredicatorT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___,
+		BinaryPredicatorT__ const& less___
 	) noexcept {
-		return Pair<_ObjectT_ const&>{__object_, __object_};
+		return Pair<ObjectT__ const&>{object___, object___};
 	}
 
 	public:
-	template <typename _ObjectT_, typename _BinaryPredicatorT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_1_,
-		_ObjectT_ const& __object_2_,
-		_BinaryPredicatorT_ const& __less_
-	) noexcept(noexcept(__less_(__object_1_, __object_2_))) {
-		return __less_(__object_2_, __object_1_) ? Pair<_ObjectT_ const&>{__object_2_, __object_1_} : Pair<_ObjectT_ const&>{__object_1_, __object_2_};
+	template <typename ObjectT__, typename BinaryPredicatorT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object_1___,
+		ObjectT__ const& object_2___,
+		BinaryPredicatorT__ const& less___
+	) noexcept(noexcept(less___(object_1___, object_2___))) {
+		return less___(object_2___, object_1___) ? Pair<ObjectT__ const&>{object_2___, object_1___} : Pair<ObjectT__ const&>{object_1___, object_2___};
 	}
 
 	private:
-	template <typename _ObjectT_, typename _BinaryPredicatorT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_,
-		Pair<_ObjectT_ const&> const& _pair,
-		_BinaryPredicatorT_ const& __less_
-	) noexcept(noexcept(__object_ < __object_)) {
-		return __less_(_pair.first, __object_) ? Pair<_ObjectT_ const&>{_pair.first, __less_(__object_, _pair.second) ? _pair.second : __object_} : Pair<_ObjectT_ const&>{__object_, _pair.second};
+	template <typename ObjectT__, typename BinaryPredicatorT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___,
+		Pair<ObjectT__ const&> const& pair_,
+		BinaryPredicatorT__ const& less___
+	) noexcept(noexcept(object___ < object___)) {
+		return less___(pair_.first, object___) ? Pair<ObjectT__ const&>{pair_.first, less___(object___, pair_.second) ? pair_.second : object___} : Pair<ObjectT__ const&>{object___, pair_.second};
 	}
 
 	public:
-	template <typename _ObjectT_, typename... _ObjectsT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_,
-		_ObjectsT_ const&... __objects_
-	) noexcept(noexcept(_min_max(__objects_...))) {
-		return _min_max(__object_, _min_max(__objects_...), get_last_argument(__objects_...));
+	template <typename ObjectT__, typename... ObjectsT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___,
+		ObjectsT__ const&... objects___
+	) noexcept(noexcept(min_max_(objects___...))) {
+		return min_max_(object___, min_max_(objects___...), get_last_argument(objects___...));
 	}
 };
 
 
 
 template <>
-struct _MinMax<true> {
+struct MinMax_<true> {
 	public:
-	template <typename _ObjectT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_
+	template <typename ObjectT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___
 	) noexcept {
-		return Pair<_ObjectT_ const&>{__object_, __object_};
+		return Pair<ObjectT__ const&>{object___, object___};
 	}
 
 	public:
-	template <typename _ObjectT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_1_,
-		_ObjectT_ const& __object_2_
-	) noexcept(noexcept(__object_1_ < __object_2_)) {
-		return __object_2_ < __object_1_ ? Pair<_ObjectT_ const&>{__object_2_, __object_1_} : Pair<_ObjectT_ const&>{__object_1_, __object_2_};
+	template <typename ObjectT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object_1___,
+		ObjectT__ const& object_2___
+	) noexcept(noexcept(object_1___ < object_2___)) {
+		return object_2___ < object_1___ ? Pair<ObjectT__ const&>{object_2___, object_1___} : Pair<ObjectT__ const&>{object_1___, object_2___};
 	}
 
 	private:
-	template <typename _ObjectT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_,
-		Pair<_ObjectT_ const&> const& _pair
-	) noexcept(noexcept(__object_ < __object_)) {
-		return _pair.first < __object_ ? Pair<_ObjectT_ const&>{_pair.first, __object_ < _pair.second ? _pair.second : __object_} : Pair<_ObjectT_ const&>{__object_, _pair.second};
+	template <typename ObjectT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___,
+		Pair<ObjectT__ const&> const& pair_
+	) noexcept(noexcept(object___ < object___)) {
+		return pair_.first < object___ ? Pair<ObjectT__ const&>{pair_.first, object___ < pair_.second ? pair_.second : object___} : Pair<ObjectT__ const&>{object___, pair_.second};
 	}
 
 	public:
-	template <typename _ObjectT_, typename... _ObjectsT_>
-	static Pair<_ObjectT_ const&> constexpr _min_max(
-		_ObjectT_ const& __object_,
-		_ObjectsT_ const&... __objects_
-	) noexcept(noexcept(_min_max(__objects_...))) {
-		return _min_max(__object_, _min_max(__objects_...));
+	template <typename ObjectT__, typename... ObjectsT__>
+	static Pair<ObjectT__ const&> constexpr min_max_(
+		ObjectT__ const& object___,
+		ObjectsT__ const&... objects___
+	) noexcept(noexcept(min_max_(objects___...))) {
+		return min_max_(object___, min_max_(objects___...));
 	}
 
 
@@ -102,57 +102,57 @@ struct _MinMax<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ObjectT, typename... _ObjectsT>
-inline Pair<_ObjectT const&> constexpr min_max(
-	_ObjectT const& __object,
-	_ObjectsT const&... __objects
-) noexcept(noexcept(_detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...))) {
-	return _detail::_MinMax<IsSame<_ObjectT, _ObjectsT...>::value>::_min_max(__object, __objects...);
+template <typename ObjectT_, typename... ObjectsT_>
+inline Pair<ObjectT_ const&> constexpr min_max(
+	ObjectT_ const& object__,
+	ObjectsT_ const&... objects__
+) noexcept(noexcept(detail_::MinMax_<IsSame<ObjectT_, ObjectsT_...>::value>::min_max_(object__, objects__...))) {
+	return detail_::MinMax_<IsSame<ObjectT_, ObjectsT_...>::value>::min_max_(object__, objects__...);
 }
 
-template <typename _ObjectT>
-inline Pair<_ObjectT const&> constexpr min_max(
-	InitializerList<_ObjectT> _initializer_list
+template <typename ObjectT_>
+inline Pair<ObjectT_ const&> constexpr min_max(
+	InitializerList<ObjectT_> initializer_list_
 ) {
-	return dereference(find_min_max(_initializer_list.cbegin(), _initializer_list.cend()));
+	return dereference(find_min_max(initializer_list_.cbegin(), initializer_list_.cend()));
 }
 
-template <typename _ObjectT, typename _BinaryPredicatorT>
-inline Pair<_ObjectT const&> constexpr min_max(
-	InitializerList<_ObjectT> _initializer_list,
-	_BinaryPredicatorT const& __less
+template <typename ObjectT_, typename BinaryPredicatorT_>
+inline Pair<ObjectT_ const&> constexpr min_max(
+	InitializerList<ObjectT_> initializer_list_,
+	BinaryPredicatorT_ const& less__
 ) {
-	return dereference(find_min_max(_initializer_list.cbegin(), _initializer_list.cend(), __less));
+	return dereference(find_min_max(initializer_list_.cbegin(), initializer_list_.cend(), less__));
 }
 #	else
-template <typename _ObjectT>
-inline inline Pair<_ObjectT const&> constexpr min_max(
-	_ObjectT const& __object_1,
-	_ObjectT const& __object_2
+template <typename ObjectT_>
+inline inline Pair<ObjectT_ const&> constexpr min_max(
+	ObjectT_ const& object_1__,
+	ObjectT_ const& object_2__
 ) {
-	return __object_2 < __object_1 : Pair<_ObjectT const&>{__object_2, __object_1} : Pair<_ObjectT const&>{__object_1, __object_2};
+	return object_2__ < object_1__ : Pair<ObjectT_ const&>{object_2__, object_1__} : Pair<ObjectT_ const&>{object_1__, object_2__};
 }
 
-template <typename _ObjectT, typename _BinaryPredicatorT>
-inline inline Pair<_ObjectT const&> constexpr min_max(
-	_ObjectT const& __object_1,
-	_ObjectT const& __object_2,
-	_BinaryPredicatorT const& __less
+template <typename ObjectT_, typename BinaryPredicatorT_>
+inline inline Pair<ObjectT_ const&> constexpr min_max(
+	ObjectT_ const& object_1__,
+	ObjectT_ const& object_2__,
+	BinaryPredicatorT_ const& less__
 ) {
-	return __less(__object_2, __object_1) : Pair<_ObjectT const&>{__object_2, __object_1} : Pair<_ObjectT const&>{__object_1, __object_2};
+	return less__(object_2__, object_1__) : Pair<ObjectT_ const&>{object_2__, object_1__} : Pair<ObjectT_ const&>{object_1__, object_2__};
 }
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

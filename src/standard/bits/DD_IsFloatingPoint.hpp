@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsFloatingPoint.hpp
-#ifndef _DD_IS_FLOATING_POINT_HPP_INCLUDED
-#	define _DD_IS_FLOATING_POINT_HPP_INCLUDED 1
+#ifndef DD_IS_FLOATING_POINT_HPP_INCLUDED_
+#	define DD_IS_FLOATING_POINT_HPP_INCLUDED_ 1
 
 
 #	if __cplusplus >= 201103L
@@ -15,30 +15,30 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-using _IsFloatingPoint = OrType<IsFloat<_ObjectT>, IsDouble<_ObjectT>, IsLongDouble<_ObjectT>, StdBoolConstant<std::is_floating_point<_ObjectT>>>;
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+using IsFloatingPoint_ = OrType<IsFloat<ObjectT_>, IsDouble<ObjectT_>, IsLongDouble<ObjectT_>, StdBoolConstant<std::is_floating_point<ObjectT_>>>;
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsFloatingPoint = AndType<_detail::_IsFloatingPoint<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsFloatingPoint = AndType<detail_::IsFloatingPoint_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsFloatingPoint : BoolConstant<IsFloat<_ObjectT>::value || IsDouble<_ObjectT>::value || IsLongDouble<_ObjectT>::value> {
+template <typename ObjectT_>
+struct IsFloatingPoint : BoolConstant<IsFloat<ObjectT_>::value || IsDouble<ObjectT_>::value || IsLongDouble<ObjectT_>::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

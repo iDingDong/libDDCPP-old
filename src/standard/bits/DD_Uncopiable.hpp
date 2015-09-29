@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Uncopiable.hpp
-#ifndef _DD_UNCOPIABLE_HPP_INCLUDED
-#	define _DD_UNCOPIABLE_HPP_INCLUDED 1
+#ifndef DD_UNCOPIABLE_HPP_INCLUDED_
+#	define DD_UNCOPIABLE_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct Uncopiable {
 	public:
 	DD_ALIAS(ThisType, Uncopiable);
@@ -49,7 +49,7 @@ struct Uncopiable {
 
 
 
-_DD_END
+DD_END_
 
 
 

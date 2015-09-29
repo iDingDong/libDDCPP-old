@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Vessel.hpp
-#ifndef _DD_VESSEL_HPP_INCLUDED
-#	define _DD_VESSEL_HPP_INCLUDED 1
+#ifndef DD_VESSEL_HPP_INCLUDED_
+#	define DD_VESSEL_HPP_INCLUDED_ 1
 
 
 
@@ -14,17 +14,17 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT, typename _AllocatorT = Allocator<_ValueT>>
+DD_BEGIN_
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
 struct Vessel {
 	public:
 #	if __cplusplus >= 201103L
-	using ThisType = Vessel<_ValueT, _AllocatorT>;
+	using ThisType = Vessel<ValueT_, AllocatorT_>;
 #	else
-	typedef Vessel<_ValueT, _AllocatorT> ThisType;
+	typedef Vessel<ValueT_, AllocatorT_> ThisType;
 #	endif
-	DD_ALIAS(ValueType, _ValueT)
-	DD_ALIAS(AllocatorType, _AllocatorT)
+	DD_ALIAS(ValueType, ValueT_)
+	DD_ALIAS(AllocatorType, AllocatorT_)
 
 	public:
 	DD_ALIAS(ReferenceType, ValueType&)
@@ -38,12 +38,12 @@ struct Vessel {
 
 
 
-template <typename _ValueT>
-struct Vessel<_ValueT, Allocator<_ValueT>> {
+template <typename ValueT_>
+struct Vessel<ValueT_, Allocator<ValueT_>> {
 	public:
-	DD_ALIAS(ThisType = Vessel<_ValueT DD_COMMA Allocator<_ValueT>>);
-	DD_ALIAS(ValueType, _ValueT);
-	DD_ALIAS(AllocatorType, Allocator<_ValueT>);
+	DD_ALIAS(ThisType = Vessel<ValueT_ DD_COMMA Allocator<ValueT_>>);
+	DD_ALIAS(ValueType, ValueT_);
+	DD_ALIAS(AllocatorType, Allocator<ValueT_>);
 
 	public:
 	DD_ALIAS(ReferenceType, ValueType&);
@@ -53,29 +53,29 @@ struct Vessel<_ValueT, Allocator<_ValueT>> {
 
 
 	private:
-	PointerType _m_begin = PointerType();
-	PointerType _m_end = PointerType();
-	PointerType _m_storage_end = PointerType();
+	PointerType m_begin_ = PointerType();
+	PointerType m_end_ = PointerType();
+	PointerType m_storage_end_ = PointerType();
 
 
 	public:
 	DD_CONSTEXPR Vessel() = default;
 
 	public:
-	Vessel(ThisType const& _origin) DD_NOEXCEPT_IF(false) : _m_begin(_origin.is_empty() ? PointerType() : AllocatorType::allocate(_origin.get_length())), _m_end(_m_begin), _m_storage_end(_m_begin + _origin.get_length()) {
+	Vessel(ThisType const& origin_) DD_NOEXCEPT_IF(false) : m_begin_(origin_.is_empty() ? PointerType() : AllocatorType::allocate(origin_.get_length())), m_end_(m_begin_), m_storage_end_(m_begin_ + origin_.get_length()) {
 		throw false;// Unrealized.
 	}
 
 #	if __cplusplus >= 201103
 	public:
-	constexpr Vessel(ThisType&& _origin) noexcept : _m_begin(release(_origin._m_begin)), _m_end(release(_origin._m_end)), _m_storage_end(_origin._m_storage_end) {
+	constexpr Vessel(ThisType&& origin_) noexcept : m_begin_(release(origin_.m_begin_)), m_end_(release(origin_.m_end_)), m_storage_end_(origin_.m_storage_end_) {
 	}
 
 	public:
-	Vessel(std::initializer_list<ValueType> _initializer) noexcept(false) : _m_begin(_initializer.empty() ? PointerType() : AllocatorType::allocate(_initializer.size())), _m_end(_m_begin), _m_storage_end(_m_begin + _initializer.size()) {
-		for (auto& _value : _initializer) {
+	Vessel(std::initializer_list<ValueType> initializer_) noexcept(false) : m_begin_(initializer_.empty() ? PointerType() : AllocatorType::allocate(initializer_.size())), m_end_(m_begin_), m_storage_end_(m_begin_ + initializer_.size()) {
+		for (auto& value_ : initializer_) {
 			try {
-				AllocatorType::construct(this->_m_end++, move(_value));
+				AllocatorType::construct(this->m_end_++, move(value_));
 			} catch (...) {
 				this->clear();
 				throw;
@@ -93,38 +93,38 @@ struct Vessel<_ValueT, Allocator<_ValueT>> {
 
 	public:
 	LengthType DD_CONSTEXPR get_length() const DD_NOEXCEPT {
-		return this->_m_end - this->_m_begin;
+		return this->m_end_ - this->m_begin_;
 	}
 
 
 	public:
 	LengthType DD_CONSTEXPR get_capacity() const DD_NOEXCEPT {
-		return this->_m_storage_end - this->_m_begin;
+		return this->m_storage_end_ - this->m_begin_;
 	}
 
 
 	public:
 	LengthType DD_CONSTEXPR get_space() const DD_NOEXCEPT {
-		return this->_m_storage_end - this->_m_end;
+		return this->m_storage_end_ - this->m_end_;
 	}
 
 
 	public:
 	LengthType DD_CONSTEXPR is_empty() const DD_NOEXCEPT {
-		return this->_m_begin >= this->_m_end;
+		return this->m_begin_ >= this->m_end_;
 	}
 
 
 	public:
 	LengthType DD_CONSTEXPR is_full() const DD_NOEXCEPT {
-		return this->_m_end >= this->_m_storage_end;
+		return this->m_end_ >= this->m_storage_end_;
 	}
 
 
 	public:
 	ProcessType DD_CONSTEXPR clear() const DD_NOEXCEPT {
-		AllocatorType::destroy(this->_m_begin, this->_m_end);
-		AllocatorType::destruct(this->_m_begin, this->get_capacity());
+		AllocatorType::destroy(this->m_begin_, this->m_end_);
+		AllocatorType::destruct(this->m_begin_, this->get_capacity());
 	}
 
 
@@ -132,7 +132,7 @@ struct Vessel<_ValueT, Allocator<_ValueT>> {
 
 
 
-_DD_END
+DD_END_
 
 
 

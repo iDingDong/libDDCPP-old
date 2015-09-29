@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_square_root.hpp
-#ifndef _DD_SQUARE_ROOT_HPP
-#	define _DD_SQUARE_ROOT_HPP 1
+#ifndef DD_SQUARE_ROOT_HPP_
+#	define DD_SQUARE_ROOT_HPP_ 1
 
 
 
@@ -10,17 +10,17 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ResultT, ValidityType _has_integral_result_c = IsIntegral<_ResultT>::value>
-struct _SquareRoot {
-	template <typename _NumberT>
+DD_DETAIL_BEGIN_
+template <typename ResultT_, ValidityType has_integral_result_c_ = IsIntegral<ResultT_>::value>
+struct SquareRoot_ {
+	template <typename NumberT_>
 #	if __cplusplus >= 201402L
-	static _ResultT constexpr _square_root(
-		_NumberT const& __number
+	static ResultT_ constexpr square_root_(
+		NumberT_ const& number__
 	) DD_NOEXCEPT {
 #	else
-	static _ResultT _square_root(
-		_NumberT const& __number
+	static ResultT_ square_root_(
+		NumberT_ const& number__
 	) DD_NOEXCEPT {
 #	endif
 		throw false;
@@ -31,33 +31,33 @@ struct _SquareRoot {
 
 
 
-template <typename _ResultT>
-struct _SquareRoot<_ResultT, true> {
-	template <typename _NumberT>
+template <typename ResultT_>
+struct SquareRoot_<ResultT_, true> {
+	template <typename NumberT_>
 #	if __cplusplus >= 201402L
-	static _ResultT constexpr _square_root(
-		_NumberT const& __number
+	static ResultT_ constexpr square_root_(
+		NumberT_ const& number__
 	) DD_NOEXCEPT {
 #	else
-	static _ResultT _square_root(
-		_NumberT const& __number
+	static ResultT_ square_root_(
+		NumberT_ const& number__
 	) DD_NOEXCEPT {
 #	endif
-		_ResultT __low = _ResultT();
-		_ResultT __high = __number;
-		_ResultT __current;
+		ResultT_ low__ = ResultT_();
+		ResultT_ high__ = number__;
+		ResultT_ current__;
 		do {
-			__current = (__low + __high) / 2;
-			_NumberT __current_power = __current * __current;
-			if (__current_power < __number) {
-				__low = __current;
-			} else if (__number < __current_power) {
-				__high = __current;
+			current__ = (low__ + high__) / 2;
+			NumberT_ current_power__ = current__ * current__;
+			if (current_power__ < number__) {
+				low__ = current__;
+			} else if (number__ < current_power__) {
+				high__ = current__;
 			} else {
-				return __current;
+				return current__;
 			}
-		} while (__high - __low > 1);
-		return __low;
+		} while (high__ - low__ > 1);
+		return low__;
 	}
 
 
@@ -65,21 +65,21 @@ struct _SquareRoot<_ResultT, true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _ResultT, typename _NumberT>
-inline _ResultT DD_CONSTEXPR square_root(
-	_NumberT const& __number
-) DD_NOEXCEPT_AS(_detail::_SquareRoot<_ResultT>::_square_root(__number)) {
-	return _detail::_SquareRoot<_ResultT>::_square_root(__number);
+DD_BEGIN_
+template <typename ResultT_, typename NumberT_>
+inline ResultT_ DD_CONSTEXPR square_root(
+	NumberT_ const& number__
+) DD_NOEXCEPT_AS(detail_::SquareRoot_<ResultT_>::square_root_(number__)) {
+	return detail_::SquareRoot_<ResultT_>::square_root_(number__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_find_first_of.hpp
-#ifndef _DD_FIRST_OF_HPP_INCLUDED
-#	define _DD_FIRST_OF_HPP_INCLUDED 1
+#ifndef DD_FIRST_OF_HPP_INCLUDED_
+#	define DD_FIRST_OF_HPP_INCLUDED_ 1
 
 
 
@@ -9,53 +9,53 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIterator1, typename _UndirectionalIterator2>
-_UndirectionalIterator1 find_first_of(
-	_UndirectionalIterator1 __begin,
-	_UndirectionalIterator1 const& __end,
-	_UndirectionalIterator2 const& __sample_begin,
-	_UndirectionalIterator2 const& __sample_end
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin == *++const_cast<_UndirectionalIterator2&>(__sample_begin)) {
-	for (; __begin != __end; ++__begin) {
-		for (_UndirectionalIterator2 __current = __sample_begin; __current != __sample_end; ++__current) {
-			if (*__begin == *__current) {
-				return __begin;
+DD_BEGIN_
+template <typename UndirectionalIterator1_, typename UndirectionalIterator2_>
+UndirectionalIterator1_ find_first_of(
+	UndirectionalIterator1_ begin__,
+	UndirectionalIterator1_ const& end__,
+	UndirectionalIterator2_ const& sample_begin__,
+	UndirectionalIterator2_ const& sample_end__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ == *++const_cast<UndirectionalIterator2_&>(sample_begin__)) {
+	for (; begin__ != end__; ++begin__) {
+		for (UndirectionalIterator2_ current__ = sample_begin__; current__ != sample_end__; ++current__) {
+			if (*begin__ == *current__) {
+				return begin__;
 			}
 		}
 	}
-	return __begin;
+	return begin__;
 }
 
-template <typename _UndirectionalIterator1, typename _UndirectionalIterator2, typename _BinaryPredicatorT>
-_UndirectionalIterator1 find_first_of(
-	_UndirectionalIterator1 __begin,
-	_UndirectionalIterator1 const& __end,
-	_UndirectionalIterator2 const& __sample_begin,
-	_UndirectionalIterator2 const& __sample_end,
-	_BinaryPredicatorT const& __equal
-) DD_NOEXCEPT_AS(++__begin != __end && __equal(*__begin, *++const_cast<_UndirectionalIterator2&>(__sample_begin))) {
-	for (; __begin != __end; ++__begin) {
-		for (_UndirectionalIterator2 __current = __sample_begin; __current != __sample_end; ++__current) {
-			if (__equal(*__begin, *__current)) {
-				return __begin;
+template <typename UndirectionalIterator1_, typename UndirectionalIterator2_, typename BinaryPredicatorT_>
+UndirectionalIterator1_ find_first_of(
+	UndirectionalIterator1_ begin__,
+	UndirectionalIterator1_ const& end__,
+	UndirectionalIterator2_ const& sample_begin__,
+	UndirectionalIterator2_ const& sample_end__,
+	BinaryPredicatorT_ const& equal__
+) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, *++const_cast<UndirectionalIterator2_&>(sample_begin__))) {
+	for (; begin__ != end__; ++begin__) {
+		for (UndirectionalIterator2_ current__ = sample_begin__; current__ != sample_end__; ++current__) {
+			if (equal__(*begin__, *current__)) {
+				return begin__;
 			}
 		}
 	}
-	return __begin;
+	return begin__;
 }
 
-template <typename _UndirectionalRangeT1, typename _UndirectionalRangeT2>
-inline DD_MODIFY_TRAIT(Iterator, _UndirectionalRangeT1) find_first_of(
-	_UndirectionalRangeT1& __range,
-	_UndirectionalRangeT2 const& __sample_range
-) DD_NOEXCEPT_AS(find_first_of(DD_SPLIT_RANGE(__range) DD_COMMA DD_SPLIT_RANGE(__sample_range))) {
-	return find_first_of(DD_SPLIT_RANGE(__range), DD_SPLIT_RANGE(__sample_range));
+template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT1_) find_first_of(
+	UndirectionalRangeT1_& range__,
+	UndirectionalRangeT2_ const& sample_range__
+) DD_NOEXCEPT_AS(find_first_of(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(sample_range__))) {
+	return find_first_of(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(sample_range__));
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

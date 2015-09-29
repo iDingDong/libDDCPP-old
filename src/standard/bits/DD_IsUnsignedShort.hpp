@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsUnsignedShort.hpp
-#ifndef _DD_IS_UNSIGNED_SHORT_HPP_INCLUDED
-#	define _DD_IS_UNSIGNED_SHORT_HPP_INCLUDED 1
+#ifndef DD_IS_UNSIGNED_SHORT_HPP_INCLUDED_
+#	define DD_IS_UNSIGNED_SHORT_HPP_INCLUDED_ 1
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsUnsignedShort : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsUnsignedShort_ : FalseType {
 };
 
 
 
 template <>
-struct _IsUnsignedShort<unsigned short> : TrueType {
+struct IsUnsignedShort_<unsigned short> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsUnsignedShort = AndType<_detail::_IsUnsignedShort<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsUnsignedShort = AndType<detail_::IsUnsignedShort_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsUnsignedShort : _detail::_IsUnsignedShort<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsUnsignedShort : detail_::IsUnsignedShort_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_absolute.hpp
-#ifndef _DD_ABSOLUTE_HPP
-#	define _DD_ABSOLUTE_HPP 1
+#ifndef DD_ABSOLUTE_HPP_
+#	define DD_ABSOLUTE_HPP_ 1
 
 
 
@@ -8,18 +8,18 @@
 
 
 
-_DD_BEGIN
-template <typename _NumberT>
-inline _NumberT absolute(
-	_NumberT const& __number
-) DD_NOEXCEPT_AS(__number < 0 ? -__number : __number) {
-	return __number < 0 ? -__number : __number;
+DD_BEGIN_
+template <typename NumberT_>
+inline NumberT_ absolute(
+	NumberT_ const& number__
+) DD_NOEXCEPT_AS(number__ < 0 ? -number__ : number__) {
+	return number__ < 0 ? -number__ : number__;
 }
 
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_swap_target.hpp
-#ifndef _DD_SWAP_TARGET_HPP_INCLUDED
-#	define _DD_SWAP_TARGET_HPP_INCLUDED 1
+#ifndef DD_SWAP_TARGET_HPP_INCLUDED_
+#	define DD_SWAP_TARGET_HPP_INCLUDED_ 1
 
 
 
@@ -8,19 +8,19 @@
 
 
 
-_DD_BEGIN
-template <typename _PointerT>
+DD_BEGIN_
+template <typename PointerT_>
 inline ProcessType swap_target(
-	_PointerT const& __pointer_1,
-	_PointerT const& __pointer_2
-) DD_NOEXCEPT_AS(swap(*__pointer_1, *__pointer_2)) {
+	PointerT_ const& pointer_1__,
+	PointerT_ const& pointer_2__
+) DD_NOEXCEPT_AS(swap(*pointer_1__, *pointer_2__)) {
 	using DD::swap;
-	swap(*__pointer_1, *__pointer_2);
+	swap(*pointer_1__, *pointer_2__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

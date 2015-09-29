@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsUnsigned.hpp
-#ifndef _DD_IS_UNSIGNED_HPP_INCLUDED
-#	define _DD_IS_UNSIGNED_HPP_INCLUDED 1
+#ifndef DD_IS_UNSIGNED_HPP_INCLUDED_
+#	define DD_IS_UNSIGNED_HPP_INCLUDED_ 1
 
 
 
@@ -8,40 +8,40 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT, ValidityType _is_arithmetic_c>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_, ValidityType is_arithmetic_c_>
 #	if __cplusplus >= 201103L
-struct _IsUnsigned : StdBoolConstant<std::is_unsigned<_ObjectT>> {
+struct IsUnsigned_ : StdBoolConstant<std::is_unsigned<ObjectT_>> {
 #	else
-struct _IsUnsigned : FalseType {
+struct IsUnsigned_ : FalseType {
 #	endif
 };
 
 
 
-template <typename _ObjectT>
-struct _IsUnsigned<_ObjectT, true> : BoolConstant<_ObjectT(0) < _ObjectT(-1)> {
+template <typename ObjectT_>
+struct IsUnsigned_<ObjectT_, true> : BoolConstant<ObjectT_(0) < ObjectT_(-1)> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsUnsigned = AndType<_detail::_IsUnsigned<_ObjectsT, IsArithmetic<_ObjectsT>::value>...>;
+template <typename... ObjectsT_>
+using IsUnsigned = AndType<detail_::IsUnsigned_<ObjectsT_, IsArithmetic<ObjectsT_>::value>...>;
 #	else
-template <typename _ObjectT>
-struct IsUnsigned : _detail::_IsUnsigned<_ObjectT, IsArithmetic<_ObjectT>::value> {
+template <typename ObjectT_>
+struct IsUnsigned : detail_::IsUnsigned_<ObjectT_, IsArithmetic<ObjectT_>::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

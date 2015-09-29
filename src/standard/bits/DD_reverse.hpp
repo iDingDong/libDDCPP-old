@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_reverse.hpp
-#ifndef _DD_REVERSE_HPP_INCLUDED
-#	define _DD_REVERSE_HPP_INCLUDED 1
+#ifndef DD_REVERSE_HPP_INCLUDED_
+#	define DD_REVERSE_HPP_INCLUDED_ 1
 
 
 
@@ -9,16 +9,16 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <ValidityType _is_free_access_iterator_c>
-struct _Reverse {
-	template <typename _BidirectionalIteratorT_>
-	static ProcessType _reverse(
-		_BidirectionalIteratorT_ __begin_,
-		_BidirectionalIteratorT_ __end_
-	) DD_NOEXCEPT_AS(swap_target(++__begin_, --__end_) DD_COMMA ValidityType(__begin_ != __end_)) {
-		for (; __begin_ != __end_ && __begin_ != --__end_; ++__begin_) {
-			swap_target(__begin_, __end_);
+DD_DETAIL_BEGIN_
+template <ValidityType is_free_access_iterator_c_>
+struct Reverse_ {
+	template <typename BidirectionalIteratorT__>
+	static ProcessType reverse_(
+		BidirectionalIteratorT__ begin___,
+		BidirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ != end___)) {
+		for (; begin___ != end___ && begin___ != --end___; ++begin___) {
+			swap_target(begin___, end___);
 		}
 	}
 
@@ -28,14 +28,14 @@ struct _Reverse {
 
 
 template <>
-struct _Reverse<true> {
-	template <typename _FreeAccessIteratorT_>
-	static ProcessType _reverse(
-		_FreeAccessIteratorT_ __begin_,
-		_FreeAccessIteratorT_ __end_
-	) DD_NOEXCEPT_AS(swap_target(++__begin_, --__end_) DD_COMMA ValidityType(__begin_ < __end_)) {
-		for (; __begin_ < --__end_; ++__begin_) {
-			swap_target(__begin_, __end_);
+struct Reverse_<true> {
+	template <typename FreeAccessIteratorT__>
+	static ProcessType reverse_(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___
+	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ < end___)) {
+		for (; begin___ < --end___; ++begin___) {
+			swap_target(begin___, end___);
 		}
 	}
 
@@ -44,31 +44,31 @@ struct _Reverse<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _BidirectionalIteratorT>
+DD_BEGIN_
+template <typename BidirectionalIteratorT_>
 inline ProcessType reverse(
-	_BidirectionalIteratorT const& __begin,
-	_BidirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(_detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin DD_COMMA __end)) {
-	_detail::_Reverse<IsFreeAccessIterator<_BidirectionalIteratorT>::value>::_reverse(__begin, __end);
+	BidirectionalIteratorT_ const& begin__,
+	BidirectionalIteratorT_ const& end__
+) DD_NOEXCEPT_AS(detail_::Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse_(begin__ DD_COMMA end__)) {
+	detail_::Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse_(begin__, end__);
 }
 
 
 
-template <typename _BidirectionalRangeT>
+template <typename BidirectionalRangeT_>
 inline ProcessType reverse(
-	_BidirectionalRangeT& __range
-) DD_NOEXCEPT_AS(reverse(DD_SPLIT_RANGE(__range))) {
-	reverse(DD_SPLIT_RANGE(__range));
+	BidirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(reverse(DD_SPLIT_RANGE(range__))) {
+	reverse(DD_SPLIT_RANGE(range__));
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

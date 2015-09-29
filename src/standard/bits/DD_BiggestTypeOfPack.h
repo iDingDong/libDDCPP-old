@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_BiggestTypeOfPack.hpp
-#ifndef _DD_BIGGEST_TYPE_OF_PACK_HPP_INCLUDED
-#	define _DD_BIGGEST_TYPE_OF_PACK_HPP_INCLUDED 1
+#ifndef DD_BIGGEST_TYPE_OF_PACK_HPP_INCLUDED_
+#	define DD_BIGGEST_TYPE_OF_PACK_HPP_INCLUDED_ 1
 
 
 
@@ -15,8 +15,8 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
+DD_BEGIN_
+template <typename... ObjectsT_>
 struct BiggestTypeOfPack {
 	DD_ALIAS(Type, void);
 
@@ -25,34 +25,34 @@ struct BiggestTypeOfPack {
 
 
 
-template <typename _ObjectT1, typename _ObjectT2, typename... _ObjectsT>
-struct BiggestTypeOfPack<_ObjectT1, _ObjectT2, _ObjectsT...> {
-	DD_ALIAS(Type, typename BiggestTypeOfPack<BiggestTypeOfPack<_ObjectT1 DD_COMMA _ObjectT2> DD_COMMA _ObjectsT...>::Type);
+template <typename ObjectT1_, typename ObjectT2_, typename... ObjectsT_>
+struct BiggestTypeOfPack<ObjectT1_, ObjectT2_, ObjectsT_...> {
+	DD_ALIAS(Type, typename BiggestTypeOfPack<BiggestTypeOfPack<ObjectT1_ DD_COMMA ObjectT2_> DD_COMMA ObjectsT_...>::Type);
 
 
 };
 
 
 
-template <typename _ObjectT1, typename _ObjectT2>
-struct BiggestTypeOfPack<_ObjectT1, _ObjectT2> {
-	DD_ALIAS(Type, typename Conditional<sizeof(_ObjectT1) < sizeof(_ObjectT2) DD_COMMA _ObjectT2 DD_COMMA _ObjectT1>::Type);
+template <typename ObjectT1_, typename ObjectT2_>
+struct BiggestTypeOfPack<ObjectT1_, ObjectT2_> {
+	DD_ALIAS(Type, typename Conditional<sizeof(ObjectT1_) < sizeof(ObjectT2_) DD_COMMA ObjectT2_ DD_COMMA ObjectT1_>::Type);
 
 
 };
 
 
 
-template <typename _ObjectT>
-struct BiggestTypeOfPack<_ObjectT> {
-	DD_ALIAS(Type, _ObjectT);
+template <typename ObjectT_>
+struct BiggestTypeOfPack<ObjectT_> {
+	DD_ALIAS(Type, ObjectT_);
 
 
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

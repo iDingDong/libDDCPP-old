@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_relationship_operators.hpp
-#ifndef _DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED
-#	define _DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED 1
+#ifndef DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED_
+#	define DD_RELATIONSHIP_OPERATORS_HPP_INCLUDED_ 1
 
 
 
@@ -8,43 +8,43 @@
 
 
 
-#	define _DD_RELATIONSHIP_OPERATORS_BEGIN _DD_BEGIN namespace relationship_operators {
-#	define _DD_RELATIONSHIP_OPERATORS_END } _DD_END
+#	define DD_RELATIONSHIP_OPERATORS_BEGIN_ DD_BEGIN_ namespace relationship_operators {
+#	define DD_RELATIONSHIP_OPERATORS_END_ } DD_END_
 
 
 
-_DD_RELATIONSHIP_OPERATORS_BEGIN
-template <typename _ObjectT>
-ValidityType DD_CONSTEXPR operator !=(_ObjectT const& __object_1, _ObjectT const& __object_2) DD_NOEXCEPT_AS(__object_1 == __object_2) {
-	return !(__object_1 == __object_2);
+DD_RELATIONSHIP_OPERATORS_BEGIN_
+template <typename ObjectT_>
+ValidityType DD_CONSTEXPR operator !=(ObjectT_ const& object_1__, ObjectT_ const& object_2__) DD_NOEXCEPT_AS(object_1__ == object_2__) {
+	return !(object_1__ == object_2__);
 }
 
 
-template <typename _ObjectT>
-ValidityType DD_CONSTEXPR operator <=(_ObjectT const& __object_1, _ObjectT const& __object_2) DD_NOEXCEPT_AS(__object_1 < __object_2) {
-	return !(__object_2 < __object_1);
+template <typename ObjectT_>
+ValidityType DD_CONSTEXPR operator <=(ObjectT_ const& object_1__, ObjectT_ const& object_2__) DD_NOEXCEPT_AS(object_1__ < object_2__) {
+	return !(object_2__ < object_1__);
 }
 
 
-template <typename _ObjectT>
-ValidityType DD_CONSTEXPR operator >(_ObjectT const& __object_1, _ObjectT const& __object_2) DD_NOEXCEPT_AS(__object_1 < __object_2) {
-	return __object_2 < __object_1;
+template <typename ObjectT_>
+ValidityType DD_CONSTEXPR operator >(ObjectT_ const& object_1__, ObjectT_ const& object_2__) DD_NOEXCEPT_AS(object_1__ < object_2__) {
+	return object_2__ < object_1__;
 }
 
 
-template <typename _ObjectT>
-ValidityType DD_CONSTEXPR operator >=(_ObjectT const& __object_1, _ObjectT const& __object_2) DD_NOEXCEPT_AS(__object_1 < __object_2) {
-	return !(__object_1 < __object_2);
+template <typename ObjectT_>
+ValidityType DD_CONSTEXPR operator >=(ObjectT_ const& object_1__, ObjectT_ const& object_2__) DD_NOEXCEPT_AS(object_1__ < object_2__) {
+	return !(object_1__ < object_2__);
 }
 
 
 
-_DD_RELATIONSHIP_OPERATORS_END
+DD_RELATIONSHIP_OPERATORS_END_
 
 
 
-#	undef _DD_RELATIONSHIP_OPERATORS_BEGIN
-#	undef _DD_RELATIONSHIP_OPERATORS_END
+#	undef DD_RELATIONSHIP_OPERATORS_BEGIN_
+#	undef DD_RELATIONSHIP_OPERATORS_END_
 
 
 

@@ -1,5 +1,5 @@
-#ifndef _TEST_MATH_H_INCLUDED
-#	define _TEST_MATH_H_INCLUDED 1
+#ifndef TEST_MATH_H_INCLUDED_
+#	define TEST_MATH_H_INCLUDED_ 1
 
 
 

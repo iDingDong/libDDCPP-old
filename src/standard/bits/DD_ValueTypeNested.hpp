@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ValueTypeNested.hpp
-#ifndef _DD_VALUE_TYPE_NESTED_HPP_INCLUDED
-#	define _DD_VALUE_TYPE_NESTED_HPP_INCLUDED 1
+#ifndef DD_VALUE_TYPE_NESTED_HPP_INCLUDED_
+#	define DD_VALUE_TYPE_NESTED_HPP_INCLUDED_ 1
 
 
 
@@ -28,8 +28,8 @@
 			using ConstPointerType = ValueType const*;\
 			DD_VALUE_TYPE_NESTED_COMPAT_STL
 #	else
-#		define DD_VALUE_TYPE_NESTED(_ARG_ValueType)\
-			typedef _ARG_ValueType ValueType;\
+#		define DD_VALUE_TYPE_NESTED(ARG_ValueType_)\
+			typedef ARG_ValueType_ ValueType;\
 			typedef ValueType& ReferenceType;\
 			typedef ValueType const& ConstReferenceType;\
 			typedef ValueType* PointerType;\

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ConstantList.hpp
-#ifndef _DD_CONSTANT_LIST_HPP_INCLUDED
-#	define _DD_CONSTANT_LIST_HPP_INCLUDED 1
+#ifndef DD_CONSTANT_LIST_HPP_INCLUDED_
+#	define DD_CONSTANT_LIST_HPP_INCLUDED_ 1
 
 
 
@@ -14,19 +14,19 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT, _ValuesT... __values_c>
+DD_BEGIN_
+template <typename ValueT_, ValuesT_... values_c__>
 struct ConstantList {
 	public:
-	using ThisType = ConstantList<_ValueT, __values_c...>;
+	using ThisType = ConstantList<ValueT_, values_c__...>;
 
 
-	template <_ValuesT_... __values_c_>
-	using PushFront = ConstantList<_ValueT, __values_c..., __values_c_...>;
+	template <ValuesT__... values_c___>
+	using PushFront = ConstantList<ValueT_, values_c__..., values_c___...>;
 
 	public:
-	template <_ValuesT_... __values_c_>
-	using PushBack = ConstantList<_ValueT, __values_c..., __values_c_...>;
+	template <ValuesT__... values_c___>
+	using PushBack = ConstantList<ValueT_, values_c__..., values_c___...>;
 
 
 
@@ -38,12 +38,12 @@ template <>
 
 
 
-template <typename _ValueT, _ValueT __value>
+template <typename ValueT_, ValueT_ value__>
 struct Generate
 
 
 
-_DD_END
+DD_END_
 
 
 

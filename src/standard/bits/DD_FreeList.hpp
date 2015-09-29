@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_FreeList.hpp
-#ifndef _DD_FREE_LIST_HPP_INCLUDED
-#	define _DD_FREE_LIST_HPP_INCLUDED 1
+#ifndef DD_FREE_LIST_HPP_INCLUDED_
+#	define DD_FREE_LIST_HPP_INCLUDED_ 1
 
 
 
@@ -8,34 +8,34 @@
 
 
 
-_DD_DETAIL_BEGIN
-struct _FreeListBase {
-	_FreeListBase* next;
+DD_DETAIL_BEGIN_
+struct FreeListBase_ {
+	FreeListBase_* next;
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <LengthType _length_c>
-struct FreeList : _detail::_FreeListBase {
-	DD_STATIC_ASSERT(_length_c > 0, "Length of 'DD::FreeList' should be no less than 1.")
+DD_BEGIN_
+template <LengthType length_c_>
+struct FreeList : detail_::FreeListBase_ {
+	DD_STATIC_ASSERT(length_c_ > 0, "Length of 'DD::FreeList' should be no less than 1.")
 
 
-	static DD_CONSTANT LengthType length = _length_c;
+	static DD_CONSTANT LengthType length = length_c_;
 
 	static DD_CONSTANT SizeType unit = sizeof(void*);
 	static DD_CONSTANT SizeType size = length * unit;
 
-	static DD_CONSTANT SizeType _expansion_size = size - unit;
+	static DD_CONSTANT SizeType expansion_size_ = size - unit;
 
 
-	SizeTrait<_expansion_size> memory;
+	SizeTrait<expansion_size_> memory;
 
 
 	void* get_memory() DD_NOEXCEPT {
@@ -47,14 +47,14 @@ struct FreeList : _detail::_FreeListBase {
 
 
 
-template <LengthType _length_c>
-inline void* get_memory(FreeList<_length_c>& _free_list) DD_NOEXCEPT_AS(static_cast<void*>(_free_list.get_memory())) {
-	return _free_list.get_memory();
+template <LengthType length_c_>
+inline void* get_memory(FreeList<length_c_>& free_list_) DD_NOEXCEPT_AS(static_cast<void*>(free_list_.get_memory())) {
+	return free_list_.get_memory();
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

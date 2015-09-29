@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_copy.hpp
-#ifndef _DD_COPY_HPP_INCLUDED
-#	define _DD_COPY_HPP_INCLUDED 1
+#ifndef DD_COPY_HPP_INCLUDED_
+#	define DD_COPY_HPP_INCLUDED_ 1
 
 
 
@@ -11,19 +11,19 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <ValidityType _is_memmoveable_c>
-struct _Copy {
-	template <typename _UndirectionalIteratorT1_, typename _UndirectionalIteratorT2_>
-	static _UndirectionalIteratorT2_ _copy(
-		_UndirectionalIteratorT1_ __begin_,
-		_UndirectionalIteratorT1_ const& __end_,
-		_UndirectionalIteratorT2_ __result_begin_
-	) DD_NOEXCEPT_IF(noexcept(++__begin_) && noexcept(++__result_begin_) && noexcept(*__result_begin_ = *__begin_)) {
-		for (; __begin_ != __end_; ++__begin_, ++__result_begin_) {
-			*__result_begin_ = *__begin_;
+DD_DETAIL_BEGIN_
+template <ValidityType is_memmoveable_c_>
+struct Copy_ {
+	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
+	static UndirectionalIteratorT2__ copy_(
+		UndirectionalIteratorT1__ begin___,
+		UndirectionalIteratorT1__ const& end___,
+		UndirectionalIteratorT2__ result_begin___
+	) DD_NOEXCEPT_IF(noexcept(++begin___) && noexcept(++result_begin___) && noexcept(*result_begin___ = *begin___)) {
+		for (; begin___ != end___; ++begin___, ++result_begin___) {
+			*result_begin___ = *begin___;
 		}
-		return __result_begin_;
+		return result_begin___;
 	}
 
 
@@ -32,14 +32,14 @@ struct _Copy {
 
 
 template <>
-struct _Copy<true> {
-	template <typename _PointerT1_, typename _PointerT2_>
-	static _PointerT2_ DD_CONSTEXPR _copy(
-		_PointerT1_ const& __begin_,
-		_PointerT1_ const& __end_,
-		_PointerT2_ const& __result_begin_
-	) DD_NOEXCEPT_AS(std::memmove(__result_begin_, __begin_, size_distance(__begin_, __end_))) {
-		return std::memmove(__result_begin_, __begin_, size_distance(__begin_, __end_)), __result_begin_ + (__end_ - __begin_);
+struct Copy_<true> {
+	template <typename PointerT1__, typename PointerT2__>
+	static PointerT2__ DD_CONSTEXPR copy_(
+		PointerT1__ const& begin___,
+		PointerT1__ const& end___,
+		PointerT2__ const& result_begin___
+	) DD_NOEXCEPT_AS(std::memmove(result_begin___, begin___, size_distance(begin___, end___))) {
+		return std::memmove(result_begin___, begin___, size_distance(begin___, end___)), result_begin___ + (end___ - begin___);
 	}
 
 
@@ -47,23 +47,23 @@ struct _Copy<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT1, typename _UndirectionalIteratorT2>
-_UndirectionalIteratorT2 DD_CONSTEXPR copy(
-	_UndirectionalIteratorT1 const& __begin,
-	_UndirectionalIteratorT1 const& __end,
-	_UndirectionalIteratorT2 const& __result_end
+DD_BEGIN_
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+UndirectionalIteratorT2_ DD_CONSTEXPR copy(
+	UndirectionalIteratorT1_ const& begin__,
+	UndirectionalIteratorT1_ const& end__,
+	UndirectionalIteratorT2_ const& result_end__
 ) {
-	return _detail::_Copy<false>::_copy(__begin, __end, __result_end);// Imperfect realization
+	return detail_::Copy_<false>::copy_(begin__, end__, result_end__);// Imperfect realization
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

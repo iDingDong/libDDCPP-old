@@ -1,6 +1,6 @@
 //	DDCPP/math/bits/DD_Rational.hpp
-#ifndef _DD_RATIONAL_HPP_INCLUDED
-#	define _DD_RATIONAL_HPP_INCLUDED 1
+#ifndef DD_RATIONAL_HPP_INCLUDED_
+#	define DD_RATIONAL_HPP_INCLUDED_ 1
 
 
 
@@ -21,8 +21,8 @@
 
 
 
-#	define DD_RATIONAL_BEGIN _DD_BEGIN namespace rational {
-#	define DD_RATIONAL_END } _DD_END
+#	define DD_RATIONAL_BEGIN DD_BEGIN_ namespace rational {
+#	define DD_RATIONAL_END } DD_END_
 
 
 
@@ -128,101 +128,101 @@ DD_RATIONAL_END
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201402L
-template <typename _NumeratorT, typename _DenominatorT>
-Pair<_NumeratorT, _DenominatorT> constexpr _normalize(
-	Pair<_NumeratorT, _DenominatorT> const& _pair
+template <typename NumeratorT_, typename DenominatorT_>
+Pair<NumeratorT_, DenominatorT_> constexpr normalize_(
+	Pair<NumeratorT_, DenominatorT_> const& pair_
 ) noexcept(
-	noexcept(greatest_common_divisor<CommonType<_NumeratorT, _DenominatorT>>(_pair.first, _pair.second)) &&
-	noexcept(Pair<_NumeratorT, _DenominatorT>(_pair.first / __temp, _pair.second / __temp))
+	noexcept(greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second)) &&
+	noexcept(Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__))
 ) {
-	auto __temp = greatest_common_divisor<CommonType<_NumeratorT, _DenominatorT>>(_pair.first, _pair.second);
-	return Pair<_NumeratorT, _DenominatorT>(_pair.first / __temp, _pair.second / __temp)
+	auto temp__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second);
+	return Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__)
 }
 #	else
-template <typename _NumeratorT, typename _DenominatorT>
-Pair<_NumeratorT, _DenominatorT> constexpr _normalize(
-	Pair<_NumeratorT, _DenominatorT> const& _pair,
-	CommonType<_NumeratorT, _DenominatorT> __workaround = CommonType<_NumeratorT, _DenominatorT>()
+template <typename NumeratorT_, typename DenominatorT_>
+Pair<NumeratorT_, DenominatorT_> constexpr normalize_(
+	Pair<NumeratorT_, DenominatorT_> const& pair_,
+	CommonType<NumeratorT_, DenominatorT_> workaround__ = CommonType<NumeratorT_, DenominatorT_>()
 ) noexcept(noexcept(
-	__workaround = greatest_common_divisor<CommonType<_NumeratorT, _DenominatorT>>(_pair.first, _pair.second),
-	Pair<_NumeratorT, _DenominatorT>(_pair.first / __workaround, _pair.second / __workaround)
+	workaround__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second),
+	Pair<NumeratorT_, DenominatorT_>(pair_.first / workaround__, pair_.second / workaround__)
 )) {
 	return
-		__workaround = greatest_common_divisor<CommonType<_NumeratorT, _DenominatorT>>(_pair.first, _pair.second),
-		Pair<_NumeratorT, _DenominatorT>(_pair.first / __workaround, _pair.second / __workaround)
+		workaround__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second),
+		Pair<NumeratorT_, DenominatorT_>(pair_.first / workaround__, pair_.second / workaround__)
 	;
 }
 #	endif
 
 
 
-template <typename _NumeratorT, typename _DenominatorT, ValidityType _is_divided_by_unsigned_c = IsUnsigned<_DenominatorT>::value>
-struct _Rational :
-	Addable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>,
-	Subtractable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>,
-	Multipliable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>,
-	Dividable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>,
-	Comparable<_Rational<_NumeratorT, _DenominatorT, _is_divided_by_unsigned_c>>
+template <typename NumeratorT_, typename DenominatorT_, ValidityType is_divided_by_unsigned_c_ = IsUnsigned<DenominatorT_>::value>
+struct Rational_ :
+	Addable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
+	Subtractable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
+	Multipliable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
+	Dividable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
+	Comparable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>
 {
 	public:
-	DD_ALIAS(ThisType, _Rational<_NumeratorT DD_COMMA _DenominatorT DD_COMMA _is_divided_by_unsigned_c>);
-	DD_ALIAS(NumeratorType, _NumeratorT);
-	DD_ALIAS(DenominatorType, _DenominatorT);
+	DD_ALIAS(ThisType, Rational_<NumeratorT_ DD_COMMA DenominatorT_ DD_COMMA is_divided_by_unsigned_c_>);
+	DD_ALIAS(NumeratorType, NumeratorT_);
+	DD_ALIAS(DenominatorType, DenominatorT_);
 
 	public:
 	DD_ALIAS(ValueType, Pair<NumeratorType DD_COMMA DenominatorType>);
 
 
 	private:
-	ValueType _m_value DD_IN_CLASS_INITIALIZE(ValueType(NumeratorType() DD_COMMA DenominatorType(1)));
+	ValueType m_value_ DD_IN_CLASS_INITIALIZE(ValueType(NumeratorType() DD_COMMA DenominatorType(1)));
 
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr _Rational() = default;
+	constexpr Rational_() = default;
 
 	public:
-	constexpr _Rational(ThisType const& _origin) = default;
+	constexpr Rational_(ThisType const& origin_) = default;
 
 	public:
-	constexpr _Rational(ThisType&& _origin) = default;
+	constexpr Rational_(ThisType&& origin_) = default;
 #	else
 	public:
-	_Rational() : _m_numerator(), _m_value(NumeratorType(), DenominatorType(1)) {
+	Rational_() : m_numerator_(), m_value_(NumeratorType(), DenominatorType(1)) {
 	}
 #	endif
 
 	public:
-	DD_CONSTEXPR _Rational(ValueType const& _value) : _m_value(_value) {
+	DD_CONSTEXPR Rational_(ValueType const& value_) : m_value_(value_) {
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr _Rational(ValueType _value) noexcept(noexcept(ValueType(move(_value)))) : _m_value(move(_value)) {
+	constexpr Rational_(ValueType value_) noexcept(noexcept(ValueType(move(value_)))) : m_value_(move(value_)) {
 	};
 
 	public:
-	template <typename _NumeratorT_, typename _DenominatorT_>
-	constexpr _Rational(_NumeratorT_&& __numerator_, _DenominatorT_&& __denominator_) noexcept(
-		noexcept(_Rational(ValueType(forward<_NumeratorT_>(__numerator_) DD_COMMA forward<_DenominatorT_>(__denominator_))))
-	) : _Rational(ValueType(forward<_NumeratorT_>(__numerator_), forward<_DenominatorT_>(__denominator_))) {
+	template <typename NumeratorT__, typename DenominatorT__>
+	constexpr Rational_(NumeratorT__&& numerator___, DenominatorT__&& denominator___) noexcept(
+		noexcept(Rational_(ValueType(forward<NumeratorT__>(numerator___) DD_COMMA forward<DenominatorT__>(denominator___))))
+	) : Rational_(ValueType(forward<NumeratorT__>(numerator___), forward<DenominatorT__>(denominator___))) {
 	}
 #	else
 	public:
-	_Rational(ValueType const& _value) : _m_value(_value) {
+	Rational_(ValueType const& value_) : m_value_(value_) {
 	}
 
 	public:
-	template <typename _NumeratorT_, typename _DenominatorT_>
-	_Rational (_NumeratorT_ const& __numerator, _DenominatorT_ const& __denominator_) : _m_value(__numerator, __denominator_) {
+	template <typename NumeratorT__, typename DenominatorT__>
+	Rational_ (NumeratorT__ const& numerator__, DenominatorT__ const& denominator___) : m_value_(numerator__, denominator___) {
 	}
 #	endif
 
 #	if __cplusplus >= 201103L
 	public:
-	~_Rational() = default;
+	~Rational_() = default;
 
 
 #	endif
@@ -234,13 +234,13 @@ struct _Rational :
 
 
 
-template <typename _NumeratorT, typename _DenominatorT>
-struct _Rational<_NumeratorT, _DenominatorT, true> :
-	Addable<_Rational<_NumeratorT, _DenominatorT, true>>,
-	Subtractable<_Rational<_NumeratorT, _DenominatorT, true>>,
-	Multipliable<_Rational<_NumeratorT, _DenominatorT, true>>,
-	Dividable<_Rational<_NumeratorT, _DenominatorT, true>>,
-	Comparable<_Rational<_NumeratorT, _DenominatorT, true>>
+template <typename NumeratorT_, typename DenominatorT_>
+struct Rational_<NumeratorT_, DenominatorT_, true> :
+	Addable<Rational_<NumeratorT_, DenominatorT_, true>>,
+	Subtractable<Rational_<NumeratorT_, DenominatorT_, true>>,
+	Multipliable<Rational_<NumeratorT_, DenominatorT_, true>>,
+	Dividable<Rational_<NumeratorT_, DenominatorT_, true>>,
+	Comparable<Rational_<NumeratorT_, DenominatorT_, true>>
 {
 	public:
 
@@ -249,22 +249,22 @@ struct _Rational<_NumeratorT, _DenominatorT, true> :
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _NumeratorT, typename _DenominatorT = _NumeratorT>
+DD_BEGIN_
+template <typename NumeratorT_, typename DenominatorT_ = NumeratorT_>
 #	if __cplusplus >= 201103L
-using Rational = _detail::_Rational<_NumeratorT, _DenominatorT>;
+using Rational = detail_::Rational_<NumeratorT_, DenominatorT_>;
 #	else
-struct Rational : _detail::_Rational<_NumeratorT, _DenominatorT> {
+struct Rational : detail_::Rational_<NumeratorT_, DenominatorT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

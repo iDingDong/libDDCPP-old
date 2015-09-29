@@ -1,6 +1,6 @@
 //	standard/bits/DD_List.hpp
-#ifndef _DD_LIST_HPP
-#	define _DD_LIST_HPP 1
+#ifndef DD_LIST_HPP_
+#	define DD_LIST_HPP_ 1
 
 
 
@@ -20,11 +20,11 @@
 
 
 DD_DETAIL_BEGIN
-template <typename _ValueT>
-struct _ListBase {
+template <typename ValueT_>
+struct ListBase_ {
 	public:
-	DD_ALIAS(ThisType, _List<_ValueT>);
-	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(ThisType, List_<ValueT_>);
+	DD_ALIAS(ValueType, ValueT_);
 
 	private:
 	DD_ALIAS(EmptyNode, EmptyListNode);
@@ -54,27 +54,27 @@ struct _ListBase {
 
 
 	private:
-	EmptyListNode _m_sentry;
+	EmptyListNode m_sentry_;
 
 
 	public:
-	_ListBase() DD_NOEXCEPT : _m_sentry{address_of(_m_sentry), address_of(_m_sentry)} {
+	ListBase_() DD_NOEXCEPT : m_sentry_{address_of(m_sentry_), address_of(m_sentry_)} {
 	}
 
 	public:
-	DD_DELETE_COPY_CONSTRUCTOR(_ListBase)
+	DD_DELETE_COPY_CONSTRUCTOR(ListBase_)
 
 	public:
-	DD_DELETE_MOVE_CONSTRUCTOR(_ListBase)
+	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
 
 	public:
-	_ListBase(NodePointer _begin, NodePointer _end) DD_NOEXCEPT : _m_sentry{_begin, _end} {
+	ListBase_(NodePointer begin_, NodePointer end_) DD_NOEXCEPT : m_sentry_{begin_, end_} {
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~_ListBase() = default;
+	~ListBase_() = default;
 
 
 #	endif
@@ -92,12 +92,12 @@ struct _ListBase {
 
 	public:
 	NodePointer get_sentry() DD_NOEXCEPT {
-		return static_cast<NodePointer>(address_of(_m_sentry));
+		return static_cast<NodePointer>(address_of(m_sentry_));
 	}
 
 	public:
 	NodeConstPointer get_sentry() const DD_NOEXCEPT {
-		return static_cast<NodePointer>(address_of(_m_sentry));
+		return static_cast<NodePointer>(address_of(m_sentry_));
 	}
 
 
@@ -124,23 +124,23 @@ struct _ListBase {
 
 
 	public:
-	DD_DELETE_COPY_ASSIGNMENT(_ListBase)
+	DD_DELETE_COPY_ASSIGNMENT(ListBase_)
 
 	public:
-	DD_DELETE_MOVE_ASSIGNMENT(_ListBase)
+	DD_DELETE_MOVE_ASSIGNMENT(ListBase_)
 
 
 };
 
 
 
-template <typename _ValueT, typename _AllocatorT, ValidityType _need_instance_c>
-struct _List : _ListBase<_ValueT> {
+template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
+struct List_ : ListBase_<ValueT_> {
 	public:
-	DD_ALIAS(SuperType, _List<_ValueT>);
-	DD_ALIAS(ThisType, _List<_ValueT DD_COMMA _AllocatorT DD_COMMA _need_instance_c>);
-	DD_ALIAS(ValueType, _ValueT);
-	DD_ALIAS(Allocator, _AllocatorT);
+	DD_ALIAS(SuperType, List_<ValueT_>);
+	DD_ALIAS(ThisType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(ValueType, ValueT_);
+	DD_ALIAS(Allocator, AllocatorT_);
 
 	private:
 	DD_ALIAS(EmptyNode, EmptyListNode);
@@ -171,13 +171,13 @@ struct _List : _ListBase<_ValueT> {
 
 #	if __cplusplus >= 201103L
 	public:
-	_List() = default;
+	List_() = default;
 
 #	endif
 	public:
-	_List(ThisType const& _origin) DD_NOEXCEPT_AS(append(_origin)) {
+	List_(ThisType const& origin_) DD_NOEXCEPT_AS(append(origin_)) {
 		try {
-			append(_origin);
+			append(origin_);
 		} catch (...) {
 			destruct();
 			throw;
@@ -186,195 +186,195 @@ struct _List : _ListBase<_ValueT> {
 
 #	if __cplusplus >= 201103L
 	public:
-	_List(ThisType&& _origin) noexcept : SuperType(_origin._m_sentry->previous, _origin._m_sentry->next) {
-		_origin._reset();
+	List_(ThisType&& origin_) noexcept : SuperType(origin_.m_sentry_->previous, origin_.m_sentry_->next) {
+		origin_.reset_();
 	}
 
 #	endif
 
 	public:
-	~_List() DD_NOEXCEPT {
-		_destruct();
+	~List_() DD_NOEXCEPT {
+		destruct_();
 	}
 
 
 	public:
-	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
+	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
-		swap(this->_m_sentry, _target._m_sentry);
+		swap(this->m_sentry_, target_.m_sentry_);
 	}
 
 
 	public:
-	template <typename _UndirectionalIteratorT_>
+	template <typename UndirectionalIteratorT__>
 	ProcessType clone(
-		_UndirectionalIteratorT_ __begin_,
-		_UndirectionalIteratorT_ const& __end_
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ const& end___
 	) {
-		for (Iterator _current(begin()); _current != end(); ++_current, ++__begin_) {
-			if (__begin == __end) {
-				erase_range(_current, end());
+		for (Iterator current_(begin()); current_ != end(); ++current_, ++begin___) {
+			if (begin__ == end__) {
+				erase_range(current_, end());
 				return;
 			}
-			*_current = *__begin_;
+			*current_ = *begin___;
 		}
-		append_range(__begin, __end_);
+		append_range(begin__, end___);
 	}
 
 	public:
-	template <typename _UndirectionalRangeT_>
-	ProcessType clone(_UndirectionalRangeT_ const& __origin_) {
-		clone(DD_SPLIT_RANGE(__origin_));
+	template <typename UndirectionalRangeT__>
+	ProcessType clone(UndirectionalRangeT__ const& origin___) {
+		clone(DD_SPLIT_RANGE(origin___));
 	}
 
 
 	public:
 #	if __cplusplus >= 201103L
-	template <typename _ValueT_>
-	ProcessType push_front(_ValueT_&& __value_) {
-		insert(begin(), forward<_ValueT_>(__value_));
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__&& value___) {
+		insert(begin(), forward<ValueT__>(value___));
 	}
 #	else
-	template <typename _ValueT_>
-	ProcessType push_front(_ValueT_ const& __value_) {
-		insert(begin(), __value_);
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__ const& value___) {
+		insert(begin(), value___);
 	}
 #	endif
 
 
 	public:
 #	if __cplusplus >= 201103L
-	template <typename _ValueT_>
-	ProcessType push_back(_ValueT_&& __value_) {
-		insert(end(), forward<_ValueT_>(__value_));
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__&& value___) {
+		insert(end(), forward<ValueT__>(value___));
 	}
 #	else
-	template <typename _ValueT_>
-	ProcessType push_back(_ValueT_ const& __value_) {
-		insert(end(), __value_);
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__ const& value___) {
+		insert(end(), value___);
 	}
 #	endif
 
 
 	public:
-	template <typename _UndirectionalIteratorT_>
+	template <typename UndirectionalIteratorT__>
 	ProcessType append_range(
-		_UndirectionalIteratorT_ __begin_,
-		_UndirectionalIteratorT_ const& __end_
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ const& end___
 	) {
-		for (; __begin_ != __end_; ++__begin_) {
-			push_back(*__begin_);
+		for (; begin___ != end___; ++begin___) {
+			push_back(*begin___);
 		}
 	}
 
 	public:
-	template <typename _UndirectionalRangeT_>
-	ProcessType append_range(_UndirectionalRangeT_ const& __range_) {
-		append_range(DD_SPLIT_RANGE(__range_));
+	template <typename UndirectionalRangeT__>
+	ProcessType append_range(UndirectionalRangeT__ const& range___) {
+		append_range(DD_SPLIT_RANGE(range___));
 	}
 
 
 	public:
 	static ProcessType splice(
-		NodePointer _position,
-		NodePointer _begin,
-		NodePointer _end
+		NodePointer position_,
+		NodePointer begin_,
+		NodePointer end_
 	) DD_NOEXCEPT {
 
 	}
 
 
 	public:
-	static ProcessType transfer(Iterator const& _position, Iterator const& _new_node) DD_NOEXCEPT_AS(_transfer(_position.get_node() DD_COMMA _new_node.get_node())) {
-		_transfer(_position.get_node(), _new_node.get_node());
+	static ProcessType transfer(Iterator const& position_, Iterator const& new_node_) DD_NOEXCEPT_AS(transfer_(position_.get_node() DD_COMMA new_node_.get_node())) {
+		transfer_(position_.get_node(), new_node_.get_node());
 	}
 
 	private:
-	static ProcessType _transfer(NodePointer _position, NodePointer _node) DD_NOEXCEPT_AS {
-		_delink(_node);
-		_enlink(_position, _node);
+	static ProcessType transfer_(NodePointer position_, NodePointer node_) DD_NOEXCEPT_AS {
+		delink_(node_);
+		enlink_(position_, node_);
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	template <typename _ValueT_>
-	static Iterator insert(Iterator const& _position, _ValueT_&& __value_) {
-		return Iterator(_insert(_position.get_node(), forward<_ValueT_>(__value_)));
+	template <typename ValueT__>
+	static Iterator insert(Iterator const& position_, ValueT__&& value___) {
+		return Iterator(insert_(position_.get_node(), forward<ValueT__>(value___)));
 	}
 
 	private:
-	template <typename _ValueT_>
-	static ProcessType _insert(NodePointer _position, _ValueT_&& __value_) {
-		NodePointer _new_node = _create_node(forward<_ValueT_>(__value_));
-		_enlink(_position, _new_node);
-		return _new_node;
+	template <typename ValueT__>
+	static ProcessType insert_(NodePointer position_, ValueT__&& value___) {
+		NodePointer new_node_ = create_node_(forward<ValueT__>(value___));
+		enlink_(position_, new_node_);
+		return new_node_;
 	}
 #	else
 	public:
-	template <typename _ValueT_>
-	static Iterator insert(Iterator const& _position, _ValueT_ const& __value_) {
-		return Iterator(_insert(_position.get_node(), __value_));
+	template <typename ValueT__>
+	static Iterator insert(Iterator const& position_, ValueT__ const& value___) {
+		return Iterator(insert_(position_.get_node(), value___));
 	}
 
 	private:
-	template <typename _ValueT_>
-	static NodePointer _insert(NodePointer _position, _ValueT_ const& __value_);
-		NodePointer _new_node = _create_node(__value_);
-		_enlink(_position, _new_node);
-		return _new_node;
+	template <typename ValueT__>
+	static NodePointer insert_(NodePointer position_, ValueT__ const& value___);
+		NodePointer new_node_ = create_node_(value___);
+		enlink_(position_, new_node_);
+		return new_node_;
 	}
 #	endif
 
 
 	private:
-	static ProcessType _enlink(NodePointer _position, NodePointer _new_node) DD_NOEXCEPT {
-		_new_node->previous = _position->previous;
-		_new_node->previous->next = _new_node;
-		_new_node->next = _position;
-		_position->previous = _new_node;
+	static ProcessType enlink_(NodePointer position_, NodePointer new_node_) DD_NOEXCEPT {
+		new_node_->previous = position_->previous;
+		new_node_->previous->next = new_node_;
+		new_node_->next = position_;
+		position_->previous = new_node_;
 	}
 
 	private:
-	static ProcessType _delink(NodePointer _node) {
-		_node->previous->next = _node->next;
-		_node->next->previous = _node->previous;
+	static ProcessType delink_(NodePointer node_) {
+		node_->previous->next = node_->next;
+		node_->next->previous = node_->previous;
 	}
 
 
 	public:
-	static Iterator erase(Iterator const& _position) DD_NOEXCEPT_AS(Iterator(_erase(_position.get_node()))) {
-		return Iterator(_erase(_position.get_node()));
+	static Iterator erase(Iterator const& position_) DD_NOEXCEPT_AS(Iterator(erase_(position_.get_node()))) {
+		return Iterator(erase_(position_.get_node()));
 	}
 
 	public:
-	static NodePointer _erase(NodePointer _position) DD_NOEXCEPT {
-		_position = _position->next;
-		_delink(_position->previous);
-		_destroy_node(_position);
-		return _position;
+	static NodePointer erase_(NodePointer position_) DD_NOEXCEPT {
+		position_ = position_->next;
+		delink_(position_->previous);
+		destroy_node_(position_);
+		return position_;
 	}
 
 
 	public:
 	static Iterator erase_range(
-		Iterator _begin,
-		Iterator const& _end
-	) DD_NOEXCEPT_AS(Iterator(_erase_range(_begin.get_node() DD_COMMA _end.get_node()))) {
-		return Iterator(_erase_range(_begin.get_node(), _end.get_node()));
+		Iterator begin_,
+		Iterator const& end_
+	) DD_NOEXCEPT_AS(Iterator(erase_range_(begin_.get_node() DD_COMMA end_.get_node()))) {
+		return Iterator(erase_range_(begin_.get_node(), end_.get_node()));
 	}
 
 	private:
-	static NodePointer _erase_range(
-		NodePointer _begin,
-		NodePointer _end
-	) DD_NOEXCEPT_AS(erase(_begin)) {
-		_begin->previous->next = _end->next;
-		_end->next->previous = _begin->previous;
-		for (; _begin != _end; _begin = _begin->next) {
-			_destroy_node(_begin)
+	static NodePointer erase_range_(
+		NodePointer begin_,
+		NodePointer end_
+	) DD_NOEXCEPT_AS(erase(begin_)) {
+		begin_->previous->next = end_->next;
+		end_->next->previous = begin_->previous;
+		for (; begin_ != end_; begin_ = begin_->next) {
+			destroy_node_(begin_)
 		}
-		return _begin;
+		return begin_;
 	}
 
 
@@ -385,61 +385,61 @@ struct _List : _ListBase<_ValueT> {
 
 
 	private:
-	template <typename _ValueT_>
+	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	static NodePointer _creat_node(_ValueT_&& __value_) {
-		NodePointer _new_node = Allocator::Basic::allocate(sizeof(Node));
-		Allocator::construct(_new_node->value, forward<_ValueT_>(__value_));
-		return _new_node;
+	static NodePointer creat_node_(ValueT__&& value___) {
+		NodePointer new_node_ = Allocator::Basic::allocate(sizeof(Node));
+		Allocator::construct(new_node_->value, forward<ValueT__>(value___));
+		return new_node_;
 	}
 #	else
-	static NodePointer _creat_node(_ValueT_ const& __value_) {
-		NodePointer _new_node = Allocator::Basic::allocate(sizeof(Node));
-		Allocator::construct(_new_node->value, __value_);
-		return _new_node;
+	static NodePointer creat_node_(ValueT__ const& value___) {
+		NodePointer new_node_ = Allocator::Basic::allocate(sizeof(Node));
+		Allocator::construct(new_node_->value, value___);
+		return new_node_;
 	}
 #	endif
 
 
 	private:
-	template <typename _PointerT_>
-	static ProcessType _destroy_node(_PointerT_ const& _node) DD_NOEXCEPT {
-		Allocator::destruct(_node->value);
-		Allocator::Basic::deallocate(address_of(*_node), sizeof(Node));
+	template <typename PointerT__>
+	static ProcessType destroy_node_(PointerT__ const& node_) DD_NOEXCEPT {
+		Allocator::destruct(node_->value);
+		Allocator::Basic::deallocate(address_of(*node_), sizeof(Node));
 	}
 
 
 	private:
-	ProcessType _destruct() DD_NOEXCEPT {
-		for (Iterator _current = begin(); _current++ != end(); ) {
-			_destroy_node(_current.get_node()->previous);
+	ProcessType destruct_() DD_NOEXCEPT {
+		for (Iterator current_ = begin(); current_++ != end(); ) {
+			destroy_node_(current_.get_node()->previous);
 		}
 	}
 
 
 	public:
-	ThisType& operator =(ThisType const& _origin) DD_NOEXCEPT {
-		clone(_origin);
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT {
+		clone(origin_);
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) DD_NOEXCEPT {
-		swap(_origin);
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT {
+		swap(origin_);
 	}
 
 
 #	endif
 	public:
-	template <typename _ValueT_>
+	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ThisType& operator <<(_ValueT_&& __value_) DD_NOEXCEPT_AS(push_back(forward<_ValueT_>(__value))) {
-		push_back(forward<_ValueT_>(__value));
+	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(push_back(forward<ValueT__>(value__))) {
+		push_back(forward<ValueT__>(value__));
 		return *this;
 	}
 #	else
-	ThisType& operator <<(_ValueT_ const& __value_) DD_NOEXCEPT_AS(push_back(__value)) {
-		push_back(__value);
+	ThisType& operator <<(ValueT__ const& value___) DD_NOEXCEPT_AS(push_back(value__)) {
+		push_back(value__);
 		return *this;
 	}
 #	endif

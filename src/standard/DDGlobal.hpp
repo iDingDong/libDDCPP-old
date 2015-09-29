@@ -1,6 +1,6 @@
 //	DDCPP/standard\DDGlobal.hpp
-#ifndef _DDGLOBAL_HPP_INCLUDED
-#	define _DDGLOBAL_HPP_INCLUDED 1
+#ifndef DDGLOBAL_HPP_INCLUDED_
+#	define DDGLOBAL_HPP_INCLUDED_ 1
 
 
 

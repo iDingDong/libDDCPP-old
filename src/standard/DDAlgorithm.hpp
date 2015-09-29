@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DDAlgorithm.hpp
-#ifndef _DDALGORITHM_HPP_INCLUDED
-#	define _DDALGORITHM_HPP_INCLUDED 1
+#ifndef DDALGORITHM_HPP_INCLUDED_
+#	define DDALGORITHM_HPP_INCLUDED_ 1
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard\DDTrait.hpp
-#ifndef _DDTRAIT_HPP_INCLUDED
-#	define _DDTRAIT_HPP_INCLUDED 1
+#ifndef DDTRAIT_HPP_INCLUDED_
+#	define DDTRAIT_HPP_INCLUDED_ 1
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AtPack.hpp
-#ifndef _DD_AT_PACK_HPP_INCLUDED
-#	define _DD_AT_PACK_HPP_INCLUDED 1
+#ifndef DD_AT_PACK_HPP_INCLUDED_
+#	define DD_AT_PACK_HPP_INCLUDED_ 1
 
 
 
@@ -8,11 +8,11 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 
 
 
-_DD_END
+DD_END_
 
 
 

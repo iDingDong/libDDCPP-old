@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_count_if.hpp
-#ifndef _DD_COUNT_IF_HPP_INCLUDED
-#	define _DD_COUNT_IF_HPP_INCLUDED 1
+#ifndef DD_COUNT_IF_HPP_INCLUDED_
+#	define DD_COUNT_IF_HPP_INCLUDED_ 1
 
 
 
@@ -8,30 +8,30 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
-DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) count_if(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_UnaryPredicatorT const& __predicator
-) DD_NOEXCEPT_AS(++__begin != __end && __predicator(*__begin)) {
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
+DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count_if(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	UnaryPredicatorT_ const& predicator__
+) DD_NOEXCEPT_AS(++begin__ != end__ && predicator__(*begin__)) {
 #	if __cplusplus >= 201103L
-	auto _result = DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT)();
+	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
 #	else
-	typedef DD_MODIFY_TRAIT(IteratorDifference, _UndirectionalIteratorT) _ResultType;
-	_ResultType _result = _ResultType();
+	typedef DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) ResultType_;
+	ResultType_ result_ = ResultType_();
 #	endif
-	for (; __begin != __end; ++__begin) {
-		if (__predicator(*__begin)) {
-			++_result;
+	for (; begin__ != end__; ++begin__) {
+		if (predicator__(*begin__)) {
+			++result_;
 		}
 	}
-	return _result;
+	return result_;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

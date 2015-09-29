@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsDouble.hpp
-#ifndef _DD_IS_DOUBLE_HPP_INCLUDED
-#	define _DD_IS_DOUBLE_HPP_INCLUDED
+#ifndef DD_IS_DOUBLE_HPP_INCLUDED_
+#	define DD_IS_DOUBLE_HPP_INCLUDED_
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsDouble : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsDouble_ : FalseType {
 };
 
 
 
 template <>
-struct _IsDouble<double> : TrueType {
+struct IsDouble_<double> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsDouble = AndType<_detail::_IsDouble<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsDouble = AndType<detail_::IsDouble_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsDouble : _detail::_IsDouble<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsDouble : detail_::IsDouble_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

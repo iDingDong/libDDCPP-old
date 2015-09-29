@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsArray.hpp
-#ifndef _DD_IS_ARRAY_HPP_INCLUDED
-#	define _DD_IS_ARRAY_HPP_INCLUDED 1
+#ifndef DD_IS_ARRAY_HPP_INCLUDED_
+#	define DD_IS_ARRAY_HPP_INCLUDED_ 1
 
 
 
@@ -15,46 +15,46 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsArray : StdBoolConstant<std::is_array<_ObjectT>> {
+struct IsArray_ : StdBoolConstant<std::is_array<ObjectT_>> {
 #	else
-struct _IsArray : FalseType {
+struct IsArray_ : FalseType {
 #	endif
 };
 
 
 
-template <typename _ValueT>
-struct _IsArray<_ValueT[]> : TrueType {
+template <typename ValueT_>
+struct IsArray_<ValueT_[]> : TrueType {
 };
 
 
 
-template <typename _ValueT, LengthType _length_c>
-struct _IsArray<_ValueT[_length_c]> : TrueType {
+template <typename ValueT_, LengthType length_c_>
+struct IsArray_<ValueT_[length_c_]> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsArray = AndType<_detail::_IsArray<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsArray = AndType<detail_::IsArray_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsArray : _detail::_IsArray<_ObjectT> {
+template <typename ObjectT_>
+struct IsArray : detail_::IsArray_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

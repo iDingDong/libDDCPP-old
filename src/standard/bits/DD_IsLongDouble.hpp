@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsLongDouble.hpp
-#ifndef _DD_IS_LONG_DOUBLE_HPP_INCLUDED
-#	define _DD_IS_LONG_DOUBLE_HPP_INCLUDED
+#ifndef DD_IS_LONG_DOUBLE_HPP_INCLUDED_
+#	define DD_IS_LONG_DOUBLE_HPP_INCLUDED_
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsLongDouble : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsLongDouble_ : FalseType {
 };
 
 
 
 template <>
-struct _IsLongDouble<double> : TrueType {
+struct IsLongDouble_<double> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsLongDouble = AndType<_detail::_IsLongDouble<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsLongDouble = AndType<detail_::IsLongDouble_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsLongDouble : _detail::_IsLongDouble<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsLongDouble : detail_::IsLongDouble_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

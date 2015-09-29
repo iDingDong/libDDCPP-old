@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_release.hpp
-#ifndef _DD_RELEASE_HPP_INCLUDED
-#	define _DD_RELEASE_HPP_INCLUDED 1
+#ifndef DD_RELEASE_HPP_INCLUDED_
+#	define DD_RELEASE_HPP_INCLUDED_ 1
 
 
 
@@ -8,15 +8,15 @@
 
 
 
-_DD_BEGIN
-template <typename _PointerT>
-inline _PointerT DD_CONSTEXPR release(_PointerT& __pointer, _PointerT __new_pointer = _PointerT(), _PointerT __workaround = _PointerT()) DD_NOEXCEPT {
-	return __workaround = __pointer, __pointer = __new_pointer, __workaround;
+DD_BEGIN_
+template <typename PointerT_>
+inline PointerT_ DD_CONSTEXPR release(PointerT_& pointer__, PointerT_ new_pointer__ = PointerT_(), PointerT_ workaround__ = PointerT_()) DD_NOEXCEPT {
+	return workaround__ = pointer__, pointer__ = new_pointer__, workaround__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

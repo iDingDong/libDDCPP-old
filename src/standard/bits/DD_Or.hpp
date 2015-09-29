@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Or.hpp
-#ifndef _DD_OR_HPP_INCLUDED
-#	define _DD_OR_HPP_INCLUDED 1
+#ifndef DD_OR_HPP_INCLUDED_
+#	define DD_OR_HPP_INCLUDED_ 1
 
 
 
@@ -9,51 +9,51 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 template <typename... ContidionsT>
-struct _Or : FalseType {
+struct Or_ : FalseType {
 };
 
 
 
-template <typename _ConditionT1, typename _ConditionT2, typename... _ConditionsT>
-struct _Or<_ConditionT1, _ConditionT2, _ConditionsT...> : _Or<_ConditionT1, _Or<_ConditionT2, _ConditionsT...>> {
+template <typename ConditionT1_, typename ConditionT2_, typename... ConditionsT_>
+struct Or_<ConditionT1_, ConditionT2_, ConditionsT_...> : Or_<ConditionT1_, Or_<ConditionT2_, ConditionsT_...>> {
 };
 
 
 
-template <typename _ConditionT1, typename _ConditionT2>
-struct _Or<_ConditionT1, _ConditionT2> : BoolConstant<_ConditionT1::value || _ConditionT2::value> {
+template <typename ConditionT1_, typename ConditionT2_>
+struct Or_<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value || ConditionT2_::value> {
 };
 
 
 
-template <typename _ConditionT>
-struct _Or<_ConditionT> : BoolConstant<_ConditionT::value> {
+template <typename ConditionT_>
+struct Or_<ConditionT_> : BoolConstant<ConditionT_::value> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ConditionsT>
-using Or = _detail::_Or<_ConditionsT...>;
-template <typename... _ConditionsT>
-using OrType = typename Or<_ConditionsT...>::Type;
+template <typename... ConditionsT_>
+using Or = detail_::Or_<ConditionsT_...>;
+template <typename... ConditionsT_>
+using OrType = typename Or<ConditionsT_...>::Type;
 #	else
-template <typename _ConditionT1, typename _ConditionT2>
-struct Or : BoolConstant<_ConditionT1::value && _ConditionT2::value> {
+template <typename ConditionT1_, typename ConditionT2_>
+struct Or : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

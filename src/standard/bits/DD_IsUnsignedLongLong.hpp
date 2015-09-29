@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsUnsignedLongLong.hpp
-#ifndef _DD_IS_UNSIGNED_LONG_LONG_HPP_INCLUDED
-#	define _DD_IS_UNSIGNED_LONG_LONG_HPP_INCLUDED 1
+#ifndef DD_IS_UNSIGNED_LONG_LONG_HPP_INCLUDED_
+#	define DD_IS_UNSIGNED_LONG_LONG_HPP_INCLUDED_ 1
 
 
 
@@ -19,30 +19,30 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsUnsignedLongLong : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsUnsignedLongLong_ : FalseType {
 };
 
 
 
 template <>
-struct _IsUnsignedLongLong<unsigned long long> : TrueType {
+struct IsUnsignedLongLong_<unsigned long long> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsUnsignedLongLong = AndType<_detail::_IsUnsignedLongLong<RemoveCVType<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsUnsignedLongLong = AndType<detail_::IsUnsignedLongLong_<RemoveCVType<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

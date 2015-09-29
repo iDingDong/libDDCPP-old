@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AddCV.hpp
-#ifndef _DD_ADD_C_V_HPP_INCLUDED
-#	define _DD_ADD_C_V_HPP_INCLUDED 1
+#ifndef DD_ADD_C_V_HPP_INCLUDED_
+#	define DD_ADD_C_V_HPP_INCLUDED_ 1
 
 
 
@@ -9,13 +9,13 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using AddCV = AddConst<AddVolatileType<_ObjectT>>;
+template <typename ObjectT_>
+using AddCV = AddConst<AddVolatileType<ObjectT_>>;
 #	else
-template <typename _ObjectT>
-struct AddCV : AddConst<typename AddVolatile<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct AddCV : AddConst<typename AddVolatile<ObjectT_>::Type> {
 };
 #	endif
 
@@ -25,7 +25,7 @@ DD_TRAIT_MODIFIER(AddCV)
 
 
 
-_DD_END
+DD_END_
 
 
 

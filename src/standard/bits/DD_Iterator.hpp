@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Iterator.hpp
-#ifndef _DD_ITERATOR_HPP_INCLUDED
-#	define _DD_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_ITERATOR_HPP_INCLUDED_
+#	define DD_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -12,17 +12,17 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 #	if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(_IteratorOfStl, _RangeT::iterator, void)
+DD_NESTED_TYPE_TRAIT(IteratorOfStl_, RangeT_::iterator, void)
 
 
 
 #	endif
-template <typename _RangeT>
-struct _Iterator {
+template <typename RangeT_>
+struct Iterator_ {
 #	if DDCPP_COMPAT_STL
-	DD_ALIAS(Type, DD_MODIFY_TRAIT(_IteratorOfStl, _RangeT));
+	DD_ALIAS(Type, DD_MODIFY_TRAIT(IteratorOfStl_, RangeT_));
 #	else
 	DD_ALIAS(Type, void);
 #	endif
@@ -32,62 +32,62 @@ struct _Iterator {
 
 
 
-template <typename _ValueT, LengthType _length_c>
-struct _Iterator<_ValueT[_length_c]> {
-	DD_ALIAS(Type, _ValueT*);
+template <typename ValueT_, LengthType length_c_>
+struct Iterator_<ValueT_[length_c_]> {
+	DD_ALIAS(Type, ValueT_*);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct _Iterator<_ValueT[]> {
-	DD_ALIAS(Type, _ValueT*);
+template <typename ValueT_>
+struct Iterator_<ValueT_[]> {
+	DD_ALIAS(Type, ValueT_*);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct _Iterator<_ValueT*> {
-	DD_ALIAS(Type, _ValueT*);
+template <typename ValueT_>
+struct Iterator_<ValueT_*> {
+	DD_ALIAS(Type, ValueT_*);
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename detail_::Iterator_<MACRO_ObjectT_>::Type)
 #		else
-DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename detail_::Iterator_<MACRO_ObjectT_>::Type)
 #		endif
 
 
 
-template <typename _RangeT>
-using IteratorType = typename Iterator<_RangeT>::Type;
+template <typename RangeT_>
+using IteratorType = typename Iterator<RangeT_>::Type;
 #	else
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename _detail::_Iterator<typename RemoveCV<_MACRO_ObjectT>::Type>::Type);
+DD_NESTED_TYPE_TRAIT(Iterator, Iterator, typename detail_::Iterator_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type);
 #		else
-template <typename _RangeT>
-struct Iterator : _detail::_Iterator<typename RemoveCV<_RangeT>::Type> {
+template <typename RangeT_>
+struct Iterator : detail_::Iterator_<typename RemoveCV<RangeT_>::Type> {
 };
 #		endif
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

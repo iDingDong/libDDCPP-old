@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsWChar.hpp
-#ifndef _DD_IS_W_CHAR_HPP_INCLUDED
-#	define _DD_IS_W_CHAR_HPP_INCLUDED 1
+#ifndef DD_IS_W_CHAR_HPP_INCLUDED_
+#	define DD_IS_W_CHAR_HPP_INCLUDED_ 1
 
 
 
@@ -13,36 +13,36 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsWChar : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsWChar_ : FalseType {
 };
 
 
 
 template <>
-struct _IsWChar<wchar_t> : TrueType {
+struct IsWChar_<wchar_t> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsWChar = AndType<_detail::_IsWChar<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsWChar = AndType<detail_::IsWChar_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsWChar : _detail::_IsWChar<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsWChar : detail_::IsWChar_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

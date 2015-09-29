@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AddPointer.hpp
-#ifndef _DD_ADD_POINTER_HPP_INCLUDED
-#	define _DD_ADD_POINTER_HPP_INCLUDED 1
+#ifndef DD_ADD_POINTER_HPP_INCLUDED_
+#	define DD_ADD_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -8,10 +8,10 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct AddPointer {
-	DD_ALIAS(Type, DD_MODIFY_TRAIT(RemoveReference, _ObjectT)*);
+	DD_ALIAS(Type, DD_MODIFY_TRAIT(RemoveReference, ObjectT_)*);
 
 
 };
@@ -22,7 +22,7 @@ DD_TRAIT_MODIFIER(AddPointer)
 
 
 
-_DD_END
+DD_END_
 
 
 

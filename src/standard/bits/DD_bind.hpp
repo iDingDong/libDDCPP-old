@@ -1,5 +1,5 @@
 //	DDCPP/standard/bits/DD_bind.hpp
-#ifndef _DD_BIND_HPP_INCLUDED
+#ifndef DD_BIND_HPP_INCLUDED_
 #	define DD_BINARY_FIND_HPP_INCLUDED 1
 
 
@@ -18,159 +18,165 @@
 
 
 
-#	define _DD_PLACE_HOLDER_BEGIN _DD_BEGIN namespace place_holder {
-#	define _DD_PLACE_HOLDER_END } _DD_END
+#	define DD_PLACE_HOLDER_BEGIN_ DD_BEGIN_ namespace place_holder {
+#	define DD_PLACE_HOLDER_END_ } DD_END_
 
-#	define DD_GENERATE_PLACE_HOLDER(_ARG_index) _DD_PLACE_HOLDER_BEGIN static PlaceHolder<_ARG_index> constexpr _##_ARG_index; _DD_PLACE_HOLDER_END
+#	define DD_GENERATE_PLACE_HOLDER(ARG_index_)\
+		DD_PLACE_HOLDER_BEGIN_\
+		static PlaceHolder<ARG_index_> constexpr _##ARG_index_##_;\
+		\
+		\
+		\
+		DD_PLACE_HOLDER_END_
 
 
 
-_DD_DETAIL_BEGIN
-template <SubscriptType... _subscripts_c>
-struct _Indexs {
+DD_DETAIL_BEGIN_
+template <SubscriptType... subscripts_c_>
+struct Indexs_ {
 };
 
 
 
-template <SubscriptType _subscript_c, SubscriptType... subscripts_c>
-struct _MakeIndexs : _MakeIndexs<_subscript_c - 1, _subscript_c - 1, subscripts_c...> {
+template <SubscriptType subscript_c_, SubscriptType... subscripts_c>
+struct MakeIndexs_ : MakeIndexs_<subscript_c_ - 1, subscript_c_ - 1, subscripts_c...> {
 };
 
 
 
-template <SubscriptType... _subscripts_c>
-struct _MakeIndexs<0, _subscripts_c...> {
-	using Type = _Indexs<_subscripts_c...>;
-
-
-};
-
-
-
-template <SubscriptType _index_c>
-struct _PlaceHolder {
-	static constexpr SubscriptType index = _index_c;
-
-
-};
-
-
-
-template <typename _FunctionT>
-struct _ResultOf : _ResultOf<decltype(&_FunctionT::operator ())> {
-};
-
-
-
-template <typename _FunctionT>
-struct _ResultOf<_FunctionT*> : _ResultOf<_FunctionT> {
-};
-
-
-
-template <typename _ResultT, typename... _ArgumentsT>
-struct _ResultOf<_ResultT(*)(_ArgumentsT...)> {
-	using Type = _ResultT;
+template <SubscriptType... subscripts_c_>
+struct MakeIndexs_<0, subscripts_c_...> {
+	using Type = Indexs_<subscripts_c_...>;
 
 
 };
 
 
 
-template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
-struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...)> {
-	using Type = _ResultT;
+template <SubscriptType index_c_>
+struct PlaceHolder_ {
+	static constexpr SubscriptType index = index_c_;
 
 
 };
 
 
 
-template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
-struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) const> {
-	using Type = _ResultT;
+template <typename FunctionT_>
+struct ResultOf_ : ResultOf_<decltype(&FunctionT_::operator ())> {
+};
+
+
+
+template <typename FunctionT_>
+struct ResultOf_<FunctionT_*> : ResultOf_<FunctionT_> {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct ResultOf_<ResultT_(*)(ArgumentsT_...)> {
+	using Type = ResultT_;
 
 
 };
 
 
 
-template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
-struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) volatile> {
-	using Type = _ResultT;
+template <typename ResultT_, typename ClassT_, typename... ArgumentsT_>
+struct ResultOf_<ResultT_(ClassT_::*)(ArgumentsT_...)> {
+	using Type = ResultT_;
 
 
 };
 
 
 
-template <typename _ResultT, typename _ClassT, typename... _ArgumentsT>
-struct _ResultOf<_ResultT(_ClassT::*)(_ArgumentsT...) const volatile> {
-	using Type = _ResultT;
+template <typename ResultT_, typename ClassT_, typename... ArgumentsT_>
+struct ResultOf_<ResultT_(ClassT_::*)(ArgumentsT_...) const> {
+	using Type = ResultT_;
 
 
 };
 
 
 
-template <typename _ValueT, typename _TupleT>
-struct _ArgumentAt {
-	using Type = _ValueT const&;
+template <typename ResultT_, typename ClassT_, typename... ArgumentsT_>
+struct ResultOf_<ResultT_(ClassT_::*)(ArgumentsT_...) volatile> {
+	using Type = ResultT_;
 
 
 };
 
 
 
-template <SubscriptType _index_c, typename _TupleT>
-struct _ArgumentAt<_PlaceHolder<_index_c>, _TupleT> {
-	using Type = typename _TupleT::template At<_index_c>;
+template <typename ResultT_, typename ClassT_, typename... ArgumentsT_>
+struct ResultOf_<ResultT_(ClassT_::*)(ArgumentsT_...) const volatile> {
+	using Type = ResultT_;
 
 
 };
 
 
 
-template <typename _ArgumentT, typename... _ArgumentsT>
-inline _ArgumentT&& _select(_ArgumentT&& __argument, Tuple<_ArgumentsT...>& _arguments_pack) noexcept {
-	return forward<_ArgumentT>(__argument);
+template <typename ValueT_, typename TupleT_>
+struct ArgumentAt_ {
+	using Type = ValueT_ const&;
+
+
+};
+
+
+
+template <SubscriptType index_c_, typename TupleT_>
+struct ArgumentAt_<PlaceHolder_<index_c_>, TupleT_> {
+	using Type = typename TupleT_::template At<index_c_>;
+
+
+};
+
+
+
+template <typename ArgumentT_, typename... ArgumentsT_>
+inline ArgumentT_&& select_(ArgumentT_&& argument__, Tuple<ArgumentsT_...>& arguments_pack_) noexcept {
+	return forward<ArgumentT_>(argument__);
 }
 
-template <SubscriptType _index_c, typename... _ArgumentsT>
-inline auto _select(
-	_PlaceHolder<_index_c> __place_holder,
-	Tuple<_ArgumentsT...>& _arguments_pack
-) noexcept(noexcept(get_value<_index_c>(_arguments_pack))) -> decltype(get_value<_index_c>(_arguments_pack)) {
-	return get_value<_index_c>(_arguments_pack);
+template <SubscriptType index_c_, typename... ArgumentsT_>
+inline auto select_(
+	PlaceHolder_<index_c_> place_holder__,
+	Tuple<ArgumentsT_...>& arguments_pack_
+) noexcept(noexcept(get_value<index_c_>(arguments_pack_))) -> decltype(get_value<index_c_>(arguments_pack_)) {
+	return get_value<index_c_>(arguments_pack_);
 }
 
 
 
-template <ValidityType _is_member_function_c, typename _IndexsT>
-struct _BindCall;
+template <ValidityType is_member_function_c_, typename IndexsT_>
+struct BindCall_;
 
 
 
-template <SubscriptType... _indexs_c>
-struct _BindCall<true, _Indexs<0, _indexs_c...>> {
-	template <typename _FunctionT_, typename _TupleT1, typename _TupleT2>
-	static typename _ResultOf<_FunctionT_>::Type _call(
-		_FunctionT_ const& __function_,
-		_TupleT1 const& __arguments_1_,
-		_TupleT2&& __arguments_2_
+template <SubscriptType... indexs_c_>
+struct BindCall_<true, Indexs_<0, indexs_c_...>> {
+	template <typename FunctionT__, typename TupleT1_, typename TupleT2_>
+	static typename ResultOf_<FunctionT__>::Type call_(
+		FunctionT__ const& function___,
+		TupleT1_ const& arguments_1___,
+		TupleT2_&& arguments_2___
 	) noexcept(noexcept((forward<
-		typename _ArgumentAt<typename _TupleT1::template At<0>, _TupleT2>::Type
-	>(_select(get_value<0>(__arguments_1_), __arguments_2_)).*__function_)(
+		typename ArgumentAt_<typename TupleT1_::template At<0>, TupleT2_>::Type
+	>(select_(get_value<0>(arguments_1___), arguments_2___)).*function___)(
 		forward<
-			typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
-		>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...
+			typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
+		>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...
 	))) {
 		return (forward<
-			typename _ArgumentAt<typename _TupleT1::template At<0>, _TupleT2>::Type
-		>(_select(get_value<0>(__arguments_1_), __arguments_2_)).*__function_)(
+			typename ArgumentAt_<typename TupleT1_::template At<0>, TupleT2_>::Type
+		>(select_(get_value<0>(arguments_1___), arguments_2___)).*function___)(
 			forward<
-				typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
-			>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...
+				typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
+			>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...
 		);
 	}
 
@@ -179,19 +185,19 @@ struct _BindCall<true, _Indexs<0, _indexs_c...>> {
 
 
 
-template <SubscriptType... _indexs_c>
-struct _BindCall<false, _Indexs<_indexs_c...>> {
-	template <typename _FunctionT_, typename _TupleT1, typename _TupleT2>
-	static typename _ResultOf<_FunctionT_>::Type _call(
-		_FunctionT_ const& __function_,
-		_TupleT1 const& __arguments_1_,
-		_TupleT2&& __arguments_2_
-	) noexcept(noexcept(__function_(forward<
-		typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
-	>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...))) {
-		return __function_(forward<
-			typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
-		>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...);
+template <SubscriptType... indexs_c_>
+struct BindCall_<false, Indexs_<indexs_c_...>> {
+	template <typename FunctionT__, typename TupleT1_, typename TupleT2_>
+	static typename ResultOf_<FunctionT__>::Type call_(
+		FunctionT__ const& function___,
+		TupleT1_ const& arguments_1___,
+		TupleT2_&& arguments_2___
+	) noexcept(noexcept(function___(forward<
+		typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
+	>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...))) {
+		return function___(forward<
+			typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
+		>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...);
 	}
 
 
@@ -199,51 +205,51 @@ struct _BindCall<false, _Indexs<_indexs_c...>> {
 
 
 
-template <typename _FunctionT, typename... _ArgumentsT>
-struct _BindFunctor : Functor<typename _ResultOf<_FunctionT>::Type, _ArgumentsT...> {
+template <typename FunctionT_, typename... ArgumentsT_>
+struct BindFunctor_ : Functor<typename ResultOf_<FunctionT_>::Type, ArgumentsT_...> {
 	public:
-	using ThisType = _BindFunctor<_FunctionT, _ArgumentsT...>;
-	using FunctionType = _FunctionT;
-	using ArgumentsList = TypeList<_ArgumentsT...>;
+	using ThisType = BindFunctor_<FunctionT_, ArgumentsT_...>;
+	using FunctionType = FunctionT_;
+	using ArgumentsList = TypeList<ArgumentsT_...>;
 
 	public:
-	using ResultType = typename _ResultOf<_FunctionT>::Type;
-	using ArgumentsPack = Tuple<_ArgumentsT...>;
+	using ResultType = typename ResultOf_<FunctionT_>::Type;
+	using ArgumentsPack = Tuple<ArgumentsT_...>;
 
 
 	private:
-	FunctionType _m_function;
-	ArgumentsPack _m_arguments;
+	FunctionType m_function_;
+	ArgumentsPack m_arguments_;
 
 
 	public:
-	template <typename _FunctionT_, typename... _ArgumentsT_>
-	_BindFunctor(_FunctionT_&& __function_, _ArgumentsT_&&... __arguments_) noexcept(
-		noexcept(FunctionType(forward<_FunctionT_>(__function_))) &&
-		noexcept(ArgumentsPack(forward<_ArgumentsT_>(__arguments_)...))
-	) : _m_function(forward<_FunctionT_>(__function_)), _m_arguments(forward<_ArgumentsT_>(__arguments_)...) {
+	template <typename FunctionT__, typename... ArgumentsT__>
+	BindFunctor_(FunctionT__&& function___, ArgumentsT__&&... arguments___) noexcept(
+		noexcept(FunctionType(forward<FunctionT__>(function___))) &&
+		noexcept(ArgumentsPack(forward<ArgumentsT__>(arguments___)...))
+	) : m_function_(forward<FunctionT__>(function___)), m_arguments_(forward<ArgumentsT__>(arguments___)...) {
 	}
 
 
 	public:
-	template <typename... _ArgumentsT_>
-	ResultType operator ()(_ArgumentsT_&&... __arguments_) noexcept(
-		noexcept(_BindCall<
+	template <typename... ArgumentsT__>
+	ResultType operator ()(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(BindCall_<
 			IsMemberFunctionPointer<FunctionType>::value,
-			typename _MakeIndexs<ArgumentsPack::length>::Type
-		>::_call(
-			_m_function,
-			_m_arguments,
-			make_tuple(forward<_ArgumentsT_>(__arguments_)...)
+			typename MakeIndexs_<ArgumentsPack::length>::Type
+		>::call_(
+			m_function_,
+			m_arguments_,
+			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		))
 	) {
-		return _BindCall<
+		return BindCall_<
 			IsMemberFunctionPointer<FunctionType>::value,
-			typename _MakeIndexs<ArgumentsPack::length>::Type
-		>::_call(
-			_m_function,
-			_m_arguments,
-			make_tuple(forward<_ArgumentsT_>(__arguments_)...)
+			typename MakeIndexs_<ArgumentsPack::length>::Type
+		>::call_(
+			m_function_,
+			m_arguments_,
+			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		);
 	}
 
@@ -256,17 +262,17 @@ struct _BindFunctor : Functor<typename _ResultOf<_FunctionT>::Type, _ArgumentsT.
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_PLACE_HOLDER_BEGIN
-template <SubscriptType _index_c>
-using PlaceHolder = ::DD::_detail::_PlaceHolder<_index_c>;
+DD_PLACE_HOLDER_BEGIN_
+template <SubscriptType index_c_>
+using PlaceHolder = ::DD::detail_::PlaceHolder_<index_c_>;
 
 
 
-_DD_PLACE_HOLDER_END
+DD_PLACE_HOLDER_END_
 
 
 
@@ -305,31 +311,31 @@ DD_GENERATE_PLACE_HOLDER(31)
 
 
 
-_DD_BEGIN
-template <typename _FunctionT, typename... _ArgumentsT>
-inline _detail::_BindFunctor<DecayType<_FunctionT>, DecayType<_ArgumentsT>...> bind(
-	_FunctionT&& __function,
-	_ArgumentsT&&... __arguments
+DD_BEGIN_
+template <typename FunctionT_, typename... ArgumentsT_>
+inline detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...> bind(
+	FunctionT_&& function__,
+	ArgumentsT_&&... arguments__
 ) noexcept(noexcept(
-	_detail::_BindFunctor<DecayType<_FunctionT>, DecayType<_ArgumentsT>...>(
-		forward<_FunctionT>(__function),
-		forward<_ArgumentsT>(__arguments)...
+	detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
+		forward<FunctionT_>(function__),
+		forward<ArgumentsT_>(arguments__)...
 	)
 )) {
-	return _detail::_BindFunctor<DecayType<_FunctionT>, DecayType<_ArgumentsT>...>(
-		forward<_FunctionT>(__function),
-		forward<_ArgumentsT>(__arguments)...
+	return detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
+		forward<FunctionT_>(function__),
+		forward<ArgumentsT_>(arguments__)...
 	);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 
-#	undef _DD_PLACE_HOLDER_BEGIN
-#	undef _DD_PLACE_HOLDER_END
+#	undef DD_PLACE_HOLDER_BEGIN_
+#	undef DD_PLACE_HOLDER_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_TypeInfo.hpp
-#ifndef _DD_TYPE_INFO_HPP_INCLUDED
-#	define _DD_TYPE_INFO_HPP_INCLUDED 1
+#ifndef DD_TYPE_INFO_HPP_INCLUDED_
+#	define DD_TYPE_INFO_HPP_INCLUDED_ 1
 
 
 
@@ -10,12 +10,12 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 DD_ALIAS(TypeInfo, std::type_info);
 
 
 
-_DD_END
+DD_END_
 
 
 

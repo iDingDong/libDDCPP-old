@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsNullPointer.hpp
-#ifndef _DD_IS_NIL_POINTER_HPP_INCLUDED
-#	define _DD_IS_NIL_POINTER_HPP_INCLUDED 1
+#ifndef DD_IS_NIL_POINTER_HPP_INCLUDED_
+#	define DD_IS_NIL_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -14,48 +14,48 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsNilPointer : StdBoolConstant<std::is_null_pointer<_ObjectT>> {
+struct IsNilPointer_ : StdBoolConstant<std::is_null_pointer<ObjectT_>> {
 #	else
-struct _IsNilPointer : FalseType {
+struct IsNilPointer_ : FalseType {
 #	endif
 };
 
 
 
 template <>
-struct _IsNilPointer<NilPointerType> : TrueType {
+struct IsNilPointer_<NilPointerType> : TrueType {
 };
 
 
 
 #	if __cplusplus >= 201103L
 template <>
-struct _IsNilPointer<std::nullptr_t> : TrueType {
+struct IsNilPointer_<std::nullptr_t> : TrueType {
 };
 
 
 
 #	endif
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsNilPointer = AndType<_detail::_IsNilPointer<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsNilPointer = AndType<detail_::IsNilPointer_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsNilPointer : _detail::_IsNilPointer<typename RemoveCV<_ObjectT>::Type> {
+template <typename ObjectT_>
+struct IsNilPointer : detail_::IsNilPointer_<typename RemoveCV<ObjectT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

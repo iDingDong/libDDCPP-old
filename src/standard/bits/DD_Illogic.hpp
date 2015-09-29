@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Illogic.hpp
-#ifndef _DD_IlLOGIC_HPP_INCLUDED
-#	define _DD_ILOGIC_HPP_INCLUDED 1
+#ifndef DD_IlLOGIC_HPP_INCLUDED_
+#	define DD_ILOGIC_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct Illogic : Exception {
 	public:
 	DD_ALIAS(SuperType, Exception);
@@ -20,14 +20,14 @@ struct Illogic : Exception {
 	constexpr Illogic() = default;
 
 	public:
-	constexpr Illogic(ThisType const& _origin) = default;
+	constexpr Illogic(ThisType const& origin_) = default;
 
 	public:
-	constexpr Illogic(ThisType&& _origin) = default;
+	constexpr Illogic(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR Illogic(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
+	DD_CONSTEXPR Illogic(PromptType prompt_) DD_NOEXCEPT : SuperType(prompt_) {
 	}
 
 
@@ -39,10 +39,10 @@ struct Illogic : Exception {
 #	endif
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 #	endif
@@ -50,7 +50,7 @@ struct Illogic : Exception {
 
 
 
-_DD_END
+DD_END_
 
 
 

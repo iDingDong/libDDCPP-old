@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_move.hpp
-#ifndef _DD_MOVE_HPP_INCLUDED
-#	define _DD_MOVE_HPP_INCLUDED 1
+#ifndef DD_MOVE_HPP_INCLUDED_
+#	define DD_MOVE_HPP_INCLUDED_ 1
 
 
 
@@ -14,15 +14,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
-inline RemoveReferenceType<_ObjectT>&& move(_ObjectT&& _object) DD_NOEXCEPT {
-	return static_cast<RemoveReferenceType<_ObjectT>&&>(_object);
+DD_BEGIN_
+template <typename ObjectT_>
+inline RemoveReferenceType<ObjectT_>&& move(ObjectT_&& object_) DD_NOEXCEPT {
+	return static_cast<RemoveReferenceType<ObjectT_>&&>(object_);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

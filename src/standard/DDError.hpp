@@ -1,6 +1,6 @@
 //	DDCPP/standard\DDError.hpp
-#ifndef _DDERROR_HPP_INCLUDED
-#	define _DDERROR_HPP_INCLUDED 1
+#ifndef DDERROR_HPP_INCLUDED_
+#	define DDERROR_HPP_INCLUDED_ 1
 
 
 

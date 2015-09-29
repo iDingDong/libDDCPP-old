@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Dynamic.hpp
-#ifndef _DD_DYNAMIC_HPP_INCLUDED
-#	define _DD_DYNAMIC_HPP_INCLUDED 1
+#ifndef DD_DYNAMIC_HPP_INCLUDED_
+#	define DD_DYNAMIC_HPP_INCLUDED_ 1
 
 
 
@@ -15,16 +15,16 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ValuesT>
+DD_BEGIN_
+template <typename... ValuesT_>
 struct Dynamic {
 
 
@@ -32,7 +32,7 @@ struct Dynamic {
 
 
 
-_DD_END
+DD_END_
 
 
 

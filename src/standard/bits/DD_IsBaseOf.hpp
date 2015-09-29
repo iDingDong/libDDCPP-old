@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsBaseOf.hpp
-#ifndef _DD_IS_BASE_OF_HPP_INCLUDED
-#	define _DD_IS_BASE_OF_HPP_INCLUDED 1
+#ifndef DD_IS_BASE_OF_HPP_INCLUDED_
+#	define DD_IS_BASE_OF_HPP_INCLUDED_ 1
 
 
 
@@ -15,29 +15,29 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _BaseT, typename _DerivedT>
-struct _IsBaseOf {
-	template <typename _BaseT_, typename _DerivedT_>
-	struct _Host {
-		DD_CONSTEXPR operator _BaseT_*() const DD_NOEXCEPT;
-		DD_CONSTEXPR operator _DerivedT_*() DD_NOEXCEPT;
+DD_DETAIL_BEGIN_
+template <typename BaseT_, typename DerivedT_>
+struct IsBaseOf_ {
+	template <typename BaseT__, typename DerivedT__>
+	struct Host_ {
+		DD_CONSTEXPR operator BaseT__*() const DD_NOEXCEPT;
+		DD_CONSTEXPR operator DerivedT__*() DD_NOEXCEPT;
 
 
 	};
 
 
-	static FalseType constexpr _match(_BaseT*, int) noexcept;
+	static FalseType constexpr match_(BaseT_*, int) noexcept;
 
 	template <typename IntT_>
-	static TrueType constexpr _match(_DerivedT*, IntT_) noexcept {
+	static TrueType constexpr match_(DerivedT_*, IntT_) noexcept {
 		return true;
 	}
 
 
 	static ValidityType constexpr value = OrType<
-		AndType<decltype(_IsBaseOf<_BaseT, _DerivedT>::_match(_Host<_BaseT, _DerivedT>(), int())), IsClass<_BaseT, _DerivedT>>,
-		StdIntegralConstant<std::is_base_of<_BaseT, _DerivedT>>
+		AndType<decltype(IsBaseOf_<BaseT_, DerivedT_>::match_(Host_<BaseT_, DerivedT_>(), int())), IsClass<BaseT_, DerivedT_>>,
+		StdIntegralConstant<std::is_base_of<BaseT_, DerivedT_>>
 	>::value;
 
 
@@ -45,26 +45,26 @@ struct _IsBaseOf {
 
 
 
-template <typename _ObjectT>
-struct _IsBaseOf<_ObjectT, _ObjectT> {
-	static ValidityType constexpr value = IsClass<_ObjectT>::value || std::is_base_of<_ObjectT, _ObjectT>::value;
+template <typename ObjectT_>
+struct IsBaseOf_<ObjectT_, ObjectT_> {
+	static ValidityType constexpr value = IsClass<ObjectT_>::value || std::is_base_of<ObjectT_, ObjectT_>::value;
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _BaseT, typename... _DerivedsT>
-using IsBaseOf = AndType<BoolConstant<_detail::_IsBaseOf<_BaseT, _DerivedsT>::value>...>;
+DD_BEGIN_
+template <typename BaseT_, typename... DerivedsT_>
+using IsBaseOf = AndType<BoolConstant<detail_::IsBaseOf_<BaseT_, DerivedsT_>::value>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

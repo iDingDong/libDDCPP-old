@@ -1,6 +1,6 @@
 //	DDCPP/standard/DDArray.hpp
-#ifndef _DDARRAY_HPP_INCLUDED
-#	define _DDARRAY_HPP_INCLUDED 1
+#ifndef DDARRAY_HPP_INCLUDED_
+#	define DDARRAY_HPP_INCLUDED_ 1
 
 
 

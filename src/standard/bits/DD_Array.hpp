@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Array.hpp
-#ifndef _DD_ARRAY_HPP_INCLUDED
-#	define _DD_ARRAY_HPP_INCLUDED 1
+#ifndef DD_ARRAY_HPP_INCLUDED_
+#	define DD_ARRAY_HPP_INCLUDED_ 1
 
 
 
@@ -11,10 +11,10 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ValueT, LengthType _length_c, LengthType... _lengths_c>
-struct _Array : _Array<_Array<_ValueT, _lengths_c...>, _length_c> {
+template <typename ValueT_, LengthType length_c_, LengthType... lengths_c_>
+struct Array_ : Array_<Array_<ValueT_, lengths_c_...>, length_c_> {
 };
 
 
@@ -22,16 +22,16 @@ struct _Array : _Array<_Array<_ValueT, _lengths_c...>, _length_c> {
 
 #	endif
 #	if __cplusplus >= 201103L
-template <typename _ValueT, LengthType _length_c>
-struct _Array<_ValueT, _length_c> {
+template <typename ValueT_, LengthType length_c_>
+struct Array_<ValueT_, length_c_> {
 #	else
-template <typename _ValueT, LengthType _length_c>
-struct _Array : ValueTypeNested<_ValueT> {
+template <typename ValueT_, LengthType length_c_>
+struct Array_ : ValueTypeNested<ValueT_> {
 #	endif
-	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA _length_c>);
-	DD_ALIAS(LowerType, _ValueT);
-	static LengthType DD_CONSTANT length_constant = _length_c;
-	DD_VALUE_TYPE_NESTED(_ValueT);
+	DD_ALIAS(ThisType, Array_<ValueT_ DD_COMMA length_c_>);
+	DD_ALIAS(LowerType, ValueT_);
+	static LengthType DD_CONSTANT length_constant = length_c_;
+	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	DD_ALIAS(Iterator, PointerType);
 	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type);
@@ -62,21 +62,21 @@ struct _Array : ValueTypeNested<_ValueT> {
 	}
 
 
-	ReferenceType at(LengthType _index) {
-		if (_index >= length_constant) {
+	ReferenceType at(LengthType index_) {
+		if (index_ >= length_constant) {
 			throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		}
-		return array[_index];
+		return array[index_];
 	}
 
-	ConstReferenceType DD_CONSTEXPR at(LengthType _index) const {
+	ConstReferenceType DD_CONSTEXPR at(LengthType index_) const {
 #	if __cplusplus >= 201402L || __cplusplus < 201103L
-		if (_index >= length_constant) {
+		if (index_ >= length_constant) {
 			throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		}
-		return array[_index];
+		return array[index_];
 #	else
-		return _index < length_constant ? array[_index] : throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__)),  *array;
+		return index_ < length_constant ? array[index_] : throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__)),  *array;
 #	endif
 	}
 
@@ -164,16 +164,16 @@ struct _Array : ValueTypeNested<_ValueT> {
 	}
 
 
-	ReferenceType operator [](LengthType _index) DD_NOEXCEPT {
-		DD_ASSERT(_index < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return array[_index];
+	ReferenceType operator [](LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		return array[index_];
 	}
 
-	ConstReferenceType DD_CONSTEXPR operator [](LengthType _index) const DD_NOEXCEPT {
+	ConstReferenceType DD_CONSTEXPR operator [](LengthType index_) const DD_NOEXCEPT {
 #	if __cplusplus >= 201402L
-		DD_ASSERT(_index < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 #	endif
-		return array[_index];
+		return array[index_];
 	}
 
 
@@ -190,12 +190,12 @@ struct _Array : ValueTypeNested<_ValueT> {
 
 
 
-template <typename _ValueT>
-struct _Array<_ValueT, 0> {
-	DD_ALIAS(ThisType, _Array<_ValueT DD_COMMA 0>);
-	DD_ALIAS(LowerType, _ValueT);
+template <typename ValueT_>
+struct Array_<ValueT_, 0> {
+	DD_ALIAS(ThisType, Array_<ValueT_ DD_COMMA 0>);
+	DD_ALIAS(LowerType, ValueT_);
 	static LengthType DD_CONSTANT length_constant = 0;
-	DD_VALUE_TYPE_NESTED(_ValueT);
+	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	DD_ALIAS(Iterator, PointerType);
 	DD_ALIAS(ReverseIterator, typename IteratorReverse<Iterator>::Type);
@@ -273,23 +273,23 @@ struct _Array<_ValueT, 0> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ValueT, LengthType _length_c, LengthType... _lengths_c>
-using Array = _detail::_Array<_ValueT, _length_c, _lengths_c...>;
+template <typename ValueT_, LengthType length_c_, LengthType... lengths_c_>
+using Array = detail_::Array_<ValueT_, length_c_, lengths_c_...>;
 #	else
-template <typename _ValueT, LengthType _length_c>
-struct Array : _detail::_Array<_ValueT, _length_c> {
+template <typename ValueT_, LengthType length_c_>
+struct Array : detail_::Array_<ValueT_, length_c_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

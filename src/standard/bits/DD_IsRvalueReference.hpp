@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsRvalueReference.hpp
-#ifndef _DD_IS_RVALUE_REFERENCE_HPP_INCLUDED
-#	define _DD_IS_RVALUE_REFERENCE_HPP_INCLUDED 1
+#ifndef DD_IS_RVALUE_REFERENCE_HPP_INCLUDED_
+#	define DD_IS_RVALUE_REFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -16,30 +16,30 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsRvalueReference : StdBoolConstant<std::is_rvalue_reference<_ObjectT>> {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsRvalueReference_ : StdBoolConstant<std::is_rvalue_reference<ObjectT_>> {
 };
 
 
 
-template <typename _ObjectT>
-struct _IsRvalueReference<_ObjectT&&> : TrueType {
+template <typename ObjectT_>
+struct IsRvalueReference_<ObjectT_&&> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsRvalueReference = AndType<_detail::_IsRvalueReference<_ObjectsT>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsRvalueReference = AndType<detail_::IsRvalueReference_<ObjectsT_>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

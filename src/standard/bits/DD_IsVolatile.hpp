@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsVolatile.hpp
-#ifndef _DD_IS_Volatile_HPP_INCLUDED
-#	define _DD_IS_Volatile_HPP_INCLUDED 1
+#ifndef DD_IS_Volatile_HPP_INCLUDED_
+#	define DD_IS_Volatile_HPP_INCLUDED_ 1
 
 
 
@@ -14,40 +14,40 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsVolatile : StdBoolConstant<std::is_volatile<_ObjectT>> {
+struct IsVolatile_ : StdBoolConstant<std::is_volatile<ObjectT_>> {
 #	else
-struct _IsVolatile : FalseType {
+struct IsVolatile_ : FalseType {
 #	endif
 };
 
 
 
-template <typename _ObjectT>
-struct _IsVolatile<_ObjectT volatile> : TrueType {
+template <typename ObjectT_>
+struct IsVolatile_<ObjectT_ volatile> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsVolatile = AndType<_detail::_IsVolatile<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsVolatile = AndType<detail_::IsVolatile_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsVolatile : _detail::_IsVolatile<_ObjectT> {
+template <typename ObjectT_>
+struct IsVolatile : detail_::IsVolatile_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

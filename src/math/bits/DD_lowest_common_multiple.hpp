@@ -1,6 +1,6 @@
 //	DDCPP/math/bits/DD_lowest_common_multiple.hpp
-#ifndef _DD_LOWEST_COMMON_MULTIPLE_HPP_INCLUDED
-#	define _DD_LOWEST_COMMON_MULTIPLE_HPP_INCLUDED 1
+#ifndef DD_LOWEST_COMMON_MULTIPLE_HPP_INCLUDED_
+#	define DD_LOWEST_COMMON_MULTIPLE_HPP_INCLUDED_ 1
 
 
 
@@ -8,18 +8,18 @@
 
 
 
-_DD_BEGIN
-template <typename _IntegerT>
-inline _IntegerT DD_CONSTEXPR lowest_common_multiple(
-	_IntegerT const& __integer_1,
-	_IntegerT const& __integer_2
-) DD_NOEXCEPT_AS(static_cast<_IntegerT>(__integer_1 * __integer_2 / greatest_common_divisor(__integer_1, __integer_2))) {
-	return __integer_1 * __integer_2 / greatest_common_divisor(__integer_1, __integer_2);
+DD_BEGIN_
+template <typename IntegerT_>
+inline IntegerT_ DD_CONSTEXPR lowest_common_multiple(
+	IntegerT_ const& integer_1__,
+	IntegerT_ const& integer_2__
+) DD_NOEXCEPT_AS(static_cast<IntegerT_>(integer_1__ * integer_2__ / greatest_common_divisor(integer_1__, integer_2__))) {
+	return integer_1__ * integer_2__ / greatest_common_divisor(integer_1__, integer_2__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

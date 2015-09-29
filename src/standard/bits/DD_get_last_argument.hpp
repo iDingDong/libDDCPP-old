@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_get_last_argument.hpp
-#ifndef _DD_GET_LAST_ARGUMENT_HPP_INCLUDED
-#	define _DD_GET_LAST_ARGUMENT_HPP_INCLUDED 1
+#ifndef DD_GET_LAST_ARGUMENT_HPP_INCLUDED_
+#	define DD_GET_LAST_ARGUMENT_HPP_INCLUDED_ 1
 
 
 
@@ -15,25 +15,25 @@
 
 
 
-_DD_BEGIN
-template <typename _Argument>
-_Argument&& get_last_argument(_Argument&& __argument) noexcept {
-	return forward<_Argument>(__argument);
+DD_BEGIN_
+template <typename Argument_>
+Argument_&& get_last_argument(Argument_&& argument__) noexcept {
+	return forward<Argument_>(argument__);
 }
 
 
 
-template <typename _Argument, typename... _ArgumentsT>
-GetPackBackType<_Argument, _ArgumentsT...>&& get_last_argument(
-	_Argument&& __argument,
-	_ArgumentsT&&... __arguments
+template <typename Argument_, typename... ArgumentsT_>
+GetPackBackType<Argument_, ArgumentsT_...>&& get_last_argument(
+	Argument_&& argument__,
+	ArgumentsT_&&... arguments__
 ) noexcept {
-	return get_last_argument(forward<_ArgumentsT>(__arguments)...);
+	return get_last_argument(forward<ArgumentsT_>(arguments__)...);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

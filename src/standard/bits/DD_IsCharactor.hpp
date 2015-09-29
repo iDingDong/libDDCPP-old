@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsCharactor.hpp
-#ifndef _DD_IS_CHARACTOR_HPP_INCLUDED
-#	define _DD_IS_CHARACTOR_HPP_INCLUDED 1
+#ifndef DD_IS_CHARACTOR_HPP_INCLUDED_
+#	define DD_IS_CHARACTOR_HPP_INCLUDED_ 1
 
 
 #	if __cplusplus >= 201103L
@@ -18,37 +18,37 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-using _IsCharactor = OrType<
-	IsChar<_ObjectT>,
-	IsUnsignedChar<_ObjectT>,
-	IsSignedChar<_ObjectT>,
-	IsWChar<_ObjectT>,
-	IsChar16<_ObjectT>,
-	IsChar32<_ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+using IsCharactor_ = OrType<
+	IsChar<ObjectT_>,
+	IsUnsignedChar<ObjectT_>,
+	IsSignedChar<ObjectT_>,
+	IsWChar<ObjectT_>,
+	IsChar16<ObjectT_>,
+	IsChar32<ObjectT_>
 >;
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsCharactor = AndType<_detail::_IsCharactor<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsCharactor = AndType<detail_::IsCharactor_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsCharactor : BoolConstant<IsChar<_ObjectT>::value || IsUnsignedChar<_ObjectT>::value || IsSignedChar<_ObjectT>::value || IsWChar<_ObjectT>::value> {
+template <typename ObjectT_>
+struct IsCharactor : BoolConstant<IsChar<ObjectT_>::value || IsUnsignedChar<ObjectT_>::value || IsSignedChar<ObjectT_>::value || IsWChar<ObjectT_>::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

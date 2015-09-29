@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_swap.hpp
-#ifndef _DD_SWAP_HPP_INCLUDED
-#	define _DD_SWAP_HPP_INCLUDED 1
+#ifndef DD_SWAP_HPP_INCLUDED_
+#	define DD_SWAP_HPP_INCLUDED_ 1
 
 
 
@@ -15,26 +15,26 @@
 
 
 
-_DD_DETAIL_BEGIN
-DD_MEMBER_FUNCTION_CHECK(_HasSwap, swap, ProcessType, _MACRO_ObjectT_&)
+DD_DETAIL_BEGIN_
+DD_MEMBER_FUNCTION_CHECK(HasSwap_, swap, ProcessType, MACRO_ObjectT__&)
 
 
 
-template <ValidityType _has_swap_c>
-struct _Swap {
-	template <typename _ObjectT_>
-	static ProcessType _swap(
-		_ObjectT_& __object_1_,
-		_ObjectT_& __object_2_
-	) DD_NOEXCEPT_AS(__object_1_ = move(__object_2_) DD_COMMA _ObjectT_(move(__object_1_))) {
+template <ValidityType has_swap_c_>
+struct Swap_ {
+	template <typename ObjectT__>
+	static ProcessType swap_(
+		ObjectT__& object_1___,
+		ObjectT__& object_2___
+	) DD_NOEXCEPT_AS(object_1___ = move(object_2___) DD_COMMA ObjectT__(move(object_1___))) {
 #	if __cplusplus >= 201103L
-		auto __temp_(move(__object_1_));
-		__object_1_ = move(__object_2_);
-		__object_2_ = move(__temp_);
+		auto temp___(move(object_1___));
+		object_1___ = move(object_2___);
+		object_2___ = move(temp___);
 #	else
-		_ObjectT __temp_(__object_1_);
-		__object_1_ = __object_2_;
-		__object_2_ = __temp_;
+		ObjectT_ temp___(object_1___);
+		object_1___ = object_2___;
+		object_2___ = temp___;
 #	endif
 	}
 
@@ -44,13 +44,13 @@ struct _Swap {
 
 
 template <>
-struct _Swap<true> {
-	template <typename _ObjectT_>
-	static ProcessType _swap(
-		_ObjectT_& __object_1_,
-		_ObjectT_& __object_2_
-	) DD_NOEXCEPT_AS(__object_1_.swap(__object_2_)) {
-		__object_1_.swap(__object_2_);
+struct Swap_<true> {
+	template <typename ObjectT__>
+	static ProcessType swap_(
+		ObjectT__& object_1___,
+		ObjectT__& object_2___
+	) DD_NOEXCEPT_AS(object_1___.swap(object_2___)) {
+		object_1___.swap(object_2___);
 	}
 
 
@@ -58,37 +58,37 @@ struct _Swap<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 inline ProcessType swap(
-	_ObjectT& __object_1,
-	_ObjectT& __object_2
-) DD_NOEXCEPT_AS(_detail::_Swap<_detail::_HasSwap<_ObjectT>::value>::_swap(__object_1 DD_COMMA __object_2)) {
-	_detail::_Swap<_detail::_HasSwap<_ObjectT>::value>::_swap(__object_1, __object_2);
+	ObjectT_& object_1__,
+	ObjectT_& object_2__
+) DD_NOEXCEPT_AS(detail_::Swap_<detail_::HasSwap_<ObjectT_>::value>::swap_(object_1__ DD_COMMA object_2__)) {
+	detail_::Swap_<detail_::HasSwap_<ObjectT_>::value>::swap_(object_1__, object_2__);
 }
 
 
 
-template <typename _ObjectT, LengthType _length_c>
+template <typename ObjectT_, LengthType length_c_>
 #	if __cplusplus >= 201103L
-inline ProcessType swap(ArrayType<_ObjectT, _length_c>& _array_1, ArrayType<_ObjectT, _length_c>& _array_2) noexcept(
-	noexcept(swap(*_array_1, *_array_2))
+inline ProcessType swap(ArrayType<ObjectT_, length_c_>& array_1_, ArrayType<ObjectT_, length_c_>& array_2_) noexcept(
+	noexcept(swap(*array_1_, *array_2_))
 ) {
 #	else
-inline ProcessType swap(_ObjectT (&_array_1)[_length_c], _ObjectT (&_array_2)[_length_c]) {
+inline ProcessType swap(ObjectT_ (&array_1_)[length_c_], ObjectT_ (&array_2_)[length_c_]) {
 #	endif
-	for (LengthType i = 0; i < _length_c; ++i) {
-		swap(_array_1[i], _array_2[i]);
+	for (LengthType i = 0; i < length_c_; ++i) {
+		swap(array_1_[i], array_2_[i]);
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

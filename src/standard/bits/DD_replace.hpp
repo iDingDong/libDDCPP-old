@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_replace.hpp
-#ifndef _DD_REPLACE_HPP_INCLUDED
-#	define _DD_REPLACE_HPP_INCLUDED 1
+#ifndef DD_REPLACE_HPP_INCLUDED_
+#	define DD_REPLACE_HPP_INCLUDED_ 1
 
 
 
@@ -8,39 +8,39 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _ValueT1, typename _ValueT2>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename ValueT1_, typename ValueT2_>
 ProcessType replace(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT1 const& __old,
-	_ValueT2 __value
-) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end && *__begin == __old) {
-	for (; __begin != __end; ++__begin) {
-		if (*__begin == __old) {
-			*__begin = __value;
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT1_ const& old__,
+	ValueT2_ value__
+) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && *begin__ == old__) {
+	for (; begin__ != end__; ++begin__) {
+		if (*begin__ == old__) {
+			*begin__ = value__;
 		}
 	}
 }
 
-template <typename _UndirectionalIteratorT, typename _ValueT1, typename _BinaryPredicatorT, typename _ValueT2>
+template <typename UndirectionalIteratorT_, typename ValueT1_, typename BinaryPredicatorT_, typename ValueT2_>
 ProcessType replace(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT1 __old,
-	_BinaryPredicatorT const& __equal,
-	_ValueT2 __value
-) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end && __equal(*__begin, __old)) {
-	for (; __begin != __end; ++__begin) {
-		if (__equal(*__begin, __old)) {
-			*__begin = __value;
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT1_ old__,
+	BinaryPredicatorT_ const& equal__,
+	ValueT2_ value__
+) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && equal__(*begin__, old__)) {
+	for (; begin__ != end__; ++begin__) {
+		if (equal__(*begin__, old__)) {
+			*begin__ = value__;
 		}
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

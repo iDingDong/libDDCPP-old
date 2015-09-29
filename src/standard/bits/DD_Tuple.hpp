@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Tuple.hpp
-#ifndef _DD_TUPLE_HPP_INCLUDED
-#	define _DD_TUPLE_HPP_INCLUDED 1
+#ifndef DD_TUPLE_HPP_INCLUDED_
+#	define DD_TUPLE_HPP_INCLUDED_ 1
 
 
 
@@ -17,121 +17,121 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _StripReferenceWrapper {
-	using Type = _ObjectT;
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct StripReferenceWrapper_ {
+	using Type = ObjectT_;
 
 
 };
 
 
 
-template <typename _ObjectT>
-struct _StripReferenceWrapper<ReferenceWrapper<_ObjectT>> {
-	using Type = _ObjectT&;
+template <typename ObjectT_>
+struct StripReferenceWrapper_<ReferenceWrapper<ObjectT_>> {
+	using Type = ObjectT_&;
 
 
 };
 
 
 
-template <typename _ObjectT>
-struct _DecayAndStrip {
-	using Type = typename _StripReferenceWrapper<DecayType<_ObjectT>>::Type;
+template <typename ObjectT_>
+struct DecayAndStrip_ {
+	using Type = typename StripReferenceWrapper_<DecayType<ObjectT_>>::Type;
 
 
 };
 
 
 
-template <typename _ObjectT>
-using _DecayAndStripType = typename _DecayAndStrip<_ObjectT>::Type;
+template <typename ObjectT_>
+using DecayAndStripType_ = typename DecayAndStrip_<ObjectT_>::Type;
 
 
 
-template <SubscriptType _index_c, typename... _ValuesT>
-struct _Tuple;
+template <SubscriptType index_c_, typename... ValuesT_>
+struct Tuple_;
 
 
 
-template <SubscriptType _index_c, typename _ValueT>
-_ValueT get_type_helper(_Tuple<_index_c, _ValueT>) noexcept;
+template <SubscriptType index_c_, typename ValueT_>
+ValueT_ get_type_helper(Tuple_<index_c_, ValueT_>) noexcept;
 
 
 
-template <SubscriptType _index_c, typename... _ValuesT>
-struct _Tuple {
+template <SubscriptType index_c_, typename... ValuesT_>
+struct Tuple_ {
 	public:
-	using ThisType = _Tuple<_index_c>;
-	using StorageType = _Tuple<_index_c>;
-	static SubscriptType constexpr index = _index_c;
-	using TypeList = TypeList<_ValuesT...>;
+	using ThisType = Tuple_<index_c_>;
+	using StorageType = Tuple_<index_c_>;
+	static SubscriptType constexpr index = index_c_;
+	using TypeList = TypeList<ValuesT_...>;
 
 
 };
 
 
 
-template <SubscriptType _index_c, typename _ValueT, typename... _ValuesT>
-struct _Tuple<_index_c, _ValueT, _ValuesT...> : _Tuple<_index_c, _ValueT>, _Tuple<_index_c + 1, _ValuesT...> {
+template <SubscriptType index_c_, typename ValueT_, typename... ValuesT_>
+struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple_<index_c_ + 1, ValuesT_...> {
 	public:
-	using StorageType = _Tuple<_index_c, _ValueT>;
-	using RestType = _Tuple<_index_c + 1, _ValuesT...>;
-	using ThisType = _Tuple<_index_c, _ValueT, _ValuesT...>;
-	static SubscriptType constexpr index = _index_c;
-	using TypeList = TypeList<_ValueT, _ValuesT...>;
-	using ValueType = _ValueT;
+	using StorageType = Tuple_<index_c_, ValueT_>;
+	using RestType = Tuple_<index_c_ + 1, ValuesT_...>;
+	using ThisType = Tuple_<index_c_, ValueT_, ValuesT_...>;
+	static SubscriptType constexpr index = index_c_;
+	using TypeList = TypeList<ValueT_, ValuesT_...>;
+	using ValueType = ValueT_;
 	static LengthType constexpr length = RestType::length + 1;
 
 
 	public:
-	template <SubscriptType _index_c_>
-	using At = decltype(get_type_helper<_index_c_>(ThisType()));
+	template <SubscriptType index_c__>
+	using At = decltype(get_type_helper<index_c__>(ThisType()));
 
 
 	public:
-	constexpr _Tuple() = default;
+	constexpr Tuple_() = default;
 
 	public:
-	constexpr _Tuple(ThisType const& _origin) = default;
+	constexpr Tuple_(ThisType const& origin_) = default;
 
 	public:
-	constexpr _Tuple(ThisType&& _origin) = default;
+	constexpr Tuple_(ThisType&& origin_) = default;
 
 	public:
-	template <typename _ValueT_, typename... _ValuesT_>
-	explicit constexpr _Tuple(_ValueT_&& __value_, _ValuesT_&&... __values_) noexcept(
-		noexcept(StorageType(forward<_ValueT_>(__value_))) &&
-		noexcept(RestType(forward<_ValuesT_>(__values_)...))
-	) : StorageType(forward<_ValueT_>(__value_)), RestType(forward<_ValuesT_>(__values_)...) {
+	template <typename ValueT__, typename... ValuesT__>
+	explicit constexpr Tuple_(ValueT__&& value___, ValuesT__&&... values___) noexcept(
+		noexcept(StorageType(forward<ValueT__>(value___))) &&
+		noexcept(RestType(forward<ValuesT__>(values___)...))
+	) : StorageType(forward<ValueT__>(value___)), RestType(forward<ValuesT__>(values___)...) {
 	}
 
 
 	public:
-	~_Tuple() = default;
+	~Tuple_() = default;
 
 
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 };
 
 
 
-template <SubscriptType _index_c, typename _ValueT>
-struct _Tuple<_index_c, _ValueT> {
+template <SubscriptType index_c_, typename ValueT_>
+struct Tuple_<index_c_, ValueT_> {
 	public:
-	using ThisType = _Tuple<_index_c, _ValueT>;
+	using ThisType = Tuple_<index_c_, ValueT_>;
 	using StorageType = ThisType;
-	using RestType = _Tuple<_index_c + 1>;
-	static SubscriptType constexpr index = _index_c;
-	using TypeList = TypeList<_ValueT>;
-	using ValueType = _ValueT;
+	using RestType = Tuple_<index_c_ + 1>;
+	static SubscriptType constexpr index = index_c_;
+	using TypeList = TypeList<ValueT_>;
+	using ValueType = ValueT_;
 	static LengthType constexpr length = 1;
 
 	public:
@@ -142,141 +142,141 @@ struct _Tuple<_index_c, _ValueT> {
 
 
 	public:
-	template <SubscriptType _index_c_>
-	using At = decltype(get_type_helper<_index_c_>(ThisType()));
+	template <SubscriptType index_c__>
+	using At = decltype(get_type_helper<index_c__>(ThisType()));
 
 
 	private:
-	ValueType _m_value = ValueType();
+	ValueType m_value_ = ValueType();
 
 
 	public:
-	constexpr _Tuple() = default;
+	constexpr Tuple_() = default;
 
 	public:
-	constexpr _Tuple(ThisType const& _origin) = default;
+	constexpr Tuple_(ThisType const& origin_) = default;
 
 	public:
-	constexpr _Tuple(ThisType&& _origin) = default;
+	constexpr Tuple_(ThisType&& origin_) = default;
 
 	public:
-	template <typename _ValueT_>
-	explicit constexpr _Tuple(_ValueT_&& __value_) noexcept(
-		noexcept(ValueType(forward<_ValueT_>(__value_)))
-	) : _m_value(forward<_ValueT_>(__value_)) {
+	template <typename ValueT__>
+	explicit constexpr Tuple_(ValueT__&& value___) noexcept(
+		noexcept(ValueType(forward<ValueT__>(value___)))
+	) : m_value_(forward<ValueT__>(value___)) {
 	}
 
 
 	public:
-	~_Tuple() = default;
+	~Tuple_() = default;
 
 
 	public:
 	ValueType& get_value() noexcept {
-		return _m_value;
+		return m_value_;
 	}
 
 	public:
 	ValueType const& get_value() const noexcept {
-		return _m_value;
+		return m_value_;
 	}
 
 
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 };
 
 
 
-template <typename... _ValuesT>
-_Tuple<0, _DecayAndStripType<_ValuesT>...> constexpr make_tuple(_ValuesT&&... __elements) noexcept(
-	noexcept(_Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...))
+template <typename... ValuesT_>
+Tuple_<0, DecayAndStripType_<ValuesT_>...> constexpr make_tuple(ValuesT_&&... elements__) noexcept(
+	noexcept(Tuple_<0, DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...))
 ) {
-	return _Tuple<0, _DecayAndStripType<_ValuesT>...>(forward<_ValuesT>(__elements)...);
+	return Tuple_<0, DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...);
 }
 
 
-template <SubscriptType _index_c, typename _ValueT>
-inline _ValueT& get_value(_Tuple<_index_c, _ValueT>& __tuple) {
-	return __tuple.get_value();
+template <SubscriptType index_c_, typename ValueT_>
+inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__) {
+	return tuple__.get_value();
 }
 
-template <SubscriptType _index_c, typename _ValueT>
-inline _ValueT const& get_value(_Tuple<_index_c, _ValueT> const& __tuple) {
-	return __tuple.get_value();
+template <SubscriptType index_c_, typename ValueT_>
+inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__) {
+	return tuple__.get_value();
 }
 
-template <typename _ValueT, SubscriptType _index_c>
-inline _ValueT& get_value(_Tuple<_index_c, _ValueT>& __tuple) {
-	return __tuple.get_value();
+template <typename ValueT_, SubscriptType index_c_>
+inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__) {
+	return tuple__.get_value();
 }
 
-template <typename _ValueT, SubscriptType _index_c>
-inline _ValueT const& get_value(_Tuple<_index_c, _ValueT> const& __tuple) {
-	return __tuple.get_value();
+template <typename ValueT_, SubscriptType index_c_>
+inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__) {
+	return tuple__.get_value();
 }
 
 
 /*
-template <SubscriptType _index_c, typename _ValueT1, typename _ValueT2>
+template <SubscriptType index_c_, typename ValueT1_, typename ValueT2_>
 inline ValidityType constexpr operator ==(
-	_Tuple<_index_c, _ValueT1> const& _tuple_1,
-	_Tuple<_index_c, _ValueT2> const& _tuple_2
-) noexcept(noexcept(get_value<_index_c>(_tuple_1) == get_value<_index_c>(_tuple_2))) {
-	return get_value<_index_c>(_tuple_1) == get_value<_index_c>(_tuple_2);
+	Tuple_<index_c_, ValueT1_> const& tuple_1_,
+	Tuple_<index_c_, ValueT2_> const& tuple_2_
+) noexcept(noexcept(get_value<index_c_>(tuple_1_) == get_value<index_c_>(tuple_2_))) {
+	return get_value<index_c_>(tuple_1_) == get_value<index_c_>(tuple_2_);
 }
 
-template <SubscriptType _index_c, typename _ValueT, typename..._ValuesT>
+template <SubscriptType index_c_, typename ValueT_, typename...ValuesT_>
 inline ValidityType constexpr operator ==(
-	_Tuple<_index_c, _ValueT> const& _tuple_1,
-	_Tuple<_index_c, _ValuesT...> const& _tuple_2
+	Tuple_<index_c_, ValueT_> const& tuple_1_,
+	Tuple_<index_c_, ValuesT_...> const& tuple_2_
 ) noexcept {
 	return false;
 }
 
-template <SubscriptType _index_c, typename _ValueT, typename..._ValuesT>
+template <SubscriptType index_c_, typename ValueT_, typename...ValuesT_>
 inline ValidityType constexpr operator ==(
-	_Tuple<_index_c, _ValuesT...> const& _tuple_1,
-	_Tuple<_index_c, _ValueT> const& _tuple_2
+	Tuple_<index_c_, ValuesT_...> const& tuple_1_,
+	Tuple_<index_c_, ValueT_> const& tuple_2_
 ) noexcept {
 	return false;
 }
 
-template <SubscriptType _index_c, typename... _ValuesT1, typename... _ValuesT2>
+template <SubscriptType index_c_, typename... ValuesT1_, typename... ValuesT2_>
 inline ValidityType constexpr operator ==(
-	_Tuple<_index_c, _ValuesT1...> const& _tuple_1,
-	_Tuple<_index_c, _ValuesT2...> const& _tuple_2
+	Tuple_<index_c_, ValuesT1_...> const& tuple_1_,
+	Tuple_<index_c_, ValuesT2_...> const& tuple_2_
 ) noexcept(noexcept(static_cast<ValidityType>(
-	get_value<_index_c>(_tuple_1) == get_value<_index_c>(_tuple_2) &&
-	operator ==<_index_c + 1>(_tuple_1, _tuple_2)
+	get_value<index_c_>(tuple_1_) == get_value<index_c_>(tuple_2_) &&
+	operator ==<index_c_ + 1>(tuple_1_, tuple_2_)
 ))) {
-	return _TupleEqual<0>::_equal(_tuple_1, _tuple_2);
+	return TupleEqual_<0>::equal_(tuple_1_, tuple_2_);
 }
 */
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ValuesT>
-using Tuple = _detail::_Tuple<0, _ValuesT...>;
+DD_BEGIN_
+template <typename... ValuesT_>
+using Tuple = detail_::Tuple_<0, ValuesT_...>;
 
 
 
-using _detail::get_value;
-using _detail::make_tuple;
+using detail_::get_value;
+using detail_::make_tuple;
 
 
 
-_DD_END
+DD_END_
 
 
 

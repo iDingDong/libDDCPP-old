@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Exception.hpp
-#ifndef _DD_EXCEPTION_HPP_INCLUDED
-#	define _DD_EXCEPTION_HPP_INCLUDED 1
+#ifndef DD_EXCEPTION_HPP_INCLUDED_
+#	define DD_EXCEPTION_HPP_INCLUDED_ 1
 
 
 
@@ -8,14 +8,14 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct Exception {
 	public:
 	DD_ALIAS(ThisType, Exception);
 
 
 	private:
-	PromptType _m_prompt DD_IN_CLASS_INITIALIZE("Unknown Error. ");
+	PromptType m_prompt_ DD_IN_CLASS_INITIALIZE("Unknown Error. ");
 
 
 #	if __cplusplus >= 201103L
@@ -23,20 +23,20 @@ struct Exception {
 	constexpr Exception() = default;
 
 	public:
-	constexpr Exception(ThisType const& _origin) = default;
+	constexpr Exception(ThisType const& origin_) = default;
 
 	public:
-	constexpr Exception(ThisType&& _origin) = default;
+	constexpr Exception(ThisType&& origin_) = default;
 
 	public:
 #	else
 	public:
-	Exception() throw() : _m_prompt() {
+	Exception() throw() : m_prompt_() {
 	};
 #	endif
 
 	public:
-	DD_CONSTEXPR Exception(PromptType _prompt) DD_NOEXCEPT : _m_prompt(_prompt) {
+	DD_CONSTEXPR Exception(PromptType prompt_) DD_NOEXCEPT : m_prompt_(prompt_) {
 	}
 
 
@@ -51,16 +51,16 @@ struct Exception {
 
 	public:
 	virtual PromptType get_prompt() const DD_NOEXCEPT {
-		return _m_prompt;
+		return m_prompt_;
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 #	endif
@@ -68,7 +68,7 @@ struct Exception {
 
 
 
-_DD_END
+DD_END_
 
 
 

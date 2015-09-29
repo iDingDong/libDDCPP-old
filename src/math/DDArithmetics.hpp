@@ -1,6 +1,6 @@
 //	DDCPP/math/DDArithmetics.hpp
-#ifndef _DDARITHMETICS_HPP
-#	define _DDARITHMETICS_HPP 1
+#ifndef DDARITHMETICS_HPP_
+#	define DDARITHMETICS_HPP_ 1
 
 
 

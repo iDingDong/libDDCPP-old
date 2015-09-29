@@ -1,25 +1,25 @@
 // standard/bits/DD_compatibility_definitions.hpp
-#ifndef _DD_COMPATIBILITY_DEFINITIONS_HPP_INCLUDED
-#	define _DD_COMPATIBILITY_DEFINITIONS_HPP_INCLUDED 1
+#ifndef DD_COMPATIBILITY_DEFINITIONS_HPP_INCLUDED_
+#	define DD_COMPATIBILITY_DEFINITIONS_HPP_INCLUDED_ 1
 
 
 
 #	define DD_COMMA ,
 
 #	if __cplusplus >= 201103L
-#		define DD_STATIC_ASSERT(_ARG_condition, _ARG_Prompt) static_assert(_ARG_condition, _ARG_Prompt);
+#		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_) static_assert(ARG_condition_, ARG_Prompt_);
 #	else
-#		define DD_STATIC_ASSERT(_ARG_condition, _ARG_Prompt)
+#		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_)
 #	endif
 
 #	if __cplusplus >= 201103L
 #		define DD_NOEXCEPT noexcept
-#		define DD_NOEXCEPT_IF(_ARG_condition) noexcept(_ARG_condition)
-#		define DD_NOEXCEPT_AS(_ARG_expression) noexcept(noexcept(_ARG_expression))
+#		define DD_NOEXCEPT_IF(ARG_condition_) noexcept(ARG_condition_)
+#		define DD_NOEXCEPT_AS(ARG_expression_) noexcept(noexcept(ARG_expression_))
 #	else
 #		define DD_NOEXCEPT throw()
-#		define DD_NOEXCEPT_IF(_ARG_condition)
-#		define DD_NOEXCEPT_AS(_ARG_expression)
+#		define DD_NOEXCEPT_IF(ARG_condition_)
+#		define DD_NOEXCEPT_AS(ARG_expression_)
 #	endif
 
 #	if __cplusplus >= 201103L
@@ -39,45 +39,45 @@
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) using _ARG_Alias = _ARG_Origin
+#		define DD_ALIAS(ARG_Alias_, ARG_Origin_) using ARG_Alias_ = ARG_Origin_
 #	else
-#		define DD_ALIAS(_ARG_Alias, _ARG_Origin) typedef _ARG_Origin _ARG_Alias
+#		define DD_ALIAS(ARG_Alias_, ARG_Origin_) typedef ARG_Origin_ ARG_Alias_
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_TRAIT_MODIFIER(_ARG_Modifier) template <typename _MACRO_ObjectT> using _ARG_Modifier##Type = typename _ARG_Modifier<_MACRO_ObjectT>::Type;
-#		define DD_MODIFY_TRAIT(_ARG_Modifier, _ARG_Target) _ARG_Modifier##Type<_ARG_Target>
+#		define DD_TRAIT_MODIFIER(ARG_Modifier_) template <typename MACRO_ObjectT_> using ARG_Modifier_##Type = typename ARG_Modifier_<MACRO_ObjectT_>::Type;
+#		define DD_MODIFY_TRAIT(ARG_Modifier_, ARG_Target_) ARG_Modifier_##Type<ARG_Target_>
 #	else
-#		define DD_TRAIT_MODIFIER(_ARG_Modifier)
-#		define DD_MODIFY_TRAIT(_ARG_Modifier, _ARG_Target) typename _ARG_Modifier<_ARG_Target>::Type
+#		define DD_TRAIT_MODIFIER(ARG_Modifier_)
+#		define DD_MODIFY_TRAIT(ARG_Modifier_, ARG_Target_) typename ARG_Modifier_<ARG_Target_>::Type
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_IN_CLASS_INITIALIZE(_ARG_Expression) = _ARG_Expression
+#		define DD_IN_CLASS_INITIALIZE(ARG_Expression_) = ARG_Expression_
 #	else
-#		define DD_IN_CLASS_INITIALIZE(_ARG_Expression)
+#		define DD_IN_CLASS_INITIALIZE(ARG_Expression_)
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class) _ARG_Class() = delete;
-#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) _ARG_Class(ThisType const& _origin) = delete;
-#		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class) _ARG_Class(ThisType&& _origin) = delete;
-#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) ThisType& operator =(ThisType const& _origin) = delete;
-#		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class) ThisType& operator =(ThisType&& _origin) = delete;
+#		define DD_DELETE_DEFAULT_CONSTRUCTOR(ARG_Class_) ARG_Class_() = delete;
+#		define DD_DELETE_COPY_CONSTRUCTOR(ARG_Class_) ARG_Class_(ThisType const& origin_) = delete;
+#		define DD_DELETE_MOVE_CONSTRUCTOR(ARG_Class_) ARG_Class_(ThisType&& origin_) = delete;
+#		define DD_DELETE_COPY_ASSIGNMENT(ARG_Class_) ThisType& operator =(ThisType const& origin_) = delete;
+#		define DD_DELETE_MOVE_ASSIGNMENT(ARG_Class_) ThisType& operator =(ThisType&& origin_) = delete;
 #	else
-#		define DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class) private: _ARG_Class();
-#		define DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class) private: _ARG_Class(ThisType const& _origin);
-#		define DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class)
-#		define DD_DELETE_COPY_ASSIGNMENT(_ARG_Class) private: ThisType& operator =(ThisType const& _origin);
-#		define DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class)
+#		define DD_DELETE_DEFAULT_CONSTRUCTOR(ARG_Class_) private: ARG_Class_();
+#		define DD_DELETE_COPY_CONSTRUCTOR(ARG_Class_) private: ARG_Class_(ThisType const& origin_);
+#		define DD_DELETE_MOVE_CONSTRUCTOR(ARG_Class_)
+#		define DD_DELETE_COPY_ASSIGNMENT(ARG_Class_) private: ThisType& operator =(ThisType const& origin_);
+#		define DD_DELETE_MOVE_ASSIGNMENT(ARG_Class_)
 #	endif
-#	define DD_DELETE_ALL_CONSTRUCTORS(_ARG_Class)\
-		DD_DELETE_DEFAULT_CONSTRUCTOR(_ARG_Class)\
-		DD_DELETE_COPY_CONSTRUCTOR(_ARG_Class)\
-		DD_DELETE_MOVE_CONSTRUCTOR(_ARG_Class)
-#	define DD_DELETE_ALL_ASSIGNMENTS(_ARG_Class)\
-		DD_DELETE_COPY_ASSIGNMENT(_ARG_Class)\
-		DD_DELETE_MOVE_ASSIGNMENT(_ARG_Class)
+#	define DD_DELETE_ALL_CONSTRUCTORS(ARG_Class_)\
+		DD_DELETE_DEFAULT_CONSTRUCTOR(ARG_Class_)\
+		DD_DELETE_COPY_CONSTRUCTOR(ARG_Class_)\
+		DD_DELETE_MOVE_CONSTRUCTOR(ARG_Class_)
+#	define DD_DELETE_ALL_ASSIGNMENTS(ARG_Class_)\
+		DD_DELETE_COPY_ASSIGNMENT(ARG_Class_)\
+		DD_DELETE_MOVE_ASSIGNMENT(ARG_Class_)
 
 #	if __cplusplus >= 201103L
 #		define DD_FINAL final

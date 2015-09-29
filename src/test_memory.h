@@ -1,5 +1,5 @@
-#ifndef _TEST_MEMORY_H
-#	define _TEST_MEMORY_H
+#ifndef TEST_MEMORY_H_
+#	define TEST_MEMORY_H_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Dereferenceable.hpp
-#ifndef _DD_DEREFERENCEABLE_HPP_INCLUDED
-#	define _DD_DEREFERENCEABLE_HPP_INCLUDED 1
+#ifndef DD_DEREFERENCEABLE_HPP_INCLUDED_
+#	define DD_DEREFERENCEABLE_HPP_INCLUDED_ 1
 
 
 
@@ -9,11 +9,11 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct Dereferenceable {
 	public:
-	DD_ALIAS(Type, _ObjectT);
+	DD_ALIAS(Type, ObjectT_);
 
 
 	public:
@@ -26,7 +26,7 @@ struct Dereferenceable {
 
 
 
-_DD_END
+DD_END_
 
 
 

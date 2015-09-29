@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsFreeAccessIterator.hpp
-#ifndef _DD_IS_FREE_ACCESS_ITERATOR_HPP_INCLUDED
-#	define _DD_IS_FREE_ACCESS_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_IS_FREE_ACCESS_ITERATOR_HPP_INCLUDED_
+#	define DD_IS_FREE_ACCESS_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -9,19 +9,19 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _IteratorsT>
-using IsFreeAccessIterator = IsBaseOf<FreeAccessIterator, IteratorCatagoryType<_IteratorsT>...>;
+template <typename... IteratorsT_>
+using IsFreeAccessIterator = IsBaseOf<FreeAccessIterator, IteratorCatagoryType<IteratorsT_>...>;
 #	else
-template <typename _IteratorT>
-struct IsFreeAccessIterator : IsBaseOf<FreeAccessIterator, typename IteratorCatagory<_IteratorT>::Type> {
+template <typename IteratorT_>
+struct IsFreeAccessIterator : IsBaseOf<FreeAccessIterator, typename IteratorCatagory<IteratorT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

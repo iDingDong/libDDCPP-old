@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsReference.hpp
-#ifndef _DD_IS_REFERENCE_HPP_INCLUDED
-#	define _DD_IS_REFERENCE_HPP_INCLUDED 1
+#ifndef DD_IS_REFERENCE_HPP_INCLUDED_
+#	define DD_IS_REFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -14,40 +14,40 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-using _IsReference = OrType<IsLvalueReference<_ObjectT>, IsRvalueReference<_ObjectT>>;
+using IsReference_ = OrType<IsLvalueReference<ObjectT_>, IsRvalueReference<ObjectT_>>;
 #	else
-struct _IsReference : FalseType {
+struct IsReference_ : FalseType {
 };
 
 
 
-template <typename _ObjectT>
-struct _IsReference<_ObjectT&> : TrueType {
+template <typename ObjectT_>
+struct IsReference_<ObjectT_&> : TrueType {
 };
 #	endif
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsReference = AndType<_detail::_IsReference<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsReference = AndType<detail_::IsReference_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsReference : _detail::_IsReference<_ObjectT> {
+template <typename ObjectT_>
+struct IsReference : detail_::IsReference_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

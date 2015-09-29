@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AllocationFailure.hpp
-#ifndef _DD_ALLOCATION_FAILURE_HPP_INCLUDED
-#	define _DD_ALLOCATION_FAILURE_HPP_INCLUDED 1
+#ifndef DD_ALLOCATION_FAILURE_HPP_INCLUDED_
+#	define DD_ALLOCATION_FAILURE_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct AllocationFailure : RunTimeError {
 	public:
 	DD_ALIAS(SuperType, RunTimeError);
@@ -20,14 +20,14 @@ struct AllocationFailure : RunTimeError {
 	constexpr AllocationFailure() = default;
 
 	public:
-	constexpr AllocationFailure(ThisType const& _origin) = default;
+	constexpr AllocationFailure(ThisType const& origin_) = default;
 
 	public:
-	constexpr AllocationFailure(ThisType&& _origin) = default;
+	constexpr AllocationFailure(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR AllocationFailure(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
+	DD_CONSTEXPR AllocationFailure(PromptType prompt_) DD_NOEXCEPT : SuperType(prompt_) {
 	}
 
 
@@ -39,10 +39,10 @@ struct AllocationFailure : RunTimeError {
 #	endif
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 #	endif
@@ -50,7 +50,7 @@ struct AllocationFailure : RunTimeError {
 
 
 
-_DD_END
+DD_END_
 
 
 

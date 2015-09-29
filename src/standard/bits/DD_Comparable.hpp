@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Comparable.hpp
-#ifndef _DD_COMPARABLE_HPP_INCLUDED
-#	define _DD_COMPARABLE_HPP_INCLUDED 1
+#ifndef DD_COMPARABLE_HPP_INCLUDED_
+#	define DD_COMPARABLE_HPP_INCLUDED_ 1
 
 
 
@@ -9,14 +9,14 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT1, typename _ObjectT2 = _ObjectT1>
-struct Comparable : EqualityComparable<_ObjectT1, _ObjectT2>, LessThanComparable<_ObjectT1, _ObjectT2> {
+DD_BEGIN_
+template <typename ObjectT1_, typename ObjectT2_ = ObjectT1_>
+struct Comparable : EqualityComparable<ObjectT1_, ObjectT2_>, LessThanComparable<ObjectT1_, ObjectT2_> {
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/DDUtility.hpp
-#ifndef _DDUTILITY_HPP_INCLUDED
-#	define _DDUTILITY_HPP_INCLUDED 1
+#ifndef DDUTILITY_HPP_INCLUDED_
+#	define DDUTILITY_HPP_INCLUDED_ 1
 
 
 

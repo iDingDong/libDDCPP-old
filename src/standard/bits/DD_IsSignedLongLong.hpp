@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsSignedLongLong.hpp
-#ifndef _DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED
-#	define _DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED 1
+#ifndef DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED_
+#	define DD_IS_SIGNED_LONG_LONG_HPP_INCLUDED_ 1
 
 
 
@@ -15,30 +15,30 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsSignedLongLong : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsSignedLongLong_ : FalseType {
 };
 
 
 
 template <>
-struct _IsSignedLongLong<signed long long> : TrueType {
+struct IsSignedLongLong_<signed long long> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsSignedLongLong = AndType<_detail::_IsSignedLongLong<RemoveCVType<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsSignedLongLong = AndType<detail_::IsSignedLongLong_<RemoveCVType<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

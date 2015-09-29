@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AddRvalueReference.hpp
-#ifndef _DD_ADD_RVALUE_REFERENCE_HPP_INCLUDED
-#	define _DD_ADD_RVALUE_REFERENCE_HPP_INCLUDED 1
+#ifndef DD_ADD_RVALUE_REFERENCE_HPP_INCLUDED_
+#	define DD_ADD_RVALUE_REFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -15,33 +15,33 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT, ValidityType _is_referenceable_c>
-struct _AddRvalueReference {
-	DD_ALIAS(Type, _ObjectT);
+DD_DETAIL_BEGIN_
+template <typename ObjectT_, ValidityType is_referenceable_c_>
+struct AddRvalueReference_ {
+	DD_ALIAS(Type, ObjectT_);
 
 
 };
 
 
 
-template <typename _ObjectT>
-struct _AddRvalueReference<_ObjectT, true> {
-	DD_ALIAS(Type, _ObjectT&&);
+template <typename ObjectT_>
+struct AddRvalueReference_<ObjectT_, true> {
+	DD_ALIAS(Type, ObjectT_&&);
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct AddRvalueReference {
-	DD_ALIAS(Type, typename _detail::_AddRvalueReference<_ObjectT DD_COMMA IsReferable<_ObjectT>::value>::Type);
+	DD_ALIAS(Type, typename detail_::AddRvalueReference_<ObjectT_ DD_COMMA IsReferable<ObjectT_>::value>::Type);
 
 
 };
@@ -52,7 +52,7 @@ DD_TRAIT_MODIFIER(AddRvalueReference)
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_FunctorGreater.hpp
-#ifndef _DD_FUNCTOR_GREATER_HPP_INCLUDED
-#	define _DD_FUNCTOR_GREATER_HPP_INCLUDED 1
+#ifndef DD_FUNCTOR_GREATER_HPP_INCLUDED_
+#	define DD_FUNCTOR_GREATER_HPP_INCLUDED_ 1
 
 
 
@@ -9,10 +9,10 @@
 
 
 DD_BEGIN
-template <typename _ObjectT>
-struct FunctorGreater : BinaryFunctor<ValidityType, _ObjectT, _ObjectT> {
-	ValidityType operator ()(_ObjectT __object_1, _ObjectT __object_2) const DD_NOEXCEPT_AS(bool(__object_2 < __object_1)) {
-		return __object_2 < __object_1;
+template <typename ObjectT_>
+struct FunctorGreater : BinaryFunctor<ValidityType, ObjectT_, ObjectT_> {
+	ValidityType operator ()(ObjectT_ object_1__, ObjectT_ object_2__) const DD_NOEXCEPT_AS(bool(object_2__ < object_1__)) {
+		return object_2__ < object_1__;
 	}
 	
 	

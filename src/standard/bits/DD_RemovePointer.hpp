@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RemovePointer.hpp
-#ifndef _DD_REMOVE_POINTER_HPP_INCLUDED
-#	define _DD_REMOVE_POINTER_HPP_INCLUDED 1
+#ifndef DD_REMOVE_POINTER_HPP_INCLUDED_
+#	define DD_REMOVE_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct RemovePointer {
 #	if __cplusplus >= 201402L
-	using Type = std::remove_pointer_t<_ObjectT>;
+	using Type = std::remove_pointer_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::remove_pointer<_ObjectT>::type;
+	using Type = typename std::remove_pointer<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -28,36 +28,36 @@ struct RemovePointer {
 
 
 
-template <typename _ValueT>
-struct RemovePointer<_ValueT*> {
-	DD_ALIAS(Type, _ValueT);
+template <typename ValueT_>
+struct RemovePointer<ValueT_*> {
+	DD_ALIAS(Type, ValueT_);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct RemovePointer<_ValueT* const> {
-	DD_ALIAS(Type, _ValueT);
+template <typename ValueT_>
+struct RemovePointer<ValueT_* const> {
+	DD_ALIAS(Type, ValueT_);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct RemovePointer<_ValueT* volatile> {
-	DD_ALIAS(Type, _ValueT);
+template <typename ValueT_>
+struct RemovePointer<ValueT_* volatile> {
+	DD_ALIAS(Type, ValueT_);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct RemovePointer<_ValueT* const volatile> {
-	DD_ALIAS(Type, _ValueT);
+template <typename ValueT_>
+struct RemovePointer<ValueT_* const volatile> {
+	DD_ALIAS(Type, ValueT_);
 
 
 };
@@ -65,13 +65,13 @@ struct RemovePointer<_ValueT* const volatile> {
 
 
 #	if __cplusplus >= 201103L
-template <typename _ValueT>
-using RemovePointerType = typename RemovePointer<_ValueT>::Type;
+template <typename ValueT_>
+using RemovePointerType = typename RemovePointer<ValueT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

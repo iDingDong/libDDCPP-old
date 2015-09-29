@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsScalar.hpp
-#ifndef _DD_IS_SCALAR_HPP_INCLUDED
-#	define _DD_IS_SCALAR_HPP_INCLUDED 1
+#ifndef DD_IS_SCALAR_HPP_INCLUDED_
+#	define DD_IS_SCALAR_HPP_INCLUDED_ 1
 
 
 
@@ -16,13 +16,13 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsScalar = AndType<OrType<IsArithmetic<_ObjectsT>, IsPointer<_ObjectsT>, IsEnum<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsScalar = AndType<OrType<IsArithmetic<ObjectsT_>, IsPointer<ObjectsT_>, IsEnum<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

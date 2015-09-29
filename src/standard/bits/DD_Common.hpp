@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_COMMON_HPP
-#ifndef _DD_COMMON_HPP_INCLUDED
-#	define _DD_COMMON_HPP_INCLUDED 1
+#ifndef DD_COMMON_HPP_INCLUDED_
+#	define DD_COMMON_HPP_INCLUDED_ 1
 
 
 
@@ -15,8 +15,8 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
+DD_BEGIN_
+template <typename... ObjectsT_>
 struct Common {
 	using Type = void;
 
@@ -25,39 +25,39 @@ struct Common {
 
 
 
-template <typename _ObjectT>
-struct Common<_ObjectT> {
-	using Type = DecayType<_ObjectT>;
+template <typename ObjectT_>
+struct Common<ObjectT_> {
+	using Type = DecayType<ObjectT_>;
 
 
 };
 
 
 
-template <typename _ObjectT1, typename _ObjectT2>
-struct Common<_ObjectT1, _ObjectT2> {
-	using Type = DecayType<decltype(true ? declare_value<_ObjectT1> : declare_value<_ObjectT2>)>;
+template <typename ObjectT1_, typename ObjectT2_>
+struct Common<ObjectT1_, ObjectT2_> {
+	using Type = DecayType<decltype(true ? declare_value<ObjectT1_> : declare_value<ObjectT2_>)>;
 
 
 };
 
 
 
-template <typename _ObjectT1, typename _ObjectT2, typename... _ObjectsT>
-struct Common<_ObjectT1, _ObjectT2, _ObjectsT...> {
-	using Type = typename Common<_ObjectT1, typename Common<_ObjectT2, _ObjectsT...>::Type>::Type;
+template <typename ObjectT1_, typename ObjectT2_, typename... ObjectsT_>
+struct Common<ObjectT1_, ObjectT2_, ObjectsT_...> {
+	using Type = typename Common<ObjectT1_, typename Common<ObjectT2_, ObjectsT_...>::Type>::Type;
 
 
 };
 
 
 
-template <typename... _ObjectsT>
-using CommonType = typename Common<_ObjectsT...>::Type;
+template <typename... ObjectsT_>
+using CommonType = typename Common<ObjectsT_...>::Type;
 
 
 
-_DD_END
+DD_END_
 
 
 

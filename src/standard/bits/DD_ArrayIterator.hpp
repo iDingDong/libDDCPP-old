@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ArrayIterator.hpp
-#ifndef _DD_ARRAY_ITERATOR_HPP_INCLUDED
-#	define _DD_ARRAY_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_ARRAY_ITERATOR_HPP_INCLUDED_
+#	define DD_ARRAY_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -9,12 +9,12 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT>
+DD_BEGIN_
+template <typename ValueT_>
 struct ArrayIterator {
 	public:
-	DD_ALIAS(ThisType, ArrayIterator<_ValueT>);
-	DD_VALUE_TYPE_NESTED(_ValueT);
+	DD_ALIAS(ThisType, ArrayIterator<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
 	DD_ALIAS(DifferenceType, DD::DifferenceType);
@@ -26,9 +26,9 @@ struct ArrayIterator {
 
 	private:
 #	if __cplusplus >= 201103L
-	PointerType _m_pointer = PointerType();
+	PointerType m_pointer_ = PointerType();
 #	else
-	PointerType _m_pointer;
+	PointerType m_pointer_;
 #	endif
 
 
@@ -37,14 +37,14 @@ struct ArrayIterator {
 	DD_CONSTEXPR ArrayIterator() DD_NOEXCEPT = default;
 
 	public:
-	DD_CONSTEXPR ArrayIterator(ThisType const& _origin) DD_NOEXCEPT = default;
+	DD_CONSTEXPR ArrayIterator(ThisType const& origin_) DD_NOEXCEPT = default;
 #	else
-	DD_CONSTEXPR ArrayIterator() DD_NOEXCEPT : _m_pointer() {
+	DD_CONSTEXPR ArrayIterator() DD_NOEXCEPT : m_pointer_() {
 	}
 #	endif
 
 	public:
-	DD_CONSTEXPR ArrayIterator(PointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
+	DD_CONSTEXPR ArrayIterator(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	};
 
 
@@ -55,95 +55,95 @@ struct ArrayIterator {
 
 #	endif
 	public:
-	ValidityType DD_CONSTEXPR equal(ThisType const& _target) const DD_NOEXCEPT {
-		return this->_m_pointer == _target._m_pointer;
+	ValidityType DD_CONSTEXPR equal(ThisType const& target_) const DD_NOEXCEPT {
+		return this->m_pointer_ == target_.m_pointer_;
 	}
 
 
 	public:
-	ValidityType DD_CONSTEXPR less(ThisType const& _target) const DD_NOEXCEPT {
-		return this->_m_pointer < _target._m_pointer;
+	ValidityType DD_CONSTEXPR less(ThisType const& target_) const DD_NOEXCEPT {
+		return this->m_pointer_ < target_.m_pointer_;
 	}
 
 
 	public:
-	ValidityType DD_CONSTEXPR distance(ThisType const& _target) const DD_NOEXCEPT {
-		return _target._m_pointer - this->_m_pointer;
+	ValidityType DD_CONSTEXPR distance(ThisType const& target_) const DD_NOEXCEPT {
+		return target_.m_pointer_ - this->m_pointer_;
 	}
 
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return this->_m_pointer;
+		return this->m_pointer_;
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) & noexcept(true) = default;
+	ThisType& operator =(ThisType const& origin_) & noexcept(true) = default;
 
 
 #	endif
 	public:
 	ThisType& operator ++() DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		++this->_m_pointer;
+		++this->m_pointer_;
 		return *this;
 	}
 
 	public:
 	ThisType operator ++(int) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		return ThisType(this->_m_pointer++);
+		return ThisType(this->m_pointer_++);
 	}
 
 
 	public:
 	ThisType& operator --() DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		--this->_m_pointer;
+		--this->m_pointer_;
 		return *this;
 	}
 
 	public:
 	ThisType operator --(int) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		return ThisType(this->_m_pointer++);
+		return ThisType(this->m_pointer_++);
 	}
 
 
 	public:
-	ThisType& operator +=(DifferenceType _step) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		this->_m_pointer += _step;
+	ThisType& operator +=(DifferenceType step_) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
+		this->m_pointer_ += step_;
 		return *this;
 	}
 
 
 	public:
-	ThisType& operator -=(DifferenceType _step) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
-		this->_m_pointer -= _step;
+	ThisType& operator -=(DifferenceType step_) DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
+		this->m_pointer_ -= step_;
 		return *this;
 	}
 
 
 	public:
-	ReferenceType operator [](DifferenceType _index) const DD_NOEXCEPT {
-		return this->_m_pointer[_index];
+	ReferenceType operator [](DifferenceType index_) const DD_NOEXCEPT {
+		return this->m_pointer_[index_];
 	}
 
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return *this->_m_pointer;
+		return *this->m_pointer_;
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		return *this->_m_pointer;
+		return *this->m_pointer_;
 	}
 
 
 	public:
 #	if __cplusplus >= 201103L
 	explicit operator ValidityType() const DD_NOEXCEPT {
-		return this->_m_pointer;
+		return this->m_pointer_;
 	}
 
 
@@ -152,45 +152,45 @@ struct ArrayIterator {
 
 
 
-template <typename _ValueT>
-inline ArrayIterator<_ValueT> DD_CONSTEXPR operator +(ArrayIterator<_ValueT> _array_iterator, typename ArrayIterator<_ValueT>::DifferenceType _step) DD_NOEXCEPT {
-	return _array_iterator += _step;
+template <typename ValueT_>
+inline ArrayIterator<ValueT_> DD_CONSTEXPR operator +(ArrayIterator<ValueT_> array_iterator_, typename ArrayIterator<ValueT_>::DifferenceType step_) DD_NOEXCEPT {
+	return array_iterator_ += step_;
 }
 
-template <typename _ValueT>
-inline ArrayIterator<_ValueT> DD_CONSTEXPR operator +(typename ArrayIterator<_ValueT>::DifferenceType _step, ArrayIterator<_ValueT> _array_iterator) DD_NOEXCEPT {
-	return _array_iterator += _step;
+template <typename ValueT_>
+inline ArrayIterator<ValueT_> DD_CONSTEXPR operator +(typename ArrayIterator<ValueT_>::DifferenceType step_, ArrayIterator<ValueT_> array_iterator_) DD_NOEXCEPT {
+	return array_iterator_ += step_;
 }
 
 
-template <typename _ValueT>
-inline typename ArrayIterator<_ValueT>::DifferenceType DD_CONSTEXPR operator -(
-	ArrayIterator<_ValueT> const& _array_iterator_1,
-	ArrayIterator<_ValueT> const& _array_iterator_2
+template <typename ValueT_>
+inline typename ArrayIterator<ValueT_>::DifferenceType DD_CONSTEXPR operator -(
+	ArrayIterator<ValueT_> const& array_iterator_1_,
+	ArrayIterator<ValueT_> const& array_iterator_2_
 ) DD_NOEXCEPT {
-	return _array_iterator_2.distance(_array_iterator_1);
+	return array_iterator_2_.distance(array_iterator_1_);
 }
 
-template <typename _ValueT>
-inline ArrayIterator<_ValueT> DD_CONSTEXPR operator -(ArrayIterator<_ValueT> _array_iterator, typename ArrayIterator<_ValueT>::DifferenceType _step) DD_NOEXCEPT {
-	return _array_iterator -= _step;
-}
-
-
-template <typename _ValueT>
-inline ValidityType DD_CONSTEXPR operator ==(ArrayIterator<_ValueT> const& _array_iterator_1, ArrayIterator<_ValueT> const& _array_iterator_2) DD_NOEXCEPT {
-	return _array_iterator_1.equal(_array_iterator_2);
+template <typename ValueT_>
+inline ArrayIterator<ValueT_> DD_CONSTEXPR operator -(ArrayIterator<ValueT_> array_iterator_, typename ArrayIterator<ValueT_>::DifferenceType step_) DD_NOEXCEPT {
+	return array_iterator_ -= step_;
 }
 
 
-template <typename _ValueT>
-inline ValidityType DD_CONSTEXPR operator <(ArrayIterator<_ValueT> const& _array_iterator_1, ArrayIterator<_ValueT> const& _array_iterator_2) DD_NOEXCEPT {
-	return _array_iterator_1.less(_array_iterator_2.m_pointer);
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator ==(ArrayIterator<ValueT_> const& array_iterator_1_, ArrayIterator<ValueT_> const& array_iterator_2_) DD_NOEXCEPT {
+	return array_iterator_1_.equal(array_iterator_2_);
+}
+
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator <(ArrayIterator<ValueT_> const& array_iterator_1_, ArrayIterator<ValueT_> const& array_iterator_2_) DD_NOEXCEPT {
+	return array_iterator_1_.less(array_iterator_2_.m_pointer);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

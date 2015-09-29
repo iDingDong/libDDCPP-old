@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_NeedInstance.hpp
-#ifndef _DD_NEED_INSTANCE_HPP_INCLUDED
-#	define _DD_NEED_INSTANCE_HPP_INCLUDED 1
+#ifndef DD_NEED_INSTANCE_HPP_INCLUDED_
+#	define DD_NEED_INSTANCE_HPP_INCLUDED_ 1
 
 
 
@@ -13,34 +13,34 @@
 
 
 
-_DD_DETAIL_BEGIN
-DD_NESTED_TYPE_TRAIT(_GetNeedInstance, NeedInstance, FalseType)
+DD_DETAIL_BEGIN_
+DD_NESTED_TYPE_TRAIT(GetNeedInstance_, NeedInstance, FalseType)
 
 
 
-template <typename _ObjectT>
-struct _NeedInstance : BoolConstant<DD_MODIFY_TRAIT(_GetNeedInstance, _ObjectT)::value> {
+template <typename ObjectT_>
+struct NeedInstance_ : BoolConstant<DD_MODIFY_TRAIT(GetNeedInstance_, ObjectT_)::value> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >=201103L
-template <typename... _ObjectsT>
-using NeedInstance = AndType<_detail::_NeedInstance<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using NeedInstance = AndType<detail_::NeedInstance_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct NeedInstance : _detail::_NeedInstance<_ObjectT> {
+template <typename ObjectT_>
+struct NeedInstance : detail_::NeedInstance_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

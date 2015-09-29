@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_global_definitions.hpp
-#ifndef _DD_GLOBAL_DEFINITIONS_HPP_INCLUDED
-#	define _DD_GLOBAL_DEFINITIONS_HPP_INCLUDED 1
+#ifndef DD_GLOBAL_DEFINITIONS_HPP_INCLUDED_
+#	define DD_GLOBAL_DEFINITIONS_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-#	define _DDCPP 1000
+#	define DDCPP_ 1000
 
 #	define DD_ON 1
 #	define DD_OFF 0
@@ -46,14 +46,14 @@
 #	endif
 
 
-#	define _DD_BEGIN namespace DD {
-#	define _DD_END }
+#	define DD_BEGIN_ namespace DD {
+#	define DD_END_ }
 
-#	define _DD_DETAIL_BEGIN _DD_BEGIN namespace _detail {
-#	define _DD_DETAIL_END } _DD_END
+#	define DD_DETAIL_BEGIN_ DD_BEGIN_ namespace detail_ {
+#	define DD_DETAIL_END_ } DD_END_
 
-#	define DD_USER_DEFINITION_BEGIN _DD_DETAIL_BEGIN namespace user_definition {
-#	define DD_USER_DEFINITION_END } _DD_DETAIL_END
+#	define DD_USER_DEFINITION_BEGIN DD_DETAIL_BEGIN_ namespace user_definition {
+#	define DD_USER_DEFINITION_END } DD_DETAIL_END_
 
 
 #	define DD_TO_STRING(literal) #literal
@@ -66,7 +66,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 DD_ALIAS(ProcessType, void);
 
 DD_ALIAS(ValidityType, bool);
@@ -117,20 +117,20 @@ struct Direction {
 
 
 	public:
-	int _m_value;
+	int m_value_;
 
 
 };
 
 
 
-inline ValidityType operator ==(Direction _direction_1, Direction _direction_2) {
-	return _direction_1._m_value == _direction_2._m_value;
+inline ValidityType operator ==(Direction direction_1_, Direction direction_2_) {
+	return direction_1_.m_value_ == direction_2_.m_value_;
 }
 
 
-inline ValidityType operator !=(Direction _direction_1, Direction _direction_2) {
-	return !(_direction_1._m_value == _direction_2._m_value);
+inline ValidityType operator !=(Direction direction_1_, Direction direction_2_) {
+	return !(direction_1_.m_value_ == direction_2_.m_value_);
 }
 
 
@@ -161,7 +161,7 @@ CheckType DD_CONSTANT off = false;
 
 
 
-_DD_END
+DD_END_
 
 
 

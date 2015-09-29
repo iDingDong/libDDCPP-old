@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RemoveVolatile.hpp
-#ifndef _DD_REMOVE_VOLATILE_HPP_INCLUDED
-#	define _DD_REMOVE_VOLATILE_HPP_INCLUDED 1
+#ifndef DD_REMOVE_VOLATILE_HPP_INCLUDED_
+#	define DD_REMOVE_VOLATILE_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct RemoveVolatile {
 #	if __cplusplus >= 201402L
-	using Type = std::remove_volatile_t<_ObjectT>;
+	using Type = std::remove_volatile_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::remove_volatile<_ObjectT>::type;
+	using Type = typename std::remove_volatile<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -28,9 +28,9 @@ struct RemoveVolatile {
 
 
 
-template <typename _ObjectT>
-struct RemoveVolatile<_ObjectT volatile> {
-	DD_ALIAS(Type, _ObjectT);
+template <typename ObjectT_>
+struct RemoveVolatile<ObjectT_ volatile> {
+	DD_ALIAS(Type, ObjectT_);
 
 
 };
@@ -38,13 +38,13 @@ struct RemoveVolatile<_ObjectT volatile> {
 
 
 #	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using RemoveVolatileType = typename RemoveVolatile<_ObjectT>::Type;
+template <typename ObjectT_>
+using RemoveVolatileType = typename RemoveVolatile<ObjectT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

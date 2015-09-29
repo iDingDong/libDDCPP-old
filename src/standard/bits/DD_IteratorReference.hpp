@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorReference.hpp
-#ifndef _DD_ITERATOR_REFERENCE_HPP_INCLUDED
-#	define _DD_ITERATOR_REFERENCE_HPP_INCLUDED 1
+#ifndef DD_ITERATOR_REFERENCE_HPP_INCLUDED_
+#	define DD_ITERATOR_REFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -9,33 +9,33 @@
 
 
 #	if DDCPP_COMPAT_STL
-_DD_DETAIL_BEGIN
-DD_NESTED_TYPE_TRAIT(_IteratorReference, reference, typename IteratorValue<_MACRO_ObjectT>::Type&)
+DD_DETAIL_BEGIN_
+DD_NESTED_TYPE_TRAIT(IteratorReference_, reference, typename IteratorValue<MACRO_ObjectT_>::Type&)
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename _detail::_IteratorReference<_MACRO_ObjectT>::Type)
+DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename detail_::IteratorReference_<MACRO_ObjectT_>::Type)
 #	else
-DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename IteratorValue<_MACRO_ObjectT>::Type&)
+DD_NESTED_TYPE_TRAIT(IteratorReference, ReferenceType, typename IteratorValue<MACRO_ObjectT_>::Type&)
 #	endif
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _IteratorT>
-using IteratorReferenceType = typename IteratorReference<_IteratorT>::Type;
+template <typename IteratorT_>
+using IteratorReferenceType = typename IteratorReference<IteratorT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

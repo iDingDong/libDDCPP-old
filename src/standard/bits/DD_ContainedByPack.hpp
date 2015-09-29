@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ContainedByPack.hpp
-#ifndef _DD_CONTAINED_BY_PACK_INCLUDED
-#	define _DD_CONTAINED_BY_PACK_INCLUDED 1
+#ifndef DD_CONTAINED_BY_PACK_INCLUDED_
+#	define DD_CONTAINED_BY_PACK_INCLUDED_ 1
 
 
 
@@ -15,23 +15,23 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT, typename... _ListObjectsT>
+DD_BEGIN_
+template <typename ObjectT_, typename... ListObjectsT_>
 struct ContainedByPack : FalseType {
 };
 
 
 
-template <typename _ObjectT, typename _ListObjectT, typename... _ListObjectsT>
-struct ContainedByPack<_ObjectT, _ListObjectT, _ListObjectsT...> : OrType<
-	IsSame<_ObjectT, _ListObjectT>,
-	ContainedByPack<_ObjectT, _ListObjectsT...>
+template <typename ObjectT_, typename ListObjectT_, typename... ListObjectsT_>
+struct ContainedByPack<ObjectT_, ListObjectT_, ListObjectsT_...> : OrType<
+	IsSame<ObjectT_, ListObjectT_>,
+	ContainedByPack<ObjectT_, ListObjectsT_...>
 > {
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

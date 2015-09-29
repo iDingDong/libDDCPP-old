@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Trait.hpp
-#ifndef _DD_TRAIT_HPP_INCLUDED
-#	define _DD_TRAIT_HPP_INCLUDED 1
+#ifndef DD_TRAIT_HPP_INCLUDED_
+#	define DD_TRAIT_HPP_INCLUDED_ 1
 
 
 
@@ -33,10 +33,10 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct Trait {
-	DD_ALIAS(ObjectType, _ObjectT);
+	DD_ALIAS(ObjectType, ObjectT_);
 
 	DD_ALIAS(IsVoid, DD::IsVoid<ObjectType>);
 	DD_ALIAS(IsBool, DD::IsBool<ObjectType>);
@@ -79,15 +79,15 @@ struct Trait {
 #	if __cplusplus >= 201103L
 	using IsNoexceptMoveConstructible = DD::IsNoexceptMoveConstructible<ObjectType>;
 	using IsNoexceptMoveAssignable = DD::IsNoexceptMoveAssignable<ObjectType>;
-	template <typename... _ObjectsT_>
-	using IsSame = DD::IsSame<ObjectType, _ObjectsT_...>;
-	template <typename... _ObjectsT_>
-	using IsBaseOf = DD::IsBaseOf<ObjectType, _ObjectsT_...>;
+	template <typename... ObjectsT__>
+	using IsSame = DD::IsSame<ObjectType, ObjectsT__...>;
+	template <typename... ObjectsT__>
+	using IsBaseOf = DD::IsBaseOf<ObjectType, ObjectsT__...>;
 #	else
 
 
-	template <typename _ObjectT_>
-	struct IsSame : DD::IsSame<ObjectType, _ObjectT_> {
+	template <typename ObjectT__>
+	struct IsSame : DD::IsSame<ObjectType, ObjectT__> {
 	};
 
 #	endif
@@ -112,7 +112,7 @@ struct Trait {
 
 
 
-_DD_END
+DD_END_
 
 
 

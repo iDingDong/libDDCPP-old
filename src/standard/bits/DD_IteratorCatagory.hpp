@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorCatagory.hpp
-#ifndef _DD_ITERATOR_CATAGORY_HPP_INCLUDED
-#	define _DD_ITERATOR_CATAGORY_HPP_INCLUDED
+#ifndef DD_ITERATOR_CATAGORY_HPP_INCLUDED_
+#	define DD_ITERATOR_CATAGORY_HPP_INCLUDED_
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 struct FixedIterator {
 };
 
@@ -29,17 +29,17 @@ struct FreeAccessIterator : BidirectionalIterator {
 
 
 
-template <typename _IteratorT>
-struct _IteratorCatagory {
-	DD_ALIAS(Type, typename _IteratorT::CatagoryType);
+template <typename IteratorT_>
+struct IteratorCatagory_ {
+	DD_ALIAS(Type, typename IteratorT_::CatagoryType);
 
 
 };
 
 
 
-template <typename _ValueT>
-struct _IteratorCatagory<_ValueT*> {
+template <typename ValueT_>
+struct IteratorCatagory_<ValueT_*> {
 	DD_ALIAS(Type, FreeAccessIterator);
 
 
@@ -47,32 +47,32 @@ struct _IteratorCatagory<_ValueT*> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-using _detail::FixedIterator;
-using _detail::UndirectionalIterator;
-using _detail::BidirectionalIterator;
-using _detail::FreeAccessIterator;
+DD_BEGIN_
+using detail_::FixedIterator;
+using detail_::UndirectionalIterator;
+using detail_::BidirectionalIterator;
+using detail_::FreeAccessIterator;
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _IteratorT>
-using IteratorCatagory = _detail::_IteratorCatagory<RemoveCVType<_IteratorT>>;
-template <typename _IteratorT>
-using IteratorCatagoryType = typename IteratorCatagory<_IteratorT>::Type;
+template <typename IteratorT_>
+using IteratorCatagory = detail_::IteratorCatagory_<RemoveCVType<IteratorT_>>;
+template <typename IteratorT_>
+using IteratorCatagoryType = typename IteratorCatagory<IteratorT_>::Type;
 #	else
-template <typename _IteratorT>
-struct IteratorCatagory : _detail::_IteratorCatagory<typename RemoveCV<_IteratorT>::Type> {
+template <typename IteratorT_>
+struct IteratorCatagory : detail_::IteratorCatagory_<typename RemoveCV<IteratorT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

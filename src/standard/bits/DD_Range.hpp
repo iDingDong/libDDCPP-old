@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Range.hpp
-#ifndef _DD_RANGE_HPP_INCLUDED
-#	define _DD_RANGE_HPP_INCLUDED 1
+#ifndef DD_RANGE_HPP_INCLUDED_
+#	define DD_RANGE_HPP_INCLUDED_ 1
 
 
 
@@ -23,88 +23,88 @@
 #	if __cplusplus >= 201103L
 #		define DD_SPLIT_RANGE(...) ::DD::begin(__VA_ARGS__), ::DD::end(__VA_ARGS__)
 #	else
-#		define DD_SPLIT_RANGE(_ARG_range) ::DD::begin(__range), ::DD::end(__range)
+#		define DD_SPLIT_RANGE(ARG_range_) ::DD::begin(range__), ::DD::end(range__)
 #	endif
 
 
 
-_DD_BEGIN
-template <typename _RangeT>
+DD_BEGIN_
+template <typename RangeT_>
 #	if __cplusplus >= 201402L
-auto begin(_RangeT& __range) noexcept(noexcept(__range.begin())) {
+auto begin(RangeT_& range__) noexcept(noexcept(range__.begin())) {
 #	elif __cplusplus >= 201103L
-auto begin(_RangeT& __range) noexcept(noexcept(__range.begin())) ->decltype(__range.begin()) {
+auto begin(RangeT_& range__) noexcept(noexcept(range__.begin())) ->decltype(range__.begin()) {
 #	else
-typename Iterator<_RangeT>::Type begin(_RangeT& __range) {
+typename Iterator<RangeT_>::Type begin(RangeT_& range__) {
 #	endif
-	return __range.begin();
+	return range__.begin();
 }
 
-template <typename _RangeT>
+template <typename RangeT_>
 #	if __cplusplus >= 201402L
-auto begin(_RangeT const& __range) noexcept(noexcept(__range.begin())) {
+auto begin(RangeT_ const& range__) noexcept(noexcept(range__.begin())) {
 #	elif __cplusplus >= 201103L
-auto begin(_RangeT const& __range) noexcept(noexcept(__range.begin())) ->decltype(__range.begin()) {
+auto begin(RangeT_ const& range__) noexcept(noexcept(range__.begin())) ->decltype(range__.begin()) {
 #	else
-typename Iterator<_RangeT>::Type begin(_RangeT const& __range) {
+typename Iterator<RangeT_>::Type begin(RangeT_ const& range__) {
 #	endif
-	return __range.begin();
+	return range__.begin();
 }
 
-template <typename _ValueT, LengthType _length_c>
+template <typename ValueT_, LengthType length_c_>
 #	if __cplusplus >= 201103L
-_ValueT constexpr* begin(ArrayType<_ValueT, _length_c>& _array) noexcept {
+ValueT_ constexpr* begin(ArrayType<ValueT_, length_c_>& array_) noexcept {
 #	else
-_ValueT* begin(_ValueT (&_array)[_length_c]) throw() {
+ValueT_* begin(ValueT_ (&array_)[length_c_]) throw() {
 #	endif
-	return _array;
+	return array_;
 }
 
 
-template <typename _RangeT>
+template <typename RangeT_>
 #	if __cplusplus >= 201402L
-auto end(_RangeT& __range) noexcept(noexcept(__range.end())) {
+auto end(RangeT_& range__) noexcept(noexcept(range__.end())) {
 #	elif __cplusplus >= 201103L
-auto end(_RangeT& __range) noexcept(noexcept(__range.end())) ->decltype(__range.end()) {
+auto end(RangeT_& range__) noexcept(noexcept(range__.end())) ->decltype(range__.end()) {
 #	else
-typename Iterator<_RangeT>::Type end(_RangeT& __range) {
+typename Iterator<RangeT_>::Type end(RangeT_& range__) {
 #	endif
-	return __range.end();
+	return range__.end();
 }
 
-template <typename _RangeT>
+template <typename RangeT_>
 #	if __cplusplus >= 201402L
-auto end(_RangeT const& __range) noexcept(noexcept(__range.end())) {
+auto end(RangeT_ const& range__) noexcept(noexcept(range__.end())) {
 #	elif __cplusplus >= 201103L
-auto end(_RangeT const& __range) noexcept(noexcept(__range.end())) ->decltype(__range.end()) {
+auto end(RangeT_ const& range__) noexcept(noexcept(range__.end())) ->decltype(range__.end()) {
 #	else
-typename Iterator<_RangeT>::Type end(_RangeT const& __range) {
+typename Iterator<RangeT_>::Type end(RangeT_ const& range__) {
 #	endif
-	return __range.end();
+	return range__.end();
 }
 
-template <typename _ValueT, LengthType _length_c>
-#	if _cplusplus >= 201103L
-_ValueT constexpr* end(ArrayType<_ValueT, _length_c>& _array) noexcept {
+template <typename ValueT_, LengthType length_c_>
+#	if cplusplus_ >= 201103L
+ValueT_ constexpr* end(ArrayType<ValueT_, length_c_>& array_) noexcept {
 #	else
-_ValueT* end(_ValueT (&_array)[_length_c]) throw() {
+ValueT_* end(ValueT_ (&array_)[length_c_]) throw() {
 #	endif
-	return _array + _length_c;
+	return array_ + length_c_;
 }
 
 
 
-template <typename _IteratorT>
+template <typename IteratorT_>
 struct Range {
 	public:
-	DD_ALIAS(ThisType, Range<_IteratorT>);
-	DD_ALIAS(Iterator, _IteratorT);
+	DD_ALIAS(ThisType, Range<IteratorT_>);
+	DD_ALIAS(Iterator, IteratorT_);
 
 	DD_ALIAS(ReverseIterator, IteratorReverse<Iterator>);
 
 
 	private:
-	Pair<Iterator> _m_range;
+	Pair<Iterator> m_range_;
 
 
 #	if __cplusplus >= 201103L
@@ -112,33 +112,33 @@ struct Range {
 	constexpr Range() = default;
 
 	public:
-	constexpr Range(ThisType const& _origin) = default;
+	constexpr Range(ThisType const& origin_) = default;
 
 	public:
-	constexpr Range(ThisType&& _origin) = default;
+	constexpr Range(ThisType&& origin_) = default;
 
 	public:
-	template <typename _IteratorT1_, typename _IteratorT2_>
-	constexpr Range(_IteratorT1_&& __begin_, _IteratorT2_&& __end_) noexcept(
-		noexcept(Iterator(__begin_)) && noexcept(Iterator(__end_))
-	) : _m_range(forward<_IteratorT1_>(__begin_), forward<_IteratorT2_>(__end_)) {
+	template <typename IteratorT1__, typename IteratorT2__>
+	constexpr Range(IteratorT1__&& begin___, IteratorT2__&& end___) noexcept(
+		noexcept(Iterator(begin___)) && noexcept(Iterator(end___))
+	) : m_range_(forward<IteratorT1__>(begin___), forward<IteratorT2__>(end___)) {
 	}
 #	else
 	public:
-	Range() : _m_range() {
+	Range() : m_range_() {
 	}
 
 	public:
-	template <typename _IteratorT1_, typename _IteratorT2_>
-	Range(_IteratorT1_ const& __begin_, _IteratorT2_ const& __end) : _m_range(__begin_, __end_) {
+	template <typename IteratorT1__, typename IteratorT2__>
+	Range(IteratorT1__ const& begin___, IteratorT2__ const& end__) : m_range_(begin___, end___) {
 	}
 #	endif
 
 	public:
-	template <typename _RangeT_>
-	Range(_RangeT_ const& __range_) DD_NOEXCEPT_AS(
-		Pair<Iterator>(DD_SPLIT_RANGE(__range_))
-	) : _m_range(DD_SPLIT_RANGE(__range_)) {
+	template <typename RangeT__>
+	Range(RangeT__ const& range___) DD_NOEXCEPT_AS(
+		Pair<Iterator>(DD_SPLIT_RANGE(range___))
+	) : m_range_(DD_SPLIT_RANGE(range___)) {
 	}
 
 
@@ -150,30 +150,30 @@ struct Range {
 #	endif
 	public:
 	Iterator const& begin() const DD_NOEXCEPT {
-		return _m_range.first;
+		return m_range_.first;
 	}
 
 
 	public:
 	Iterator const& end() const DD_NOEXCEPT {
-		return _m_range.second;
+		return m_range_.second;
 	}
 
 
 	public:
 	ReverseIterator rbegin() const DD_NOEXCEPT_AS(
-		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(_m_range.second)))
+		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(m_range_.second)))
 	) {
-		ReverseIterator _temp(_m_range.second);
-		return ++_temp;
+		ReverseIterator temp_(m_range_.second);
+		return ++temp_;
 	}
 
 	public:
 	ReverseIterator rend() const DD_NOEXCEPT_AS(
-		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(_m_range.first)))
+		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(m_range_.first)))
 	) {
-		ReverseIterator _temp(_m_range.first);
-		return ++_temp;
+		ReverseIterator temp_(m_range_.first);
+		return ++temp_;
 	}
 
 
@@ -181,7 +181,7 @@ struct Range {
 
 
 
-_DD_END
+DD_END_
 
 
 

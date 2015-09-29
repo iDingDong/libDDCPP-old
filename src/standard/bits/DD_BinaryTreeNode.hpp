@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_BinaryTreeNode.hpp
-#ifndef _DD_BINARY_TREE_NODE_HPP_INCLUDED
-#	define _DD_BINARY_TREE_NODE_HPP_INCLUDED 1
+#ifndef DD_BINARY_TREE_NODE_HPP_INCLUDED_
+#	define DD_BINARY_TREE_NODE_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct EmptyBinaryTreeNode {
 	DD_ALIAS(ThisType, EmptyBinaryTreeNode);
 
@@ -22,10 +22,10 @@ struct EmptyBinaryTreeNode {
 
 
 
-template <typename _ValueT>
+template <typename ValueT_>
 struct BinaryTreeNode : EmptyBinaryTreeNode {
-	DD_ALIAS(ThisType, BinaryTree<_ValueT>);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_ALIAS(ThisType, BinaryTree<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
 	ValueType value;
@@ -58,10 +58,10 @@ struct EmptyRedBlackTreeNode : EmptyBinaryTreeNode {
 
 
 
-template <typename _ValueT>
+template <typename ValueT_>
 struct RedBlackTreeNode : EmptyRedBlackTreeNode {
-	DD_ALIAS(ThisType, RedBlackTreeNode<_ValueT>);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_ALIAS(ThisType, RedBlackTreeNode<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
 	ValueType value;
@@ -71,7 +71,7 @@ struct RedBlackTreeNode : EmptyRedBlackTreeNode {
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_is_partitioned_by.hpp
-#ifndef _DD_IS_PARTITIONED_BY_HPP_INCLUDED
-#	define _DD_IS_PARTITIONED_BY_HPP_INCLUDED 1
+#ifndef DD_IS_PARTITIONED_BY_HPP_INCLUDED_
+#	define DD_IS_PARTITIONED_BY_HPP_INCLUDED_ 1
 
 
 
@@ -8,20 +8,20 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _UnaryPredicatorT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
 ValidityType is_partitioned_by(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_UnaryPredicatorT const& __predicator
-) DD_NOEXCEPT_AS(++__begin != __end && __predicator(*__begin)) {
-	for (; __begin != __end; ++__begin) {
-		if (!__predicator(*__begin)) {
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	UnaryPredicatorT_ const& predicator__
+) DD_NOEXCEPT_AS(++begin__ != end__ && predicator__(*begin__)) {
+	for (; begin__ != end__; ++begin__) {
+		if (!predicator__(*begin__)) {
 			break;
 		}
 	}
-	while (++__begin != __end) {
-		if (__predicator(*__begin)) {
+	while (++begin__ != end__) {
+		if (predicator__(*begin__)) {
 			return false;
 		}
 	}
@@ -30,7 +30,7 @@ ValidityType is_partitioned_by(
 
 
 
-_DD_END
+DD_END_
 
 
 

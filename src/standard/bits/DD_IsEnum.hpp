@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsEnum.hpp
-#ifndef _DD_IS_ENUM_HPP_INCLUDED
-#	define _DD_IS_ENUM_HPP_INCLUDED 1
+#ifndef DD_IS_ENUM_HPP_INCLUDED_
+#	define DD_IS_ENUM_HPP_INCLUDED_ 1
 
 
 
@@ -16,13 +16,13 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsEnum = AndType<StdBoolConstant<std::is_enum<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsEnum = AndType<StdBoolConstant<std::is_enum<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

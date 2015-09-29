@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IntegeralConstant.hpp
-#ifndef _DD_INTERGRAL_CONSTANT_HPP_INCLUDED
-#	define _DD_INTERGRAL_CONSTANT_HPP_INCLUDED 1
+#ifndef DD_INTERGRAL_CONSTANT_HPP_INCLUDED_
+#	define DD_INTERGRAL_CONSTANT_HPP_INCLUDED_ 1
 
 
 
@@ -8,21 +8,21 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT, _ValueT _value_c>
+DD_BEGIN_
+template <typename ValueT_, ValueT_ value_c_>
 struct IntegralConstant {
-	DD_ALIAS(ValueType, _ValueT);
-	static ValueType DD_CONSTANT value = _value_c;
+	DD_ALIAS(ValueType, ValueT_);
+	static ValueType DD_CONSTANT value = value_c_;
 
 #	if __cplusplus >= 201103L
-	using Type = IntegralConstant<_ValueT, _value_c>;
+	using Type = IntegralConstant<ValueT_, value_c_>;
 
 
 	constexpr operator ValueType() const noexcept(true) {
 		return value;
 	}
 #	else
-	typedef IntegralConstant<_ValueT, _value_c> Type;
+	typedef IntegralConstant<ValueT_, value_c_> Type;
 #	endif
 
 
@@ -31,40 +31,40 @@ struct IntegralConstant {
 
 
 #	if __cplusplus >= 201103L
-template <bool _value_c>
-using BoolConstant = IntegralConstant<bool, _value_c>;
+template <bool value_c_>
+using BoolConstant = IntegralConstant<bool, value_c_>;
 
-template <SizeType _size_c>
-using SizeConstant = IntegralConstant<SizeType, _size_c>;
+template <SizeType size_c_>
+using SizeConstant = IntegralConstant<SizeType, size_c_>;
 
-template <DifferenceType _difference_c>
-using DifferenceConstant = IntegralConstant<DifferenceType, _difference_c>;
+template <DifferenceType difference_c_>
+using DifferenceConstant = IntegralConstant<DifferenceType, difference_c_>;
 
-template <typename _IntegralT>
-using StdIntegralConstant = IntegralConstant<typename _IntegralT::value_type, _IntegralT::value>;
-template <typename _IntegralT>
-using StdBoolConstant = BoolConstant<_IntegralT::value>;
+template <typename IntegralT_>
+using StdIntegralConstant = IntegralConstant<typename IntegralT_::value_type, IntegralT_::value>;
+template <typename IntegralT_>
+using StdBoolConstant = BoolConstant<IntegralT_::value>;
 #	else
-template <bool _value_c>
-struct BoolConstant : IntegralConstant<bool, _value_c> {
+template <bool value_c_>
+struct BoolConstant : IntegralConstant<bool, value_c_> {
 };
 
 
 
-template <SizeType _size_c>
-struct SizeConstant : IntegralConstant<SizeType, _size_c> {
+template <SizeType size_c_>
+struct SizeConstant : IntegralConstant<SizeType, size_c_> {
 };
 
 
 
-template <DifferenceType _difference_c>
-struct DifferenceConstant : IntegralConstant<DifferenceType, _difference_c> {
+template <DifferenceType difference_c_>
+struct DifferenceConstant : IntegralConstant<DifferenceType, difference_c_> {
 };
 
 
 
-template <typename _IntegralT>
-struct StdIntegralConstant : IntegralConstant<typename _IntegralT::value_type, _IntegralT::value> {
+template <typename IntegralT_>
+struct StdIntegralConstant : IntegralConstant<typename IntegralT_::value_type, IntegralT_::value> {
 };
 #	endif
 
@@ -75,7 +75,7 @@ DD_ALIAS(FalseType, BoolConstant<false>);
 
 
 
-_DD_END
+DD_END_
 
 
 

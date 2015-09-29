@@ -83,9 +83,9 @@ void test_utility() {
 	}
 	{
 		using namespace ::DD::place_holder;
-		auto testBinded_1 = DD::bind(func, _0, 123);
-		auto testBinded_2 = DD::bind(&A::func, _1, 123, _0);
-		auto testBinded_3 = DD::bind(A(), 123, _0);
+		auto testBinded_1 = DD::bind(func, _0_, 123);
+		auto testBinded_2 = DD::bind(&A::func, _1_, 123, _0_);
+		auto testBinded_3 = DD::bind(A(), 123, _0_);
 		if (
 			testBinded_1(111) != 111 + 123 ||
 			testBinded_1(432) != 432 + 123 ||

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_insert_sort.hpp
-#ifndef _DD_INSERT_SORT_HPP_INCLUDED
-#	define _DD_INSERT_SORT_HPP_INCLUDED
+#ifndef DD_INSERT_SORT_HPP_INCLUDED_
+#	define DD_INSERT_SORT_HPP_INCLUDED_
 
 
 #	if __cplusplus >= 201103L
@@ -13,54 +13,54 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <ValidityType _is_bidirectional_iterator_c>
-struct _InsertSort {
-	template <typename _UndirectionalIteratorT_>
-	static ProcessType _insert_sort(
-		_UndirectionalIteratorT_ const& __begin_,
-		_UndirectionalIteratorT_ const& __end_
+DD_DETAIL_BEGIN_
+template <ValidityType is_bidirectional_iterator_c_>
+struct InsertSort_ {
+	template <typename UndirectionalIteratorT__>
+	static ProcessType insert_sort_(
+		UndirectionalIteratorT__ const& begin___,
+		UndirectionalIteratorT__ const& end___
 	) DD_NOEXCEPT_IF(
-		noexcept(swap_target(__begin_, __end_)) &&
-		noexcept(++const_cast<_UndirectionalIteratorT_&>(__begin_) != __end_) &&
-		noexcept(*__begin_ < *__end_)
+		noexcept(swap_target(begin___, end___)) &&
+		noexcept(++const_cast<UndirectionalIteratorT__&>(begin___) != end___) &&
+		noexcept(*begin___ < *end___)
 	) {
-		if (__begin_ != __end_) {
-			for (_UndirectionalIteratorT_ __current_(__begin_), __front_; ++__current_ != __end_; ) {
-				__front_ = __begin_;
+		if (begin___ != end___) {
+			for (UndirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
+				front___ = begin___;
 				do {
-					if (*__current_ < *__front_) {
+					if (*current___ < *front___) {
 						do {
-							swap_target(__front_, __current_);
-						} while (++__front_ != __current_);
+							swap_target(front___, current___);
+						} while (++front___ != current___);
 						break;
 					}
-				} while (++__front_ != __current_);
+				} while (++front___ != current___);
 			}
 		}
 	}
 
-	template <typename _UndirectionalIteratorT_, typename _BinaryPredicatorT_>
-	static ProcessType _insert_sort(
-		_UndirectionalIteratorT_ const& __begin_,
-		_UndirectionalIteratorT_ const& __end_,
-		_BinaryPredicatorT_ const& __less_
+	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
+	static ProcessType insert_sort_(
+		UndirectionalIteratorT__ const& begin___,
+		UndirectionalIteratorT__ const& end___,
+		BinaryPredicatorT__ const& less___
 	) DD_NOEXCEPT_IF(
-		noexcept(swap_target(__begin_, __end_)) &&
-		noexcept(++const_cast<_UndirectionalIteratorT_&>(__begin_) != __end_) &&
-		noexcept(__less_(*__begin_, *__end_))
+		noexcept(swap_target(begin___, end___)) &&
+		noexcept(++const_cast<UndirectionalIteratorT__&>(begin___) != end___) &&
+		noexcept(less___(*begin___, *end___))
 	) {
-		if (__begin_ != __end_) {
-			for (_UndirectionalIteratorT_ __current_(__begin_), __front_; ++__current_ != __end_; ) {
-				__front_ = __begin_;
+		if (begin___ != end___) {
+			for (UndirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
+				front___ = begin___;
 				do {
-					if (__less_(*__current_, *__front_)) {
+					if (less___(*current___, *front___)) {
 						do {
-							swap_target(__front_, __current_);
-						} while (++__front_ != __current_);
+							swap_target(front___, current___);
+						} while (++front___ != current___);
 						break;
 					}
-				} while (++__front_ != __current_);
+				} while (++front___ != current___);
 			}
 		}
 	}
@@ -71,77 +71,77 @@ struct _InsertSort {
 
 
 template <>
-struct _InsertSort<true> {
-	template <typename _BidirectionalIteratorT_>
-	static ProcessType _insert_sort(
-		_BidirectionalIteratorT_ const& __begin_,
-		_BidirectionalIteratorT_ const& __end_
+struct InsertSort_<true> {
+	template <typename BidirectionalIteratorT__>
+	static ProcessType insert_sort_(
+		BidirectionalIteratorT__ const& begin___,
+		BidirectionalIteratorT__ const& end___
 	) DD_NOEXCEPT_IF(
-		noexcept(IteratorValueType<_BidirectionalIteratorT_>(move(*__begin_))) &&
-		noexcept(++const_cast<_BidirectionalIteratorT_&>(__begin_) == __end_) &&
-		noexcept(*__begin_ < *__end_)
+		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
+		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
+		noexcept(*begin___ < *end___)
 	) {
-		if (__begin_ != __end_) {
-			for (_BidirectionalIteratorT_ __current_(__begin_), __front_; ++__current_ != __end_; ) {
-				__front_ = __current_;
+		if (begin___ != end___) {
+			for (BidirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
+				front___ = current___;
 #	if __cplusplus >= 201103L
-				auto _temp = move(*__front_);
-				for (auto __previous_(__front_); _temp < *--__previous_; ) {
-					*__front_ = move(*__previous_);
-					--__front_;
-					if (__front_ == __begin_) {
+				auto temp_ = move(*front___);
+				for (auto previous___(front___); temp_ < *--previous___; ) {
+					*front___ = move(*previous___);
+					--front___;
+					if (front___ == begin___) {
 						break;
 					}
 				}
-				*__front_ = move(_temp);
+				*front___ = move(temp_);
 #	else
-				typename IteratorValue<_BidirectionalIteratorT_>::Type _temp = *__current_;
-				for (_BidirectionalIteratorT_ __previous_(__front_); _temp < *--__previous_; ) {
-					*__front_ = *__previous_;
-					--__front_;
-					if (__previous_ == __begin_) {
+				typename IteratorValue<BidirectionalIteratorT__>::Type temp_ = *current___;
+				for (BidirectionalIteratorT__ previous___(front___); temp_ < *--previous___; ) {
+					*front___ = *previous___;
+					--front___;
+					if (previous___ == begin___) {
 						break;
 					}
 				}
-				*__front_ = _temp;
+				*front___ = temp_;
 #	endif
 			}
 		}
 	}
 
-	template <typename _BidirectionalIteratorT_, typename _BinaryPredicatorT_>
-	static ProcessType _insert_sort(
-		_BidirectionalIteratorT_ const& __begin_,
-		_BidirectionalIteratorT_ const& __end_,
-		_BinaryPredicatorT_ const& __less_
+	template <typename BidirectionalIteratorT__, typename BinaryPredicatorT__>
+	static ProcessType insert_sort_(
+		BidirectionalIteratorT__ const& begin___,
+		BidirectionalIteratorT__ const& end___,
+		BinaryPredicatorT__ const& less___
 	) DD_NOEXCEPT_IF(
-		noexcept(IteratorValueType<_BidirectionalIteratorT_>(move(*__begin_))) &&
-		noexcept(++const_cast<_BidirectionalIteratorT_&>(__begin_) == __end_) &&
-		noexcept(__less_(*__begin_, *__end_))
+		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
+		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
+		noexcept(less___(*begin___, *end___))
 	) {
-		if (__begin_ != __end_) {
-			for (_BidirectionalIteratorT_ __current_(__begin_), __front_; ++__current_ != __end_; ) {
-				__front_ = __current_;
+		if (begin___ != end___) {
+			for (BidirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
+				front___ = current___;
 #	if __cplusplus >= 201103L
-				auto _temp = move(*__front_);
-				for (auto __previous_(__front_); __less_(_temp, *--__previous_); ) {
-					*__front_ = move(*__previous_);
-					--__front_;
-					if (__front_ == __begin_) {
+				auto temp_ = move(*front___);
+				for (auto previous___(front___); less___(temp_, *--previous___); ) {
+					*front___ = move(*previous___);
+					--front___;
+					if (front___ == begin___) {
 						break;
 					}
 				}
-				*__front_ = move(_temp);
+				*front___ = move(temp_);
 #	else
-				typename IteratorValue<_BidirectionalIteratorT_>::Type _temp = *__current_;
-				for (_BidirectionalIteratorT_ __previous_(__front_); __less_(_temp, *--__previous_); ) {
-					*__front_ = *__previous_;
-					--__front_;
-					if (__previous_ == __begin_) {
+				typename IteratorValue<BidirectionalIteratorT__>::Type temp_ = *current___;
+				for (BidirectionalIteratorT__ previous___(front___); less___(temp_, *--previous___); ) {
+					*front___ = *previous___;
+					--front___;
+					if (previous___ == begin___) {
 						break;
 					}
 				}
-				*__front_ = _temp;
+				*front___ = temp_;
 #	endif
 			}
 		}
@@ -152,58 +152,58 @@ struct _InsertSort<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_>
 inline ProcessType insert_sort(
-	_UndirectionalIteratorT const& __begin,
-	_UndirectionalIteratorT const& __end
+	UndirectionalIteratorT_ const& begin__,
+	UndirectionalIteratorT_ const& end__
 ) DD_NOEXCEPT_AS(
-	_detail::_InsertSort<
-		IsBidirectionalIterator<_UndirectionalIteratorT>::value
-	>::_insert_sort(__begin DD_COMMA __end)
+	detail_::InsertSort_<
+		IsBidirectionalIterator<UndirectionalIteratorT_>::value
+	>::insert_sort_(begin__ DD_COMMA end__)
 ) {
-	_detail::_InsertSort<
-		IsBidirectionalIterator<_UndirectionalIteratorT>::value
-	>::_insert_sort(__begin, __end);
+	detail_::InsertSort_<
+		IsBidirectionalIterator<UndirectionalIteratorT_>::value
+	>::insert_sort_(begin__, end__);
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
+template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
 inline ProcessType insert_sort(
-	_UndirectionalIteratorT const& __begin,
-	_UndirectionalIteratorT const& __end,
-	_BinaryPredicatorT const& __less
+	UndirectionalIteratorT_ const& begin__,
+	UndirectionalIteratorT_ const& end__,
+	BinaryPredicatorT_ const& less__
 ) DD_NOEXCEPT_AS(
-	_detail::_InsertSort<
-		IsBidirectionalIterator<_UndirectionalIteratorT>::value
-	>::_insert_sort(__begin DD_COMMA __end DD_COMMA __less)
+	detail_::InsertSort_<
+		IsBidirectionalIterator<UndirectionalIteratorT_>::value
+	>::insert_sort_(begin__ DD_COMMA end__ DD_COMMA less__)
 ) {
-	_detail::_InsertSort<
-		IsBidirectionalIterator<_UndirectionalIteratorT>::value
-	>::_insert_sort(__begin, __end, __less);
+	detail_::InsertSort_<
+		IsBidirectionalIterator<UndirectionalIteratorT_>::value
+	>::insert_sort_(begin__, end__, less__);
 }
 
-template <typename _UndirectionalRangeT>
+template <typename UndirectionalRangeT_>
 inline ProcessType insert_sort(
-	_UndirectionalRangeT& __range
-) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(__range)) {
-	insert_sort(DD_SPLIT_RANGE(__range));
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(range__)) {
+	insert_sort(DD_SPLIT_RANGE(range__));
 }
 
-template <typename _UndirectionalRangeT, typename _BinaryPredicatorT>
+template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
 inline ProcessType insert_sort(
-	_UndirectionalRangeT& __range,
-	_BinaryPredicatorT const& __less
-) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(__range) DD_COMMA __less) {
-	insert_sort(DD_SPLIT_RANGE(__range), __less);
+	UndirectionalRangeT_& range__,
+	BinaryPredicatorT_ const& less__
+) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(range__) DD_COMMA less__) {
+	insert_sort(DD_SPLIT_RANGE(range__), less__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

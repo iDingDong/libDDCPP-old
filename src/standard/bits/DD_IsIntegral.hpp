@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsIntegral.hpp
-#ifndef _DD_IS_INTEGRAL_HPP_INCLUDED
-#	define _DD_IS_INTEGRAL_HPP_INCLUDED 1
+#ifndef DD_IS_INTEGRAL_HPP_INCLUDED_
+#	define DD_IS_INTEGRAL_HPP_INCLUDED_ 1
 
 
 
@@ -26,51 +26,51 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-using _IsIntegral = OrType<
-	IsBool<_ObjectT>,
-	IsCharactor<_ObjectT>,
-	IsUnsignedShort<_ObjectT>,
-	IsSignedShort<_ObjectT>,
-	IsUnsignedInt<_ObjectT>,
-	IsSignedInt<_ObjectT>,
-	IsUnsignedLong<_ObjectT>,
-	IsSignedLong<_ObjectT>,
-	IsUnsignedLongLong<_ObjectT>,
-	IsSignedLongLong<_ObjectT>,
-	StdBoolConstant<std::is_integral<_ObjectT>>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+using IsIntegral_ = OrType<
+	IsBool<ObjectT_>,
+	IsCharactor<ObjectT_>,
+	IsUnsignedShort<ObjectT_>,
+	IsSignedShort<ObjectT_>,
+	IsUnsignedInt<ObjectT_>,
+	IsSignedInt<ObjectT_>,
+	IsUnsignedLong<ObjectT_>,
+	IsSignedLong<ObjectT_>,
+	IsUnsignedLongLong<ObjectT_>,
+	IsSignedLongLong<ObjectT_>,
+	StdBoolConstant<std::is_integral<ObjectT_>>
 >;
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsIntegral = AndType<_detail::_IsIntegral<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsIntegral = AndType<detail_::IsIntegral_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
+template <typename ObjectT_>
 struct IsIntegral : BoolConstant<
-	IsBool<_ObjectT>::value ||
-	IsCharactor<_ObjectT>::value ||
-	IsUnsignedShort<_ObjectT>::value ||
-	IsSignedShort<_ObjectT>::value ||
-	IsUnsignedInt<_ObjectT>::value ||
-	IsSignedInt<_ObjectT>::value ||
-	IsUnsignedLong<_ObjectT>::value ||
-	IsSignedLong<_ObjectT>::value
+	IsBool<ObjectT_>::value ||
+	IsCharactor<ObjectT_>::value ||
+	IsUnsignedShort<ObjectT_>::value ||
+	IsSignedShort<ObjectT_>::value ||
+	IsUnsignedInt<ObjectT_>::value ||
+	IsSignedInt<ObjectT_>::value ||
+	IsUnsignedLong<ObjectT_>::value ||
+	IsSignedLong<ObjectT_>::value
 > {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

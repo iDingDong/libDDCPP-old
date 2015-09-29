@@ -1,6 +1,6 @@
 //	DDCPP/standard/DDMemory.hpp
-#ifndef _DDMEMORY_HPP_INCLUDED
-#	define _DDMEMORY_HPP_INCLUDED 1
+#ifndef DDMEMORY_HPP_INCLUDED_
+#	define DDMEMORY_HPP_INCLUDED_ 1
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AddConst.hpp
-#ifndef _DD_ADD_CONST_HPP_INCLUDED
-#	define _DD_ADD_CONST_HPP_INCLUDED 1
+#ifndef DD_ADD_CONST_HPP_INCLUDED_
+#	define DD_ADD_CONST_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct AddConst {
 #	if __cplusplus >= 201402L
-	using Type = std::add_const_t<_ObjectT>;
+	using Type = std::add_const_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::add_const<_ObjectT>::type;
+	using Type = typename std::add_const<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -32,7 +32,7 @@ DD_TRAIT_MODIFIER(AddConst)
 
 
 
-_DD_END
+DD_END_
 
 
 

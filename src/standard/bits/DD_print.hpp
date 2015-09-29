@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_print.hpp
-#ifndef _DD_PRINT_HPP_INCLUDED
-#	define _DD_PRINT_HPP_INCLUDED 1
+#ifndef DD_PRINT_HPP_INCLUDED_
+#	define DD_PRINT_HPP_INCLUDED_ 1
 
 
 
@@ -10,15 +10,15 @@
 
 
 
-_DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct FlushTag : Tag {
 } DD_CONSTANT flush;
 
@@ -38,29 +38,29 @@ struct Print {
 		return *this;
 	}
 
-	template <typename _ValueT_, typename... _ValuesT_>
+	template <typename ValueT__, typename... ValuesT__>
 	ThisType const& operator ()(
-		_ValueT_ const& __value_,
-		_ValuesT_ const&... __values_
-	) const DD_NOEXCEPT_AS((Print(), __value_)(__values_...)) {
-		return (*this, __value_)(__values_...);
+		ValueT__ const& value___,
+		ValuesT__ const&... values___
+	) const DD_NOEXCEPT_AS((Print(), value___)(values___...)) {
+		return (*this, value___)(values___...);
 	}
 
 
 #	endif
-	ThisType const& operator ,(FlushTag _tag) const DD_NOEXCEPT_AS(std::cout << std::flush) {
+	ThisType const& operator ,(FlushTag tag_) const DD_NOEXCEPT_AS(std::cout << std::flush) {
 		std::cout << std::flush;
 		return *this;
 	}
 
-	ThisType const& operator ,(EndLineTag _tag) const DD_NOEXCEPT_AS(std::cout << std::endl) {
+	ThisType const& operator ,(EndLineTag tag_) const DD_NOEXCEPT_AS(std::cout << std::endl) {
 		std::cout << std::endl;
 		return *this;
 	}
 
-	template <typename _ValueT_>
-	ThisType const& operator ,(_ValueT_ const& __value_) const DD_NOEXCEPT_AS(std::cout << __value_) {
-		std::cout << __value_;
+	template <typename ValueT__>
+	ThisType const& operator ,(ValueT__ const& value___) const DD_NOEXCEPT_AS(std::cout << value___) {
+		std::cout << value___;
 		return *this;
 	}
 
@@ -69,7 +69,7 @@ struct Print {
 
 
 
-_DD_END
+DD_END_
 
 
 

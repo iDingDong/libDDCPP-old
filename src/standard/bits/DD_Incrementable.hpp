@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Incrementable.hpp
-#ifndef _DD_INCREMENTABLE_HPP_INCLUDED
-#	define _DD_INCREMENTABLE_HPP_INCLUDED 1
+#ifndef DD_INCREMENTABLE_HPP_INCLUDED_
+#	define DD_INCREMENTABLE_HPP_INCLUDED_ 1
 
 
 
@@ -8,18 +8,18 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct Incrementable {
 	public:
-	DD_ALIAS(Type, _ObjectT);
+	DD_ALIAS(Type, ObjectT_);
 
 
 	public:
-	friend Type operator ++(Type& _object, int) DD_NOEXCEPT_AS(++_object, Type(_object)) {
-		Type _temp(_object);
-		++_object;
-		return _temp;
+	friend Type operator ++(Type& object_, int) DD_NOEXCEPT_AS(++object_, Type(object_)) {
+		Type temp_(object_);
+		++object_;
+		return temp_;
 	}
 
 
@@ -27,7 +27,7 @@ struct Incrementable {
 
 
 
-_DD_END
+DD_END_
 
 
 

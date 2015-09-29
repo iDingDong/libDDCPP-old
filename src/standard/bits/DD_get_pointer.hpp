@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_get_pointer.hpp
-#ifndef _DD_GET_POINTER_HPP_INCLUDED
-#	define _DD_GET_POINTER_HPP_INCLUDED 1
+#ifndef DD_GET_POINTER_HPP_INCLUDED_
+#	define DD_GET_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -11,21 +11,21 @@
 
 
 
-_DD_BEGIN
-template <typename _PointerT>
+DD_BEGIN_
+template <typename PointerT_>
 #	if __cplusplus >= 201402L
-inline auto DD_CONSTEXPR get_pointer(_PointerT const& __pointer) DD_NOEXCEPT {
+inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT {
 #	elif __cplusplus >= 201103L
-inline auto DD_CONSTEXPR get_pointer(_PointerT const& __pointer) DD_NOEXCEPT -> decltype(address_of(*__pointer)) {
+inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT -> decltype(address_of(*pointer__)) {
 #	else
-inline typename IteratorPointer<_PointerT>::Type get_pointer(_PointerT const& __pointer) DD_NOEXCEPT {
+inline typename IteratorPointer<PointerT_>::Type get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT {
 #	endif
-	return address_of(*__pointer);
+	return address_of(*pointer__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

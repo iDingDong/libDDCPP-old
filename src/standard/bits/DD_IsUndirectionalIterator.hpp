@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsUndirectionalIterator.hpp
-#ifndef _DD_IS_UNDIRECTIONAL_ITERATOR_HPP_INCLUDED
-#	define _DD_IS_UNDIRECTIONAL_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_IS_UNDIRECTIONAL_ITERATOR_HPP_INCLUDED_
+#	define DD_IS_UNDIRECTIONAL_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -9,19 +9,19 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _IteratorsT>
-using IsUndirectionalIterator = IsBaseOf<UndirectionalIterator, IteratorCatagoryType<_IteratorsT>...>;
+template <typename... IteratorsT_>
+using IsUndirectionalIterator = IsBaseOf<UndirectionalIterator, IteratorCatagoryType<IteratorsT_>...>;
 #	else
-template <typename _IteratorT>
-struct IsUndirectionalIterator : IsBaseOf<UndirectionalIterator, typename IteratorCatagory<_IteratorT>::Type> {
+template <typename IteratorT_>
+struct IsUndirectionalIterator : IsBaseOf<UndirectionalIterator, typename IteratorCatagory<IteratorT_>::Type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

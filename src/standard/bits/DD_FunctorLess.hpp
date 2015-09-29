@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_FunctorLess.hpp
-#ifndef _DD_FUNCTOR_LESS_HPP_INCLUDED
-#	define _DD_FUNCTOR_LESS_HPP_INCLUDED 1
+#ifndef DD_FUNCTOR_LESS_HPP_INCLUDED_
+#	define DD_FUNCTOR_LESS_HPP_INCLUDED_ 1
 
 
 
@@ -9,10 +9,10 @@
 
 
 DD_BEGIN
-template <typename _ObjectT>
-struct FunctorLess : BinaryFunctor<ValidityType, _ObjectT, _ObjectT> {
-	ValidityType operator ()(_ObjectT __object_1, _ObjectT __object_2) const DD_NOEXCEPT_AS(bool(__object_1 < __object_2)) {
-		return __object_1 < __object_2;
+template <typename ObjectT_>
+struct FunctorLess : BinaryFunctor<ValidityType, ObjectT_, ObjectT_> {
+	ValidityType operator ()(ObjectT_ object_1__, ObjectT_ object_2__) const DD_NOEXCEPT_AS(bool(object_1__ < object_2__)) {
+		return object_1__ < object_2__;
 	}
 	
 	

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsConst.hpp
-#ifndef _DD_IS_CONST_HPP_INCLUDED
-#	define _DD_IS_CONST_HPP_INCLUDED 1
+#ifndef DD_IS_CONST_HPP_INCLUDED_
+#	define DD_IS_CONST_HPP_INCLUDED_ 1
 
 
 
@@ -14,40 +14,40 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsConst : StdBoolConstant<std::is_const<_ObjectT>> {
+struct IsConst_ : StdBoolConstant<std::is_const<ObjectT_>> {
 #	else
-struct _IsConst : FalseType {
+struct IsConst_ : FalseType {
 #	endif
 };
 
 
 
-template <typename _ObjectT>
-struct _IsConst<_ObjectT const> : TrueType {
+template <typename ObjectT_>
+struct IsConst_<ObjectT_ const> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsConst = AndType<_detail::_IsConst<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsConst = AndType<detail_::IsConst_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsConst : _detail::_IsConst<_ObjectT> {
+template <typename ObjectT_>
+struct IsConst : detail_::IsConst_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

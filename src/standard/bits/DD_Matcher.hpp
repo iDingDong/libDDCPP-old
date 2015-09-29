@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Matcher.hpp
-#ifndef _DD_MATCHER_HPP_INCLUDED
-#	define _DD_MATCHER_HPP_INCLUDED
+#ifndef DD_MATCHER_HPP_INCLUDED_
+#	define DD_MATCHER_HPP_INCLUDED_
 
 
 

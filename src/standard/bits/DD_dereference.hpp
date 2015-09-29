@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_dereference.hpp
-#ifndef _DD_DEREFERENCE_HPP_INCLUDED
-#	define _DD_DEREFERENCE_HPP_INCLUDED 1
+#ifndef DD_DEREFERENCE_HPP_INCLUDED_
+#	define DD_DEREFERENCE_HPP_INCLUDED_ 1
 
 
 
@@ -8,15 +8,15 @@
 
 
 
-_DD_BEGIN
-template <typename _PointerT>
-inline DD_MODIFY_TRAIT(IteratorReference, _PointerT) DD_CONSTEXPR dereference(_PointerT const& __pointer) DD_NOEXCEPT_AS(*__pointer) {
-	return *__pointer;
+DD_BEGIN_
+template <typename PointerT_>
+inline DD_MODIFY_TRAIT(IteratorReference, PointerT_) DD_CONSTEXPR dereference(PointerT_ const& pointer__) DD_NOEXCEPT_AS(*pointer__) {
+	return *pointer__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

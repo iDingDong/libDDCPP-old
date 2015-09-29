@@ -1,6 +1,6 @@
 //	DDCPP/standard\DDCompare.hpp
-#ifndef _DDCOMPARE_HPP_INCLUDED
-#	define _DDCOMPARE_HPP_INCLUDED 1
+#ifndef DDCOMPARE_HPP_INCLUDED_
+#	define DDCOMPARE_HPP_INCLUDED_ 1
 
 
 

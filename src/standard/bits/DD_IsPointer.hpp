@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsPointer.hpp
-#ifndef _DD_IS_POINTER_HPP_INCLUDED
-#	define _DD_IS_POINTER_HPP_INCLUDED 1
+#ifndef DD_IS_POINTER_HPP_INCLUDED_
+#	define DD_IS_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -16,54 +16,54 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct _IsPointer : StdBoolConstant<std::is_pointer<_ObjectT>> {
+struct IsPointer_ : StdBoolConstant<std::is_pointer<ObjectT_>> {
 #	else
-struct _IsPointer : FalseType {
+struct IsPointer_ : FalseType {
 #	endif
 };
 
 
 
-template <typename _ValueT>
-struct _IsPointer<_ValueT*> : TrueType {
+template <typename ValueT_>
+struct IsPointer_<ValueT_*> : TrueType {
 };
 
 
 
 template <>
-struct _IsPointer<NilPointerType> : TrueType {
+struct IsPointer_<NilPointerType> : TrueType {
 };
 
 
 
 #	if __cplusplus >= 201103L
 template <>
-struct _IsPointer<std::nullptr_t> : TrueType {
+struct IsPointer_<std::nullptr_t> : TrueType {
 };
 #	endif
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsPointer = AndType<_detail::_IsPointer<RemoveCVType<_ObjectsT>>...>;
+template <typename... ObjectsT_>
+using IsPointer = AndType<detail_::IsPointer_<RemoveCVType<ObjectsT_>>...>;
 #	else
-template <typename _ObjectT>
-struct IsPointer : _detail::_IsPointer<typename RemoveCV<_ObjectT>::type> {
+template <typename ObjectT_>
+struct IsPointer : detail_::IsPointer_<typename RemoveCV<ObjectT_>::type> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_And.hpp
-#ifndef _DD_AND_HPP_INCLUDED
-#	define _DD_AND_HPP_INCLUDED 1
+#ifndef DD_AND_HPP_INCLUDED_
+#	define DD_AND_HPP_INCLUDED_ 1
 
 
 
@@ -9,51 +9,51 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <typename... _ConditionsT>
-struct _And : TrueType {
+DD_DETAIL_BEGIN_
+template <typename... ConditionsT_>
+struct And_ : TrueType {
 };
 
 
 
-template <typename _ConditionT1, typename _ConditionT2, typename... _ConditionsT>
-struct _And<_ConditionT1, _ConditionT2, _ConditionsT...> : _And<_ConditionT1, _And<_ConditionT2, _ConditionsT...>> {
+template <typename ConditionT1_, typename ConditionT2_, typename... ConditionsT_>
+struct And_<ConditionT1_, ConditionT2_, ConditionsT_...> : And_<ConditionT1_, And_<ConditionT2_, ConditionsT_...>> {
 };
 
 
 
-template <typename _ConditionT1, typename _ConditionT2>
-struct _And<_ConditionT1, _ConditionT2> : BoolConstant<_ConditionT1::value && _ConditionT2::value> {
+template <typename ConditionT1_, typename ConditionT2_>
+struct And_<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
 };
 
 
 
-template <typename _ConditionT>
-struct _And<_ConditionT> : BoolConstant<_ConditionT::value> {
+template <typename ConditionT_>
+struct And_<ConditionT_> : BoolConstant<ConditionT_::value> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ConditionsT>
-using And = _detail::_And<_ConditionsT...>;
-template <typename... _ConditionsT>
-using AndType = typename And<_ConditionsT...>::Type;
+template <typename... ConditionsT_>
+using And = detail_::And_<ConditionsT_...>;
+template <typename... ConditionsT_>
+using AndType = typename And<ConditionsT_...>::Type;
 #	else
-template <typename _ConditionT1, typename _ConditionT2>
-struct And : BoolConstant<_ConditionT1::value && _ConditionT2::value> {
+template <typename ConditionT1_, typename ConditionT2_>
+struct And : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Variant.hpp
-#ifndef _DD_VARIANT_HPP_INCLUDED
-#	define _DD_VARIANT_HPP_INCLUDED 1
+#ifndef DD_VARIANT_HPP_INCLUDED_
+#	define DD_VARIANT_HPP_INCLUDED_ 1
 
 
 
@@ -14,26 +14,26 @@
 
 
 
-_DD_DETAIL_BEGIN
-struct _VariantHolderBase {
+DD_DETAIL_BEGIN_
+struct VariantHolderBase_ {
 	public:
-	DD_ALIAS(ThisType, _VariantHolderBase);
+	DD_ALIAS(ThisType, VariantHolderBase_);
 
 
 	public:
 #	if __cplusplus >= 201103L
-	virtual ~_VariantHolderBase() = default;
+	virtual ~VariantHolderBase_() = default;
 #	else
-	virtual ~_VariantHolderBase() throw() {
+	virtual ~VariantHolderBase_() throw() {
 	}
 #	endif
 
 
 	public:
 #	if __cplusplus >= 201103L
-	virtual UniquePointer<ThisType> _get_clone() const = 0;
+	virtual UniquePointer<ThisType> get_clone_() const = 0;
 #	else
-	virtual ThisType* _get_clone() const = 0;
+	virtual ThisType* get_clone_() const = 0;
 #	endif
 
 	public:
@@ -44,12 +44,12 @@ struct _VariantHolderBase {
 
 
 
-template <typename _ValueT>
-struct _VariantHolder DD_FINAL : _VariantHolderBase {
+template <typename ValueT_>
+struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 	public:
-	DD_ALIAS(ThisType, _VariantHolder<_ValueT>);
-	DD_ALIAS(SuperType, _VariantHolderBase);
-	DD_ALIAS(ValueType, _ValueT);
+	DD_ALIAS(ThisType, VariantHolder_<ValueT_>);
+	DD_ALIAS(SuperType, VariantHolderBase_);
+	DD_ALIAS(ValueType, ValueT_);
 
 
 	public:
@@ -57,23 +57,23 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 
 
 	public:
-	template <typename _ValueT_>
+	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	_VariantHolder(_ValueT_&& _value) noexcept(noexcept(ValueType(_value))) : m_value(forward<_ValueT_>(_value)) {
+	VariantHolder_(ValueT__&& value_) noexcept(noexcept(ValueType(value_))) : m_value(forward<ValueT__>(value_)) {
 	}
 #	else
-	_VariantHolder(_ValueT_ const& _value) : m_value(_value) {
+	VariantHolder_(ValueT__ const& value_) : m_value(value_) {
 	}
 #	endif
 
 
 	public:
 #	if __cplusplus >= 201103L
-	UniquePointer<SuperType> _get_clone() const override {
+	UniquePointer<SuperType> get_clone_() const override {
 		return UniquePointer<SuperType>(new ThisType(m_value));
 	}
 #	else
-	SuperType* _get_clone() const {
+	SuperType* get_clone_() const {
 		return new ValueType(m_value);
 	}
 #	endif
@@ -89,18 +89,18 @@ struct _VariantHolder DD_FINAL : _VariantHolderBase {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct Variant {
 	public:
 	DD_ALIAS(ThisType, Variant);
 
 
 	private:
-	UniquePointer<_detail::_VariantHolderBase> _m_holder_pointer;
+	UniquePointer<detail_::VariantHolderBase_> m_holder_pointer_;
 
 
 #	if __cplusplus >= 201103L
@@ -108,26 +108,26 @@ struct Variant {
 	constexpr Variant() = default;
 #	else
 	public:
-	Variant() : _m_holder_pointer() {
+	Variant() : m_holder_pointer_() {
 	}
 #	endif
 
 	public:
-	Variant(ThisType const& _origin) : _m_holder_pointer(_origin._m_holder_pointer->_get_clone()) {
+	Variant(ThisType const& origin_) : m_holder_pointer_(origin_.m_holder_pointer_->get_clone_()) {
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr Variant(ThisType&& _origin) = default;
+	constexpr Variant(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	template <typename _ValueT_>
+	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	Variant(_ValueT_&& __value_) : _m_holder_pointer(new _detail::_VariantHolder<DecayType<_ValueT_>>(forward<_ValueT_>(__value_))) {
+	Variant(ValueT__&& value___) : m_holder_pointer_(new detail_::VariantHolder_<DecayType<ValueT__>>(forward<ValueT__>(value___))) {
 	}
 #	else
-	Variant(_ValueT_ const& __value_) : _m_holder_pointer(new _detail::_VariantHolder<_ValueT_>(__value_)) {
+	Variant(ValueT__ const& value___) : m_holder_pointer_(new detail_::VariantHolder_<ValueT__>(value___)) {
 	}
 #	endif
 
@@ -139,55 +139,55 @@ struct Variant {
 
 #	endif
 	public:
-	ProcessType swap(ThisType& _target) DD_NOEXCEPT {
+	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
-		swap(_m_holder_pointer, _target._m_holder_pointer);
+		swap(m_holder_pointer_, target_.m_holder_pointer_);
 	}
 
 
 	public:
-	template <typename _ValueT_>
-	_ValueT_& to() DD_NOEXCEPT {
-		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
-		return static_cast<_detail::_VariantHolder<_ValueT_>&>(*_m_holder_pointer).m_value;
+	template <typename ValueT__>
+	ValueT__& to() DD_NOEXCEPT {
+		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
+		return static_cast<detail_::VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value;
 	}
 
 	public:
-	template <typename _ValueT_>
-	_ValueT_ const& to() const DD_NOEXCEPT {
-		DD_ASSERT(_m_holder_pointer->get_type() == typeid(_ValueT_), "Invalid cast on DD::Variant.")
-		return static_cast<_detail::_VariantHolder<_ValueT_> const&>(*_m_holder_pointer).m_value;
+	template <typename ValueT__>
+	ValueT__ const& to() const DD_NOEXCEPT {
+		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
+		return static_cast<detail_::VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value;
 	}
 
 
 	public:
 	TypeInfo const& get_type() const {
-		return _m_holder_pointer->get_type();
+		return m_holder_pointer_->get_type();
 	}
 
 
 	public:
-	ThisType& operator =(ThisType const& _origin) {
-		ThisType _temp(_origin);
-		swap(_temp);
+	ThisType& operator =(ThisType const& origin_) {
+		ThisType temp_(origin_);
+		swap(temp_);
 		return *this;
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	template <typename _ValueT_>
+	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ThisType& operator =(_ValueT_&& __value_) {
-		ThisType _temp(forward<_ValueT_>(__value_));
+	ThisType& operator =(ValueT__&& value___) {
+		ThisType temp_(forward<ValueT__>(value___));
 #	else
-	ThisType& operator =(_ValueT_ const& __value_) {
-		ThisType _temp(__value_);
+	ThisType& operator =(ValueT__ const& value___) {
+		ThisType temp_(value___);
 #	endif
-		swap(_temp);
+		swap(temp_);
 		return *this;
 	}
 
@@ -196,7 +196,7 @@ struct Variant {
 
 
 
-_DD_END
+DD_END_
 
 
 

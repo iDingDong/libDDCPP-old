@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_InitializerList.hpp
-#ifndef _DD_INITIALIZER_LIST_HPP_INCLUDED
-#	define _DD_INITIALIZER_LIST_HPP_INCLUDED 1
+#ifndef DD_INITIALIZER_LIST_HPP_INCLUDED_
+#	define DD_INITIALIZER_LIST_HPP_INCLUDED_ 1
 
 
 
@@ -16,13 +16,13 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT>
-using InitializerList = std::initializer_list<_ValueT>;
+DD_BEGIN_
+template <typename ValueT_>
+using InitializerList = std::initializer_list<ValueT_>;
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsRange.hpp
-#ifndef _DD_IS_RANGE_HPP_INCLUDED
-#	define _DD_IS_RANGE_HPP_INCLUDED 1
+#ifndef DD_IS_RANGE_HPP_INCLUDED_
+#	define DD_IS_RANGE_HPP_INCLUDED_ 1
 
 
 
@@ -23,81 +23,81 @@
 
 
 
-_DD_DETAIL_BEGIN
-DD_MEMBER_FUNCTION_CHECK(_HasBegin, begin, DD_MODIFY_TRAIT(Iterator, _MACRO_ObjectT_), )
+DD_DETAIL_BEGIN_
+DD_MEMBER_FUNCTION_CHECK(HasBegin_, begin, DD_MODIFY_TRAIT(Iterator, MACRO_ObjectT__), )
 
 
 
-DD_MEMBER_FUNCTION_CHECK(_HasEnd, end, DD_MODIFY_TRAIT(Iterator, _MACRO_ObjectT_), )
+DD_MEMBER_FUNCTION_CHECK(HasEnd_, end, DD_MODIFY_TRAIT(Iterator, MACRO_ObjectT__), )
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _ObjectT>
-using _HasBeginAndEnd = AndType<_HasBegin<_ObjectT>, _HasEnd<_ObjectT>>;
+template <typename ObjectT_>
+using HasBeginAndEnd_ = AndType<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>>;
 #	else
-template <typename _ObjectT>
-struct _HasBeginAndEnd : And<_HasBegin<_ObjectT>, _HasEnd<_ObjectT>> {
+template <typename ObjectT_>
+struct HasBeginAndEnd_ : And<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>> {
 };
 #	endif
 
 
 
-template <typename _ObjectT>
-struct _IsRange : _detail::_HasBeginAndEnd<_ObjectT> {
+template <typename ObjectT_>
+struct IsRange_ : detail_::HasBeginAndEnd_<ObjectT_> {
 };
 
 
 
-template <typename _ValueT, LengthType _length_c>
-struct _IsRange<_ValueT[_length_c]> : TrueType {
+template <typename ValueT_, LengthType length_c_>
+struct IsRange_<ValueT_[length_c_]> : TrueType {
 };
 
 
 
 #	if DDCPP_CONSIDER_CSTRING_AS_RANGE
-template <typename _ValueT>
-struct _IsRange<_ValueT*> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, _ValueT)> {
+template <typename ValueT_>
+struct IsRange_<ValueT_*> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
-template <typename _ValueT>
-struct _IsRange<_ValueT* const> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, _ValueT)> {
+template <typename ValueT_>
+struct IsRange_<ValueT_* const> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
-template <typename _ValueT>
-struct _IsRange<_ValueT* volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, _ValueT)> {
+template <typename ValueT_>
+struct IsRange_<ValueT_* volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
-template <typename _ValueT>
-struct _IsRange<_ValueT* const volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, _ValueT)> {
+template <typename ValueT_>
+struct IsRange_<ValueT_* const volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
 #	endif
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename... _ObjectsT>
-using IsRange = AndType<_detail::_IsRange<_ObjectsT>...>;
+template <typename... ObjectsT_>
+using IsRange = AndType<detail_::IsRange_<ObjectsT_>...>;
 #	else
-template <typename _ObjectT>
-struct IsRange : _detail::_IsRange<_ObjectT> {
+template <typename ObjectT_>
+struct IsRange : detail_::IsRange_<ObjectT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

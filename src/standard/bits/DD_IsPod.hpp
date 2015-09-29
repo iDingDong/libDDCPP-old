@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsPod.hpp
-#ifndef _DD_IS_POD_HPP_INCLUDED
-#	define _DD_IS_POD_HPP_INCLUDED 1
+#ifndef DD_IS_POD_HPP_INCLUDED_
+#	define DD_IS_POD_HPP_INCLUDED_ 1
 
 
 
@@ -15,13 +15,13 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsPod = AndType<StdBoolConstant<std::is_pod<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsPod = AndType<StdBoolConstant<std::is_pod<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

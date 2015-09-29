@@ -1,6 +1,6 @@
 //	standard/bits/DD_ListNode.hpp
-#ifndef _DD_LIST_NODE_HPP
-#	define _DD_LIST_NODE_HPP 1
+#ifndef DD_LIST_NODE_HPP_
+#	define DD_LIST_NODE_HPP_ 1
 
 
 
@@ -21,10 +21,10 @@ struct EmptyListNode {
 
 
 
-template <typename _ValueT>
+template <typename ValueT_>
 struct ListNode : EmptyListNode {
-	DD_ALIAS(ThisType, ListNode<_ValueT>)
-	DD_ALIAS(ValueType, _ValueT)
+	DD_ALIAS(ThisType, ListNode<ValueT_>)
+	DD_ALIAS(ValueType, ValueT_)
 
 	DD_ALIAS(ReferenceType, ValueType&)
 	DD_ALIAS(ConstReferenceType, ValueType const&)

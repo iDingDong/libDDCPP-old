@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_select_sort.hpp
-#ifndef _DD_SELECT_SORT_HPP_INCLUDED
-#	define _DD_SELECT_SORT_HPP_INCLUDED
+#ifndef DD_SELECT_SORT_HPP_INCLUDED_
+#	define DD_SELECT_SORT_HPP_INCLUDED_
 
 
 
@@ -8,32 +8,32 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT>
-ProcessType select_sort(_UndirectionalIteratorT __begin, _UndirectionalIteratorT const& __end) DD_NOEXCEPT_IF(
-	noexcept(__begin != __end) &&
-	noexcept(++__begin) &&
-	noexcept(_UndirectionalIteratorT()) &&
-	noexcept(__begin = __begin) &&
-	noexcept(*__begin < *__begin) &&
-	noexcept(swap_target(__begin, __begin))
+DD_BEGIN_
+template <typename UndirectionalIteratorT_>
+ProcessType select_sort(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ const& end__) DD_NOEXCEPT_IF(
+	noexcept(begin__ != end__) &&
+	noexcept(++begin__) &&
+	noexcept(UndirectionalIteratorT_()) &&
+	noexcept(begin__ = begin__) &&
+	noexcept(*begin__ < *begin__) &&
+	noexcept(swap_target(begin__, begin__))
 ) {
-	for (_UndirectionalIteratorT __current, __tagged; __begin != __end; ++__begin) {
-		__current = __begin;
-		__tagged = __current;
-		while (++__current != __end) {
-			if (*__current < *__tagged) {
-				__tagged = __current;
+	for (UndirectionalIteratorT_ current__, tagged__; begin__ != end__; ++begin__) {
+		current__ = begin__;
+		tagged__ = current__;
+		while (++current__ != end__) {
+			if (*current__ < *tagged__) {
+				tagged__ = current__;
 			}
 		}
 		using DD::swap_target;
-		swap_target(__begin, __tagged);
+		swap_target(begin__, tagged__);
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

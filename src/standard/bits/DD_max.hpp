@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_max.hpp
-#ifndef _DD_MAX_HPP_INCLUDED
-#	define _DD_MAX_HPP_INCLUDED 1
+#ifndef DD_MAX_HPP_INCLUDED_
+#	define DD_MAX_HPP_INCLUDED_ 1
 
 
 
@@ -16,32 +16,32 @@
 
 
 #	if __cplusplus >= 201103L
-_DD_DETAIL_BEGIN
-template <ValidityType _use_default_compare_c>
-struct _Max {
-	template <typename _ObjectT_, typename _BinaryPredicatorT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_,
-		_BinaryPredicatorT_ const& __less_
+DD_DETAIL_BEGIN_
+template <ValidityType use_default_compare_c_>
+struct Max_ {
+	template <typename ObjectT__, typename BinaryPredicatorT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object___,
+		BinaryPredicatorT__ const& less___
 	) noexcept {
-		return __object_;
+		return object___;
 	}
 
-	template <typename _ObjectT_, typename _BinaryPredicatorT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_1_,
-		_ObjectT_ const& __object_2_,
-		_BinaryPredicatorT_ const& __less_
-	) noexcept(noexcept(__less_(__object_2_, __object_1_))) {
-		return __less_(__object_2_, __object_1_) ? __object_1_ : __object_2_;
+	template <typename ObjectT__, typename BinaryPredicatorT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object_1___,
+		ObjectT__ const& object_2___,
+		BinaryPredicatorT__ const& less___
+	) noexcept(noexcept(less___(object_2___, object_1___))) {
+		return less___(object_2___, object_1___) ? object_1___ : object_2___;
 	}
 
-	template <typename _ObjectT_, typename... _ArgumentsT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_,
-		_ArgumentsT_ const&... __arguments_
-	) noexcept(noexcept(_max(__object_, _max(__arguments_...), get_last_argument(__arguments_...)))) {
-		return _max(__object_, _max(__arguments_...), get_last_argument(__arguments_...));
+	template <typename ObjectT__, typename... ArgumentsT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object___,
+		ArgumentsT__ const&... arguments___
+	) noexcept(noexcept(max_(object___, max_(arguments___...), get_last_argument(arguments___...)))) {
+		return max_(object___, max_(arguments___...), get_last_argument(arguments___...));
 	}
 
 
@@ -50,28 +50,28 @@ struct _Max {
 
 
 template <>
-struct _Max<true> {
-	template <typename _ObjectT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_
+struct Max_<true> {
+	template <typename ObjectT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object___
 	) noexcept {
-		return __object_;
+		return object___;
 	}
 
-	template <typename _ObjectT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_1_,
-		_ObjectT_ const& __object_2_
-	) noexcept(noexcept(__object_2_ < __object_1_)) {
-		return __object_2_ < __object_1_ ? __object_1_ : __object_2_;
+	template <typename ObjectT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object_1___,
+		ObjectT__ const& object_2___
+	) noexcept(noexcept(object_2___ < object_1___)) {
+		return object_2___ < object_1___ ? object_1___ : object_2___;
 	};
 
-	template <typename _ObjectT_, typename... _ObjectsT_>
-	static _ObjectT_ constexpr const& _max(
-		_ObjectT_ const& __object_,
-		_ObjectsT_ const&... __objects_
-	) noexcept(noexcept(_max(__object_, _max(__objects_...)))) {
-		return _max(__object_, _max(__objects_...));
+	template <typename ObjectT__, typename... ObjectsT__>
+	static ObjectT__ constexpr const& max_(
+		ObjectT__ const& object___,
+		ObjectsT__ const&... objects___
+	) noexcept(noexcept(max_(object___, max_(objects___...)))) {
+		return max_(object___, max_(objects___...));
 	}
 
 
@@ -79,57 +79,57 @@ struct _Max<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
 #	endif
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <typename _ObjectT, typename... _ArgumentsT>
-inline _ObjectT constexpr const& max(
-	_ObjectT const& __object,
-	_ArgumentsT const&... __arguments
-) noexcept(noexcept(_detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...))) {
-	return _detail::_Max<IsSame<_ObjectT, _ArgumentsT...>::value>::_max(__object, __arguments...);
+template <typename ObjectT_, typename... ArgumentsT_>
+inline ObjectT_ constexpr const& max(
+	ObjectT_ const& object__,
+	ArgumentsT_ const&... arguments__
+) noexcept(noexcept(detail_::Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max_(object__, arguments__...))) {
+	return detail_::Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max_(object__, arguments__...);
 }
 
-template <typename _ObjectT>
-inline _ObjectT constexpr const& max(
-	InitializerList<_ObjectT> _initializer_list
-) noexcept(noexcept(find_min(_initializer_list.cbegin(), _initializer_list.cengd()))) {
-	return *find_max(_initializer_list.cbegin(), _initializer_list.cengd());
+template <typename ObjectT_>
+inline ObjectT_ constexpr const& max(
+	InitializerList<ObjectT_> initializer_list_
+) noexcept(noexcept(find_min(initializer_list_.cbegin(), initializer_list_.cengd()))) {
+	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd());
 }
 
-template <typename _ObjectT, typename _BinaryPredicatorT>
-inline _ObjectT constexpr const& max(
-	InitializerList<_ObjectT> _initializer_list,
-	_BinaryPredicatorT const& __less
-) noexcept(noexcept(find_min(_initializer_list.cbegin(), _initializer_list.cengd()))) {
-	return *find_max(_initializer_list.cbegin(), _initializer_list.cengd(), __less);
+template <typename ObjectT_, typename BinaryPredicatorT_>
+inline ObjectT_ constexpr const& max(
+	InitializerList<ObjectT_> initializer_list_,
+	BinaryPredicatorT_ const& less__
+) noexcept(noexcept(find_min(initializer_list_.cbegin(), initializer_list_.cengd()))) {
+	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd(), less__);
 }
 #	else
-template <typename _ObjectT>
-inline _ObjectT const& max(
-	_ObjectT const& __object_1,
-	_ObjectT const& __object_2
+template <typename ObjectT_>
+inline ObjectT_ const& max(
+	ObjectT_ const& object_1__,
+	ObjectT_ const& object_2__
 ) {
-	return __object_2 < __object_1 ? __object_1 : __object_2;
+	return object_2__ < object_1__ ? object_1__ : object_2__;
 }
 
-template <typename _ObjectT, typename _BinaryPredicatorT>
-inline _ObjectT const& max(
-	_ObjectT const& __object_1,
-	_ObjectT const& __object_2,
-	_BinaryPredicatorT const& __less
+template <typename ObjectT_, typename BinaryPredicatorT_>
+inline ObjectT_ const& max(
+	ObjectT_ const& object_1__,
+	ObjectT_ const& object_2__,
+	BinaryPredicatorT_ const& less__
 ) {
-	return __less(__object_2, __object_1) ? __object_1 : __object_2;
+	return less__(object_2__, object_1__) ? object_1__ : object_2__;
 }
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

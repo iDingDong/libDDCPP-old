@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_partition_by.hpp
-#ifndef _DD_PARTITION_BY_HPP_INCLUDED
-#	define _DD_PARTITION_BY_HPP_INCLUDED 1
+#ifndef DD_PARTITION_BY_HPP_INCLUDED_
+#	define DD_PARTITION_BY_HPP_INCLUDED_ 1
 
 
 
@@ -8,33 +8,33 @@
 
 
 
-_DD_BEGIN
-template <typename _BidirectionalIteratorT, typename _UnaryPredicatorT>
-_BidirectionalIteratorT partition_by(
-	_BidirectionalIteratorT __begin,
-	_BidirectionalIteratorT __end,
-	_UnaryPredicatorT const& __predicator
-) DD_NOEXCEPT_IF(noexcept(__predicator(*--++__begin)) && noexcept(swap_target(__begin, __end))) {
-	while (__begin != __end) {
-		while (__predicator(*__begin)) {
-			++__begin;
-			if (__begin == __end) {
-				return __begin;
+DD_BEGIN_
+template <typename BidirectionalIteratorT_, typename UnaryPredicatorT_>
+BidirectionalIteratorT_ partition_by(
+	BidirectionalIteratorT_ begin__,
+	BidirectionalIteratorT_ end__,
+	UnaryPredicatorT_ const& predicator__
+) DD_NOEXCEPT_IF(noexcept(predicator__(*--++begin__)) && noexcept(swap_target(begin__, end__))) {
+	while (begin__ != end__) {
+		while (predicator__(*begin__)) {
+			++begin__;
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		while (!__predicator(*--__end)) {
-			if (__begin == __end) {
-				return __begin;
+		while (!predicator__(*--end__)) {
+			if (begin__ == end__) {
+				return begin__;
 			}
 		}
-		swap_target(__begin, __end);
+		swap_target(begin__, end__);
 	}
-	return __begin;
+	return begin__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

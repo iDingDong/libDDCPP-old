@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsClass.hpp
-#ifndef _DD_IS_CLASS_HPP_INCLUDED
-#	define _DD_IS_CLASS_HPP_INCLUDED 1
+#ifndef DD_IS_CLASS_HPP_INCLUDED_
+#	define DD_IS_CLASS_HPP_INCLUDED_ 1
 
 
 #	if __cplusplus < 201103L
@@ -14,38 +14,38 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsClass {
-	template <typename _ObjectT_>
-	static ValidityType constexpr _match(int _ObjectT_::*) noexcept {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsClass_ {
+	template <typename ObjectT__>
+	static ValidityType constexpr match_(int ObjectT__::*) noexcept {
 		return true;
 	}
 
-	template <typename _ObjectT_>
-	static ValidityType constexpr _match(...) noexcept {
+	template <typename ObjectT__>
+	static ValidityType constexpr match_(...) noexcept {
 		return false;
 	}
 
 
-	static ValidityType constexpr value = (_IsClass<_ObjectT>::_match<_ObjectT>(nil_pointer) && !IsUnion<_ObjectT>::value ) || std::is_class<_ObjectT>::value;
+	static ValidityType constexpr value = (IsClass_<ObjectT_>::match_<ObjectT_>(nil_pointer) && !IsUnion<ObjectT_>::value ) || std::is_class<ObjectT_>::value;
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsClass = AndType<BoolConstant<_detail::_IsClass<_ObjectsT>::value>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsClass = AndType<BoolConstant<detail_::IsClass_<ObjectsT_>::value>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_address_of.hpp
-#ifndef _DD_ADDRESS_OF_HPP_INCLUDED
-#	define _DD_ADDRESS_OF_HPP_INCLUDED 1
+#ifndef DD_ADDRESS_OF_HPP_INCLUDED_
+#	define DD_ADDRESS_OF_HPP_INCLUDED_ 1
 
 
 
@@ -8,15 +8,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ValueT>
-_ValueT DD_CONSTEXPR* address_of(_ValueT& __object) DD_NOEXCEPT {
-	return reinterpret_cast<_ValueT*>(&const_cast<char&>(reinterpret_cast<char const volatile&>(__object)));
+DD_BEGIN_
+template <typename ValueT_>
+ValueT_ DD_CONSTEXPR* address_of(ValueT_& object__) DD_NOEXCEPT {
+	return reinterpret_cast<ValueT_*>(&const_cast<char&>(reinterpret_cast<char const volatile&>(object__)));
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

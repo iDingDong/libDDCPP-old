@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_find_min.hpp
-#ifndef _DD_FIND_MIN_HPP_INCLUDED
-#	define _DD_FIND_MIN_HPP_INCLUDED 1
+#ifndef DD_FIND_MIN_HPP_INCLUDED_
+#	define DD_FIND_MIN_HPP_INCLUDED_ 1
 
 
 
@@ -8,39 +8,39 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT>
-_UndirectionalIteratorT find_min(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin < *__begin) {
-	_UndirectionalIteratorT __min = __begin;
-	for (; __begin != __end; ++__begin) {
-		if (*__begin < *__min) {
-			__min = __begin;
+DD_BEGIN_
+template <typename UndirectionalIteratorT_>
+UndirectionalIteratorT_ find_min(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < *begin__) {
+	UndirectionalIteratorT_ min__ = begin__;
+	for (; begin__ != end__; ++begin__) {
+		if (*begin__ < *min__) {
+			min__ = begin__;
 		}
 	}
-	return __min;
+	return min__;
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
-_UndirectionalIteratorT find_min(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_BinaryPredicatorT const& __less
-) DD_NOEXCEPT_AS(++__begin != __end && __less(*__begin, *__begin)) {
-	_UndirectionalIteratorT __min = __begin;
-	for (; __begin != __end; ++__begin) {
-		if (__less(*__begin, *__min)) {
-			__min = __begin;
+template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+UndirectionalIteratorT_ find_min(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	BinaryPredicatorT_ const& less__
+) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
+	UndirectionalIteratorT_ min__ = begin__;
+	for (; begin__ != end__; ++begin__) {
+		if (less__(*begin__, *min__)) {
+			min__ = begin__;
 		}
 	}
-	return __min;
+	return min__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

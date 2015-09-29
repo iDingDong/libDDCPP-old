@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsMemberFunctionPointer.hpp
-#ifndef _DD_IS_MEMBER_FUNCION_POINTER_HPP_INCLUDED
-#	define _DD_IS_MEMBER_FUNCION_POINTER_HPP_INCLUDED 1
+#ifndef DD_IS_MEMBER_FUNCION_POINTER_HPP_INCLUDED_
+#	define DD_IS_MEMBER_FUNCION_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -17,30 +17,30 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsMemberFunctionPointer : StdBoolConstant<std::is_member_function_pointer<_ObjectT>> {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsMemberFunctionPointer_ : StdBoolConstant<std::is_member_function_pointer<ObjectT_>> {
 };
 
 
 
-template <typename _FunctionT, typename _ClassT>
-struct _IsMemberFunctionPointer<_FunctionT _ClassT::*> : IsFunction<_FunctionT> {
+template <typename FunctionT_, typename ClassT_>
+struct IsMemberFunctionPointer_<FunctionT_ ClassT_::*> : IsFunction<FunctionT_> {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsMemberFunctionPointer = AndType<_detail::_IsMemberFunctionPointer<RemoveCVType<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsMemberFunctionPointer = AndType<detail_::IsMemberFunctionPointer_<RemoveCVType<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

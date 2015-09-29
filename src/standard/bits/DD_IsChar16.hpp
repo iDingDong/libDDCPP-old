@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsChar16.hpp
-#ifndef _DD_IS_CHAR_16_HPP_INCLUDED
-#	define _DD_IS_CHAR_16_HPP_INCLUDED 1
+#ifndef DD_IS_CHAR_16_HPP_INCLUDED_
+#	define DD_IS_CHAR_16_HPP_INCLUDED_ 1
 
 
 
@@ -15,30 +15,30 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ObjectT>
-struct _IsChar16 : FalseType {
+DD_DETAIL_BEGIN_
+template <typename ObjectT_>
+struct IsChar16_ : FalseType {
 };
 
 
 
 template <>
-struct _IsChar16<char16_t> : TrueType {
+struct IsChar16_<char16_t> : TrueType {
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsChar16 = AndType<_detail::_IsChar16<RemoveCVType<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsChar16 = AndType<detail_::IsChar16_<RemoveCVType<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

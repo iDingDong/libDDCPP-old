@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_partition_point.hpp
-#ifndef _DD_PARTITION_POINT_HPP_INCLUDED
-#	define _DD_PARTITION_POINT_HPP_INCLUDED 1
+#ifndef DD_PARTITION_POINT_HPP_INCLUDED_
+#	define DD_PARTITION_POINT_HPP_INCLUDED_ 1
 
 
 
@@ -8,22 +8,22 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _ValueT>
-_UndirectionalIteratorT partition_point(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT const& __value
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin < __value) {
-	while (__begin != __end && *__begin < __value) {
-		++__begin;
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename ValueT_>
+UndirectionalIteratorT_ partition_point(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < value__) {
+	while (begin__ != end__ && *begin__ < value__) {
+		++begin__;
 	}
-	return __begin;
+	return begin__;
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

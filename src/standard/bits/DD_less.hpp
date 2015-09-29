@@ -1,11 +1,11 @@
 //	DDCPP/standard/bits/DD_less.hpp
-#ifndef _DD_LESS_HPP_INCLUDED
-#	define _DD_LESS_HPP_INCLUDED 1
+#ifndef DD_LESS_HPP_INCLUDED_
+#	define DD_LESS_HPP_INCLUDED_ 1
 
 
 
-_DD_BEGIN
-_DD_END
+DD_BEGIN_
+DD_END_
 
 
 

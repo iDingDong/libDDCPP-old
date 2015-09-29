@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_min_max_element.hpp
-#ifndef _DD_FIND_MIN_MAX_HPP_INCLUDED
-#	define _DD_FIND_MIN_MAX_HPP_INCLUDED 1
+#ifndef DD_FIND_MIN_MAX_HPP_INCLUDED_
+#	define DD_FIND_MIN_MAX_HPP_INCLUDED_ 1
 
 
 
@@ -8,45 +8,45 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT>
-Pair<_UndirectionalIteratorT> find_min_max(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(++__begin != __end && *__begin < *__begin) {
-	_UndirectionalIteratorT __min = __begin;
-	_UndirectionalIteratorT __max = __begin;
-	for (; __begin != __end; ++__begin) {
-		if (*__begin < *__min) {
-			__min = __begin;
-		} else if (*__max < *__begin) {
-			__max = __begin;
+DD_BEGIN_
+template <typename UndirectionalIteratorT_>
+Pair<UndirectionalIteratorT_> find_min_max(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__
+) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < *begin__) {
+	UndirectionalIteratorT_ min__ = begin__;
+	UndirectionalIteratorT_ max__ = begin__;
+	for (; begin__ != end__; ++begin__) {
+		if (*begin__ < *min__) {
+			min__ = begin__;
+		} else if (*max__ < *begin__) {
+			max__ = begin__;
 		}
 	}
-	return Pair<_UndirectionalIteratorT>{__min, __max};
+	return Pair<UndirectionalIteratorT_>{min__, max__};
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
-Pair<_UndirectionalIteratorT> find_min_max(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_BinaryPredicatorT const& __less
-) DD_NOEXCEPT_AS(++__begin != __end && __less(*__begin, *__begin)) {
-	_UndirectionalIteratorT __min = __begin;
-	_UndirectionalIteratorT __max = __begin;
-	for (; __begin != __end; ++__begin) {
-		if (__less(*__begin, *__min)) {
-			__min = __begin;
-		} else if (*__max < *__begin) {
-			__max = __begin;
+template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+Pair<UndirectionalIteratorT_> find_min_max(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	BinaryPredicatorT_ const& less__
+) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
+	UndirectionalIteratorT_ min__ = begin__;
+	UndirectionalIteratorT_ max__ = begin__;
+	for (; begin__ != end__; ++begin__) {
+		if (less__(*begin__, *min__)) {
+			min__ = begin__;
+		} else if (*max__ < *begin__) {
+			max__ = begin__;
 		}
 	}
-	return Pair<_UndirectionalIteratorT>{__min, __max};
+	return Pair<UndirectionalIteratorT_>{min__, max__};
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

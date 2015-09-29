@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_EnableIf.hpp
-#ifndef _DD_ENABLE_IF_HPP_INCLUDED
-#	define _DD_ENABLE_IF_HPP_INCLUDED 1
+#ifndef DD_ENABLE_IF_HPP_INCLUDED_
+#	define DD_ENABLE_IF_HPP_INCLUDED_ 1
 
 
 
@@ -8,16 +8,16 @@
 
 
 
-_DD_BEGIN
-template <ValidityType _is_valid_c, typename _ObjectT>
+DD_BEGIN_
+template <ValidityType is_valid_c_, typename ObjectT_>
 struct EnableIf {
 };
 
 
 
-template <typename _ObjectT>
-struct EnableIf<true, _ObjectT> {
-	DD_ALIAS(Type, _ObjectT);
+template <typename ObjectT_>
+struct EnableIf<true, ObjectT_> {
+	DD_ALIAS(Type, ObjectT_);
 
 
 };
@@ -25,13 +25,13 @@ struct EnableIf<true, _ObjectT> {
 
 
 #	if __cplusplus >= 201103L
-template <ValidityType _is_valid_c, typename _ObjectT>
-using EnableIfType = typename EnableIf<_is_valid_c, _ObjectT>::Type;
+template <ValidityType is_valid_c_, typename ObjectT_>
+using EnableIfType = typename EnableIf<is_valid_c_, ObjectT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

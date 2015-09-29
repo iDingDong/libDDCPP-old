@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RunTimeError.hpp
-#ifndef _DD_RUN_TIME_ERROR_HPP_INCLUDED
-#	define _DD_RUN_TIME_ERROR_HPP_INCLUDED 1
+#ifndef DD_RUN_TIME_ERROR_HPP_INCLUDED_
+#	define DD_RUN_TIME_ERROR_HPP_INCLUDED_ 1
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 struct RunTimeError : Exception {
 	public:
 	DD_ALIAS(SuperType, Exception);
@@ -20,14 +20,14 @@ struct RunTimeError : Exception {
 	constexpr RunTimeError() = default;
 
 	public:
-	constexpr RunTimeError(ThisType const& _origin) = default;
+	constexpr RunTimeError(ThisType const& origin_) = default;
 
 	public:
-	constexpr RunTimeError(ThisType&& _origin) = default;
+	constexpr RunTimeError(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	DD_CONSTEXPR RunTimeError(PromptType _prompt) DD_NOEXCEPT : SuperType(_prompt) {
+	DD_CONSTEXPR RunTimeError(PromptType prompt_) DD_NOEXCEPT : SuperType(prompt_) {
 	}
 
 
@@ -39,10 +39,10 @@ struct RunTimeError : Exception {
 #	endif
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 #	endif
@@ -50,7 +50,7 @@ struct RunTimeError : Exception {
 
 
 
-_DD_END
+DD_END_
 
 
 

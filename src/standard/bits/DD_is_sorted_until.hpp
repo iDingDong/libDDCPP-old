@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_is_sorted_until.hpp
-#ifndef _DD_IS_SORTED_UNTIL_HPP_INCLUDED
-#	define _DD_IS_SORTED_UNTIL_HPP_INCLUDED 1
+#ifndef DD_IS_SORTED_UNTIL_HPP_INCLUDED_
+#	define DD_IS_SORTED_UNTIL_HPP_INCLUDED_ 1
 
 
 
@@ -9,34 +9,34 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <ValidityType _is_free_access_iterator>
-struct _IsSortedUntil {
-	template <typename _UndirectionalIteratorT_>
-	static _UndirectionalIteratorT_ _is_sorted_until(
-		_UndirectionalIteratorT_ __begin_,
-		_UndirectionalIteratorT_ const& __end_
-	) DD_NOEXCEPT_AS(++__begin_ != __end_ && *__begin_ < *__begin_ DD_COMMA _UndirectionalIteratorT_(__begin_)) {
-		if (__begin_ != __end_) {
-			for (_UndirectionalIteratorT_ __front_(__begin_); ++__begin_ != __end_ && !(*__begin_ < *__front_); ) {
-				__front_ = __begin_;
+DD_DETAIL_BEGIN_
+template <ValidityType is_free_access_iterator_>
+struct IsSortedUntil_ {
+	template <typename UndirectionalIteratorT__>
+	static UndirectionalIteratorT__ is_sorted_until_(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ const& end___
+	) DD_NOEXCEPT_AS(++begin___ != end___ && *begin___ < *begin___ DD_COMMA UndirectionalIteratorT__(begin___)) {
+		if (begin___ != end___) {
+			for (UndirectionalIteratorT__ front___(begin___); ++begin___ != end___ && !(*begin___ < *front___); ) {
+				front___ = begin___;
 			}
 		}
-		return __begin_;
+		return begin___;
 	}
 
-	template <typename _UndirectionalIteratorT_, typename _BinaryPredicatorT_>
-	static _UndirectionalIteratorT_ _is_sorted_until(
-		_UndirectionalIteratorT_ __begin_,
-		_UndirectionalIteratorT_ const& __end_,
-		_BinaryPredicatorT_ const& __less_
-	) DD_NOEXCEPT_AS(++__begin_ != __end_ && __less_(*__begin_ DD_COMMA *__begin_) DD_COMMA _UndirectionalIteratorT_(__begin_)) {
-		if (__begin_ != __end_) {
-			for (_UndirectionalIteratorT_ __front_(__begin_); ++__begin_ != __end_ && !__less_(*__begin_, *__front_); ) {
-				__front_ = __begin_;
+	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
+	static UndirectionalIteratorT__ is_sorted_until_(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ const& end___,
+		BinaryPredicatorT__ const& less___
+	) DD_NOEXCEPT_AS(++begin___ != end___ && less___(*begin___ DD_COMMA *begin___) DD_COMMA UndirectionalIteratorT__(begin___)) {
+		if (begin___ != end___) {
+			for (UndirectionalIteratorT__ front___(begin___); ++begin___ != end___ && !less___(*begin___, *front___); ) {
+				front___ = begin___;
 			}
 		}
-		return __begin_;
+		return begin___;
 	}
 
 
@@ -45,26 +45,26 @@ struct _IsSortedUntil {
 
 
 template <>
-struct _IsSortedUntil<true> {
-	template <typename _FreeAccessIteratorT_>
-	static _FreeAccessIteratorT_ _is_sorted_until(
-		_FreeAccessIteratorT_ __begin_,
-		_FreeAccessIteratorT_ const& __end_
-	) DD_NOEXCEPT_AS(++__begin_ < __end_ && *__begin_ < *(__begin_ - 1)) {
-		while (++__begin_ < __end_ && !(*__begin_ < *(__begin_ - 1))) {
+struct IsSortedUntil_<true> {
+	template <typename FreeAccessIteratorT__>
+	static FreeAccessIteratorT__ is_sorted_until_(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ const& end___
+	) DD_NOEXCEPT_AS(++begin___ < end___ && *begin___ < *(begin___ - 1)) {
+		while (++begin___ < end___ && !(*begin___ < *(begin___ - 1))) {
 		}
-		return __begin_;
+		return begin___;
 	}
 
-	template <typename _FreeAccessIteratorT_, typename _BinaryPredicatorT_>
-	static _FreeAccessIteratorT_ _is_sorted_until(
-		_FreeAccessIteratorT_ __begin_,
-		_FreeAccessIteratorT_ const& __end_,
-		_BinaryPredicatorT_ const& __less_
-	) DD_NOEXCEPT_AS(++__begin_ < __end_ && __less_(*__begin_ DD_COMMA *(__begin_ - 1))) {
-		while (++__begin_ < __end_ && !__less_(*__begin_, *(__begin_ - 1))) {
+	template <typename FreeAccessIteratorT__, typename BinaryPredicatorT__>
+	static FreeAccessIteratorT__ is_sorted_until_(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ const& end___,
+		BinaryPredicatorT__ const& less___
+	) DD_NOEXCEPT_AS(++begin___ < end___ && less___(*begin___ DD_COMMA *(begin___ - 1))) {
+		while (++begin___ < end___ && !less___(*begin___, *(begin___ - 1))) {
 		}
-		return __begin_;
+		return begin___;
 	}
 
 
@@ -72,31 +72,31 @@ struct _IsSortedUntil<true> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT>
-inline _UndirectionalIteratorT is_sorted_until(
-	_UndirectionalIteratorT const& __begin,
-	_UndirectionalIteratorT const& __end
-) DD_NOEXCEPT_AS(_detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end)) {
-	return _detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end);
+DD_BEGIN_
+template <typename UndirectionalIteratorT_>
+inline UndirectionalIteratorT_ is_sorted_until(
+	UndirectionalIteratorT_ const& begin__,
+	UndirectionalIteratorT_ const& end__
+) DD_NOEXCEPT_AS(detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__)) {
+	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__);
 }
 
-template <typename _UndirectionalIteratorT, typename _BinaryPredicatorT>
-inline _UndirectionalIteratorT is_sorted_until(
-	_UndirectionalIteratorT const& __begin,
-	_UndirectionalIteratorT const& __end,
-	_BinaryPredicatorT const& __less
-) DD_NOEXCEPT_AS(_detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin DD_COMMA __end DD_COMMA __less)) {
-	return _detail::_IsSortedUntil<IsFreeAccessIterator<_UndirectionalIteratorT>::value>::_is_sorted_until(__begin, __end, __less);
+template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+inline UndirectionalIteratorT_ is_sorted_until(
+	UndirectionalIteratorT_ const& begin__,
+	UndirectionalIteratorT_ const& end__,
+	BinaryPredicatorT_ const& less__
+) DD_NOEXCEPT_AS(detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__ DD_COMMA less__)) {
+	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__, less__);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

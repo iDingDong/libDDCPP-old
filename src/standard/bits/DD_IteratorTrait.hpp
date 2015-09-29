@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorTrait.hpp
-#ifndef _DD_ITERATOR_TRAIT_HPP_INCLUDED
-#	define _DD_ITERATOR_TRAIT_HPP_INCLUDED 1
+#ifndef DD_ITERATOR_TRAIT_HPP_INCLUDED_
+#	define DD_ITERATOR_TRAIT_HPP_INCLUDED_ 1
 
 
 
@@ -12,10 +12,10 @@
 
 
 
-_DD_BEGIN
-template <typename _IteratorT>
-struct IteratorTrait : Trait<_IteratorT> {
-	DD_ALIAS(IteratorType, _IteratorT);
+DD_BEGIN_
+template <typename IteratorT_>
+struct IteratorTrait : Trait<IteratorT_> {
+	DD_ALIAS(IteratorType, IteratorT_);
 
 	DD_ALIAS(IsUndiretionalIterator, DD::IsUndirectionalIterator<IteratorType>);
 	DD_ALIAS(IsBidiretionalIterator, DD::IsBidirectionalIterator<IteratorType>);
@@ -33,7 +33,7 @@ struct IteratorTrait : Trait<_IteratorT> {
 
 
 
-_DD_END
+DD_END_
 
 
 

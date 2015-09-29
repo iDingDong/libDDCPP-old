@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_RangeWorkaround.hpp
-#ifndef _DD_RANGE_WORKAROUND_HPP_INCLUDED
-#	define _DD_RANGE_WORKAROUND_HPP_INCLUDED 1
+#ifndef DD_RANGE_WORKAROUND_HPP_INCLUDED_
+#	define DD_RANGE_WORKAROUND_HPP_INCLUDED_ 1
 
 
 
@@ -15,40 +15,40 @@
 
 
 
-_DD_END
-template <typename _ObjectT, typename _is_range_c>
-struct _IteratorSwitch {
-	typedef _ObjectT Type;
+DD_END_
+template <typename ObjectT_, typename is_range_c_>
+struct IteratorSwitch_ {
+	typedef ObjectT_ Type;
 
 
 };
 
 
 
-template <typename _ObjectT>
-struct _IteratorSwitch<true> {
-	typedef typename Iterator<_ObjectT>::Type Type;
+template <typename ObjectT_>
+struct IteratorSwitch_<true> {
+	typedef typename Iterator<ObjectT_>::Type Type;
 
 
 };
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct IteratorSwitch {
-	typedef _detail::_IteratorSwitch<_ObjectT, IsRange<_ObjectT>> Type;
+	typedef detail_::IteratorSwitch_<ObjectT_, IsRange<ObjectT_>> Type;
 
 
 };
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Conditional.hpp
-#ifndef _DD_CONDITIONAL_HPP_INCLUDED
-#	define _DD_CONDITIONAL_HPP_INCLUDED 1
+#ifndef DD_CONDITIONAL_HPP_INCLUDED_
+#	define DD_CONDITIONAL_HPP_INCLUDED_ 1
 
 
 
@@ -8,44 +8,44 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-struct _Conditional {
-	DD_ALIAS(Type, _ElseT);
+DD_DETAIL_BEGIN_
+template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
+struct Conditional_ {
+	DD_ALIAS(Type, ElseT_);
 
 
 };
 
 
 
-template <typename _ThenT, typename _ElseT>
-struct _Conditional<true, _ThenT, _ElseT> {
-	DD_ALIAS(Type, _ThenT);
+template <typename ThenT_, typename ElseT_>
+struct Conditional_<true, ThenT_, ElseT_> {
+	DD_ALIAS(Type, ThenT_);
 
 
 };
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
+DD_BEGIN_
 #	if __cplusplus >= 201103L
-template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-using Conditional = _detail::_Conditional<_condition_c, _ThenT, _ElseT>;
-template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-using ConditionalType = typename Conditional<_condition_c, _ThenT, _ElseT>::Type;
+template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
+using Conditional = detail_::Conditional_<condition_c_, ThenT_, ElseT_>;
+template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
+using ConditionalType = typename Conditional<condition_c_, ThenT_, ElseT_>::Type;
 #	else
-template <ValidityType _condition_c, typename _ThenT, typename _ElseT>
-struct Conditional : _detail::_Conditional<_condition_c, _ThenT, _ElseT> {
+template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
+struct Conditional : detail_::Conditional_<condition_c_, ThenT_, ElseT_> {
 };
 #	endif
 
 
 
-_DD_END
+DD_END_
 
 
 

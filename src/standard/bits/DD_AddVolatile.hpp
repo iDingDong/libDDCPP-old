@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_AddVolatile.hpp
-#ifndef _DD_ADD_VOLATILE_HPP_INCLUDED
-#	define _DD_ADD_VOLATILE_HPP_INCLUDED 1
+#ifndef DD_ADD_VOLATILE_HPP_INCLUDED_
+#	define DD_ADD_VOLATILE_HPP_INCLUDED_ 1
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-_DD_BEGIN
-template <typename _ObjectT>
+DD_BEGIN_
+template <typename ObjectT_>
 struct AddVolatile {
 #	if __cplusplus >= 201402L
-	using Type = std::add_volatile_t<_ObjectT>;
+	using Type = std::add_volatile_t<ObjectT_>;
 #	elif __cplusplus >= 201103L
-	using Type = typename std::add_volatile<_ObjectT>::type;
+	using Type = typename std::add_volatile<ObjectT_>::type;
 #	else
-	typedef _ObjectT Type;
+	typedef ObjectT_ Type;
 #	endif
 
 
@@ -32,7 +32,7 @@ DD_TRAIT_MODIFIER(AddVolatile)
 
 
 
-_DD_END
+DD_END_
 
 
 

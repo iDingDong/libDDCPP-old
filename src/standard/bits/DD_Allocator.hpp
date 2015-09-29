@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Allocator.hpp
-#ifndef _DD_ALLOCATOR_HPP_INCLUDED
-#	define _DD_ALLOCATOR_HPP_INCLUDED 1
+#ifndef DD_ALLOCATOR_HPP_INCLUDED_
+#	define DD_ALLOCATOR_HPP_INCLUDED_ 1
 
 
 
@@ -18,12 +18,12 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _ValueT = void>
+DD_DETAIL_BEGIN_
+template <typename ValueT_ = void>
 class Allocator {
 	public:
-	DD_ALIAS(ThisType, Allocator<_ValueT>);
-	DD_VALUE_TYPE_NESTED(_ValueT)
+	DD_ALIAS(ThisType, Allocator<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	public:
 	DD_ALIAS(NeedInstance, TrueType);
@@ -49,8 +49,8 @@ class Allocator<void> {
 	DD_ALIAS(SizeType, DD::SizeType);
 
 
-	static PointerType allocate(SizeType _size) {
-		PointerType temp = ::operator new(_size);
+	static PointerType allocate(SizeType size_) {
+		PointerType temp = ::operator new(size_);
 		if (temp) {
 			return temp;
 		}
@@ -58,34 +58,34 @@ class Allocator<void> {
 	}
 
 
-	static ProcessType deallocate(PointerType _pointer) DD_NOEXCEPT {
-		::operator delete(_pointer);
+	static ProcessType deallocate(PointerType pointer_) DD_NOEXCEPT {
+		::operator delete(pointer_);
 	}
 
 
-	static ProcessType deallocate(PointerType _pointer, SizeType _size) DD_NOEXCEPT {
-		::operator delete(_pointer);
+	static ProcessType deallocate(PointerType pointer_, SizeType size_) DD_NOEXCEPT {
+		::operator delete(pointer_);
 	}
 
 
 #	if __cplusplus >= 201103L
-	template <typename _ValueT_, typename... _ArgumentsT_>
-	static ProcessType construct(_ValueT_* _pointer, _ArgumentsT_&&... __arguments_) noexcept(
-		noexcept(new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...))
+	template <typename ValueT__, typename... ArgumentsT__>
+	static ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
+		noexcept(new (pointer_) ValueT__(forward<ArgumentsT__>(arguments___)...))
 	) {
-		new (_pointer) _ValueT_(forward<_ArgumentsT_>(__arguments_)...);
+		new (pointer_) ValueT__(forward<ArgumentsT__>(arguments___)...);
 	}
 #	else
-	template <typename _ValueT_>
-	static ProcessType construct(_ValueT_* _pointer, _ValueT_ const& __value_) {
-		new (_pointer) _ValueT_(__value_);
+	template <typename ValueT__>
+	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
+		new (pointer_) ValueT__(value___);
 	}
 #	endif
 
 
-	template <typename _ValueT_>
-	static ProcessType destruct(_ValueT_* _pointer) {
-		_pointer->~_ValueT_();
+	template <typename ValueT__>
+	static ProcessType destruct(ValueT__* pointer_) {
+		pointer_->~ValueT__();
 	}
 
 
@@ -93,16 +93,16 @@ class Allocator<void> {
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-using _detail::Allocator;
+DD_BEGIN_
+using detail_::Allocator;
 
 
 
-_DD_END
+DD_END_
 
 
 

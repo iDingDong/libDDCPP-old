@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ListIterator.hpp
-#ifndef _DD_LIST_ITERATOR_HPP_INCLUDED
-#	define _DD_LIST_ITERATOR_HPP_INCLUDED 1
+#ifndef DD_LIST_ITERATOR_HPP_INCLUDED_
+#	define DD_LIST_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -10,12 +10,12 @@
 
 
 
-_DD_BEGIN
-template <typename _NodeT>
+DD_BEGIN_
+template <typename NodeT_>
 struct ListIterator {
 	public:
-	DD_ALIAS(ThisType, ListIterator<_NodeT>);
-	DD_ALIAS(NodeType, _NodeT);
+	DD_ALIAS(ThisType, ListIterator<NodeT_>);
+	DD_ALIAS(NodeType, NodeT_);
 
 	public:
 	DD_ALIAS(NodeConstType, NodeType const);
@@ -34,9 +34,9 @@ struct ListIterator {
 
 	private:
 #	if __cplusplus >= 201103L
-	NodePointerType _m_pointer = NodePointerType();
+	NodePointerType m_pointer_ = NodePointerType();
 #	else
-	NodePointerType _m_pointer;
+	NodePointerType m_pointer_;
 #	endif
 
 
@@ -45,89 +45,89 @@ struct ListIterator {
 	constexpr ListIterator() = default;
 
 	public:
-	constexpr ListIterator(ThisType const& _origin) = default;
+	constexpr ListIterator(ThisType const& origin_) = default;
 
 	public:
-	constexpr ListIterator(ThisType&& _origin) = default;
+	constexpr ListIterator(ThisType&& origin_) = default;
 #	else
 	public:
-	ListIterator() throw() : _m_pointer() {
+	ListIterator() throw() : m_pointer_() {
 	};
 #	endif
 
 	public:
-	DD_CONSTEXPR ListIterator(NodePointerType _pointer) DD_NOEXCEPT : _m_pointer(_pointer) {
+	DD_CONSTEXPR ListIterator(NodePointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	}
 
 
 	public:
-	ProcessType swap_target(ThisType& _target) DD_NOEXCEPT {
-		//assert(_m_pointer && _target)
-		NodePointerType _temp = _m_pointer->previous;
-		if (_temp) {
-			_temp->next = _target._m_pointer;
+	ProcessType swap_target(ThisType& target_) DD_NOEXCEPT {
+		//assert(m_pointer_ && target_)
+		NodePointerType temp_ = m_pointer_->previous;
+		if (temp_) {
+			temp_->next = target_.m_pointer_;
 		}
-		_temp = _m_pointer->next;
-		if (_temp) {
-			_temp->previous = _target._m_pointer;
+		temp_ = m_pointer_->next;
+		if (temp_) {
+			temp_->previous = target_.m_pointer_;
 		}
-		_temp = _target._m_pointer->previous;
-		_target._m_pointer->previous = _m_pointer->previous;
-		_m_pointer->previous = _temp;
-		if (_temp) {
-			_temp->next = _m_pointer;
+		temp_ = target_.m_pointer_->previous;
+		target_.m_pointer_->previous = m_pointer_->previous;
+		m_pointer_->previous = temp_;
+		if (temp_) {
+			temp_->next = m_pointer_;
 		}
-		_temp = _target._m_pointer->next;
-		_target._m_pointer->next = _m_pointer->next;
-		_m_pointer->next = _temp;
-		if (_temp) {
-			_temp->previous = _m_pointer;
+		temp_ = target_.m_pointer_->next;
+		target_.m_pointer_->next = m_pointer_->next;
+		m_pointer_->next = temp_;
+		if (temp_) {
+			temp_->previous = m_pointer_;
 		}
 	}
 
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return address_of(this->_m_pointer->value);
+		return address_of(this->m_pointer_->value);
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 
 #	endif
 	public:
 	ThisType& operator ++() DD_NOEXCEPT {
-		this->_m_pointer = this->_m_pointer->next;
+		this->m_pointer_ = this->m_pointer_->next;
 		return *this;
 	}
 
 	public:
 	ThisType operator ++(int) DD_NOEXCEPT {
-		return ThisType(release(this->_m_pointer, this->m_pointer->next));
+		return ThisType(release(this->m_pointer_, this->m_pointer->next));
 	}
 
 
 	public:
 	ThisType& operator --() DD_NOEXCEPT {
-		this->_m_pointer = this->_m_pointer->previous;
+		this->m_pointer_ = this->m_pointer_->previous;
 		return *this;
 	}
 
 	public:
 	ThisType operator --(int) DD_NOEXCEPT {
-		return ThisType(release(this->_m_pointer, this->m_pointer->previous));
+		return ThisType(release(this->m_pointer_, this->m_pointer->previous));
 	}
 
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return this->_m_pointer->value;
+		return this->m_pointer_->value;
 	}
 
 
@@ -140,7 +140,7 @@ struct ListIterator {
 #	if __cplusplus >= 201103L
 	public:
 	explicit operator ValidityType() const noexcept {
-		return this->_m_pointer;
+		return this->m_pointer_;
 	}
 
 
@@ -149,14 +149,14 @@ struct ListIterator {
 
 
 
-template <typename _NodeT>
-inline ProcessType swap_target(ListIterator<_NodeT>& _list_iterator_1, ListIterator<_NodeT>& _list_iterator_2) DD_NOEXCEPT {
-	_list_iterator_1.swap_target(_list_iterator_2);
+template <typename NodeT_>
+inline ProcessType swap_target(ListIterator<NodeT_>& list_iterator_1_, ListIterator<NodeT_>& list_iterator_2_) DD_NOEXCEPT {
+	list_iterator_1_.swap_target(list_iterator_2_);
 }
 
 
 
-_DD_END
+DD_END_
 
 
 

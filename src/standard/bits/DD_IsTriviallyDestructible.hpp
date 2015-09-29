@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IsTriviallyDestructible
-#ifndef _DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED
-#	define _DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED 1
+#ifndef DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED_
+#	define DD_IS_TRIVIALLY_DESTRUCTIBLE_HPP_INCLUDED_ 1
 
 
 
@@ -16,13 +16,13 @@
 
 
 
-_DD_BEGIN
-template <typename... _ObjectsT>
-using IsTriviallyDestructible = AndType<StdBoolConstant<std::is_trivially_destructible<_ObjectsT>>...>;
+DD_BEGIN_
+template <typename... ObjectsT_>
+using IsTriviallyDestructible = AndType<StdBoolConstant<std::is_trivially_destructible<ObjectsT_>>...>;
 
 
 
-_DD_END
+DD_END_
 
 
 

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Pool.hpp
-#ifndef _DD_POOL_HPP_INCLUDED
-#	define _DD_POOL_HPP_INCLUDED 1
+#ifndef DD_POOL_HPP_INCLUDED_
+#	define DD_POOL_HPP_INCLUDED_ 1
 
 
 
@@ -8,8 +8,8 @@
 
 
 
-_DD_BEGIN
-template <ValidityType _is_thread_safe_c>
+DD_BEGIN_
+template <ValidityType is_thread_safe_c_>
 class Pool {
 
 
@@ -24,7 +24,7 @@ class Pool<true> {
 
 
 
-_DD_END
+DD_END_
 
 
 

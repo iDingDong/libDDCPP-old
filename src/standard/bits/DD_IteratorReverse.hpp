@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_IteratorReverse.hpp
-#ifndef _DD_ITERATOR_REVERSE_HPP_INCLUDED
-#	define _DD_ITERATOR_REVERSE_HPP_INCLUDED
+#ifndef DD_ITERATOR_REVERSE_HPP_INCLUDED_
+#	define DD_ITERATOR_REVERSE_HPP_INCLUDED_
 
 
 
@@ -20,12 +20,12 @@
 
 
 
-_DD_DETAIL_BEGIN
-template <typename _IteratorT>
-struct _ReverseIterator {
+DD_DETAIL_BEGIN_
+template <typename IteratorT_>
+struct ReverseIterator_ {
 	public:
-	DD_ALIAS(ReverseType, _IteratorT);
-	DD_ALIAS(ThisType, _ReverseIterator<ReverseType>);
+	DD_ALIAS(ReverseType, IteratorT_);
+	DD_ALIAS(ThisType, ReverseIterator_<ReverseType>);
 
 	public:
 	DD_ALIAS(ValueType, typename IteratorValue<ReverseType>::Type);
@@ -38,152 +38,152 @@ struct _ReverseIterator {
 
 	private:
 #	if __cplusplus >= 201103L
-	ReverseType _m_iterator = ReverseType();
+	ReverseType m_iterator_ = ReverseType();
 #	else
-	ReverseType _m_iterator;
+	ReverseType m_iterator_;
 #	endif
 
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr _ReverseIterator() noexcept(noexcept(ReverseType())) = default;
+	constexpr ReverseIterator_() noexcept(noexcept(ReverseType())) = default;
 
 	public:
-	constexpr _ReverseIterator(ThisType const& _origin) = default;
+	constexpr ReverseIterator_(ThisType const& origin_) = default;
 
 	public:
-	constexpr _ReverseIterator(ThisType&& _origin) = default;
+	constexpr ReverseIterator_(ThisType&& origin_) = default;
 #	else
-	_ReverseIterator() : _m_iterator() {
+	ReverseIterator_() : m_iterator_() {
 	}
 #	endif
 
 	public:
-	DD_CONSTEXPR _ReverseIterator(ReverseType const& _iterator) DD_NOEXCEPT_AS(ReverseType(_iterator)) : _m_iterator(_iterator) {
+	DD_CONSTEXPR ReverseIterator_(ReverseType const& iterator_) DD_NOEXCEPT_AS(ReverseType(iterator_)) : m_iterator_(iterator_) {
 	}
 
 	public:
 #	if __cplusplus >= 201103L
-	template <typename... _ArgumentsT>
-	constexpr _ReverseIterator(_ArgumentsT const&... __arguments) noexcept(noexcept(ReverseType(__arguments...))) : _m_iterator(__arguments...) {
+	template <typename... ArgumentsT_>
+	constexpr ReverseIterator_(ArgumentsT_ const&... arguments__) noexcept(noexcept(ReverseType(arguments__...))) : m_iterator_(arguments__...) {
 #	else
-	template <typename _ArgumentT>
-	_ReverseIterator(_ArgumentT const& __argument) : _m_iterator(__argument) {
+	template <typename ArgumentT_>
+	ReverseIterator_(ArgumentT_ const& argument__) : m_iterator_(argument__) {
 #	endif
 	}// Global reference doesn't work here. See test2.cpp
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~_ReverseIterator() noexcept(noexcept(_m_iterator.~ReverseType())) = default;
+	~ReverseIterator_() noexcept(noexcept(m_iterator_.~ReverseType())) = default;
 
 
 #	endif
 	public:
-	ValidityType DD_CONSTEXPR equal(ThisType const& _target) const DD_NOEXCEPT_AS(_m_iterator == _target._m_iterator) {
-		return this->_m_iterator == _target._m_iterator;
+	ValidityType DD_CONSTEXPR equal(ThisType const& target_) const DD_NOEXCEPT_AS(m_iterator_ == target_.m_iterator_) {
+		return this->m_iterator_ == target_.m_iterator_;
 	}
 
 
 	public:
-	ValidityType DD_CONSTEXPR less(ThisType const& _target) const DD_NOEXCEPT_AS(_target._m_iterator < _m_iterator) {
-		return _target._m_iterator < this->_m_iterator;
+	ValidityType DD_CONSTEXPR less(ThisType const& target_) const DD_NOEXCEPT_AS(target_.m_iterator_ < m_iterator_) {
+		return target_.m_iterator_ < this->m_iterator_;
 	}
 
 
 	public:
-	DifferenceType DD_CONSTEXPR difference(ThisType const& _target) const DD_NOEXCEPT_AS(_target._m_iterator - _m_iterator) {
-		return _target._m_iterator - this->_m_iterator;
+	DifferenceType DD_CONSTEXPR difference(ThisType const& target_) const DD_NOEXCEPT_AS(target_.m_iterator_ - m_iterator_) {
+		return target_.m_iterator_ - this->m_iterator_;
 	}
 
 
 	public:
-	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT_AS(address_of(*_m_iterator)) {
-		return address_of(*this->_m_iterator);
+	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT_AS(address_of(*m_iterator_)) {
+		return address_of(*this->m_iterator_);
 	}
 
 
 	public:
-	ReverseType DD_CONSTEXPR reverse() const DD_NOEXCEPT_AS(ReverseType(_m_iterator)) {
-		return _m_iterator;
+	ReverseType DD_CONSTEXPR reverse() const DD_NOEXCEPT_AS(ReverseType(m_iterator_)) {
+		return m_iterator_;
 	}
 
 
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType const& _origin) = default;
+	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
-	ThisType& operator =(ThisType&& _origin) = default;
+	ThisType& operator =(ThisType&& origin_) = default;
 
 #	endif
 	public:
-	ThisType& operator =(ReverseType const& _iterator) DD_NOEXCEPT_AS(_m_iterator = _iterator) {
-		this->_m_iterator = _iterator;
+	ThisType& operator =(ReverseType const& iterator_) DD_NOEXCEPT_AS(m_iterator_ = iterator_) {
+		this->m_iterator_ = iterator_;
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ReverseType&& _iterator) DD_NOEXCEPT_AS(_m_iterator = move(_iterator)) {
-		this->_m_iterator = move(_iterator);
+	ThisType& operator =(ReverseType&& iterator_) DD_NOEXCEPT_AS(m_iterator_ = move(iterator_)) {
+		this->m_iterator_ = move(iterator_);
 	}
 
 #	endif
 	public:
-	template <typename _ArgumentT>
-	ThisType& operator =(_ArgumentT const& __argument) DD_NOEXCEPT_AS(_m_iterator = __argument) {
-		this->_m_iterator = __argument;
+	template <typename ArgumentT_>
+	ThisType& operator =(ArgumentT_ const& argument__) DD_NOEXCEPT_AS(m_iterator_ = argument__) {
+		this->m_iterator_ = argument__;
 	}// Global reference doesn't work here. See test2.cpp
 
 
 	public:
-	ThisType& operator ++() DD_NOEXCEPT_AS(--_m_iterator) {
-		--this->_m_iterator;
+	ThisType& operator ++() DD_NOEXCEPT_AS(--m_iterator_) {
+		--this->m_iterator_;
 		return *this;
 	}
 
 	public:
-	ThisType operator ++(int) DD_NOEXCEPT_AS(_m_iterator--) {
-		return ThisType(_m_iterator--);
+	ThisType operator ++(int) DD_NOEXCEPT_AS(m_iterator_--) {
+		return ThisType(m_iterator_--);
 	}
 
 
 	public:
-	ThisType& operator --() DD_NOEXCEPT_AS(++_m_iterator) {
-		++this->_m_iterator;
+	ThisType& operator --() DD_NOEXCEPT_AS(++m_iterator_) {
+		++this->m_iterator_;
 		return *this;
 	}
 
 	public:
-	ThisType operator --(int) DD_NOEXCEPT_AS(_m_iterator++) {
-		return ThisType(_m_iterator++);
+	ThisType operator --(int) DD_NOEXCEPT_AS(m_iterator_++) {
+		return ThisType(m_iterator_++);
 	}
 
 
 	public:
-	ThisType& operator +=(DifferenceType _step) DD_NOEXCEPT_AS(_m_iterator -= _step) {
-		this->_m_iterator -= _step;
-		return *this;
-	}
-
-
-	public:
-	ThisType& operator -=(DifferenceType _step) DD_NOEXCEPT_AS(_m_iterator += _step) {
-		this->_m_iterator += _step;
+	ThisType& operator +=(DifferenceType step_) DD_NOEXCEPT_AS(m_iterator_ -= step_) {
+		this->m_iterator_ -= step_;
 		return *this;
 	}
 
 
 	public:
-	ReferenceType operator [](DifferenceType _index) const DD_NOEXCEPT_AS(_m_iterator[-_index]) {
-		return this->_m_iterator[-_index];
+	ThisType& operator -=(DifferenceType step_) DD_NOEXCEPT_AS(m_iterator_ += step_) {
+		this->m_iterator_ += step_;
+		return *this;
 	}
 
 
 	public:
-	ReferenceType operator *() const DD_NOEXCEPT_AS(*_m_iterator) {
-		return *this->_m_iterator;
+	ReferenceType operator [](DifferenceType index_) const DD_NOEXCEPT_AS(m_iterator_[-index_]) {
+		return this->m_iterator_[-index_];
+	}
+
+
+	public:
+	ReferenceType operator *() const DD_NOEXCEPT_AS(*m_iterator_) {
+		return *this->m_iterator_;
 	}
 
 
@@ -197,42 +197,42 @@ struct _ReverseIterator {
 
 
 
-template <typename _IteratorT>
+template <typename IteratorT_>
 inline ValidityType DD_CONSTEXPR operator ==(
-	_ReverseIterator<_IteratorT> const& __reverse_iterator_1,
-	_ReverseIterator<_IteratorT> const& __reverse_iterator_2
-) DD_NOEXCEPT_AS(__reverse_iterator_1.equal(__reverse_iterator_2)) {
-	return __reverse_iterator_1.equal(__reverse_iterator_2);
+	ReverseIterator_<IteratorT_> const& reverse_iterator_1__,
+	ReverseIterator_<IteratorT_> const& reverse_iterator_2__
+) DD_NOEXCEPT_AS(reverse_iterator_1__.equal(reverse_iterator_2__)) {
+	return reverse_iterator_1__.equal(reverse_iterator_2__);
 }
 
 
-template <typename _IteratorT>
+template <typename IteratorT_>
 inline ValidityType DD_CONSTEXPR operator <(
-	_ReverseIterator<_IteratorT> const& __reverse_iterator_1,
-	_ReverseIterator<_IteratorT> const& __reverse_iterator_2
-) DD_NOEXCEPT_AS(__reverse_iterator_1.less(__reverse_iterator_2)) {
-	return __reverse_iterator_1.less(__reverse_iterator_2);
+	ReverseIterator_<IteratorT_> const& reverse_iterator_1__,
+	ReverseIterator_<IteratorT_> const& reverse_iterator_2__
+) DD_NOEXCEPT_AS(reverse_iterator_1__.less(reverse_iterator_2__)) {
+	return reverse_iterator_1__.less(reverse_iterator_2__);
 }
 
 
 
-_DD_DETAIL_END
+DD_DETAIL_END_
 
 
 
-_DD_BEGIN
-DD_NESTED_TYPE_TRAIT(IteratorReverse, ReverseType, _detail::_ReverseIterator<_MACRO_ObjectT>)
+DD_BEGIN_
+DD_NESTED_TYPE_TRAIT(IteratorReverse, ReverseType, detail_::ReverseIterator_<MACRO_ObjectT_>)
 
 
 
 #	if __cplusplus >= 201103L
-template <typename _IteratorT>
-using IteratorReverseType = typename IteratorReverse<_IteratorT>::Type;
+template <typename IteratorT_>
+using IteratorReverseType = typename IteratorReverse<IteratorT_>::Type;
 
 
 
 #	endif
-_DD_END
+DD_END_
 
 
 

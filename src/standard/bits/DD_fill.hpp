@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_fill.hpp
-#ifndef _DD_FILL_HPP_INCLUDED
-#	define _DD_FILL_HPP_INCLUDED 1
+#ifndef DD_FILL_HPP_INCLUDED_
+#	define DD_FILL_HPP_INCLUDED_ 1
 
 
 
@@ -8,21 +8,21 @@
 
 
 
-_DD_BEGIN
-template <typename _UndirectionalIteratorT, typename _ValueT>
+DD_BEGIN_
+template <typename UndirectionalIteratorT_, typename ValueT_>
 ProcessType fill(
-	_UndirectionalIteratorT __begin,
-	_UndirectionalIteratorT const& __end,
-	_ValueT const& __value
-) DD_NOEXCEPT_AS(*++__begin = __value DD_COMMA __begin != __end) {
-	for (; __begin != __end; ++__begin) {
-		*__begin = __value;
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& end__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__) {
+	for (; begin__ != end__; ++begin__) {
+		*begin__ = value__;
 	}
 }
 
 
 
-_DD_END
+DD_END_
 
 
 
