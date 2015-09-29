@@ -717,9 +717,10 @@
 	"DD_Allocator.hpp"
 	"DD_swap.hpp"
 
-1443483420 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1443487971 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	"DD_ValueTypeNested.hpp"
+	"DD_IntegralConstant.hpp"
 	"DD_AllocationFailure.hpp"
 	"DD_IsTriviallyDestructible.hpp"
 	"DD_forward.hpp"
@@ -867,7 +868,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_Trait.hpp"
 
-1443458407 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1443486309 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	<iostream>
@@ -905,10 +906,16 @@
 1443250255 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1443483455 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1443490084 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+	"DD_NeedInstance.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"
 	"DD_release.hpp"
 	"DD_Allocator.hpp"
 	"DD_Functor.hpp"
+
+1443488026 d:\develop\repositories\libddcpp\src\standard\bits\dd_needinstance.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_And.hpp"
+	"DD_IntegralConstant.hpp"
 

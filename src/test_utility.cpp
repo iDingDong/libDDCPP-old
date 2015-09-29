@@ -100,7 +100,8 @@ void test_utility() {
 	{
 		DD::Function<int(int, int)> testFunc = func;
 		if (
-			func(123, 321) != 123 + 321
+			testFunc(123, 321) != 123 + 321 ||
+			testFunc(345, 432) != 345 + 432
 		) {
 			throw "'DD::Function' test failed.";
 		}

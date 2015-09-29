@@ -7,6 +7,7 @@
 #	include <cstdlib>
 
 #	include "DD_ValueTypeNested.hpp"
+#	include "DD_IntegralConstant.hpp"
 #	include "DD_AllocationFailure.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
@@ -24,6 +25,10 @@ class Allocator {
 	DD_ALIAS(ThisType, Allocator<_ValueT>);
 	DD_VALUE_TYPE_NESTED(_ValueT)
 
+	public:
+	DD_ALIAS(NeedInstance, TrueType);
+	DD_ALIAS(Basic, Allocator<void>);
+
 
 };
 
@@ -36,6 +41,7 @@ class Allocator<void> {
 	DD_ALIAS(ValueType, void);
 
 	public:
+	DD_ALIAS(NeedInstance, TrueType);
 	DD_ALIAS(Basic, Allocator<void>);
 
 	public:
