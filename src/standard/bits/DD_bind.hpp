@@ -153,23 +153,23 @@ struct _BindCall;
 
 template <SubscriptType... _indexs_c>
 struct _BindCall<true, _Indexs<0, _indexs_c...>> {
-	template <typename _FunctionT_, typename _ArgumentT_, typename... _ArgumentsT1_, typename... _ArgumentsT2_>
+	template <typename _FunctionT_, typename _TupleT1, typename _TupleT2>
 	static typename _ResultOf<_FunctionT_>::Type _call(
 		_FunctionT_ const& __function_,
-		Tuple<_ArgumentT_, _ArgumentsT1_...> const& __arguments_1_,
-		Tuple<_ArgumentsT2_...>&& __arguments_2_
+		_TupleT1 const& __arguments_1_,
+		_TupleT2&& __arguments_2_
 	) noexcept(noexcept((forward<
-		typename _ArgumentAt<typename Tuple<_ArgumentT_, _ArgumentsT1_...>::template At<0>, Tuple<_ArgumentsT2_...>>::Type
+		typename _ArgumentAt<typename _TupleT1::template At<0>, _TupleT2>::Type
 	>(_select(get_value<0>(__arguments_1_), __arguments_2_)).*__function_)(
 		forward<
-			typename _ArgumentAt<typename Tuple<_ArgumentT_, _ArgumentsT1_...>::template At<_indexs_c>, Tuple<_ArgumentsT2_...>>::Type
+			typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
 		>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...
 	))) {
 		return (forward<
-			typename _ArgumentAt<typename Tuple<_ArgumentT_, _ArgumentsT1_...>::template At<0>, Tuple<_ArgumentsT2_...>>::Type
+			typename _ArgumentAt<typename _TupleT1::template At<0>, _TupleT2>::Type
 		>(_select(get_value<0>(__arguments_1_), __arguments_2_)).*__function_)(
 			forward<
-				typename _ArgumentAt<typename Tuple<_ArgumentT_, _ArgumentsT1_...>::template At<_indexs_c>, Tuple<_ArgumentsT2_...>>::Type
+				typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
 			>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...
 		);
 	}
@@ -181,16 +181,16 @@ struct _BindCall<true, _Indexs<0, _indexs_c...>> {
 
 template <SubscriptType... _indexs_c>
 struct _BindCall<false, _Indexs<_indexs_c...>> {
-	template <typename _FunctionT_, typename... _ArgumentsT1_, typename... _ArgumentsT2_>
+	template <typename _FunctionT_, typename _TupleT1, typename _TupleT2>
 	static typename _ResultOf<_FunctionT_>::Type _call(
 		_FunctionT_ const& __function_,
-		Tuple<_ArgumentsT1_...> const& __arguments_1_,
-		Tuple<_ArgumentsT2_...>&& __arguments_2_
+		_TupleT1 const& __arguments_1_,
+		_TupleT2&& __arguments_2_
 	) noexcept(noexcept(__function_(forward<
-		typename _ArgumentAt<typename Tuple<_ArgumentsT1_...>::template At<_indexs_c>, Tuple<_ArgumentsT2_...>>::Type
+		typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
 	>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...))) {
 		return __function_(forward<
-			typename _ArgumentAt<typename Tuple<_ArgumentsT1_...>::template At<_indexs_c>, Tuple<_ArgumentsT2_...>>::Type
+			typename _ArgumentAt<typename _TupleT1::template At<_indexs_c>, _TupleT2>::Type
 		>(_select(get_value<_indexs_c>(__arguments_1_), __arguments_2_))...);
 	}
 
