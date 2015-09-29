@@ -709,7 +709,7 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1443514413 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+1443531364 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_Tags.hpp"
 	"DD_Comparable.hpp"
@@ -799,7 +799,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1443517251 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1443517488 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -831,7 +831,7 @@
 1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1443517463 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+1443533753 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_Tags.hpp"
 	"DD_Comparable.hpp"

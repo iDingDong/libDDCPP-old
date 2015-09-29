@@ -50,7 +50,10 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 #	endif
 
 	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
+	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT try : m_pointer_(pointer_), m_deleter_() {
+	} catch (...) {
+		deleter_(pointer_);
+		throw;
 	}
 
 #	if __cplusplus >= 201103L
@@ -65,7 +68,10 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 	template <typename DeleterT__>
 	constexpr UniquePointer(PointerType pointer_, DeleterT__&& deleter_) noexcept(
 		noexcept(DeleterType(forward<DeleterT__>(deleter_)))
-	) : m_pointer_(pointer_), m_deleter_(forward<DeleterT__>(deleter_)) {
+	) try : m_pointer_(pointer_), m_deleter_(forward<DeleterT__>(deleter_)) {
+	} catch (...) {
+		deleter_(pointer_);
+		throw;
 	}
 #	else
 	public:
@@ -75,7 +81,10 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 	public:
 	template <typename DeleterT__>
-	constexpr UniquePointer(PointerType pointer_, DeleterT__ const& deleter_) : m_pointer_(pointer_), m_deleter_(deleter_) {
+	constexpr UniquePointer(PointerType pointer_, DeleterT__ const& deleter_) try : m_pointer_(pointer_), m_deleter_(deleter_) {
+	} catch (...) {
+		deleter_(pointer_);
+		throw;
 	}
 #	endif
 
@@ -105,7 +114,14 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 
 	public:
-	ProcessType reset(PointerType pointer_ = PointerType()) DD_NOEXCEPT {
+	ProcessType reset() DD_NOEXCEPT {
+		destruct();
+		m_pointer_ = PointerType();
+	}
+
+
+	public:
+	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
 		destruct();
 		m_pointer_ = pointer_;
 	}
@@ -231,7 +247,13 @@ struct UniquePointer<ValueT_, DefaultTag> : Comparable<ValueT_, DefaultTag> {
 
 
 	public:
-	ProcessType reset(PointerType pointer_ = PointerType()) DD_NOEXCEPT {
+	ProcessType reset() DD_NOEXCEPT {
+		destruct();
+		m_pointer_ = PointerType();
+	}
+
+	public:
+	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
 		destruct();
 		m_pointer_ = pointer_;
 	}
@@ -268,6 +290,7 @@ struct UniquePointer<ValueT_, DefaultTag> : Comparable<ValueT_, DefaultTag> {
 	}
 
 #	endif
+
 
 	public:
 	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
@@ -357,9 +380,15 @@ struct UniquePointer<ValueT_[], DefaultTag> : Comparable<ValueT_[], DefaultTag> 
 
 
 	public:
-	ProcessType reset(PointerType target = PointerType()) DD_NOEXCEPT {
+	ProcessType reset() DD_NOEXCEPT {
 		destruct();
-		m_pointer_ = target;
+		m_pointer_ = PointerType();
+	}
+
+	public:
+	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
+		destruct();
+		m_pointer_ = pointer_;
 	}
 
 
