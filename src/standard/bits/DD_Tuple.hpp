@@ -51,6 +51,16 @@ using _DecayAndStripType = typename _DecayAndStrip<_ObjectT>::Type;
 
 
 template <SubscriptType _index_c, typename... _ValuesT>
+struct _Tuple;
+
+
+
+template <SubscriptType _index_c, typename _ValueT>
+_ValueT get_type_helper(_Tuple<_index_c, _ValueT>) noexcept;
+
+
+
+template <SubscriptType _index_c, typename... _ValuesT>
 struct _Tuple {
 	public:
 	using ThisType = _Tuple<_index_c>;
@@ -73,6 +83,11 @@ struct _Tuple<_index_c, _ValueT, _ValuesT...> : _Tuple<_index_c, _ValueT>, _Tupl
 	using TypeList = TypeList<_ValueT, _ValuesT...>;
 	using ValueType = _ValueT;
 	static LengthType constexpr length = RestType::length + 1;
+
+
+	public:
+	template <SubscriptType _index_c_>
+	using At = decltype(get_type_helper<_index_c_>(ThisType()));
 
 
 	public:
@@ -124,6 +139,11 @@ struct _Tuple<_index_c, _ValueT> {
 	using ConstReferenceType = ValueType const&;
 	using PointerType = ValueType*;
 	using ConstPointerType = ValueType const*;
+
+
+	public:
+	template <SubscriptType _index_c_>
+	using At = decltype(get_type_helper<_index_c_>(ThisType()));
 
 
 	private:

@@ -32,14 +32,16 @@ void test_algorithm() {
 		using DD::min_max;
 		auto mm1 = min_max(1, 5, 3, 7, -2, 4);
 		auto mm2 = min_max(1, 5, 3, 7, -2, 4, greater<int>);
-		if (min(1, 5, 3, 7, -2, 4) != -2 ||
+		if (
+			min(1, 5, 3, 7, -2, 4) != -2 ||
 			min(1, 5, 3, 7, -2, 4, greater<int>) != 7 ||
 			max(1, 5, 3, 7, -2, 4) != 7 ||
 			max(1, 5, 3, 7, -2, 4, greater<int>) != -2 ||
 			mm1.first != -2 ||
 			mm1.second != 7 ||
 			mm2.first != 7 ||
-			mm2.second != -2) {
+			mm2.second != -2
+		) {
 			throw "DD::min/DD::max/DD::min_max test failed.";
 		}
 	}
@@ -118,8 +120,8 @@ void test_algorithm() {
 			throw "'DD::insert_sort' test failed.";
 		}
 	}
-	
-	
+
+
 	/*
 	std::cout << DD::is_sorted(arr1.begin(), arr1.end()) << std::endl;
 	std::cout << DD::is_sorted_until(arr1.begin(), arr1.end()) - arr1.begin() << std::endl;

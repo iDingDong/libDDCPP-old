@@ -378,7 +378,9 @@ struct _Function<_ResultT(_ArgumentsT...), _AllocatorT, true> : Functor<_ResultT
 	constexpr _Function() = default;
 
 	public:
-	constexpr _Function(ThisType const& _origin) : _m_allocator(_origin.get_allocator()), _m_holder(_origin._m_holder->_get_clone(get_allocator())) {
+	constexpr _Function(ThisType const& _origin) : _m_allocator(_origin.get_allocator()), _m_holder(
+		_origin.is_valid() ? _origin._m_holder->_get_clone(get_allocator()) : HolderPointerType()
+	) {
 	}
 
 	public:
