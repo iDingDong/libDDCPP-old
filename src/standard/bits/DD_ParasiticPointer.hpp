@@ -4,7 +4,9 @@
 
 
 
+#	include "DD_ValueTypeNested.hpp"
 #	include "DD_Tags.hpp"
+#	include "DD_Comparable.hpp"
 #	include "DD_address_of.hpp"
 #	include "DD_release.hpp"
 #	include "DD_Pair.hpp"
@@ -12,23 +14,18 @@
 
 
 _DD_BEGIN
-template <typename _ValueT, typename _DeleterT = void>
+template <typename _ValueT, typename _DeleterT = DefaultTag>
 struct ParasiticPointer {
 };
 
 
 
 template <typename _ValueT>
-struct ParasiticPointer<_ValueT, void> {
+struct ParasiticPointer<_ValueT, DefaultTag> {
 	public:
 	DD_ALIAS(ThisType, ParasiticPointer<_ValueT DD_COMMA void>);
-	DD_ALIAS(ValueType, _ValueT);
+	DD_VALUE_TYPE_NESTED(_ValueT)
 	DD_ALIAS(DeleterType, void);
-
-	public:
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ReferenceType, ValueType&);
-	DD_ALIAS(DifferenceType, DD::DifferenceType);
 
 	public:
 	DD_ALIAS(ParasitiferValueType, Pair<LengthType DD_COMMA ValueType>);
@@ -38,18 +35,13 @@ struct ParasiticPointer<_ValueT, void> {
 
 
 	private:
-#	if __cplusplus >= 201103L
-	ParasitiferPointerType _m_pointer = ParasitiferPointerType();
-#	else
-	ParasitiferPointerType _m_pointer;
-#	endif
+	ParasitiferPointerType _m_pointer DD_IN_CLASS_INITIALIZE(ParasitiferPointerType());
 
 
-#	if __cplusplus >= 201103L
 	public:
+#	if __cplusplus >= 201103L
 	constexpr ParasiticPointer() = default;
 #	else
-	public:
 	ParasiticPointer() throw() : _m_pointer() {
 	}
 #	endif
@@ -76,7 +68,9 @@ struct ParasiticPointer<_ValueT, void> {
 	explicit constexpr ParasiticPointer(
 		ConstructTag _tag,
 		_ArgumentsT_&&... __arguments_
-	) DD_NOEXCEPT_AS(new ParasitiferValueType(1 DD_COMMA ValueType(__arguments_...))) : _m_pointer(new ParasitiferValueType(1, ValueType(__arguments_...))) {
+	) noexcept(
+		noexcept(new ParasitiferValueType(1 DD_COMMA ValueType(__arguments_...)))
+	) : _m_pointer(new ParasitiferValueType(1, ValueType(__arguments_...))) {
 	};
 #	else
 	public:
@@ -119,13 +113,13 @@ struct ParasiticPointer<_ValueT, void> {
 
 	public:
 	ParasitiferReferenceType get_parasitifer() const DD_NOEXCEPT {
-		return *_m_pointer;
+		return *get_pointer();
 	}
 
 
 	public:
 	LengthType get_reference_count() const DD_NOEXCEPT {
-		return _m_pointer->first;
+		return get_pointer()->first;
 	}
 
 
@@ -138,7 +132,7 @@ struct ParasiticPointer<_ValueT, void> {
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& _origin) DD_NOEXCEPT {
+	ThisType& operator =(ThisType&& _origin) noexcept {
 		swap(_origin);
 		return *this;
 	}
@@ -147,7 +141,7 @@ struct ParasiticPointer<_ValueT, void> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		return _m_pointer->second;
+		return get_pointer()->second;
 	}
 
 
@@ -159,11 +153,15 @@ struct ParasiticPointer<_ValueT, void> {
 
 	public:
 	explicit operator ValidityType() const DD_NOEXCEPT {
-		return _m_pointer;
+		return get_pointer();
 	}
 
 
 };
+
+
+
+template <typename _ValueT, typename _>
 
 
 

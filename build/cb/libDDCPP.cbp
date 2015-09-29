@@ -134,6 +134,7 @@
 		<Unit filename="../../src/standard/bits/DD_ListIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_MemberFunctionCheck.hpp" />
+		<Unit filename="../../src/standard/bits/DD_NeedInstance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NestedTypeCheck.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
