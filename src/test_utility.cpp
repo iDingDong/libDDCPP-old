@@ -9,6 +9,14 @@ inline int func(int x, int y) {
 	return x + y;
 }
 
+inline int overloaded(int x, int y) {
+	return x + y;
+}
+
+inline int overloaded(int x, int y, int z) {
+	return x + y + z;
+}
+
 class A {
 	public:
 	int func(int x, int y) const {
@@ -16,7 +24,7 @@ class A {
 	}
 
 	public:
-	operator ()(int x, int y) const {
+	int operator ()(int x, int y) const {
 		return x * y;
 	}
 
@@ -98,10 +106,30 @@ void test_utility() {
 		}
 	}
 	{
-		DD::Function<int(int, int)> testFunc = func;
+		DD::Function<int(int, int)> test_func_1 = func;
 		if (
-			testFunc(123, 321) != 123 + 321 ||
-			testFunc(345, 432) != 345 + 432
+			test_func_1(123, 321) != 123 + 321 ||
+			test_func_1(345, 432) != 345 + 432
+		) {
+			throw "'DD::Function' test failed.";
+		}
+		DD::Function<int(int, int)> test_func_2 = overloaded;
+		DD::Function<int(int, int, int)> test_func_3 = overloaded;
+		if (
+			test_func_2(123, 234) != 123 + 234 ||
+			test_func_3(123, 234, 345) != 123 + 234 + 345
+		) {
+			throw "'DD::Function' test failed.";
+		}
+		DD::Function<int(int, int)> test_func_4 = A();
+		if (
+			test_func_4(123, 234) != 123 * 234
+		) {
+			throw "'DD::Function' test failed.";
+		}
+		DD::Function<int(int, int)> test_func_5 = [](int x, int y) { return x - y; };
+		if (
+			test_func_5(123, 234) != 123 - 234
 		) {
 			throw "'DD::Function' test failed.";
 		}

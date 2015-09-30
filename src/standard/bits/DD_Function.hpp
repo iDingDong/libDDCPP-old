@@ -362,6 +362,7 @@ template <typename AllocatorT_, typename ResultT_, typename... ArgumentsT_>
 struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_, ArgumentsT_...> {
 	public:
 	using ThisType = Function_<ResultT_(ArgumentsT_...), AllocatorT_, true>;
+	using FunctionType = ResultT_(ArgumentsT_...);
 	using AllocatorType = AllocatorT_;
 
 
@@ -385,6 +386,20 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_
 
 	public:
 	constexpr Function_(ThisType&& origin_) : m_allocator_(move(origin_.get_allocator())), m_holder_(release(origin_.m_holder_)) {
+	}
+
+	public:
+	template <typename AllocatorT__>
+	constexpr Function_(DecayType<FunctionType> function_, AllocatorT__&& allocator___) noexcept(
+		noexcept(AllocatorType(forward<AllocatorT__>(allocator___))) &&
+		noexcept(HolderPointerType(ThisType().make_holder_(function_)))
+	) : m_allocator_(forward<AllocatorT__>(allocator___)), m_holder_(make_holder_(function_)) {
+	}
+
+	public:
+	constexpr Function_(DecayType<FunctionType> function_) noexcept(
+		noexcept(ThisType(function_, AllocatorType()))
+	) : Function_(function_, AllocatorType()) {
 	}
 
 	public:
