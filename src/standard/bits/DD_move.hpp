@@ -22,6 +22,32 @@ inline RemoveReferenceType<ObjectT_>&& move(ObjectT_&& object_) DD_NOEXCEPT {
 
 
 
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+inline UndirectionalIteratorT1_ watched_move(
+	UndirectionalIteratorT1_ begin__,
+	UndirectionalIteratorT1_ const& end__,
+	UndirectionalIteratorT2_& result_begin__
+) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = move(*++begin__))) {
+	for (; begin__ != end__; ++begin__, ++result_begin__) {
+		*result_begin__ = move(*begin__);
+	}
+	return result_begin__;
+}
+
+
+
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+inline UndirectionalIteratorT1_ move(
+	UndirectionalIteratorT1_ const& begin__,
+	UndirectionalIteratorT1_ const& end__,
+	UndirectionalIteratorT2_ result_begin__
+) noexcept(noexcept(watched_move(begin__, end__, result_begin__))) {
+	watched_move(begin__, end__, result_begin__)
+	return result_begin__;
+}
+
+
+
 DD_END_
 
 

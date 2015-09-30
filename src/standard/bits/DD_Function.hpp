@@ -249,6 +249,7 @@ template <typename AllocatorT_, ValidityType need_instance_c_, typename ResultT_
 struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Functor<ResultT_, ArgumentsT_...> {
 	public:
 	using ThisType = Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_>;
+	using FunctionType = ResultT_(ArgumentsT_...);
 	using AllocatorType = AllocatorT_;
 
 
@@ -269,6 +270,12 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Func
 
 	public:
 	constexpr Function_(ThisType&& origin_) : m_holder_(release(origin_.m_holder_)) {
+	}
+
+	public:
+	constexpr Function_(DecayType<FunctionType> function_) noexcept(
+		noexcept(HolderPointerType(ThisType().make_holder_(function_)))
+	) : m_holder_(make_holder_(function_)) {
 	}
 
 	public:

@@ -34,6 +34,8 @@
 		<Unit filename="../../src/standard/DDMeta.hpp" />
 		<Unit filename="../../src/standard/DDTrait.hpp" />
 		<Unit filename="../../src/standard/DDUtility.hpp" />
+		<Unit filename="../../src/standard/DDVessel.hpp" />
+		<Unit filename="../../src/standard/bits/DDContainer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AccessDenied.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddCV.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddConst.hpp" />
@@ -124,6 +126,7 @@
 		<Unit filename="../../src/standard/bits/DD_Iterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorCatagory.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorDifference.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IteratorNested.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorReverse.hpp" />

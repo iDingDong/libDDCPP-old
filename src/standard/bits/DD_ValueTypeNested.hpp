@@ -9,14 +9,14 @@
 
 
 #	if DD_COMPAT_STL
-#		define DD_VALUE_TYPE_NESTED_COMPAT_STL\
+#		define DD_VALUE_TYPE_NESTED_COMPAT_STL_\
 			DD_ALIAS(value_type, ValueType);\
 			DD_ALIAS(reference, ReferenceType);\
 			DD_ALIAS(const_reference, ConstReferenceType);\
 			DD_ALIAS(pointer, PointerType);\
 			DD_ALIAS(const_pointer, ConstPointerType);
 #	else
-#		define DD_VALUE_TYPE_NESTED_COMPAT_STL
+#		define DD_VALUE_TYPE_NESTED_COMPAT_STL_
 #	endif
 
 #	if __cplusplus >= 201103L
@@ -26,7 +26,7 @@
 			using ConstReferenceType = ValueType const&;\
 			using PointerType = ValueType*;\
 			using ConstPointerType = ValueType const*;\
-			DD_VALUE_TYPE_NESTED_COMPAT_STL
+			DD_VALUE_TYPE_NESTED_COMPAT_STL_
 #	else
 #		define DD_VALUE_TYPE_NESTED(ARG_ValueType_)\
 			typedef ARG_ValueType_ ValueType;\
@@ -34,7 +34,7 @@
 			typedef ValueType const& ConstReferenceType;\
 			typedef ValueType* PointerType;\
 			typedef ValueType const* ConstPointerType;\
-			DD_VALUE_TYPE_NESTED_COMPAT_STL
+			DD_VALUE_TYPE_NESTED_COMPAT_STL_
 #	endif
 
 

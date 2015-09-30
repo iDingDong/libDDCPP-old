@@ -14,7 +14,7 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename ValueT_, LengthType length_c_, LengthType... lengths_c_>
-struct Array_ : Array_<Array_<ValueT_, lengths_c_...>, length_c_> {
+struct Array : Array<Array<ValueT_, lengths_c_...>, length_c_> {
 };
 
 
@@ -23,12 +23,12 @@ struct Array_ : Array_<Array_<ValueT_, lengths_c_...>, length_c_> {
 #	endif
 #	if __cplusplus >= 201103L
 template <typename ValueT_, LengthType length_c_>
-struct Array_<ValueT_, length_c_> {
+struct Array<ValueT_, length_c_> {
 #	else
 template <typename ValueT_, LengthType length_c_>
-struct Array_ : ValueTypeNested<ValueT_> {
+struct Array : ValueTypeNested<ValueT_> {
 #	endif
-	DD_ALIAS(ThisType, Array_<ValueT_ DD_COMMA length_c_>);
+	DD_ALIAS(ThisType, Array<ValueT_ DD_COMMA length_c_>);
 	DD_ALIAS(LowerType, ValueT_);
 	static LengthType DD_CONSTANT length_constant = length_c_;
 	DD_VALUE_TYPE_NESTED(ValueT_);
@@ -104,7 +104,7 @@ struct Array_ : ValueTypeNested<ValueT_> {
 	}
 
 	ConstIterator begin() const DD_NOEXCEPT {
-		return cbegin();
+		return Iterator(array);
 	}
 
 
@@ -113,7 +113,7 @@ struct Array_ : ValueTypeNested<ValueT_> {
 	}
 
 	ConstIterator end() const DD_NOEXCEPT {
-		return cend();
+		return Iterator(array + length_constant);
 	}
 
 
@@ -122,7 +122,7 @@ struct Array_ : ValueTypeNested<ValueT_> {
 	}
 
 	ConstReverseIterator rbegin() const DD_NOEXCEPT {
-		return crbegin();
+		return ReverseIterator(array + length_constant - 1);
 	}
 
 
@@ -131,27 +131,27 @@ struct Array_ : ValueTypeNested<ValueT_> {
 	}
 
 	ConstReverseIterator rend() const DD_NOEXCEPT {
-		return crend();
+		return ReverseIterator(array - 1);
 	}
 
 
 	ConstIterator cbegin() const DD_NOEXCEPT {
-		return ConstIterator(array);
+		return begin();
 	}
 
 
 	ConstIterator cend() const DD_NOEXCEPT {
-		return ConstIterator(array + length_constant);
+		return end();
 	}
 
 
 	ConstReverseIterator crbegin() const DD_NOEXCEPT {
-		return ConstReverseIterator(array - 1);
+		return rbegin();
 	}
 
 
 	ConstReverseIterator crend() const DD_NOEXCEPT {
-		return ConstReverseIterator(array + length_constant - 1);
+		return rend();
 	}
 
 
@@ -186,13 +186,22 @@ struct Array_ : ValueTypeNested<ValueT_> {
 	}
 
 
+	operator PointerType() DD_NOEXCEPT {
+		return array;
+	}
+
+	constexpr operator ConstPointerType() const DD_NOEXCEPT {
+		return array;
+	}
+
+
 };
 
 
 
 template <typename ValueT_>
-struct Array_<ValueT_, 0> {
-	DD_ALIAS(ThisType, Array_<ValueT_ DD_COMMA 0>);
+struct Array<ValueT_, 0> {
+	DD_ALIAS(ThisType, Array<ValueT_ DD_COMMA 0>);
 	DD_ALIAS(LowerType, ValueT_);
 	static LengthType DD_CONSTANT length_constant = 0;
 	DD_VALUE_TYPE_NESTED(ValueT_);
@@ -218,7 +227,7 @@ struct Array_<ValueT_, 0> {
 	}
 
 	ConstIterator begin() const DD_NOEXCEPT {
-		return cbegin();
+		return Iterator();
 	}
 
 
@@ -227,7 +236,7 @@ struct Array_<ValueT_, 0> {
 	}
 
 	ConstIterator end() const DD_NOEXCEPT {
-		return cend();
+		return Iterator();
 	}
 
 
@@ -236,7 +245,7 @@ struct Array_<ValueT_, 0> {
 	}
 
 	ConstReverseIterator rbegin() const DD_NOEXCEPT {
-		return crbegin();
+		return ReverseIterator();
 	}
 
 
@@ -245,27 +254,27 @@ struct Array_<ValueT_, 0> {
 	}
 
 	ConstReverseIterator rend() const DD_NOEXCEPT {
-		return crend();
+		return ReverseIterator();
 	}
 
 
 	ConstIterator cbegin() const DD_NOEXCEPT {
-		return ConstIterator();
+		return begin();
 	}
 
 
 	ConstIterator cend() const DD_NOEXCEPT {
-		return ConstIterator();
+		return end();
 	}
 
 
 	ConstReverseIterator crbegin() const DD_NOEXCEPT {
-		return ConstReverseIterator();
+		return rbegin();
 	}
 
 
 	ConstReverseIterator crend() const DD_NOEXCEPT {
-		return ConstReverseIterator();
+		return rend();
 	}
 
 
@@ -278,14 +287,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename ValueT_, LengthType length_c_, LengthType... lengths_c_>
-using Array = detail_::Array_<ValueT_, length_c_, lengths_c_...>;
-#	else
-template <typename ValueT_, LengthType length_c_>
-struct Array : detail_::Array_<ValueT_, length_c_> {
-};
-#	endif
+using detail_::Array;
 
 
 

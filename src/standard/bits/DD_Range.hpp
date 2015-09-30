@@ -18,13 +18,30 @@
 #		define DDCPP_CONSIDER_CSTRING_AS_RANGE DD_OFF
 #	endif
 
-
-
 #	if __cplusplus >= 201103L
 #		define DD_SPLIT_RANGE(...) ::DD::begin(__VA_ARGS__), ::DD::end(__VA_ARGS__)
 #	else
 #		define DD_SPLIT_RANGE(ARG_range_) ::DD::begin(range__), ::DD::end(range__)
 #	endif
+
+#	define DD_RANGE_NESTED\
+	ConstIterator cbegin() const DD_NOEXCEPT_AS(ThisType().begin()) {\
+		return begin();\
+	}\
+	\
+	\
+	ConstIterator cend() const DD_NOEXCEPT_AS(ThisType().end()) {\
+		return end();\
+	}
+#	define DD_REVERSE_RANGE_NESTED\
+	ReverseIterator crbegin() const DD_NOEXCEPT_AS(ThisType().rbegin()) {\
+		return rbegin();\
+	}\
+	\
+	\
+	ReverseIterator crend() const DD_NOEXCEPT_AS(ThisType().rend()) {\
+		return rend();\
+	}
 
 
 

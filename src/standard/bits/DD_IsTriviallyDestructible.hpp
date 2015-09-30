@@ -4,21 +4,25 @@
 
 
 
-#	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsTriviallyDistructible'.
+#	if __cplusplus >= 201103L
+#		include <type_traits>
 
-
-
+#		include "DD_IntegralConstant.hpp"
+#	else
+#		include "DD_IsScalar.hpp"
 #	endif
-#	include <type_traits>
-
-#	include "DD_And.hpp"
 
 
 
 DD_BEGIN_
+#	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
 using IsTriviallyDestructible = AndType<StdBoolConstant<std::is_trivially_destructible<ObjectsT_>>...>;
+#	else
+template <typename ObjectT_>
+struct IsTriviallyDestructible : IsScalar<ObjectT_> {
+};
+#	endif
 
 
 
