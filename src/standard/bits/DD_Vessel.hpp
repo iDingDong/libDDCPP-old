@@ -16,6 +16,7 @@
 #	include "DD_Range.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
+#	include "DD_transconstruct.hpp"
 #	include "DD_copy.hpp"
 
 
@@ -259,14 +260,13 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 
 
-	/*public:
+	public:
 	ProcessType stretch(LengthType new_capacity_) {
 		PointerType temp_begin_ = AllocatorType::allocate(new_capacity_);
-		PointerType temp_end_ = temp_begin_;
-		//	prepare to copy/move construct
+		PointerType temp_end_ = transconstruct(this->m_begin_, this->m_end_, temp_begin_);
 		destruct();
-		this->m_begin = temp_begin_;
-		this->m_end = temp_end_;
+		this->m_begin_ = temp_begin_;
+		this->m_end_ = temp_end_;
 		this->m_storage_end_ = temp_begin_ + new_capacity_;
 	}
 
@@ -287,7 +287,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		if (new_capacity_ > this->get_length()) {
 			stretch(new_capacity_);
 		}
-	}*/
+	}
 
 
 	private:

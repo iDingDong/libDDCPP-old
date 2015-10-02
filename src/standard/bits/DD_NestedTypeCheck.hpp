@@ -39,22 +39,37 @@
 
 
 #		define DD_NESTED_TYPE_TRAIT(ARG_Checker_, ARG_Target_, ...)\
-			template <typename MACRO_ObjectT_>\
-			struct ARG_Checker_ {\
-				private:\
-				template <typename MACRO_ObjectT__>\
-				static typename MACRO_ObjectT__::ARG_Target_ match_(::DD::detail_::NestedTypeMatcher_<typename MACRO_ObjectT__::ARG_Target_>*) noexcept(true);\
-				\
-				private:\
-				template <typename MACRO_ObjectT__>\
-				static __VA_ARGS__ match_(...) noexcept(true);\
-				\
-				\
-				public:\
-				using Type = decltype(match_<MACRO_ObjectT_>(::DD::nil_pointer));\
-				\
-				\
+			DD_MACRO_DETAIL_BEGIN\
+			DD_NESTED_TYPE_CHECK(MACRO_Helper_##ARG_Checker_, ARG_Target_)\
+			\
+			\
+			\
+			template <typename MACRO_ObjectT_, ::DD::ValidityType MACRO_has_nested_type_c_>\
+			struct ARG_Checker_##_ {\
+				using Type = __VA_ARGS__;\
+			\
+			\
 			};\
+			\
+			\
+			\
+			template <typename MACRO_ObjectT_>\
+			struct ARG_Checker_##_<MACRO_ObjectT_, true> {\
+				using Type = typename MACRO_ObjectT_::ARG_Target_;\
+			\
+			\
+			};\
+			\
+			\
+			\
+			DD_MACRO_DETAIL_END\
+			\
+			\
+			\
+			template <typename MACRO_ObjectT_>\
+			using ARG_Checker_ = MACRO_detail_::ARG_Checker_##_<\
+				MACRO_ObjectT_, MACRO_detail_::MACRO_Helper_##ARG_Checker_<MACRO_ObjectT_>::value\
+			>;\
 			\
 			\
 			\
@@ -69,14 +84,14 @@
 			struct ARG_Checker_##_ {\
 				template <typename MACRO_ObjectT__>\
 				static SizeTrait<1> match_(::DD::detail_::NestedTypeMatcher_<typename MACRO_ObjectT__::ARG_Target_>*);\
-				\
+			\
 				template <typename MACRO_ObjectT__>\
 				static SizeTrait<2> match_(...);\
-				\
-				\
+			\
+			\
 				static ::DD::ValidityType const value = sizeof(match_<MACRO_ObjectT_>(0)) == sizeof(SizeTrait<1>);\
-				\
-				\
+			\
+			\
 			};\
 			\
 			\
@@ -100,8 +115,8 @@
 			template <typename MACRO_ObjectT_, ValidityType MACRO_has_target_c_>\
 			struct ARG_Checker_##_ {\
 				typedef ARG_Default_ Type;\
-				\
-				\
+			\
+			\
 			};\
 			\
 			\
@@ -109,8 +124,8 @@
 			template <typename MACRO_ObjectT_>\
 			struct ARG_Checker_##_<MACRO_ObjectT_, true> {\
 				typedef typename MACRO_ObjectT_::ARG_Target_ Type;\
-				\
-				\
+			\
+			\
 			};\
 			\
 			\
@@ -125,8 +140,8 @@
 					MACRO_ObjectT_,\
 					MACRO_detail_::CHECK_##ARG_Checker_##_<MACRO_ObjectT_>::value\
 				>::Type Type;\
-				\
-				\
+			\
+			\
 			};
 
 

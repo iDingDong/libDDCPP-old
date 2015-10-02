@@ -58,11 +58,6 @@ DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename detail_::IteratorValue_<
 #		else
 DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, RemoveReferenceType<decltype(*MACRO_ObjectT_())>)
 #		endif
-
-
-
-template <typename IteratorT_>
-using IteratorValueType = typename IteratorValue<IteratorT_>::Type;
 #	else
 #		if DDCPP_COMPAT_STL
 DD_NESTED_TYPE_TRAIT(IteratorValue, ValueType, typename detail_::IteratorValue_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type);
@@ -72,6 +67,10 @@ struct IteratorValue : detail_::IteratorValue_<typename RemoveCV<IteratorT_>::Ty
 };
 #		endif
 #	endif
+
+
+
+DD_TRAIT_MODIFIER(IteratorValue)
 
 
 

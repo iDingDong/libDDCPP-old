@@ -33,31 +33,28 @@ struct FunctionHolderBase_ {
 
 
 	public:
-	friend Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_>;
-	friend AllocatorType;
-
-
-	protected:
 	constexpr FunctionHolderBase_() = default;
 
-	private:
+	public:
 	DD_DELETE_COPY_CONSTRUCTOR(FunctionHolderBase_)
+
+	public:
 	DD_DELETE_MOVE_CONSTRUCTOR(FunctionHolderBase_)
 
 
-	protected:
+	public:
 	virtual ~FunctionHolderBase_() = default;
 
 
-	private:
+	public:
 	virtual ThisType* get_clone_() const = 0;
 
 
-	private:
+	public:
 	virtual ResultT_ call_(ArgumentsT_... arguments__) = 0;
 
 
-	private:
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 
@@ -73,31 +70,28 @@ struct FunctionHolderBase_<AllocatorT_, true, ResultT_, ArgumentsT_...> {
 
 
 	public:
-	friend Function_<ResultT_(ArgumentsT_...), AllocatorT_, true>;
-	friend AllocatorType;
-
-
-	protected:
 	constexpr FunctionHolderBase_() = default;
 
-	private:
+	public:
 	DD_DELETE_COPY_CONSTRUCTOR(FunctionHolderBase_)
+
+	public:
 	DD_DELETE_MOVE_CONSTRUCTOR(FunctionHolderBase_)
 
 
-	protected:
+	public:
 	virtual ~FunctionHolderBase_() = default;
 
 
-	private:
+	public:
 	virtual ThisType* get_clone_(AllocatorT_& allocator__) const = 0;
 
 
-	private:
+	public:
 	virtual ResultT_ call_(ArgumentsT_... arguments__) = 0;
 
 
-	private:
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 
@@ -114,29 +108,21 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 	using AllocatorType = AllocatorT_;
 
 
-	public:
-	friend AllocatorType;
-
-
-	public:
-	friend Function_<ResultT_(ArgumentsT_...), AllocatorT_,  need_instance_c_>;
-
-
 	private:
 	FunctionType m_function_;
 
 
-	private:
-	FunctionHolder_() = delete;
+	public:
+	DD_DELETE_DEFAULT_CONSTRUCTOR(FunctionHolder_)
 
-	private:
+	public:
 	constexpr FunctionHolder_(ThisType const& origin_) noexcept(noexcept(FunctionType(origin_.m_function_))) : m_function_(origin_.m_function_) {
 	};
 
-	private:
-	FunctionHolder_(ThisType&& origin_) = delete;
+	public:
+	DD_DELETE_MOVE_CONSTRUCTOR(FunctionHolder_)
 
-	private:
+	public:
 	template <typename FunctionT__>
 	constexpr FunctionHolder_(FunctionT__&& function___) noexcept(
 		noexcept(FunctionType(forward<FunctionT__>(function___)))
@@ -144,11 +130,11 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 	}
 
 
-	private:
+	public:
 	~FunctionHolder_() override = default;
 
 
-	private:
+	public:
 	SuperType* get_clone_() const override {
 		ThisType* pointer_ = static_cast<ThisType*>(AllocatorType::Basic::allocate(sizeof(ThisType)));
 		try {
@@ -161,13 +147,13 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 	}
 
 
-	private:
+	public:
 	ResultT_ call_(ArgumentsT_... arguments__) override {
 		return m_function_(arguments__...);
 	}
 
 
-	private:
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 
@@ -184,29 +170,21 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 	using AllocatorType = AllocatorT_;
 
 
-	public:
-	friend AllocatorType;
-
-
-	public:
-	friend Function_<ResultT_(ArgumentsT_...), AllocatorT_,  true>;
-
-
 	private:
 	FunctionType m_function_;
 
 
-	private:
-	FunctionHolder_() = delete;
+	public:
+	DD_DELETE_DEFAULT_CONSTRUCTOR(FunctionHolder_)
 
-	private:
+	public:
 	constexpr FunctionHolder_(ThisType const& origin_) noexcept(noexcept(FunctionType(origin_.m_function_))) : m_function_(origin_.m_function_) {
 	};
 
-	private:
-	FunctionHolder_(ThisType&& origin_) = delete;
+	public:
+	DD_DELETE_MOVE_CONSTRUCTOR(FunctionHolder_)
 
-	private:
+	public:
 	template <typename FunctionT__>
 	constexpr FunctionHolder_(FunctionT__&& function___) noexcept(
 		noexcept(FunctionType(forward<FunctionT__>(function___)))
@@ -214,11 +192,11 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 	}
 
 
-	private:
+	public:
 	~FunctionHolder_() override = default;
 
 
-	private:
+	public:
 	SuperType* get_clone_(AllocatorT_& allocator__) const override {
 		ThisType* pointer_ = static_cast<ThisType*>(allocator__.AllocatorType::Basic::allocate(sizeof(ThisType)));
 		try {
@@ -231,13 +209,13 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 	}
 
 
-	private:
+	public:
 	ResultT_ call_(ArgumentsT_... arguments__) override {
 		return m_function_(arguments__...);
 	}
 
 
-	private:
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 

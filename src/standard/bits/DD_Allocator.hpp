@@ -11,10 +11,10 @@
 #	include "DD_AllocationFailure.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
-#		include "DD_forward.hpp"
 #	endif
 #	include "DD_debugger_definitions.hpp"
-#	include "DD_address_of.hpp"
+#	include "DD_construct.hpp"
+#	include "DD_destruct.hpp"
 
 
 
@@ -37,31 +37,6 @@ class Allocator<void> {
 	public:
 	DD_ALIAS(Basic, Allocator<void>);
 	DD_ALIAS(NeedInstance, FalseType);
-
-
-	private:
-	template <ValidityType can_ignore_, int workaround_ = 0>
-	struct Destruct_ {
-		template <typename ValueT__>
-		ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-			for (; begin_ != end_; ++begin_) {
-				begin_->~ValueT__();
-			}
-		}
-
-
-	};
-
-
-	private:
-	template <int workaround_>
-	struct Destruct_<true, workaround_> {
-		template <typename ValueT__>
-		ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		}
-
-
-	};
 
 
 	public:
@@ -90,14 +65,14 @@ class Allocator<void> {
 #	if __cplusplus >= 201103L
 	template <typename ValueT__, typename... ArgumentsT__>
 	static ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(new (pointer_) ValueT__(forward<ArgumentsT__>(arguments___)...))
+		noexcept(::DD::construct(pointer_, forward<ArgumentsT__>(arguments___)...))
 	) {
-		new (pointer_) ValueT__(forward<ArgumentsT__>(arguments___)...);
+		::DD::construct(pointer_, forward<ArgumentsT__>(arguments___)...);
 	}
 #	else
 	template <typename ValueT__>
 	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		new (pointer_) ValueT__(value___);
+		::DD::construct(pointer_, value__);
 	}
 #	endif
 
@@ -105,14 +80,14 @@ class Allocator<void> {
 	public:
 	template <typename ValueT__>
 	static ProcessType destruct(ValueT__* pointer_) DD_NOEXCEPT {
-		pointer_->~ValueT__();
+		::DD::destruct(pointer_);
 	}
 
 
 	public:
 	template <typename ValueT__>
 	static ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		Destruct_<IsTriviallyDestructible<ValueT__>::value>::destruct_(begin_, end_);
+		::DD::destruct(begin_, end_);
 	}
 
 

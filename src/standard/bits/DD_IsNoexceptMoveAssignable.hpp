@@ -3,6 +3,7 @@
 #	define DD_IS_NOEXCEPT_MOVE_ASSIGNABLE_HPP_INCLUDED_ 1
 
 
+
 #	if __cplusplus < 201103L
 #		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsNoexceptMoveAssignable'.
 
