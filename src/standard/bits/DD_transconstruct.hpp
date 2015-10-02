@@ -48,9 +48,8 @@ struct Transconstruct_ {
 			} catch (...) {
 #	if __cplusplus >= 201103L
 				move(destination____, current____, begin____);
-#	else
-				destruct(destination____, current____);
 #	endif
+				destruct(destination____, current____);
 				throw;
 			}
 			return current____;

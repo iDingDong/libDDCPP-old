@@ -28,6 +28,13 @@ class DefaultDeleter {
 	}
 
 
+	public:
+	static ProcessType operate(ValueT_* pointer_) DD_NOEXCEPT {
+		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");
+		delete pointer_;
+	}
+
+
 };
 
 

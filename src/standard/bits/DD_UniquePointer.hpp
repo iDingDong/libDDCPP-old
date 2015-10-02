@@ -10,8 +10,8 @@
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
+#	include "DD_StrictPointer.hpp"
 #	include "DD_Allocator.hpp"
-#	include "DD_swap.hpp"
 
 
 
@@ -137,7 +137,7 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 	public:
 	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
-		using DD::swap;
+		using ::DD::swap;
 		swap(m_pointer_, target_.m_pointer_);
 		swap(m_deleter_, target_.m_deleter_);
 	}
@@ -155,6 +155,7 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 	public:
 	ThisType& operator =(ThisType&& origin_) noexcept(true) {
 		swap(origin_);
+		return *this;
 	}
 
 #	endif
@@ -192,18 +193,11 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 
 template <typename ValueT_>
-struct UniquePointer<ValueT_, DefaultTag> : Comparable<ValueT_, DefaultTag> {
+struct UniquePointer<ValueT_, DefaultTag> : StrictPointer<ValueT_> {
 	public:
 	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA DefaultTag>);
-	DD_ALIAS(DeleterType, void);
 	DD_VALUE_TYPE_NESTED(ValueT_)
-
-	public:
-	DD_ALIAS(DifferenceType, DD::DifferenceType);
-
-
-	private:
-	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
+	DD_ALIAS(SuperType, StrictPointer<ValueT_>);
 
 
 	public:
@@ -218,199 +212,13 @@ struct UniquePointer<ValueT_, DefaultTag> : Comparable<ValueT_, DefaultTag> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()) {
-	}
-
-#	endif
-
-	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
-	}
-
-
-	public:
-	~UniquePointer() DD_NOEXCEPT {
-		destruct();
-	}
-
-
-	public:
-	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return m_pointer_;
-	}
-
-
-	public:
-	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
-		return get_pointer();
-	}
-
-
-	public:
-	ProcessType reset() DD_NOEXCEPT {
-		destruct();
-		m_pointer_ = PointerType();
-	}
-
-	public:
-	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
-		destruct();
-		m_pointer_ = pointer_;
-	}
-
-
-	public:
-	PointerType release() DD_NOEXCEPT {
-		PointerType temp(get_pointer());
-		m_pointer_ = PointerType();
-		return temp;
-	}
-
-
-	public:
-	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
-		using DD::swap;
-		swap(m_pointer_, target_.m_pointer_);
-	}
-
-
-	private:
-	ProcessType destruct() const DD_NOEXCEPT {
-		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
-		delete get_pointer();
-	}
-
-
-	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
-
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType&& origin_) noexcept(true) {
-		swap(origin_);
-	}
+	constexpr UniquePointer(ThisType&& origin_) = default;
 
 #	endif
 
 
 	public:
-	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
-		reset(pointer_);
-	}
-
-
-	public:
-	ReferenceType operator *() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return *get_pointer();
-	}
-
-
-	public:
-	PointerType operator ->() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return get_pointer();
-	}
-
-
-#	if __cplusplus >= 201103L
-	public:
-	explicit operator ValidityType() const DD_NOEXCEPT {
-		return is_valid();
-	}
-
-
-#	endif
-};
-
-
-
-template <typename ValueT_>
-struct UniquePointer<ValueT_[], DefaultTag> : Comparable<ValueT_[], DefaultTag> {
-	public:
-	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA void>);
-	DD_ALIAS(DeleterType, void);
-	DD_VALUE_TYPE_NESTED(ValueT_)
-
-	public:
-	DD_ALIAS(DifferenceType, DD::DifferenceType);
-
-
-	private:
-	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
-
-
-	public:
-#	if __cplusplus >= 201103L
-	constexpr UniquePointer() = default;
-#	else
-	UniquePointer() throw() : m_pointer_() {
-	}
-#	endif
-
-	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
-
-#	if __cplusplus >= 201103L
-	public:
-	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()) {
-	}
-
-#	endif
-
-	public:
-	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
-	}
-
-
-	public:
-	~UniquePointer() DD_NOEXCEPT {
-		destruct();
-	}
-
-
-	public:
-	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return m_pointer_;
-	}
-
-
-	public:
-	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
-		return get_pointer();
-	}
-
-
-	public:
-	ProcessType reset() DD_NOEXCEPT {
-		destruct();
-		m_pointer_ = PointerType();
-	}
-
-	public:
-	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
-		destruct();
-		m_pointer_ = pointer_;
-	}
-
-
-	public:
-	PointerType release() DD_NOEXCEPT {
-		PointerType temp_(get_pointer());
-		m_pointer_ = PointerType();
-		return temp_;
-	}
-
-
-	public:
-	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
-		using DD::swap;
-		swap(m_pointer_, target_.m_pointer_);
-	}
-
-
-	private:
-	ProcessType destruct() const DD_NOEXCEPT {
-		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type. ");
-		delete[] get_pointer();
+	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : SuperType(pointer_) {
 	}
 
 
@@ -419,39 +227,13 @@ struct UniquePointer<ValueT_[], DefaultTag> : Comparable<ValueT_[], DefaultTag> 
 #	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType&& origin_) noexcept {
-		swap(origin_);
+		this->swap(origin_);
+		return *this;
 	}
 
 #	endif
 
-	public:
-	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
-		reset(pointer_);
-	}
 
-
-	public:
-	ReferenceType operator *() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return *get_pointer();
-	}
-
-
-	public:
-	PointerType operator ->() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return get_pointer();
-	}
-
-
-#	if __cplusplus >= 201103L
-	public:
-	explicit operator ValidityType() const DD_NOEXCEPT {
-		return is_valid();
-	}
-
-
-#	endif
 };
 
 

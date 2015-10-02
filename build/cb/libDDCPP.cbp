@@ -96,6 +96,7 @@
 		<Unit filename="../../src/standard/bits/DD_IsLvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsMemberFunctionPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNilPointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsNoexceptCopyConstructible.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveAssignable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveConstructible.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsPod.hpp" />
@@ -111,7 +112,9 @@
 		<Unit filename="../../src/standard/bits/DD_IsSignedLong.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsSignedLongLong.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsSignedShort.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyCopyConstructible.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsTriviallyDestructible.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyMoveConstructible.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUndirectionalIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUnion.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUnsigned.hpp" />
@@ -157,6 +160,7 @@
 		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StrictPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />
@@ -173,6 +177,7 @@
 		<Unit filename="../../src/standard/bits/DD_binary_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bind.hpp" />
 		<Unit filename="../../src/standard/bits/DD_compatibility_definitions.hpp" />
+		<Unit filename="../../src/standard/bits/DD_construct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_container_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_copy.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count.hpp" />
@@ -180,6 +185,7 @@
 		<Unit filename="../../src/standard/bits/DD_debugger_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_declare_value.hpp" />
 		<Unit filename="../../src/standard/bits/DD_dereference.hpp" />
+		<Unit filename="../../src/standard/bits/DD_destruct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_equal.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fill.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find.hpp" />
@@ -228,6 +234,7 @@
 		<Unit filename="../../src/standard/bits/DD_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_swap.hpp" />
 		<Unit filename="../../src/standard/bits/DD_swap_target.hpp" />
+		<Unit filename="../../src/standard/bits/DD_transconstruct.hpp" />
 		<Unit filename="../../src/test_algorithm.cpp" />
 		<Unit filename="../../src/test_algorithm.h" />
 		<Unit filename="../../src/test_math.cpp" />

@@ -16,6 +16,7 @@
 #	include "DD_Range.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
+#	include "DD_get_pointer.hpp"
 #	include "DD_transconstruct.hpp"
 #	include "DD_copy.hpp"
 
@@ -250,6 +251,11 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	DD_ALIAS(SizeType, DD::SizeType);
 	DD_ALIAS(LengthType, DD::LengthType);
 
+	public:
+	DD_ALIAS(Iterator, PointerType);
+	DD_ALIAS(ConstIterator, ConstPointerType);
+	DD_ITERATOR_NESTED
+
 
 	public:
 #	if __cplusplus >= 201103L
@@ -263,7 +269,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	ProcessType stretch(LengthType new_capacity_) {
 		PointerType temp_begin_ = AllocatorType::allocate(new_capacity_);
-		PointerType temp_end_ = transconstruct(this->m_begin_, this->m_end_, temp_begin_);
+		PointerType temp_end_;
+		try {
+			temp_end_ = transconstruct(this->m_begin_, this->m_end_, temp_begin_);
+		} catch (...) {
+			AllocatorType::deallocate(temp_begin_, new_capacity_);
+		}
 		destruct();
 		this->m_begin_ = temp_begin_;
 		this->m_end_ = temp_end_;
@@ -275,9 +286,13 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	ProcessType reserve() noexcept(noexcept(ThisType().reserve(LengthType()))) {
 		LengthType capacity_ = this->get_capacity();
 		if (capacity_) {
-			reserve(capacity_ * 2);
+			try {
+				stretch(capacity_ * 2);
+			} catch (AllocationFailure& error_) {
+				stretch(capacity_ + 1);
+			}
 		} else {
-			reserve(1);
+			stretch(1);
 		}
 	}
 
@@ -288,6 +303,74 @@ struct Vessel_ : VesselBase_<ValueT_> {
 			stretch(new_capacity_);
 		}
 	}
+
+
+	public:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ProcessType push_back(ValueT__&& value___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		AllocatorType::construct(this->m_end_, forward<ValueT__>(value___));
+		++this->m_end_;
+	}
+#	else
+	ProcessType push_back(ValueT__ const& value___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		AllocatorType::construct(this->m_end_, value___);
+		++this->m_end_;
+	}
+#	endif
+
+
+	/*public:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ProcessType insert(Iterator position_, ValueT__&& value__) {
+#	else
+	ProcessType insert(Iterator position_, ValueT__&& value__) {
+#	endif
+		if (this->is_full()) {
+			LengthType capacity_ = this->get_capacity();
+			PointerType temp_begin_;
+			PointerType temp_end_;
+			if (capacity_) {
+				try {
+					temp_begin_ = AllocatorType::allocate(capacity_ * 2);
+				} catch (AllocationFailure& error_) {
+					temp_begin_ = AllocatorType::allocate(capacity_ + 1);
+				}
+			} else {
+				temp_begin_ = AllocatorType::allocate(1);
+			}
+			try {
+				temp_end_ = transconstruct(this->m_begin_, get_pointer(position_), temp_begin_);
+				try {
+					AllocatorType::construct(temp_end_, forward<ValueT__>(value__));
+					try {
+						transconstruct(get_pointer(position_), this->end(), ++temp_end_);
+					} catch (...) {
+						AllocatorType::destruct(--temp_end_);
+						throw;
+					}
+				} catch (...) {
+					move(temp_begin_, temp_end_, this->m_begin_);
+					AllocatorType::destruct(temp_begin_, temp_end_);
+					throw;
+				}
+			} catch (...) {
+				AllocatorType::deallocate(temp_begin_);
+			}
+			this->begin_ = temp_begin_;
+			this->end_ = temp_end_;
+			this->storage_end = temp_begin_ + capacity_;
+		} else {
+			//temp_ = get_pointer(position);
+		}
+	}*/
 
 
 	private:

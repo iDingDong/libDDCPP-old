@@ -58,4 +58,7 @@ void test_memory() {
 			throw "'DD::ParasiticPointer' test failed.";
 		}
 	}
+	{
+		DD::StrictPointer<int> sp_1;
+	}
 }
