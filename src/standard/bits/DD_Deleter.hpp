@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_Tags.hpp"
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_Value.hpp"
 #	include "DD_NeedInstance.hpp"
@@ -113,10 +114,10 @@ struct Deleter_<AllocatorT_, true> {
 
 
 	public:
-	static ProcessType destroy(PointerType pointer_) DD_NOEXCEPT {
+	ProcessType destroy(PointerType pointer_) DD_NOEXCEPT {
 		if (pointer_) {
-			AllocatorType::destruct(pointer_);
-			AllocatorType::deallocate(pointer_, 1);
+			m_allocator_.destruct(pointer_);
+			m_allocator_.deallocate(pointer_, 1);
 		}
 	}
 

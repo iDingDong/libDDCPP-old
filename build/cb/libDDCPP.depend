@@ -797,7 +797,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1443869296 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1443870995 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -808,16 +808,17 @@
 1443513194 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1443794786 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1443873361 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_FreeList.hpp"
+	"bits/DD_Deleter.hpp"
 	"bits/DD_make_unique.hpp"
 	"bits/DD_make_parasitic.hpp"
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
 
-1443870864 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
-	"DD_Deleter.hpp"
+1443873330 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
+	"DD_ValueTypeNested.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_freelist.hpp
 	"DD_SizeTrait.hpp"
@@ -996,7 +997,8 @@
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
 
-1443870973 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+1443873422 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+	"DD_Tags.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_Value.hpp"
 	"DD_NeedInstance.hpp"
