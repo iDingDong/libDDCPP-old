@@ -12,8 +12,8 @@
 
 
 
-#	if __cplusplus < 201103L
 DD_DETAIL_BEGIN_
+#	if __cplusplus < 201103L
 template <typename ObjectT_>
 struct Value_ {
 #		if DDCPP_COMPAT_STL
@@ -36,40 +36,58 @@ struct Value_<ValueT_*> {
 
 
 
-DD_DETAIL_END_
-
-
-
 #	elif DDCPP_COMPAT_STL
-DD_DETAIL_BEGIN_
-DD_NESTED_TYPE_TRAIT(Value_, value_type, RemoveReferenceType<decltype(*MACRO_ObjectT_())>)
+template <typename ObjectT_>
+struct Value__ {
+	using Type = decltype(*ObjectT_());
+
+
+};
 
 
 
-DD_DETAIL_END_
+template <typename ValueT_>
+struct Value__<ValueT_*> {
+	using Type = ValueT_;
+
+
+};
+
+
+
+DD_NESTED_TYPE_TRAIT(Value_, value_type, RemoveReferenceType<typename ::DD::detail_::Value__<MACRO_ObjectT_>::Type>)
 
 
 
 #	endif
-DD_BEGIN_
 #	if __cplusplus >= 201103L
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(Value, ValueType, typename detail_::Value_<MACRO_ObjectT_>::Type)
+DD_NESTED_TYPE_TRAIT(Value, ValueType, typename ::DD::detail_::Value_<MACRO_ObjectT_>::Type)
 #		else
-DD_NESTED_TYPE_TRAIT(Value, ValueType, RemoveReferenceType<decltype(*MACRO_ObjectT_())>)
+DD_NESTED_TYPE_TRAIT(Value, ValueType, RemoveReferenceType<typename ::DD::detail_::Value__<MACRO_ObjectT_>::Type>)
 #		endif
 #	else
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(Value, ValueType, typename detail_::Value_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type);
+DD_NESTED_TYPE_TRAIT(Value, ValueType, typename ::DD::detail_::Value_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type);
 #		else
 template <typename ObjectT_>
-struct Value : detail_::Value_<typename RemoveCV<ObjectT_>::Type> {
+struct Value : Value_<typename RemoveCV<ObjectT_>::Type> {
 };
 #		endif
 #	endif
 
 
 
+DD_TRAIT_MODIFIER(Value)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Value;
 DD_TRAIT_MODIFIER(Value)
 
 
