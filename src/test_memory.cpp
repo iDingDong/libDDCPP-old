@@ -8,12 +8,12 @@
 
 
 
-std::mutex g_mutex;
+//std::mutex g_mutex;
 //DD::ParasiticPointer<Test> g_ip(DD::construct_tag);
 
 
-/*
-void th1_main() {
+
+/*void th1_main() {
 	while (true) {
 		std::cout << "out: " << g_ip.get_reference_count() << std::endl;
 		{
@@ -23,8 +23,8 @@ void th1_main() {
 		}
 		std::cout << "end: " << g_ip.get_reference_count() << std::endl;
 	}
-}
-*/
+}*/
+
 
 
 void test_memory() {
@@ -59,6 +59,11 @@ void test_memory() {
 		}
 	}
 	{
-		DD::StrictPointer<int> sp_1;
+		{
+			DD::StrictPointer<Test[]> sp_1(new Test[3]);
+		}
+		if (Test::count != 0) {
+			throw "'DD::StrictPointer' test failed.";
+		}
 	}
 }

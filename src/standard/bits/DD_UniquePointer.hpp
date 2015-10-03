@@ -50,7 +50,7 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 #	endif
 
 	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT try : m_pointer_(pointer_), m_deleter_() {
+	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT try : m_pointer_(pointer_), m_deleter_() {
 	} catch (...) {
 		deleter_(pointer_);
 		throw;
@@ -218,7 +218,7 @@ struct UniquePointer<ValueT_, DefaultTag> : StrictPointer<ValueT_> {
 
 
 	public:
-	explicit DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : SuperType(pointer_) {
+	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : SuperType(pointer_) {
 	}
 
 

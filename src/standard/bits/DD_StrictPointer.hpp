@@ -6,18 +6,22 @@
 
 #	include "DD_debugger_definitions.hpp"
 #	include "DD_ValueTypeNested.hpp"
+#	include "DD_RemoveExtent.hpp"
 #	include "DD_DefaultDeleter.hpp"
 #	include "DD_swap.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT_, ProcessType(&deleter_c_)(ValueT_*) DD_NOEXCEPT = DefaultDeleter<ValueT_>::operate>
+template <
+	typename ValueT_,
+	ProcessType(&deleter_c_)(DD_MODIFY_TRAIT(RemoveExtent, ValueT_)*) DD_NOEXCEPT = DefaultDeleter<ValueT_>::destroy
+>
 struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 	public:
 	DD_ALIAS(ThisType, StrictPointer<ValueT_ DD_COMMA deleter_c_>);
-	DD_VALUE_TYPE_NESTED(ValueT_);
-	DD_ALIAS(DeleterType, ProcessType(&)(ValueT_*));
+	DD_VALUE_TYPE_NESTED(DD_MODIFY_TRAIT(RemoveExtent, ValueT_));
+	DD_ALIAS(DeleterType, ProcessType(&)(DD_MODIFY_TRAIT(RemoveExtent, ValueT_)*));
 	static DeleterType DD_CONSTANT deleter = deleter_c_;
 
 
@@ -43,7 +47,7 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 #	endif
 
 	public:
-	explicit DD_CONSTEXPR StrictPointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
+	DD_CONSTEXPR StrictPointer(PointerType pointer_) DD_NOEXCEPT : m_pointer_(pointer_) {
 	}
 
 

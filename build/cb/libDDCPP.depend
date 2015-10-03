@@ -189,10 +189,8 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreference.hpp
 	"DD_IteratorValue.hpp"
 
-1443778617 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorvalue.hpp
-	"DD_NestedTypeCheck.hpp"
-	"DD_RemoveCV.hpp"
-	"DD_RemoveReference.hpp"
+1443869845 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorvalue.hpp
+	"DD_Value.hpp"
 
 1443781855 d:\develop\repositories\libddcpp\src\standard\bits\dd_nestedtypecheck.hpp
 	"DD_Nil.hpp"
@@ -708,7 +706,7 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1443797285 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+1443868756 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_Tags.hpp"
 	"DD_Comparable.hpp"
@@ -799,7 +797,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1443793995 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1443869296 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -818,8 +816,8 @@
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
 
-1443793346 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
-	"DD_global_definitions.hpp"
+1443870864 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
+	"DD_Deleter.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_freelist.hpp
 	"DD_SizeTrait.hpp"
@@ -986,9 +984,21 @@
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
 
-1443797260 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictpointer.hpp
+1443868756 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictpointer.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_ValueTypeNested.hpp"
+	"DD_RemoveExtent.hpp"
 	"DD_DefaultDeleter.hpp"
 	"DD_swap.hpp"
+
+1443869845 d:\develop\repositories\libddcpp\src\standard\bits\dd_value.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_RemoveCV.hpp"
+	"DD_RemoveReference.hpp"
+
+1443870973 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_Value.hpp"
+	"DD_NeedInstance.hpp"
+	"DD_forward.hpp"
 
