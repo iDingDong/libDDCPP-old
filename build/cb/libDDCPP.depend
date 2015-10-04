@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1443793609 source:d:\develop\repositories\libddcpp\src\main.cpp
+1443935620 source:d:\develop\repositories\libddcpp\src\main.cpp
 	<iostream>
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
@@ -586,7 +586,7 @@
 	"DD_IsBidirectionalIterator.hpp"
 	"DD_IsFreeAccessIterator.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
+1443929994 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
 	"DD_IsVoid.hpp"
 	"DD_IsArithmetic.hpp"
 	"DD_IsReference.hpp"
@@ -606,6 +606,7 @@
 	"DD_AddPointer.hpp"
 	"DD_RemoveReference.hpp"
 	"DD_RemoveExtent.hpp"
+	"DD_ReadOnlyCall.hpp"
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_isvoid.hpp
 	<type_traits>
@@ -797,7 +798,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1443875399 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1443876064 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -840,10 +841,12 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_release.hpp
 	"DD_global_definitions.hpp"
 
-1441685287 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
+1443936448 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
 	"test_meta.h"
+	"test_object.hpp"
 	"standard/DDMeta.hpp"
 	"standard/DDTrait.hpp"
+	"standard/bits/DD_TypeInfo.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
 	"bits/DD_NestedTypeCheck.hpp"
@@ -970,7 +973,7 @@
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
 
-1443767731 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyconstructible.hpp
+1443935932 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyconstructible.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
@@ -980,7 +983,7 @@
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
 
-1443876011 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct.hpp
+1443877860 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct.hpp
 	"DD_IsTriviallyDestructible.hpp"
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
@@ -1003,4 +1006,8 @@
 	"DD_Value.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_forward.hpp"
+
+1443936499 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
+	"DD_Conditional.hpp"
+	"DD_IsTriviallyCopyConstructible.hpp"
 

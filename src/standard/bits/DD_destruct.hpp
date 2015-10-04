@@ -51,8 +51,6 @@ inline ProcessType destruct(PointerT_ const& pointer__) DD_NOEXCEPT {
 	Destruct_<IsTriviallyDestructible<DD_MODIFY_TRAIT(IteratorValue, PointerT_)>::value>::destruct(pointer__);
 }
 
-
-
 template <typename UndirectionalIteratorT_>
 inline ProcessType destruct(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ const& end__) DD_NOEXCEPT {
 	Destruct_<IsTriviallyDestructible<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT_)>::value>::destruct(begin__, end__);

@@ -17,7 +17,7 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-using IsTriviallyCopyConstructible = AndType<StdBoolConstant<std::is_trivially_copy_constructible<ObjectT_>>...>;
+using IsTriviallyCopyConstructible = AndType<StdBoolConstant<std::is_trivially_copy_constructible<ObjectsT_>>...>;
 #	else
 template <typename ObjectT_>
 struct IsTriviallyCopyConstructible : IsScalar<ObjectT_> {

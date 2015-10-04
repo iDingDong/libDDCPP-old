@@ -30,6 +30,7 @@
 #		include "DD_RemoveReference.hpp"
 #		include "DD_RemoveExtent.hpp"
 #	endif
+#	include "DD_ReadOnlyCall.hpp"
 
 
 
@@ -106,6 +107,8 @@ struct Trait {
 #	if __cplusplus >= 201103L
 	using Decayed = DecayType<ObjectType>;
 #	endif
+
+	DD_ALIAS(CalledForReadOnly, DD_MODIFY_TRAIT(ReadOnlyCall, ObjectType));
 
 
 };

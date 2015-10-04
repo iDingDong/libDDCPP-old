@@ -60,6 +60,7 @@
 		<Unit filename="../../src/standard/bits/DD_ContainedByPack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Decay.hpp" />
 		<Unit filename="../../src/standard/bits/DD_DefaultDeleter.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Deleter.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dereferenceable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dynamic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EnableIf.hpp" />
@@ -169,6 +170,7 @@
 		<Unit filename="../../src/standard/bits/DD_Uncopiable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UnusedIgnorer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Value.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ValueTypeNested.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Variant.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Vessel.hpp" />
