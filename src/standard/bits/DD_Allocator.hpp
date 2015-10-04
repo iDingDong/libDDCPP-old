@@ -41,11 +41,11 @@ class Allocator<void> {
 
 	public:
 	static PointerType allocate(SizeType size_) {
-		PointerType temp = ::operator new(size_);
-		if (temp) {
-			return temp;
+		try {
+			return ::operator new(size_);
+		} catch (std::bad_alloc& error_) {
+			throw AllocationFailure("'DD::Allocator' Failed to allocate.");
 		}
-		throw AllocationFailure("'DD::Allocator' Failed to allocate.");
 	}
 
 

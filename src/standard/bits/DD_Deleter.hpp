@@ -16,7 +16,7 @@
 
 DD_DETAIL_BEGIN_
 template <typename AllocatorT_, ValidityType need_instance_c_>
-struct Deleter_ {
+class Deleter_ {
 	public:
 	DD_ALIAS(ThisType, Deleter_<AllocatorT_ DD_COMMA need_instance_c_>);
 	DD_ALIAS(AllocatorType, AllocatorT_);
@@ -66,7 +66,7 @@ struct Deleter_ {
 
 
 template <typename AllocatorT_>
-struct Deleter_<AllocatorT_, true> {
+class Deleter_<AllocatorT_, true> {
 	public:
 	DD_ALIAS(ThisType, Deleter_<AllocatorT_ DD_COMMA true>);
 	DD_ALIAS(AllocatorType, AllocatorT_);
@@ -136,12 +136,8 @@ struct Deleter_<AllocatorT_, true> {
 
 
 template <typename AllocatorT_>
-#	if __cplusplus >= 201103L
-using Deleter = Deleter_<AllocatorT_, NeedInstance<AllocatorT_>::value>;
-#	else
-struct Deleter : Deleter_<AllocatorT_, NeedInstance<AllocatorT_>::value> {
+class Deleter : Deleter_<AllocatorT_, NeedInstance<AllocatorT_>::value> {
 };
-#	endif
 
 
 

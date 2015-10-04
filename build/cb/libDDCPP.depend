@@ -715,7 +715,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1443776267 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1443948783 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	"DD_ValueTypeNested.hpp"
 	"DD_IntegralConstant.hpp"
@@ -725,7 +725,8 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 
-1443513192 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
+1443939970 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
+	<new>
 	"DD_RunTimeError.hpp"
 
 1443628725 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
@@ -809,10 +810,10 @@
 1443513194 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1443873361 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1443948742 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
-	"bits/DD_FreeList.hpp"
 	"bits/DD_Deleter.hpp"
+	"bits/DD_Pool.hpp"
 	"bits/DD_make_unique.hpp"
 	"bits/DD_make_parasitic.hpp"
 	"bits/DD_UniquePointer.hpp"
@@ -1000,7 +1001,7 @@
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
 
-1443873422 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+1443937574 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
 	"DD_Tags.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_Value.hpp"
@@ -1012,4 +1013,9 @@
 	"DD_IsTriviallyCopyConstructible.hpp"
 	"DD_RemoveReference.hpp"
 	"DD_RemoveCV.hpp"
+
+1443949395 d:\develop\repositories\libddcpp\src\standard\bits\dd_pool.hpp
+	"DD_NeedInstance.hpp"
+	"DD_Array.hpp"
+	"DD_Allocator.hpp"
 
