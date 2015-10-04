@@ -841,7 +841,7 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_release.hpp
 	"DD_global_definitions.hpp"
 
-1443936448 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
+1443936518 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
 	"test_meta.h"
 	"test_object.hpp"
 	"standard/DDMeta.hpp"
@@ -1007,7 +1007,9 @@
 	"DD_NeedInstance.hpp"
 	"DD_forward.hpp"
 
-1443936499 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
+1443937083 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
 	"DD_Conditional.hpp"
 	"DD_IsTriviallyCopyConstructible.hpp"
+	"DD_RemoveReference.hpp"
+	"DD_RemoveCV.hpp"
 

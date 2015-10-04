@@ -6,12 +6,14 @@
 
 #	include "DD_Conditional.hpp"
 #	include "DD_IsTriviallyCopyConstructible.hpp"
+#	include "DD_RemoveReference.hpp"
+#	include "DD_RemoveCV.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename ArgumentT_>
-struct ReadOnlyCall {
+struct ReadOnlyCall_ {
 #	if __cplusplus >= 201103L
 	using Type = ConditionalType<
 		IsTriviallyCopyConstructible<ArgumentT_>::value && sizeof(ArgumentT_) <= sizeof(void*),
@@ -27,6 +29,12 @@ struct ReadOnlyCall {
 #	endif
 
 
+};
+
+
+
+template <typename ArgumentT_>
+struct ReadOnlyCall : ReadOnlyCall_<DD_MODIFY_TRAIT(RemoveCV, DD_MODIFY_TRAIT(RemoveReference, ArgumentT_))> {
 };
 
 
