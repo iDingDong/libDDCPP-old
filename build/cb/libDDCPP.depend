@@ -725,8 +725,7 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 
-1443939970 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
-	<new>
+1443949436 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_RunTimeError.hpp"
 
 1443628725 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
@@ -864,9 +863,10 @@
 	"DD_Or.hpp"
 	"DD_IsSame.hpp"
 
-1443513193 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
+1444014770 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
 	"bits/DD_declare_value.hpp"
 	"bits/DD_Conditional.hpp"
+	"bits/DD_EnableIf.hpp"
 	"bits/DD_Or.hpp"
 	"bits/DD_And.hpp"
 	"bits/DD_Result.hpp"
@@ -1018,4 +1018,7 @@
 	"DD_NeedInstance.hpp"
 	"DD_Array.hpp"
 	"DD_Allocator.hpp"
+
+1444014736 d:\develop\repositories\libddcpp\src\standard\bits\dd_enableif.hpp
+	"DD_global_definitions.hpp"
 

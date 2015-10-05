@@ -67,7 +67,6 @@
 		<Unit filename="../../src/standard/bits/DD_EqualityComparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Exception.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ForRange.hpp" />
-		<Unit filename="../../src/standard/bits/DD_FreeList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Function.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Functor.hpp" />
 		<Unit filename="../../src/standard/bits/DD_GetPackBack.hpp" />
@@ -150,6 +149,7 @@
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReferenceWrapper.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveAllExtents.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveCV.hpp" />

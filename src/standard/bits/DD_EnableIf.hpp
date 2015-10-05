@@ -8,8 +8,8 @@
 
 
 
-DD_BEGIN_
-template <ValidityType is_valid_c_, typename ObjectT_>
+DD_DETAIL_BEGIN_
+template <ValidityType is_valid_c_, typename ObjectT_ = void>
 struct EnableIf {
 };
 
@@ -24,13 +24,25 @@ struct EnableIf<true, ObjectT_> {
 
 
 
-#	if __cplusplus >= 201103L
-template <ValidityType is_valid_c_, typename ObjectT_>
+#if __cplusplus >= 201103L
+template <ValidityType is_valid_c_, typename ObjectT_ = void>
 using EnableIfType = typename EnableIf<is_valid_c_, ObjectT_>::Type;
 
 
 
+#endif
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::EnableIf;
+#	if __cplusplus >= 201103L
+using detail_::EnableIfType;
 #	endif
+
+
+
 DD_END_
 
 
