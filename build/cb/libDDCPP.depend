@@ -137,7 +137,8 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
 	"DD_Pair.hpp"
 
-1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
+1444031279 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
+	"DD_forward.hpp"
 	"DD_Comparable.hpp"
 	"DD_swap.hpp"
 	"DD_dereference.hpp"
@@ -556,7 +557,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\ddarray.hpp
 	"bits/DD_Array.hpp"
 
-1443623679 d:\develop\repositories\libddcpp\src\standard\bits\dd_array.hpp
+1444039647 d:\develop\repositories\libddcpp\src\standard\bits\dd_array.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_AccessDenied.hpp"
@@ -733,7 +734,7 @@
 	"DD_IntegralConstant.hpp"
 	"DD_IsScalar.hpp"
 
-1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1444020591 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
@@ -776,7 +777,7 @@
 1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsigned.hpp
 	"DD_IsArithmetic.hpp"
 
-1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_common.hpp
+1444020561 d:\develop\repositories\libddcpp\src\standard\bits\dd_common.hpp
 	"DD_declare_value.hpp"
 	"DD_Decay.hpp"
 
@@ -798,7 +799,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1443876064 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1444046953 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -809,14 +810,14 @@
 1443513194 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1443948742 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1444039239 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Pool.hpp"
 	"bits/DD_make_unique.hpp"
-	"bits/DD_make_parasitic.hpp"
+	"bits/DD_make_strict_parasitic.hpp"
 	"bits/DD_UniquePointer.hpp"
-	"bits/DD_ParasiticPointer.hpp"
+	"bits/DD_StrictParasiticPointer.hpp"
 
 1443873330 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -830,10 +831,9 @@
 1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1443534283 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
-	"DD_ValueTypeNested.hpp"
+1444038539 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+	"DD_Parasitifer.hpp"
 	"DD_Tags.hpp"
-	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
 	"DD_release.hpp"
 	"DD_Pair.hpp"
@@ -989,7 +989,7 @@
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
 
-1443868756 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictpointer.hpp
+1444041992 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictpointer.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_RemoveExtent.hpp"
@@ -1020,5 +1020,25 @@
 	"DD_Allocator.hpp"
 
 1444014736 d:\develop\repositories\libddcpp\src\standard\bits\dd_enableif.hpp
+	"DD_global_definitions.hpp"
+
+1444042158 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasitifer.hpp
+	"DD_move.hpp"
+	"DD_DefaultDeleter.hpp"
+	"DD_Pair.hpp"
+
+1444041447 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_strict_parasitic.hpp
+	"DD_StrictParasiticPointer.hpp"
+
+1444047954 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictparasiticpointer.hpp
+	"DD_fabricate.hpp"
+	"DD_Parasitifer.hpp"
+	"DD_StrictPointer.hpp"
+	"DD_Tags.hpp"
+	"DD_address_of.hpp"
+	"DD_release.hpp"
+	"DD_Pair.hpp"
+
+1444041917 d:\develop\repositories\libddcpp\src\standard\bits\dd_fabricate.hpp
 	"DD_global_definitions.hpp"
 

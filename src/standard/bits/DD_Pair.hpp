@@ -5,9 +5,9 @@
 
 
 //#	include "DD_relationship_operators.hpp"
-//#	if __cplusplus >= 201103L
-//#		include "DD_forward.hpp"
-//#	endif
+#	if __cplusplus >= 201103L
+#		include "DD_forward.hpp"
+#	endif
 #	include "DD_Comparable.hpp"
 #	include "DD_swap.hpp"
 #	include "DD_dereference.hpp"
@@ -40,10 +40,9 @@ struct Pair : Comparable<Pair<ValueT1_, ValueT2_>> {
 
 	public:
 	template <typename ValueT1__, typename ValueT2__>
-	DD_CONSTEXPR Pair(
-		ValueT1__&& value_1___,
-		ValueT2__&& value_2___
-	) DD_NOEXCEPT_IF(noexcept(FirstValueType(value_1___)) && noexcept(SecondValueType(value_2___))) : first(value_1___), second(value_2___) {
+	DD_CONSTEXPR Pair(ValueT1__&& value_1___, ValueT2__&& value_2___) noexcept(
+		noexcept(FirstValueType(forward<ValueT1__>(value_1___))) && noexcept(SecondValueType(forward<ValueT2__>(value_2___)))
+	) : first(forward<ValueT1__>(value_1___)), second(forward<ValueT2__>(value_2___)) {
 	}
 #	else
 	public:

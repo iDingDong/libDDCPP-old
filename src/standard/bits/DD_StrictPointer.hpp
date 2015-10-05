@@ -123,14 +123,14 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		return *get_pointer();
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		return get_pointer();
 	}
 

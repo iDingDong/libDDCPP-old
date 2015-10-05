@@ -165,13 +165,13 @@ struct Array : ValueTypeNested<ValueT_> {
 
 
 	ReferenceType operator [](LengthType index_) DD_NOEXCEPT {
-		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		return array[index_];
 	}
 
 	ConstReferenceType DD_CONSTEXPR operator [](LengthType index_) const DD_NOEXCEPT {
 #	if __cplusplus >= 201402L
-		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(index_ < length_constant, "Out of range: 'DD::Array::operator []' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 #	endif
 		return array[index_];
 	}

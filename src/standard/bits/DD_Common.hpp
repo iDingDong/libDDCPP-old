@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
 struct Common {
 	using Type = void;
@@ -54,6 +54,16 @@ struct Common<ObjectT1_, ObjectT2_, ObjectsT_...> {
 
 template <typename... ObjectsT_>
 using CommonType = typename Common<ObjectsT_...>::Type;
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Common;
+using detail_::CommonType;
 
 
 

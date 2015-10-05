@@ -35,7 +35,6 @@
 		<Unit filename="../../src/standard/DDTrait.hpp" />
 		<Unit filename="../../src/standard/DDUtility.hpp" />
 		<Unit filename="../../src/standard/DDVessel.hpp" />
-		<Unit filename="../../src/standard/bits/DDContainer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AccessDenied.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddCV.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddConst.hpp" />
@@ -145,7 +144,7 @@
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
-		<Unit filename="../../src/standard/bits/DD_ParasiticPointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Parasitifer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
@@ -161,6 +160,7 @@
 		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StrictParasiticPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
@@ -189,6 +189,7 @@
 		<Unit filename="../../src/standard/bits/DD_dereference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_destruct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_equal.hpp" />
+		<Unit filename="../../src/standard/bits/DD_fabricate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fill.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_first_of.hpp" />
@@ -212,7 +213,7 @@
 		<Unit filename="../../src/standard/bits/DD_iterator_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_length_difference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_less.hpp" />
-		<Unit filename="../../src/standard/bits/DD_make_parasitic.hpp" />
+		<Unit filename="../../src/standard/bits/DD_make_strict_parasitic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_make_unique.hpp" />
 		<Unit filename="../../src/standard/bits/DD_max.hpp" />
 		<Unit filename="../../src/standard/bits/DD_merge.hpp" />
