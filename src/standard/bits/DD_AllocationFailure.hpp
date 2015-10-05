@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 struct AllocationFailure : RunTimeError {
 	public:
 	DD_ALIAS(SuperType, RunTimeError);
@@ -47,6 +47,15 @@ struct AllocationFailure : RunTimeError {
 
 #	endif
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AllocationFailure;
 
 
 

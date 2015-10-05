@@ -210,7 +210,6 @@ inline ValidityType DD_CONSTEXPR operator <(
 
 
 
-
 DD_DETAIL_END_
 
 

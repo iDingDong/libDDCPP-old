@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 struct AccessDenied : Illogic {
 	public:
 	DD_ALIAS(SuperType, Illogic);
@@ -47,6 +47,15 @@ struct AccessDenied : Illogic {
 
 #	endif
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AccessDenied;
 
 
 
