@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename PointerT1_, typename PointerT2_>
 inline SizeType DD_CONSTEXPR size_distance(
 	PointerT1_ const& begin__,
@@ -16,6 +16,15 @@ inline SizeType DD_CONSTEXPR size_distance(
 ) DD_NOEXCEPT_IF(noexcept(get_pointer(begin__)) && noexcept(get_pointer(end__))) {
 	return reinterpret_cast<char const*>(get_pointer(end__)) - reinterpret_cast<char const*>(get_pointer(begin__));
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::size_distance;
 
 
 

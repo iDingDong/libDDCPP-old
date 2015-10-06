@@ -15,7 +15,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 inline ObjectT_&& forward(RemoveReferenceType<ObjectT_>& object__) noexcept {
 	return static_cast<ObjectT_&&>(object__);
@@ -26,6 +26,15 @@ inline ObjectT_&& forward(RemoveReferenceType<ObjectT_>&& object__) noexcept {
 	static_assert(!IsLvalueReference<ObjectT_>::value, "Template argument substituting 'ObjectT_' is an lvalue reference type.");
 	return static_cast<ObjectT_&&>(object__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::forward;
 
 
 
