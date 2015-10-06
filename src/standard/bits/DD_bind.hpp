@@ -258,7 +258,21 @@ struct BindFunctor_ : Functor<typename ResultOf_<FunctionT_>::Type, ArgumentsT_.
 
 
 
-
+template <typename FunctionT_, typename... ArgumentsT_>
+inline BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...> bind(
+	FunctionT_&& function__,
+	ArgumentsT_&&... arguments__
+) noexcept(noexcept(
+	BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
+		forward<FunctionT_>(function__),
+		forward<ArgumentsT_>(arguments__)...
+	)
+)) {
+	return BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
+		forward<FunctionT_>(function__),
+		forward<ArgumentsT_>(arguments__)...
+	);
+}
 
 
 
@@ -312,21 +326,7 @@ DD_GENERATE_PLACE_HOLDER(31)
 
 
 DD_BEGIN_
-template <typename FunctionT_, typename... ArgumentsT_>
-inline detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...> bind(
-	FunctionT_&& function__,
-	ArgumentsT_&&... arguments__
-) noexcept(noexcept(
-	detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
-		forward<FunctionT_>(function__),
-		forward<ArgumentsT_>(arguments__)...
-	)
-)) {
-	return detail_::BindFunctor_<DecayType<FunctionT_>, DecayType<ArgumentsT_>...>(
-		forward<FunctionT_>(function__),
-		forward<ArgumentsT_>(arguments__)...
-	);
-}
+using detail_::bind;
 
 
 

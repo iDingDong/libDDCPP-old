@@ -66,7 +66,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 DD_ALIAS(ProcessType, void);
 
 DD_ALIAS(ValidityType, bool);
@@ -74,11 +74,9 @@ DD_ALIAS(CheckType, bool);
 
 DD_ALIAS(SizeType, std::size_t);
 DD_ALIAS(LengthType, SizeType);
-DD_ALIAS(QuantityType, SizeType);
 
 DD_ALIAS(PointerDifferenceType, std::ptrdiff_t);
 DD_ALIAS(DifferenceType, PointerDifferenceType);
-DD_ALIAS(CounterType, PointerDifferenceType);
 DD_ALIAS(SubscriptType, PointerDifferenceType);
 
 #	if __cplusplus >= 201103L
@@ -149,15 +147,35 @@ LengthType constexpr operator ""_DD_Length(unsigned long long length) {
 
 
 
-CounterType constexpr operator ""_DD_Counter(unsigned long long counter) {
-	return counter;
-}
-
-
-
 #	endif
 CheckType DD_CONSTANT on = true;
 CheckType DD_CONSTANT off = false;
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::ProcessType;
+using detail_::ValidityType;
+using detail_::CheckType;
+using detail_::SizeType;
+using detail_::LengthType;
+using detail_::PointerDifferenceType;
+using detail_::DifferenceType;
+using detail_::SubscriptType;
+#	if __cplusplus >= 201103L
+using detail_::ReferenceType;
+using detail_::ArrayType;
+using detail_::PointerType;
+#	endif
+using detail_::GlobalPointerType;
+using detail_::CStringType;
+using detail_::CStringConstType;
+using detail_::PromptType;
+using detail_::Direction;
 
 
 

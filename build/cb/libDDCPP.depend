@@ -19,7 +19,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1443795220 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1444132909 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -87,7 +87,7 @@
 1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_getpackback.hpp
 	"DD_global_definitions.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_forward.hpp
+1444132104 d:\develop\repositories\libddcpp\src\standard\bits\dd_forward.hpp
 	"DD_IsLvalueReference.hpp"
 	"DD_RemoveReference.hpp"
 
@@ -374,7 +374,7 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
+1444132178 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
 	"DD_IteratorDifference.hpp"
 	"DD_IsFreeAccessIterator.hpp"
 
@@ -400,14 +400,14 @@
 1443513195 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorcatagory.hpp
 	"DD_RemoveCV.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_size_distance.hpp
+1444132233 d:\develop\repositories\libddcpp\src\standard\bits\dd_size_distance.hpp
 	"DD_get_pointer.hpp"
 
 1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_pointer.hpp
 	"DD_address_of.hpp"
 	"DD_IteratorPointer.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_address_of.hpp
+1444132047 d:\develop\repositories\libddcpp\src\standard\bits\dd_address_of.hpp
 	"DD_global_definitions.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
@@ -570,10 +570,10 @@
 1442752949 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatstlcontainer.hpp
 	"DD_compatibility_definitions.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
+1444052503 d:\develop\repositories\libddcpp\src\standard\bits\dd_accessdenied.hpp
 	"DD_Illogic.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_exception.hpp
+1444052597 d:\develop\repositories\libddcpp\src\standard\bits\dd_exception.hpp
 	"DD_global_definitions.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_arrayiterator.hpp
@@ -726,7 +726,7 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 
-1443949436 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
+1444052538 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_RunTimeError.hpp"
 
 1443628725 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
@@ -799,7 +799,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1444046953 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1444048035 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	<iostream>
@@ -878,14 +878,14 @@
 	<iostream>
 	"standard/DDUtility.hpp"
 
-1443514613 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1444132394 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"
 	"DD_Tuple.hpp"
 	"DD_Functor.hpp"
 
-1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_functor.hpp
+1444132518 d:\develop\repositories\libddcpp\src\standard\bits\dd_functor.hpp
 	"DD_global_definitions.hpp"
 
 1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_ismemberfunctionpointer.hpp
@@ -904,13 +904,13 @@
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_global_definitions.hpp"
 
-1443513195 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
+1444052641 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
 	"DD_Exception.hpp"
 
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1443781942 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1444132454 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_NeedInstance.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"
@@ -1030,7 +1030,7 @@
 1444041447 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_strict_parasitic.hpp
 	"DD_StrictParasiticPointer.hpp"
 
-1444047954 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictparasiticpointer.hpp
+1444052445 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictparasiticpointer.hpp
 	"DD_fabricate.hpp"
 	"DD_Parasitifer.hpp"
 	"DD_StrictPointer.hpp"

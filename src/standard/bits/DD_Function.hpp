@@ -492,13 +492,17 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_
 
 
 
+template <typename FunctionT_, typename AllocatorT_ = Allocator<void>>
+using Function = detail_::Function_<FunctionT_, AllocatorT_, NeedInstance<AllocatorT_>::value>;
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename FunctionT_, typename AllocatorT_ = Allocator<void>>
-using Function = detail_::Function_<FunctionT_, AllocatorT_, NeedInstance<AllocatorT_>::value>;
+using detail_::Function;
 
 
 
