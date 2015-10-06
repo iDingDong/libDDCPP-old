@@ -44,6 +44,9 @@
 #		define DD_ALIAS(ARG_Alias_, ARG_Origin_) typedef ARG_Origin_ ARG_Alias_
 #	endif
 
+#	define DD_INHERIT_ALIAS(ARG_Alias_) DD_ALIAS(ARG_Alias_, SuperType::ARG_Alias_)
+#	define DD_INHERIT_TEMPLATE_ALIAS(ARG_Alias_) DD_ALIAS(ARG_Alias_, typename SuperType::ARG_Alias_)
+
 #	if __cplusplus >= 201103L
 #		define DD_TRAIT_MODIFIER(ARG_Modifier_) template <typename MACRO_ObjectT_> using ARG_Modifier_##Type = typename ARG_Modifier_<MACRO_ObjectT_>::Type;
 #		define DD_MODIFY_TRAIT(ARG_Modifier_, ARG_Target_) ARG_Modifier_##Type<ARG_Target_>

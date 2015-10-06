@@ -47,6 +47,8 @@ struct BinaryFunctor : Functor<ResultT_> {
 	DD_ALIAS(FirstArgumentType, ArgumentT1_);
 	DD_ALIAS(SecondArgumentType, ArgumentT2_);
 
+	DD_ALIAS(FunctionType, ResultT_(ArgumentT1_ DD_COMMA ArgumentT2_));
+
 
 };
 

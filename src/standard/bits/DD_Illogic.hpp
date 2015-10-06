@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_Illogic.hpp
-#ifndef DD_IlLOGIC_HPP_INCLUDED_
-#	define DD_ILOGIC_HPP_INCLUDED_ 1
+#ifndef DD_IllOGIC_HPP_INCLUDED_
+#	define DD_IllOGIC_HPP_INCLUDED_ 1
 
 
 

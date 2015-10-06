@@ -334,9 +334,4 @@ DD_END_
 
 
 
-#	undef DD_PLACE_HOLDER_BEGIN_
-#	undef DD_PLACE_HOLDER_END_
-
-
-
 #endif

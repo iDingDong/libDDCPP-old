@@ -134,6 +134,7 @@
 		<Unit filename="../../src/standard/bits/DD_IteratorReverse.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IteratorValue.hpp" />
+		<Unit filename="../../src/standard/bits/DD_LessThan.hpp" />
 		<Unit filename="../../src/standard/bits/DD_LessThanComparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_List.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ListIterator.hpp" />
@@ -149,6 +150,7 @@
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />
+		<Unit filename="../../src/standard/bits/DD_RedBlackTree.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReferenceWrapper.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveAllExtents.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveCV.hpp" />

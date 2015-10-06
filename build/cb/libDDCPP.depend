@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1443935620 source:d:\develop\repositories\libddcpp\src\main.cpp
+1444146441 source:d:\develop\repositories\libddcpp\src\main.cpp
 	<iostream>
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
+	"standard/bits/DD_RedBlackTree.hpp"
 	"test_meta.h"
 	"test_memory.h"
 	"test_algorithm.h"
@@ -23,7 +24,7 @@
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
-1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
+1444145851 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
 	<cstdint>
@@ -878,14 +879,14 @@
 	<iostream>
 	"standard/DDUtility.hpp"
 
-1444132394 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1444136925 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"
 	"DD_Tuple.hpp"
 	"DD_Functor.hpp"
 
-1444132518 d:\develop\repositories\libddcpp\src\standard\bits\dd_functor.hpp
+1444146262 d:\develop\repositories\libddcpp\src\standard\bits\dd_functor.hpp
 	"DD_global_definitions.hpp"
 
 1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_ismemberfunctionpointer.hpp
@@ -904,7 +905,7 @@
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_global_definitions.hpp"
 
-1444052641 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
+1444149044 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
 	"DD_Exception.hpp"
 
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
@@ -1041,4 +1042,18 @@
 
 1444041917 d:\develop\repositories\libddcpp\src\standard\bits\dd_fabricate.hpp
 	"DD_global_definitions.hpp"
+
+1444150563 d:\develop\repositories\libddcpp\src\standard\bits\dd_redblacktree.hpp
+	"DD_NeedInstance.hpp"
+	"DD_ReadOnlyCall.hpp"
+	"DD_LessThan.hpp"
+	"DD_BinaryTreeNode.hpp"
+	"DD_Allocator.hpp"
+
+1444146549 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
+	"DD_ReadOnlyCall.hpp"
+	"DD_Functor.hpp"
+
+1444150547 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
+	"DD_ValueTypeNested.hpp"
 
