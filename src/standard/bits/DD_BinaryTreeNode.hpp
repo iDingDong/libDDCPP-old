@@ -72,16 +72,50 @@ struct RedBlackTreeNode : EmptyRedBlackTreeNode {
 
 
 template <typename BinaryTreeNodeT_>
+inline ValidityType DD_CONSTEXPR has_root(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
+	return node_->parent;
+}
+
+
+template <typename BinaryTreeNodeT_>
+inline ValidityType DD_CONSTEXPR has_left(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
+	return node_->left;
+}
+
+
+template <typename BinaryTreeNodeT_>
+inline ValidityType DD_CONSTEXPR has_right(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
+	return node_->right;
+}
+
+
+template <typename BinaryTreeNodeT_>
+inline ValidityType DD_CONSTEXPR is_root(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
+	return !has_root(node_);
+}
+
+
+template <typename BinaryTreeNodeT_>
 inline ValidityType is_left_child(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
-	DD_ASSERT(node_->parent, "Failed to judge a non-child node: 'DD::is_left_child'");
+	DD_ASSERT(!is_root(node_), "Failed to judge a non-child node: 'DD::is_left_child'");
 	return node_ == node_->parent->left;
 }
 
 
 template <typename BinaryTreeNodeT_>
 inline ValidityType is_right_child(BinaryTreeNodeT_* node_) DD_NOEXCEPT {
-	DD_ASSERT(node_->parent, "Failed to judge a non-child node: 'DD::is_right_child'");
+	DD_ASSERT(!is_root(node_), "Failed to judge a non-child node: 'DD::is_right_child'");
 	return node_ == node_->parent->right;
+}
+
+
+template <typename BinaryTreeNodeT_>
+inline BinaryTreeNodeT_* minimum_binary_tree_node(BinaryTreeNodeT_* root_) DD_NOEXCEPT {
+	DD_ASSERT(root_, "Failed to find minimum node in an empty binary (sub-)tree: 'DD::minimum_binary_tree_node'");
+	if (root_->right) {
+		root_ = root_->right;
+	}
+	return root_;
 }
 
 
@@ -92,7 +126,7 @@ ProcessType left_rotate(BinaryTreeNodeT_* root_) DD_NOEXCEPT {
 	if (root_->right) {
 		root_->right->parent = root_;
 	}
-	if (root_->parent) {
+	if (!is_root(root_)) {
 		if (is_left_child(root_)) {
 			root_->parent->left = temp_;
 		} else {
