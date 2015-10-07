@@ -60,8 +60,25 @@ struct RedBlackTreeBase_ {
 	ProcessType insert_node_(NodePointerType new_node_) DD_NOEXCEPT;
 
 
+	protected:
+	static ProcessType detach_node_(NodePointerType node_) DD_NOEXCEPT;
+
+
 	private:
-	ProcessType insert_fix_up_(NodePointerType new_node_) DD_NOEXCEPT;
+	static ProcessType insert_fix_up_(NodePointerType new_node_) DD_NOEXCEPT;
+
+
+	private:
+	ProcessType transplant_(NodePointerType old_root_, NodePointer new_root_) DD_NOEXCEPT {
+		if (is_root(old_root_)) {
+			m_root_ = new_root_;
+		} else if (is_left_child) {
+			old_root_->parent->left = new_root_;
+		} else {
+			old_root_->parent->right = new_root_;
+		}
+		new_root_->parent = old_root->parent;
+	}
 
 
 	protected:
@@ -79,10 +96,8 @@ ProcessType RedBlackTreeBase_<ValueT_, less_c_>::insert_node_(
 	new_node_->left = NodePointerType();
 	new_node_->right = NodePointerType();
 	if (m_root_) {
-		m_root_ = new_node_;
 		new_node_->color = NodeType::black;
 		new_node_->parent = NodePointerType();
-	} else {
 		new_node_->color = NodeType::red;
 		new_node_->parent = m_root_;
 		for (; ; ) {
@@ -104,6 +119,26 @@ ProcessType RedBlackTreeBase_<ValueT_, less_c_>::insert_node_(
 				throw Illogic("Repeat element found in a search tree.");
 			}
 		}
+	} else {
+		m_root_ = new_node_;
+	}
+}
+
+
+template <typename ValueT_, typename LessThan<RedBlackTreeNode<ValueT_>>::FunctionType& less_c_>
+ProcessType RedBlackTreeBase_<ValueT_, less_c_>::detach_node_(
+	RedBlackTreeBase_<ValueT_, less_c_>::NodePointerType node_
+) DD_NOEXCEPT {
+	NodePointerType temp_ = node_;
+	NodePointerType track_;
+	typename NodeType::Color original_color_ = node_->color;
+	if (!has_left(node_)) {
+		track_ = node_->right;
+		transplant_(node_, track_);
+	} else if (!has_right(node_)) {
+		track_ = node_->left;
+		transplant_(node_, track_);
+	} else {
 	}
 }
 
@@ -114,12 +149,11 @@ ProcessType RedBlackTreeBase_<ValueT_, less_c_>::insert_fix_up_(
 ) DD_NOEXCEPT {
 	while (new_node_->parent->color == NodeType::red) {
 		if (is_left_child(new_node_->parent)) {
-			NodePointerType temp_ = new_node_->parent->parent->right;
-			if (temp_->color == NodeType::red) {
+			if (new_node_->parent->parent->right->color == NodeType::red) {
 				new_node_->parent->color = NodeType::black;
-				temp_->color = NodeType::black;
-				temp_->parent = NodeType::red;
-				new_node_ = temp_->parent;
+				new_node_->parent->parent->right->color = NodeType::black;
+				new_node_->parent->parent = NodeType::red;
+				new_node_ = new_node_->parent->parent;
 			} else if (is_right_child(new_node_)) {
 				new_node_ = new_node_->parent;
 				left_rotate(new_node_);
@@ -128,12 +162,11 @@ ProcessType RedBlackTreeBase_<ValueT_, less_c_>::insert_fix_up_(
 			new_node_->parent->parent->color = NodeType::red;
 			right_rotate(new_node_->parent->parent);
 		} else {
-			NodePointerType temp_ = new_node_->parent->parent->left;
-			if (temp_->color == NodeType::red) {
+			if (new_node_->parent->parent->left->color == NodeType::red) {
 				new_node_->parent->color = NodeType::black;
-				temp_->color = NodeType::black;
-				temp_->parent = NodeType::red;
-				new_node_ = temp_->parent;
+				new_node_->parent->parent->left->color = NodeType::black;
+				new_node_->parent->parent = NodeType::red;
+				new_node_ = new_node_->parent->parent;
 			} else if (is_left_child(new_node_)) {
 				new_node_ = new_node_->parent;
 				right_rotate(new_node_);
