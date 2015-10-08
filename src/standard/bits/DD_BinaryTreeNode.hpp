@@ -12,13 +12,120 @@ DD_DETAIL_BEGIN_
 struct EmptyBinaryTreeNode {
 	DD_ALIAS(ThisType, EmptyBinaryTreeNode);
 
+	DD_ALIAS(NodePointerType, ThisType*);
+	DD_ALIAS(NodeConstPointerType, ThisType const*);
 
-	ThisType* parent;
-	ThisType* left;
-	ThisType* right;
+
+	NodePointerType parent;
+	NodePointerType left;
+	NodePointerType right;
+
+
+	ValidityType DD_CONSTEXPR has_parent() const DD_NOEXCEPT {
+		return parent;
+	}
+
+
+	ValidityType DD_CONSTEXPR has_left() const DD_NOEXCEPT {
+		return left;
+	}
+
+
+	ValidityType DD_CONSTEXPR has_right() const DD_NOEXCEPT {
+		return right;
+	}
+
+
+	ValidityType DD_CONSTEXPR is_left() const DD_NOEXCEPT {
+		DD_ASSERT(has_parent(), "Not a child: 'DD::EmptyBinaryTreeNode::is_left'");
+		return this == parent->left;
+	}
+
+
+	ValidityType DD_CONSTEXPR is_right() const DD_NOEXCEPT {
+		DD_ASSERT(has_parent(), "Not a child: 'DD::EmptyBinaryTreeNode::is_right'");
+		return this == parent->right;
+	}
+
+
+	NodePointerType DD_CONSTEXPR get_brother() const DD_NOEXCEPT {
+		DD_ASSERT(has_parent(), "No brother to get: 'DD::EmptyBinaryTreeNode::get_brother'");
+		return is_left() ? parent->right : parent->left;
+	}
+
+
+	NodePointerType get_minimum() DD_NOEXCEPT {
+		NodePointerType current_ = this;
+		if (current_->has_left()) {
+			current_ = current_->left;
+		}
+		return current_;
+	}
+
+	NodeConstPointerType DD_CONSTEXPR get_minimum() const DD_NOEXCEPT {
+#	if __cplusplus >= 201402L
+		NodePointerType current_ = this;
+		if (current_->has_left()) {
+			current_ = current_->left;
+		}
+		return current_;
+#	else
+		return has_left() ? static_cast<NodeConstPointerType>(left)->get_minimum() : this;
+#	endif
+	}
+
+
+	template <int workaround_ = 0>
+	ProcessType left_rotate() DD_NOEXCEPT;
+
+
+	template <int workaround_ = 0>
+	ProcessType right_rotate() DD_NOEXCEPT;
 
 
 };
+
+
+
+template <int workaround_>
+ProcessType EmptyBinaryTreeNode::left_rotate() DD_NOEXCEPT {
+	NodePointerType temp_ = this->right;
+	this->right = temp_->left;
+	if (this->has_right()) {
+		this->right->parent = this;
+	}
+	if (this->has_parent()) {
+		if (this->is_left()) {
+			this->parent->left = temp_;
+		} else {
+			this->parent->right = temp_;
+		}
+	}
+	temp_->parent = this->parent;
+	temp_->left = this;
+	this->parent = temp_;
+}
+
+
+
+template <int workaround_>
+ProcessType EmptyBinaryTreeNode::right_rotate() DD_NOEXCEPT {
+	NodePointerType temp_ = this->left;
+	this->left = temp_->right;
+	if (this->has_left()) {
+		this->left->parent = this;
+	}
+	if (this->has_parent()) {
+		if (this->is_right()) {
+			this->parent->right = temp_;
+		} else {
+			this->parent->left = temp_;
+		}
+	}
+	temp_->parent = this->parent;
+	temp_->right = this;
+	this->parent = temp_;
+}
 
 
 
@@ -35,7 +142,7 @@ struct BinaryTreeNode : EmptyBinaryTreeNode {
 
 
 
-struct EmptyRedBlackTreeNode : EmptyBinaryTreeNode {
+struct EmptyRedBlackTreeNode {
 	DD_ALIAS(ThisType, EmptyRedBlackTreeNode);
 
 
@@ -58,8 +165,13 @@ struct EmptyRedBlackTreeNode : EmptyBinaryTreeNode {
 
 
 
+struct RedBlackTreeNodeBase : EmptyBinaryTreeNode, EmptyRedBlackTreeNode {
+};
+
+
+
 template <typename ValueT_>
-struct RedBlackTreeNode : EmptyRedBlackTreeNode {
+struct RedBlackTreeNode : RedBlackTreeNodeBase {
 	DD_ALIAS(ThisType, RedBlackTreeNode<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
@@ -80,10 +192,6 @@ using detail_::EmptyBinaryTreeNode;
 using detail_::BinaryTreeNode;
 using detail_::EmptyRedBlackTreeNode;
 using detail_::RedBlackTreeNode;
-using detail_::is_left_child;
-using detail_::is_right_child;
-using detail_::left_rotate;
-using detail_::right_rotate;
 
 
 

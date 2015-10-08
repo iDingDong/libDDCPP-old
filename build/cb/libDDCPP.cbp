@@ -49,6 +49,7 @@
 		<Unit filename="../../src/standard/bits/DD_AtPack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BiggestTypeOfPack.h" />
 		<Unit filename="../../src/standard/bits/DD_BinaryOperators.hpp" />
+		<Unit filename="../../src/standard/bits/DD_BinarySearchTree.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BinaryTreeNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BuildInTypes.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Common.hpp" />
@@ -215,6 +216,7 @@
 		<Unit filename="../../src/standard/bits/DD_iterator_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_length_difference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_less.hpp" />
+		<Unit filename="../../src/standard/bits/DD_logical_not_of.hpp" />
 		<Unit filename="../../src/standard/bits/DD_make_strict_parasitic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_make_unique.hpp" />
 		<Unit filename="../../src/standard/bits/DD_max.hpp" />
