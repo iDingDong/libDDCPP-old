@@ -7,6 +7,10 @@
 #	define DD_COMMA ,
 
 #	if __cplusplus >= 201103L
+#		define DD_ARGUMENT(...) __VA_ARGS__
+
+#	endif
+#	if __cplusplus >= 201103L
 #		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_) static_assert(ARG_condition_, ARG_Prompt_);
 #	else
 #		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_)
