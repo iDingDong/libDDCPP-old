@@ -25,16 +25,20 @@ struct declare_value_protector_ {
 
 
 
+template <typename ObjectT_>
+AddRvalueReferenceType<ObjectT_> declare_value() noexcept {
+	static_assert(declare_value_protector_<ObjectT_>::value, "DD::declare_value is forbidden to be evaluated.");
+	return declare_value_protector_<ObjectT_>::declare_value_();
+}
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename ObjectT_>
-AddRvalueReferenceType<ObjectT_> declare_value() noexcept {
-	static_assert(detail_::declare_value_protector_<ObjectT_>::value, "DD::declare_value is forbidden to be evaluated.");
-	return detail_::declare_value_protector_<ObjectT_>::declare_value_();
-}
+using detail_::declare_value;
 
 
 

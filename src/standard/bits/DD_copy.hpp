@@ -15,7 +15,7 @@ DD_DETAIL_BEGIN_
 template <ValidityType is_memmoveable_c_>
 struct Copy_ {
 	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
-	static UndirectionalIteratorT2__ copy_(
+	static UndirectionalIteratorT2__ copy(
 		UndirectionalIteratorT1__ begin___,
 		UndirectionalIteratorT1__ const& end___,
 		UndirectionalIteratorT2__ result_begin___
@@ -34,7 +34,7 @@ struct Copy_ {
 template <>
 struct Copy_<true> {
 	template <typename PointerT1__, typename PointerT2__>
-	static PointerT2__ DD_CONSTEXPR copy_(
+	static PointerT2__ DD_CONSTEXPR copy(
 		PointerT1__ const& begin___,
 		PointerT1__ const& end___,
 		PointerT2__ const& result_begin___
@@ -47,19 +47,23 @@ struct Copy_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
 UndirectionalIteratorT2_ DD_CONSTEXPR copy(
 	UndirectionalIteratorT1_ const& begin__,
 	UndirectionalIteratorT1_ const& end__,
 	UndirectionalIteratorT2_ const& result_end__
 ) {
-	return detail_::Copy_<false>::copy_(begin__, end__, result_end__);// Imperfect realization
+	return Copy_<false>::copy(begin__, end__, result_end__);// Imperfect realization
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::copy;
 
 
 
