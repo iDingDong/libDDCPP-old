@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1444146441 source:d:\develop\repositories\libddcpp\src\main.cpp
+1444210149 source:d:\develop\repositories\libddcpp\src\main.cpp
 	<iostream>
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
@@ -20,11 +20,11 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1444132909 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1444443721 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
-1444145851 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
+1444401013 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
 	<cstdint>
@@ -74,7 +74,7 @@
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_select_sort.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
+1444475427 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
@@ -118,7 +118,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min.hpp
 	"DD_global_definitions.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_max.hpp
+1444475374 d:\develop\repositories\libddcpp\src\standard\bits\dd_max.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
@@ -128,7 +128,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
 	"DD_global_definitions.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_min_max.hpp
+1444475473 d:\develop\repositories\libddcpp\src\standard\bits\dd_min_max.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
@@ -493,7 +493,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_global_definitions.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1444398851 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_global_definitions.hpp"
 	"DD_size_distance.hpp"
@@ -540,9 +540,11 @@
 1443513051 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/bits/DD_print.hpp"
 
-1443513183 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
+1444474781 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
 	<iostream>
+	<iomanip>
 	"DD_Tags.hpp"
+	"DD_fabricate.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\test_utility.h
 
@@ -783,7 +785,7 @@
 	"DD_declare_value.hpp"
 	"DD_Decay.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_declare_value.hpp
+1444398915 d:\develop\repositories\libddcpp\src\standard\bits\dd_declare_value.hpp
 	"DD_AddRvalueReference.hpp"
 
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
@@ -1044,20 +1046,26 @@
 1444041917 d:\develop\repositories\libddcpp\src\standard\bits\dd_fabricate.hpp
 	"DD_global_definitions.hpp"
 
-1444150563 d:\develop\repositories\libddcpp\src\standard\bits\dd_redblacktree.hpp
+1444474153 d:\develop\repositories\libddcpp\src\standard\bits\dd_redblacktree.hpp
 	"DD_NeedInstance.hpp"
 	"DD_ReadOnlyCall.hpp"
 	"DD_LessThan.hpp"
-	"DD_BinaryTreeNode.hpp"
+	"DD_BinarySearchTree.hpp"
 	"DD_Allocator.hpp"
 
 1444146549 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
 	"DD_ReadOnlyCall.hpp"
 	"DD_Functor.hpp"
 
-1444150547 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
+1444315099 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
 	"DD_ValueTypeNested.hpp"
 
 1444187649 d:\develop\repositories\libddcpp\src\standard\bits\dd_logical_not_of.hpp
 	"DD_global_definitions.hpp"
+
+1444315128 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarysearchtree.hpp
+	"DD_Value.hpp"
+	"DD_logical_not_of.hpp"
+	"DD_BinaryTreeNode.hpp"
+	"DD_LessThan.hpp"
 

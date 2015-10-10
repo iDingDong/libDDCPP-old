@@ -15,33 +15,33 @@
 
 
 
-#	if __cplusplus >= 201103L
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
 template <ValidityType use_default_compare_c_>
 struct Max_ {
 	template <typename ObjectT__, typename BinaryPredicatorT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicatorT__ less___
 	) noexcept {
 		return object___;
 	}
 
 	template <typename ObjectT__, typename BinaryPredicatorT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object_1___,
 		ObjectT__ const& object_2___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicatorT__ less___
 	) noexcept(noexcept(less___(object_2___, object_1___))) {
 		return less___(object_2___, object_1___) ? object_1___ : object_2___;
 	}
 
 	template <typename ObjectT__, typename... ArgumentsT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___,
 		ArgumentsT__ const&... arguments___
-	) noexcept(noexcept(max_(object___, max_(arguments___...), get_last_argument(arguments___...)))) {
-		return max_(object___, max_(arguments___...), get_last_argument(arguments___...));
+	) noexcept(noexcept(max(object___, max(arguments___...), get_last_argument(arguments___...)))) {
+		return max(object___, max(arguments___...), get_last_argument(arguments___...));
 	}
 
 
@@ -52,14 +52,14 @@ struct Max_ {
 template <>
 struct Max_<true> {
 	template <typename ObjectT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___
 	) noexcept {
 		return object___;
 	}
 
 	template <typename ObjectT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object_1___,
 		ObjectT__ const& object_2___
 	) noexcept(noexcept(object_2___ < object_1___)) {
@@ -67,11 +67,11 @@ struct Max_<true> {
 	};
 
 	template <typename ObjectT__, typename... ObjectsT__>
-	static ObjectT__ constexpr const& max_(
+	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___,
 		ObjectsT__ const&... objects___
-	) noexcept(noexcept(max_(object___, max_(objects___...)))) {
-		return max_(object___, max_(objects___...));
+	) noexcept(noexcept(max(object___, max(objects___...)))) {
+		return max(object___, max(objects___...));
 	}
 
 
@@ -79,19 +79,12 @@ struct Max_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-#	endif
-DD_BEGIN_
-#	if __cplusplus >= 201103L
 template <typename ObjectT_, typename... ArgumentsT_>
 inline ObjectT_ constexpr const& max(
 	ObjectT_ const& object__,
 	ArgumentsT_ const&... arguments__
-) noexcept(noexcept(detail_::Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max_(object__, arguments__...))) {
-	return detail_::Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max_(object__, arguments__...);
+) noexcept(noexcept(Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max(object__, arguments__...))) {
+	return Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max(object__, arguments__...);
 }
 
 template <typename ObjectT_>
@@ -126,6 +119,15 @@ inline ObjectT_ const& max(
 	return less__(object_2__, object_1__) ? object_1__ : object_2__;
 }
 #	endif
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::max;
 
 
 

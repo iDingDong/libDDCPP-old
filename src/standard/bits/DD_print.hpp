@@ -8,6 +8,7 @@
 #	include <iomanip>
 
 #	include "DD_Tags.hpp"
+#	include "DD_fabricate.hpp"
 
 
 
@@ -60,17 +61,20 @@ struct Print {
 		return *this;
 	}
 
-
-	ThisType const& operator ,(VersionTag tag_) const DD_NOEXCEPT_AS() {
-		return *this, "libDDCPP\nversion: ", DD_CPP_LIBRARY / 1000, '.', DD_CPP_LIBRARY % 1000;
-	}
-
 	ThisType const& operator ,(FlushTag tag_) const DD_NOEXCEPT_AS(std::cout << std::flush) {
-		return *this, std::flush;
+		std::cout << std::flush;
+		return *this;
 	}
 
 	ThisType const& operator ,(EndLineTag tag_) const DD_NOEXCEPT_AS(std::cout << std::endl) {
-		return *this, std::endl;
+		std::cout << std::endl;
+		return *this;
+	}
+
+	ThisType const& operator ,(VersionTag tag_) const DD_NOEXCEPT_AS(
+		fabricate<ThisType>() DD_COMMA "libDDCPP\nversion: " DD_COMMA DD_CPP_LIBRARY / 1000 DD_COMMA '.' DD_COMMA DD_CPP_LIBRARY % 1000
+	) {
+		return *this, "libDDCPP\nversion: ", DD_CPP_LIBRARY / 1000, '.', DD_CPP_LIBRARY % 1000;
 	}
 
 

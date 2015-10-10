@@ -54,7 +54,7 @@ struct RedBlackTreeBase__ {
 
 	private:
 	template <int workaround_ = 0>
-	ProcessType detach_fix_up_(NodePointerType node_) DD_NOEXCEPT;
+	ProcessType detach_fix_up_(NodePointerType node_, ValidityType left_removed_) DD_NOEXCEPT;
 
 
 };
@@ -65,14 +65,23 @@ template <int workaround_>
 ProcessType RedBlackTreeBase__::detach_node_(RedBlackTreeBase__::NodePointerType node_) DD_NOEXCEPT {
 	NodePointerType temp_ = node_;
 	NodeType::Color original_color_ = temp_->color;
-	if (node_->has_left()) {
+	if (!node_->has_left()) {
+		NodePointerType to_fix_ = node_->parent;
 		transplant_binary_tree_(&m_root_, node_, node_->right);
-	} else if (node_->has_right) {
+		if (node_->color == NodeType::black) {
+			detach_fix_up_(to_fix_, node_->right->is_left());
+		}
+	} else if (!node_->has_right()) {
+		NodePointerType to_fix_ = node_->parent;
 		transplant_binary_tree_(&m_root_, node_, node_->left);
+		if (node_->color == NodeType::black) {
+			detach_fix_up_(to_fix_, node_->left->is_left());
+		}
 	} else {
-		temp_ = node_->get_minimum();
+		temp_ = node_->right->get_minimum();
 		NodeType::Color original_color_ = temp_->color;
 		temp_->color = node_->color;
+		NodePointerType to_fix_ = temp_->parent == node_ ? node_->parent : temp_->parent;
 		if (temp_ != node_->right) {
 			transplant_binary_tree_(&m_root_, temp_, temp_->right);
 			temp_->right = node_->right;
@@ -90,7 +99,7 @@ ProcessType RedBlackTreeBase__::detach_node_(RedBlackTreeBase__::NodePointerType
 
 
 template <int workaround_>
-ProcessType RedBlackTreeBase__::detach_fix_up_(RedBlackTreeBase__::NodePointerType node_) DD_NOEXCEPT {
+ProcessType RedBlackTreeBase__::detach_fix_up_(RedBlackTreeBase__::NodePointerType node_, ValidityType left_removed_) DD_NOEXCEPT {
 
 }
 
@@ -165,10 +174,17 @@ ProcessType RedBlackTreeBase_<NodeT_, less_c_>::insert_fix_up_(
 			} else if (is_right_child(new_node_)) {
 				new_node_ = new_node_->parent;
 				left_rotate(new_node_);
+				if (!new_node_->parent->has_parent()) {
+					this->m_root_ = new_node_->parent;
+				}
 			}
 			new_node_->parent->color = NodeType::black;
 			new_node_->parent->parent->color = NodeType::red;
-			right_rotate(new_node_->parent->parent);
+			NodePointerType current_ = new_node_->parent->parent;
+			right_rotate(current_);
+			if (!current_->parent->has_parent()) {
+				this->m_root_ = current_->parent;
+			}
 		} else {
 			if (new_node_->parent->parent->left->color == NodeType::red) {
 				new_node_->parent->color = NodeType::black;
@@ -178,10 +194,17 @@ ProcessType RedBlackTreeBase_<NodeT_, less_c_>::insert_fix_up_(
 			} else if (is_left_child(new_node_)) {
 				new_node_ = new_node_->parent;
 				right_rotate(new_node_);
+				if (!new_node_->parent->has_parent()) {
+					this->m_root_ = new_node_->parent;
+				}
 			}
 			new_node_->parent->color = NodeType::black;
 			new_node_->parent->parent->color = NodeType::red;
-			left_rotate(new_node_->parent->parent);
+			NodePointerType current_ = new_node_->parent->parent;
+			left_rotate(current_);
+			if (!current_->parent->has_parent()) {
+				this->m_root_ = current_->parent;
+			}
 		}
 	}
 	m_root_->color = NodeType::black;
