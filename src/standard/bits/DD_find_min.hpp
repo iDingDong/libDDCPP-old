@@ -4,11 +4,12 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_Iterator.hpp"
+#	include "DD_Range.hpp"
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
 UndirectionalIteratorT_ find_min(
 	UndirectionalIteratorT_ begin__,
@@ -27,7 +28,7 @@ template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
 UndirectionalIteratorT_ find_min(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicatorT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
 	UndirectionalIteratorT_ min__ = begin__;
 	for (; begin__ != end__; ++begin__) {
@@ -37,6 +38,30 @@ UndirectionalIteratorT_ find_min(
 	}
 	return min__;
 }
+
+template <typename UndirectionalRangeT_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_min(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(find_min(DD_SPLIT_RANGE(range__))) {
+	return find_min(DD_SPLIT_RANGE(range__));
+}
+
+template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_min(
+	UndirectionalRangeT_& range__,
+	BinaryPredicatorT_ less__
+) DD_NOEXCEPT_AS(find_min(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
+	return find_min(DD_SPLIT_RANGE(range__), less__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::find_min;
 
 
 

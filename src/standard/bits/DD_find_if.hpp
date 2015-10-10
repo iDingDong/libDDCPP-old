@@ -8,12 +8,12 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
 UndirectionalIteratorT_ find_if(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	UnaryPredicatorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(begin__ != end__ && predicator__(*++begin__)) {
 	while (begin__ != end__ && !predicator__(*begin__)) {
 		++begin__;
@@ -24,10 +24,19 @@ UndirectionalIteratorT_ find_if(
 template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_if(
 	UndirectionalRangeT_& range__,
-	UnaryPredicatorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(find_if(DD_SPLIT_RANGE(range__) DD_COMMA predicator__)) {
 	return find_if(DD_SPLIT_RANGE(range__), predicator__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::find_if;
 
 
 

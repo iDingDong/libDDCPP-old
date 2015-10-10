@@ -115,8 +115,9 @@
 	<initializer_list>
 	"DD_global_definitions.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min.hpp
-	"DD_global_definitions.hpp"
+1444490305 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 
 1444475374 d:\develop\repositories\libddcpp\src\standard\bits\dd_max.hpp
 	"DD_get_last_argument.hpp"
@@ -125,8 +126,9 @@
 	"DD_find_max.hpp"
 	"DD_global_definitions.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
-	"DD_global_definitions.hpp"
+1444490289 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 
 1444475473 d:\develop\repositories\libddcpp\src\standard\bits\dd_min_max.hpp
 	"DD_get_last_argument.hpp"
@@ -135,7 +137,9 @@
 	"DD_find_min_max.hpp"
 	"DD_Pair.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
+1444490568 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 	"DD_Pair.hpp"
 
 1444031279 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
@@ -440,20 +444,21 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Pair.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1444489353 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
-	"DD_global_definitions.hpp"
+1444490718 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if.hpp
+1444489746 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if.hpp
 	"DD_Iterator.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if_not.hpp
+1444489788 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if_not.hpp
 	"DD_global_definitions.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
+1444489715 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
 	"DD_Range.hpp"
 	"DD_Iterator.hpp"
 

@@ -10,15 +10,6 @@
 
 
 DD_DETAIL_BEGIN_
-
-
-
-
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 UndirectionalIteratorT_ find(
 	UndirectionalIteratorT_ begin__,
@@ -36,7 +27,7 @@ UndirectionalIteratorT_ find(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& equal__
+	BinaryPredicatorT_ equal__
 ) DD_NOEXCEPT_AS(begin__ != end__ && equal__(*++begin__, value__)) {
 	while (begin__ != end__ && !equal__(*begin__, value__)) {
 		++begin__;
@@ -56,10 +47,19 @@ template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredic
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& equal__
+	BinaryPredicatorT_ equal__
 ) DD_NOEXCEPT_AS(find(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)) {
 	return find(DD_SPLIT_RANGE(range__), value__, equal__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::find;
 
 
 

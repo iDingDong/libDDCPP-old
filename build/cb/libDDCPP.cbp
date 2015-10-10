@@ -57,6 +57,7 @@
 		<Unit filename="../../src/standard/bits/DD_CompatStlIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Conditional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstantList.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ConstantSequence.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ContainedByPack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Decay.hpp" />
 		<Unit filename="../../src/standard/bits/DD_DefaultDeleter.hpp" />
