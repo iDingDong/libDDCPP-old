@@ -5,6 +5,7 @@
 
 
 #	include <iostream>
+#	include <iomanip>
 
 #	include "DD_Tags.hpp"
 
@@ -19,6 +20,11 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+struct VersionTag : Tag {
+} DD_CONSTANT version;
+
+
+
 struct FlushTag : Tag {
 } DD_CONSTANT flush;
 
@@ -48,20 +54,23 @@ struct Print {
 
 
 #	endif
-	ThisType const& operator ,(FlushTag tag_) const DD_NOEXCEPT_AS(std::cout << std::flush) {
-		std::cout << std::flush;
-		return *this;
-	}
-
-	ThisType const& operator ,(EndLineTag tag_) const DD_NOEXCEPT_AS(std::cout << std::endl) {
-		std::cout << std::endl;
-		return *this;
-	}
-
 	template <typename ValueT__>
 	ThisType const& operator ,(ValueT__ const& value___) const DD_NOEXCEPT_AS(std::cout << value___) {
 		std::cout << value___;
 		return *this;
+	}
+
+
+	ThisType const& operator ,(VersionTag tag_) const DD_NOEXCEPT_AS() {
+		return *this, "libDDCPP\nversion: ", DD_CPP_LIBRARY / 1000, '.', DD_CPP_LIBRARY % 1000;
+	}
+
+	ThisType const& operator ,(FlushTag tag_) const DD_NOEXCEPT_AS(std::cout << std::flush) {
+		return *this, std::flush;
+	}
+
+	ThisType const& operator ,(EndLineTag tag_) const DD_NOEXCEPT_AS(std::cout << std::endl) {
+		return *this, std::endl;
 	}
 
 

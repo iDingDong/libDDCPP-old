@@ -8,7 +8,7 @@
 
 
 
-#	define DDCPP_ 1000
+#	define DD_CPP_LIBRARY 1000
 
 #	define DD_ON 1
 #	define DD_OFF 0
