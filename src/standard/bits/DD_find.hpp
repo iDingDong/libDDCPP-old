@@ -36,7 +36,7 @@ UndirectionalIteratorT_ find(
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_>
-DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find(
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(find(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {

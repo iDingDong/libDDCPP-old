@@ -39,6 +39,7 @@
 #	include "bits/DD_merge.hpp"
 #	include "bits/DD_insert_sort.hpp"
 #	include "bits/DD_select_sort.hpp"
+#	include "bits/DD_sort.hpp"
 
 
 

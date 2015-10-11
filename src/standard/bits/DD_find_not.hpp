@@ -36,7 +36,7 @@ UndirectionalIteratorT_ find_not(
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_>
-DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_not(
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_not(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(find_not(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {

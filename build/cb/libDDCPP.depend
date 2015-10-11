@@ -39,7 +39,7 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1443513190 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1444545231 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -73,6 +73,7 @@
 	"bits/DD_merge.hpp"
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_select_sort.hpp"
+	"bits/DD_sort.hpp"
 
 1444475427 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
@@ -137,7 +138,7 @@
 	"DD_find_min_max.hpp"
 	"DD_Pair.hpp"
 
-1444490568 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
+1444495870 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 	"DD_Pair.hpp"
@@ -444,11 +445,11 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Pair.hpp"
 
-1444489353 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1444525953 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1444490718 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
+1444495856 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
@@ -522,7 +523,9 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_by.hpp
 	"DD_swap_target.hpp"
 
-1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_merge.hpp
+1444527878 d:\develop\repositories\libddcpp\src\standard\bits\dd_merge.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 	"DD_copy.hpp"
 
 1443513187 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
@@ -1073,4 +1076,13 @@
 	"DD_logical_not_of.hpp"
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
+
+1444545556 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+	<cmath>
+	"DD_ReadOnlyCall.hpp"
+	"DD_IteratorValue.hpp"
+	"DD_IteratorDifference.hpp"
+	"DD_LessThan.hpp"
+	"DD_length_difference.hpp"
+	"DD_insert_sort.hpp"
 
