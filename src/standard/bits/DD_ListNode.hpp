@@ -8,9 +8,9 @@
 
 
 
-DD_BEGIN
+DD_BEGIN_
 struct EmptyListNode {
-	DD_ALIAS(ThisType, EmptyListNode)
+	DD_ALIAS(ThisType, EmptyListNode);
 
 
 	ThisType* previous;
@@ -23,13 +23,13 @@ struct EmptyListNode {
 
 template <typename ValueT_>
 struct ListNode : EmptyListNode {
-	DD_ALIAS(ThisType, ListNode<ValueT_>)
-	DD_ALIAS(ValueType, ValueT_)
+	DD_ALIAS(ThisType, ListNode<ValueT_>);
+	DD_ALIAS(ValueType, ValueT_);
 
-	DD_ALIAS(ReferenceType, ValueType&)
-	DD_ALIAS(ConstReferenceType, ValueType const&)
-	DD_ALIAS(PointerType, ValueType*)
-	DD_ALIAS(ConstPointerType, ValueType*)
+	DD_ALIAS(ReferenceType, ValueType&);
+	DD_ALIAS(ConstReferenceType, ValueType const&);
+	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ConstPointerType, ValueType*);
 
 
 	ValueType value;
@@ -39,7 +39,7 @@ struct ListNode : EmptyListNode {
 
 
 
-DD_END
+DD_END_
 
 
 

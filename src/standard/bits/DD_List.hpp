@@ -4,7 +4,7 @@
 
 
 
-#	include "DD_CompatStlContainer.hpp"
+#	include "DD_IteratorNested.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
@@ -19,12 +19,12 @@
 
 
 
-DD_DETAIL_BEGIN
+DD_DETAIL_BEGIN_
 template <typename ValueT_>
 struct ListBase_ {
 	public:
-	DD_ALIAS(ThisType, List_<ValueT_>);
-	DD_ALIAS(ValueType, ValueT_);
+	DD_ALIAS(ThisType, ListBase_<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	private:
 	DD_ALIAS(EmptyNode, EmptyListNode);
@@ -35,22 +35,20 @@ struct ListBase_ {
 	DD_ALIAS(EmptyNodeConstPointer, EmptyNodeConst*);
 
 	public:
-	DD_ALIAS(Node, ListNode<ValueType>);
-	DD_ALIAS(NodeConst, Node const);
-	DD_ALIAS(NodeReference, Node&);
-	DD_ALIAS(NodeConstReference, NodeConst&);
-	DD_ALIAS(NodePointer, Node*);
-	DD_ALIAS(NodeConstPointer, NodeConst*);
+	DD_ALIAS(NodeType, ListNode<ValueType>);
+	DD_ALIAS(NodeConstType, NodeType const);
+	DD_ALIAS(NodeReferenceType, NodeType&);
+	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
+	DD_ALIAS(NodePointerType, NodeType*);
+	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
 	public:
-	DD_CONTAINER_DECLARATIONS
 	DD_ALIAS(LengthType, DD::LengthType);
 
 	public:
 	DD_ALIAS(Iterator, ListIterator<NodeType>);
-	DD_ALIAS(ReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, Iterator));
 	DD_ALIAS(ConstIterator, ListIterator<NodeConstType>);
-	DD_ALIAS(ConstReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, ConstIterator));
+	DD_ITERATOR_NESTED
 
 
 	private:
@@ -68,7 +66,7 @@ struct ListBase_ {
 	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
 
 	public:
-	ListBase_(NodePointer begin_, NodePointer end_) DD_NOEXCEPT : m_sentry_{begin_, end_} {
+	ListBase_(NodePointerType begin_, NodePointerType end_) DD_NOEXCEPT : m_sentry_{begin_, end_} {
 	}
 
 
@@ -91,13 +89,13 @@ struct ListBase_ {
 
 
 	public:
-	NodePointer get_sentry() DD_NOEXCEPT {
-		return static_cast<NodePointer>(address_of(m_sentry_));
+	NodePointerType get_sentry() DD_NOEXCEPT {
+		return static_cast<NodePointerType>(address_of(m_sentry_));
 	}
 
 	public:
-	NodeConstPointer get_sentry() const DD_NOEXCEPT {
-		return static_cast<NodePointer>(address_of(m_sentry_));
+	NodeConstPointerType get_sentry() const DD_NOEXCEPT {
+		return static_cast<NodePointerType>(address_of(m_sentry_));
 	}
 
 
@@ -137,9 +135,9 @@ struct ListBase_ {
 template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
 struct List_ : ListBase_<ValueT_> {
 	public:
-	DD_ALIAS(SuperType, List_<ValueT_>);
+	DD_ALIAS(SuperType, ListBase_<ValueT_>);
 	DD_ALIAS(ThisType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
-	DD_ALIAS(ValueType, ValueT_);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(Allocator, AllocatorT_);
 
 	private:
@@ -151,22 +149,21 @@ struct List_ : ListBase_<ValueT_> {
 	DD_ALIAS(EmptyNodeConstPointer, EmptyNodeConst*);
 
 	public:
-	DD_ALIAS(Node, ListNode<ValueType>);
-	DD_ALIAS(NodeConst, Node const);
-	DD_ALIAS(NodeReference, Node&);
-	DD_ALIAS(NodeConstReference, NodeConst&);
-	DD_ALIAS(NodePointer, Node*);
-	DD_ALIAS(NodeConstPointer, NodeConst*);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
 
 	public:
-	DD_CONTAINER_DECLARATIONS
 	DD_ALIAS(LengthType, DD::LengthType);
 
 	public:
-	DD_ALIAS(Iterator, ListIterator<NodeType>);
-	DD_ALIAS(ReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, Iterator));
-	DD_ALIAS(ConstIterator, ListIterator<NodeConstType>);
-	DD_ALIAS(ConstReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, ConstIterator));
+	DD_INHERIT_TEMPLATE_ALIAS(Iterator);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstIterator);
+	DD_INHERIT_TEMPLATE_ALIAS(ReverseIterator);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstReverseIterator);
 
 
 #	if __cplusplus >= 201103L
@@ -179,7 +176,7 @@ struct List_ : ListBase_<ValueT_> {
 		try {
 			append(origin_);
 		} catch (...) {
-			destruct();
+			destruct_();
 			throw;
 		}
 	}
@@ -211,14 +208,14 @@ struct List_ : ListBase_<ValueT_> {
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ const& end___
 	) {
-		for (Iterator current_(begin()); current_ != end(); ++current_, ++begin___) {
-			if (begin__ == end__) {
-				erase_range(current_, end());
+		for (Iterator current_(this->begin()); current_ != this->end(); ++current_, ++begin___) {
+			if (begin___ == end___) {
+				erase_range(current_, this->end());
 				return;
 			}
 			*current_ = *begin___;
 		}
-		append_range(begin__, end___);
+		append_range(begin___, end___);
 	}
 
 	public:
@@ -232,12 +229,12 @@ struct List_ : ListBase_<ValueT_> {
 #	if __cplusplus >= 201103L
 	template <typename ValueT__>
 	ProcessType push_front(ValueT__&& value___) {
-		insert(begin(), forward<ValueT__>(value___));
+		insert(this->begin(), forward<ValueT__>(value___));
 	}
 #	else
 	template <typename ValueT__>
 	ProcessType push_front(ValueT__ const& value___) {
-		insert(begin(), value___);
+		insert(this->begin(), value___);
 	}
 #	endif
 
@@ -246,12 +243,12 @@ struct List_ : ListBase_<ValueT_> {
 #	if __cplusplus >= 201103L
 	template <typename ValueT__>
 	ProcessType push_back(ValueT__&& value___) {
-		insert(end(), forward<ValueT__>(value___));
+		insert(this->end(), forward<ValueT__>(value___));
 	}
 #	else
 	template <typename ValueT__>
 	ProcessType push_back(ValueT__ const& value___) {
-		insert(end(), value___);
+		insert(this->end(), value___);
 	}
 #	endif
 
@@ -276,11 +273,17 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	static ProcessType splice(
-		NodePointer position_,
-		NodePointer begin_,
-		NodePointer end_
+		NodePointerType position_,
+		NodePointerType begin_,
+		NodePointerType end_
 	) DD_NOEXCEPT {
-
+		NodePointerType front_ = position_->previous;
+		position_->previous = end_->previous;
+		position_->previous->next = position_;
+		begin_->previous->next = end_;
+		end_->previous = begin_->previous;
+		front_->next = begin_;
+		begin_->previous_ = front_;
 	}
 
 
@@ -290,7 +293,9 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 	private:
-	static ProcessType transfer_(NodePointer position_, NodePointer node_) DD_NOEXCEPT_AS {
+	static ProcessType transfer_(NodePointerType position_, NodePointerType node_) DD_NOEXCEPT_AS(
+		delink_(node_) DD_COMMA enlink(position_ DD_COMMA node_)
+	) {
 		delink_(node_);
 		enlink_(position_, node_);
 	}
@@ -305,8 +310,8 @@ struct List_ : ListBase_<ValueT_> {
 
 	private:
 	template <typename ValueT__>
-	static ProcessType insert_(NodePointer position_, ValueT__&& value___) {
-		NodePointer new_node_ = create_node_(forward<ValueT__>(value___));
+	static ProcessType insert_(NodePointerType position_, ValueT__&& value___) {
+		NodePointerType new_node_ = create_node_(forward<ValueT__>(value___));
 		enlink_(position_, new_node_);
 		return new_node_;
 	}
@@ -319,8 +324,8 @@ struct List_ : ListBase_<ValueT_> {
 
 	private:
 	template <typename ValueT__>
-	static NodePointer insert_(NodePointer position_, ValueT__ const& value___);
-		NodePointer new_node_ = create_node_(value___);
+	static NodePointerType insert_(NodePointerType position_, ValueT__ const& value___);
+		NodePointerType new_node_ = create_node_(value___);
 		enlink_(position_, new_node_);
 		return new_node_;
 	}
@@ -328,7 +333,7 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	private:
-	static ProcessType enlink_(NodePointer position_, NodePointer new_node_) DD_NOEXCEPT {
+	static ProcessType enlink_(NodePointerType position_, NodePointerType new_node_) DD_NOEXCEPT {
 		new_node_->previous = position_->previous;
 		new_node_->previous->next = new_node_;
 		new_node_->next = position_;
@@ -336,7 +341,7 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 	private:
-	static ProcessType delink_(NodePointer node_) {
+	static ProcessType delink_(NodePointerType node_) {
 		node_->previous->next = node_->next;
 		node_->next->previous = node_->previous;
 	}
@@ -348,7 +353,7 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 	public:
-	static NodePointer erase_(NodePointer position_) DD_NOEXCEPT {
+	static NodePointerType erase_(NodePointerType position_) DD_NOEXCEPT {
 		position_ = position_->next;
 		delink_(position_->previous);
 		destroy_node_(position_);
@@ -365,14 +370,14 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 	private:
-	static NodePointer erase_range_(
-		NodePointer begin_,
-		NodePointer end_
+	static NodePointerType erase_range_(
+		NodePointerType begin_,
+		NodePointerType end_
 	) DD_NOEXCEPT_AS(erase(begin_)) {
 		begin_->previous->next = end_->next;
 		end_->next->previous = begin_->previous;
 		for (; begin_ != end_; begin_ = begin_->next) {
-			destroy_node_(begin_)
+			destroy_node_(begin_);
 		}
 		return begin_;
 	}
@@ -380,21 +385,21 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	ProcessType clear() DD_NOEXCEPT {
-		erase_range(begin(), end());
+		erase_range(this->begin(), this->end());
 	}
 
 
 	private:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	static NodePointer creat_node_(ValueT__&& value___) {
-		NodePointer new_node_ = Allocator::Basic::allocate(sizeof(Node));
+	static NodePointerType creat_node_(ValueT__&& value___) {
+		NodePointerType new_node_ = Allocator::Basic::allocate(sizeof(NodeType));
 		Allocator::construct(new_node_->value, forward<ValueT__>(value___));
 		return new_node_;
 	}
 #	else
-	static NodePointer creat_node_(ValueT__ const& value___) {
-		NodePointer new_node_ = Allocator::Basic::allocate(sizeof(Node));
+	static NodePointerType creat_node_(ValueT__ const& value___) {
+		NodePointerType new_node_ = Allocator::Basic::allocate(sizeof(NodeType));
 		Allocator::construct(new_node_->value, value___);
 		return new_node_;
 	}
@@ -405,13 +410,13 @@ struct List_ : ListBase_<ValueT_> {
 	template <typename PointerT__>
 	static ProcessType destroy_node_(PointerT__ const& node_) DD_NOEXCEPT {
 		Allocator::destruct(node_->value);
-		Allocator::Basic::deallocate(address_of(*node_), sizeof(Node));
+		Allocator::Basic::deallocate(address_of(*node_), sizeof(NodeType));
 	}
 
 
 	private:
 	ProcessType destruct_() DD_NOEXCEPT {
-		for (Iterator current_ = begin(); current_++ != end(); ) {
+		for (Iterator current_ = this->begin(); current_++ != this->end(); ) {
 			destroy_node_(current_.get_node()->previous);
 		}
 	}
@@ -433,13 +438,13 @@ struct List_ : ListBase_<ValueT_> {
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(push_back(forward<ValueT__>(value__))) {
-		push_back(forward<ValueT__>(value__));
+	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(push_back(forward<ValueT__>(value___))) {
+		push_back(forward<ValueT__>(value___));
 		return *this;
 	}
 #	else
-	ThisType& operator <<(ValueT__ const& value___) DD_NOEXCEPT_AS(push_back(value__)) {
-		push_back(value__);
+	ThisType& operator <<(ValueT__ const& value___) DD_NOEXCEPT_AS(push_back(value___)) {
+		push_back(value___);
 		return *this;
 	}
 #	endif
@@ -449,15 +454,22 @@ struct List_ : ListBase_<ValueT_> {
 
 
 
-DD_DETAIL_END
+template <typename ValueT_, typename AllocatorT_ = Allocator<void>>
+struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
+};
 
 
 
-DD_BEGIN
+DD_DETAIL_END_
 
 
 
-DD_END
+DD_BEGIN_
+using detail_::List;
+
+
+
+DD_END_
 
 
 
