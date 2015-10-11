@@ -30,6 +30,7 @@
 		<Unit filename="../../src/standard/DDFunctional.hpp" />
 		<Unit filename="../../src/standard/DDGlobal.hpp" />
 		<Unit filename="../../src/standard/DDIterator.hpp" />
+		<Unit filename="../../src/standard/DDList.hpp" />
 		<Unit filename="../../src/standard/DDMemory.hpp" />
 		<Unit filename="../../src/standard/DDMeta.hpp" />
 		<Unit filename="../../src/standard/DDTrait.hpp" />
