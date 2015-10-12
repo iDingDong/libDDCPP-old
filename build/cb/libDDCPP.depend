@@ -747,10 +747,11 @@
 	"DD_IntegralConstant.hpp"
 	"DD_IsScalar.hpp"
 
-1444020591 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1444665222 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
+	"DD_Allocator.hpp"
 	"DD_UniquePointer.hpp"
 	"DD_swap.hpp"
 

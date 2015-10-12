@@ -9,6 +9,7 @@
 #		include "DD_Decay.hpp"
 #		include "DD_forward.hpp"
 #	endif
+#	include "DD_Allocator.hpp"
 #	include "DD_UniquePointer.hpp"
 #	include "DD_swap.hpp"
 
@@ -89,18 +90,13 @@ struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 struct Variant {
 	public:
 	DD_ALIAS(ThisType, Variant);
 
 
 	private:
-	UniquePointer<detail_::VariantHolderBase_> m_holder_pointer_;
+	UniquePointer<VariantHolderBase_> m_holder_pointer_;
 
 
 #	if __cplusplus >= 201103L
@@ -124,10 +120,10 @@ struct Variant {
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	Variant(ValueT__&& value___) : m_holder_pointer_(new detail_::VariantHolder_<DecayType<ValueT__>>(forward<ValueT__>(value___))) {
+	Variant(ValueT__&& value___) : m_holder_pointer_(new VariantHolder_<DecayType<ValueT__>>(forward<ValueT__>(value___))) {
 	}
 #	else
-	Variant(ValueT__ const& value___) : m_holder_pointer_(new detail_::VariantHolder_<ValueT__>(value___)) {
+	Variant(ValueT__ const& value___) : m_holder_pointer_(new VariantHolder_<ValueT__>(value___)) {
 	}
 #	endif
 
@@ -149,14 +145,14 @@ struct Variant {
 	template <typename ValueT__>
 	ValueT__& to() DD_NOEXCEPT {
 		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
-		return static_cast<detail_::VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value;
+		return static_cast<VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value;
 	}
 
 	public:
 	template <typename ValueT__>
 	ValueT__ const& to() const DD_NOEXCEPT {
 		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
-		return static_cast<detail_::VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value;
+		return static_cast<VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value;
 	}
 
 
@@ -193,6 +189,15 @@ struct Variant {
 
 
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Variant;
 
 
 
