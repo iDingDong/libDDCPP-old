@@ -29,7 +29,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 DD_BINARY_OPERATOR(Addable, +)
 DD_BINARY_OPERATOR(Subtractable, -)
 DD_BINARY_OPERATOR(Multipliable, *)
@@ -37,6 +37,21 @@ DD_BINARY_OPERATOR(Dividable, /)
 DD_BINARY_OPERATOR(Modable, %)
 DD_BINARY_OPERATOR(Orable, |)
 DD_BINARY_OPERATOR(Andable, &)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Addable;
+using detail_::Subtractable;
+using detail_::Multipliable;
+using detail_::Dividable;
+using detail_::Modable;
+using detail_::Orable;
+using detail_::Andable;
 
 
 

@@ -20,13 +20,11 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT_>
 struct ListBase_ {
-	public:
-	DD_ALIAS(ThisType, ListBase_<ValueT_>);
-	DD_VALUE_TYPE_NESTED(ValueT_)
+	protected:
+	DD_ALIAS(ThisType, ListBase_);
 
-	private:
+	protected:
 	DD_ALIAS(EmptyNode, EmptyListNode);
 	DD_ALIAS(EmptyNodeConst, EmptyNode const);
 	DD_ALIAS(EmptyNodeReference, EmptyNode&);
@@ -34,7 +32,57 @@ struct ListBase_ {
 	DD_ALIAS(EmptyNodePointer, EmptyNode*);
 	DD_ALIAS(EmptyNodeConstPointer, EmptyNodeConst*);
 
-	public:
+	protected:
+	DD_ALIAS(NodeType, EmptyNode);
+	DD_ALIAS(NodeConstType, NodeType const);
+	DD_ALIAS(NodeReferenceType, NodeType&);
+	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
+	DD_ALIAS(NodePointerType, NodeType*);
+	DD_ALIAS(NodeConstPointerType, NodeConstType*);
+
+
+	private:
+	NodeType m_sentry_;
+
+
+	protected:
+	DD_CONSTEXPR ListBase_() DD_NOEXCEPT : m_sentry_{address_of(m_sentry_), address_of(m_sentry_)} {
+	}
+
+	protected:
+	DD_DELETE_COPY_CONSTRUCTOR(ListBase_)
+
+	protected:
+	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
+
+	protected:
+	DD_CONSTEXPR ListBase_(NodePointerType begin_, NodePointerType end_) DD_NOEXCEPT : m_sentry_{begin_, end_} {
+	}
+
+
+	protected:
+
+
+};
+
+
+
+template <typename ValueT_>
+struct List_ : ListBase_ {
+	protected:
+	DD_ALIAS(SuperType, ListBase_);
+	DD_ALIAS(ThisType, List_<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
+
+	protected:
+	DD_INHERIT_ALIAS(EmptyNode);
+	DD_INHERIT_ALIAS(EmptyNodeConst);
+	DD_INHERIT_ALIAS(EmptyNodeReference);
+	DD_INHERIT_ALIAS(EmptyNodeConstReference);
+	DD_INHERIT_ALIAS(EmptyNodePointer);
+	DD_INHERIT_ALIAS(EmptyNodeConstPointer);
+
+	protected:
 	DD_ALIAS(NodeType, ListNode<ValueType>);
 	DD_ALIAS(NodeConstType, NodeType const);
 	DD_ALIAS(NodeReferenceType, NodeType&);
@@ -42,37 +90,37 @@ struct ListBase_ {
 	DD_ALIAS(NodePointerType, NodeType*);
 	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
-	public:
+	protected:
 	DD_ALIAS(LengthType, DD::LengthType);
 
-	public:
+	protected:
 	DD_ALIAS(Iterator, ListIterator<NodeType>);
 	DD_ALIAS(ConstIterator, ListIterator<NodeConstType>);
 	DD_ITERATOR_NESTED
 
 
-	private:
-	EmptyListNode m_sentry_;
-
-
 	public:
-	ListBase_() DD_NOEXCEPT : m_sentry_{address_of(m_sentry_), address_of(m_sentry_)} {
+#	if __cplusplus >= 201103L
+	constexpr List_() = default;
+#	else
+	List_ throw() {
 	}
+#	endif
 
 	public:
-	DD_DELETE_COPY_CONSTRUCTOR(ListBase_)
+	DD_DELETE_COPY_CONSTRUCTOR(List_)
 
 	public:
-	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
+	DD_DELETE_MOVE_CONSTRUCTOR(List_)
 
 	public:
-	ListBase_(NodePointerType begin_, NodePointerType end_) DD_NOEXCEPT : m_sentry_{begin_, end_} {
+	DD_CONSTEXPR List_(NodePointerType begin_, NodePointerType end_) DD_NOEXCEPT : ListBase_(begin_, end_) {
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	~ListBase_() = default;
+	~List_() = default;
 
 
 #	endif
@@ -122,10 +170,10 @@ struct ListBase_ {
 
 
 	public:
-	DD_DELETE_COPY_ASSIGNMENT(ListBase_)
+	DD_DELETE_COPY_ASSIGNMENT(List_)
 
 	public:
-	DD_DELETE_MOVE_ASSIGNMENT(ListBase_)
+	DD_DELETE_MOVE_ASSIGNMENT(List_)
 
 
 };
@@ -133,10 +181,10 @@ struct ListBase_ {
 
 
 template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
-struct List_ : ListBase_<ValueT_> {
+struct List : List_<ValueT_> {
 	public:
-	DD_ALIAS(SuperType, ListBase_<ValueT_>);
-	DD_ALIAS(ThisType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(SuperType, List_<ValueT_>);
+	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(Allocator, AllocatorT_);
 
@@ -168,11 +216,11 @@ struct List_ : ListBase_<ValueT_> {
 
 #	if __cplusplus >= 201103L
 	public:
-	List_() = default;
+	List() = default;
 
 #	endif
 	public:
-	List_(ThisType const& origin_) DD_NOEXCEPT_AS(append(origin_)) {
+	List(ThisType const& origin_) DD_NOEXCEPT_AS(append(origin_)) {
 		try {
 			append(origin_);
 		} catch (...) {
@@ -183,14 +231,14 @@ struct List_ : ListBase_<ValueT_> {
 
 #	if __cplusplus >= 201103L
 	public:
-	List_(ThisType&& origin_) noexcept : SuperType(origin_.m_sentry_->previous, origin_.m_sentry_->next) {
+	List(ThisType&& origin_) noexcept : SuperType(origin_.m_sentry_->previous, origin_.m_sentry_->next) {
 		origin_.reset_();
 	}
 
 #	endif
 
 	public:
-	~List_() DD_NOEXCEPT {
+	~List() DD_NOEXCEPT {
 		destruct_();
 	}
 
@@ -450,12 +498,6 @@ struct List_ : ListBase_<ValueT_> {
 #	endif
 
 
-};
-
-
-
-template <typename ValueT_, typename AllocatorT_ = Allocator<void>>
-struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 };
 
 

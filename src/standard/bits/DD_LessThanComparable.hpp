@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT1_, typename ObjectT2_ = ObjectT1_>
 struct LessThanComparable {
 	DD_ALIAS(Type1, ObjectT1_);
@@ -95,6 +95,15 @@ struct LessThanComparable<ObjectT_> {
 
 
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::LessThanComparable;
 
 
 

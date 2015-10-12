@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1444210149 source:d:\develop\repositories\libddcpp\src\main.cpp
+1444577889 source:d:\develop\repositories\libddcpp\src\main.cpp
 	<iostream>
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
+	"standard/DDList.hpp"
 	"standard/bits/DD_RedBlackTree.hpp"
 	"test_meta.h"
 	"test_memory.h"
@@ -149,14 +150,14 @@
 	"DD_swap.hpp"
 	"DD_dereference.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_comparable.hpp
+1444579669 d:\develop\repositories\libddcpp\src\standard\bits\dd_comparable.hpp
 	"DD_EqualityComparable.hpp"
 	"DD_LessThanComparable.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_equalitycomparable.hpp
+1444579669 d:\develop\repositories\libddcpp\src\standard\bits\dd_equalitycomparable.hpp
 	"DD_global_definitions.hpp"
 
-1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthancomparable.hpp
+1444579669 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthancomparable.hpp
 	"DD_global_definitions.hpp"
 
 1443513183 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap.hpp
@@ -805,7 +806,7 @@
 	"DD_Or.hpp"
 	"DD_IsReference.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_binaryoperators.hpp
+1444579682 d:\develop\repositories\libddcpp\src\standard\bits\dd_binaryoperators.hpp
 	"DD_global_definitions.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
@@ -1071,7 +1072,7 @@
 1444187649 d:\develop\repositories\libddcpp\src\standard\bits\dd_logical_not_of.hpp
 	"DD_global_definitions.hpp"
 
-1444315128 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarysearchtree.hpp
+1444579545 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarysearchtree.hpp
 	"DD_Value.hpp"
 	"DD_logical_not_of.hpp"
 	"DD_BinaryTreeNode.hpp"
@@ -1085,4 +1086,32 @@
 	"DD_LessThan.hpp"
 	"DD_length_difference.hpp"
 	"DD_insert_sort.hpp"
+
+1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
+	"bits/DD_List.hpp"
+
+1444627430 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+	"DD_IteratorNested.hpp"
+	"DD_forward.hpp"
+	"DD_address_of.hpp"
+	"DD_Allocator.hpp"
+	"DD_IteratorReverse.hpp"
+	"DD_InitializerList.hpp"
+	"DD_container_definitions.hpp"
+	"DD_ListNode.hpp"
+	"DD_ListIterator.hpp"
+	"DD_length_difference.hpp"
+
+1444577957 d:\develop\repositories\libddcpp\src\standard\bits\dd_container_definitions.hpp
+
+1444578001 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
+	"DD_ValueTypeNested.hpp"
+
+1443513184 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+	"DD_address_of.hpp"
+	"DD_iterator_definitions.hpp"
+	"DD_IteratorCatagory.hpp"
+
+1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
+	"DD_global_definitions.hpp"
 
