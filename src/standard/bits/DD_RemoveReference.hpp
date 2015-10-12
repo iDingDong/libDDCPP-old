@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct RemoveReference {
 #	if __cplusplus >= 201402L
@@ -48,6 +48,16 @@ struct RemoveReference<ValueT_&&> {
 
 
 #	endif
+DD_TRAIT_MODIFIER(RemoveReference)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemoveReference;
 DD_TRAIT_MODIFIER(RemoveReference)
 
 

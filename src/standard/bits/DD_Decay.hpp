@@ -20,7 +20,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct Decay {
 	using TempT_ = RemoveReferenceType<ObjectT_>;
@@ -39,6 +39,16 @@ struct Decay {
 
 
 
+DD_TRAIT_MODIFIER(Decay)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Decay;
 DD_TRAIT_MODIFIER(Decay)
 
 

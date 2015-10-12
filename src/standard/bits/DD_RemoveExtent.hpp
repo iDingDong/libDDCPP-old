@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct RemoveExtent {
 #	if __cplusplus >= 201402L
@@ -46,6 +46,16 @@ struct RemoveExtent<ValueT_[]> {
 
 
 
+DD_TRAIT_MODIFIER(RemoveExtent)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemoveExtent;
 DD_TRAIT_MODIFIER(RemoveExtent)
 
 

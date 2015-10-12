@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct AddConst {
 #	if __cplusplus >= 201402L
@@ -28,6 +28,16 @@ struct AddConst {
 
 
 
+DD_TRAIT_MODIFIER(AddConst)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AddConst;
 DD_TRAIT_MODIFIER(AddConst)
 
 

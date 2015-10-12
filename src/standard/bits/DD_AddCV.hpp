@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename ObjectT_>
 using AddCV = AddConst<AddVolatileType<ObjectT_>>;
@@ -21,6 +21,16 @@ struct AddCV : AddConst<typename AddVolatile<ObjectT_>::Type> {
 
 
 
+DD_TRAIT_MODIFIER(AddCV)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AddCV;
 DD_TRAIT_MODIFIER(AddCV)
 
 

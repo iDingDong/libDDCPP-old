@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename ObjectT_>
 using RemoveCV = RemoveVolatile<RemoveConstType<ObjectT_>>;
@@ -21,6 +21,16 @@ struct RemoveCV : RemoveVolatile<typename RemoveConst<ObjectT_>::Type> {
 
 
 
+DD_TRAIT_MODIFIER(RemoveCV)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemoveCV;
 DD_TRAIT_MODIFIER(RemoveCV)
 
 

@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct RemoveConst {
 #	if __cplusplus >= 201402L
@@ -37,6 +37,16 @@ struct RemoveConst<ObjectT_ const> {
 
 
 
+DD_TRAIT_MODIFIER(RemoveConst)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemoveConst;
 DD_TRAIT_MODIFIER(RemoveConst)
 
 

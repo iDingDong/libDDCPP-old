@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct RemovePointer {
 #	if __cplusplus >= 201402L
@@ -64,13 +64,20 @@ struct RemovePointer<ValueT_* const volatile> {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename ValueT_>
-using RemovePointerType = typename RemovePointer<ValueT_>::Type;
+DD_TRAIT_MODIFIER(RemovePointer)
 
 
 
-#	endif
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemovePointer;
+DD_TRAIT_MODIFIER(RemovePointer)
+
+
+
 DD_END_
 
 

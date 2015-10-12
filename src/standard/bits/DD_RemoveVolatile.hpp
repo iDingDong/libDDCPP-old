@@ -12,7 +12,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct RemoveVolatile {
 #	if __cplusplus >= 201402L
@@ -37,13 +37,20 @@ struct RemoveVolatile<ObjectT_ volatile> {
 
 
 
-#	if __cplusplus >= 201103L
-template <typename ObjectT_>
-using RemoveVolatileType = typename RemoveVolatile<ObjectT_>::Type;
+DD_TRAIT_MODIFIER(RemoveVolatile);
 
 
 
-#	endif
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::RemoveVolatile;
+DD_TRAIT_MODIFIER(RemoveVolatile);
+
+
+
 DD_END_
 
 

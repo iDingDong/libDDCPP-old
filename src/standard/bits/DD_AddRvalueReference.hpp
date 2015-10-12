@@ -34,20 +34,25 @@ struct AddRvalueReference_<ObjectT_, true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename ObjectT_>
 struct AddRvalueReference {
-	DD_ALIAS(Type, typename detail_::AddRvalueReference_<ObjectT_ DD_COMMA IsReferable<ObjectT_>::value>::Type);
+	DD_ALIAS(Type, typename AddRvalueReference_<ObjectT_ DD_COMMA IsReferable<ObjectT_>::value>::Type);
 
 
 };
 
 
 
+DD_TRAIT_MODIFIER(AddRvalueReference)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AddRvalueReference;
 DD_TRAIT_MODIFIER(AddRvalueReference)
 
 

@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct AddPointer {
 	DD_ALIAS(Type, DD_MODIFY_TRAIT(RemoveReference, ObjectT_)*);
@@ -18,6 +18,16 @@ struct AddPointer {
 
 
 
+DD_TRAIT_MODIFIER(AddPointer)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::AddPointer;
 DD_TRAIT_MODIFIER(AddPointer)
 
 
