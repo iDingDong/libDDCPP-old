@@ -38,7 +38,12 @@ struct Optional_ {
 
 
 	protected:
+#	if __cplusplus >= 201103L
 	constexpr Optional_() = default;
+#	else
+	Optional_() : m_validity_(false) {
+	}
+#	endif
 
 	protected:
 	DD_DELETE_COPY_CONSTRUCTOR(Optional_)
@@ -51,10 +56,12 @@ struct Optional_ {
 	}
 
 
+#	if __cplusplus >= 201103L
 	protected:
 	~Optional_() = default;
 
 
+#	endif
 	public:
 	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return m_validity_;
@@ -378,6 +385,7 @@ struct Optional : Optional_ {
 		return *this;
 	}
 #	endif
+
 
 
 };
