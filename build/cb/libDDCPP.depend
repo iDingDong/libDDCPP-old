@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1444719753 source:d:\develop\repositories\libddcpp\src\main.cpp
+1444720066 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
@@ -695,12 +695,13 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1444192349 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1444726803 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
 	"bits/DD_logical_not_of.hpp"
 	"bits/DD_Range.hpp"
+	"bits/DD_Optional.hpp"
 	"bits/DD_Variant.hpp"
 	"bits/DD_Function.hpp"
 	"bits/DD_bind.hpp"
@@ -980,7 +981,7 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 
-1443772831 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveconstructible.hpp
+1444750868 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveconstructible.hpp
 	<type_traits>
 	"DD_And.hpp"
 
@@ -989,7 +990,7 @@
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
 
-1443935932 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyconstructible.hpp
+1444726530 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyconstructible.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
@@ -1116,4 +1117,35 @@
 
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
 	"DD_global_definitions.hpp"
+
+1444751281 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
+	"DD_Tags.hpp"
+	"DD_ValueTypeNested.hpp"
+	"DD_IsSame.hpp"
+	"DD_IsLvalueReference.hpp"
+	"DD_IsRvalueReference.hpp"
+	"DD_IsTriviallyCopyable.hpp"
+	"DD_IsTriviallyMoveable.hpp"
+	"DD_AccessDenied.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
+	"DD_SizeTrait.hpp"
+
+1444728016 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
+	"DD_IsTriviallyCopyConstructible.hpp"
+	"DD_IsTriviallyCopyAssignable.hpp"
+	"DD_And.hpp"
+
+1444727449 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyassignable.hpp
+	<type_traits>
+	"DD_And.hpp"
+	"DD_IsScalar.hpp"
+
+1444750701 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveable.hpp
+	"DD_IsTriviallyMoveConstructible.hpp"
+	"DD_IsTriviallyMoveAssignable.hpp"
+
+1444750887 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveassignable.hpp
+	<type_traits>
+	"DD_And.hpp"
 

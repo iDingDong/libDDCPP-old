@@ -4,6 +4,12 @@
 
 
 
+#	if __cplusplus < 201103L
+#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::IsTriviallyMoveConstructible'.
+
+
+
+#	endif
 #	include <type_traits>
 
 #	include "DD_And.hpp"
@@ -12,7 +18,14 @@
 
 DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-using IsTriviallyMoveConstructible = AndType<StdBoolConstant<std::is_trivially_move_constructible<ObjectsT_>>...>;
+struct IsTriviallyMoveConstructible : AndType<IsTriviallyMoveConstructible<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsTriviallyMoveConstructible<ObjectT_> : StdBoolConstant<std::is_trivially_move_constructible<ObjectT_>> {
+};
 
 
 
