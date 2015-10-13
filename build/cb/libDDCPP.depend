@@ -25,7 +25,7 @@
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
-1444401013 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
+1444716356 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
 	<cstdint>
@@ -747,12 +747,12 @@
 	"DD_IntegralConstant.hpp"
 	"DD_IsScalar.hpp"
 
-1444665222 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1444716692 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
 	"DD_Allocator.hpp"
-	"DD_UniquePointer.hpp"
+	"DD_StrictPointer.hpp"
 	"DD_swap.hpp"
 
 1441685287 source:d:\develop\repositories\libddcpp\src\test_math.cpp

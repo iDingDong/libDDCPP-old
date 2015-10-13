@@ -10,12 +10,30 @@
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_Allocator.hpp"
-#	include "DD_UniquePointer.hpp"
+#	include "DD_StrictPointer.hpp"
 #	include "DD_swap.hpp"
 
 
 
+#	if !defined(DDCPP_VARIANT_ALLOCATOR)
+#		define DDCPP_VARIANT_ALLOCATOR ::DD::Allocator<void>
+#	endif
+
+
+
 DD_DETAIL_BEGIN_
+DD_ALIAS(VariantAllocator_, DDCPP_VARIANT_ALLOCATOR);
+
+
+
+struct VariantHolderBase_;
+
+
+
+inline ProcessType destroy_variant_holder_(VariantHolderBase_* pointer_) DD_NOEXCEPT;
+
+
+
 struct VariantHolderBase_ {
 	public:
 	DD_ALIAS(ThisType, VariantHolderBase_);
@@ -32,10 +50,14 @@ struct VariantHolderBase_ {
 
 	public:
 #	if __cplusplus >= 201103L
-	virtual UniquePointer<ThisType> get_clone_() const = 0;
+	virtual StrictPointer<ThisType, destroy_variant_holder_> get_clone_() const = 0;
 #	else
 	virtual ThisType* get_clone_() const = 0;
 #	endif
+
+
+	public:
+	virtual ProcessType destroy_() DD_NOEXCEPT = 0;
 
 	public:
 	virtual TypeInfo const& get_type() const = 0;
@@ -48,45 +70,64 @@ struct VariantHolderBase_ {
 template <typename ValueT_>
 struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 	public:
-	DD_ALIAS(ThisType, VariantHolder_<ValueT_>);
 	DD_ALIAS(SuperType, VariantHolderBase_);
-	DD_ALIAS(ValueType, ValueT_);
+	DD_ALIAS(ThisType, VariantHolder_<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
 	public:
-	ValueType m_value;
+	ValueType m_value_;
 
 
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	VariantHolder_(ValueT__&& value_) noexcept(noexcept(ValueType(value_))) : m_value(forward<ValueT__>(value_)) {
+	VariantHolder_(ValueT__&& value_) noexcept(noexcept(ValueType(value_))) try : m_value_(forward<ValueT__>(value_)) {
+	} catch (...) {
+		VariantAllocator_::deallocate(this, sizeof(ThisType));
+		throw;
 	}
 #	else
-	VariantHolder_(ValueT__ const& value_) : m_value(value_) {
+	VariantHolder_(ValueT__ const& value_) try : m_value_(value_) {
+	} catch (...) {
+		VariantAllocator_::deallocate(this, sizeof(ThisType));
+		throw;
 	}
 #	endif
 
 
 	public:
 #	if __cplusplus >= 201103L
-	UniquePointer<SuperType> get_clone_() const override {
-		return UniquePointer<SuperType>(new ThisType(m_value));
+	StrictPointer<SuperType, destroy_variant_holder_> get_clone_() const override {
+		return StrictPointer<SuperType, destroy_variant_holder_>(new (VariantAllocator_::allocate(sizeof(ThisType))) ThisType(m_value_));
 	}
 #	else
 	SuperType* get_clone_() const {
-		return new ValueType(m_value);
+		return new (VariantAllocator_::allocate(sizeof(ThisType))) ThisType(m_value_);
 	}
 #	endif
 
 
 	public:
 	TypeInfo const& get_type() const DD_OVERRIDE {
-		return typeid(m_value);
+		return typeid(m_value_);
+	}
+
+
+	public:
+	ProcessType destroy_() DD_NOEXCEPT DD_OVERRIDE {
+		m_value_.~ValueType();
+		VariantAllocator_::deallocate(this, sizeof(ThisType));
 	}
 
 
 };
+
+
+
+inline ProcessType destroy_variant_holder_(VariantHolderBase_* pointer_) DD_NOEXCEPT {
+	pointer_->destroy_();
+}
 
 
 
@@ -96,7 +137,7 @@ struct Variant {
 
 
 	private:
-	UniquePointer<VariantHolderBase_> m_holder_pointer_;
+	StrictPointer<VariantHolderBase_, destroy_variant_holder_> m_holder_pointer_;
 
 
 #	if __cplusplus >= 201103L
@@ -120,10 +161,16 @@ struct Variant {
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	Variant(ValueT__&& value___) : m_holder_pointer_(new VariantHolder_<DecayType<ValueT__>>(forward<ValueT__>(value___))) {
+	Variant(ValueT__&& value___) : m_holder_pointer_(
+		new (
+			VariantAllocator_::allocate(sizeof(VariantHolder_<DecayType<ValueT__>>))
+		) VariantHolder_<DecayType<ValueT__>>(forward<ValueT__>(value___))
+	) {
 	}
 #	else
-	Variant(ValueT__ const& value___) : m_holder_pointer_(new VariantHolder_<ValueT__>(value___)) {
+	Variant(ValueT__ const& value___) : m_holder_pointer_(
+		new (VariantAllocator_::allocate(sizeof(VariantHolder_<ValueT__>))) VariantHolder_<ValueT__>(value___)
+	) {
 	}
 #	endif
 
@@ -131,9 +178,14 @@ struct Variant {
 #	if __cplusplus >= 201103L
 	public:
 	~Variant() = default;
-
-
+#	else
+	public:
+	~Variant() throw() {
+		destroy_variant_holder_(m_holder_pointer_);
+	}
 #	endif
+
+
 	public:
 	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
 		using DD::swap;
@@ -145,14 +197,14 @@ struct Variant {
 	template <typename ValueT__>
 	ValueT__& to() DD_NOEXCEPT {
 		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
-		return static_cast<VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value;
+		return static_cast<VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value_;
 	}
 
 	public:
 	template <typename ValueT__>
 	ValueT__ const& to() const DD_NOEXCEPT {
 		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
-		return static_cast<VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value;
+		return static_cast<VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value_;
 	}
 
 

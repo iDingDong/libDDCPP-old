@@ -69,12 +69,14 @@
 #		define DD_DELETE_DEFAULT_CONSTRUCTOR(ARG_Class_) ARG_Class_() = delete;
 #		define DD_DELETE_COPY_CONSTRUCTOR(ARG_Class_) ARG_Class_(ThisType const& origin_) = delete;
 #		define DD_DELETE_MOVE_CONSTRUCTOR(ARG_Class_) ARG_Class_(ThisType&& origin_) = delete;
+#		define DD_DELETE_DESTRUCTOR(ARG_Class_) ~ARG_Class_() = delete;
 #		define DD_DELETE_COPY_ASSIGNMENT(ARG_Class_) ThisType& operator =(ThisType const& origin_) = delete;
 #		define DD_DELETE_MOVE_ASSIGNMENT(ARG_Class_) ThisType& operator =(ThisType&& origin_) = delete;
 #	else
 #		define DD_DELETE_DEFAULT_CONSTRUCTOR(ARG_Class_) private: ARG_Class_();
 #		define DD_DELETE_COPY_CONSTRUCTOR(ARG_Class_) private: ARG_Class_(ThisType const& origin_);
 #		define DD_DELETE_MOVE_CONSTRUCTOR(ARG_Class_)
+#		define DD_DELETE_DESTRUCTOR(ARG_Class_) private: ~ARG_Class_();
 #		define DD_DELETE_COPY_ASSIGNMENT(ARG_Class_) private: ThisType& operator =(ThisType const& origin_);
 #		define DD_DELETE_MOVE_ASSIGNMENT(ARG_Class_)
 #	endif
