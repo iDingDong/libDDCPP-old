@@ -72,9 +72,23 @@ struct Print {
 	}
 
 	ThisType const& operator ,(VersionTag tag_) const DD_NOEXCEPT_AS(
-		fabricate<ThisType>() DD_COMMA "libDDCPP\nversion: " DD_COMMA DD_CPP_LIBRARY / 1000 DD_COMMA '.' DD_COMMA DD_CPP_LIBRARY % 1000
+		fabricate<ThisType>() DD_COMMA
+		"libDDCPP\nversion: " DD_COMMA
+		DD_CPP_LIBRARY / 1000 DD_COMMA
+		'.' DD_COMMA
+		DD_CPP_LIBRARY % 1000 / 100 DD_COMMA
+		DD_CPP_LIBRARY % 100 / 10 DD_COMMA
+		DD_CPP_LIBRARY % 10
 	) {
-		return *this, "libDDCPP\nversion: ", DD_CPP_LIBRARY / 1000, '.', DD_CPP_LIBRARY % 1000;
+		return
+			*this,
+			"libDDCPP\nversion: ",
+			DD_CPP_LIBRARY / 1000,
+			'.',
+			DD_CPP_LIBRARY % 1000 / 100,
+			DD_CPP_LIBRARY % 100 / 10,
+			DD_CPP_LIBRARY % 10
+		;
 	}
 
 

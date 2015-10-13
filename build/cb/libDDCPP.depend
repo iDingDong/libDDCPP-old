@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1444577889 source:d:\develop\repositories\libddcpp\src\main.cpp
-	<iostream>
+1444719753 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
+	"standard/bits/DD_print.hpp"
 	"standard/bits/DD_RedBlackTree.hpp"
 	"test_meta.h"
 	"test_memory.h"
@@ -21,7 +21,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1444443721 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1444719607 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -549,7 +549,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/bits/DD_print.hpp"
 
-1444474781 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
+1444720014 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
 	<iostream>
 	<iomanip>
 	"DD_Tags.hpp"
@@ -729,8 +729,9 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1443948783 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1444719703 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
+	<new>
 	"DD_ValueTypeNested.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_AllocationFailure.hpp"

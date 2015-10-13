@@ -1,11 +1,11 @@
-#include <iostream>
-
 #define DDCPP_DEFAULT_WARNING 0
 
 #include "standard/DDGlobal.hpp"
 
 #include "standard/DDVessel.hpp"
 #include "standard/DDList.hpp"
+
+#include "standard/bits/DD_print.hpp"
 #include "standard/bits/DD_RedBlackTree.hpp"
 #include "test_meta.h"
 #include "test_memory.h"
@@ -15,6 +15,7 @@
 
 int main() {
 	try {
+		DD_PRINT DD::version, '\n', DD::end_line;
 		test_meta();
 		test_utility();
 		test_memory();
@@ -22,8 +23,8 @@ int main() {
 		test_math();
 		std::cout << "All tests successfully operated.";
 	} catch (char const* prompt) {
-		std::cout << prompt;
+		DD_PRINT prompt;
 	}
-	std::cout << std::endl;
+	DD_PRINT DD::end_line;
 	return 0;
 }

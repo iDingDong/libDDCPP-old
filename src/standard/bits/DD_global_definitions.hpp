@@ -8,7 +8,7 @@
 
 
 
-#	define DD_CPP_LIBRARY 1000
+#	define DD_CPP_LIBRARY 0000L
 
 #	define DD_ON 1
 #	define DD_OFF 0

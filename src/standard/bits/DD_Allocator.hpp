@@ -5,6 +5,7 @@
 
 
 #	include <cstdlib>
+#	include <new>
 
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_IntegralConstant.hpp"
