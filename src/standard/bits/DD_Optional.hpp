@@ -15,6 +15,7 @@
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyMoveable.hpp"
 #	endif
+#	include "DD_Comparable.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_construct.hpp"
 #	include "DD_destruct.hpp"
@@ -77,7 +78,11 @@ struct Optional_ {
 
 
 template <typename ValueT_>
-struct Optional : Optional_ {
+#	if __cplusplus >= 201103L
+struct Optional : Comparable<Optional<ValueT_>>, Optional_ {
+#	else
+struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
+#	endif
 	public:
 	DD_ALIAS(SuperType, Optional_);
 	DD_ALIAS(ThisType, Optional<ValueT_>);
@@ -387,8 +392,38 @@ struct Optional : Optional_ {
 #	endif
 
 
+#	if __cplusplus >= 201103L
+	public:
+	explicit constexpr operator ValidityType() const noexcept {
+		return is_valid();
+	}
 
+
+#	endif
 };
+
+
+
+template <typename ValueT_>
+inline ValidityType operator ==(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
+	if (optional_1_.is_valid() && optional_2_.is_valid()) {
+		return optional_1_.get_value() == optional_2_.get_value();
+	} else {
+		return optional_1_.is_valid() == optional_2_.is_valid();
+	}
+}
+
+
+template <typename ValueT_>
+inline ValidityType operator <(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
+	if (!optional_1_.is_valid()) {
+		return optional_2_.is_valid();
+	} else if (!optional_2_.is_valid()) {
+		return false;
+	} else {
+		return optional_1_.get_value() < optional_2_.get_value();
+	}
+}
 
 
 

@@ -114,9 +114,13 @@
 		<Unit filename="../../src/standard/bits/DD_IsSignedLong.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsSignedLongLong.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsSignedShort.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyCopyAssignable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsTriviallyCopyConstructible.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyCopyable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsTriviallyDestructible.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyMoveAssignable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsTriviallyMoveConstructible.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsTriviallyMoveable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUndirectionalIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUnion.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsUnsigned.hpp" />
@@ -146,6 +150,7 @@
 		<Unit filename="../../src/standard/bits/DD_NeedInstance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NestedTypeCheck.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Optional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Parasitifer.hpp" />
