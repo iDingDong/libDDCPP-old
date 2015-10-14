@@ -99,7 +99,7 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 #	if __cplusplus >= 201103L
 		static ProcessType reset(ThisType* this_, ValueT___&& value____) {
 			if (this_->is_valid()) {
-				this_->get_value_() = forward<ValueT___>(value____);
+				this_->assign(forward<ValueT___>(value____));
 			} else {
 				this_->emplace(forward<ValueT___>(value____));
 			}
@@ -108,7 +108,7 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 #	else
 		static ProcessType reset(ThisType* this_, ValueT___ const& value____) {
 			if (this_->is_valid()) {
-				this_->get_value_() = value____;
+				this_->assign(value____);
 			} else {
 				this_->emplace(value____);
 			}
@@ -127,12 +127,12 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 #	if __cplusplus >= 201103L
 		static ProcessType reset(ThisType* this_, ValueT___&& value____) {
 			this_->m_validity_ = true;
-			this_->get_value_() = forward<ValueT___>(value____);
+			this_->assign(forward<ValueT___>(value____));
 		}
 #	else
 		static ProcessType reset(ThisType* this_, ValueT___ const& value____) {
 			this_->m_validity_ = true;
-			this_->get_value_() = value____;
+			this_->assign(value____);
 		}
 #	endif
 
