@@ -15,6 +15,7 @@
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyMoveable.hpp"
 #	endif
+#	include "DD_Decay.hpp"
 #	include "DD_Comparable.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_construct.hpp"
@@ -176,6 +177,12 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 		}
 	}
 
+#	endif
+	public:
+	DD_CONSTEXPR Optional(NilOptional tag_) DD_NOEXCEPT : SuperType(false) {
+	}
+
+#	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
 	Optional(ValidityType validity_, ArgumentsT__&&... arguments___) noexcept(
@@ -185,6 +192,14 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 			emplace(forward<ArgumentsT__>(arguments___)...);
 		}
 	}
+
+	public:
+	template <typename... ArgumentsT__>
+	Optional(ConstructTag tag_, ArgumentsT__&&... arguments___) noexcept(
+		noexcept(emplace(forward<ArgumentsT__>(arguments___)...))
+	) : SuperType(true) {
+		emplace(forward<ArgumentsT__>(arguments___)...);
+	}
 #	else
 	public:
 	template <typename ValueT__>
@@ -192,6 +207,12 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 		if (is_valid()) {
 			emplace(value___);
 		}
+	}
+
+	public:
+	template <typename ValueT__>
+	Optional(ConstructTag tag_, ValueT__ const& value___) : SuperType(true) {
+		emplace(value___);
 	}
 #	endif
 
@@ -338,6 +359,11 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	}
 
 	public:
+	ProcessType reset(NilOptional tag_) DD_NOEXCEPT {
+		reset();
+	}
+
+	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType reset(ValueT__&& value___) noexcept(
@@ -415,7 +441,19 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 
 
 template <typename ValueT_>
-inline ValidityType operator ==(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
+#	if __cplusplus >= 201103L
+Optional<DecayType<ValueT_>> make_optional(ValueT_&& value__) DD_NOEXCEPT_AS(Optional<DecayType<ValueT_>>(forward<ValueT_>(value__))) {
+	return Optional<DecayType<ValueT_>>(construct_tag, forward<ValueT_>(value__));
+}
+#	else
+Optional<ValueT_> make_optional(ValueT_ const& value__) {
+	return Optional<ValueT_>(construct_tag, value__);
+}
+#	endif
+
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator ==(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
 	if (optional_1_.is_valid() && optional_2_.is_valid()) {
 		return optional_1_.get_value() == optional_2_.get_value();
 	} else {
@@ -423,9 +461,19 @@ inline ValidityType operator ==(Optional<ValueT_> const& optional_1_, Optional<V
 	}
 }
 
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator ==(NilOptional nil_optional_, Optional<ValueT_> const& optional_) {
+	return !optional_.is_valid();
+}
 
 template <typename ValueT_>
-inline ValidityType operator <(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
+inline ValidityType DD_CONSTEXPR operator ==(Optional<ValueT_> const& optional_, NilOptional nil_optional_) {
+	return nil_optional == optional_;
+}
+
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator <(Optional<ValueT_> const& optional_1_, Optional<ValueT_> const& optional_2_) {
 	if (!optional_1_.is_valid()) {
 		return optional_2_.is_valid();
 	} else if (!optional_2_.is_valid()) {
@@ -435,6 +483,16 @@ inline ValidityType operator <(Optional<ValueT_> const& optional_1_, Optional<Va
 	}
 }
 
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator <(NilOptional nil_optional_, Optional<ValueT_> const& optional_) {
+	return optional_.is_valid();
+}
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator <(Optional<ValueT_> const& optional_, NilOptional nil_optional_) {
+	return false;
+}
+
 
 
 DD_DETAIL_END_
@@ -442,7 +500,10 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::NilOptional;
+using detail_::nil_optional;
 using detail_::Optional;
+using detail_::make_optional;
 
 
 

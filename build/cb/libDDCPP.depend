@@ -1118,7 +1118,7 @@
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
 	"DD_global_definitions.hpp"
 
-1444836175 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
+1444838988 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
 	"DD_Tags.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_IsSame.hpp"
@@ -1126,6 +1126,7 @@
 	"DD_IsRvalueReference.hpp"
 	"DD_IsTriviallyCopyable.hpp"
 	"DD_IsTriviallyMoveable.hpp"
+	"DD_Decay.hpp"
 	"DD_Comparable.hpp"
 	"DD_AccessDenied.hpp"
 	"DD_construct.hpp"
