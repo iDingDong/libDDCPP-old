@@ -101,7 +101,12 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 			if (this_->is_valid()) {
 				this_->assign(forward<ValueT___>(value____));
 			} else {
-				this_->emplace(forward<ValueT___>(value____));
+				try {
+					this_->emplace(forward<ValueT___>(value____));
+				} catch (...) {
+					this_->m_validity_ = false;
+					throw;
+				}
 			}
 			this_->m_validity_ = true;
 		}
@@ -110,7 +115,12 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 			if (this_->is_valid()) {
 				this_->assign(value____);
 			} else {
-				this_->emplace(value____);
+				try {
+					this_->emplace(value____);
+				} catch (...) {
+					this_->m_validity_ = false;
+					throw;
+				}
 			}
 			this_->m_validity_ = true;
 		}
