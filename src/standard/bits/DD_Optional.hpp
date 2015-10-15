@@ -102,28 +102,16 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 			if (this_->is_valid()) {
 				this_->assign(forward<ValueT___>(value____));
 			} else {
-				try {
-					this_->emplace(forward<ValueT___>(value____));
-				} catch (...) {
-					this_->m_validity_ = false;
-					throw;
-				}
+				this_->emplace(forward<ValueT___>(value____));
 			}
-			this_->m_validity_ = true;
 		}
 #	else
 		static ProcessType reset(ThisType* this_, ValueT___ const& value____) {
 			if (this_->is_valid()) {
 				this_->assign(value____);
 			} else {
-				try {
-					this_->emplace(value____);
-				} catch (...) {
-					this_->m_validity_ = false;
-					throw;
-				}
+				this_->emplace(value____);
 			}
-			this_->m_validity_ = true;
 		}
 #	endif
 
@@ -137,13 +125,13 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 		template <typename ValueT___>
 #	if __cplusplus >= 201103L
 		static ProcessType reset(ThisType* this_, ValueT___&& value____) {
-			this_->m_validity_ = true;
 			this_->assign(forward<ValueT___>(value____));
+			this_->m_validity_ = true;
 		}
 #	else
 		static ProcessType reset(ThisType* this_, ValueT___ const& value____) {
-			this_->m_validity_ = true;
 			this_->assign(value____);
+			this_->m_validity_ = true;
 		}
 #	endif
 
@@ -160,20 +148,20 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 
 	public:
 	Optional(ThisType const& origin_) DD_NOEXCEPT_AS(
-		emplace(origin_.get_value_())
+		emplace_(origin_.get_value_())
 	) : SuperType(origin_.is_valid()) {
 		if (is_valid()) {
-			emplace(origin_.get_value_());
+			emplace_(origin_.get_value_());
 		}
 	}
 
 #	if __cplusplus >= 201103L
 	public:
 	Optional(ThisType&& origin_) noexcept(
-		noexcept(emplace(move(origin_.get_value_())))
+		noexcept(emplace_(move(origin_.get_value_())))
 	) : SuperType(origin_.is_valid()) {
 		if (is_valid()) {
-			emplace(move(origin_.get_value_()));
+			emplace_(move(origin_.get_value_()));
 		}
 	}
 
@@ -186,33 +174,33 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	public:
 	template <typename... ArgumentsT__>
 	Optional(ValidityType validity_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(emplace(forward<ArgumentsT__>(arguments___)...))
+		noexcept(emplace_(forward<ArgumentsT__>(arguments___)...))
 	) : SuperType(validity_) {
 		if (is_valid()) {
-			emplace(forward<ArgumentsT__>(arguments___)...);
+			emplace_(forward<ArgumentsT__>(arguments___)...);
 		}
 	}
 
 	public:
 	template <typename... ArgumentsT__>
 	Optional(ConstructTag tag_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(emplace(forward<ArgumentsT__>(arguments___)...))
+		noexcept(emplace_(forward<ArgumentsT__>(arguments___)...))
 	) : SuperType(true) {
-		emplace(forward<ArgumentsT__>(arguments___)...);
+		emplace_(forward<ArgumentsT__>(arguments___)...);
 	}
 #	else
 	public:
 	template <typename ValueT__>
 	Optional(ValidityType validity_, ValueT__ const& value___) : SuperType(validity_) {
 		if (is_valid()) {
-			emplace(value___);
+			emplace_(value___);
 		}
 	}
 
 	public:
 	template <typename ValueT__>
 	Optional(ConstructTag tag_, ValueT__ const& value___) : SuperType(true) {
-		emplace(value___);
+		emplace_(value___);
 	}
 #	endif
 
@@ -317,20 +305,37 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	}
 
 
-	public:
 #	if __cplusplus >= 201103L
+	private:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(construct(get_pointer(), forward<ArgumentsT__>(arguments___)...))
+	) {
+		construct(get_pointer_(), forward<ArgumentsT__>(arguments___)...);
+	}
+
+	public:
 	template <typename... ArgumentsT__>
 	ProcessType emplace(ArgumentsT__&&... arguments___) noexcept(
 		noexcept(construct(get_pointer(), forward<ArgumentsT__>(arguments___)...))
 	) {
 		DD_ASSERT(!is_valid(), "Failed to construct over other instance: 'DD::Optional::emplace'");
-		construct(get_pointer_(), forward<ArgumentsT__>(arguments___)...);
+		emplace_(forward<ArgumentsT__>(arguments___)...);
+		m_validity_ = true;
 	}
 #	else
+	private:
+	template <typename ValueT__>
+	ProcessType emplace_(ValueT__ const& value___) {
+		construct(get_pointer_(), forward<ArgumentsT>(arguments___)...);
+	}
+
+	public:
 	template <typename ValueT__>
 	ProcessType emplace(ValueT__ const& value___) {
 		DD_ASSERT(!is_valid(), "Failed to construct over other instance: 'DD::Optional::emplace'");
-		construct(get_pointer_(), forward<ArgumentsT>(arguments___)...);
+		emplace_(forward<ArgumentsT>(arguments___)...);
+		m_validity_ = true;
 	}
 #	endif
 
