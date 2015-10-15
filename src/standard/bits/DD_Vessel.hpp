@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_Tags.hpp"
 #	include "DD_NeedInstance.hpp"
 #	include "DD_fabricate.hpp"
 #	include "DD_IteratorNested.hpp"
@@ -47,18 +48,22 @@ struct VesselBase_ {
 
 
 	protected:
-#	if __cplusplus >= 201103L
-	constexpr VesselBase_() = default;
-#	else
-	VesselBase_() throw() : m_begin_(), m_end_(), m_storage_end_() {
+	DD_CONSTEXPR VesselBase_() DD_NOEXCEPT : m_begin_(), m_end_(), m_storage_end_() {
 	}
-#	endif
 
 	protected:
 	DD_DELETE_COPY_CONSTRUCTOR(VesselBase_)
 
 	protected:
 	DD_DELETE_MOVE_CONSTRUCTOR(VesselBase_)
+
+	protected:
+	DD_CONSTEXPR VesselBase_(UnguardedTag tag_) DD_NOEXCEPT {
+	}
+
+	protected:
+	DD_CONSTEXPR VesselBase_(UnguardedTag tag_, PointerType begin_) DD_NOEXCEPT : m_begin_(begin_) {
+	}
 
 #	if __cplusplus >= 201103L
 	protected:
@@ -314,9 +319,9 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 
 	public:
-	Vessel_(ThisType const& origin_) : SuperType(AllocatorType::allocate(origin_.get_length()), origin_.get_length()) {
+	Vessel_(ThisType const& origin_) : SuperType(unguarded_tag, AllocatorType::allocate(origin_.get_length())) {
 		try {
-			copy(origin_, this->begin());
+			this->m_end_ = copy(origin_, this->begin());
 		} catch (...) {
 			AllocatorType::deallocate(this->m_begin_, this->get_length());
 			throw;

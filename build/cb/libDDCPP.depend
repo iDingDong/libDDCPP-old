@@ -37,7 +37,7 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_relationship_operators.hpp
 	"DD_global_definitions.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
+1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
 1444545231 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
@@ -500,10 +500,14 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_global_definitions.hpp"
 
-1444398851 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1444891785 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
-	"DD_global_definitions.hpp"
+	"DD_IsSame.hpp"
+	"DD_IsPointer.hpp"
+	"DD_IsTriviallyCopyable.hpp"
+	"DD_IteratorValue.hpp"
 	"DD_size_distance.hpp"
+	"DD_Range.hpp"
 
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
 	"DD_global_definitions.hpp"
@@ -942,7 +946,8 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1444888454 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1444891265 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_fabricate.hpp"
 	"DD_IteratorNested.hpp"

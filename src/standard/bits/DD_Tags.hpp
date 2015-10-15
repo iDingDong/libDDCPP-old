@@ -24,6 +24,11 @@ struct ConstructTag : Tag {
 
 
 
+struct UnguardedTag : Tag {
+} DD_CONSTANT unguarded_tag;
+
+
+
 DD_END_
 
 
