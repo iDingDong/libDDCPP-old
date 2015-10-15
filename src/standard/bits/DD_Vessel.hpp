@@ -199,7 +199,7 @@ struct VesselBase_ {
 
 
 	public:
-	PointerType DD_CONSTEXPR data() DD_NOEXCEPT {
+	PointerType data() DD_NOEXCEPT {
 		return m_begin_;
 	}
 
