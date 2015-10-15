@@ -942,8 +942,9 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1443793552 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1444888454 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_NeedInstance.hpp"
+	"DD_fabricate.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_move.hpp"
 	"DD_length_difference.hpp"
@@ -1133,9 +1134,10 @@
 	"DD_destruct.hpp"
 	"DD_SizeTrait.hpp"
 
-1444728016 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
+1444878038 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
 	"DD_IsTriviallyCopyConstructible.hpp"
 	"DD_IsTriviallyCopyAssignable.hpp"
+	"DD_IsTriviallyMoveable.hpp"
 	"DD_And.hpp"
 
 1444727449 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyassignable.hpp

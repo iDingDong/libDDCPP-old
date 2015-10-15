@@ -5,6 +5,7 @@
 
 
 #	include "DD_NeedInstance.hpp"
+#	include "DD_fabricate.hpp"
 #	include "DD_IteratorNested.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_move.hpp"
@@ -58,6 +59,52 @@ struct VesselBase_ {
 
 	protected:
 	DD_DELETE_MOVE_CONSTRUCTOR(VesselBase_)
+
+#	if __cplusplus >= 201103L
+	protected:
+	constexpr VesselBase_(
+		PointerType begin_,
+		LengthType length_
+	) noexcept : VesselBase_(begin_, length_, length_) {
+	}
+
+	protected:
+	constexpr VesselBase_(
+		PointerType begin_,
+		LengthType length_,
+		LengthType capacity_
+	) noexcept : VesselBase_(begin_, begin_ + length_, begin_ + capacity_) {
+	}
+
+	protected:
+	constexpr VesselBase_(
+		PointerType begin_,
+		PointerType end_
+	) noexcept : VesselBase_(begin_, end_, end_) {
+	}
+#	else
+	protected:
+	VesselBase_(
+		PointerType begin_,
+		LengthType length_
+	) throw() : m_begin_(begin_), m_end_(m_begin_ + length_), m_storage_end_(m_end_) {
+	}
+
+	protected:
+	VesselBase_(
+		PointerType begin_,
+		LengthType length_,
+		LengthType capacity_
+	) throw() : m_begin_(begin_), m_end_(m_begin_ + length_), m_storage_end_(m_begin_ + capacity_) {
+	}
+
+	protected:
+	VesselBase_(
+		PointerType begin_,
+		PointerType end_
+	) throw() : m_begin_(begin_), m_end_(end_), m_storage_end_(m_end_) {
+	}
+#	endif
 
 	protected:
 	DD_CONSTEXPR VesselBase_(
@@ -243,6 +290,7 @@ struct VesselBase_ {
 template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
 struct Vessel_ : VesselBase_<ValueT_> {
 	public:
+	DD_ALIAS(SuperType, VesselBase_<ValueT_>);
 	DD_ALIAS(ThisType, Vessel_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(AllocatorType, AllocatorT_);
@@ -265,6 +313,32 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 #	endif
 
+	public:
+	Vessel_(ThisType const& origin_) : SuperType(AllocatorType::allocate(origin_.get_length()), origin_.get_length()) {
+		try {
+			copy(origin_, this->begin());
+		} catch (...) {
+			AllocatorType::deallocate(this->m_begin_, this->get_length());
+			throw;
+		}
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	constexpr Vessel_(ThisType&& origin_) DD_NOEXCEPT : SuperType(
+		release(origin_.m_begin_),
+		release(origin_.m_end_),
+		release(origin_.m_storage_end_)
+	) {
+	}
+
+#	endif
+
+	public:
+	~Vessel_() DD_NOEXCEPT {
+		destruct_();
+	}
+
 
 	public:
 	ProcessType stretch(LengthType new_capacity_) {
@@ -275,7 +349,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		} catch (...) {
 			AllocatorType::deallocate(temp_begin_, new_capacity_);
 		}
-		destruct();
+		destruct_();
 		this->m_begin_ = temp_begin_;
 		this->m_end_ = temp_end_;
 		this->m_storage_end_ = temp_begin_ + new_capacity_;
@@ -306,6 +380,20 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
+	static ProcessType transfer(Iterator from_, Iterator to_) {
+#	if __cplusplus >= 201103L
+		ValueType temp_(move(*from_));
+		move(ReverseIterator(from_ - 1), ReverseIterator(to_), ReverseIterator(from_));
+		*to_ = move(temp_);
+#	else
+		ValueType temp_ = *from_;
+		copy(ReverseIterator(from_ - 1), ReverseIterator(to_), ReverseIterator(from_));
+		*to_ = temp_;
+#	endif
+	}
+
+
+	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType push_back(ValueT__&& value___) {
@@ -326,57 +414,44 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 
 
-	/*public:
+	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType insert(Iterator position_, ValueT__&& value__) {
 #	else
-	ProcessType insert(Iterator position_, ValueT__&& value__) {
+	ProcessType insert(Iterator position_, ValueT__ const& value__) {
 #	endif
 		if (this->is_full()) {
-			LengthType capacity_ = this->get_capacity();
-			PointerType temp_begin_;
-			PointerType temp_end_;
-			if (capacity_) {
-				try {
-					temp_begin_ = AllocatorType::allocate(capacity_ * 2);
-				} catch (AllocationFailure& error_) {
-					temp_begin_ = AllocatorType::allocate(capacity_ + 1);
-				}
-			} else {
-				temp_begin_ = AllocatorType::allocate(1);
-			}
-			try {
-				temp_end_ = transconstruct(this->m_begin_, get_pointer(position_), temp_begin_);
-				try {
-					AllocatorType::construct(temp_end_, forward<ValueT__>(value__));
-					try {
-						transconstruct(get_pointer(position_), this->end(), ++temp_end_);
-					} catch (...) {
-						AllocatorType::destruct(--temp_end_);
-						throw;
-					}
-				} catch (...) {
-					move(temp_begin_, temp_end_, this->m_begin_);
-					AllocatorType::destruct(temp_begin_, temp_end_);
-					throw;
-				}
-			} catch (...) {
-				AllocatorType::deallocate(temp_begin_);
-			}
-			this->begin_ = temp_begin_;
-			this->end_ = temp_end_;
-			this->storage_end = temp_begin_ + capacity_;
-		} else {
-			//temp_ = get_pointer(position);
+			reserve();
 		}
-	}*/
+#	if __cplusplus >= 201103L
+		push_back(forward<ValueT__>(value__));
+#	else
+		push_back(value__);
+#	endif
+		transfer(this->end(), position_);
+	}
+
+
+	public:
+	ProcessType clear() DD_NOEXCEPT {
+		destruct_();
+		this->m_begin_ = PointerType();
+		this->m_end_ = PointerType();
+		this->m_storage_end_ = PointerType();
+	}
+
+
+	public:
+	ProcessType shrink() DD_NOEXCEPT_AS(fabricate<ThisType>().stretch(fabricate<ThisType>().get_length())) {
+		stretch(this->get_length());
+	}
 
 
 	private:
-	ProcessType destruct() const DD_NOEXCEPT {
-		AllocatorType::destruct(this->begin(), this->end());
-		AllocatorType::deallocate(this->begin(), this->get_capacity());
+	ProcessType destruct_() const DD_NOEXCEPT {
+		AllocatorType::destruct(this->m_begin_, this->m_end_);
+		AllocatorType::deallocate(this->m_begin_, this->get_capacity());
 	}
 
 
@@ -390,19 +465,18 @@ struct Vessel_<ValueT_, AllocatorT_, true> : VesselBase_<ValueT_> {
 
 
 
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
+struct Vessel : detail_::Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
-using Vessel = detail_::Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value>;
-#	else
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
-struct Vessel : detail_::Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
-};
-#	endif
+using detail_::Vessel;
 
 
 

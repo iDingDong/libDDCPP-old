@@ -6,7 +6,9 @@
 
 #	include "DD_IsTriviallyCopyConstructible.hpp"
 #	include "DD_IsTriviallyCopyAssignable.hpp"
-#	if __cplusplus < 201103L
+#	if __cplusplus >= 201103L
+#		include "DD_IsTriviallyMoveable.hpp"
+#	else
 #		include "DD_And.hpp"
 #	endif
 
@@ -15,7 +17,7 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsTriviallyCopyable : AndType<IsTriviallyCopyConstructible<ObjectsT_...>, IsTriviallyCopyAssignable<ObjectsT_...>> {
+struct IsTriviallyCopyable : AndType<IsTriviallyCopyConstructible<ObjectsT_...>, IsTriviallyCopyAssignable<ObjectsT_...>, IsTriviallyMoveable<ObjectsT_...>> {
 };
 #	else
 template <typename ObjectT_>
