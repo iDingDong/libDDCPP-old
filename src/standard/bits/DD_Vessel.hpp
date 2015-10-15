@@ -199,6 +199,17 @@ struct VesselBase_ {
 
 
 	public:
+	PointerType DD_CONSTEXPR data() DD_NOEXCEPT {
+		return m_begin_;
+	}
+
+	public:
+	ConstPointerType DD_CONSTEXPR data() const DD_NOEXCEPT {
+		return m_begin_;
+	}
+
+
+	public:
 	LengthType get_length() const DD_NOEXCEPT {
 		return length_difference(begin(), end());
 	}

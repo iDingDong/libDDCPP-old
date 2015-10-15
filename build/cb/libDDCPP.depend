@@ -500,7 +500,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_global_definitions.hpp"
 
-1444891785 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1444902993 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_IsSame.hpp"
 	"DD_IsPointer.hpp"
