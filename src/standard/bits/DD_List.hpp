@@ -9,6 +9,7 @@
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_address_of.hpp"
+#	include "DD_previous.hpp"
 #	include "DD_Allocator.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
@@ -165,8 +166,39 @@ struct List_ : ListBase_ {
 
 	public:
 	ConstIterator end() const DD_NOEXCEPT_AS(ConstIterator(get_sentry())) {
-		return Iterator(get_sentry());
+		return ConstIterator(get_sentry());
 	}
+
+
+	public:
+	ReverseIterator rbegin() DD_NOEXCEPT_AS(ReverseIterator(previous(end()))) {
+		return ReverseIterator(previous(end()));
+	}
+
+	public:
+	ConstReverseIterator rbegin() const DD_NOEXCEPT_AS(ReverseIterator(previous(end()))) {
+		return ConstReverseIterator(previous(end()));
+	}
+
+
+	public:
+	ReverseIterator rend() DD_NOEXCEPT_AS(ReverseIterator(previous(begin()))) {
+		return ReverseIterator(previous(begin()));
+	}
+
+	public:
+	ConstReverseIterator rend() const DD_NOEXCEPT_AS(ReverseIterator(previous(begin()))) {
+		return ConstReverseIterator(previous(begin()));
+	}
+
+
+
+	public:
+	DD_RANGE_NESTED
+
+
+	public:
+	DD_REVERSE_RANGE_NESTED
 
 
 	public:

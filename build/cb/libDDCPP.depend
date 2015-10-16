@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1444720066 source:d:\develop\repositories\libddcpp\src\main.cpp
+1444903029 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
@@ -946,7 +946,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1444891265 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1444925179 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_fabricate.hpp"
@@ -1099,10 +1099,11 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1444627430 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1444971026 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_forward.hpp"
 	"DD_address_of.hpp"
+	"DD_previous.hpp"
 	"DD_Allocator.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
@@ -1157,4 +1158,10 @@
 1444750887 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveassignable.hpp
 	<type_traits>
 	"DD_And.hpp"
+
+1444970864 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
+	"DD_retreat.hpp"
+
+1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
+	"DD_IsFreeAccessIterator.hpp"
 

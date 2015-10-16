@@ -186,6 +186,7 @@
 		<Unit filename="../../src/standard/bits/DD_Vessel.hpp" />
 		<Unit filename="../../src/standard/bits/DD_VoidType.hpp" />
 		<Unit filename="../../src/standard/bits/DD_address_of.hpp" />
+		<Unit filename="../../src/standard/bits/DD_advance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_binary_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bind.hpp" />
 		<Unit filename="../../src/standard/bits/DD_compatibility_definitions.hpp" />
@@ -233,15 +234,18 @@
 		<Unit filename="../../src/standard/bits/DD_min_max.hpp" />
 		<Unit filename="../../src/standard/bits/DD_mismatch.hpp" />
 		<Unit filename="../../src/standard/bits/DD_move.hpp" />
+		<Unit filename="../../src/standard/bits/DD_next.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point_by.hpp" />
+		<Unit filename="../../src/standard/bits/DD_previous.hpp" />
 		<Unit filename="../../src/standard/bits/DD_print.hpp" />
 		<Unit filename="../../src/standard/bits/DD_relationship_operators.hpp" />
 		<Unit filename="../../src/standard/bits/DD_release.hpp" />
 		<Unit filename="../../src/standard/bits/DD_replace.hpp" />
 		<Unit filename="../../src/standard/bits/DD_replace_if.hpp" />
+		<Unit filename="../../src/standard/bits/DD_retreat.hpp" />
 		<Unit filename="../../src/standard/bits/DD_reverse.hpp" />
 		<Unit filename="../../src/standard/bits/DD_select_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_size_distance.hpp" />
