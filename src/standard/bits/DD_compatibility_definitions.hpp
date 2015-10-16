@@ -11,7 +11,7 @@
 
 #	endif
 #	if __cplusplus >= 201103L
-#		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_) static_assert(ARG_condition_, ARG_Prompt_);
+#		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_) static_assert(ARG_condition_, ARG_Prompt_)
 #	else
 #		define DD_STATIC_ASSERT(ARG_condition_, ARG_Prompt_)
 #	endif
