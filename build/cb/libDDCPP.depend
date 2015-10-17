@@ -699,10 +699,11 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1444726803 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1445068919 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
+	"bits/DD_get_length.hpp"
 	"bits/DD_logical_not_of.hpp"
 	"bits/DD_Range.hpp"
 	"bits/DD_Optional.hpp"
@@ -1164,4 +1165,7 @@
 
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
 	"DD_IsFreeAccessIterator.hpp"
+
+1445068950 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_length.hpp
+	"DD_global_definitions.hpp"
 

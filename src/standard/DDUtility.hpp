@@ -7,6 +7,7 @@
 #	include "bits/DD_UnusedIgnorer.hpp"
 #	include "bits/DD_Uncopiable.hpp"
 #	include "bits/DD_Dereferenceable.hpp"
+#	include "bits/DD_get_length.hpp"
 #	include "bits/DD_logical_not_of.hpp"
 #	include "bits/DD_Range.hpp"
 #	include "bits/DD_Optional.hpp"
