@@ -189,6 +189,7 @@
 		<Unit filename="../../src/standard/bits/DD_advance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_binary_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bind.hpp" />
+		<Unit filename="../../src/standard/bits/DD_check_bound.hpp" />
 		<Unit filename="../../src/standard/bits/DD_compatibility_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_construct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_container_definitions.hpp" />
@@ -254,6 +255,9 @@
 		<Unit filename="../../src/standard/bits/DD_swap.hpp" />
 		<Unit filename="../../src/standard/bits/DD_swap_target.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transconstruct.hpp" />
+		<Unit filename="../../src/standard/bits/DD_transfer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_transfer_backward.hpp" />
+		<Unit filename="../../src/standard/bits/DD_transfer_forward.hpp" />
 		<Unit filename="../../src/test_algorithm.cpp" />
 		<Unit filename="../../src/test_algorithm.h" />
 		<Unit filename="../../src/test_math.cpp" />

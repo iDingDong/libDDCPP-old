@@ -40,7 +40,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1444545231 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1445182754 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -66,6 +66,7 @@
 	"bits/DD_fill.hpp"
 	"bits/DD_generate.hpp"
 	"bits/DD_copy.hpp"
+	"bits/DD_transfer.hpp"
 	"bits/DD_replace.hpp"
 	"bits/DD_replace_if.hpp"
 	"bits/DD_reverse.hpp"
@@ -947,21 +948,22 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1445171863 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1445182445 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_fabricate.hpp"
 	"DD_IteratorNested.hpp"
-	"DD_move.hpp"
 	"DD_length_difference.hpp"
 	"DD_release.hpp"
 	"DD_AccessDenied.hpp"
 	"DD_Allocator.hpp"
-	"DD_Range.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
 	"DD_get_pointer.hpp"
+	"DD_check_bound.hpp"
 	"DD_transconstruct.hpp"
+	"DD_transfer.hpp"
 	"DD_copy.hpp"
 
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratornested.hpp
@@ -1168,4 +1170,27 @@
 
 1445068950 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_length.hpp
 	"DD_global_definitions.hpp"
+
+1445179927 d:\develop\repositories\libddcpp\src\standard\bits\dd_check_bound.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
+
+1445182316 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer.hpp
+	"DD_transfer_backward.hpp"
+
+1445182466 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_backward.hpp
+	"DD_IteratorReverse.hpp"
+	"DD_transfer_forward.hpp"
+
+1445182573 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_forward.hpp
+	"DD_IteratorValue.hpp"
+	"DD_next.hpp"
+	"DD_move.hpp"
+	"DD_copy.hpp"
+
+1444970887 d:\develop\repositories\libddcpp\src\standard\bits\dd_next.hpp
+	"DD_advance.hpp"
+
+1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_advance.hpp
+	"DD_IsFreeAccessIterator.hpp"
 
