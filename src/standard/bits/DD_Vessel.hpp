@@ -309,6 +309,20 @@ struct VesselBase_ {
 	}
 
 
+	public:
+	ValidityType DD_CONSTEXPR operator !() const DD_NOEXCEPT {
+		return is_empty();
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	explicit constexpr operator ValidityType() const DD_NOEXCEPT {
+		return begin() != end();
+	}
+
+
+#	endif
 };
 
 
@@ -359,6 +373,19 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 
 #	endif
+	public:
+	template <typename ValueT__>
+	Vessel_(LengthType length_, ValueT__ const& value) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().push_back(value)
+	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+		try {
+			for (; !this->is_full(); ++this->m_end_) {
+				push_back(value);
+			}
+		} catch (...) {
+			destruct_();
+		}
+	}
 
 	public:
 	~Vessel_() DD_NOEXCEPT {
