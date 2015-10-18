@@ -375,17 +375,37 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 	public:
 	template <typename ValueT__>
-	Vessel_(LengthType length_, ValueT__ const& value) DD_NOEXCEPT_AS(
-		fabricate<ThisType>().push_back(value)
+	Vessel_(LengthType length_, ValueT__ const& value___) noexcept(
+		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().push_back_(value___))
 	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
 			for (; !this->is_full(); ++this->m_end_) {
-				push_back(value);
+				push_back_(value___);
 			}
 		} catch (...) {
 			destruct_();
+			throw;
 		}
 	}
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename ValueT__>
+	Vessel_(InitializerList<ValueT__> initializer) noexcept(
+		noexcept(AllocatorType::allocate(initializer.size())) && noexcept(fabricate<ThisType>().push_back_(fabricate<ValueT__>()))
+	) : SuperType(AllocatorType::allocate(initializer.size()), 0, initializer.size()) {
+		try {
+			for (auto const& value_ : initializer) {
+				push_back_(value_);
+			}
+		} catch (...) {
+			destruct_();
+			throw;
+		}
+	}
+
+
+#	endif
 
 	public:
 	~Vessel_() DD_NOEXCEPT {
@@ -446,15 +466,33 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 
 
+	private:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ProcessType push_back_(ValueT__&& value___) noexcept(
+		noexcept(AllocatorType::construct(fabricate<ThisType>().m_end_, forward<ValueT__>(value___)))
+	) {
+		AllocatorType::construct(this->m_end_, forward<ValueT__>(value___));
+		++this->m_end_;
+	}
+#	else
+	ProcessType push_back_(ValueT__ const& value___) {
+		AllocatorType::construct(this->m_end_, value___);
+		++this->m_end_;
+	}
+#	endif
+
+
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ProcessType push_back(ValueT__&& value___) {
+	ProcessType push_back(ValueT__&& value___) noexcept(
+		noexcept(fabricate<ThisType>().reserve()) && noexcept(fabricate<ThisType>().push_back_((forward<ValueT__>(value___))))
+	) {
 		if (this->is_full()) {
 			reserve();
 		}
-		AllocatorType::construct(this->m_end_, forward<ValueT__>(value___));
-		++this->m_end_;
+		push_back_((forward<ValueT__>(value___)));
 	}
 #	else
 	ProcessType push_back(ValueT__ const& value___) {
