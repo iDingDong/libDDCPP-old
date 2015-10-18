@@ -4,23 +4,25 @@
 
 
 
+#	include "DD_debugger_definitions.hpp"
 #	include "DD_Tags.hpp"
 #	include "DD_NeedInstance.hpp"
 #	include "DD_fabricate.hpp"
 #	include "DD_IteratorNested.hpp"
-#	if __cplusplus >= 201103L
-#		include "DD_move.hpp"
-#	endif
 #	include "DD_length_difference.hpp"
 #	include "DD_release.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_Allocator.hpp"
-#	include "DD_Range.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
 #	include "DD_get_pointer.hpp"
+#	include "DD_check_bound.hpp"
 #	include "DD_transconstruct.hpp"
-#	include "DD_copy.hpp"
+#	include "DD_transfer.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_copy.hpp"
+#	endif
+
 
 
 
@@ -452,20 +454,6 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 
 
-	public:
-	static ProcessType transfer(Iterator from_, Iterator to_) {
-#	if __cplusplus >= 201103L
-		ValueType temp_(move(*from_));
-		move(ReverseIterator(from_ - 1), ReverseIterator(to_), ReverseIterator(from_));
-		*to_ = move(temp_);
-#	else
-		ValueType temp_ = *from_;
-		copy(ReverseIterator(from_ - 1), ReverseIterator(to_), ReverseIterator(from_));
-		*to_ = temp_;
-#	endif
-	}
-
-
 	private:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
@@ -506,6 +494,13 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
+	ProcessType pop_back() DD_NOEXCEPT {
+		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
+		AllocatorType::destruct(--this->m_end_);
+	}
+
+
+	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType insert(Iterator position_, ValueT__&& value__) {
@@ -520,7 +515,15 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	else
 		push_back(value__);
 #	endif
-		transfer(this->end(), position_);
+		this->transfer_backward(this->end() - 1, position_);
+	}
+
+
+	public:
+	ProcessType erase(Iterator position_) {
+		DD_ASSERT(check_bound(*this, position), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
+		this->transfer_forward(position_, this->end() - 1);
+		pop_back();
 	}
 
 
