@@ -253,46 +253,46 @@ struct VesselBase_ {
 
 	public:
 	ReferenceType front() DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::front' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::front'");
 		return *begin();
 	}
 
 	public:
 	ConstReferenceType front() const DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::front' in " __FILE__ " at " DD_TO_STRING(__LINE__))
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::front'");
 		return *begin();
 	}
 
 
 	public:
 	ReferenceType back() DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::back' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return end()[-1];
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::back'");
+		return *(end() - 1);
 	}
 
 	public:
 	ConstReferenceType back() const DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::back' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return end()[-1];
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Vessel::back'");
+		return *(end() - 1);
 	}
 
 
 	public:
 	ReferenceType at(LengthType index_) DD_NOEXCEPT {
 		Iterator temp_ = begin() + index_;
-		if (temp_ >= end()) {
-			throw AccessDenied("'DD::Vessel::at' in " __FILE__ " at " DD_TO_STRING(__LINE__));
+		if (check_bound(*this, temp_)) {
+			return *temp_;
 		}
-		return *temp_;
+		throw AccessDenied("Out of range: 'DD::Vessel::at'");
 	}
 
 	public:
 	ConstReferenceType at(LengthType index_) const DD_NOEXCEPT {
 		ConstIterator temp_ = begin() + index_;
-		if (temp_ >= end()) {
-			throw AccessDenied("'DD::Vessel::at' in " __FILE__ " at " DD_TO_STRING(__LINE__));
+		if (check_bound(*this, temp_)) {
+			return *temp_;
 		}
-		return *temp_;
+		throw AccessDenied("Out of range: 'DD::Vessel::at'");
 	}
 
 
@@ -302,12 +302,14 @@ struct VesselBase_ {
 
 	public:
 	ReferenceType operator [](LengthType index_) DD_NOEXCEPT {
-		return begin()[index_];
+		DD_ASSERT(check_bound(*this, begin() + index_), "Out of range: 'DD::Vessel::operator []'");
+		return *(begin() + index_);
 	}
 
 	public:
 	ConstReferenceType operator [](LengthType index_) const DD_NOEXCEPT {
-		return begin()[index_];
+		DD_ASSERT(check_bound(*this, begin() + index_), "Out of range: 'DD::Vessel::operator []'");
+		return (*begin() + index_);
 	}
 
 
@@ -454,14 +456,53 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 
 
+#	if __cplusplus >= 201103L
+	private:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_back_(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(AllocatorType::construct(fabricate<ThisType>().m_end_, forward<ArgumentsT__>(arguments___)...))
+	) {
+		AllocatorType::construct(this->m_end_, forward<ArgumentsT__>(arguments___)...);
+		++this->m_end_;
+	}
+
+
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_back(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(reserve()) &&
+		noexcept(emplace_back_(forward<ArgumentsT__>(arguments___)...))
+	) {
+		if (this->is_full()) {
+			reserve();
+		}
+		emplace_back_(forward<ArgumentsT__>(arguments___)...);
+	}
+
+
+#	endif
+	public:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ProcessType push_front(ValueT__&& value__) noexcept(
+		noexcept(fabricate<ThisType>(insert(fabricate<ThisType>().begin(), forward<ValueT__>(value__))))
+	) {
+		insert(this->begin(), forward<ValueT__>(value__));
+	}
+#	else
+	ProcessType push_front(ValueT__&& value__) {
+		insert(this->begin(), value__);
+	}
+#	endif
+
+
 	private:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType push_back_(ValueT__&& value___) noexcept(
-		noexcept(AllocatorType::construct(fabricate<ThisType>().m_end_, forward<ValueT__>(value___)))
+		noexcept(emplace_back_(forward<ValueT__>(value___)))
 	) {
-		AllocatorType::construct(this->m_end_, forward<ValueT__>(value___));
-		++this->m_end_;
+		emplace_back_(forward<ValueT__>(value___));
 	}
 #	else
 	ProcessType push_back_(ValueT__ const& value___) {
@@ -475,22 +516,25 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType push_back(ValueT__&& value___) noexcept(
-		noexcept(fabricate<ThisType>().reserve()) && noexcept(fabricate<ThisType>().push_back_((forward<ValueT__>(value___))))
+		noexcept(fabricate<ThisType>().emplace_back(forward<ValueT__>(value___)))
 	) {
-		if (this->is_full()) {
-			reserve();
-		}
-		push_back_((forward<ValueT__>(value___)));
+		emplace_back(forward<ValueT__>(value___));
 	}
 #	else
 	ProcessType push_back(ValueT__ const& value___) {
 		if (this->is_full()) {
 			reserve();
 		}
-		AllocatorType::construct(this->m_end_, value___);
-		++this->m_end_;
+		push_back_(value___);
 	}
 #	endif
+
+
+	public:
+	ProcessType pop_front() DD_NOEXCEPT_AS(fabricate<ThisType>().begin()) {
+		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
+		erase(this->begin());
+	}
 
 
 	public:
