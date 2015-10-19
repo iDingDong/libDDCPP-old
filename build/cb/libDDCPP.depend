@@ -722,8 +722,9 @@
 	"DD_address_of.hpp"
 	"DD_IteratorPointer.hpp"
 
-1443513182 d:\develop\repositories\libddcpp\src\standard\bits\dd_tuple.hpp
+1445297778 d:\develop\repositories\libddcpp\src\standard\bits\dd_tuple.hpp
 	"DD_Decay.hpp"
+	"DD_fabricate.hpp"
 	"DD_ReferenceWrapper.hpp"
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"

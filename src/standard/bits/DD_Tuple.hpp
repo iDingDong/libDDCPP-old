@@ -11,6 +11,7 @@
 
 #	endif
 #	include "DD_Decay.hpp"
+#	include "DD_fabricate.hpp"
 #	include "DD_ReferenceWrapper.hpp"
 #	include "DD_forward.hpp"
 #	include "DD_TypeList.hpp"
@@ -56,7 +57,16 @@ struct Tuple_;
 
 
 template <SubscriptType index_c_, typename ValueT_>
-ValueT_ get_type_helper(Tuple_<index_c_, ValueT_>) noexcept;
+inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__);
+
+template <SubscriptType index_c_, typename ValueT_>
+inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__);
+
+template <typename ValueT_, SubscriptType index_c_>
+inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__);
+
+template <typename ValueT_, SubscriptType index_c_>
+inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__);
 
 
 
@@ -87,7 +97,7 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 
 	public:
 	template <SubscriptType index_c__>
-	using At = decltype(get_type_helper<index_c__>(ThisType()));
+	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
 
 
 	public:
@@ -105,6 +115,19 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 		noexcept(StorageType(forward<ValueT__>(value___))) &&
 		noexcept(RestType(forward<ValuesT__>(values___)...))
 	) : StorageType(forward<ValueT__>(value___)), RestType(forward<ValuesT__>(values___)...) {
+	}
+
+
+	public:
+	template <SubscriptType index_c__>
+	At<index_c__>& at() noexcept {
+		return ::DD::detail_::get_value<index_c__>(*this);
+	}
+
+	public:
+	template <SubscriptType index_c__>
+	At<index_c__> const& at() const noexcept {
+		return ::DD::detail_::get_value<index_c__>(*this);
 	}
 
 
@@ -143,7 +166,7 @@ struct Tuple_<index_c_, ValueT_> {
 
 	public:
 	template <SubscriptType index_c__>
-	using At = decltype(get_type_helper<index_c__>(ThisType()));
+	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
 
 
 	private:
@@ -183,6 +206,19 @@ struct Tuple_<index_c_, ValueT_> {
 
 
 	public:
+	template <SubscriptType index_c__>
+	At<index_c__>& at() noexcept {
+		return ::DD::detail_::get_value<index_c__>(*this);
+	}
+
+	public:
+	template <SubscriptType index_c__>
+	At<index_c__> const& at() const noexcept {
+		return ::DD::detail_::get_value<index_c__>(*this);
+	}
+
+
+	public:
 	ThisType& operator =(ThisType const& origin_) = default;
 
 	public:
@@ -194,10 +230,48 @@ struct Tuple_<index_c_, ValueT_> {
 
 
 template <typename... ValuesT_>
-Tuple_<0, DecayAndStripType_<ValuesT_>...> constexpr make_tuple(ValuesT_&&... elements__) noexcept(
-	noexcept(Tuple_<0, DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...))
+struct Tuple : Tuple_<0, ValuesT_...> {
+	using SuperType = Tuple_<0, ValuesT_...>;
+	using ThisType = Tuple<ValuesT_...>;
+
+
+	public:
+	DD_CONSTEXPR Tuple() = default;
+
+	public:
+	DD_CONSTEXPR Tuple(ThisType const& origin_) = default;
+
+	public:
+	DD_CONSTEXPR Tuple(ThisType&& origin_) = default;
+
+	public:
+	template <typename... ValuesT__>
+	explicit constexpr Tuple(ValuesT__&&... values___) noexcept(
+		noexcept(SuperType(forward<ValuesT__>(values___)...))
+	) : SuperType(forward<ValuesT__>(values___)...) {
+	}
+
+
+	public:
+	~Tuple() = default;
+
+
+	public:
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType&& origin_) = default;
+
+
+};
+
+
+
+template <typename... ValuesT_>
+Tuple<DecayAndStripType_<ValuesT_>...> constexpr make_tuple(ValuesT_&&... elements__) noexcept(
+	noexcept(Tuple<DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...))
 ) {
-	return Tuple_<0, DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...);
+	return Tuple<DecayAndStripType_<ValuesT_>...>(forward<ValuesT_>(elements__)...);
 }
 
 
@@ -266,10 +340,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-template <typename... ValuesT_>
-using Tuple = detail_::Tuple_<0, ValuesT_...>;
-
-
+using detail_::Tuple;
 
 using detail_::get_value;
 using detail_::make_tuple;
