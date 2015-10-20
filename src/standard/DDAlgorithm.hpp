@@ -16,10 +16,11 @@
 #	include "bits/DD_find_first_of.hpp"
 #	include "bits/DD_binary_find.hpp"
 #	if __cplusplus < 201103L
-#		include "bits/DD_find_min"
-#		include "bits/DD_find_max"
-#		include "bits/DD_find_min_max"
+#		include "bits/DD_find_min.hpp"
+#		include "bits/DD_find_max.hpp"
+#		include "bits/DD_find_min_max.hpp"
 #	endif
+#	include "bits/DD_find_range.hpp"
 #	include "bits/DD_count.hpp"
 #	include "bits/DD_count_if.hpp"
 #	include "bits/DD_is_partitioned.hpp"

@@ -1,5 +1,7 @@
 #include "test_algorithm.h"
 
+#include <cstdlib>
+#include <ctime>
 #include <algorithm>
 
 #include "standard/DDArray.hpp"
@@ -12,13 +14,14 @@ bool greater(T x, T y) {
 }
 
 void test_algorithm() {
-	DD::Array<int, 5> arr1 = {5, 3, 2, 4, 1};
-	DD::Array<int, 5> arr2 = {1, 4, 5, 3, 2};
-	DD::Array<int, 3> arr3 = {6, 7, 5};
+	std::srand(std::time(0));
+	DD::Array<int, 5> arr1 = { 5, 3, 2, 4, 1 };
+	DD::Array<int, 5> arr2 = { 1, 4, 5, 3, 2 };
+	DD::Array<int, 3> arr3 = { 6, 7, 5 };
 	DD_IGNORE_UNUSED arr1, arr2, arr3;
 	{
-		int right_result[5] = {5, 3, 2, 4, 1};
-		int wrong_result[5] = {2, 4, 1, 5, 3};
+		int right_result[5] = { 5, 3, 2, 4, 1 };
+		int wrong_result[5] = { 2, 4, 1, 5, 3 };
 		if (
 			!DD::equal(arr1, right_result) ||
 			DD::equal(arr1, wrong_result)
@@ -118,6 +121,15 @@ void test_algorithm() {
 			!DD::equal(temp2, result_2)
 		) {
 			throw "'DD::insert_sort' test failed.";
+		}
+	}
+	{
+		DD::Array<int, 17> text = { 3, 2, 4, 1, 5, 3, 2, 4, 2, 5, 3, 2, 4, 1, 4, 6, 3 };
+		DD_PRINT DD::find_range(text, arr1) - text, ' ', std::search(DD_SPLIT_RANGE(text), DD_SPLIT_RANGE(arr1)) - text, DD::end_line;
+		if (
+			DD::find_range(text, arr1) != std::search(DD_SPLIT_RANGE(text), DD_SPLIT_RANGE(arr1))
+		) {
+			throw "'DD::find_range' test failed.";
 		}
 	}
 

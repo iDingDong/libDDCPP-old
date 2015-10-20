@@ -7,6 +7,8 @@
 #	include "DD_debugger_definitions.hpp"
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_RemoveExtent.hpp"
+#	include "DD_IteratorPointer.hpp"
+#	include "DD_Indexable.hpp"
 #	include "DD_DefaultDeleter.hpp"
 #	include "DD_swap.hpp"
 
@@ -23,6 +25,9 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 	DD_VALUE_TYPE_NESTED(DD_MODIFY_TRAIT(RemoveExtent, ValueT_));
 	DD_ALIAS(DeleterType, ProcessType(&)(DD_MODIFY_TRAIT(RemoveExtent, ValueT_)*));
 	static DeleterType DD_CONSTANT deleter = deleter_c_;
+
+	public:
+	DD_ALIAS(DifferenceType, ::DD::DifferenceType);
 
 
 	private:
@@ -114,7 +119,6 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 
 #	endif
 
-
 	public:
 	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
 		reset(pointer_);
@@ -135,6 +139,12 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 	}
 
 
+	public:
+	ReferenceType operator [](DifferenceType index_) const DD_NOEXCEPT {
+		return *(*this + index_);
+	}
+
+
 #	if __cplusplus >= 201103L
 	public:
 	explicit operator ValidityType() const DD_NOEXCEPT {
@@ -144,6 +154,16 @@ struct StrictPointer : Comparable<StrictPointer<ValueT_ DD_COMMA deleter_c_>> {
 
 #	endif
 };
+
+
+
+template <typename ValueT_, ProcessType(&deleter_c_)(DD_MODIFY_TRAIT(RemoveExtent, ValueT_)*) DD_NOEXCEPT, typename DifferenceT_>
+inline DD_MODIFY_TRAIT(IteratorPointer, StrictPointer<ValueT_[] DD_COMMA deleter_c_>) operator +(
+	StrictPointer<ValueT_[], deleter_c_> const& strict_pointer_,
+	DifferenceT_ const& step_
+) DD_NOEXCEPT_AS(DD_MODIFY_TRAIT(IteratorPointer, StrictPointer<ValueT_[] DD_COMMA deleter_c_>)(strict_pointer_.get_pointer() + step_)) {
+	return strict_pointer_.get_pointer() + step_;
+}
 
 
 

@@ -19,7 +19,7 @@
 #	endif
 
 #	if __cplusplus >= 201103L
-#		define DD_SPLIT_RANGE(...) ::DD::begin(__VA_ARGS__), ::DD::end(__VA_ARGS__)
+#		define DD_SPLIT_RANGE(...) ::DD::detail_::begin(__VA_ARGS__), ::DD::detail_::end(__VA_ARGS__)
 #	else
 #		define DD_SPLIT_RANGE(ARG_range_) ::DD::begin(range__), ::DD::end(range__)
 #	endif
@@ -45,7 +45,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename RangeT_>
 #	if __cplusplus >= 201402L
 auto begin(RangeT_& range__) noexcept(noexcept(range__.begin())) {
@@ -195,6 +195,26 @@ struct Range {
 
 
 };
+
+
+
+template <typename IteratorT_>
+Range<IteratorT_> make_range(IteratorT_ const& begin__, IteratorT_ const& end__) DD_NOEXCEPT_AS(Range<IteratorT_>(begin__, end__)) {
+	return Range<IteratorT_>(begin__, end__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Range;
+
+using detail_::begin;
+using detail_::end;
+using detail_::make_range;
 
 
 

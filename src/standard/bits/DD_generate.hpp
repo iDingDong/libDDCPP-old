@@ -4,7 +4,7 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_Range.hpp"
 
 
 
@@ -13,11 +13,19 @@ template <typename UndirectionalIteratorT_, typename Generator_>
 ProcessType generate(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	Generator_ const& generator__
+	Generator_ generator__
 ) DD_NOEXCEPT_AS(*++begin__ = generator__() DD_COMMA begin__ != end__) {
 	for (; begin__ != end__; ++begin__) {
 		*begin__ = generator__();
 	}
+}
+
+template <typename UndirectionalRangeT_, typename Generator_>
+ProcessType generate(
+	UndirectionalRangeT_& range__,
+	Generator_ generator__
+) DD_NOEXCEPT_AS(generate(DD_SPLIT_RANGE(range__) DD_COMMA generator__)) {
+	generate(DD_SPLIT_RANGE(range__), generator__);
 }
 
 

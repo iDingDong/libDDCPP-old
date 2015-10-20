@@ -66,6 +66,7 @@
 		<Unit filename="../../src/standard/bits/DD_Dereferenceable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dynamic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EnableIf.hpp" />
+		<Unit filename="../../src/standard/bits/DD_EqualTo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualityComparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Exception.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ForRange.hpp" />
@@ -74,6 +75,7 @@
 		<Unit filename="../../src/standard/bits/DD_GetPackBack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Illogic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Incrementable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Indexable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_InitializerList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IntegralConstant.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsArithmetic.hpp" />
@@ -211,6 +213,7 @@
 		<Unit filename="../../src/standard/bits/DD_find_min.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_min_max.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_not.hpp" />
+		<Unit filename="../../src/standard/bits/DD_find_range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_for_each.hpp" />
 		<Unit filename="../../src/standard/bits/DD_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_generate.hpp" />
