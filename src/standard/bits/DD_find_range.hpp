@@ -27,7 +27,6 @@ DifferenceT_* process_kmp_pattern(
 	while (--length__) {
 		DifferenceT_ common_length_ = length__;
 		while (--common_length_ && !equal(begin__, next(begin__, common_length_), next(begin__, length__ - common_length_))) {
-			//--common_length_;
 		}
 		result[length__] = length__ - common_length_;
 	}
