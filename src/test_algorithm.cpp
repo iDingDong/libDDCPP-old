@@ -124,10 +124,10 @@ void test_algorithm() {
 		}
 	}
 	{
-		DD::Array<int, 17> text = { 3, 2, 4, 1, 5, 3, 2, 4, 2, 5, 3, 2, 4, 1, 4, 6, 3 };
-		DD_PRINT DD::find_range(text, arr1) - text, ' ', std::search(DD_SPLIT_RANGE(text), DD_SPLIT_RANGE(arr1)) - text, DD::end_line;
+		DD::Array<int, 23> text = { 3, 2, 3, 4, 1, 5, 3, 2, 4, 2, 4, 1, 2, 5, 3, 2, 4, 3, 2, 1, 4, 6, 3 };
+		DD::Array<int, 6> pattern = { 3, 2, 4, 3, 2, 1 };
 		if (
-			DD::find_range(text, arr1) != std::search(DD_SPLIT_RANGE(text), DD_SPLIT_RANGE(arr1))
+			DD::find_range(text, pattern) != std::search(DD_SPLIT_RANGE(text), DD_SPLIT_RANGE(pattern))
 		) {
 			throw "'DD::find_range' test failed.";
 		}

@@ -26,10 +26,10 @@ DifferenceT_* process_kmp_pattern(
 	StrictPointer<DifferenceT_[]> result(new DifferenceT_[length__]);
 	while (--length__) {
 		DifferenceT_ common_length_ = length__;
-		while (common_length_ && !equal(begin__, next(begin__, common_length_), next(begin__, length__ - common_length_ + 1))) {
-			--common_length_;
+		while (--common_length_ && !equal(begin__, next(begin__, common_length_), next(begin__, length__ - common_length_))) {
+			//--common_length_;
 		}
-		result[length__] = length__ + 1 - common_length_;
+		result[length__] = length__ - common_length_;
 	}
 	*result = 1;
 #	if __cplusplus >= 201103L
@@ -48,16 +48,18 @@ struct KmpFindRangeImplement_ {
 		FreeAccessIteratorT1__ begin___,
 		FreeAccessIteratorT1__ const& end___,
 		FreeAccessIteratorT2__ const& pattern_begin___,
-		DifferenceT__* processed_pattern_,
+		StrictPointer<DifferenceT__[]> const& processed_pattern_,
 		DifferenceT__ const& length___
 	) {
-		for (DifferenceT__ current___ = DifferenceT__(); begin___ <= end___ - length___; ) {
-			for (; ; ++current___) {
+		int i = 0;
+		for (; begin___ <= end___ - length___; ) {
+			for (DifferenceT__ current___ = DifferenceT__(); ; ++current___) {
 				if (current___ == length___) {
 					return begin___;
 				}
 				if (*(begin___ + current___) != *(pattern_begin___ + current___)) {
 					begin___ += processed_pattern_[current___];
+					i += processed_pattern_[current___];
 					break;
 				}
 			}
@@ -75,7 +77,7 @@ UndirectionalIteratorT_ kmp_find_range_apply(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
 	FreeAccessIteratorT_ const& pattern_begin__,
-	DifferenceT_* processed_pattern_,
+	StrictPointer<DifferenceT_[]> const& processed_pattern_,
 	DifferenceT_ const& length__
 ) DD_NOEXCEPT_AS(UndirectionalIteratorT_(
 	KmpFindRangeImplement_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::kmp_find_range_apply(
@@ -108,7 +110,7 @@ UndirectionalIteratorT_ kmp_find_range(
 		begin__ DD_COMMA
 		end__ DD_COMMA
 		pattern_begin__ DD_COMMA
-		get_pointer(process_kmp_pattern(pattern_begin__, pattern_end__ - pattern_begin__)) DD_COMMA
+		process_kmp_pattern(pattern_begin__, pattern_end__ - pattern_begin__) DD_COMMA
 		pattern_end__ - pattern_begin__
 	)
 )) {
@@ -116,7 +118,7 @@ UndirectionalIteratorT_ kmp_find_range(
 		begin__,
 		end__,
 		pattern_begin__,
-		get_pointer(process_kmp_pattern(pattern_begin__, pattern_end__ - pattern_begin__)),
+		process_kmp_pattern(pattern_begin__, pattern_end__ - pattern_begin__),
 		pattern_end__ - pattern_begin__
 	);
 }
