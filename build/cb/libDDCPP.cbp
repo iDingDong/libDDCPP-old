@@ -227,6 +227,7 @@
 		<Unit filename="../../src/standard/bits/DD_is_sorted.hpp" />
 		<Unit filename="../../src/standard/bits/DD_is_sorted_until.hpp" />
 		<Unit filename="../../src/standard/bits/DD_iterator_definitions.hpp" />
+		<Unit filename="../../src/standard/bits/DD_kmp_find_range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_length_difference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_less.hpp" />
 		<Unit filename="../../src/standard/bits/DD_logical_not_of.hpp" />

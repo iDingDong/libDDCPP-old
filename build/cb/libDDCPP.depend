@@ -1200,13 +1200,16 @@
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_advance.hpp
 	"DD_IsFreeAccessIterator.hpp"
 
-1445334238 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_range.hpp
+1445403268 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_range.hpp
+	"DD_kmp_find_range.hpp"
+
+1445319345 d:\develop\repositories\libddcpp\src\standard\bits\dd_indexable.hpp
+
+1445403268 d:\develop\repositories\libddcpp\src\standard\bits\dd_kmp_find_range.hpp
 	"DD_StrictPointer.hpp"
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 	"DD_next.hpp"
 	"DD_equal.hpp"
-
-1445319345 d:\develop\repositories\libddcpp\src\standard\bits\dd_indexable.hpp
 
