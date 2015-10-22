@@ -115,7 +115,7 @@
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 
-1443513184 d:\develop\repositories\libddcpp\src\standard\bits\dd_initializerlist.hpp
+1445530186 d:\develop\repositories\libddcpp\src\standard\bits\dd_initializerlist.hpp
 	<initializer_list>
 	"DD_global_definitions.hpp"
 
@@ -898,7 +898,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_Trait.hpp"
 
-1445498057 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1445498076 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	<iostream>
