@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ValueT_>
 struct ArrayIterator {
 	public:
@@ -187,6 +187,15 @@ template <typename ValueT_>
 inline ValidityType DD_CONSTEXPR operator <(ArrayIterator<ValueT_> const& array_iterator_1_, ArrayIterator<ValueT_> const& array_iterator_2_) DD_NOEXCEPT {
 	return array_iterator_1_.less(array_iterator_2_.m_pointer);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::ArrayIterator;
 
 
 
