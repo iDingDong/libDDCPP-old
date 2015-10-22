@@ -725,7 +725,7 @@
 	"DD_address_of.hpp"
 	"DD_IteratorPointer.hpp"
 
-1445297778 d:\develop\repositories\libddcpp\src\standard\bits\dd_tuple.hpp
+1445497972 d:\develop\repositories\libddcpp\src\standard\bits\dd_tuple.hpp
 	"DD_Decay.hpp"
 	"DD_fabricate.hpp"
 	"DD_ReferenceWrapper.hpp"
@@ -898,7 +898,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_Trait.hpp"
 
-1443595311 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1445498057 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	<iostream>

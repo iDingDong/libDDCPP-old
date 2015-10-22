@@ -73,8 +73,20 @@ void test_utility() {
 			throw "'DD::Tuple' test failed.";
 		}
 		if (
+			&tuple_1.at<0>() != &DD::get_value<0>(tuple_1) ||
+			&tuple_1.at<1>() != &DD::get_value<1>(tuple_1)
+		) {
+			throw "'DD::Tuple' test failed.";
+		}
+		if (
 			DD::get_value<short>(tuple_1) != 3 ||
 			DD::get_value<long>(tuple_1) != 2
+		) {
+			throw "'DD::Tuple' test failed.";
+		}
+		if (
+			&tuple_1.get<short>() != &DD::get_value<short>(tuple_1) ||
+			&tuple_1.get<long>() != &DD::get_value<long>(tuple_1)
 		) {
 			throw "'DD::Tuple' test failed.";
 		}

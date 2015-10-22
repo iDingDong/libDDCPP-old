@@ -94,10 +94,13 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 	using ValueType = ValueT_;
 	static LengthType constexpr length = RestType::length + 1;
 
-
 	public:
 	template <SubscriptType index_c__>
 	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
+
+	public:
+	template <typename ValueT__>
+	using Get = RemoveReferenceType<decltype(::DD::detail_::get_value<ValueT__>(fabricate<ThisType>()))>;
 
 
 	public:
@@ -128,6 +131,19 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 	template <SubscriptType index_c__>
 	At<index_c__> const& at() const noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
+	}
+
+
+	public:
+	template <typename ValueT__>
+	Get<ValueT__>& get() noexcept {
+		return ::DD::detail_::get_value<ValueT__>(*this);
+	}
+
+	public:
+	template <typename ValueT__>
+	Get<ValueT__> const& get() const noexcept {
+		return ::DD::detail_::get_value<ValueT__>(*this);
 	}
 
 
@@ -163,10 +179,13 @@ struct Tuple_<index_c_, ValueT_> {
 	using PointerType = ValueType*;
 	using ConstPointerType = ValueType const*;
 
-
 	public:
 	template <SubscriptType index_c__>
 	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
+
+	public:
+	template <typename ValueT__>
+	using Get = RemoveReferenceType<decltype(::DD::detail_::get_value<ValueT__>(fabricate<ThisType>()))>;
 
 
 	private:
@@ -215,6 +234,19 @@ struct Tuple_<index_c_, ValueT_> {
 	template <SubscriptType index_c__>
 	At<index_c__> const& at() const noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
+	}
+
+
+	public:
+	template <typename ValueT__>
+	Get<ValueT__>& get() noexcept {
+		return ::DD::detail_::get_value<ValueT__>(*this);
+	}
+
+	public:
+	template <typename ValueT__>
+	Get<ValueT__> const& get() const noexcept {
+		return ::DD::detail_::get_value<ValueT__>(*this);
 	}
 
 
