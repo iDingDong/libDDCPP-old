@@ -919,9 +919,8 @@
 	"DD_IsFunction.hpp"
 	"DD_RemoveCV.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencewrapper.hpp
-	<functional>
-	"DD_global_definitions.hpp"
+1445588179 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencewrapper.hpp
+	"DD_address_of.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_result.hpp
 	<type_traits>
