@@ -836,7 +836,7 @@
 1443513194 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1444039239 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1445590260 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Pool.hpp"
@@ -844,6 +844,7 @@
 	"bits/DD_make_strict_parasitic.hpp"
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_StrictParasiticPointer.hpp"
+	"bits/DD_StrictAutoPointer.hpp"
 
 1443873330 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -1211,4 +1212,7 @@
 	"DD_Range.hpp"
 	"DD_next.hpp"
 	"DD_equal.hpp"
+
+1445590285 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictautopointer.hpp
+	"DD_StrictPointer.hpp"
 

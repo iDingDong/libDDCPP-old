@@ -14,6 +14,7 @@
 #		include "bits/DD_UniquePointer.hpp"
 #		include "bits/DD_StrictParasiticPointer.hpp"
 #	endif
+#	include "bits/DD_StrictAutoPointer.hpp"
 
 
 

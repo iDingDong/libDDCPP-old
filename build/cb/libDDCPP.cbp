@@ -172,6 +172,7 @@
 		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StrictAutoPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictParasiticPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
