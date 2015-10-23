@@ -67,12 +67,12 @@
 
 
 
-DD_USER_DEFINITION_BEGIN
+DD_USER_DEFINITION_BEGIN_
 ProcessType assertion_handler(CStringConstType expression_, CStringConstType prompt_, CStringConstType function_, CStringConstType file_, long line_);
 
 
 
-DD_USER_DEFINITION_END
+DD_USER_DEFINITION_END_
 
 
 

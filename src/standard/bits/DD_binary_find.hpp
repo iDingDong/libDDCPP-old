@@ -9,7 +9,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_, typename ValueT_>
 FreeAccessIteratorT_ binary_find(
 	FreeAccessIteratorT_ const& begin__,
@@ -101,6 +101,15 @@ inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 #	endif
 	return binary_find(DD_SPLIT_RANGE(range__), value__, less__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::binary_find;
 
 
 

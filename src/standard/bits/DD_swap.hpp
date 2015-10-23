@@ -16,21 +16,21 @@
 
 
 DD_DETAIL_BEGIN_
-DD_MEMBER_FUNCTION_CHECK(HasSwap_, swap, ProcessType, MACRO_ObjectT__&)
+DD_MEMBER_FUNCTION_CHECK(HasSwap_, swap, ::DD::ProcessType, MACRO_ObjectT__&)
 
 
 
 template <ValidityType has_swap_c_>
 struct Swap_ {
 	template <typename ObjectT__>
-	static ProcessType swap_(
+	static ProcessType swap(
 		ObjectT__& object_1___,
 		ObjectT__& object_2___
-	) DD_NOEXCEPT_AS(object_1___ = move(object_2___) DD_COMMA ObjectT__(move(object_1___))) {
+	) DD_NOEXCEPT_AS(object_1___ = ::DD::move(object_2___) DD_COMMA ObjectT__(::DD::move(object_1___))) {
 #	if __cplusplus >= 201103L
-		auto temp___(move(object_1___));
-		object_1___ = move(object_2___);
-		object_2___ = move(temp___);
+		auto temp___(::DD::move(object_1___));
+		object_1___ = ::DD::move(object_2___);
+		object_2___ = ::DD::move(temp___);
 #	else
 		ObjectT_ temp___(object_1___);
 		object_1___ = object_2___;
@@ -46,7 +46,7 @@ struct Swap_ {
 template <>
 struct Swap_<true> {
 	template <typename ObjectT__>
-	static ProcessType swap_(
+	static ProcessType swap(
 		ObjectT__& object_1___,
 		ObjectT__& object_2___
 	) DD_NOEXCEPT_AS(object_1___.swap(object_2___)) {
@@ -58,20 +58,13 @@ struct Swap_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename ObjectT_>
 inline ProcessType swap(
 	ObjectT_& object_1__,
 	ObjectT_& object_2__
-) DD_NOEXCEPT_AS(detail_::Swap_<detail_::HasSwap_<ObjectT_>::value>::swap_(object_1__ DD_COMMA object_2__)) {
-	detail_::Swap_<detail_::HasSwap_<ObjectT_>::value>::swap_(object_1__, object_2__);
+) DD_NOEXCEPT_AS(Swap_<HasSwap_<ObjectT_>::value>::swap(object_1__ DD_COMMA object_2__)) {
+	Swap_<HasSwap_<ObjectT_>::value>::swap(object_1__, object_2__);
 }
-
-
 
 template <typename ObjectT_, LengthType length_c_>
 #	if __cplusplus >= 201103L
@@ -81,10 +74,20 @@ inline ProcessType swap(ArrayType<ObjectT_, length_c_>& array_1_, ArrayType<Obje
 #	else
 inline ProcessType swap(ObjectT_ (&array_1_)[length_c_], ObjectT_ (&array_2_)[length_c_]) {
 #	endif
+	using ::DD::detail_::swap;
 	for (LengthType i = 0; i < length_c_; ++i) {
 		swap(array_1_[i], array_2_[i]);
 	}
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::swap;
 
 
 

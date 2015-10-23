@@ -52,8 +52,8 @@
 #	define DD_DETAIL_BEGIN_ DD_BEGIN_ namespace detail_ {
 #	define DD_DETAIL_END_ } DD_END_
 
-#	define DD_USER_DEFINITION_BEGIN DD_DETAIL_BEGIN_ namespace user_definition {
-#	define DD_USER_DEFINITION_END } DD_DETAIL_END_
+#	define DD_USER_DEFINITION_BEGIN_ DD_DETAIL_BEGIN_ namespace user_definition {
+#	define DD_USER_DEFINITION_END_ } DD_DETAIL_END_
 
 
 #	define DD_TO_STRING(ARG_literal_) #ARG_literal_
