@@ -8,29 +8,39 @@
 
 
 
-#	if __cplusplus >= 201103L
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
 template <typename... ContidionsT>
-struct Or_ : FalseType {
+struct Or : FalseType {
 };
 
 
 
 template <typename ConditionT1_, typename ConditionT2_, typename... ConditionsT_>
-struct Or_<ConditionT1_, ConditionT2_, ConditionsT_...> : Or_<ConditionT1_, Or_<ConditionT2_, ConditionsT_...>> {
+struct Or<ConditionT1_, ConditionT2_, ConditionsT_...> : Or<ConditionT1_, Or<ConditionT2_, ConditionsT_...>> {
 };
 
 
 
 template <typename ConditionT1_, typename ConditionT2_>
-struct Or_<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value || ConditionT2_::value> {
+struct Or<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value || ConditionT2_::value> {
 };
 
 
 
 template <typename ConditionT_>
-struct Or_<ConditionT_> : BoolConstant<ConditionT_::value> {
+struct Or<ConditionT_> : BoolConstant<ConditionT_::value> {
 };
+
+
+
+template <typename... ConditionsT_>
+using OrType = typename Or<ConditionsT_...>::Type;
+#	else
+template <typename ConditionT1_, typename ConditionT2_>
+struct Or : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
+};
+#	endif
 
 
 
@@ -38,17 +48,10 @@ DD_DETAIL_END_
 
 
 
-#	endif
 DD_BEGIN_
+using detail_::Or;
 #	if __cplusplus >= 201103L
-template <typename... ConditionsT_>
-using Or = detail_::Or_<ConditionsT_...>;
-template <typename... ConditionsT_>
-using OrType = typename Or<ConditionsT_...>::Type;
-#	else
-template <typename ConditionT1_, typename ConditionT2_>
-struct Or : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
-};
+using detail_::OrType;
 #	endif
 
 

@@ -100,7 +100,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\standard\bits\dd_and.hpp
+1445763815 d:\develop\repositories\libddcpp\src\standard\bits\dd_and.hpp
 	"DD_IntegralConstant.hpp"
 
 1443513187 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
@@ -183,7 +183,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1443513183 d:\develop\repositories\libddcpp\src\standard\bits\dd_or.hpp
+1445763988 d:\develop\repositories\libddcpp\src\standard\bits\dd_or.hpp
 	"DD_IntegralConstant.hpp"
 
 1443769440 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptmoveassignable.hpp
@@ -398,7 +398,7 @@
 	"DD_Or.hpp"
 	"DD_IsClass.hpp"
 
-1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_isclass.hpp
+1445763729 d:\develop\repositories\libddcpp\src\standard\bits\dd_isclass.hpp
 	"DD_Nil.hpp"
 	"DD_IsUnion.hpp"
 

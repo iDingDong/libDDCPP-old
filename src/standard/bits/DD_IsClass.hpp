@@ -28,7 +28,10 @@ struct IsClass_ {
 	}
 
 
-	static ValidityType constexpr value = (IsClass_<ObjectT_>::match_<ObjectT_>(nil_pointer) && !IsUnion<ObjectT_>::value ) || std::is_class<ObjectT_>::value;
+	static ValidityType constexpr value =
+		(IsClass_<ObjectT_>::match_<ObjectT_>(nil_pointer) && !IsUnion<ObjectT_>::value ) ||
+		std::is_class<ObjectT_>::value
+	;
 
 
 };

@@ -8,29 +8,39 @@
 
 
 
-#	if __cplusplus >= 201103L
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
 template <typename... ConditionsT_>
-struct And_ : TrueType {
+struct And : TrueType {
 };
 
 
 
 template <typename ConditionT1_, typename ConditionT2_, typename... ConditionsT_>
-struct And_<ConditionT1_, ConditionT2_, ConditionsT_...> : And_<ConditionT1_, And_<ConditionT2_, ConditionsT_...>> {
+struct And<ConditionT1_, ConditionT2_, ConditionsT_...> : And<ConditionT1_, And<ConditionT2_, ConditionsT_...>> {
 };
 
 
 
 template <typename ConditionT1_, typename ConditionT2_>
-struct And_<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
+struct And<ConditionT1_, ConditionT2_> : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
 };
 
 
 
 template <typename ConditionT_>
-struct And_<ConditionT_> : BoolConstant<ConditionT_::value> {
+struct And<ConditionT_> : BoolConstant<ConditionT_::value> {
 };
+
+
+
+template <typename... ConditionsT_>
+using AndType = typename And<ConditionsT_...>::Type;
+#	else
+template <typename ConditionT1_, typename ConditionT2_>
+struct And : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
+};
+#	endif
 
 
 
@@ -38,17 +48,11 @@ DD_DETAIL_END_
 
 
 
-#	endif
+
 DD_BEGIN_
+using detail_::And;
 #	if __cplusplus >= 201103L
-template <typename... ConditionsT_>
-using And = detail_::And_<ConditionsT_...>;
-template <typename... ConditionsT_>
-using AndType = typename And<ConditionsT_...>::Type;
-#	else
-template <typename ConditionT1_, typename ConditionT2_>
-struct And : BoolConstant<ConditionT1_::value && ConditionT2_::value> {
-};
+using detail_::AndType;
 #	endif
 
 
