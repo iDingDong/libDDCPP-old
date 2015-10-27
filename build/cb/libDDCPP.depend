@@ -890,14 +890,14 @@
 	"DD_Or.hpp"
 	"DD_IsSame.hpp"
 
-1444014770 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
+1445937691 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
 	"bits/DD_declare_value.hpp"
 	"bits/DD_Conditional.hpp"
 	"bits/DD_EnableIf.hpp"
 	"bits/DD_Or.hpp"
 	"bits/DD_And.hpp"
 	"bits/DD_Result.hpp"
-	"bits/DD_Trait.hpp"
+	"bits/DD_ArithmeticTrait.hpp"
 
 1445498076 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
@@ -1215,4 +1215,13 @@
 
 1445590285 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictautopointer.hpp
 	"DD_StrictPointer.hpp"
+
+1445937690 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmetictrait.hpp
+	"DD_Trait.hpp"
+	"DD_ArithmeticLimit.hpp"
+
+1445937691 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmeticlimit.hpp
+	<limits>
+	<cstdint>
+	"DD_global_definitions.hpp"
 

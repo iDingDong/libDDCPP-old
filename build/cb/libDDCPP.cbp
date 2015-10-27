@@ -45,6 +45,8 @@
 		<Unit filename="../../src/standard/bits/DD_AllocationFailure.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Allocator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_And.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ArithmeticLimit.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ArithmeticTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Array.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ArrayIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AtPack.hpp" />
@@ -52,6 +54,7 @@
 		<Unit filename="../../src/standard/bits/DD_BinaryOperators.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BinarySearchTree.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BinaryTreeNode.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Bitset.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BuildInTypes.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Common.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Comparable.hpp" />
