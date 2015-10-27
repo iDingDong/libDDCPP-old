@@ -10,6 +10,16 @@
 
 
 DD_DETAIL_BEGIN_
+template <typename ArithmeticT_>
+struct ArithmeticTrait : Trait<ArithmeticT_> {
+	DD_ALIAS(Type, ArithmeticT_);
+
+	static Type DD_CONSTEXPR digits = ArithmeticLimit<Type>::digits;
+	static Type DD_CONSTEXPR min = ArithmeticLimit<Type>::min;
+	static Type DD_CONSTEXPR max = ArithmeticLimit<Type>::max;
+
+
+};
 
 
 
@@ -18,6 +28,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::ArithmeticTrait;
 
 
 

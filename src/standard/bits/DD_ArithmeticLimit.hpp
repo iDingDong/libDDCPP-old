@@ -19,6 +19,8 @@ DD_DETAIL_BEGIN_
 template <typename ArithmeticT_>
 struct ArithmeticLimit {
 	using Type = ArithmeticT_;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type constexpr min = std::numeric_limits<Type>::min();
 	static Type constexpr max = std::numeric_limits<Type>::max();
 
@@ -33,6 +35,8 @@ struct ArithmeticLimit;
 template <>
 struct ArithmeticLimit<bool> {
 	typedef bool Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = false;
 	static Type const max = true;
 
@@ -44,6 +48,8 @@ struct ArithmeticLimit<bool> {
 template <>
 struct ArithmeticLimit<char> {
 	typedef char Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = CHAR_MIN;
 	static Type const max = CHAR_MAX;
 
@@ -55,6 +61,8 @@ struct ArithmeticLimit<char> {
 template <>
 struct ArithmeticLimit<unsigned char> {
 	typedef unsigned char Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = 0;
 	static Type const max = UCHAR_MAX;
 
@@ -66,6 +74,8 @@ struct ArithmeticLimit<unsigned char> {
 template <>
 struct ArithmeticLimit<signed char> {
 	typedef signed char Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = SCHAR_MIN;
 	static Type const max = SCHAR_MAX;
 
@@ -77,6 +87,8 @@ struct ArithmeticLimit<signed char> {
 template <>
 struct ArithmeticLimit<unsigned short int> {
 	typedef unsigned short int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = 0;
 	static Type const max = USHRT_MAX;
 
@@ -88,6 +100,8 @@ struct ArithmeticLimit<unsigned short int> {
 template <>
 struct ArithmeticLimit<signed short int> {
 	typedef signed short int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = SHRT_MIN;
 	static Type const max = SHRT_MAX;
 
@@ -99,6 +113,8 @@ struct ArithmeticLimit<signed short int> {
 template <>
 struct ArithmeticLimit<unsigned int> {
 	typedef unsigned int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = 0;
 	static Type const max = UINT_MAX;
 
@@ -110,6 +126,8 @@ struct ArithmeticLimit<unsigned int> {
 template <>
 struct ArithmeticLimit<signed int> {
 	typedef signed int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = INT_MIN;
 	static Type const max = INT_MAX;
 
@@ -121,6 +139,8 @@ struct ArithmeticLimit<signed int> {
 template <>
 struct ArithmeticLimit<unsigned long int> {
 	typedef unsigned long int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = 0;
 	static Type const max = ULONG_MAX;
 
@@ -132,6 +152,8 @@ struct ArithmeticLimit<unsigned long int> {
 template <>
 struct ArithmeticLimit<signed long int> {
 	typedef signed long int Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = LONG_MIN;
 	static Type const max = LONG_MAX;
 
@@ -143,6 +165,8 @@ struct ArithmeticLimit<signed long int> {
 template <>
 ArithmeticLimit<float> {
 	typedef float Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = FLT_MIN;
 	static Type const max = FLT_MAX;
 
@@ -154,6 +178,8 @@ ArithmeticLimit<float> {
 template <>
 ArithmeticLimit<double> {
 	typedef double Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = DBL_MIN;
 	static Type const max = DBL_MAX;
 
@@ -165,6 +191,8 @@ ArithmeticLimit<double> {
 template <>
 ArithmeticLimit<long double> {
 	typedef long double Type;
+
+	static Type constexpr digits = std::numeric_limits<Type>::digits;
 	static Type const min = LDBL_MIN;
 	static Type const max = LDBL_MAX;
 

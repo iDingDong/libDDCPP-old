@@ -5,21 +5,23 @@
 
 
 #	include "DD_ArithmeticLimit.hpp"
+#	include "DD_Array.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <LengthType length_c_>
-struct Bitset {
-	public:
-	DD_ALIAS(ThisType, Bitset<length_c_>);
+struct Bitset_ {
+	protected:
+	DD_ALIAS(ThisType, Bitset_<length_c_>);
 	static DD_CONSTEXPR LengthType length = length_c_;
 
-	private:
+	protected:
 	DD_ALIAS(WordType_, unsigned long int);
 
-	public:
 
+	private:
+	Array<WordType_, length> m_words_;
 
 
 };

@@ -1216,11 +1216,11 @@
 1445590285 d:\develop\repositories\libddcpp\src\standard\bits\dd_strictautopointer.hpp
 	"DD_StrictPointer.hpp"
 
-1445937690 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmetictrait.hpp
+1445946228 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmetictrait.hpp
 	"DD_Trait.hpp"
 	"DD_ArithmeticLimit.hpp"
 
-1445937691 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmeticlimit.hpp
+1445946232 d:\develop\repositories\libddcpp\src\standard\bits\dd_arithmeticlimit.hpp
 	<limits>
 	<cstdint>
 	"DD_global_definitions.hpp"
