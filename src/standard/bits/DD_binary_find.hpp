@@ -18,13 +18,13 @@ FreeAccessIteratorT_ binary_find(
 ) DD_NOEXCEPT_AS(begin__[0] < value__) {
 	DD_ALIAS(IndexType_, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_));
 	IndexType_ lower_bound__ = IndexType_();
-	IndexType_ higher_bound__ = end__ - begin__ - 1;
-	for (IndexType_ current__; lower_bound__ <= higher_bound__; ) {
+	IndexType_ higher_bound__ = end__ - begin__;
+	for (IndexType_ current__; lower_bound__ < higher_bound__; ) {
 		current__ = (lower_bound__ + higher_bound__) / 2;
 		if (begin__[current__] < value__) {
-			lower_bound__ == current__ + 1;
-		} else if(value__ < begin__[current__]) {
-			higher_bound__ == current__ - 1;
+			lower_bound__ = current__ + 1;
+		} else if (value__ < begin__[current__]) {
+			higher_bound__ = current__;
 		} else {
 			return begin__ + current__;
 		}
@@ -41,13 +41,13 @@ FreeAccessIteratorT_ binary_find(
 ) DD_NOEXCEPT_AS(less__(begin__[0], value__)) {
 	DD_ALIAS(IndexType_, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_));
 	IndexType_ lower_bound__ = IndexType_();
-	IndexType_ higher_bound__ = end__ - begin__ - 1;
-	for (IndexType_ current__; lower_bound__ <= higher_bound__; ) {
+	IndexType_ higher_bound__ = end__ - begin__;
+	for (IndexType_ current__; lower_bound__ < higher_bound__; ) {
 		current__ = (lower_bound__ + higher_bound__) / 2;
 		if (less__(begin__[current__], value__)) {
-			lower_bound__ == current__ + 1;
-		} else if(less__(value__, begin__[current__])) {
-			higher_bound__ == current__ - 1;
+			lower_bound__ = current__ + 1;
+		} else if (less__(value__, begin__[current__])) {
+			higher_bound__ = current__;
 		} else {
 			return begin__ + current__;
 		}

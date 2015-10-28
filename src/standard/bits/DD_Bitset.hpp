@@ -49,9 +49,17 @@ struct Bitset_ {
 
 #	endif
 	public:
-	ProcessType and(ThisType const& other_) DD_NOEXCEPT {
-		for (LengthType current_ = 0; current_ < length_; ++current_) {
+	ProcessType bit_and(ThisType const& other_) DD_NOEXCEPT {
+		for (LengthType current_ = 0; current_ < length; ++current_) {
 			m_words_[current_] &= other_.m_words_[current_];
+		}
+	}
+
+
+	public:
+	ProcessType bit_or(ThisType const& other_) DD_NOEXCEPT {
+		for (LengthType current_ = 0; current_ < length; ++current_) {
+			m_words_[current_] |= other_.m_words_[current_];
 		}
 	}
 
@@ -73,7 +81,14 @@ struct Bitset_ {
 
 	public:
 	ThisType& operator &=(ThisType const& other_) DD_NOEXCEPT {
-		and(other_);
+		bit_and(other_);
+		return *this;
+	}
+
+
+	public:
+	ThisType& operator |=(ThisType const& other_) DD_NOEXCEPT {
+		bit_or(other_);
 		return *this;
 	}
 

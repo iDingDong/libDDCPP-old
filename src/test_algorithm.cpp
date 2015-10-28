@@ -51,7 +51,7 @@ void test_algorithm() {
 	{
 		DD::Array<int, 5> temp = arr1;
 		DD::reverse(temp);
-		int result[5] = {1, 4, 2, 3, 5};
+		int result[5] = { 1, 4, 2, 3, 5 };
 		if (!DD::equal(temp, result)) {
 			throw "'DD::reverse' test failed.";
 		}
@@ -110,10 +110,23 @@ void test_algorithm() {
 		}
 	}
 	{
+		DD::Array<int, 5> arr = { 1, 2, 5, 17, 29 };
+		if (
+			DD::binary_find(arr, 1) != DD::find(arr, 1) ||
+			DD::binary_find(arr, 2) != DD::find(arr, 2) ||
+			DD::binary_find(arr, 5) != DD::find(arr, 5) ||
+			DD::binary_find(arr, 17) != DD::find(arr, 17) ||
+			DD::binary_find(arr, 29) != DD::find(arr, 29) ||
+			DD::binary_find(arr, 14) != DD::find(arr, 14)
+		) {
+			throw "'DD::binary_find' test failed.";
+		}
+	}
+	{
 		DD::Array<int, 5> temp1 = arr1;
 		DD::Array<int, 5> temp2 = arr1;
-		int result_1[5] = {1, 2, 3, 4, 5};
-		int result_2[5] = {5, 4, 3, 2, 1};
+		int result_1[5] = { 1, 2, 3, 4, 5 };
+		int result_2[5] = { 5, 4, 3, 2, 1 };
 		DD::insert_sort(temp1);
 		DD::insert_sort(temp2, greater<int>);
 		if (
