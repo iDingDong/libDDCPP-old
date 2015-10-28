@@ -10,6 +10,7 @@
 #	include "bits/DD_get_length.hpp"
 #	include "bits/DD_logical_not_of.hpp"
 #	include "bits/DD_Range.hpp"
+#	include "bits/DD_Bitset.hpp"
 #	include "bits/DD_Optional.hpp"
 #	include "bits/DD_Variant.hpp"
 #	if __cplusplus >= 201103L

@@ -4,6 +4,8 @@
 
 
 
+#	include <cstring>
+
 #	include "DD_ArithmeticLimit.hpp"
 #	include "DD_Array.hpp"
 
@@ -21,7 +23,59 @@ struct Bitset_ {
 
 
 	private:
-	Array<WordType_, length> m_words_;
+	Array<WordType_, length> m_words_ DD_IN_CLASS_INITIALIZE({});
+
+
+#	if __cplusplus >= 201103L
+	protected:
+	constexpr Bitset_() = default;
+
+	protected:
+	constexpr Bitset_(ThisType const& origin_) = default;
+
+	protected:
+	constexpr Bitset_(ThisType&& origin_) = default;
+#	else
+	protected:
+	Bitset_() : m_words_{} {
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	public:
+	~Bitset_() = default;
+
+
+#	endif
+	public:
+	ProcessType and(ThisType const& other_) DD_NOEXCEPT {
+		for (LengthType current_ = 0; current_ < length_; ++current_) {
+			m_words_[current_] &= other_.m_words_[current_];
+		}
+	}
+
+
+	public:
+	ProcessType clear() DD_NOEXCEPT {
+		std::memset(m_words_, 0, sizeof(m_words_));
+	}
+
+
+#	if __cplusplus >= 201103L
+	protected:
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	protected:
+	ThisType& operator =(ThisType&& origin_) = default;
+
+#	endif
+
+	public:
+	ThisType& operator &=(ThisType const& other_) DD_NOEXCEPT {
+		and(other_);
+		return *this;
+	}
 
 
 };

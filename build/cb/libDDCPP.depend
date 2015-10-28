@@ -703,13 +703,14 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1445068919 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1446008848 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
 	"bits/DD_get_length.hpp"
 	"bits/DD_logical_not_of.hpp"
 	"bits/DD_Range.hpp"
+	"bits/DD_Bitset.hpp"
 	"bits/DD_Optional.hpp"
 	"bits/DD_Variant.hpp"
 	"bits/DD_Function.hpp"
@@ -1224,4 +1225,9 @@
 	<limits>
 	<cstdint>
 	"DD_global_definitions.hpp"
+
+1446009356 d:\develop\repositories\libddcpp\src\standard\bits\dd_bitset.hpp
+	<cstring>
+	"DD_ArithmeticLimit.hpp"
+	"DD_Array.hpp"
 
