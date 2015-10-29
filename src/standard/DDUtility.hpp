@@ -9,6 +9,7 @@
 #	include "bits/DD_Dereferenceable.hpp"
 #	include "bits/DD_get_length.hpp"
 #	include "bits/DD_logical_not_of.hpp"
+#	include "bits/DD_HashOf.hpp"
 #	include "bits/DD_Range.hpp"
 #	include "bits/DD_Bitset.hpp"
 #	include "bits/DD_Optional.hpp"

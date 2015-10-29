@@ -25,7 +25,7 @@
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
-1445011192 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
+1446087365 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
 	<cstdint>
@@ -565,7 +565,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1446030893 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1446031692 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
@@ -703,12 +703,13 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1446008848 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1446085672 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
 	"bits/DD_get_length.hpp"
 	"bits/DD_logical_not_of.hpp"
+	"bits/DD_HashOf.hpp"
 	"bits/DD_Range.hpp"
 	"bits/DD_Bitset.hpp"
 	"bits/DD_Optional.hpp"
@@ -1230,4 +1231,9 @@
 	<cstring>
 	"DD_ArithmeticLimit.hpp"
 	"DD_Array.hpp"
+
+1446092627 d:\develop\repositories\libddcpp\src\standard\bits\dd_hashof.hpp
+	<cstring>
+	"DD_address_of.hpp"
+	"DD_Functor.hpp"
 

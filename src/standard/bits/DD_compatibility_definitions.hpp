@@ -34,6 +34,11 @@
 #		define DD_CALLABLE_WITH_RVALUE_ONLY
 #	endif
 
+#	if __cplusplus >= 201402L
+#		define DD_UNCONSTRIANED_CONSTEXPR constexpr
+#	else
+#		define DD_UNCONSTRIANED_CONSTEXPR
+#	endif
 #	if __cplusplus >= 201103L
 #		define DD_CONSTEXPR constexpr
 #		define DD_CONSTANT constexpr
