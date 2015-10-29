@@ -5,7 +5,7 @@
 #include "standard/DDVessel.hpp"
 #include "standard/DDList.hpp"
 
-#include "standard/bits/DD_print.hpp"
+#include "standard/DDHub.hpp"
 #include "standard/bits/DD_RedBlackTree.hpp"
 #include "test_meta.h"
 #include "test_memory.h"
@@ -21,7 +21,7 @@ int main() {
 		test_memory();
 		test_algorithm();
 		test_math();
-		std::cout << "All tests successfully operated.";
+		DD_PRINT "All tests successfully operated.";
 	} catch (char const* prompt) {
 		DD_PRINT prompt;
 	}

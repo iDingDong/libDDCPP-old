@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1444903029 source:d:\develop\repositories\libddcpp\src\main.cpp
+1446128223 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
-	"standard/bits/DD_print.hpp"
+	"standard/DDHub.hpp"
 	"standard/bits/DD_RedBlackTree.hpp"
 	"test_meta.h"
 	"test_memory.h"
@@ -555,7 +555,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/bits/DD_print.hpp"
 
-1444720014 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
+1446122990 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
 	<iostream>
 	<iomanip>
 	"DD_Tags.hpp"
@@ -1236,4 +1236,12 @@
 	<cstring>
 	"DD_address_of.hpp"
 	"DD_Functor.hpp"
+
+1446122897 d:\develop\repositories\libddcpp\src\standard\ddhub.hpp
+	"bits/DD_scan.hpp"
+	"bits/DD_print.hpp"
+
+1446128078 d:\develop\repositories\libddcpp\src\standard\bits\dd_scan.hpp
+	<iostream>
+	"DD_fabricate.hpp"
 

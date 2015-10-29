@@ -13,14 +13,6 @@
 
 
 DD_DETAIL_BEGIN_
-
-
-
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 struct VersionTag : Tag {
 } DD_CONSTANT version;
 
@@ -49,7 +41,7 @@ struct Print {
 	ThisType const& operator ()(
 		ValueT__ const& value___,
 		ValuesT__ const&... values___
-	) const DD_NOEXCEPT_AS((Print(), value___)(values___...)) {
+	) const DD_NOEXCEPT_AS((fabricate<ThisType>(), value___)(values___...)) {
 		return (*this, value___)(values___...);
 	}
 
@@ -93,6 +85,22 @@ struct Print {
 
 
 } DD_CONSTANT print;
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::VersionTag;
+using detail_::version;
+using detail_::FlushTag;
+using detail_::flush;
+using detail_::EndLineTag;
+using detail_::end_line;
+using detail_::Print;
+using detail_::print;
 
 
 

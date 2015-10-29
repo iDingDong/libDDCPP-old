@@ -76,6 +76,7 @@
 		<Unit filename="../../src/standard/bits/DD_Function.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Functor.hpp" />
 		<Unit filename="../../src/standard/bits/DD_GetPackBack.hpp" />
+		<Unit filename="../../src/standard/bits/DD_HashOf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Illogic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Incrementable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Indexable.hpp" />
