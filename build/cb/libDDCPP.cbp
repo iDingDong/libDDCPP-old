@@ -29,6 +29,7 @@
 		<Unit filename="../../src/standard/DDError.hpp" />
 		<Unit filename="../../src/standard/DDFunctional.hpp" />
 		<Unit filename="../../src/standard/DDGlobal.hpp" />
+		<Unit filename="../../src/standard/DDHub.hpp" />
 		<Unit filename="../../src/standard/DDIterator.hpp" />
 		<Unit filename="../../src/standard/DDList.hpp" />
 		<Unit filename="../../src/standard/DDMemory.hpp" />
@@ -258,6 +259,7 @@
 		<Unit filename="../../src/standard/bits/DD_replace_if.hpp" />
 		<Unit filename="../../src/standard/bits/DD_retreat.hpp" />
 		<Unit filename="../../src/standard/bits/DD_reverse.hpp" />
+		<Unit filename="../../src/standard/bits/DD_scan.hpp" />
 		<Unit filename="../../src/standard/bits/DD_select_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_size_distance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_sort.hpp" />
