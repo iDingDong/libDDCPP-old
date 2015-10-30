@@ -443,6 +443,12 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_
 
 
 	public:
+	TypeInfo const& get_type() const {
+		return m_holder_->get_type_();
+	}
+
+
+	public:
 	AllocatorType& get_allocator() const noexcept {
 		return m_allocator_;
 	}
