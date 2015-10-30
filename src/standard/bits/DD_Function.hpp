@@ -10,8 +10,9 @@
 
 
 #	endif
-#	include "DD_NeedInstance.hpp"
 #	include "DD_Decay.hpp"
+#	include "DD_NeedInstance.hpp"
+#	include "DD_TypeInfo.hpp"
 #	include "DD_move.hpp"
 #	include "DD_release.hpp"
 #	include "DD_Allocator.hpp"
@@ -51,6 +52,10 @@ struct FunctionHolderBase_ {
 
 
 	public:
+	virtual TypeInfo const& get_type_() const = 0;
+
+
+	public:
 	virtual ResultT_ call_(ArgumentsT_... arguments__) = 0;
 
 
@@ -85,6 +90,10 @@ struct FunctionHolderBase_<AllocatorT_, true, ResultT_, ArgumentsT_...> {
 
 	public:
 	virtual ThisType* get_clone_(AllocatorT_& allocator__) const = 0;
+
+
+	public:
+	virtual TypeInfo const& get_type_() const = 0;
 
 
 	public:
@@ -148,6 +157,12 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 
 
 	public:
+	TypeInfo const& get_type_() const override {
+		return typeid(m_function_);
+	}
+
+
+	public:
 	ResultT_ call_(ArgumentsT_... arguments__) override {
 		return m_function_(arguments__...);
 	}
@@ -206,6 +221,12 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 			throw;
 		}
 		return pointer_;
+	}
+
+
+	public:
+	TypeInfo const& get_type_() const override {
+		return typeid(m_function_);
 	}
 
 
@@ -273,6 +294,12 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Func
 	public:
 	ValidityType constexpr is_valid() const noexcept {
 		return m_holder_;
+	}
+
+
+	public:
+	TypeInfo const& get_type() const {
+		return m_holder_->get_type_();
 	}
 
 

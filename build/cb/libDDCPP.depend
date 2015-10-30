@@ -938,9 +938,10 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1444132454 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
-	"DD_NeedInstance.hpp"
+1446202315 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
+	"DD_NeedInstance.hpp"
+	"DD_TypeInfo.hpp"
 	"DD_move.hpp"
 	"DD_release.hpp"
 	"DD_Allocator.hpp"
