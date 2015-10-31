@@ -761,7 +761,7 @@
 	"DD_IntegralConstant.hpp"
 	"DD_IsScalar.hpp"
 
-1444716692 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1446278312 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
@@ -938,7 +938,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1446202389 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1446267700 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"

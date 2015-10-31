@@ -60,7 +60,7 @@ struct VariantHolderBase_ {
 	virtual ProcessType destroy_() DD_NOEXCEPT = 0;
 
 	public:
-	virtual TypeInfo const& get_type() const = 0;
+	virtual TypeInfo const& get_type_() const = 0;
 
 
 };
@@ -109,7 +109,7 @@ struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 
 
 	public:
-	TypeInfo const& get_type() const DD_OVERRIDE {
+	TypeInfo const& get_type_() const DD_OVERRIDE {
 		return typeid(m_value_);
 	}
 
@@ -196,21 +196,21 @@ struct Variant {
 	public:
 	template <typename ValueT__>
 	ValueT__& to() DD_NOEXCEPT {
-		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
+		DD_ASSERT(get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.");
 		return static_cast<VariantHolder_<ValueT__>&>(*m_holder_pointer_).m_value_;
 	}
 
 	public:
 	template <typename ValueT__>
 	ValueT__ const& to() const DD_NOEXCEPT {
-		DD_ASSERT(m_holder_pointer_->get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.")
+		DD_ASSERT(get_type() == typeid(ValueT__), "Invalid cast on DD::Variant.");
 		return static_cast<VariantHolder_<ValueT__> const&>(*m_holder_pointer_).m_value_;
 	}
 
 
 	public:
 	TypeInfo const& get_type() const {
-		return m_holder_pointer_->get_type();
+		return m_holder_pointer_->get_type_();
 	}
 
 
