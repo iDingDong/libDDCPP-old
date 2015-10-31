@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_bind.hpp
 #ifndef DD_BIND_HPP_INCLUDED_
-#	define DD_BINARY_FIND_HPP_INCLUDED 1
+#	define DD_BIND_HPP_INCLUDED_ 1
 
 
 

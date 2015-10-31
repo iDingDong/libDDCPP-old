@@ -466,7 +466,7 @@
 	"DD_Range.hpp"
 	"DD_Iterator.hpp"
 
-1446030912 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
+1446308722 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
 	"DD_Range.hpp"
 	"DD_IteratorDifference.hpp"
 
@@ -907,7 +907,7 @@
 	<iostream>
 	"standard/DDUtility.hpp"
 
-1444136925 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1446308721 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"

@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_binary_find.hpp
-#ifndef DD_BINARY_SEARCH_HPP_INCLUDED_
-#	define DD_BINARY_SEARCH_HPP_INCLUDED_ 1
+#ifndef DD_BINARY_FIND_HPP_INCLUDED_
+#	define DD_BINARY_FIND_HPP_INCLUDED_ 1
 
 
 
