@@ -567,7 +567,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1446353991 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1446385360 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
@@ -909,10 +909,11 @@
 	<iostream>
 	"standard/DDUtility.hpp"
 
-1446353956 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1446391883 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
 	"DD_move.hpp"
+	"DD_invoke.hpp"
 	"DD_Tuple.hpp"
 	"DD_Functor.hpp"
 
@@ -1251,4 +1252,7 @@
 1446371300 d:\develop\repositories\libddcpp\src\standard\bits\dd_next_permutation.hpp
 	"DD_previous.hpp"
 	"DD_reverse.hpp"
+
+1446391757 d:\develop\repositories\libddcpp\src\standard\bits\dd_invoke.hpp
+	"DD_forward.hpp"
 

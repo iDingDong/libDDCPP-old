@@ -228,6 +228,7 @@
 		<Unit filename="../../src/standard/bits/DD_get_pointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_global_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_insert_sort.hpp" />
+		<Unit filename="../../src/standard/bits/DD_invoke.hpp" />
 		<Unit filename="../../src/standard/bits/DD_is_partitioned.hpp" />
 		<Unit filename="../../src/standard/bits/DD_is_partitioned_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_is_sorted.hpp" />
@@ -247,6 +248,7 @@
 		<Unit filename="../../src/standard/bits/DD_mismatch.hpp" />
 		<Unit filename="../../src/standard/bits/DD_move.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next.hpp" />
+		<Unit filename="../../src/standard/bits/DD_next_permutation.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />

@@ -13,6 +13,7 @@
 #	include "DD_IsMemberFunctionPointer.hpp"
 #	include "DD_Decay.hpp"
 #	include "DD_move.hpp"
+#	include "DD_invoke.hpp"
 #	include "DD_Tuple.hpp"
 #	include "DD_Functor.hpp"
 
@@ -152,52 +153,31 @@ inline auto select_(
 
 
 
-template <ValidityType is_member_function_c_, typename IndexsT_>
+template <typename IndexsT_>
 struct BindCall_;
 
 
 
+
 template <SubscriptType... indexs_c_>
-struct BindCall_<true, Indexs_<0, indexs_c_...>> {
-	template <typename FunctionT__, typename TupleT1_, typename TupleT2_>
+struct BindCall_<Indexs_<indexs_c_...>> {
+	template <typename FunctionT__, typename TupleT1__, typename TupleT2__>
 	static typename ResultOf_<FunctionT__>::Type call_(
 		FunctionT__ const& function___,
-		TupleT1_ const& arguments_1___,
-		TupleT2_&& arguments_2___
-	) noexcept(noexcept((forward<
-		typename ArgumentAt_<typename TupleT1_::template At<0>, TupleT2_>::Type
-	>(select_(get_value<0>(arguments_1___), arguments_2___)).*function___)(
-		forward<
-			typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
-		>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...
+		TupleT1__ const& arguments_1___,
+		TupleT2__&& arguments_2___
+	) noexcept(noexcept(invoke(
+		function___,
+		forward<typename ArgumentAt_<typename TupleT1__::template At<indexs_c_>, TupleT2__>::Type>(
+			select_(get_value<indexs_c_>(arguments_1___), arguments_2___)
+		)...
 	))) {
-		return (forward<
-			typename ArgumentAt_<typename TupleT1_::template At<0>, TupleT2_>::Type
-		>(select_(get_value<0>(arguments_1___), arguments_2___)).*function___)(
-			forward<
-				typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
-			>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...
+		return invoke(
+			function___,
+			forward<typename ArgumentAt_<typename TupleT1__::template At<indexs_c_>, TupleT2__>::Type>(
+				select_(get_value<indexs_c_>(arguments_1___), arguments_2___)
+			)...
 		);
-	}
-
-
-};
-
-
-
-template <SubscriptType... indexs_c_>
-struct BindCall_<false, Indexs_<indexs_c_...>> {
-	template <typename FunctionT__, typename TupleT1_, typename TupleT2_>
-	static typename ResultOf_<FunctionT__>::Type call_(
-		FunctionT__ const& function___,
-		TupleT1_ const& arguments_1___,
-		TupleT2_&& arguments_2___
-	) noexcept(noexcept(function___(forward<
-		typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
-	>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...))) {
-		return function___(forward<
-			typename ArgumentAt_<typename TupleT1_::template At<indexs_c_>, TupleT2_>::Type
-		>(select_(get_value<indexs_c_>(arguments_1___), arguments_2___))...);
 	}
 
 
@@ -234,19 +214,13 @@ struct BindFunctor_ : Functor<typename ResultOf_<FunctionT_>::Type, ArgumentsT_.
 	public:
 	template <typename... ArgumentsT__>
 	ResultType operator ()(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(BindCall_<
-			IsMemberFunctionPointer<FunctionType>::value,
-			typename MakeIndexs_<ArgumentsPack::length>::Type
-		>::call_(
+		noexcept(BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
 			m_function_,
 			m_arguments_,
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		))
 	) {
-		return BindCall_<
-			IsMemberFunctionPointer<FunctionType>::value,
-			typename MakeIndexs_<ArgumentsPack::length>::Type
-		>::call_(
+		return BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
 			m_function_,
 			m_arguments_,
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
