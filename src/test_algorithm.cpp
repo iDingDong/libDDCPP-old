@@ -145,14 +145,4 @@ void test_algorithm() {
 			throw "'DD::find_range' test failed.";
 		}
 	}
-
-
-	/*
-	std::cout << DD::is_sorted(arr1.begin(), arr1.end()) << std::endl;
-	std::cout << DD::is_sorted_until(arr1.begin(), arr1.end()) - arr1.begin() << std::endl;
-	DD::insert_sort(arr1.begin(), arr1.end());
-	print_container(arr1);
-	std::cout << DD::is_sorted(arr1.begin(), arr1.end()) << std::endl;
-	std::cout << DD::is_sorted_until(arr1.begin(), arr1.end()) - arr1.begin() << std::endl;
-	*/
 }
