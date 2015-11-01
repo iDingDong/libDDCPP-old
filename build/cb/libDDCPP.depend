@@ -40,7 +40,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1445318200 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1446371230 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -77,6 +77,7 @@
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_select_sort.hpp"
 	"bits/DD_sort.hpp"
+	"bits/DD_next_permutation.hpp"
 
 1444475427 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
@@ -517,9 +518,10 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
 	"DD_global_definitions.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
-	"DD_swap_target.hpp"
+1446357249 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
 	"DD_IsFreeAccessIterator.hpp"
+	"DD_swap_target.hpp"
+	"DD_Range.hpp"
 
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_target.hpp
 	"DD_swap.hpp"
@@ -565,7 +567,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1446031692 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1446353991 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
@@ -1245,4 +1247,8 @@
 1446128078 d:\develop\repositories\libddcpp\src\standard\bits\dd_scan.hpp
 	<iostream>
 	"DD_fabricate.hpp"
+
+1446371300 d:\develop\repositories\libddcpp\src\standard\bits\dd_next_permutation.hpp
+	"DD_previous.hpp"
+	"DD_reverse.hpp"
 

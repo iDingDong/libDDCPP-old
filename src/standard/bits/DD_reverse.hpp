@@ -4,8 +4,9 @@
 
 
 
-#	include "DD_swap_target.hpp"
 #	include "DD_IsFreeAccessIterator.hpp"
+#	include "DD_swap_target.hpp"
+#	include "DD_Range.hpp"
 
 
 
@@ -13,7 +14,7 @@ DD_DETAIL_BEGIN_
 template <ValidityType is_free_access_iterator_c_>
 struct Reverse_ {
 	template <typename BidirectionalIteratorT__>
-	static ProcessType reverse_(
+	static ProcessType reverse(
 		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___
 	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ != end___)) {
@@ -30,7 +31,7 @@ struct Reverse_ {
 template <>
 struct Reverse_<true> {
 	template <typename FreeAccessIteratorT__>
-	static ProcessType reverse_(
+	static ProcessType reverse(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___
 	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ < end___)) {
@@ -44,17 +45,12 @@ struct Reverse_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename BidirectionalIteratorT_>
 inline ProcessType reverse(
 	BidirectionalIteratorT_ const& begin__,
 	BidirectionalIteratorT_ const& end__
-) DD_NOEXCEPT_AS(detail_::Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse_(begin__ DD_COMMA end__)) {
-	detail_::Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse_(begin__, end__);
+) DD_NOEXCEPT_AS(Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse(begin__ DD_COMMA end__)) {
+	Reverse_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::reverse(begin__, end__);
 }
 
 
@@ -65,6 +61,15 @@ inline ProcessType reverse(
 ) DD_NOEXCEPT_AS(reverse(DD_SPLIT_RANGE(range__))) {
 	reverse(DD_SPLIT_RANGE(range__));
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::reverse;
 
 
 

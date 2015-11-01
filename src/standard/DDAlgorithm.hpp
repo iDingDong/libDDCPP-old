@@ -44,6 +44,7 @@
 #	include "bits/DD_insert_sort.hpp"
 #	include "bits/DD_select_sort.hpp"
 #	include "bits/DD_sort.hpp"
+#	include "bits/DD_next_permutation.hpp"
 
 
 
