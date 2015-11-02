@@ -45,6 +45,33 @@ struct NextPermutation_ {
 
 
 
+template <>
+struct NextPermutation_<true> {
+	template <typename FreeAccessIteratorT_>
+	ValidityType next_permutation(
+		FreeAccessIteratorT_ const& begin__,
+		FreeAccessIteratorT_ const& end__
+	) {
+		for (FreeAccessIteratorT_ current__ = end__ - 2; begin__ <= current__; ) {
+			if (*current__ < *current__ + 1) {
+				FreeAccessIteratorT_ head__ = end__;
+				do {
+					--head__;
+				} while (!(*current__ < *head__));
+				swap_target(current__, head__);
+				reverse(current__ + 1, end__);
+				return true;
+			}
+		}
+		reverse(begin__, end__);
+		return false;
+	}
+
+
+};
+
+
+
 template <typename BidirectionalIteratorT_>
 ValidityType next_permutation(
 	BidirectionalIteratorT_ const& begin__,
