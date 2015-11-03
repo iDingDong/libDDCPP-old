@@ -10,7 +10,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 DD_ALIAS(Char, char);
 DD_ALIAS(UnsignedChar, unsigned char);
 DD_ALIAS(SignedChar, signed char);
@@ -47,7 +47,22 @@ typedef UnsignedInt UnsignedInt32;
 typedef SignedInt SignedInt32;
 typedef UnsignedLongInt UnsignedInt64;
 typedef SignedLongInt SignedInt64;
+#	else
+typedef UnsignedChar UnsignedInt8;
+typedef SignedChar SignedInt8;
+typedef UnsignedShort UnsignedInt16;
+typedef SignedShort SignedInt16;
+typedef UnsignedLongInt UnsignedInt32;
+typedef SignedLongInt SignedInt32;
 #	endif
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
 
 
 

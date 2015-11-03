@@ -43,7 +43,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-using detail_::LessThan;
+using detail_::EqualTo;
 
 
 

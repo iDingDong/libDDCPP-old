@@ -10,7 +10,7 @@
 
 DD_DETAIL_BEGIN_
 template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
-struct Conditional_ {
+struct Conditional {
 	DD_ALIAS(Type, ElseT_);
 
 
@@ -19,7 +19,7 @@ struct Conditional_ {
 
 
 template <typename ThenT_, typename ElseT_>
-struct Conditional_<true, ThenT_, ElseT_> {
+struct Conditional<true, ThenT_, ElseT_> {
 	DD_ALIAS(Type, ThenT_);
 
 
@@ -27,20 +27,21 @@ struct Conditional_<true, ThenT_, ElseT_> {
 
 
 
+#	if __cplusplus >= 201103L
+template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
+using ConditionalType = typename Conditional<condition_c_, ThenT_, ElseT_>::Type;
+
+
+
+#	endif
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
+using detail_::Conditional;
 #	if __cplusplus >= 201103L
-template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
-using Conditional = detail_::Conditional_<condition_c_, ThenT_, ElseT_>;
-template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
-using ConditionalType = typename Conditional<condition_c_, ThenT_, ElseT_>::Type;
-#	else
-template <ValidityType condition_c_, typename ThenT_, typename ElseT_>
-struct Conditional : detail_::Conditional_<condition_c_, ThenT_, ElseT_> {
-};
+using detail_::ConditionalType;
 #	endif
 
 
