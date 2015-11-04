@@ -12,6 +12,7 @@
 #	endif
 #	include "DD_IsMemberFunctionPointer.hpp"
 #	include "DD_Decay.hpp"
+#	include "DD_fabricate.hpp"
 #	include "DD_move.hpp"
 #	include "DD_invoke.hpp"
 #	include "DD_Tuple.hpp"
@@ -212,17 +213,39 @@ struct BindFunctor_ : Functor<typename ResultOf_<FunctionT_>::Type, ArgumentsT_.
 
 
 	public:
+	FunctionType& get_function() noexcept {
+		return m_function_;
+	}
+
+	public:
+	FunctionType const& get_function() const noexcept {
+		return m_function_;
+	}
+
+
+	public:
+	ArgumentsPack& get_arguments() noexcept {
+		return m_arguments_;
+	}
+
+	public:
+	ArgumentsPack const& get_arguments() const noexcept {
+		return m_arguments_;
+	}
+
+
+	public:
 	template <typename... ArgumentsT__>
 	ResultType operator ()(ArgumentsT__&&... arguments___) noexcept(
 		noexcept(BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
-			m_function_,
-			m_arguments_,
+			fabricate<ThisType>().get_function(),
+			fabricate<ThisType>().get_arguments(),
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		))
 	) {
 		return BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
-			m_function_,
-			m_arguments_,
+			get_function(),
+			get_arguments(),
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		);
 	}

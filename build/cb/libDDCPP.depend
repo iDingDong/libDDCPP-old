@@ -909,9 +909,10 @@
 	<iostream>
 	"standard/DDUtility.hpp"
 
-1446391883 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1446637548 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
+	"DD_fabricate.hpp"
 	"DD_move.hpp"
 	"DD_invoke.hpp"
 	"DD_Tuple.hpp"
