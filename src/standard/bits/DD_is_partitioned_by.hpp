@@ -4,16 +4,16 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_Range.hpp"
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
 ValidityType is_partitioned_by(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	UnaryPredicatorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && predicator__(*begin__)) {
 	for (; begin__ != end__; ++begin__) {
 		if (!predicator__(*begin__)) {
@@ -27,6 +27,23 @@ ValidityType is_partitioned_by(
 	}
 	return true;
 }
+
+template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
+inline ValidityType is_partitioned_by(
+	UndirectionalRangeT_ const& range__,
+	UnaryPredicatorT_ const& predicator__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned_by(DD_SPLIT_RANGE(range__) DD_COMMA predicator__))) {
+	return is_partitioned_by(DD_SPLIT_RANGE(range__), predicator__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::is_partitioned_by;
 
 
 

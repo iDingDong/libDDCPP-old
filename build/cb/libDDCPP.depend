@@ -477,11 +477,11 @@
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_count_if.hpp
 	"DD_IteratorDifference.hpp"
 
-1446736111 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned.hpp
+1446740842 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned.hpp
 	"DD_Range.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned_by.hpp
-	"DD_global_definitions.hpp"
+1446740946 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned_by.hpp
+	"DD_Range.hpp"
 
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point.hpp
 	"DD_global_definitions.hpp"
