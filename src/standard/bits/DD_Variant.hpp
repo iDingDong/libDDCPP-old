@@ -18,6 +18,15 @@
 #	if !defined(DDCPP_VARIANT_ALLOCATOR)
 #		define DDCPP_VARIANT_ALLOCATOR ::DD::Allocator<void>
 #	endif
+#	if !defined(DDCPP_VARIANT_IMPLICIT_CAST)
+#		define DDCPP_VARIANT_IMPLICIT_CAST DD_OFF
+#	endif
+
+#	if __cplusplus < 201103L || DDCPP_VARIANT_IMPLICIT_CAST
+#		define DD_VARIANT_CAST_OPERATOR_EXPLICIT_
+#	else
+#		define DD_VARIANT_CAST_OPERATOR_EXPLICIT_ explicit
+#	endif
 
 
 
@@ -240,6 +249,15 @@ struct Variant {
 	}
 
 
+#	if __cplusplus >= 201103L || DDCPP_VARIANT_IMPLICIT_CAST
+	public:
+	template <typename ValueT__>
+	DD_VARIANT_CAST_OPERATOR_EXPLICIT_ operator ValueT__() const DD_NOEXCEPT {
+		return to<ValueT__>();
+	}
+
+
+#	endif
 };
 
 
@@ -254,6 +272,10 @@ using detail_::Variant;
 
 
 DD_END_
+
+
+
+#	undef DD_VARIANT_CAST_OPERATOR_EXPLICIT_
 
 
 
