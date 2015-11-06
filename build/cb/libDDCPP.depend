@@ -449,7 +449,7 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Pair.hpp"
 
-1444525953 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1446804643 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
@@ -483,10 +483,11 @@
 1446740946 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned_by.hpp
 	"DD_Range.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point.hpp
-	"DD_global_definitions.hpp"
+1446805011 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point_by.hpp
+1446805036 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point_by.hpp
 	"DD_global_definitions.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted.hpp

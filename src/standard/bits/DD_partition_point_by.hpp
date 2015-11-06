@@ -8,18 +8,37 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
 UndirectionalIteratorT_ partition_point_by(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	UndirectionalIteratorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && predicator__(*begin__)) {
 	while (begin__ != end__ && predicator__(*begin__)) {
 		++begin__;
 	}
 	return begin__;
 }
+
+template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point_by(
+	UndirectionalRangeT_& range__,
+	UnaryPredicatorT_ const& predicator__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
+	partition_point_by(DD_SPLIT_RANGE(range__) DD_COMMA predicator__)
+)) {
+	return partition_point_by(DD_SPLIT_RANGE(range__), predicator__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::partition_point_by;
 
 
 
