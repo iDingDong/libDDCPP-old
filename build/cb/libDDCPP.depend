@@ -449,7 +449,7 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Pair.hpp"
 
-1446804643 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1446887188 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
@@ -558,7 +558,7 @@
 1443513051 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/bits/DD_print.hpp"
 
-1446122990 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
+1446880373 d:\develop\repositories\libddcpp\src\standard\bits\dd_print.hpp
 	<iostream>
 	<iomanip>
 	"DD_Tags.hpp"
@@ -580,11 +580,12 @@
 1443513051 d:\develop\repositories\libddcpp\src\standard\ddarray.hpp
 	"bits/DD_Array.hpp"
 
-1444039647 d:\develop\repositories\libddcpp\src\standard\bits\dd_array.hpp
+1446914282 d:\develop\repositories\libddcpp\src\standard\bits\dd_array.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_AccessDenied.hpp"
 	"DD_ArrayIterator.hpp"
+	"DD_equal.hpp"
 
 1445617484 d:\develop\repositories\libddcpp\src\standard\bits\dd_debugger_definitions.hpp
 	"DD_global_definitions.hpp"
@@ -1247,8 +1248,9 @@
 	"bits/DD_scan.hpp"
 	"bits/DD_print.hpp"
 
-1446128078 d:\develop\repositories\libddcpp\src\standard\bits\dd_scan.hpp
+1446883394 d:\develop\repositories\libddcpp\src\standard\bits\dd_scan.hpp
 	<iostream>
+	"DD_Value.hpp"
 	"DD_fabricate.hpp"
 
 1446471028 d:\develop\repositories\libddcpp\src\standard\bits\dd_next_permutation.hpp

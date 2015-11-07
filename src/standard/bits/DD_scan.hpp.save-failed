@@ -6,15 +6,16 @@
 
 #	include <iostream>
 
-#	include "DD_Value.hpp"
+
+
 #	include "DD_fabricate.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <typename BufferT_>
+template <typename CharT_>
 struct GetLineProxy_ {
-	DD_ALIAS(ValueType, BufferT_);
+	DD_ALIAS(ValueType, CharT_*);
 
 
 	ValueType value_;
@@ -25,10 +26,10 @@ struct GetLineProxy_ {
 
 
 
-template <typename BufferT_>
+template <typename CharT_>
 struct GetUntilProxy_ {
-	DD_ALIAS(ValueType, BufferT_);
-	DD_ALIAS(CharType, DD_MODIFY_TRAIT(DD::Value, BufferT_));
+	DD_ALIAS(ValueType, CharT_*);
+	DD_ALIAS(CharType, CharT_);
 
 
 	ValueType value_;

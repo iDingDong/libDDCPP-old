@@ -8,6 +8,7 @@
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_ArrayIterator.hpp"
+#	include "DD_equal.hpp"
 
 
 
@@ -279,6 +280,21 @@ struct Array<ValueT_, 0> {
 
 
 };
+
+
+
+template <typename ValueT1_, typename ValueT2_, LengthType length_c_>
+ValidityType DD_UNCONSTRIANED_CONSTEXPR operator ==(
+	Array<ValueT1_, length_c_> const& array_1_,
+	Array<ValueT2_, length_c_> const& array_2_
+) DD_NOEXCEPT_AS(array_1_[length_c_] != array_2_[length_c_]) {
+	for (DD::LengthType i = 0; i < length_c_; ++i) {
+		if (array_1_[i] != array_2_[i]) {
+			return false;
+		}
+	}
+	return true;
+}
 
 
 
