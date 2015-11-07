@@ -255,6 +255,7 @@
 		<Unit filename="../../src/standard/bits/DD_partition_point_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_previous.hpp" />
 		<Unit filename="../../src/standard/bits/DD_print.hpp" />
+		<Unit filename="../../src/standard/bits/DD_quick_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_relationship_operators.hpp" />
 		<Unit filename="../../src/standard/bits/DD_release.hpp" />
 		<Unit filename="../../src/standard/bits/DD_replace.hpp" />

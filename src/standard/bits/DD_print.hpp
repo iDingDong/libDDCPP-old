@@ -70,7 +70,8 @@ struct Print {
 		'.' DD_COMMA
 		DD_CPP_LIBRARY % 1000 / 100 DD_COMMA
 		DD_CPP_LIBRARY % 100 / 10 DD_COMMA
-		DD_CPP_LIBRARY % 10
+		DD_CPP_LIBRARY % 10 DD_COMMA
+		'\n'
 	) {
 		return
 			*this,
@@ -79,7 +80,8 @@ struct Print {
 			'.',
 			DD_CPP_LIBRARY % 1000 / 100,
 			DD_CPP_LIBRARY % 100 / 10,
-			DD_CPP_LIBRARY % 10
+			DD_CPP_LIBRARY % 10,
+			'\n'
 		;
 	}
 
