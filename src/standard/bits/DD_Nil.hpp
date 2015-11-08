@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 struct NilType {
 };
 
@@ -54,6 +54,18 @@ inline ValidityType DD_CONSTEXPR operator <(NilPointerType nil_pointer_1_, NilPo
 NilType DD_CONSTANT nil;
 
 NilPointerType DD_CONSTANT nil_pointer;
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::NilType;
+using detail_::NilPointerType;
+using detail_::nil;
+using detail_::nil_pointer;
 
 
 
