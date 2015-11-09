@@ -10,6 +10,7 @@
 #include "test_meta.h"
 #include "test_memory.h"
 #include "test_algorithm.h"
+#include "test_container.h"
 #include "test_utility.h"
 #include "test_math.h"
 
@@ -20,6 +21,7 @@ int main() {
 		test_utility();
 		test_memory();
 		test_algorithm();
+		test_container();
 		test_math();
 		DD_PRINT "All tests successfully operated.";
 	} catch (char const* prompt) {

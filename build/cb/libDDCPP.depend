@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1446128223 source:d:\develop\repositories\libddcpp\src\main.cpp
+1447082147 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
@@ -8,6 +8,7 @@
 	"test_meta.h"
 	"test_memory.h"
 	"test_algorithm.h"
+	"test_container.h"
 	"test_utility.h"
 	"test_math.h"
 
@@ -746,7 +747,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1444719703 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1447082014 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -961,7 +962,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1445232096 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1447082813 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1259,4 +1260,13 @@
 
 1446391757 d:\develop\repositories\libddcpp\src\standard\bits\dd_invoke.hpp
 	"DD_forward.hpp"
+
+1447079623 d:\develop\repositories\libddcpp\src\test_container.h
+
+1447082448 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+	"test_container.h"
+	"test_object.hpp"
+	"standard/DDArray.hpp"
+	"standard/DDVessel.hpp"
+	"standard/DDAlgorithm.hpp"
 

@@ -154,12 +154,12 @@ struct VesselBase_ {
 
 	public:
 	Iterator end() DD_NOEXCEPT {
-		return Iterator(m_begin_);
+		return Iterator(m_end_);
 	}
 
 	public:
 	ConstIterator end() const DD_NOEXCEPT {
-		return Iterator(m_begin_);
+		return Iterator(m_end_);
 	}
 
 
@@ -169,12 +169,12 @@ struct VesselBase_ {
 
 	public:
 	ReverseIterator rbegin() DD_NOEXCEPT {
-		return ReverseIterator(m_end_ - 1);
+		return ReverseIterator(end() - 1);
 	}
 
 	public:
 	ConstReverseIterator rbegin() const DD_NOEXCEPT {
-		return ReverseIterator(m_end_ - 1);
+		return ReverseIterator(end() - 1);
 	}
 
 
@@ -205,7 +205,7 @@ struct VesselBase_ {
 
 
 	public:
-	ConstIterator storage_cend() const DD_NOEXCEPT {
+	ConstIterator cstorage_end() const DD_NOEXCEPT {
 		return m_storage_end_;
 	}
 
@@ -247,7 +247,7 @@ struct VesselBase_ {
 
 	public:
 	ValidityType is_valid() const DD_NOEXCEPT {
-		return begin() < storage_cend();
+		return begin() < cstorage_end();
 	}
 
 
@@ -376,23 +376,6 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	) {
 	}
 
-#	endif
-	public:
-	template <typename ValueT__>
-	Vessel_(LengthType length_, ValueT__ const& value___) noexcept(
-		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().push_back_(value___))
-	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
-		try {
-			for (; !this->is_full(); ++this->m_end_) {
-				push_back_(value___);
-			}
-		} catch (...) {
-			destruct_();
-			throw;
-		}
-	}
-
-#	if __cplusplus >= 201103L
 	public:
 	template <typename ValueT__>
 	Vessel_(InitializerList<ValueT__> initializer) noexcept(
@@ -408,8 +391,22 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		}
 	}
 
-
 #	endif
+	public:
+	template <typename ValueT__>
+	Vessel_(LengthType length_, ValueT__ const& value___) noexcept(
+		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().push_back_(value___))
+	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+		try {
+			while (!this->is_full()) {
+				push_back_(value___);
+			}
+		} catch (...) {
+			destruct_();
+			throw;
+		}
+	}
+
 
 	public:
 	~Vessel_() DD_NOEXCEPT {
@@ -500,7 +497,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
 	ProcessType push_back_(ValueT__&& value___) noexcept(
-		noexcept(emplace_back_(forward<ValueT__>(value___)))
+		noexcept(fabricate<ThisType>().emplace_back_(forward<ValueT__>(value___)))
 	) {
 		emplace_back_(forward<ValueT__>(value___));
 	}
@@ -604,7 +601,53 @@ struct Vessel_<ValueT_, AllocatorT_, true> : VesselBase_<ValueT_> {
 
 
 template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
-struct Vessel : detail_::Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
+struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
+	public:
+	DD_ALIAS(SuperType, Vessel_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA NeedInstance<AllocatorT_>::value>);
+	DD_ALIAS(ThisType, Vessel<ValueT_ DD_COMMA AllocatorT_>);
+
+
+#	if __cplusplus >= 201103L
+	public:
+	constexpr Vessel() = default;
+
+	public:
+	constexpr Vessel(ThisType const& origin_) = default;
+
+	public:
+	constexpr Vessel(ThisType&& origin_) = default;
+
+	public:
+	template <typename ValueT__>
+	constexpr Vessel(InitializerList<ValueT__> initializer) noexcept(noexcept(SuperType(initializer))) : SuperType(initializer) {
+	}
+#	else
+	public:
+	Vessel() {
+	}
+#	endif
+
+	public:
+	template <typename ValueT__>
+	Vessel(LengthType length_, ValueT__ const& value___) DD_NOEXCEPT_AS(
+		SuperType(length_ DD_COMMA value___)
+	) : SuperType(length_, value___) {
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	~Vessel() = default;
+
+
+#	endif
+	public:
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType&& origin_) = default;
+
+
 };
 
 

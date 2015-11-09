@@ -117,7 +117,7 @@ class Allocator : Allocator<void> {
 
 	public:
 	static PointerType allocate(LengthType length_) {
-		return Basic::allocate(unit * length_);
+		return PointerType(Basic::allocate(unit * length_));
 	}
 
 

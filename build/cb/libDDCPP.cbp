@@ -274,6 +274,8 @@
 		<Unit filename="../../src/standard/bits/DD_transfer_forward.hpp" />
 		<Unit filename="../../src/test_algorithm.cpp" />
 		<Unit filename="../../src/test_algorithm.h" />
+		<Unit filename="../../src/test_container.cpp" />
+		<Unit filename="../../src/test_container.h" />
 		<Unit filename="../../src/test_math.cpp" />
 		<Unit filename="../../src/test_math.h" />
 		<Unit filename="../../src/test_memory.cpp" />
