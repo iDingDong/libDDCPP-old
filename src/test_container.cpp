@@ -22,6 +22,12 @@ void test_container() {
 			) {
 				throw "'DD::Vessel' test failed.";
 			}
+			ves.push_back(Test());
+			if (
+				Test::count != 4
+			) {
+				throw "'DD::Vessel' test failed.";
+			}
 		}
 		if (
 			Test::count != 0

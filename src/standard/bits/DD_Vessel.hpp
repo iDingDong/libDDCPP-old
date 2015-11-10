@@ -446,7 +446,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
-	ProcessType reserve(LengthType new_capacity_) noexcept(noexcept(ThisType().stretch())) {
+	ProcessType reserve(LengthType new_capacity_) noexcept(noexcept(fabricate<ThisType>().stretch(new_capacity_))) {
 		if (new_capacity_ > this->get_length()) {
 			stretch(new_capacity_);
 		}
@@ -467,8 +467,8 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename... ArgumentsT__>
 	ProcessType emplace_back(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(reserve()) &&
-		noexcept(emplace_back_(forward<ArgumentsT__>(arguments___)...))
+		noexcept(fabricate<ThisType>().reserve()) &&
+		noexcept(fabricate<ThisType>().emplace_back_(forward<ArgumentsT__>(arguments___)...))
 	) {
 		if (this->is_full()) {
 			reserve();

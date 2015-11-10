@@ -23,7 +23,6 @@
 
 
 
-
 DD_DETAIL_BEGIN_
 
 template <ValidityType can_trivially_operate_c_>
@@ -86,13 +85,15 @@ struct Transconstruct_ {
 		UndirectionalIteratorT1___ begin___,
 		UndirectionalIteratorT1___ end___,
 		UndirectionalIteratorT2___ destination___
-	) DD_NOEXCEPT_AS(construct(destination___ DD_COMMA move(*begin___))) {
+	) DD_NOEXCEPT_AS(Transconstruct__<
+			noexcept(construct(destination___ DD_COMMA move(*begin___)))
+	>::transconstruct(begin___ DD_COMMA end___ DD_COMMA destination___)) {
 #	if __cplusplus >= 201103L
-		return Transconstruct_<
+		return Transconstruct__<
 			noexcept(construct(destination___, move(*begin___)))
 		>::transconstruct(begin___, end___, destination___);
 #	else
-		return Transconstruct_<
+		return Transconstruct__<
 			IsNoexceptCopyConstructible<typename IteratorValue<UndirectionalIteratorT2___>::Type>::value
 		>::transconstruct(begin___, end___, destination___);
 #	endif
@@ -131,7 +132,7 @@ UndirectionalIteratorT2_ transconstruct(
 		IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_> DD_COMMA
 		IsSame<IteratorValueType<UndirectionalIteratorT1_> DD_COMMA IteratorValueType<UndirectionalIteratorT2_>> DD_COMMA
 		IsTriviallyMoveConstructible<IteratorValueType<UndirectionalIteratorT1_>>
-	>::value>::transconstruct=(begin__ DD_COMMA end__ DD_COMMA destination__)
+	>::value>::transconstruct(begin__ DD_COMMA end__ DD_COMMA destination__)
 ) {
 #	if __cplusplus >= 201103L
 	return Transconstruct_<AndType<
