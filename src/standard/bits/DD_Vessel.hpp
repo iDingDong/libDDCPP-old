@@ -556,14 +556,14 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	else
 		push_back(value__);
 #	endif
-		this->transfer_backward(this->end() - 1, position_);
+		transfer_backward(this->end() - 1, position_);
 	}
 
 
 	public:
 	ProcessType erase(Iterator position_) {
 		DD_ASSERT(check_bound(*this, position), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
-		this->transfer_forward(position_, this->end() - 1);
+		transfer_forward(position_, this->end() - 1);
 		pop_back();
 	}
 

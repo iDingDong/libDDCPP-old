@@ -24,7 +24,7 @@ inline RemoveReferenceType<ObjectT_>&& move(ObjectT_&& object_) DD_NOEXCEPT {
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
 inline UndirectionalIteratorT1_ move(
-	UndirectionalIteratorT1_ const& begin__,
+	UndirectionalIteratorT1_ begin__,
 	UndirectionalIteratorT1_ const& end__,
 	UndirectionalIteratorT2_ result_begin__
 ) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = move(*++begin__))) {

@@ -61,6 +61,23 @@ struct TestImpl {
 	}
 
 
+	TestImpl& operator =(TestImpl const&) throw() {
+#	if TEST_OBJECT_AUTO_PROMPT
+		std::cout << "\nTest object " << id << " copied. ";
+#	endif
+		return *this;
+	}
+
+#	if __cplusplus >= 201103L
+	TestImpl& operator =(TestImpl&&) throw() {
+#		if TEST_OBJECT_AUTO_PROMPT
+		std::cout << "\nTest object " << id << " copied. ";
+#		endif
+		return *this;
+	}
+
+#	endif
+
 };
 
 

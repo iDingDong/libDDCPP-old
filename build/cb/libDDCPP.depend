@@ -192,7 +192,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1443768098 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
+1447210368 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
 	"DD_RemoveReference.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
@@ -430,11 +430,12 @@
 	"DD_IteratorReverse.hpp"
 	"DD_Pair.hpp"
 
-1443513190 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
+1447210775 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
 	"DD_CompatStlIterator.hpp"
 	"DD_NestedTypeCheck.hpp"
 	"DD_Or.hpp"
 	"DD_IsSame.hpp"
+	"DD_Comparable.hpp"
 	"DD_move.hpp"
 	"DD_relationship_operators.hpp"
 	"DD_IteratorReference.hpp"
@@ -840,7 +841,7 @@
 	<mutex>
 	"standard/DDMemory.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\test_object.hpp
+1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
 1445590260 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
@@ -962,7 +963,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1447167255 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1447210345 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1263,7 +1264,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1447167861 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1447210145 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDArray.hpp"

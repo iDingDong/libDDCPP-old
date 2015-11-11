@@ -8,6 +8,7 @@
 #	include "DD_NestedTypeCheck.hpp"
 #	include "DD_Or.hpp"
 #	include "DD_IsSame.hpp"
+#	include "DD_Comparable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_move.hpp"
 #	endif
@@ -22,10 +23,10 @@
 
 DD_DETAIL_BEGIN_
 template <typename IteratorT_>
-struct ReverseIterator_ {
+struct ReverseIterator_ : Comparable<ReverseIterator_<IteratorT_>> {
 	public:
+	DD_ALIAS(ThisType, ReverseIterator_<IteratorT_>);
 	DD_ALIAS(ReverseType, IteratorT_);
-	DD_ALIAS(ThisType, ReverseIterator_<ReverseType>);
 
 	public:
 	DD_ALIAS(ValueType, typename IteratorValue<ReverseType>::Type);
