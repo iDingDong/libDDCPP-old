@@ -37,9 +37,16 @@ void test_container() {
 				throw "'DD::Vessel' test failed.";
 			}
 
+			ves.insert(ves.begin() + 1, Test());
+			if (
+				Test::count != 6
+			) {
+				throw "'DD::Vessel' test failed.";
+			}
+
 			ves.erase(ves.begin());
 			if (
-				Test::count != 4
+				Test::count != 5
 			) {
 				throw "'DD::Vessel' test failed.";
 			}
