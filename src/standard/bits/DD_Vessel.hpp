@@ -22,7 +22,7 @@
 #	if __cplusplus >= 201103L
 #		include "DD_copy.hpp"
 #	endif
-
+#	include "DD_copy_construct.hpp"
 
 
 
@@ -360,7 +360,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	Vessel_(ThisType const& origin_) : SuperType(unguarded_tag, AllocatorType::allocate(origin_.get_length())) {
 		try {
-			this->m_end_ = copy(origin_, this->begin());
+			this->m_end_ = copy_construct(origin_, this->begin());
 		} catch (...) {
 			AllocatorType::deallocate(this->m_begin_, this->get_length());
 			throw;

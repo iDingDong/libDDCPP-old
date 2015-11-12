@@ -51,6 +51,13 @@ void test_container() {
 				throw "'DD::Vessel' test failed.";
 			}
 
+			auto another_ves = ves;
+			if (
+				Test::count != 10
+			) {
+				throw "'DD::Vessel' test failed.";
+			}
+
 		}
 		if (
 			Test::count != 0
