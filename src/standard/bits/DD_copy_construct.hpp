@@ -29,11 +29,27 @@ struct CopyConstruct_ {
 
 
 
+template <>
+struct CopyConstruct_<true> {
+	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
+	static UndirectionalIteratorT2__ copy_construct(
+		UndirectionalIteratorT1__ const& begin___,
+		UndirectionalIteratorT1__ const& end___,
+		UndirectionalIteratorT2__ const& result_begin___
+	) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT2__>(copy(begin___ DD_COMMA end___ DD_COMMA result_begin___))) {
+		return copy(begin___, end___, result_begin___);
+	}
+
+
+};
+
+
+
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
 inline UndirectionalIteratorT2_ copy_construct(
-	UndirectionalIteratorT1_ begin__,
+	UndirectionalIteratorT1_ const& begin__,
 	UndirectionalIteratorT1_ const& end__,
-	UndirectionalIteratorT2_ result_begin__
+	UndirectionalIteratorT2_ const& result_begin__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT2_>(CopyConstruct_<
 	IsSame<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT1_), DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT2_)>::value &&
 	IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_>::value &&
@@ -49,7 +65,7 @@ inline UndirectionalIteratorT2_ copy_construct(
 template <typename UndirectionalRangeT_, typename UndirectionalIteratorT_>
 inline UndirectionalIteratorT_ copy_construct(
 	UndirectionalRangeT_& range__,
-	UndirectionalIteratorT_ result_begin__
+	UndirectionalIteratorT_ const& result_begin__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(copy_construct(DD_SPLIT_RANGE(range__) DD_COMMA result_begin__))) {
 	return copy_construct(DD_SPLIT_RANGE(range__), result_begin__);
 }
