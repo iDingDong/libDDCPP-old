@@ -51,31 +51,31 @@ using DecayAndStripType_ = typename DecayAndStrip_<ObjectT_>::Type;
 
 
 
-template <SubscriptType index_c_, typename... ValuesT_>
+template <LengthType index_c_, typename... ValuesT_>
 struct Tuple_;
 
 
 
-template <SubscriptType index_c_, typename ValueT_>
+template <LengthType index_c_, typename ValueT_>
 inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__);
 
-template <SubscriptType index_c_, typename ValueT_>
+template <LengthType index_c_, typename ValueT_>
 inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__);
 
-template <typename ValueT_, SubscriptType index_c_>
+template <typename ValueT_, LengthType index_c_>
 inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__);
 
-template <typename ValueT_, SubscriptType index_c_>
+template <typename ValueT_, LengthType index_c_>
 inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__);
 
 
 
-template <SubscriptType index_c_, typename... ValuesT_>
+template <LengthType index_c_, typename... ValuesT_>
 struct Tuple_ {
 	public:
 	using ThisType = Tuple_<index_c_>;
 	using StorageType = Tuple_<index_c_>;
-	static SubscriptType constexpr index = index_c_;
+	static LengthType constexpr index = index_c_;
 	using TypeList = TypeList<ValuesT_...>;
 
 
@@ -83,19 +83,19 @@ struct Tuple_ {
 
 
 
-template <SubscriptType index_c_, typename ValueT_, typename... ValuesT_>
+template <LengthType index_c_, typename ValueT_, typename... ValuesT_>
 struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple_<index_c_ + 1, ValuesT_...> {
 	public:
 	using StorageType = Tuple_<index_c_, ValueT_>;
 	using RestType = Tuple_<index_c_ + 1, ValuesT_...>;
 	using ThisType = Tuple_<index_c_, ValueT_, ValuesT_...>;
-	static SubscriptType constexpr index = index_c_;
+	static LengthType constexpr index = index_c_;
 	using TypeList = TypeList<ValueT_, ValuesT_...>;
 	using ValueType = ValueT_;
 	static LengthType constexpr length = RestType::length + 1;
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
 
 	public:
@@ -122,13 +122,13 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	At<index_c__>& at() noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
 	}
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	At<index_c__> const& at() const noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
 	}
@@ -162,13 +162,13 @@ struct Tuple_<index_c_, ValueT_, ValuesT_...> : Tuple_<index_c_, ValueT_>, Tuple
 
 
 
-template <SubscriptType index_c_, typename ValueT_>
+template <LengthType index_c_, typename ValueT_>
 struct Tuple_<index_c_, ValueT_> {
 	public:
 	using ThisType = Tuple_<index_c_, ValueT_>;
 	using StorageType = ThisType;
 	using RestType = Tuple_<index_c_ + 1>;
-	static SubscriptType constexpr index = index_c_;
+	static LengthType constexpr index = index_c_;
 	using TypeList = TypeList<ValueT_>;
 	using ValueType = ValueT_;
 	static LengthType constexpr length = 1;
@@ -180,7 +180,7 @@ struct Tuple_<index_c_, ValueT_> {
 	using ConstPointerType = ValueType const*;
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	using At = RemoveReferenceType<decltype(::DD::detail_::get_value<index_c__>(fabricate<ThisType>()))>;
 
 	public:
@@ -225,13 +225,13 @@ struct Tuple_<index_c_, ValueT_> {
 
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	At<index_c__>& at() noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
 	}
 
 	public:
-	template <SubscriptType index_c__>
+	template <LengthType index_c__>
 	At<index_c__> const& at() const noexcept {
 		return ::DD::detail_::get_value<index_c__>(*this);
 	}
@@ -307,29 +307,29 @@ Tuple<DecayAndStripType_<ValuesT_>...> constexpr make_tuple(ValuesT_&&... elemen
 }
 
 
-template <SubscriptType index_c_, typename ValueT_>
+template <LengthType index_c_, typename ValueT_>
 inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__) {
 	return tuple__.get_value();
 }
 
-template <SubscriptType index_c_, typename ValueT_>
+template <LengthType index_c_, typename ValueT_>
 inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__) {
 	return tuple__.get_value();
 }
 
-template <typename ValueT_, SubscriptType index_c_>
+template <typename ValueT_, LengthType index_c_>
 inline ValueT_& get_value(Tuple_<index_c_, ValueT_>& tuple__) {
 	return tuple__.get_value();
 }
 
-template <typename ValueT_, SubscriptType index_c_>
+template <typename ValueT_, LengthType index_c_>
 inline ValueT_ const& get_value(Tuple_<index_c_, ValueT_> const& tuple__) {
 	return tuple__.get_value();
 }
 
 
 /*
-template <SubscriptType index_c_, typename ValueT1_, typename ValueT2_>
+template <LengthType index_c_, typename ValueT1_, typename ValueT2_>
 inline ValidityType constexpr operator ==(
 	Tuple_<index_c_, ValueT1_> const& tuple_1_,
 	Tuple_<index_c_, ValueT2_> const& tuple_2_
@@ -337,7 +337,7 @@ inline ValidityType constexpr operator ==(
 	return get_value<index_c_>(tuple_1_) == get_value<index_c_>(tuple_2_);
 }
 
-template <SubscriptType index_c_, typename ValueT_, typename...ValuesT_>
+template <LengthType index_c_, typename ValueT_, typename...ValuesT_>
 inline ValidityType constexpr operator ==(
 	Tuple_<index_c_, ValueT_> const& tuple_1_,
 	Tuple_<index_c_, ValuesT_...> const& tuple_2_
@@ -345,7 +345,7 @@ inline ValidityType constexpr operator ==(
 	return false;
 }
 
-template <SubscriptType index_c_, typename ValueT_, typename...ValuesT_>
+template <LengthType index_c_, typename ValueT_, typename...ValuesT_>
 inline ValidityType constexpr operator ==(
 	Tuple_<index_c_, ValuesT_...> const& tuple_1_,
 	Tuple_<index_c_, ValueT_> const& tuple_2_
@@ -353,7 +353,7 @@ inline ValidityType constexpr operator ==(
 	return false;
 }
 
-template <SubscriptType index_c_, typename... ValuesT1_, typename... ValuesT2_>
+template <LengthType index_c_, typename... ValuesT1_, typename... ValuesT2_>
 inline ValidityType constexpr operator ==(
 	Tuple_<index_c_, ValuesT1_...> const& tuple_1_,
 	Tuple_<index_c_, ValuesT2_...> const& tuple_2_
