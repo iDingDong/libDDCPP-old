@@ -379,11 +379,11 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename ValueT__>
 	Vessel_(InitializerList<ValueT__> initializer) noexcept(
-		noexcept(AllocatorType::allocate(initializer.size())) && noexcept(fabricate<ThisType>().push_back_(fabricate<ValueT__>()))
+		noexcept(AllocatorType::allocate(initializer.size())) && noexcept(fabricate<ThisType>().unguarded_push_back(fabricate<ValueT__>()))
 	) : SuperType(AllocatorType::allocate(initializer.size()), 0, initializer.size()) {
 		try {
 			for (auto const& value_ : initializer) {
-				push_back_(value_);
+				unguarded_push_back(value_);
 			}
 		} catch (...) {
 			destruct_();
@@ -395,11 +395,11 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename ValueT__>
 	Vessel_(LengthType length_, ValueT__ const& value___) noexcept(
-		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().push_back_(value___))
+		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().unguarded_push_back(value___))
 	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
 			while (!this->is_full()) {
-				push_back_(value___);
+				unguarded_push_back(value___);
 			}
 		} catch (...) {
 			destruct_();
@@ -454,11 +454,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 #	if __cplusplus >= 201103L
-	private:
+	public:
 	template <typename... ArgumentsT__>
-	ProcessType emplace_back_(ArgumentsT__&&... arguments___) noexcept(
+	ProcessType unguarded_emplace_back(ArgumentsT__&&... arguments___) noexcept(
 		noexcept(AllocatorType::construct(fabricate<ThisType>().m_end_, forward<ArgumentsT__>(arguments___)...))
 	) {
+		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_emplace_back'");
 		AllocatorType::construct(this->m_end_, forward<ArgumentsT__>(arguments___)...);
 		++this->m_end_;
 	}
@@ -468,12 +469,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	template <typename... ArgumentsT__>
 	ProcessType emplace_back(ArgumentsT__&&... arguments___) noexcept(
 		noexcept(fabricate<ThisType>().reserve()) &&
-		noexcept(fabricate<ThisType>().emplace_back_(forward<ArgumentsT__>(arguments___)...))
+		noexcept(fabricate<ThisType>().unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...))
 	) {
 		if (this->is_full()) {
 			reserve();
 		}
-		emplace_back_(forward<ArgumentsT__>(arguments___)...);
+		unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...);
 	}
 
 
@@ -493,16 +494,18 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 
 
-	private:
+	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ProcessType push_back_(ValueT__&& value___) noexcept(
-		noexcept(fabricate<ThisType>().emplace_back_(forward<ValueT__>(value___)))
+	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
+		noexcept(fabricate<ThisType>().unguarded_emplace_back(forward<ValueT__>(value___)))
 	) {
-		emplace_back_(forward<ValueT__>(value___));
+		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_push_back'");
+		unguarded_emplace_back(forward<ValueT__>(value___));
 	}
 #	else
-	ProcessType push_back_(ValueT__ const& value___) {
+	ProcessType unguarded_push_back(ValueT__ const& value___) {
+		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_push_back'");
 		AllocatorType::construct(this->m_end_, value___);
 		++this->m_end_;
 	}
@@ -522,7 +525,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		if (this->is_full()) {
 			reserve();
 		}
-		push_back_(value___);
+		unguarded_push_back(value___);
 	}
 #	endif
 
