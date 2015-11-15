@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 ProcessType fill(
 	UndirectionalIteratorT_ begin__,
@@ -19,6 +19,15 @@ ProcessType fill(
 		*begin__ = value__;
 	}
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::fill;
 
 
 
