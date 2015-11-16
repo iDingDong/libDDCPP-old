@@ -4,13 +4,13 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_Range.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
-ProcessType fill(
+inline ProcessType fill(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__
@@ -18,6 +18,14 @@ ProcessType fill(
 	for (; begin__ != end__; ++begin__) {
 		*begin__ = value__;
 	}
+}
+
+template <typename UndirectionalRangeT_, typename ValueT_>
+inline ProcessType fill(
+	UndirectionalRangeT_& range__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(fill(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {
+	fill(DD_SPLIT_RANGE(range__), value__);
 }
 
 
