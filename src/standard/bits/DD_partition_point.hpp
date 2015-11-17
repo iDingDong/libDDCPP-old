@@ -49,7 +49,7 @@ template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredic
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicatorT_ less__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
 	partition_point(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))
 ) {

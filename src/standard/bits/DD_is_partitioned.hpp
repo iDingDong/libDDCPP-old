@@ -60,7 +60,7 @@ template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredic
 inline ValidityType is_partitioned(
 	UndirectionalRangeT_ const& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicatorT_ less__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))) {
 	return is_partitioned(DD_SPLIT_RANGE(range__), value__, less__);
 }

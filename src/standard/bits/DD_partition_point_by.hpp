@@ -24,7 +24,7 @@ UndirectionalIteratorT_ partition_point_by(
 template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point_by(
 	UndirectionalRangeT_& range__,
-	UnaryPredicatorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
 	partition_point_by(DD_SPLIT_RANGE(range__) DD_COMMA predicator__)
 )) {

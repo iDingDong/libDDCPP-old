@@ -4,7 +4,7 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_fabricate.hpp"
 
 
 
@@ -18,7 +18,7 @@
 		friend Type1 operator ARG_symbol_(\
 			Type1 const& object_1_,\
 			Type2 const& object_2_\
-		) DD_NOEXCEPT_AS(const_cast<Type1>(object_1_ ARG_symbol_##= object_2_) DD_COMMA Type1(object_1_)) {\
+		) DD_NOEXCEPT_AS(fabricate<Type1>() ARG_symbol_##= object_2_ DD_COMMA Type1(fabricate<Type1>())) {\
 			Type1 temp_(object_1_);\
 			temp_ ARG_symbol_##= object_2_;\
 			return temp_;\

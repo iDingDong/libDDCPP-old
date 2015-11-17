@@ -4,8 +4,8 @@
 
 
 
-#	include "DD_global_definitions.hpp"
 #	include "DD_IsFreeAccessIterator.hpp"
+#	include "DD_Range.hpp"
 
 
 
@@ -84,27 +84,46 @@ struct IsSorted_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename UndirectionalIteratorT_>
 inline ValidityType is_sorted(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__
-) DD_NOEXCEPT_AS(detail_::IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__)) {
-	return detail_::IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__);
+) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__)) {
+	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__);
 }
 
 template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
 inline ValidityType is_sorted(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ const& less__
-) DD_NOEXCEPT_AS(detail_::IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__ DD_COMMA less__)) {
-	return detail_::IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__, less__);
+	BinaryPredicatorT_ less__
+) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__ DD_COMMA less__)) {
+	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__, less__);
 }
+
+template <typename UndirectionalRangeT_>
+inline ValidityType is_sorted(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_sorted(DD_SPLIT_RANGE(range__)))) {
+	return is_sorted(DD_SPLIT_RANGE(range__));
+}
+
+template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+inline ValidityType is_sorted(
+	UndirectionalRangeT_& range__,
+	BinaryPredicatorT_ less__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_sorted(DD_SPLIT_RANGE(range__) DD_COMMA less__))) {
+	return is_sorted(DD_SPLIT_RANGE(range__), less__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::is_sorted;
 
 
 

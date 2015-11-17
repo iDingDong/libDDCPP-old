@@ -31,7 +31,7 @@ ValidityType is_partitioned_by(
 template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
 inline ValidityType is_partitioned_by(
 	UndirectionalRangeT_ const& range__,
-	UnaryPredicatorT_ const& predicator__
+	UnaryPredicatorT_ predicator__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned_by(DD_SPLIT_RANGE(range__) DD_COMMA predicator__))) {
 	return is_partitioned_by(DD_SPLIT_RANGE(range__), predicator__);
 }

@@ -9,6 +9,7 @@
 #	include "DD_Or.hpp"
 #	include "DD_IsSame.hpp"
 #	include "DD_Comparable.hpp"
+#	include "DD_BinaryOperators.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_move.hpp"
 #	endif
@@ -23,7 +24,15 @@
 
 DD_DETAIL_BEGIN_
 template <typename IteratorT_>
-struct ReverseIterator_ : Comparable<ReverseIterator_<IteratorT_>> {
+struct ReverseIterator_ :
+#	if __cplusplus >= 201103L
+	Comparable<ReverseIterator_<IteratorT_>>,
+#	else
+	Comparable<ReverseIterator_<IteratorT_> >,
+#	endif
+	Addable<ReverseIterator_<IteratorT_>, DD_MODIFY_TRAIT(IteratorDifference, IteratorT_)>,
+	Subtractable<ReverseIterator_<IteratorT_>, DD_MODIFY_TRAIT(IteratorDifference, IteratorT_)>
+{
 	public:
 	DD_ALIAS(ThisType, ReverseIterator_<IteratorT_>);
 	DD_ALIAS(ReverseType, IteratorT_);
@@ -213,6 +222,17 @@ inline ValidityType DD_CONSTEXPR operator <(
 	ReverseIterator_<IteratorT_> const& reverse_iterator_2__
 ) DD_NOEXCEPT_AS(reverse_iterator_1__.less(reverse_iterator_2__)) {
 	return reverse_iterator_1__.less(reverse_iterator_2__);
+}
+
+
+template <typename IteratorT_>
+inline typename ReverseIterator_<IteratorT_>::DifferenceType operator -(
+	ReverseIterator_<IteratorT_> const& reverse_iterator_1__,
+	ReverseIterator_<IteratorT_> const& reverse_iterator_2__
+) DD_NOEXCEPT_AS(static_cast<typename ReverseIterator_<IteratorT_>::DifferenceType>(
+	reverse_iterator_2__.reverse() - reverse_iterator_1__.reverse()
+)) {
+	return reverse_iterator_2__.reverse() - reverse_iterator_1__.reverse();
 }
 
 

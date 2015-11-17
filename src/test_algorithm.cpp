@@ -4,6 +4,8 @@
 #include <ctime>
 #include <algorithm>
 
+#include "standard/DDHub.hpp"
+
 #include "standard/DDArray.hpp"
 #include "standard/DDUtility.hpp"
 #include "standard/DDAlgorithm.hpp"
@@ -219,6 +221,22 @@ void test_algorithm() {
 			) {
 				throw "'DD::count_if' test failed.";
 			}
+		}
+	}
+	{
+		DD::Array<int, 5> temp_1 = { 1, 2, 3, 4, 5 };
+		DD::Array<int, 5> temp_2 = { 231, 12, 4, 3, -2 };
+		if (
+			DD::is_sorted(arr1) ||
+			!DD::is_sorted(temp_1)
+		) {
+			throw "'DD::is_sorted' test failed.";
+		}
+		if (
+			DD::is_sorted(arr1, [](int a, int b) { return b < a; }) ||
+			!DD::is_sorted(temp_2, [](int a, int b) { return b < a; })
+		) {
+			throw "'DD::is_sorted' test failed.";
 		}
 	}
 }
