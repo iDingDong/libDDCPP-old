@@ -515,11 +515,11 @@
 	"DD_size_distance.hpp"
 	"DD_Range.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
-	"DD_global_definitions.hpp"
+1447734357 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
+	"DD_Range.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
-	"DD_global_definitions.hpp"
+1447734357 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
+	"DD_Range.hpp"
 
 1446357249 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
 	"DD_IsFreeAccessIterator.hpp"
@@ -570,7 +570,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1446385360 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1447734950 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
