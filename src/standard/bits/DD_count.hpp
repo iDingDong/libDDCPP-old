@@ -4,11 +4,13 @@
 
 
 
+#	include "DD_Iterator.hpp"
 #	include "DD_IteratorDifference.hpp"
+#	include "DD_Range.hpp"
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	UndirectionalIteratorT_ begin__,
@@ -34,7 +36,7 @@ DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& equal__
+	BinaryPredicatorT_ equal__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, value__)) {
 #	if __cplusplus >= 201103L
 	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
@@ -49,6 +51,36 @@ DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	}
 	return result_;
 }
+
+template <typename UndirectionalRangeT_, typename ValueT_>
+inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)) count(
+	UndirectionalRangeT_& range__,
+	ValueT_ const& value__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
+	count(DD_SPLIT_RANGE(range__) DD_COMMA value__)
+)) {
+	return count(DD_SPLIT_RANGE(range__), value__);
+}
+
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)) count(
+	UndirectionalRangeT_& range__,
+	ValueT_ const& value__,
+	BinaryPredicatorT_ equal__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
+	count(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)
+)) {
+	return count(DD_SPLIT_RANGE(range__), value__, equal__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::count;
 
 
 

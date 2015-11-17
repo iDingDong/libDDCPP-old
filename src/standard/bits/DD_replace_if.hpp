@@ -24,7 +24,7 @@ ProcessType replace_if(
 }
 
 template <typename UndirectionalRangeT_, typename UnaryPredicatorT_, typename ValueT_>
-ProcessType replace_if(
+inline ProcessType replace_if(
 	UndirectionalRangeT_& range__,
 	UnaryPredicatorT_ predicator__,
 	ValueT_ const& value__

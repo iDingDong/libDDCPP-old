@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1446371230 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1447759781 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -473,10 +473,12 @@
 	"DD_Range.hpp"
 	"DD_IteratorDifference.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_count.hpp
+1447759781 d:\develop\repositories\libddcpp\src\standard\bits\dd_count.hpp
+	"DD_Iterator.hpp"
 	"DD_IteratorDifference.hpp"
+	"DD_Range.hpp"
 
-1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_count_if.hpp
+1447760491 d:\develop\repositories\libddcpp\src\standard\bits\dd_count_if.hpp
 	"DD_IteratorDifference.hpp"
 
 1446740842 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned.hpp
@@ -515,10 +517,10 @@
 	"DD_size_distance.hpp"
 	"DD_Range.hpp"
 
-1447735434 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
+1447759551 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
 	"DD_Range.hpp"
 
-1447735434 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
+1447759551 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
 	"DD_Range.hpp"
 
 1446357249 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
@@ -570,7 +572,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1447735066 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1447760377 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>

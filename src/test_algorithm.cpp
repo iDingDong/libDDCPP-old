@@ -151,21 +151,21 @@ void test_algorithm() {
 			DD::fill(temp, 1);
 			DD::Array<int, 5> result_1 = { 1, 1, 1, 1, 1 };
 			if (
-				!equal(temp, result_1)
+				!DD::equal(temp, result_1)
 			) {
 				throw "'DD::fill' test failed.";
 			}
 			DD::fill(temp.begin() + 1, temp.end(), 2);
 			DD::Array<int, 5> result_2 = { 1, 2, 2, 2, 2 };
 			if (
-				!equal(temp, result_2)
+				!DD::equal(temp, result_2)
 			) {
 				throw "'DD::fill' test failed.";
 			}
 			DD::fill(temp.begin() + 1, temp.end() - 1, 3);
 			DD::Array<int, 5> result_3 = { 1, 3, 3, 3, 2 };
 			if (
-				!equal(temp, result_3)
+				!DD::equal(temp, result_3)
 			) {
 				throw "'DD::fill' test failed.";
 			}
@@ -174,14 +174,14 @@ void test_algorithm() {
 			DD::replace(temp, 3, 0);
 			DD::Array<int, 5> result_1 = { 1, 0, 0, 0, 2 };
 			if (
-				!equal(temp, result_1)
+				!DD::equal(temp, result_1)
 			) {
 				throw "'DD::replace' test failed.";
 			}
 			DD::replace(temp, 1, [](int a, int b) { return b <= a; }, 3);
 			DD::Array<int, 5> result_2 = { 3, 0, 0, 0, 3 };
 			if (
-				!equal(temp, result_2)
+				!DD::equal(temp, result_2)
 			) {
 				throw "'DD::replace' test failed.";
 			}
@@ -190,9 +190,34 @@ void test_algorithm() {
 			DD::replace_if(temp, [](int a) { return a == 0; }, 1);
 			DD::Array<int, 5> result = { 3, 1, 1, 1, 3 };
 			if (
-				!equal(temp, result)
+				!DD::equal(temp, result)
 			) {
 				throw "'DD::replace_if' test failed.";
+			}
+		}
+		{
+			if (
+				DD::count(temp, 1) != 3 ||
+				DD::count(temp, 2) != 0 ||
+				DD::count(temp, 3) != 2
+			) {
+				throw "'DD::count' test failed.";
+			}
+			if (
+				DD::count(temp, 1, [](int a, int b) { return a != b; }) != 2 ||
+				DD::count(temp, 2, [](int a, int b) { return a != b; }) != 5 ||
+				DD::count(temp, 3, [](int a, int b) { return a != b; }) != 3
+			) {
+				throw "'DD::count' test failed.";
+			}
+		}
+		{
+			if (
+				DD::count_if(temp, [](int a) { return a == 1; }) != 3 ||
+				DD::count_if(temp, [](int a) { return a == 2; }) != 0 ||
+				DD::count_if(temp, [](int a) { return a == 3; }) != 2
+			) {
+				throw "'DD::count_if' test failed.";
 			}
 		}
 	}

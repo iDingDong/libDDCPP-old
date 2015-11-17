@@ -39,7 +39,7 @@ ProcessType replace(
 }
 
 template <typename UndirectionalRangeT_, typename ValueT1_, typename ValueT2_>
-ProcessType replace(
+inline ProcessType replace(
 	UndirectionalRangeT_& range__,
 	ValueT1_ const& old__,
 	ValueT2_ const& value__
@@ -48,7 +48,7 @@ ProcessType replace(
 }
 
 template <typename UndirectionalRangeT_, typename ValueT1_, typename BinaryPredicatorT_, typename ValueT2_>
-ProcessType replace(
+inline ProcessType replace(
 	UndirectionalRangeT_& range__,
 	ValueT1_ const& old__,
 	BinaryPredicatorT_ equal__,
