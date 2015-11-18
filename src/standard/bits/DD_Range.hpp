@@ -10,6 +10,8 @@
 #		include "DD_Iterator.hpp"
 #	endif
 #	include "DD_IteratorReverse.hpp"
+#	include "DD_fabricate.hpp"
+#	include "DD_length_difference.hpp"
 #	include "DD_Pair.hpp"
 
 
@@ -117,6 +119,8 @@ struct Range {
 	DD_ALIAS(ThisType, Range<IteratorT_>);
 	DD_ALIAS(Iterator, IteratorT_);
 
+	public:
+	DD_ALIAS(DifferenceType, DD_MODIFY_TRAIT(IteratorDifference, Iterator));
 	DD_ALIAS(ReverseIterator, IteratorReverse<Iterator>);
 
 
@@ -191,6 +195,14 @@ struct Range {
 	) {
 		ReverseIterator temp_(m_range_.first);
 		return ++temp_;
+	}
+
+
+	public:
+	DifferenceType DD_CONSTEXPR get_length() const DD_NOEXCEPT_AS(
+		static_cast<DifferenceType>(length_difference(fabricate<ThisType>().begin() DD_COMMA fabricate<ThisType>().end()))
+	) {
+		return length_difference(begin(), end());
 	}
 
 

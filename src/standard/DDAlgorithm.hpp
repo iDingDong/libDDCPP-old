@@ -10,7 +10,6 @@
 #	include "bits/DD_equal.hpp"
 #	include "bits/DD_mismatch.hpp"
 #	include "bits/DD_find.hpp"
-#	include "bits/DD_find_not.hpp"
 #	include "bits/DD_find_if.hpp"
 #	include "bits/DD_find_if_not.hpp"
 #	include "bits/DD_find_first_of.hpp"
@@ -45,6 +44,7 @@
 #	include "bits/DD_select_sort.hpp"
 #	include "bits/DD_sort.hpp"
 #	include "bits/DD_next_permutation.hpp"
+#	include "bits/DD_adjacent_unique.hpp"
 
 
 

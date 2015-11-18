@@ -13,7 +13,7 @@ DD_DETAIL_BEGIN_
 template <ValidityType is_free_access_iterator_>
 struct IsSorted_ {
 	template <typename UndirectionalIteratorT__>
-	static ValidityType is_sorted_(
+	static ValidityType is_sorted(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ const& end___
 	) DD_NOEXCEPT_AS(++begin___ != end___ && *begin___ < *begin___ DD_COMMA UndirectionalIteratorT__(begin___)) {
@@ -29,7 +29,7 @@ struct IsSorted_ {
 	}
 
 	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
-	static ValidityType is_sorted_(
+	static ValidityType is_sorted(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ const& end___,
 		BinaryPredicatorT__ const& less___
@@ -53,7 +53,7 @@ struct IsSorted_ {
 template <>
 struct IsSorted_<true> {
 	template <typename FreeAccessIteratorT__>
-	static ValidityType is_sorted_(
+	static ValidityType is_sorted(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ const& end___
 	) DD_NOEXCEPT_AS(++begin___ < end___ && *begin___ < *(begin___ - 1)) {
@@ -66,7 +66,7 @@ struct IsSorted_<true> {
 	}
 
 	template <typename FreeAccessIteratorT__, typename BinaryPredicatorT__>
-	static ValidityType is_sorted_(
+	static ValidityType is_sorted(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ const& end___,
 		BinaryPredicatorT__ const& less___
@@ -88,8 +88,8 @@ template <typename UndirectionalIteratorT_>
 inline ValidityType is_sorted(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__
-) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__)) {
-	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__);
+) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__ DD_COMMA end__)) {
+	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__, end__);
 }
 
 template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
@@ -97,8 +97,8 @@ inline ValidityType is_sorted(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
 	BinaryPredicatorT_ less__
-) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__ DD_COMMA end__ DD_COMMA less__)) {
-	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_(begin__, end__, less__);
+) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__ DD_COMMA end__ DD_COMMA less__)) {
+	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__, end__, less__);
 }
 
 template <typename UndirectionalRangeT_>

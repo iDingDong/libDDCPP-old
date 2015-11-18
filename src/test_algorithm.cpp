@@ -239,4 +239,16 @@ void test_algorithm() {
 			throw "'DD::is_sorted' test failed.";
 		}
 	}
+	{
+		DD::Array<int, 5> temp = { 0, 0, 1, 2, 2 };
+		DD::Array<int, 3> result = { 0, 1, 2 };
+		auto result_point = DD::adjacent_unique(temp);
+		auto result_range = DD::make_range(temp.begin(), result_point);
+		if (
+			result_range.get_length() != result.get_length() ||
+			!DD::equal(result_range, result)
+		) {
+			throw  "'DD::adjacent_unique' test failed.";
+		}
+	}
 }

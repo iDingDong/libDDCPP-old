@@ -41,14 +41,13 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1447759781 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1447845359 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
 	"bits/DD_equal.hpp"
 	"bits/DD_mismatch.hpp"
 	"bits/DD_find.hpp"
-	"bits/DD_find_not.hpp"
 	"bits/DD_find_if.hpp"
 	"bits/DD_find_if_not.hpp"
 	"bits/DD_find_first_of.hpp"
@@ -79,6 +78,7 @@
 	"bits/DD_select_sort.hpp"
 	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
+	"bits/DD_adjacent_unique.hpp"
 
 1444475427 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
@@ -424,10 +424,12 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1447762444 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1447855529 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
 	"DD_IteratorReverse.hpp"
+	"DD_fabricate.hpp"
+	"DD_length_difference.hpp"
 	"DD_Pair.hpp"
 
 1447763251 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
@@ -495,7 +497,7 @@
 1447761991 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point_by.hpp
 	"DD_global_definitions.hpp"
 
-1447762352 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted.hpp
+1447844048 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Range.hpp"
 
@@ -573,11 +575,12 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1447760377 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1447856231 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
 	<algorithm>
+	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
 	"standard/DDUtility.hpp"
 	"standard/DDAlgorithm.hpp"
@@ -1278,4 +1281,9 @@
 1447425796 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp
 	"DD_construct.hpp"
 	"DD_copy.hpp"
+
+1447856443 d:\develop\repositories\libddcpp\src\standard\bits\dd_adjacent_unique.hpp
+	"DD_move.hpp"
+	"DD_next.hpp"
+	"DD_find_not.hpp"
 
