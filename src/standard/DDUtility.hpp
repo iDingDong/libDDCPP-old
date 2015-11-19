@@ -15,7 +15,7 @@
 #	include "bits/DD_Optional.hpp"
 #	include "bits/DD_Variant.hpp"
 #	if __cplusplus >= 201103L
-#		include "bits/DD_Function.hpp"
+#		include "bits/DD_Predicator.hpp"
 #		include "bits/DD_bind.hpp"
 #	endif
 

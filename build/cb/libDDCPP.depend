@@ -715,7 +715,7 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1446085672 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1447902006 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
@@ -726,7 +726,7 @@
 	"bits/DD_Bitset.hpp"
 	"bits/DD_Optional.hpp"
 	"bits/DD_Variant.hpp"
-	"bits/DD_Function.hpp"
+	"bits/DD_Predicator.hpp"
 	"bits/DD_bind.hpp"
 
 1443513187 d:\develop\repositories\libddcpp\src\standard\bits\dd_unusedignorer.hpp
@@ -1286,4 +1286,7 @@
 	"DD_move.hpp"
 	"DD_next.hpp"
 	"DD_find_not.hpp"
+
+1447902435 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
+	"DD_Function.hpp"
 
