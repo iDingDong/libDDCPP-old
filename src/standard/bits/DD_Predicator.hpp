@@ -14,6 +14,29 @@
 
 
 
+#	define DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(ARG_name_, ARG_operator_)\
+	template <typename ResultT_, typename... ArgumentsT_>\
+	inline Predicator<ResultT_(ArgumentsT_...)> constexpr ARG_name_(\
+		Predicator<ResultT_(ArgumentsT_...)> predicator_1_,\
+		Predicator<ResultT_(ArgumentsT_...)> predicator_2_\
+	) {\
+		return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {\
+			return predicator_1_(arguments__...) ARG_operator_ predicator_2_(arguments__...);\
+		});\
+	}\
+	\
+	\
+	\
+	template <typename ResultT_, typename... ArgumentsT_>\
+	inline Predicator<ResultT_(ArgumentsT_...)> constexpr operator ARG_operator_(\
+		Predicator<ResultT_(ArgumentsT_...)> predicator_1_,\
+		Predicator<ResultT_(ArgumentsT_...)> predicator_2_\
+	) {\
+		return ARG_name_(predicator_1_, predicator_2_);\
+	}
+
+
+
 DD_DETAIL_BEGIN_
 template <typename FunctionT_>
 struct Predicator;
@@ -53,45 +76,16 @@ inline Predicator<ResultT_(ArgumentsT_...)> constexpr make_predicator(PointerTyp
 }
 
 
-template <typename ResultT_, typename... ArgumentsT_>
-inline Predicator<ResultT_(ArgumentsT_...)> constexpr logic_and(
-	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
-	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
-) {
-	return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {
-		return predicator_1_(arguments__...) && predicator_2_(arguments__...);
-	});
-}
 
-
-template <typename ResultT_, typename... ArgumentsT_>
-inline Predicator<ResultT_(ArgumentsT_...)> constexpr logic_or(
-	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
-	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
-) {
-	return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {
-		return predicator_1_(arguments__...) || predicator_2_(arguments__...);
-	});
-}
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-inline Predicator<ResultT_(ArgumentsT_...)> constexpr operator &&(
-	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
-	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
-) {
-	return logic_and(predicator_1_, predicator_2_);
-}
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-inline Predicator<ResultT_(ArgumentsT_...)> constexpr operator ||(
-	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
-	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
-) {
-	return logic_or(predicator_1_, predicator_2_);
-}
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(add, +)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(subtract, -)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(multiply, *)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(divide, /)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(mod, %)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(bit_or, |)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(bit_and, &)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(logical_or, ||)
+DD_GENERATE_PREDICATOR_BINARY_OPERATORS_(logical_and, &&)
 
 
 
@@ -103,10 +97,23 @@ DD_BEGIN_
 using detail_::Predicator;
 
 using detail_::make_predicator;
+using detail_::add;
+using detail_::subtract;
+using detail_::multiply;
+using detail_::divide;
+using detail_::mod;
+using detail_::bit_or;
+using detail_::bit_and;
+using detail_::logical_or;
+using detail_::logical_and;
 
 
 
 DD_END_
+
+
+
+#	undef DD_GENERATE_PREDICATOR_BINARY_OPERATORS_
 
 
 

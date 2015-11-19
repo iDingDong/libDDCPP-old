@@ -162,6 +162,7 @@
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Parasitifer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Predicator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />
