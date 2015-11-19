@@ -53,6 +53,47 @@ inline Predicator<ResultT_(ArgumentsT_...)> constexpr make_predicator(PointerTyp
 }
 
 
+template <typename ResultT_, typename... ArgumentsT_>
+inline Predicator<ResultT_(ArgumentsT_...)> constexpr logic_and(
+	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
+	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
+) {
+	return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {
+		return predicator_1_(arguments__...) && predicator_2_(arguments__...);
+	});
+}
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+inline Predicator<ResultT_(ArgumentsT_...)> constexpr logic_or(
+	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
+	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
+) {
+	return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {
+		return predicator_1_(arguments__...) || predicator_2_(arguments__...);
+	});
+}
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+inline Predicator<ResultT_(ArgumentsT_...)> constexpr operator &&(
+	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
+	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
+) {
+	return logic_and(predicator_1_, predicator_2_);
+}
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+inline Predicator<ResultT_(ArgumentsT_...)> constexpr operator ||(
+	Predicator<ResultT_(ArgumentsT_...)> predicator_1_,
+	Predicator<ResultT_(ArgumentsT_...)> predicator_2_
+) {
+	return logic_or(predicator_1_, predicator_2_);
+}
+
+
 
 DD_DETAIL_END_
 
