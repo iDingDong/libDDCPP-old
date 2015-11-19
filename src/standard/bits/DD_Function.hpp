@@ -272,6 +272,10 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Func
 	}
 
 	public:
+	constexpr Function_(ThisType& origin_) : Function_(static_cast<ThisType const&>(origin_)) {
+	}
+
+	public:
 	constexpr Function_(DecayType<FunctionType> function_) noexcept(
 		noexcept(HolderPointerType(ThisType().make_holder_(function_)))
 	) : m_holder_(make_holder_(function_)) {

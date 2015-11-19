@@ -20,7 +20,7 @@
 		Predicator<ResultT_(ArgumentsT_...)> predicator_1_,\
 		Predicator<ResultT_(ArgumentsT_...)> predicator_2_\
 	) {\
-		return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) {\
+		return Predicator<ResultT_(ArgumentsT_...)>([predicator_1_, predicator_2_](ArgumentsT_... arguments__) mutable {\
 			return predicator_1_(arguments__...) ARG_operator_ predicator_2_(arguments__...);\
 		});\
 	}\
@@ -55,8 +55,15 @@ struct Predicator<ResultT_(ArgumentsT_...)> : Function<ResultT_(ArgumentsT_...)>
 
 	constexpr Predicator(ThisType&& origin_) = default;
 
-	constexpr Predicator(SuperType function_) : SuperType(move(function_)) {
+	constexpr Predicator(ThisType& origin_) : Predicator(static_cast<ThisType const&>(origin_)) {
 	}
+
+	template <typename FunctionT__>
+	constexpr Predicator(FunctionT__&& function___) : SuperType(forward<FunctionT__>(function___)) {
+	}
+
+
+	~Predicator() = default;
 
 
 	ThisType& operator =(ThisType const& origin_) = default;

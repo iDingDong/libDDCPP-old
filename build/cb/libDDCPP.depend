@@ -913,11 +913,13 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1445498076 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1447922603 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
-	<iostream>
+	"standard/DDHub.hpp"
 	"standard/DDUtility.hpp"
+	"standard/DDArray.hpp"
+	"standard/DDAlgorithm.hpp"
 
 1446637548 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
@@ -952,7 +954,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1446267700 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1447917974 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
@@ -1287,6 +1289,6 @@
 	"DD_next.hpp"
 	"DD_find_not.hpp"
 
-1447905845 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
+1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
 	"DD_Function.hpp"
 

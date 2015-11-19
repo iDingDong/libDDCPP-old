@@ -2,8 +2,11 @@
 #define TEST_OBJECT_AUTO_PROMPT 0
 #define DDCPP_DEBUG DD_ON
 #include "test_object.hpp"
-#include <iostream>
+#include "standard/DDHub.hpp"
+
 #include "standard/DDUtility.hpp"
+#include "standard/DDArray.hpp"
+#include "standard/DDAlgorithm.hpp"
 
 inline int func(int x, int y) {
 	return x + y;
@@ -144,6 +147,19 @@ void test_utility() {
 			test_func_5(123, 234) != 123 - 234
 		) {
 			throw "'DD::Function' test failed.";
+		}
+		DD::Function<int(int, int)> test_copy = test_func_1;
+	}
+	{
+		DD::Array<int, 8> arr = { 1, 3, 4, 5, 6, 7, 18, 15 };
+		DD::Predicator<bool(int)> is_even = [](int a) { return a % 2 == 0; };
+		DD::Predicator<bool(int)> is_exactly_divided_by_3 = [](int a) { return a % 3 == 0; };
+		DD::Predicator<bool(int)> is_exactly_divided_by_6 = [](int a) { return a % 6 == 0; };
+		if (
+			DD::count_if(arr, is_even) != 3 ||
+			DD::count_if(arr, is_even && is_exactly_divided_by_3) != DD::count_if(arr, is_exactly_divided_by_6)
+		) {
+			throw "'DD::Predicator' test failed.";
 		}
 	}
 }
