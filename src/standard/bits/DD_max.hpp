@@ -19,19 +19,19 @@ DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <ValidityType use_default_compare_c_>
 struct Max_ {
-	template <typename ObjectT__, typename BinaryPredicatorT__>
+	template <typename ObjectT__, typename BinaryPredicateT__>
 	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) noexcept {
 		return object___;
 	}
 
-	template <typename ObjectT__, typename BinaryPredicatorT__>
+	template <typename ObjectT__, typename BinaryPredicateT__>
 	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object_1___,
 		ObjectT__ const& object_2___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) noexcept(noexcept(less___(object_2___, object_1___))) {
 		return less___(object_2___, object_1___) ? object_1___ : object_2___;
 	}
@@ -94,10 +94,10 @@ inline ObjectT_ constexpr const& max(
 	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd());
 }
 
-template <typename ObjectT_, typename BinaryPredicatorT_>
+template <typename ObjectT_, typename BinaryPredicateT_>
 inline ObjectT_ constexpr const& max(
 	InitializerList<ObjectT_> initializer_list_,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) noexcept(noexcept(find_min(initializer_list_.cbegin(), initializer_list_.cengd()))) {
 	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd(), less__);
 }
@@ -110,11 +110,11 @@ inline ObjectT_ const& max(
 	return object_2__ < object_1__ ? object_1__ : object_2__;
 }
 
-template <typename ObjectT_, typename BinaryPredicatorT_>
+template <typename ObjectT_, typename BinaryPredicateT_>
 inline ObjectT_ const& max(
 	ObjectT_ const& object_1__,
 	ObjectT_ const& object_2__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) {
 	return less__(object_2__, object_1__) ? object_1__ : object_2__;
 }

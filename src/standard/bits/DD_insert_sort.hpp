@@ -40,11 +40,11 @@ struct InsertSort_ {
 		}
 	}
 
-	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
+	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType insert_sort_(
 		UndirectionalIteratorT__ const& begin___,
 		UndirectionalIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_IF(
 		noexcept(swap_target(begin___, end___)) &&
 		noexcept(++const_cast<UndirectionalIteratorT__&>(begin___) != end___) &&
@@ -109,11 +109,11 @@ struct InsertSort_<true> {
 		}
 	}
 
-	template <typename BidirectionalIteratorT__, typename BinaryPredicatorT__>
+	template <typename BidirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType insert_sort_(
 		BidirectionalIteratorT__ const& begin___,
 		BidirectionalIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_IF(
 		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
 		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
@@ -171,11 +171,11 @@ inline ProcessType insert_sort(
 	>::insert_sort_(begin__, end__);
 }
 
-template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 inline ProcessType insert_sort(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) DD_NOEXCEPT_AS(
 	detail_::InsertSort_<
 		IsBidirectionalIterator<UndirectionalIteratorT_>::value
@@ -193,10 +193,10 @@ inline ProcessType insert_sort(
 	insert_sort(DD_SPLIT_RANGE(range__));
 }
 
-template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline ProcessType insert_sort(
 	UndirectionalRangeT_& range__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(range__) DD_COMMA less__) {
 	insert_sort(DD_SPLIT_RANGE(range__), less__);
 }

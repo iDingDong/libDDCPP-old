@@ -25,11 +25,11 @@ struct IsSortedUntil_ {
 		return begin___;
 	}
 
-	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
+	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
 	static UndirectionalIteratorT__ is_sorted_until_(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_AS(++begin___ != end___ && less___(*begin___ DD_COMMA *begin___) DD_COMMA UndirectionalIteratorT__(begin___)) {
 		if (begin___ != end___) {
 			for (UndirectionalIteratorT__ front___(begin___); ++begin___ != end___ && !less___(*begin___, *front___); ) {
@@ -56,11 +56,11 @@ struct IsSortedUntil_<true> {
 		return begin___;
 	}
 
-	template <typename FreeAccessIteratorT__, typename BinaryPredicatorT__>
+	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
 	static FreeAccessIteratorT__ is_sorted_until_(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_AS(++begin___ < end___ && less___(*begin___ DD_COMMA *(begin___ - 1))) {
 		while (++begin___ < end___ && !less___(*begin___, *(begin___ - 1))) {
 		}
@@ -85,11 +85,11 @@ inline UndirectionalIteratorT_ is_sorted_until(
 	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__);
 }
 
-template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 inline UndirectionalIteratorT_ is_sorted_until(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) DD_NOEXCEPT_AS(detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__ DD_COMMA less__)) {
 	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__, less__);
 }

@@ -31,12 +31,12 @@ DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	return result_;
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, value__)) {
 #	if __cplusplus >= 201103L
 	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
@@ -62,11 +62,11 @@ inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, Undirection
 	return count(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)) count(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
 	count(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)
 )) {

@@ -32,12 +32,12 @@ BidirectionalIteratorT_ partition(
 	return begin__;
 }
 
-template <typename BidirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename BidirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 BidirectionalIteratorT_ partition(
 	BidirectionalIteratorT_ begin__,
 	BidirectionalIteratorT_ end__,
 	ValueT_ key__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_IF(noexcept(less__(*--++begin__, key__)) && noexcept(swap_target(begin__, end__))) {
 	while (begin__ != end__) {
 		while (less__(*begin__, key__)) {

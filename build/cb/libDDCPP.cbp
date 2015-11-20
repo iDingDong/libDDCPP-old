@@ -57,6 +57,7 @@
 		<Unit filename="../../src/standard/bits/DD_BinaryTreeNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Bitset.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BuildInTypes.hpp" />
+		<Unit filename="../../src/standard/bits/DD_CharactorClassification.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Common.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Comparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_CompatStlIterator.hpp" />
@@ -162,7 +163,7 @@
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Parasitifer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
-		<Unit filename="../../src/standard/bits/DD_Predicator.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Predicate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />

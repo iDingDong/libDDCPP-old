@@ -9,12 +9,12 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename UndirectionalIteratorT_, typename UnaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename UnaryPredicateT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count_if(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	UnaryPredicatorT_ predicator__
-) DD_NOEXCEPT_AS(++begin__ != end__ && predicator__(*begin__)) {
+	UnaryPredicateT_ predicate__
+) DD_NOEXCEPT_AS(++begin__ != end__ && predicate__(*begin__)) {
 #	if __cplusplus >= 201103L
 	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
 #	else
@@ -22,21 +22,21 @@ DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count_if(
 	ResultType_ result_ = ResultType_();
 #	endif
 	for (; begin__ != end__; ++begin__) {
-		if (predicator__(*begin__)) {
+		if (predicate__(*begin__)) {
 			++result_;
 		}
 	}
 	return result_;
 }
 
-template <typename UndirectionalRangeT_, typename UnaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename UnaryPredicateT_>
 inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)) count_if(
 	UndirectionalRangeT_& range__,
-	UnaryPredicatorT_ predicator__
+	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
-	count_if(DD_SPLIT_RANGE(range__) DD_COMMA predicator__)
+	count_if(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
 )) {
-	return count_if(DD_SPLIT_RANGE(range__), predicator__);
+	return count_if(DD_SPLIT_RANGE(range__), predicate__);
 }
 
 

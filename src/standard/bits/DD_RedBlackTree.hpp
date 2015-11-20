@@ -110,8 +110,8 @@ struct RedBlackTreeBase_ : RedBlackTreeBase__ {
 	protected:
 	DD_ALIAS(ThisType, RedBlackTreeBase_<NodeT_ DD_COMMA less_c_>);
 	DD_ALIAS(SuperType, RedBlackTreeBase__);
-	DD_ALIAS(LessPredicatorType, typename LessThan<NodeT_>::FunctionType&);
-	static LessPredicatorType DD_CONSTANT less = less_c_;
+	DD_ALIAS(LessPredicateType, typename LessThan<NodeT_>::FunctionType&);
+	static LessPredicateType DD_CONSTANT less = less_c_;
 
 	protected:
 	DD_ALIAS(NodeType, NodeT_);

@@ -28,12 +28,12 @@ ValidityType is_partitioned(
 	return true;
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 ValidityType is_partitioned(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, value__)) {
 	for (; begin__ != end__; ++begin__) {
 		if (!less__(*begin__, value__)) {
@@ -56,11 +56,11 @@ inline ValidityType is_partitioned(
 	return is_partitioned(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
 inline ValidityType is_partitioned(
 	UndirectionalRangeT_ const& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))) {
 	return is_partitioned(DD_SPLIT_RANGE(range__), value__, less__);
 }

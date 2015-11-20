@@ -22,12 +22,12 @@ UndirectionalIteratorT_ find_not(
 	return begin__;
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ find_not(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(begin__ != end__ && equal__(*++begin__, value__)) {
 	while (begin__ != end__ && equal__(*begin__, value__)) {
 		++begin__;
@@ -43,11 +43,11 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_not(
 	return find_not(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_not(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(find_not(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)) {
 	return find_not(DD_SPLIT_RANGE(range__), value__, equal__);
 }

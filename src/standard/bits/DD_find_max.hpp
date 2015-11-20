@@ -24,11 +24,11 @@ UndirectionalIteratorT_ find_max(
 	return max__;
 }
 
-template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ find_max(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
 	UndirectionalIteratorT_ max__ = begin__;
 	for (; begin__ != end__; ++begin__) {
@@ -46,10 +46,10 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_max(
 	return find_max(DD_SPLIT_RANGE(range__));
 }
 
-template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_max(
 	UndirectionalRangeT_& range__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(find_max(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
 	return find_max(DD_SPLIT_RANGE(range__), less__);
 }

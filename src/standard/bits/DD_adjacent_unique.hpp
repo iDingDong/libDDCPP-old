@@ -35,11 +35,11 @@ UndirectionalIteratorT_ adjacent_unique(
 	return begin__;
 }
 
-template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ adjacent_unique(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) {
 	if (begin__ != end__) {
 		for (UndirectionalIteratorT_ current__ = begin__; ; ) {
@@ -67,10 +67,10 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) adjacent_unique(
 	return adjacent_unique(DD_SPLIT_RANGE(range__));
 }
 
-template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) adjacent_unique(
 	UndirectionalRangeT_& range__,
-	BinaryPredicatorT_ equal__
+	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
 	adjacent_unique(DD_SPLIT_RANGE(range__) DD_COMMA equal__)
 )) {

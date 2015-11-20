@@ -20,20 +20,20 @@ DD_DETAIL_BEGIN_
 template <ValidityType use_default_compare_>
 struct MinMax_ {
 	public:
-	template <typename ObjectT__, typename BinaryPredicatorT__>
+	template <typename ObjectT__, typename BinaryPredicateT__>
 	static Pair<ObjectT__ const&> constexpr min_max(
 		ObjectT__ const& object___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) noexcept {
 		return Pair<ObjectT__ const&>(object___, object___);
 	}
 
 	public:
-	template <typename ObjectT__, typename BinaryPredicatorT__>
+	template <typename ObjectT__, typename BinaryPredicateT__>
 	static Pair<ObjectT__ const&> constexpr min_max(
 		ObjectT__ const& object_1___,
 		ObjectT__ const& object_2___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) noexcept(noexcept(less___(object_1___, object_2___))) {
 		return less___(object_2___, object_1___) ?
 			Pair<ObjectT__ const&>(object_2___, object_1___) :
@@ -42,11 +42,11 @@ struct MinMax_ {
 	}
 
 	private:
-	template <typename ObjectT__, typename BinaryPredicatorT__>
+	template <typename ObjectT__, typename BinaryPredicateT__>
 	static Pair<ObjectT__ const&> constexpr min_max(
 		ObjectT__ const& object___,
 		Pair<ObjectT__ const&> const& pair_,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) noexcept(noexcept(object___ < object___)) {
 		return less___(pair_.first, object___) ?
 			Pair<ObjectT__ const&>(pair_.first, less___(object___, pair_.second) ? pair_.second : object___) :
@@ -129,10 +129,10 @@ inline Pair<ObjectT_ const&> constexpr min_max(
 	return dereference(find_min_max(initializer_list_.cbegin(), initializer_list_.cend()));
 }
 
-template <typename ObjectT_, typename BinaryPredicatorT_>
+template <typename ObjectT_, typename BinaryPredicateT_>
 inline Pair<ObjectT_ const&> constexpr min_max(
 	InitializerList<ObjectT_> initializer_list_,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) {
 	return dereference(find_min_max(initializer_list_.cbegin(), initializer_list_.cend(), less__));
 }
@@ -145,11 +145,11 @@ inline inline Pair<ObjectT_ const&> constexpr min_max(
 	return object_2__ < object_1__ : Pair<ObjectT_ const&>{object_2__, object_1__} : Pair<ObjectT_ const&>{object_1__, object_2__};
 }
 
-template <typename ObjectT_, typename BinaryPredicatorT_>
+template <typename ObjectT_, typename BinaryPredicateT_>
 inline inline Pair<ObjectT_ const&> constexpr min_max(
 	ObjectT_ const& object_1__,
 	ObjectT_ const& object_2__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) {
 	return less__(object_2__, object_1__) : Pair<ObjectT_ const&>{object_2__, object_1__} : Pair<ObjectT_ const&>{object_1__, object_2__};
 }

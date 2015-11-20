@@ -152,14 +152,14 @@ void test_utility() {
 	}
 	{
 		DD::Array<int, 8> arr = { 1, 3, 4, 5, 6, 7, 18, 15 };
-		DD::Predicator<bool(int)> is_even = [](int a) { return a % 2 == 0; };
-		DD::Predicator<bool(int)> is_exactly_divided_by_3 = [](int a) { return a % 3 == 0; };
-		DD::Predicator<bool(int)> is_exactly_divided_by_6 = [](int a) { return a % 6 == 0; };
+		DD::Predicate<bool(int)> is_even = [](int a) { return a % 2 == 0; };
+		DD::Predicate<bool(int)> is_exactly_divided_by_3 = [](int a) { return a % 3 == 0; };
+		DD::Predicate<bool(int)> is_exactly_divided_by_6 = [](int a) { return a % 6 == 0; };
 		if (
 			DD::count_if(arr, is_even) != 3 ||
 			DD::count_if(arr, is_even && is_exactly_divided_by_3) != DD::count_if(arr, is_exactly_divided_by_6)
 		) {
-			throw "'DD::Predicator' test failed.";
+			throw "'DD::Predicate' test failed.";
 		}
 	}
 }

@@ -28,11 +28,11 @@ struct IsSorted_ {
 		return true;
 	}
 
-	template <typename UndirectionalIteratorT__, typename BinaryPredicatorT__>
+	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
 	static ValidityType is_sorted(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_AS(++begin___ != end___ && less___(*begin___ DD_COMMA *begin___) DD_COMMA UndirectionalIteratorT__(begin___)) {
 		if (begin___ != end___) {
 			UndirectionalIteratorT__ front___(begin___);
@@ -65,11 +65,11 @@ struct IsSorted_<true> {
 		return true;
 	}
 
-	template <typename FreeAccessIteratorT__, typename BinaryPredicatorT__>
+	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
 	static ValidityType is_sorted(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ const& end___,
-		BinaryPredicatorT__ const& less___
+		BinaryPredicateT__ const& less___
 	) DD_NOEXCEPT_AS(++begin___ < end___ && less___(*begin___ DD_COMMA *(begin___ - 1))) {
 		while (++begin___ < end___) {
 			if (less___(*begin___, *(begin___ - 1))) {
@@ -92,11 +92,11 @@ inline ValidityType is_sorted(
 	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__, end__);
 }
 
-template <typename UndirectionalIteratorT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 inline ValidityType is_sorted(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__ DD_COMMA end__ DD_COMMA less__)) {
 	return IsSorted_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted(begin__, end__, less__);
 }
@@ -108,10 +108,10 @@ inline ValidityType is_sorted(
 	return is_sorted(DD_SPLIT_RANGE(range__));
 }
 
-template <typename UndirectionalRangeT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline ValidityType is_sorted(
 	UndirectionalRangeT_& range__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_sorted(DD_SPLIT_RANGE(range__) DD_COMMA less__))) {
 	return is_sorted(DD_SPLIT_RANGE(range__), less__);
 }

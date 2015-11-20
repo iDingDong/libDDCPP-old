@@ -32,12 +32,12 @@ FreeAccessIteratorT_ binary_find(
 	return end__;
 }
 
-template <typename FreeAccessIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename FreeAccessIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 FreeAccessIteratorT_ binary_find(
 	FreeAccessIteratorT_ const& begin__,
 	FreeAccessIteratorT_ const& end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) DD_NOEXCEPT_AS(less__(begin__[0], value__)) {
 	DD_ALIAS(IndexType_, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_));
 	IndexType_ lower_bound__ = IndexType_();
@@ -77,18 +77,18 @@ inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 	return binary_find(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename FreeAccessRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename FreeAccessRangeT_, typename ValueT_, typename BinaryPredicateT_>
 #	if __cplusplus >= 201402L
 inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) noexcept(noexcept(binary_find(DD_SPLIT_RANGE(range__), value__, less__))) {
 #	elif __cplusplus >= 201103L
 inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) noexcept(
 	noexcept(binary_find(DD_SPLIT_RANGE(range__), value__, less__))
 ) -> decltype(binary_find(DD_SPLIT_RANGE(range__), value__, less__)) {
@@ -96,7 +96,7 @@ inline auto binary_find(
 inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ const& less__
+	BinaryPredicateT_ const& less__
 ) {
 #	endif
 	return binary_find(DD_SPLIT_RANGE(range__), value__, less__);

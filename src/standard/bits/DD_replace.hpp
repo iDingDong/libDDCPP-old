@@ -23,12 +23,12 @@ ProcessType replace(
 	}
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT1_, typename BinaryPredicatorT_, typename ValueT2_>
+template <typename UndirectionalIteratorT_, typename ValueT1_, typename BinaryPredicateT_, typename ValueT2_>
 ProcessType replace(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ const& end__,
 	ValueT1_ const& old__,
-	BinaryPredicatorT_ equal__,
+	BinaryPredicateT_ equal__,
 	ValueT2_ const& value__
 ) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && equal__(*begin__, old__)) {
 	for (; begin__ != end__; ++begin__) {
@@ -47,11 +47,11 @@ inline ProcessType replace(
 	replace(DD_SPLIT_RANGE(range__), old__, value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT1_, typename BinaryPredicatorT_, typename ValueT2_>
+template <typename UndirectionalRangeT_, typename ValueT1_, typename BinaryPredicateT_, typename ValueT2_>
 inline ProcessType replace(
 	UndirectionalRangeT_& range__,
 	ValueT1_ const& old__,
-	BinaryPredicatorT_ equal__,
+	BinaryPredicateT_ equal__,
 	ValueT2_ const& value__
 ) DD_NOEXCEPT_AS(replace(DD_SPLIT_RANGE(range__) DD_COMMA old__ DD_COMMA equal__ DD_COMMA value__)) {
 	replace(DD_SPLIT_RANGE(range__), old__, equal__, value__);

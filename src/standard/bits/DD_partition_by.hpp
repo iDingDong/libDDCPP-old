@@ -9,20 +9,20 @@
 
 
 DD_BEGIN_
-template <typename BidirectionalIteratorT_, typename UnaryPredicatorT_>
+template <typename BidirectionalIteratorT_, typename UnaryPredicateT_>
 BidirectionalIteratorT_ partition_by(
 	BidirectionalIteratorT_ begin__,
 	BidirectionalIteratorT_ end__,
-	UnaryPredicatorT_ const& predicator__
-) DD_NOEXCEPT_IF(noexcept(predicator__(*--++begin__)) && noexcept(swap_target(begin__, end__))) {
+	UnaryPredicateT_ const& predicate__
+) DD_NOEXCEPT_IF(noexcept(predicate__(*--++begin__)) && noexcept(swap_target(begin__, end__))) {
 	while (begin__ != end__) {
-		while (predicator__(*begin__)) {
+		while (predicate__(*begin__)) {
 			++begin__;
 			if (begin__ == end__) {
 				return begin__;
 			}
 		}
-		while (!predicator__(*--end__)) {
+		while (!predicate__(*--end__)) {
 			if (begin__ == end__) {
 				return begin__;
 			}
