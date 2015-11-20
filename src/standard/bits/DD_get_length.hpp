@@ -18,6 +18,15 @@ inline LengthType get_length(ValueT_(&array_)[length_c_] array_) throw() {
 	return length_c_;
 }
 
+template <typename CharactorT_>
+LengthType DD_CONSTEXPR get_length(CharactorT_ const* cstring_) DD_NOEXCEPT {
+	CharactorT_ const* current_ = cstring_;
+	while (*current_) {
+		++current_;
+	}
+	return current_ - cstring_;
+}
+
 
 
 DD_DETAIL_END_

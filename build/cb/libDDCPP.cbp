@@ -182,6 +182,7 @@
 		<Unit filename="../../src/standard/bits/DD_StrictAutoPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictParasiticPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictPointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_String.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />

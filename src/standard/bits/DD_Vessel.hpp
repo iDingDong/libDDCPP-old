@@ -37,6 +37,11 @@ DD_STATIC_ASSERT(DDCPP_VESSEL_GROWTH_RATIO > 1, "'DDCPP_VESSEL_GROWTH_RATIO' sho
 
 
 
+struct RangeTag {
+} DD_CONSTANT range_tag;
+
+
+
 template <typename ValueT_>
 struct VesselBase_ {
 	public:
@@ -394,7 +399,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 	public:
 	template <typename ValueT__>
-	Vessel_(LengthType length_, ValueT__ const& value___) noexcept(
+	Vessel_(LengthType length_, ValueT__ const& value___) DD_NOEXCEPT_IF(
 		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().unguarded_push_back(value___))
 	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
@@ -405,6 +410,27 @@ struct Vessel_ : VesselBase_<ValueT_> {
 			destruct_();
 			throw;
 		}
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	Vessel_(RangeTag tag, UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
+		noexcept(SuperType(AllocatorType::allocate(length_) DD_COMMA length_)) &&
+		noexcept(copy_construct(begin___ DD_COMMA next(begin___ DD_COMMA length_)))
+	) : SuperType(AllocatorType::allocate(length_), length_) {
+		copy_construct(begin___, next(begin___, length_));
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	Vessel_(RangeTag tag, UndirectionalIteratorT__ const& begin___, UndirectionalIteratorT__ const& end___) DD_NOEXCEPT_IF(
+		noexcept(SuperType()) &&
+		noexcept(AllocatorType::allocate(length_difference(begin___ DD_COMMA end___))) &&
+		noexcept(copy_construct(begin___ DD_COMMA end___ DD_COMMA fabricate<ThisType>().begin()))
+	) : SuperType() {
+		this->m_begin_ = AllocatorType::allocate(length_difference(begin___, end___));
+		this->m_end_ = get_pointer(copy_construct(begin___, end___, this->begin()));
+		this->m_storage_end_ = get_pointer(this->end());
 	}
 
 
@@ -660,7 +686,10 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::RangeTag;
 using detail_::Vessel;
+
+using detail_::range_tag;
 
 
 
