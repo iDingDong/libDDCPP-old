@@ -20,11 +20,14 @@ inline LengthType get_length(ValueT_(&array_)[length_c_] array_) throw() {
 
 template <typename CharactorT_>
 LengthType DD_CONSTEXPR get_length(CharactorT_ const* cstring_) DD_NOEXCEPT {
-	CharactorT_ const* current_ = cstring_;
-	while (*current_) {
-		++current_;
+	if (cstring_) {
+		CharactorT_ const* current_ = cstring_;
+		while (*current_) {
+			++current_;
+		}
+		return current_ - cstring_;
 	}
-	return current_ - cstring_;
+	return LengthType();
 }
 
 
