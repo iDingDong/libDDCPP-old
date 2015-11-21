@@ -30,11 +30,11 @@ struct NextPermutation_ {
 							--head__;
 						} while (!(*current__ < *head__));
 						swap_target(current__, head__);
-						reverse(back__, end__);
+						::DD::reverse(back__, end__);
 						return true;
 					}
 				} while (current__ != begin__);
-				reverse(begin__, end__);
+				::DD::reverse(begin__, end__);
 			}
 		}
 		return false;
@@ -59,11 +59,11 @@ struct NextPermutation_<true> {
 					--head__;
 				} while (!(*current__ < *head__));
 				swap_target(current__, head__);
-				reverse(current__ + 1, end__);
+				::DD::reverse(current__ + 1, end__);
 				return true;
 			}
 		}
-		reverse(begin__, end__);
+		::DD::reverse(begin__, end__);
 		return false;
 	}
 

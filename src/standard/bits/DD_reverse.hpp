@@ -17,9 +17,9 @@ struct Reverse_ {
 	static ProcessType reverse(
 		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ != end___)) {
+	) DD_NOEXCEPT_AS(::DD::swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ != end___)) {
 		for (; begin___ != end___ && begin___ != --end___; ++begin___) {
-			swap_target(begin___, end___);
+			::DD::swap_target(begin___, end___);
 		}
 	}
 
@@ -34,9 +34,9 @@ struct Reverse_<true> {
 	static ProcessType reverse(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___
-	) DD_NOEXCEPT_AS(swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ < end___)) {
+	) DD_NOEXCEPT_AS(::DD::swap_target(++begin___, --end___) DD_COMMA ValidityType(begin___ < end___)) {
 		for (; begin___ < --end___; ++begin___) {
-			swap_target(begin___, end___);
+			::DD::swap_target(begin___, end___);
 		}
 	}
 
@@ -58,8 +58,8 @@ inline ProcessType reverse(
 template <typename BidirectionalRangeT_>
 inline ProcessType reverse(
 	BidirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(reverse(DD_SPLIT_RANGE(range__))) {
-	reverse(DD_SPLIT_RANGE(range__));
+) DD_NOEXCEPT_AS(::DD::detail_::reverse(DD_SPLIT_RANGE(range__))) {
+	::DD::detail_::reverse(DD_SPLIT_RANGE(range__));
 }
 
 

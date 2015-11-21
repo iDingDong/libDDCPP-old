@@ -24,8 +24,8 @@ template <typename UndirectionalRangeT_, typename ValueT_>
 inline ProcessType fill(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
-) DD_NOEXCEPT_AS(fill(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {
-	fill(DD_SPLIT_RANGE(range__), value__);
+) DD_NOEXCEPT_AS(::DD::detail_::fill(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {
+	::DD::detail_::fill(DD_SPLIT_RANGE(range__), value__);
 }
 
 

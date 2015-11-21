@@ -4,21 +4,18 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_find_not.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicateT_>
 UndirectionalIteratorT_ partition_point_by(
-	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
 	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && predicate__(*begin__)) {
-	while (begin__ != end__ && predicate__(*begin__)) {
-		++begin__;
-	}
-	return begin__;
+	return ::DD::detail_::find_not(begin__, end__, predicate__);
 }
 
 template <typename UndirectionalRangeT_, typename UnaryPredicateT_>
@@ -26,9 +23,9 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point_by(
 	UndirectionalRangeT_& range__,
 	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
-	partition_point_by(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
+	::DD::detail_::partition_point_by(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
 )) {
-	return partition_point_by(DD_SPLIT_RANGE(range__), predicate__);
+	return ::DD::detail_::partition_point_by(DD_SPLIT_RANGE(range__), predicate__);
 }
 
 

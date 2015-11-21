@@ -4,8 +4,9 @@
 
 
 
-#	include "DD_global_definitions.hpp"
 #	include "DD_IsFreeAccessIterator.hpp"
+#	include "DD_Iterator.hpp"
+#	include "DD_Range.hpp"
 
 
 
@@ -72,17 +73,12 @@ struct IsSortedUntil_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename UndirectionalIteratorT_>
 inline UndirectionalIteratorT_ is_sorted_until(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__
-) DD_NOEXCEPT_AS(detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__)) {
-	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__);
+) DD_NOEXCEPT_AS(IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__)) {
+	return IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__);
 }
 
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
@@ -90,9 +86,37 @@ inline UndirectionalIteratorT_ is_sorted_until(
 	UndirectionalIteratorT_ const& begin__,
 	UndirectionalIteratorT_ const& end__,
 	BinaryPredicateT_ const& less__
-) DD_NOEXCEPT_AS(detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__ DD_COMMA less__)) {
-	return detail_::IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__, less__);
+) DD_NOEXCEPT_AS(IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__ DD_COMMA end__ DD_COMMA less__)) {
+	return IsSortedUntil_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::is_sorted_until_(begin__, end__, less__);
 }
+
+template <typename UndirectionalRangeT_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) is_sorted_until(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
+	::DD::detail_::is_sorted_until(DD_SPLIT_RANGE(range__))
+)) {
+	return ::DD::detail_::is_sorted_until(DD_SPLIT_RANGE(range__));
+}
+
+template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
+inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) is_sorted_until(
+	UndirectionalRangeT_& range__,
+	BinaryPredicateT_& less__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
+	::DD::detail_::is_sorted_until(DD_SPLIT_RANGE(range__) DD_COMMA less__)
+)) {
+	return ::DD::detail_::is_sorted_until(DD_SPLIT_RANGE(range__), less__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::is_sorted_until;
 
 
 

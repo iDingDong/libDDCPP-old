@@ -43,8 +43,8 @@ inline ProcessType replace(
 	UndirectionalRangeT_& range__,
 	ValueT1_ const& old__,
 	ValueT2_ const& value__
-) DD_NOEXCEPT_AS(replace(DD_SPLIT_RANGE(range__) DD_COMMA old__ DD_COMMA value__)) {
-	replace(DD_SPLIT_RANGE(range__), old__, value__);
+) DD_NOEXCEPT_AS(::DD::detail_::replace(DD_SPLIT_RANGE(range__) DD_COMMA old__ DD_COMMA value__)) {
+	::DD::detail_::replace(DD_SPLIT_RANGE(range__), old__, value__);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT1_, typename BinaryPredicateT_, typename ValueT2_>
@@ -53,8 +53,8 @@ inline ProcessType replace(
 	ValueT1_ const& old__,
 	BinaryPredicateT_ equal__,
 	ValueT2_ const& value__
-) DD_NOEXCEPT_AS(replace(DD_SPLIT_RANGE(range__) DD_COMMA old__ DD_COMMA equal__ DD_COMMA value__)) {
-	replace(DD_SPLIT_RANGE(range__), old__, equal__, value__);
+) DD_NOEXCEPT_AS(::DD::detail_::replace(DD_SPLIT_RANGE(range__) DD_COMMA old__ DD_COMMA equal__ DD_COMMA value__)) {
+	::DD::detail_::replace(DD_SPLIT_RANGE(range__), old__, equal__, value__);
 }
 
 

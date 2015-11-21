@@ -52,8 +52,8 @@ template <typename UndirectionalRangeT_, typename ValueT_>
 inline ValidityType is_partitioned(
 	UndirectionalRangeT_ const& range__,
 	ValueT_ const& value__
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__))) {
-	return is_partitioned(DD_SPLIT_RANGE(range__), value__);
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(::DD::detail_::is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__))) {
+	return ::DD::detail_::is_partitioned(DD_SPLIT_RANGE(range__), value__);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
@@ -61,8 +61,8 @@ inline ValidityType is_partitioned(
 	UndirectionalRangeT_ const& range__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ less__
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))) {
-	return is_partitioned(DD_SPLIT_RANGE(range__), value__, less__);
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(::DD::detail_::is_partitioned(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))) {
+	return ::DD::detail_::is_partitioned(DD_SPLIT_RANGE(range__), value__, less__);
 }
 
 

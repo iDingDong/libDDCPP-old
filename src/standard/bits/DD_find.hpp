@@ -39,8 +39,8 @@ template <typename UndirectionalRangeT_, typename ValueT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
-) DD_NOEXCEPT_AS(find(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {
-	return find(DD_SPLIT_RANGE(range__), value__);
+) DD_NOEXCEPT_AS(::DD::detail_::find(DD_SPLIT_RANGE(range__) DD_COMMA value__)) {
+	return ::DD::detail_::find(DD_SPLIT_RANGE(range__), value__);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
@@ -48,8 +48,8 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ equal__
-) DD_NOEXCEPT_AS(find(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)) {
-	return find(DD_SPLIT_RANGE(range__), value__, equal__);
+) DD_NOEXCEPT_AS(::DD::detail_::find(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)) {
+	return ::DD::detail_::find(DD_SPLIT_RANGE(range__), value__, equal__);
 }
 
 

@@ -60,21 +60,21 @@ template <typename FreeAccessRangeT_, typename ValueT_>
 inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__
-) noexcept(noexcept(binary_find(DD_SPLIT_RANGE(range__), value__))) {
+) noexcept(noexcept(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__))) {
 #	elif __cplusplus >= 201103L
 inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__
 ) noexcept(
-	noexcept(binary_find(DD_SPLIT_RANGE(range__), value__))
-) -> decltype(binary_find(DD_SPLIT_RANGE(range__), value__)) {
+	noexcept(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__))
+) -> decltype(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__)) {
 #	else
 inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__
 ) {
 #	endif
-	return binary_find(DD_SPLIT_RANGE(range__), value__);
+	return ::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__);
 }
 
 template <typename FreeAccessRangeT_, typename ValueT_, typename BinaryPredicateT_>
@@ -83,15 +83,15 @@ inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ const& less__
-) noexcept(noexcept(binary_find(DD_SPLIT_RANGE(range__), value__, less__))) {
+) noexcept(noexcept(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__, less__))) {
 #	elif __cplusplus >= 201103L
 inline auto binary_find(
 	FreeAccessRangeT_& range__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ const& less__
 ) noexcept(
-	noexcept(binary_find(DD_SPLIT_RANGE(range__), value__, less__))
-) -> decltype(binary_find(DD_SPLIT_RANGE(range__), value__, less__)) {
+	noexcept(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__, less__))
+) -> decltype(::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__, less__)) {
 #	else
 inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 	FreeAccessRangeT_& range__,
@@ -99,7 +99,7 @@ inline DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) binary_find(
 	BinaryPredicateT_ const& less__
 ) {
 #	endif
-	return binary_find(DD_SPLIT_RANGE(range__), value__, less__);
+	return ::DD::detail_::binary_find(DD_SPLIT_RANGE(range__), value__, less__);
 }
 
 

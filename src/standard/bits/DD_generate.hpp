@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename Generator_>
 ProcessType generate(
 	UndirectionalIteratorT_ begin__,
@@ -24,9 +24,18 @@ template <typename UndirectionalRangeT_, typename Generator_>
 ProcessType generate(
 	UndirectionalRangeT_& range__,
 	Generator_ generator__
-) DD_NOEXCEPT_AS(generate(DD_SPLIT_RANGE(range__) DD_COMMA generator__)) {
-	generate(DD_SPLIT_RANGE(range__), generator__);
+) DD_NOEXCEPT_AS(::DD::detail_::generate(DD_SPLIT_RANGE(range__) DD_COMMA generator__)) {
+	::DD::detail_::generate(DD_SPLIT_RANGE(range__), generator__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::generate;
 
 
 

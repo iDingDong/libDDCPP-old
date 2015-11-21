@@ -49,8 +49,8 @@ template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT1_) find_first_of(
 	UndirectionalRangeT1_& range__,
 	UndirectionalRangeT2_ const& sample_range__
-) DD_NOEXCEPT_AS(find_first_of(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(sample_range__))) {
-	return find_first_of(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(sample_range__));
+) DD_NOEXCEPT_AS(::DD::detail_::find_first_of(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(sample_range__))) {
+	return ::DD::detail_::find_first_of(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(sample_range__));
 }
 
 template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_, typename BinaryPredicateT_>
@@ -58,8 +58,8 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT1_) find_first_of(
 	UndirectionalRangeT1_& range__,
 	UndirectionalRangeT2_ const& sample_range__,
 	BinaryPredicateT_ equal__
-) DD_NOEXCEPT_AS(find_first_of(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(sample_range__) DD_COMMA equal__)) {
-	return find_first_of(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(sample_range__), equal__);
+) DD_NOEXCEPT_AS(::DD::detail_::find_first_of(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(sample_range__) DD_COMMA equal__)) {
+	return ::DD::detail_::find_first_of(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(sample_range__), equal__);
 }
 
 

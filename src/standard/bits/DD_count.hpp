@@ -57,9 +57,9 @@ inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, Undirection
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
-	count(DD_SPLIT_RANGE(range__) DD_COMMA value__)
+	::DD::detail_::count(DD_SPLIT_RANGE(range__) DD_COMMA value__)
 )) {
-	return count(DD_SPLIT_RANGE(range__), value__);
+	return ::DD::detail_::count(DD_SPLIT_RANGE(range__), value__);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
@@ -68,9 +68,9 @@ inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, Undirection
 	ValueT_ const& value__,
 	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
-	count(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)
+	::DD::detail_::count(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA equal__)
 )) {
-	return count(DD_SPLIT_RANGE(range__), value__, equal__);
+	return ::DD::detail_::count(DD_SPLIT_RANGE(range__), value__, equal__);
 }
 
 

@@ -26,9 +26,9 @@ DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_range(
 	UndirectionalRangeT_& range__,
 	FreeAccessRangeT_ const& pattern_range__
 ) DD_NOEXCEPT_AS(
-	DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)(find_range(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(pattern_range__)))
+	DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)(::DD::detail_::find_range(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(pattern_range__)))
 ) {
-	return find_range(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(pattern_range__));
+	return ::DD::detail_::find_range(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(pattern_range__));
 }
 
 

@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1447845359 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448122906 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -70,7 +70,6 @@
 	"bits/DD_transfer.hpp"
 	"bits/DD_replace.hpp"
 	"bits/DD_replace_if.hpp"
-	"bits/DD_reverse.hpp"
 	"bits/DD_partition.hpp"
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
@@ -192,7 +191,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1447210368 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
+1448092861 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
 	"DD_RemoveReference.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
@@ -451,64 +450,66 @@
 	"DD_global_definitions.hpp"
 	"DD_compatibility_definitions.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
-	"DD_Pair.hpp"
-
-1448000918 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1448122552 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
+1448121780 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if.hpp
+1448122874 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
+
+1448121790 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if.hpp
 	"DD_Iterator.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if_not.hpp
+1448121800 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if_not.hpp
 	"DD_global_definitions.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
+1448121834 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
 	"DD_Range.hpp"
 	"DD_Iterator.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
+1448121905 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
 	"DD_Range.hpp"
 	"DD_IteratorDifference.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_count.hpp
+1448121948 d:\develop\repositories\libddcpp\src\standard\bits\dd_count.hpp
 	"DD_Iterator.hpp"
 	"DD_IteratorDifference.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_count_if.hpp
+1448121962 d:\develop\repositories\libddcpp\src\standard\bits\dd_count_if.hpp
 	"DD_IteratorDifference.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned.hpp
+1448121980 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned.hpp
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned_by.hpp
+1448121994 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_partitioned_by.hpp
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point.hpp
+1448122017 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point_by.hpp
-	"DD_global_definitions.hpp"
+1448122569 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_point_by.hpp
+	"DD_find_not.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted.hpp
+1448122117 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted_until.hpp
-	"DD_global_definitions.hpp"
+1448122478 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted_until.hpp
 	"DD_IsFreeAccessIterator.hpp"
-
-1447680496 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill.hpp
+	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1445327105 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
+1448121152 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill.hpp
+	"DD_Range.hpp"
+
+1448122643 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_Range.hpp"
 
 1444902993 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
@@ -520,13 +521,13 @@
 	"DD_size_distance.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
+1448122702 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
+1448122718 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace_if.hpp
 	"DD_Range.hpp"
 
-1446357249 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
+1448122785 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverse.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_swap_target.hpp"
 	"DD_Range.hpp"
@@ -1201,14 +1202,14 @@
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1445182316 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer.hpp
+1448122670 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer.hpp
 	"DD_transfer_backward.hpp"
 
-1445182466 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_backward.hpp
+1448122681 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_backward.hpp
 	"DD_IteratorReverse.hpp"
 	"DD_transfer_forward.hpp"
 
-1445182573 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_forward.hpp
+1448092842 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_forward.hpp
 	"DD_IteratorValue.hpp"
 	"DD_next.hpp"
 	"DD_move.hpp"
@@ -1220,7 +1221,7 @@
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_advance.hpp
 	"DD_IsFreeAccessIterator.hpp"
 
-1445403268 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_range.hpp
+1448121924 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_range.hpp
 	"DD_kmp_find_range.hpp"
 
 1445319345 d:\develop\repositories\libddcpp\src\standard\bits\dd_indexable.hpp
@@ -1264,7 +1265,7 @@
 	"DD_Value.hpp"
 	"DD_fabricate.hpp"
 
-1446471028 d:\develop\repositories\libddcpp\src\standard\bits\dd_next_permutation.hpp
+1448122847 d:\develop\repositories\libddcpp\src\standard\bits\dd_next_permutation.hpp
 	"DD_previous.hpp"
 	"DD_reverse.hpp"
 
@@ -1284,7 +1285,7 @@
 	"DD_construct.hpp"
 	"DD_copy.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_adjacent_unique.hpp
+1448122906 d:\develop\repositories\libddcpp\src\standard\bits\dd_adjacent_unique.hpp
 	"DD_move.hpp"
 	"DD_next.hpp"
 	"DD_find_not.hpp"

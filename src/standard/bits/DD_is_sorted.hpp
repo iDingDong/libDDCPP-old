@@ -104,16 +104,16 @@ inline ValidityType is_sorted(
 template <typename UndirectionalRangeT_>
 inline ValidityType is_sorted(
 	UndirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_sorted(DD_SPLIT_RANGE(range__)))) {
-	return is_sorted(DD_SPLIT_RANGE(range__));
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(::DD::detail_::is_sorted(DD_SPLIT_RANGE(range__)))) {
+	return ::DD::detail_::is_sorted(DD_SPLIT_RANGE(range__));
 }
 
 template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline ValidityType is_sorted(
 	UndirectionalRangeT_& range__,
 	BinaryPredicateT_ less__
-) DD_NOEXCEPT_AS(static_cast<ValidityType>(is_sorted(DD_SPLIT_RANGE(range__) DD_COMMA less__))) {
-	return is_sorted(DD_SPLIT_RANGE(range__), less__);
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(::DD::detail_::is_sorted(DD_SPLIT_RANGE(range__) DD_COMMA less__))) {
+	return ::DD::detail_::is_sorted(DD_SPLIT_RANGE(range__), less__);
 }
 
 

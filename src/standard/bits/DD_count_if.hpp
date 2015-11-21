@@ -34,9 +34,9 @@ inline DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, Undirection
 	UndirectionalRangeT_& range__,
 	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_))>(
-	count_if(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
+	::DD::detail_::count_if(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
 )) {
-	return count_if(DD_SPLIT_RANGE(range__), predicate__);
+	return ::DD::detail_::count_if(DD_SPLIT_RANGE(range__), predicate__);
 }
 
 

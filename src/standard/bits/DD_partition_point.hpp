@@ -40,9 +40,9 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
-	partition_point(DD_SPLIT_RANGE(range__) DD_COMMA value__)
+	::DD::detail_::partition_point(DD_SPLIT_RANGE(range__) DD_COMMA value__)
 )) {
-	return partition_point(DD_SPLIT_RANGE(range__), value__);
+	return ::DD::detail_::partition_point(DD_SPLIT_RANGE(range__), value__);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
@@ -51,9 +51,9 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) partition_point(
 	ValueT_ const& value__,
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
-	partition_point(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))
+	::DD::detail_::partition_point(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__))
 ) {
-	return partition_point(DD_SPLIT_RANGE(range__), value__, less__);
+	return ::DD::detail_::partition_point(DD_SPLIT_RANGE(range__), value__, less__);
 }
 
 

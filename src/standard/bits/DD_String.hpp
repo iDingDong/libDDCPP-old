@@ -106,6 +106,23 @@ struct String {
 	}
 
 
+	public:
+	ConstPointerType DD_CONSTEXPR get_cstring() const DD_NOEXCEPT {
+		return get_pointer(begin());
+	}
+
+
+	public:
+	PointerType DD_CONSTEXPR get_data() DD_NOEXCEPT {
+		return get_pointer(begin());
+	}
+
+	public:
+	ConstPointerType DD_CONSTEXPR get_data() const DD_NOEXCEPT {
+		return get_pointer(begin());
+	}
+
+
 #	if __cplusplus >= 201103L
 	public:
 	ThisType operator =(ThisType const& origin_) = default;

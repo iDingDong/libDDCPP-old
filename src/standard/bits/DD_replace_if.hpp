@@ -28,8 +28,8 @@ inline ProcessType replace_if(
 	UndirectionalRangeT_& range__,
 	UnaryPredicateT_ predicate__,
 	ValueT_ const& value__
-) DD_NOEXCEPT_AS(replace_if(DD_SPLIT_RANGE(range__) DD_COMMA predicate__ DD_COMMA value__)) {
-	replace_if(DD_SPLIT_RANGE(range__), predicate__, value__);
+) DD_NOEXCEPT_AS(::DD::detail_::replace_if(DD_SPLIT_RANGE(range__) DD_COMMA predicate__ DD_COMMA value__)) {
+	::DD::detail_::replace_if(DD_SPLIT_RANGE(range__), predicate__, value__);
 }
 
 

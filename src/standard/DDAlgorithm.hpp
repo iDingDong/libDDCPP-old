@@ -36,7 +36,6 @@
 #	include "bits/DD_transfer.hpp"
 #	include "bits/DD_replace.hpp"
 #	include "bits/DD_replace_if.hpp"
-#	include "bits/DD_reverse.hpp"
 #	include "bits/DD_partition.hpp"
 #	include "bits/DD_partition_by.hpp"
 #	include "bits/DD_merge.hpp"

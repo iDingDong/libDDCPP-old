@@ -25,8 +25,8 @@ template <typename UndirectionalRangeT_, typename UnaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_if_not(
 	UndirectionalRangeT_& range__,
 	UnaryPredicateT_ predicate__
-) DD_NOEXCEPT_AS(find_if_not(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)) {
-	return find_if_not(DD_SPLIT_RANGE(range__), predicate__);
+) DD_NOEXCEPT_AS(::DD::detail_::find_if_not(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)) {
+	return ::DD::detail_::find_if_not(DD_SPLIT_RANGE(range__), predicate__);
 }
 
 
