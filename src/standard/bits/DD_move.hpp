@@ -27,9 +27,9 @@ inline UndirectionalIteratorT1_ move(
 	UndirectionalIteratorT1_ begin__,
 	UndirectionalIteratorT1_ const& end__,
 	UndirectionalIteratorT2_ result_begin__
-) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = move(*++begin__))) {
+) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = ::DD::move(*++begin__))) {
 	for (; begin__ != end__; ++begin__, ++result_begin__) {
-		*result_begin__ = move(*begin__);
+		*result_begin__ = ::DD::move(*begin__);
 	}
 	return result_begin__;
 }
