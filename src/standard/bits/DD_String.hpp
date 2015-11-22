@@ -6,7 +6,7 @@
 
 #	include <string>
 
-#	include "DD_get_length.hpp"
+#	include "DD_get_string_end.hpp"
 #	include "DD_Vessel.hpp"
 
 
@@ -48,14 +48,14 @@ struct String {
 
 	public:
 	DD_CONSTEXPR String(char const* cstring_) DD_NOEXCEPT_AS(
-		StorageType(range_tag DD_COMMA cstring_ DD_COMMA get_length(cstring_) + 1)
-	) : m_storage_(range_tag, cstring_, get_length(cstring_) + 1) {
+		StorageType(range_tag DD_COMMA cstring_ DD_COMMA get_string_end(cstring_) + 1)
+	) : m_storage_(range_tag, cstring_, get_string_end(cstring_) + 1) {
 	}
 
 	public:
 	DD_CONSTEXPR String(std::string const& string_) DD_NOEXCEPT_AS(
-		StorageType(string_.c_str() DD_COMMA get_length(string_.c_str()) + 1)
-	) m_storage_(string_.c_str(), get_length(string_.c_str()) + 1) {
+		StorageType(range_tag, DD_SPLIT_RANGE(string_))
+	) m_storage_(range_tag, DD_SPLIT_RANGE(string_)) {
 	}
 
 

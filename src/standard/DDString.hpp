@@ -4,6 +4,7 @@
 
 
 
+#	include "bits/DD_get_string_length.hpp"
 #	include "bits/DD_String.hpp"
 
 

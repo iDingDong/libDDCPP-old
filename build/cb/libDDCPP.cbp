@@ -232,6 +232,8 @@
 		<Unit filename="../../src/standard/bits/DD_get_last_argument.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_pointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_get_string_end.hpp" />
+		<Unit filename="../../src/standard/bits/DD_get_string_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_global_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_insert_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_invoke.hpp" />

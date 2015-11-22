@@ -4,7 +4,7 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_get_string_length.hpp"
 
 
 
@@ -21,11 +21,7 @@ inline LengthType get_length(ValueT_(&array_)[length_c_] array_) throw() {
 template <typename CharactorT_>
 LengthType DD_CONSTEXPR get_length(CharactorT_ const* cstring_) DD_NOEXCEPT {
 	if (cstring_) {
-		CharactorT_ const* current_ = cstring_;
-		while (*current_) {
-			++current_;
-		}
-		return current_ - cstring_;
+		return get_string_length(cstring_);
 	}
 	return LengthType();
 }
