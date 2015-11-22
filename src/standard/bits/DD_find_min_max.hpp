@@ -49,16 +49,16 @@ Pair<UndirectionalIteratorT_> find_min_max(
 template <typename UndirectionalRangeT_>
 inline Pair<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)> find_min_max(
 	UndirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(find_min_max(DD_SPLIT_RANGE(range__))) {
-	return find_min_max(DD_SPLIT_RANGE(range__));
+) DD_NOEXCEPT_AS(::DD::detail_::find_min_max(DD_SPLIT_RANGE(range__))) {
+	return ::DD::detail_::find_min_max(DD_SPLIT_RANGE(range__));
 }
 
 template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline Pair<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)> find_min_max(
 	UndirectionalRangeT_& range__,
 	BinaryPredicateT_ less__
-) DD_NOEXCEPT_AS(find_min_max(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
-	return find_min_max(DD_SPLIT_RANGE(range__), less__);
+) DD_NOEXCEPT_AS(::DD::detail_::find_min_max(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
+	return ::DD::detail_::find_min_max(DD_SPLIT_RANGE(range__), less__);
 }
 
 

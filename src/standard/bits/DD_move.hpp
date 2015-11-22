@@ -14,25 +14,49 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 inline RemoveReferenceType<ObjectT_>&& move(ObjectT_&& object_) DD_NOEXCEPT {
 	return static_cast<RemoveReferenceType<ObjectT_>&&>(object_);
 }
-
-
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
 inline UndirectionalIteratorT1_ move(
 	UndirectionalIteratorT1_ begin__,
 	UndirectionalIteratorT1_ const& end__,
 	UndirectionalIteratorT2_ result_begin__
-) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = ::DD::move(*++begin__))) {
+) noexcept(noexcept(begin__ != end__) && noexcept(*++result_begin__ = ::DD::detail_::move(*++begin__))) {
 	for (; begin__ != end__; ++begin__, ++result_begin__) {
-		*result_begin__ = ::DD::move(*begin__);
+		*result_begin__ = ::DD::detail_::move(*begin__);
 	}
 	return result_begin__;
 }
+
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
+inline UndirectionalIteratorT1_ move(
+	UndirectionalIteratorT1_ begin__,
+	UndirectionalIteratorT1_ const& end__,
+	UndirectionalIteratorT2_ result_begin__,
+	UndirectionalIteratorT2_ const& result_end__
+) noexcept(
+	noexcept(begin__ != end__) &&
+	noexcept(result_begin__ != result_end__) &&
+	noexcept(*++result_begin__ = ::DD::detail_::move(*++begin__))
+) {
+	for (; begin__ != end__ && result_begin__ != result_end__; ++begin__, ++result_begin__) {
+		*result_begin__ = ::DD::detail_::move(*begin__);
+	}
+	return result_begin__;
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::move;
 
 
 

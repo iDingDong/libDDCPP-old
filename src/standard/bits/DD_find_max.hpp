@@ -42,16 +42,16 @@ UndirectionalIteratorT_ find_max(
 template <typename UndirectionalRangeT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_max(
 	UndirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(find_max(DD_SPLIT_RANGE(range__))) {
-	return find_max(DD_SPLIT_RANGE(range__));
+) DD_NOEXCEPT_AS(::DD::detail_::find_max(DD_SPLIT_RANGE(range__))) {
+	return ::DD::detail_::find_max(DD_SPLIT_RANGE(range__));
 }
 
 template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_max(
 	UndirectionalRangeT_& range__,
 	BinaryPredicateT_ less__
-) DD_NOEXCEPT_AS(find_max(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
-	return find_max(DD_SPLIT_RANGE(range__), less__);
+) DD_NOEXCEPT_AS(::DD::detail_::find_max(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
+	return ::DD::detail_::find_max(DD_SPLIT_RANGE(range__), less__);
 }
 
 

@@ -120,7 +120,7 @@
 	<initializer_list>
 	"DD_global_definitions.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min.hpp
+1448161596 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
@@ -191,7 +191,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1448092861 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
+1448163109 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
 	"DD_RemoveReference.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
@@ -512,14 +512,18 @@
 1448122643 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_Range.hpp"
 
-1444902993 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1448163172 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_IsSame.hpp"
 	"DD_IsPointer.hpp"
 	"DD_IsTriviallyCopyable.hpp"
+	"DD_Iterator.hpp"
 	"DD_IteratorValue.hpp"
+	"DD_IteratorDifference.hpp"
+	"DD_get_pointer.hpp"
 	"DD_size_distance.hpp"
 	"DD_Range.hpp"
+	"DD_min.hpp"
 
 1448122702 d:\develop\repositories\libddcpp\src\standard\bits\dd_replace.hpp
 	"DD_Range.hpp"
