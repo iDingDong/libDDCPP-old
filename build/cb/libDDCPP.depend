@@ -22,7 +22,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1445621797 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1448191607 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448163836 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448211866 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -52,6 +52,8 @@
 	"bits/DD_find_if_not.hpp"
 	"bits/DD_find_first_of.hpp"
 	"bits/DD_binary_find.hpp"
+	"bits/DD_find_lower_bound.hpp"
+	"bits/DD_find_higher_bound.hpp"
 	"bits/DD_find_min.hpp"
 	"bits/DD_find_max.hpp"
 	"bits/DD_find_min_max.hpp"
@@ -404,8 +406,10 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1443513195 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorcatagory.hpp
+1448191608 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorcatagory.hpp
 	"DD_RemoveCV.hpp"
+	"DD_IsBaseOf.hpp"
+	"DD_IsSame.hpp"
 
 1444132233 d:\develop\repositories\libddcpp\src\standard\bits\dd_size_distance.hpp
 	"DD_get_pointer.hpp"
@@ -469,9 +473,8 @@
 	"DD_Range.hpp"
 	"DD_Iterator.hpp"
 
-1448121905 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
-	"DD_Range.hpp"
-	"DD_IteratorDifference.hpp"
+1448213894 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
+	"DD_middle.hpp"
 
 1448121948 d:\develop\repositories\libddcpp\src\standard\bits\dd_count.hpp
 	"DD_Iterator.hpp"
@@ -577,7 +580,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1447856231 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448213349 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<cstdlib>
 	<ctime>
@@ -1307,4 +1310,17 @@
 
 1448178731 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_string_end.hpp
 	"DD_find.hpp"
+
+1448214623 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_lower_bound.hpp
+	"DD_middle.hpp"
+
+1448213321 d:\develop\repositories\libddcpp\src\standard\bits\dd_middle.hpp
+	"DD_Iterator.hpp"
+	"DD_IteratorCatagory.hpp"
+	"DD_Range.hpp"
+	"DD_next.hpp"
+	"DD_length_difference.hpp"
+
+1448214724 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_higher_bound.hpp
+	"DD_middle.hpp"
 

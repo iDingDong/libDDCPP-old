@@ -5,6 +5,11 @@
 
 
 #	include "DD_RemoveCV.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_IsBaseOf.hpp"
+#	else
+#		include "DD_IsSame.hpp"
+#	endif
 
 
 
@@ -47,6 +52,69 @@ struct IteratorCatagory_<ValueT_*> {
 
 
 
+#	if __cplusplus >= 201103L
+enum class IteratorCatagoryValue {
+	fixed = 1,
+	undirectional = 2,
+	bidirectional = 3,
+	free_access = 4
+
+};
+#	else
+struct IteratorCatagoryValue {
+	static IteratorCatagoryValue const fixed;
+	static IteratorCatagoryValue const undirectional;
+	static IteratorCatagoryValue const bidirectional;
+	static IteratorCatagoryValue const free_access;
+
+
+	int value;
+
+
+};
+
+
+
+IteratorCatagoryValue const IteratorCatagoryValue::fixed = { 1 };
+IteratorCatagoryValue const IteratorCatagoryValue::undirectional = { 2 };
+IteratorCatagoryValue const IteratorCatagoryValue::bidirectional = { 3 };
+IteratorCatagoryValue const IteratorCatagoryValue::free_access = { 4 };
+#	endif
+
+
+
+template <typename IteratorT_>
+struct IteratorCatagory : IteratorCatagory_<DD_MODIFY_TRAIT(RemoveCV, IteratorT_)> {
+	DD_ALIAS(Type, typename IteratorCatagory_<DD_MODIFY_TRAIT(RemoveCV, IteratorT_)>::Type);
+#	if __cplusplus >= 201103L
+	static IteratorCatagoryValue DD_CONSTANT value = IsBaseOf<FreeAccessIterator, Type>::value ?
+		IteratorCatagoryValue::free_access :
+		IsBaseOf<BidirectionalIterator, Type>::value ?
+			IteratorCatagoryValue::bidirectional :
+			IsBaseOf<UndirectionalIterator, Type>::value ?
+				IteratorCatagoryValue::undirectional :
+				IteratorCatagoryValue::fixed
+	;
+#	else
+	static IteratorCatagoryValue DD_CONSTANT value = IsSame<FreeAccessIterator, Type>::value ?
+		IteratorCatagoryValue::free_access :
+		IsSame<BidirectionalIterator, Type>::value ?
+			IteratorCatagoryValue::bidirectional :
+			IsSame<UndirectionalIterator, Type>::value ?
+				IteratorCatagoryValue::undirectional :
+				IteratorCatagoryValue::fixed
+	;
+#	endif
+
+
+};
+
+
+
+DD_TRAIT_MODIFIER(IteratorCatagory)
+
+
+
 DD_DETAIL_END_
 
 
@@ -56,19 +124,9 @@ using detail_::FixedIterator;
 using detail_::UndirectionalIterator;
 using detail_::BidirectionalIterator;
 using detail_::FreeAccessIterator;
+using detail_::IteratorCatagory;
 
-
-
-#	if __cplusplus >= 201103L
-template <typename IteratorT_>
-using IteratorCatagory = detail_::IteratorCatagory_<RemoveCVType<IteratorT_>>;
-template <typename IteratorT_>
-using IteratorCatagoryType = typename IteratorCatagory<IteratorT_>::Type;
-#	else
-template <typename IteratorT_>
-struct IteratorCatagory : detail_::IteratorCatagory_<typename RemoveCV<IteratorT_>::Type> {
-};
-#	endif
+DD_TRAIT_MODIFIER(IteratorCatagory)
 
 
 

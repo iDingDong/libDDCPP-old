@@ -251,4 +251,13 @@ void test_algorithm() {
 			throw  "'DD::adjacent_unique' test failed.";
 		}
 	}
+	{
+		DD::Array<int, 13> temp = { 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6 };
+		DD::Array<int, 3> result = { 4, 4, 4 };
+		if (
+			!DD::equal(find_lower_bound(temp, 4), find_higher_bound(temp, 4), DD_SPLIT_RANGE(result))
+		) {
+			throw "'DD::find_lower_bound'/'DD::find_higher_bound' test failed.";
+		}
+	}
 }

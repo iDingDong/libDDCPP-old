@@ -14,6 +14,8 @@
 #	include "bits/DD_find_if_not.hpp"
 #	include "bits/DD_find_first_of.hpp"
 #	include "bits/DD_binary_find.hpp"
+#	include "bits/DD_find_lower_bound.hpp"
+#	include "bits/DD_find_higher_bound.hpp"
 #	if __cplusplus < 201103L
 #		include "bits/DD_find_min.hpp"
 #		include "bits/DD_find_max.hpp"

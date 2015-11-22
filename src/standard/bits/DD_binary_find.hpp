@@ -4,29 +4,25 @@
 
 
 
-#	include "DD_Range.hpp"
-#	include "DD_IteratorDifference.hpp"
+#	include "DD_middle.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_, typename ValueT_>
 FreeAccessIteratorT_ binary_find(
-	FreeAccessIteratorT_ const& begin__,
+	FreeAccessIteratorT_ begin__,
 	FreeAccessIteratorT_ const& end__,
 	ValueT_ const& value__
-) DD_NOEXCEPT_AS(begin__[0] < value__) {
-	DD_ALIAS(IndexType_, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_));
-	IndexType_ lower_bound__ = IndexType_();
-	IndexType_ higher_bound__ = end__ - begin__;
-	for (IndexType_ current__; lower_bound__ < higher_bound__; ) {
-		current__ = (lower_bound__ + higher_bound__) / 2;
-		if (begin__[current__] < value__) {
-			lower_bound__ = current__ + 1;
-		} else if (value__ < begin__[current__]) {
-			higher_bound__ = current__;
+) {
+	for (FreeAccessIteratorT_ high__ = end__; begin__ < high__; ) {
+		FreeAccessIteratorT_ current__ = middle(begin__, high__);
+		if (value__ < *current__) {
+			high__ = current__;
+		} else if (*current__ < value__) {
+			begin__ = current__ + 1;
 		} else {
-			return begin__ + current__;
+			return current__;
 		}
 	}
 	return end__;
@@ -38,18 +34,15 @@ FreeAccessIteratorT_ binary_find(
 	FreeAccessIteratorT_ const& end__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ const& less__
-) DD_NOEXCEPT_AS(less__(begin__[0], value__)) {
-	DD_ALIAS(IndexType_, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_));
-	IndexType_ lower_bound__ = IndexType_();
-	IndexType_ higher_bound__ = end__ - begin__;
-	for (IndexType_ current__; lower_bound__ < higher_bound__; ) {
-		current__ = (lower_bound__ + higher_bound__) / 2;
-		if (less__(begin__[current__], value__)) {
-			lower_bound__ = current__ + 1;
-		} else if (less__(value__, begin__[current__])) {
-			higher_bound__ = current__;
+) {
+	for (FreeAccessIteratorT_ high__ = end__; begin__ < high__; ) {
+		FreeAccessIteratorT_ current__ = middle(begin__, high__);
+		if (less__(value__, *current__)) {
+			high__ = current__;
+		} else if (less__(*current__, value__)) {
+			begin__ = current__ + 1;
 		} else {
-			return begin__ + current__;
+			return current__;
 		}
 	}
 	return end__;

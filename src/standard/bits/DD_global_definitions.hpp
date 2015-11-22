@@ -108,13 +108,11 @@ enum class Direction {
 };
 #	else
 struct Direction {
-	public:
 	static Direction const unknown;
 	static Direction const forward;
 	static Direction const backward;
 
 
-	public:
 	int m_value_;
 
 
@@ -133,9 +131,9 @@ inline ValidityType operator !=(Direction direction_1_, Direction direction_2_) 
 
 
 
-Direction const Direction::unknown = {0};
-Direction const Direction::forward = {1};
-Direction const Direction::backward = {2};
+Direction const Direction::unknown = { 0 };
+Direction const Direction::forward = { 1 };
+Direction const Direction::backward = { 2 };
 #	endif
 
 
