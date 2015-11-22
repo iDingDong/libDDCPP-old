@@ -55,7 +55,8 @@
 			\
 			\
 			template <typename MACRO_ObjectT_>\
-			using ARG_Checker_ = ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_>::value>;
+			struct ARG_Checker_ : ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_>::value> {\
+			};
 
 
 #	else

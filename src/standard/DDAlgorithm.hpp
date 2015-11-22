@@ -30,9 +30,6 @@
 #	include "bits/DD_is_sorted_until.hpp"
 #	include "bits/DD_fill.hpp"
 #	include "bits/DD_generate.hpp"
-#	if __cplusplus < 201103L
-#		include "bits/DD_copy.hpp"
-#	endif
 #	include "bits/DD_transfer.hpp"
 #	include "bits/DD_replace.hpp"
 #	include "bits/DD_replace_if.hpp"

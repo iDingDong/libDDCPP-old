@@ -6,8 +6,6 @@
 
 #	if __cplusplus >= 201103L
 #		include "DD_MemberFunctionCheck.hpp"
-#		include "DD_IsNoexceptMoveConstructible.hpp"
-#		include "DD_IsNoexceptMoveAssignable.hpp"
 #		include "DD_move.hpp"
 #	else
 #		include "DD_global_definitions.hpp"

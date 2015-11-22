@@ -9,7 +9,7 @@
 #	endif
 #	include "DD_next.hpp"
 #	if __cplusplus >= 201103L
-#		include "DD_move.hpp"
+#		include "DD_move_range.hpp"
 #	else
 #		include "DD_copy.hpp"
 #	endif
@@ -21,7 +21,7 @@ template <typename UndirectionalIteratorT_>
 inline ProcessType transfer_forward(UndirectionalIteratorT_ const& from_, UndirectionalIteratorT_ const& to_) {
 #	if __cplusplus >= 201103L
 	auto temp_(::DD::move(*from_));
-	::DD::move(::DD::next(from_), ::DD::next(to_), from_);
+	::DD::move_range(::DD::next(from_), ::DD::next(to_), from_);
 	*to_ = ::DD::move(temp_);
 #	else
 	typename IteratorValue<UndirectionalIteratorT_>::Type temp_ = *from_;

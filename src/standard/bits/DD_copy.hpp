@@ -35,7 +35,7 @@ struct Copy_ {
 	}
 
 	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
-	static UndirectionalIteratorT2__ copy(
+	static Pair<UndirectionalIteratorT1__, UndirectionalIteratorT2__> copy(
 		UndirectionalIteratorT1__ begin___,
 		UndirectionalIteratorT1__ const& end___,
 		UndirectionalIteratorT2__ result_begin___,
@@ -46,7 +46,7 @@ struct Copy_ {
 		for (; begin___ != end___ && result_begin___ != result_end___; ++begin___, ++result_begin___) {
 			*result_begin___ = *begin___;
 		}
-		return result_begin___;
+		return Pair<UndirectionalIteratorT1__, UndirectionalIteratorT2__>(begin___, result_begin___);
 	}
 
 
@@ -72,7 +72,7 @@ struct Copy_<true> {
 	}
 
 	template <typename PointerT1__, typename PointerT2__>
-	static PointerT2__ copy(
+	static Pair<PointerT1__, PointerT2__> copy(
 		PointerT1__ const& begin___,
 		PointerT1__ const& end___,
 		PointerT2__ const& result_begin___,
@@ -87,7 +87,7 @@ struct Copy_<true> {
 			::DD::size_distance(result_begin___, result_end___)
 		);
 		std::memcpy(::DD::get_pointer(result_begin___), ::DD::get_pointer(begin___), length_);
-		return result_begin___ + length_;
+		return Pair<PointerT1__, PointerT2__>(begin___ + length_, result_begin___ + length_);
 	}
 
 
@@ -110,12 +110,16 @@ UndirectionalIteratorT2_ copy(
 }
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
-UndirectionalIteratorT2_ copy(
+Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> copy(
 	UndirectionalIteratorT1_ const& begin__,
 	UndirectionalIteratorT1_ const& end__,
 	UndirectionalIteratorT2_ const& result_begin__,
 	UndirectionalIteratorT2_ const& result_end__
-) {
+) DD_NOEXCEPT_AS(static_cast<Pair<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_>>(Copy_<
+	IsSame<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT1_), DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT2_)>::value &&
+	IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_>::value &&
+	IsTriviallyCopyable<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT2_)>::value
+>::copy(begin__ DD_COMMA end__ DD_COMMA result_begin__ DD_COMMA result_end__))) {
 	DD_ALIAS(ValueType, DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT2_));
 	return Copy_<
 		IsSame<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT1_), ValueType>::value &&
@@ -125,10 +129,10 @@ UndirectionalIteratorT2_ copy(
 }
 
 template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_>
-DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT2_) copy(
+Pair<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT1_), DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT2_)> copy(
 	UndirectionalRangeT1_& range__,
 	UndirectionalRangeT2_& result_range__
-) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT2_)>(
+) DD_NOEXCEPT_AS(static_cast<Pair<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT1_) DD_COMMA DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT2_)>>(
 	::DD::detail_::copy(DD_SPLIT_RANGE(range__) DD_COMMA DD_SPLIT_RANGE(result_range__))
 )) {
 	return ::DD::detail_::copy(DD_SPLIT_RANGE(range__), DD_SPLIT_RANGE(result_range__));

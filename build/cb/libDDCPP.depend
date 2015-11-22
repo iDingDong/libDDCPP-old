@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448122906 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448163836 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -66,7 +66,6 @@
 	"bits/DD_is_sorted_until.hpp"
 	"bits/DD_fill.hpp"
 	"bits/DD_generate.hpp"
-	"bits/DD_copy.hpp"
 	"bits/DD_transfer.hpp"
 	"bits/DD_replace.hpp"
 	"bits/DD_replace_if.hpp"
@@ -131,7 +130,7 @@
 	"DD_find_max.hpp"
 	"DD_global_definitions.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
+1448161610 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
@@ -142,7 +141,7 @@
 	"DD_find_min_max.hpp"
 	"DD_Pair.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
+1448161627 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 	"DD_Pair.hpp"
@@ -163,14 +162,12 @@
 1444579669 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthancomparable.hpp
 	"DD_global_definitions.hpp"
 
-1445621774 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap.hpp
+1448166064 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap.hpp
 	"DD_MemberFunctionCheck.hpp"
-	"DD_IsNoexceptMoveConstructible.hpp"
-	"DD_IsNoexceptMoveAssignable.hpp"
 	"DD_move.hpp"
 	"DD_global_definitions.hpp"
 
-1443513730 d:\develop\repositories\libddcpp\src\standard\bits\dd_memberfunctioncheck.hpp
+1448165737 d:\develop\repositories\libddcpp\src\standard\bits\dd_memberfunctioncheck.hpp
 	"DD_Nil.hpp"
 	"DD_meta_definitions.hpp"
 	"DD_SizeTrait.hpp"
@@ -191,7 +188,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1448163109 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
+1448166795 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
 	"DD_RemoveReference.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
@@ -512,7 +509,7 @@
 1448122643 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_Range.hpp"
 
-1448163172 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1448165873 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_IsSame.hpp"
 	"DD_IsPointer.hpp"
@@ -1213,10 +1210,10 @@
 	"DD_IteratorReverse.hpp"
 	"DD_transfer_forward.hpp"
 
-1448092842 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_forward.hpp
+1448166831 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_forward.hpp
 	"DD_IteratorValue.hpp"
 	"DD_next.hpp"
-	"DD_move.hpp"
+	"DD_move_range.hpp"
 	"DD_copy.hpp"
 
 1444970887 d:\develop\repositories\libddcpp\src\standard\bits\dd_next.hpp
@@ -1299,4 +1296,9 @@
 
 1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
 	"DD_Function.hpp"
+
+1448166831 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
+	"DD_Iterator.hpp"
+	"DD_move.hpp"
+	"DD_Range.hpp"
 
