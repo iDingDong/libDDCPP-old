@@ -14,21 +14,21 @@ struct FindLowerBound_ {
 	template <typename UndirectionalIteratorT__, typename ValueT__>
 	static UndirectionalIteratorT__ find_lower_bound(
 		UndirectionalIteratorT__ begin___,
-		UndirectionalIteratorT__ const& end___,
+		UndirectionalIteratorT__ end___,
 		ValueT__ const& value___
 	) DD_NOEXCEPT_AS(*begin___ < value___ && ++begin___ != end___) {
-		while (*begin___ < value___ && begin___ != end___) {
+		while (begin___ != end___ && *begin___ < value___) {
 			++begin___;
 		}
 		return begin___;
 	}
 
-	template <typename UndirectionalIteratorT__, typename ValueT__, typename BinaryPredicatorT__>
+	template <typename UndirectionalIteratorT__, typename ValueT__, typename BinaryPredicateT__>
 	static UndirectionalIteratorT__ find_lower_bound(
 		UndirectionalIteratorT__ begin___,
-		UndirectionalIteratorT__ const& end___,
+		UndirectionalIteratorT__ end___,
 		ValueT__ const& value___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_AS(less__(*begin___ DD_COMMA value___) && ++begin___ != end___) {
 		while (less___(*begin___, value___) && begin___ != end___) {
 			++begin___;
@@ -50,7 +50,7 @@ struct FindLowerBound_<true> {
 		ValueT__ const& value___
 	) DD_NOEXCEPT_AS(begin___ < end___ && *middle(begin___ DD_COMMA end___) < value___) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ current___ = middle(begin___, end___);
+			FreeAccessIteratorT__ current___(middle(begin___, end___));
 			if (*current___ < value___) {
 				begin___ = current___ + 1;
 			} else {
@@ -60,15 +60,15 @@ struct FindLowerBound_<true> {
 		return begin___;
 	}
 
-	template <typename FreeAccessIteratorT__, typename ValueT__, typename BinaryPredicatorT__>
+	template <typename FreeAccessIteratorT__, typename ValueT__, typename BinaryPredicateT__>
 	static FreeAccessIteratorT__ find_lower_bound(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___,
 		ValueT__ const& value___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_AS(begin___ < end___ && less___(*middle(begin___ DD_COMMA end___) DD_COMMA value___)) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ current___ = middle(begin___, end___);
+			FreeAccessIteratorT__ current___(middle(begin___, end___));
 			if (less___(*current___, value___)) {
 				begin___ = current___ + 1;
 			} else {
@@ -85,8 +85,8 @@ struct FindLowerBound_<true> {
 
 template <typename UndirectionalIteratorT_, typename ValueT_>
 inline UndirectionalIteratorT_ find_lower_bound(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(FindLowerBound_<
 	IsFreeAccessIterator<UndirectionalIteratorT_>::value
@@ -96,12 +96,12 @@ inline UndirectionalIteratorT_ find_lower_bound(
 	>::find_lower_bound(begin__, end__, value__);
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 inline UndirectionalIteratorT_ find_lower_bound(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(FindLowerBound_<
 	IsFreeAccessIterator<UndirectionalIteratorT_>::value
 >::find_lower_bound(begin__ DD_COMMA end__ DD_COMMA value__ DD_COMMA less__))) {
@@ -120,11 +120,11 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_lower_bound(
 	return ::DD::detail_::find_lower_bound(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_lower_bound(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
 	::DD::detail_::find_lower_bound(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__)
 )) {

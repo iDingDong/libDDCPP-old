@@ -13,9 +13,9 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIterator1_, typename UndirectionalIterator2_>
 UndirectionalIterator1_ find_first_of(
 	UndirectionalIterator1_ begin__,
-	UndirectionalIterator1_ const& end__,
-	UndirectionalIterator2_ const& sample_begin__,
-	UndirectionalIterator2_ const& sample_end__
+	UndirectionalIterator1_ end__,
+	UndirectionalIterator2_ sample_begin__,
+	UndirectionalIterator2_ sample_end__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ == *++const_cast<UndirectionalIterator2_&>(sample_begin__)) {
 	for (; begin__ != end__; ++begin__) {
 		for (UndirectionalIterator2_ current__ = sample_begin__; current__ != sample_end__; ++current__) {
@@ -30,9 +30,9 @@ UndirectionalIterator1_ find_first_of(
 template <typename UndirectionalIterator1_, typename UndirectionalIterator2_, typename BinaryPredicateT_>
 UndirectionalIterator1_ find_first_of(
 	UndirectionalIterator1_ begin__,
-	UndirectionalIterator1_ const& end__,
-	UndirectionalIterator2_ const& sample_begin__,
-	UndirectionalIterator2_ const& sample_end__,
+	UndirectionalIterator1_ end__,
+	UndirectionalIterator2_ sample_begin__,
+	UndirectionalIterator2_ sample_end__,
 	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, *++const_cast<UndirectionalIterator2_&>(sample_begin__))) {
 	for (; begin__ != end__; ++begin__) {

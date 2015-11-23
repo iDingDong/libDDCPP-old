@@ -11,10 +11,10 @@
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename FreeAccessIteratorT_>
 UndirectionalIteratorT_ find_range(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
-	FreeAccessIteratorT_ const& pattern_begin__,
-	FreeAccessIteratorT_ const& pattern_end__
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
+	FreeAccessIteratorT_ pattern_begin__,
+	FreeAccessIteratorT_ pattern_end__
 ) DD_NOEXCEPT_AS(UndirectionalIteratorT_(
 	kmp_find_range(begin__ DD_COMMA end__ DD_COMMA pattern_begin__ DD_COMMA pattern_end__)
 )) {

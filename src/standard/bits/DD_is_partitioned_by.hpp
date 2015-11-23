@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicateT_>
 ValidityType is_partitioned_by(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && predicate__(*begin__)) {
 	for (; begin__ != end__; ++begin__) {

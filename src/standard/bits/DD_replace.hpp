@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT1_, typename ValueT2_>
 ProcessType replace(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT1_ const& old__,
 	ValueT2_ const& value__
 ) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && *begin__ == old__) {
@@ -26,7 +26,7 @@ ProcessType replace(
 template <typename UndirectionalIteratorT_, typename ValueT1_, typename BinaryPredicateT_, typename ValueT2_>
 ProcessType replace(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT1_ const& old__,
 	BinaryPredicateT_ equal__,
 	ValueT2_ const& value__

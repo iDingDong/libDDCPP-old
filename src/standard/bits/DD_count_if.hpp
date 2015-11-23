@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicateT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count_if(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && predicate__(*begin__)) {
 #	if __cplusplus >= 201103L

@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_, typename ValueT_>
 FreeAccessIteratorT_ binary_find(
 	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ const& end__,
+	FreeAccessIteratorT_ end__,
 	ValueT_ const& value__
 ) {
 	for (FreeAccessIteratorT_ high__ = end__; begin__ < high__; ) {
@@ -30,8 +30,8 @@ FreeAccessIteratorT_ binary_find(
 
 template <typename FreeAccessIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 FreeAccessIteratorT_ binary_find(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& end__,
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ end__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ const& less__
 ) {

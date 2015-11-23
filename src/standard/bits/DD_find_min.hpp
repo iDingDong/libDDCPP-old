@@ -13,7 +13,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
 UndirectionalIteratorT_ find_min(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__
+	UndirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < *begin__) {
 	UndirectionalIteratorT_ min__ = begin__;
 	for (; begin__ != end__; ++begin__) {
@@ -27,7 +27,7 @@ UndirectionalIteratorT_ find_min(
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ find_min(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
 	UndirectionalIteratorT_ min__ = begin__;

@@ -14,10 +14,10 @@ struct FindHigherBound_ {
 	template <typename UndirectionalIteratorT__, typename ValueT__>
 	static UndirectionalIteratorT__ find_higher_bound(
 		UndirectionalIteratorT__ begin___,
-		UndirectionalIteratorT__ const& end___,
+		UndirectionalIteratorT__ end___,
 		ValueT__ const& value___
 	) {
-		while (!(value___ < *begin___) && begin___ != end___) {
+		while (begin___ != end___ && !(value___ < *begin___)) {
 			++begin___;
 		}
 		return begin___;
@@ -26,7 +26,7 @@ struct FindHigherBound_ {
 	template <typename UndirectionalIteratorT__, typename ValueT__, typename BinaryPredicatorT__>
 	static UndirectionalIteratorT__ find_higher_bound(
 		UndirectionalIteratorT__ begin___,
-		UndirectionalIteratorT__ const& end___,
+		UndirectionalIteratorT__ end___,
 		ValueT__ const& value___,
 		BinaryPredicatorT__ less___
 	) {
@@ -45,31 +45,29 @@ template <>
 struct FindHigherBound_<IteratorCatagoryValue::bidirectional> {
 	template <typename BidirectionalIteratorT__, typename ValueT__>
 	static BidirectionalIteratorT__ find_higher_bound(
-		BidirectionalIteratorT__ const& begin___,
+		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___,
 		ValueT__ const& value___
 	) {
-		while (begin___ != end___) {
+		for (; begin___ != end___; --end___) {
 			if (!(value___ < *end___)) {
 				return ::DD::next(end___);
 			}
-			--end___;
 		}
 		return end___;
 	}
 
 	template <typename BidirectionalIteratorT__, typename ValueT__, typename BinaryPredicatorT__>
 	static BidirectionalIteratorT__ find_higher_bound(
-		BidirectionalIteratorT__ const& begin___,
+		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___,
 		ValueT__ const& value___,
 		BinaryPredicatorT__ less___
 	) {
-		while (begin___ != end___) {
+		for (; begin___ != end___; --end___) {
 			if (!less___(value___, *end___)) {
 				return ::DD::next(end___);
 			}
-			--end___;
 		}
 		return end___;
 	}
@@ -88,7 +86,7 @@ struct FindHigherBound_<IteratorCatagoryValue::free_access> {
 		ValueT__ const& value___
 	) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ current___ = middle(begin___, end___);
+			FreeAccessIteratorT__ current___(middle(begin___, end___));
 			if (value___ < *current___) {
 				end___ = current___;
 			} else {
@@ -98,15 +96,15 @@ struct FindHigherBound_<IteratorCatagoryValue::free_access> {
 		return end___;
 	}
 
-	template <typename FreeAccessIteratorT__, typename ValueT__, typename BinaryPredicatorT__>
+	template <typename FreeAccessIteratorT__, typename ValueT__, typename BinaryPredicateT__>
 	static FreeAccessIteratorT__ find_higher_bound(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___,
 		ValueT__ const& value___,
-		BinaryPredicatorT__ less___
+		BinaryPredicateT__ less___
 	) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ current___ = middle(begin___, end___);
+			FreeAccessIteratorT__ current___(middle(begin___, end___));
 			if (less___(value___, *current___)) {
 				end___ = current___;
 			} else {
@@ -123,8 +121,8 @@ struct FindHigherBound_<IteratorCatagoryValue::free_access> {
 
 template <typename UndirectionalIteratorT_, typename ValueT_>
 inline UndirectionalIteratorT_ find_higher_bound(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(
 	FindHigherBound_<IteratorCatagory<UndirectionalIteratorT_>::value>::find_higher_bound(begin__ DD_COMMA end__ DD_COMMA value__)
@@ -132,12 +130,12 @@ inline UndirectionalIteratorT_ find_higher_bound(
 	return FindHigherBound_<IteratorCatagory<UndirectionalIteratorT_>::value>::find_higher_bound(begin__, end__, value__);
 }
 
-template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 inline UndirectionalIteratorT_ find_higher_bound(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(FindHigherBound_<
 	IteratorCatagory<UndirectionalIteratorT_>::value
 >::find_higher_bound(begin__ DD_COMMA end__ DD_COMMA value__ DD_COMMA less__))) {
@@ -154,11 +152,11 @@ inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_higher_bound(
 	return ::DD::detail_::find_higher_bound(DD_SPLIT_RANGE(range__), value__);
 }
 
-template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicatorT_>
+template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryPredicateT_>
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_) find_higher_bound(
 	UndirectionalRangeT_& range__,
 	ValueT_ const& value__,
-	BinaryPredicatorT_ less__
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT_)>(
 	::DD::detail_::find_higher_bound(DD_SPLIT_RANGE(range__) DD_COMMA value__ DD_COMMA less__)
 )) {

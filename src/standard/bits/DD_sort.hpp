@@ -30,9 +30,9 @@ inline LengthT_ logarithms_2_(LengthT_ length_) {
 
 template <typename IteratorT_>
 IteratorT_ find_median_(
-	IteratorT_ const& begin__,
-	IteratorT_ const& middle__,
-	IteratorT_ const& end__
+	IteratorT_ begin__,
+	IteratorT_ middle__,
+	IteratorT_ end__
 ) {
 	if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*middle__, *begin__)) {
 		if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*end__, *middle__)) {
@@ -55,7 +55,7 @@ template <typename FreeAccessIteratorT_>
 FreeAccessIteratorT_ unguarded_partition_(
 	FreeAccessIteratorT_ begin__,
 	FreeAccessIteratorT_ end__,
-	FreeAccessIteratorT_ const& pivot__
+	FreeAccessIteratorT_ pivot__
 ) {
 	for (; ; ++begin__) {
 		while (LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(*begin__, *pivot__)) {
@@ -75,8 +75,8 @@ FreeAccessIteratorT_ unguarded_partition_(
 
 template <typename FreeAccessIteratorT_>
 inline FreeAccessIteratorT_ unguarded_partition_pivot_(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& end__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ end__
 ) {
 	FreeAccessIteratorT_ middle__ = begin__ + length_difference(begin__, end__) / 2;
 	using ::DD::swap_target;
@@ -105,7 +105,7 @@ ProcessType push_heap(
 
 template <typename FreeAccessIteratorT_>
 ProcessType adjust_heap_(
-	FreeAccessIteratorT_ const& begin__,
+	FreeAccessIteratorT_ begin__,
 	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) hole_index_,
 	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) length_,
 	DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)& value_
@@ -136,9 +136,9 @@ ProcessType adjust_heap_(
 
 template <typename FreeAccessIteratorT_>
 inline ProcessType pop_heap_(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& last__,
-	FreeAccessIteratorT_ const& result__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ last__,
+	FreeAccessIteratorT_ result__
 ) {
 	DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_) value_ = *result__;
 	*result__ = *begin__;
@@ -148,9 +148,9 @@ inline ProcessType pop_heap_(
 
 template <typename FreeAccessIteratorT_>
 ProcessType heap_select_(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& middle__,
-	FreeAccessIteratorT_ const& end__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ middle__,
+	FreeAccessIteratorT_ end__
 ) {
 	make_heap_(begin__, middle__);
 	for (FreeAccessIteratorT_ current__ = middle__; current__ < end__; ++ current__) {
@@ -163,7 +163,7 @@ ProcessType heap_select_(
 
 template <typename FreeAccessIteratorT_>
 ProcessType sort_heap_(
-	FreeAccessIteratorT_ const& begin__,
+	FreeAccessIteratorT_ begin__,
 	FreeAccessIteratorT_ end__
 ) {
 	while (length_difference(begin__, end__) > 1) {
@@ -175,9 +175,9 @@ ProcessType sort_heap_(
 
 template <typename FreeAccessIteratorT_>
 inline ProcessType partitial_sort_(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& middle__,
-	FreeAccessIteratorT_ const& end__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ middle__,
+	FreeAccessIteratorT_ end__
 ) {
 	heap_select_(begin__, middle__, end__);
 	sort_heap_(begin__, middle__);
@@ -220,8 +220,8 @@ ProcessType final_insert_sort_(
 
 template <typename FreeAccessIteratorT_>
 inline ProcessType sort(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& end__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ end__
 ) {
 	if (begin__ < end__) {
 		introspective_sort_loop_(begin__, end__, logarithms_2_(length_difference(begin__, end__)) * 2);

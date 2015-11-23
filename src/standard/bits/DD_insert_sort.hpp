@@ -18,8 +18,8 @@ template <ValidityType is_bidirectional_iterator_c_>
 struct InsertSort_ {
 	template <typename UndirectionalIteratorT__>
 	static ProcessType insert_sort_(
-		UndirectionalIteratorT__ const& begin___,
-		UndirectionalIteratorT__ const& end___
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
 	) DD_NOEXCEPT_IF(
 		noexcept(swap_target(begin___, end___)) &&
 		noexcept(++const_cast<UndirectionalIteratorT__&>(begin___) != end___) &&
@@ -42,9 +42,9 @@ struct InsertSort_ {
 
 	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType insert_sort_(
-		UndirectionalIteratorT__ const& begin___,
-		UndirectionalIteratorT__ const& end___,
-		BinaryPredicateT__ const& less___
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___,
+		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_IF(
 		noexcept(swap_target(begin___, end___)) &&
 		noexcept(++const_cast<UndirectionalIteratorT__&>(begin___) != end___) &&
@@ -74,8 +74,8 @@ template <>
 struct InsertSort_<true> {
 	template <typename BidirectionalIteratorT__>
 	static ProcessType insert_sort_(
-		BidirectionalIteratorT__ const& begin___,
-		BidirectionalIteratorT__ const& end___
+		BidirectionalIteratorT__ begin___,
+		BidirectionalIteratorT__ end___
 	) DD_NOEXCEPT_IF(
 		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
 		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
@@ -111,9 +111,9 @@ struct InsertSort_<true> {
 
 	template <typename BidirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType insert_sort_(
-		BidirectionalIteratorT__ const& begin___,
-		BidirectionalIteratorT__ const& end___,
-		BinaryPredicateT__ const& less___
+		BidirectionalIteratorT__ begin___,
+		BidirectionalIteratorT__ end___,
+		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_IF(
 		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
 		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
@@ -152,36 +152,31 @@ struct InsertSort_<true> {
 
 
 
-DD_DETAIL_END_
-
-
-
-DD_BEGIN_
 template <typename UndirectionalIteratorT_>
 inline ProcessType insert_sort(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(
-	detail_::InsertSort_<
+	InsertSort_<
 		IsBidirectionalIterator<UndirectionalIteratorT_>::value
 	>::insert_sort_(begin__ DD_COMMA end__)
 ) {
-	detail_::InsertSort_<
+	InsertSort_<
 		IsBidirectionalIterator<UndirectionalIteratorT_>::value
 	>::insert_sort_(begin__, end__);
 }
 
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 inline ProcessType insert_sort(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
-	BinaryPredicateT_ const& less__
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
+	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(
-	detail_::InsertSort_<
+	InsertSort_<
 		IsBidirectionalIterator<UndirectionalIteratorT_>::value
 	>::insert_sort_(begin__ DD_COMMA end__ DD_COMMA less__)
 ) {
-	detail_::InsertSort_<
+	InsertSort_<
 		IsBidirectionalIterator<UndirectionalIteratorT_>::value
 	>::insert_sort_(begin__, end__, less__);
 }
@@ -189,17 +184,26 @@ inline ProcessType insert_sort(
 template <typename UndirectionalRangeT_>
 inline ProcessType insert_sort(
 	UndirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(range__)) {
-	insert_sort(DD_SPLIT_RANGE(range__));
+) DD_NOEXCEPT_AS(::DD::detail_::insert_sort(DD_SPLIT_RANGE(range__))) {
+	::DD::detail_::insert_sort(DD_SPLIT_RANGE(range__));
 }
 
 template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
 inline ProcessType insert_sort(
 	UndirectionalRangeT_& range__,
-	BinaryPredicateT_ const& less__
-) DD_NOEXCEPT_AS(DD_SPLIT_RANGE(range__) DD_COMMA less__) {
-	insert_sort(DD_SPLIT_RANGE(range__), less__);
+	BinaryPredicateT_ less__
+) DD_NOEXCEPT_AS(::DD::detail_::insert_sort(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
+	::DD::detail_::insert_sort(DD_SPLIT_RANGE(range__), less__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::insert_sort;
 
 
 

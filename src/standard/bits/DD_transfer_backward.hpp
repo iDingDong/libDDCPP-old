@@ -10,9 +10,12 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename UndirectionalIteratorT_>
-inline ProcessType transfer_backward(UndirectionalIteratorT_ const& from_, UndirectionalIteratorT_ const& to_) {
-	DD_ALIAS(ReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, UndirectionalIteratorT_));
+template <typename BidirectionalIteratorT_>
+inline ProcessType transfer_backward(
+	BidirectionalIteratorT_ from_,
+	BidirectionalIteratorT_ to_
+) {
+	DD_ALIAS(ReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, BidirectionalIteratorT_));
 	::DD::transfer_forward(ReverseIterator(from_), ReverseIterator(to_));
 }
 

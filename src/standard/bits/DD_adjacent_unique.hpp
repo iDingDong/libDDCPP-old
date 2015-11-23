@@ -16,7 +16,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
 UndirectionalIteratorT_ adjacent_unique(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__
+	UndirectionalIteratorT_ end__
 ) {
 	if (begin__ != end__) {
 		for (UndirectionalIteratorT_ current__ = begin__; ; ) {
@@ -38,7 +38,7 @@ UndirectionalIteratorT_ adjacent_unique(
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ adjacent_unique(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	BinaryPredicateT_ equal__
 ) {
 	if (begin__ != end__) {

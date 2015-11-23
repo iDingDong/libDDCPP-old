@@ -11,8 +11,8 @@
 DD_BEGIN_
 template <typename PointerT_>
 inline ProcessType swap_target(
-	PointerT_ const& pointer_1__,
-	PointerT_ const& pointer_2__
+	PointerT_ pointer_1__,
+	PointerT_ pointer_2__
 ) DD_NOEXCEPT_AS(swap(*pointer_1__, *pointer_2__)) {
 	using DD::swap;
 	swap(*pointer_1__, *pointer_2__);

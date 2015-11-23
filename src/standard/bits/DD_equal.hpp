@@ -197,19 +197,19 @@ template <>
 struct Equal_<true> {
 	template <typename PointerT1__, typename PointerT2__>
 	static ValidityType equal_(
-		PointerT1__ const& begin_1___,
-		PointerT1__ const& end_1___,
-		PointerT2__ const& begin_2___
+		PointerT1__ begin_1___,
+		PointerT1__ end_1___,
+		PointerT2__ begin_2___
 	) DD_NOEXCEPT {
 		return !std::memcmp(get_pointer(begin_1___), get_pointer(begin_2___), size_distance(begin_1___, end_1___));
 	}
 
 	template <typename PointerT1__, typename PointerT2__>
 	static ValidityType equal_(
-		PointerT1__ const& begin_1___,
-		PointerT1__ const& end_1___,
-		PointerT2__ const& begin_2___,
-		PointerT2__ const& end_2___
+		PointerT1__ begin_1___,
+		PointerT1__ end_1___,
+		PointerT2__ begin_2___,
+		PointerT2__ end_2___
 	) DD_NOEXCEPT {
 		SizeType size_ = size_distance(begin_1___, end_1___);
 		return size_ == size_distance(begin_2___, end_2___) && !std::memcmp(get_pointer(begin_1___), get_pointer(begin_2___), size_);
@@ -221,12 +221,12 @@ struct Equal_<true> {
 
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
-inline ValidityType equal_(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__
+inline ValidityType equal(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__
 ) DD_NOEXCEPT_AS(
-	detail_::Equal_<
+	Equal_<
 		AndType<
 			IsPod<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
 			IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_> DD_COMMA
@@ -237,7 +237,7 @@ inline ValidityType equal_(
 		>::value
 	>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__)
 ) {
-	return detail_::Equal_<
+	return Equal_<
 #	if __cplusplus >= 201103L
 		AndType<
 			IsPod<IteratorValueType<UndirectionalIteratorT1_>>,
@@ -257,13 +257,13 @@ inline ValidityType equal_(
 }
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
-inline ValidityType equal_(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__,
-	UndirectionalIteratorT2_ const& end_2__
+inline ValidityType equal(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ end_2__
 ) DD_NOEXCEPT_AS(
-	detail_::Equal_<
+	Equal_<
 		AndType<
 			IsPod<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
 			IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_> DD_COMMA
@@ -274,7 +274,7 @@ inline ValidityType equal_(
 		>::value
 	>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA end_2__)
 ) {
-	return detail_::Equal_<
+	return Equal_<
 #	if __cplusplus >= 201103L
 		AndType<
 			IsPod<IteratorValueType<UndirectionalIteratorT1_>>,
@@ -294,96 +294,41 @@ inline ValidityType equal_(
 }
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_>
-inline ValidityType equal_(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__,
-	BinaryPredicateT_ const& equal__
-) DD_NOEXCEPT_AS(detail_::Equal_<false>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA equal__)) {
-	return detail_::Equal_<false>::equal_(begin_1__, end_1__, begin_2__, equal__);
-}
-
-template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_>
-inline ValidityType equal_(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__,
-	UndirectionalIteratorT2_ const& end_2__,
-	BinaryPredicateT_ const& equal__
-) DD_NOEXCEPT_AS(detail_::Equal_<false>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA end_2__ DD_COMMA equal__)) {
-	return detail_::Equal_<false>::equal_(begin_1__, end_1__, begin_2__, end_2__, equal__);
-}
-
-
-
-template <ValidityType is_range_c_>
-struct EqualDispatcher_ {
-	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
-	static ValidityType equal_(
-		UndirectionalIteratorT1__ const& begin_1___,
-		UndirectionalIteratorT1__ const& end_1___,
-		UndirectionalIteratorT2__ const& begin_2___
-	) DD_NOEXCEPT_AS(::DD::detail_::equal_(begin_1___ DD_COMMA end_1___ DD_COMMA begin_2___)) {
-		return ::DD::detail_::equal_(begin_1___, end_1___, begin_2___);
-	}
-
-
-};
-
-
-
-template <>
-struct EqualDispatcher_<true> {
-	template <typename UndirectionalRangeT1__, typename UndirectionalRangeT2__, typename BinaryPredicateT__>
-	static ValidityType equal_(
-		UndirectionalRangeT1__ const& range_1___,
-		UndirectionalRangeT2__ const& range_2___,
-		BinaryPredicateT__ const& equal___
-	) DD_NOEXCEPT_AS(::DD::detail_::equal_(DD_SPLIT_RANGE(range_1___) DD_COMMA DD_SPLIT_RANGE(range_2___) DD_COMMA equal___)) {
-		return ::DD::detail_::equal_(DD_SPLIT_RANGE(range_1___), DD_SPLIT_RANGE(range_2___), equal___);
-	}
-
-
-};
-
-
-
-template <typename ObjectT1_, typename ObjectT2_, typename ObjectT3_>
 inline ValidityType equal(
-	ObjectT1_ const& object_1__,
-	ObjectT2_ const& object_2__,
-	ObjectT3_ const& object_3__
-) DD_NOEXCEPT_AS(EqualDispatcher_<IsRange<ObjectT1_>::value>::equal_(object_1__ DD_COMMA object_2__ DD_COMMA object_3__)) {
-	return EqualDispatcher_<IsRange<ObjectT1_>::value>::equal_(object_1__, object_2__, object_3__);
-}
-
-template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
-inline ValidityType equal(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__,
-	UndirectionalIteratorT2_ const& end_2__
-) DD_NOEXCEPT_AS(equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA end_2__)) {
-	return equal_(begin_1__, end_1__, begin_2__, end_2__);
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	BinaryPredicateT_ equal__
+) DD_NOEXCEPT_AS(Equal_<false>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA equal__)) {
+	return Equal_<false>::equal_(begin_1__, end_1__, begin_2__, equal__);
 }
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_>
 inline ValidityType equal(
-	UndirectionalIteratorT1_ const& begin_1__,
-	UndirectionalIteratorT1_ const& end_1__,
-	UndirectionalIteratorT2_ const& begin_2__,
-	UndirectionalIteratorT2_ const& end_2__,
-	BinaryPredicateT_ const& equal__
-) DD_NOEXCEPT_AS(equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA end_2__ DD_COMMA equal__)) {
-	return equal_(begin_1__, end_1__, begin_2__, end_2__, equal__);
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ end_2__,
+	BinaryPredicateT_ equal__
+) DD_NOEXCEPT_AS(Equal_<false>::equal_(begin_1__ DD_COMMA end_1__ DD_COMMA begin_2__ DD_COMMA end_2__ DD_COMMA equal__)) {
+	return Equal_<false>::equal_(begin_1__, end_1__, begin_2__, end_2__, equal__);
 }
 
 template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_>
 inline ValidityType equal(
 	UndirectionalRangeT1_ const& range_1__,
 	UndirectionalRangeT2_ const& range_2__
-) DD_NOEXCEPT_AS(equal_(DD_SPLIT_RANGE(range_1__) DD_COMMA DD_SPLIT_RANGE(range_2__))) {
-	return equal_(DD_SPLIT_RANGE(range_1__), DD_SPLIT_RANGE(range_2__));
+) DD_NOEXCEPT_AS(::DD::detail_::equal(DD_SPLIT_RANGE(range_1__) DD_COMMA DD_SPLIT_RANGE(range_2__))) {
+	return ::DD::detail_::equal(DD_SPLIT_RANGE(range_1__), DD_SPLIT_RANGE(range_2__));
+}
+
+template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_, typename BinaryPredicateT_>
+inline ValidityType equal(
+	UndirectionalRangeT1_ const& range_1__,
+	UndirectionalRangeT2_ const& range_2__,
+	BinaryPredicateT_ equal__
+) DD_NOEXCEPT_AS(::DD::detail_::equal(DD_SPLIT_RANGE(range_1__) DD_COMMA DD_SPLIT_RANGE(range_2__) DD_COMMA equal__)) {
+	return ::DD::detail_::equal(DD_SPLIT_RANGE(range_1__), DD_SPLIT_RANGE(range_2__), equal__);
 }
 
 

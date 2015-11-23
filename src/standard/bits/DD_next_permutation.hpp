@@ -14,8 +14,8 @@ template <ValidityType is_free_access_iterator_c_>
 struct NextPermutation_ {
 	template <typename BidirectionalIteratorT_>
 	ValidityType next_permutation(
-		BidirectionalIteratorT_ const& begin__,
-		BidirectionalIteratorT_ const& end__
+		BidirectionalIteratorT_ begin__,
+		BidirectionalIteratorT_ end__
 	) {
 		if (begin__ != end__) {
 			BidirectionalIteratorT_ back__ = previous(end__);
@@ -49,8 +49,8 @@ template <>
 struct NextPermutation_<true> {
 	template <typename FreeAccessIteratorT_>
 	ValidityType next_permutation(
-		FreeAccessIteratorT_ const& begin__,
-		FreeAccessIteratorT_ const& end__
+		FreeAccessIteratorT_ begin__,
+		FreeAccessIteratorT_ end__
 	) {
 		for (FreeAccessIteratorT_ current__ = end__ - 2; begin__ <= current__; ) {
 			if (*current__ < *current__ + 1) {
@@ -74,12 +74,19 @@ struct NextPermutation_<true> {
 
 template <typename BidirectionalIteratorT_>
 ValidityType next_permutation(
-	BidirectionalIteratorT_ const& begin__,
-	BidirectionalIteratorT_ const& end__
+	BidirectionalIteratorT_ begin__,
+	BidirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(
 	NextPermutation_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::next_permutation(begin__ DD_COMMA end__)
 )) {
 	return NextPermutation_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::next_permutation(begin__, end__);
+}
+
+template <typename BidirectionalRangeT_>
+inline ValidityType next_permutation(
+	BidirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(::DD::detail_::next_permutation(DD_SPLIT_RANGE(range__)))) {
+	return ::DD::detail_::next_permutation(DD_SPLIT_RANGE(range__));
 }
 
 

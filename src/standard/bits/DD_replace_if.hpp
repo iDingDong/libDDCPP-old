@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryPredicateT_, typename ValueT_>
 ProcessType replace_if(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	UnaryPredicateT_ predicate__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__ && predicate__(*begin__)) {

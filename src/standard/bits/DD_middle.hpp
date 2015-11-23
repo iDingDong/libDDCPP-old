@@ -17,8 +17,8 @@ template <IteratorCatagoryValue catagory_value_c_>
 struct Middle_ {
 	template <typename UndirectionalIteratorT__>
 	static UndirectionalIteratorT__ middle(
-		UndirectionalIteratorT__ const& begin___,
-		UndirectionalIteratorT__ const& end___
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
 	) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT__>(
 		::DD::next(begin___, length_difference(begin___, end___) / 2)
 	)) {
@@ -50,8 +50,8 @@ struct Middle_<IteratorCatagoryValue::bidirectional> {
 
 template <typename UndirectionalIteratorT_>
 inline UndirectionalIteratorT_ middle(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(static_cast<UndirectionalIteratorT_>(
 	Middle_<IteratorCatagory<UndirectionalIteratorT_>::value>::middle(begin__ DD_COMMA end__)
 )) {

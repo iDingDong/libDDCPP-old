@@ -13,7 +13,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 UndirectionalIteratorT_ find_not(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(begin__ != end__ && *++begin__ == value__) {
 	while (begin__ != end__ && *begin__ == value__) {
@@ -25,7 +25,7 @@ UndirectionalIteratorT_ find_not(
 template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 UndirectionalIteratorT_ find_not(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(begin__ != end__ && equal__(*++begin__, value__)) {

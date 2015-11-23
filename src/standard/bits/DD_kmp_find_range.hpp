@@ -20,7 +20,7 @@ StrictPointer<DifferenceT_[]> process_kmp_pattern(
 #	else
 DifferenceT_* process_kmp_pattern(
 #	endif
-	FreeAccessIteratorT_ const& begin__,
+	FreeAccessIteratorT_ begin__,
 	DifferenceT_ length__
 ) {
 	StrictPointer<DifferenceT_[]> result(new DifferenceT_[length__]);
@@ -45,8 +45,8 @@ struct KmpFindRangeImplement_ {
 	template <typename FreeAccessIteratorT1__, typename FreeAccessIteratorT2__, typename DifferenceT__>
 	static FreeAccessIteratorT1__ kmp_find_range_apply(
 		FreeAccessIteratorT1__ begin___,
-		FreeAccessIteratorT1__ const& end___,
-		FreeAccessIteratorT2__ const& pattern_begin___,
+		FreeAccessIteratorT1__ end___,
+		FreeAccessIteratorT2__ pattern_begin___,
 		StrictPointer<DifferenceT__[]> const& processed_pattern_,
 		DifferenceT__ const& length___
 	) {
@@ -73,9 +73,9 @@ struct KmpFindRangeImplement_ {
 
 template <typename UndirectionalIteratorT_, typename FreeAccessIteratorT_, typename DifferenceT_>
 UndirectionalIteratorT_ kmp_find_range_apply(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
-	FreeAccessIteratorT_ const& pattern_begin__,
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
+	FreeAccessIteratorT_ pattern_begin__,
 	StrictPointer<DifferenceT_[]> const& processed_pattern_,
 	DifferenceT_ const& length__
 ) DD_NOEXCEPT_AS(UndirectionalIteratorT_(
@@ -100,10 +100,10 @@ UndirectionalIteratorT_ kmp_find_range_apply(
 
 template <typename UndirectionalIteratorT_, typename FreeAccessIteratorT_>
 UndirectionalIteratorT_ kmp_find_range(
-	UndirectionalIteratorT_ const& begin__,
-	UndirectionalIteratorT_ const& end__,
-	FreeAccessIteratorT_ const& pattern_begin__,
-	FreeAccessIteratorT_ const& pattern_end__
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
+	FreeAccessIteratorT_ pattern_begin__,
+	FreeAccessIteratorT_ pattern_end__
 ) DD_NOEXCEPT_AS(UndirectionalIteratorT_(
 	kmp_find_range_apply(
 		begin__ DD_COMMA

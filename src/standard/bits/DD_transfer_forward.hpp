@@ -18,7 +18,7 @@
 
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
-inline ProcessType transfer_forward(UndirectionalIteratorT_ const& from_, UndirectionalIteratorT_ const& to_) {
+inline ProcessType transfer_forward(UndirectionalIteratorT_ from_, UndirectionalIteratorT_ to_) {
 #	if __cplusplus >= 201103L
 	auto temp_(::DD::move(*from_));
 	::DD::move_range(::DD::next(from_), ::DD::next(to_), from_);

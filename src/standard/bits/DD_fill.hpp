@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 inline ProcessType fill(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(*++begin__ = value__ DD_COMMA begin__ != end__) {
 	for (; begin__ != end__; ++begin__) {

@@ -14,8 +14,8 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
-	ValueT_ const& value__
+	UndirectionalIteratorT_ end__,
+	ValueT_ value__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ == value__) {
 #	if __cplusplus >= 201103L
 	auto result_ = DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)();
@@ -34,8 +34,8 @@ DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) count(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
-	ValueT_ const& value__,
+	UndirectionalIteratorT_ end__,
+	ValueT_ value__,
 	BinaryPredicateT_ equal__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && equal__(*begin__, value__)) {
 #	if __cplusplus >= 201103L

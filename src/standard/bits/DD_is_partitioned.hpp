@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename ValueT_>
 ValidityType is_partitioned(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < value__) {
 	for (; begin__ != end__; ++begin__) {
@@ -31,7 +31,7 @@ ValidityType is_partitioned(
 template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
 ValidityType is_partitioned(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	ValueT_ const& value__,
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, value__)) {

@@ -8,19 +8,20 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
-ProcessType select_sort(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ const& end__) DD_NOEXCEPT_IF(
-	noexcept(begin__ != end__) &&
-	noexcept(++begin__) &&
-	noexcept(UndirectionalIteratorT_()) &&
+ProcessType select_sort(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_IF(
+	noexcept(++begin__ != end__) &&
 	noexcept(begin__ = begin__) &&
-	noexcept(*begin__ < *begin__) &&
+	noexcept(*begin__ < *end__) &&
 	noexcept(swap_target(begin__, begin__))
 ) {
-	for (UndirectionalIteratorT_ current__, tagged__; begin__ != end__; ++begin__) {
-		current__ = begin__;
-		tagged__ = current__;
+	for (; begin__ != end__; ++begin__) {
+		UndirectionalIteratorT_ current__(begin__);
+		UndirectionalIteratorT_ tagged__(current__);
 		while (++current__ != end__) {
 			if (*current__ < *tagged__) {
 				tagged__ = current__;
@@ -30,6 +31,15 @@ ProcessType select_sort(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_
 		swap_target(begin__, tagged__);
 	}
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::select_sort;
 
 
 

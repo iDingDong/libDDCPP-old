@@ -8,12 +8,12 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename BidirectionalIteratorT_, typename UnaryPredicateT_>
 BidirectionalIteratorT_ partition_by(
 	BidirectionalIteratorT_ begin__,
 	BidirectionalIteratorT_ end__,
-	UnaryPredicateT_ const& predicate__
+	UnaryPredicateT_ predicate__
 ) DD_NOEXCEPT_IF(noexcept(predicate__(*--++begin__)) && noexcept(swap_target(begin__, end__))) {
 	while (begin__ != end__) {
 		while (predicate__(*begin__)) {
@@ -31,6 +31,25 @@ BidirectionalIteratorT_ partition_by(
 	}
 	return begin__;
 }
+
+template <typename BidirectionalRangeT_, typename UnaryPredicateT_>
+inline DD_MODIFY_TRAIT(Iterator, BidirectionalRangeT_) partition_by(
+	BidirectionalRangeT_& range__,
+	UnaryPredicateT_ predicate__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(Iterator, BidirectionalRangeT_)>(
+	::DD::detail_::partition_by(DD_SPLIT_RANGE(range__) DD_COMMA predicate__)
+)) {
+	return ::DD::detail_::partition_by(DD_SPLIT_RANGE(range__), predicate__);
+}
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::partition_by;
 
 
 

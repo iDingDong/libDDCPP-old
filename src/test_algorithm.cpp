@@ -252,10 +252,16 @@ void test_algorithm() {
 		}
 	}
 	{
-		DD::Array<int, 13> temp = { 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6 };
-		DD::Array<int, 3> result = { 4, 4, 4 };
+		DD::Array<int, 13> temp = { 0, 0, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6 };
+		DD::Array<int, 3> result_1 = { 4, 4, 4 };
+		DD::Array<int, 0> result_2;
 		if (
-			!DD::equal(find_lower_bound(temp, 4), find_higher_bound(temp, 4), DD_SPLIT_RANGE(result))
+			!DD::equal(find_lower_bound(temp, 4), find_higher_bound(temp, 4), DD_SPLIT_RANGE(result_1)) ||
+			!DD::equal(find_lower_bound(temp, 1), find_higher_bound(temp, 1), DD_SPLIT_RANGE(result_2)) ||
+			find_bounds(temp, 4).begin() != find_lower_bound(temp, 4) ||
+			find_bounds(temp, 1).begin() != find_lower_bound(temp, 1) ||
+			find_bounds(temp, 4).end() != find_higher_bound(temp, 4) ||
+			find_bounds(temp, 1).end() != find_higher_bound(temp, 1)
 		) {
 			throw "'DD::find_lower_bound'/'DD::find_higher_bound' test failed.";
 		}

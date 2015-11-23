@@ -10,7 +10,10 @@
 
 DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_>
-ProcessType transfer(FreeAccessIteratorT_ const& from_, FreeAccessIteratorT_ const& to_) {
+ProcessType transfer(
+	FreeAccessIteratorT_ from_,
+	FreeAccessIteratorT_ to_
+) {
 	if (to_ < from_) {
 		::DD::transfer_backward(from_, to_);
 	} else {

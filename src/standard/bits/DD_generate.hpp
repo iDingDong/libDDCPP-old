@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename Generator_>
 ProcessType generate(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	Generator_ generator__
 ) DD_NOEXCEPT_AS(*++begin__ = generator__() DD_COMMA begin__ != end__) {
 	for (; begin__ != end__; ++begin__) {

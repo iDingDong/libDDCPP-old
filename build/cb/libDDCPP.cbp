@@ -218,6 +218,7 @@
 		<Unit filename="../../src/standard/bits/DD_fabricate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fill.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find.hpp" />
+		<Unit filename="../../src/standard/bits/DD_find_bounds.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_first_of.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_higher_bound.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_if.hpp" />

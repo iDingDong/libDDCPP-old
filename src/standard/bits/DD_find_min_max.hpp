@@ -14,7 +14,7 @@ DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
 Pair<UndirectionalIteratorT_> find_min_max(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__
+	UndirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && *begin__ < *begin__) {
 	UndirectionalIteratorT_ min__ = begin__;
 	UndirectionalIteratorT_ max__ = begin__;
@@ -31,7 +31,7 @@ Pair<UndirectionalIteratorT_> find_min_max(
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 Pair<UndirectionalIteratorT_> find_min_max(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
+	UndirectionalIteratorT_ end__,
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(++begin__ != end__ && less__(*begin__, *begin__)) {
 	UndirectionalIteratorT_ min__ = begin__;
