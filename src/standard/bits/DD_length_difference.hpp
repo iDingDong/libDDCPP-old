@@ -10,19 +10,20 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename UndirectionalIteratorT_, ValidityType is_free_access_iterator_>
+template <ValidityType is_free_access_iterator_>
 struct LengthDifference_ {
-	static DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) length_difference_(
-		UndirectionalIteratorT_ begin__,
-		UndirectionalIteratorT_ const& end__
-	) DD_NOEXCEPT_IF(noexcept(begin__ != end__) && noexcept(++begin__)) {
+	template <typename UndirectionalIteratorT__>
+	static DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT__) length_difference(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(++begin___ != end___) {
 #	if __cplusplus >= 201103L
-		auto result_ = IteratorDifference<UndirectionalIteratorT_>();
+		auto result_ = IteratorDifference<UndirectionalIteratorT__>();
 #	else
-		typedef typename IteratorDifference<UndirectionalIteratorT_>::Type ResultType_;
+		typedef typename IteratorDifference<UndirectionalIteratorT__>::Type ResultType_;
 		ResultType result_ = ResultType();
 #	endif
-		for (; begin__ != end__; ++begin__) {
+		for (; begin___ != end___; ++begin___) {
 			++result_;
 		}
 		return result_;
@@ -33,14 +34,14 @@ struct LengthDifference_ {
 
 
 
-template <typename FreeAccessIterator_>
-struct LengthDifference_<FreeAccessIterator_, true> {
-#	if __cplusplus >= 201103L
-	static auto length_difference_(FreeAccessIterator_ const& begin__, FreeAccessIterator_ const& end__) DD_NOEXCEPT_AS(end__ - begin__) -> decltype(end__ - begin__) {
-#	else
-	static typename IteratorDifference<FreeAccessIteratorT_>::Type length_difference_(FreeAccessIterator_ const& begin__, FreeAccessIterator_ const& end__) {
-#	endif
-		return end__ - begin__;
+template <>
+struct LengthDifference_<true> {
+	template <typename FreeAccessIteratorT__>
+	static DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT__) length_difference(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___
+	) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT__)>(end___ - begin___)) {
+		return end___ - begin___;
 	}
 
 
@@ -49,14 +50,13 @@ struct LengthDifference_<FreeAccessIterator_, true> {
 
 
 template <typename UndirectionalIteratorT_>
-#	if __cplusplus >= 201103L
-inline auto length_difference(UndirectionalIteratorT_ const& begin__, UndirectionalIteratorT_ const& end__) noexcept(
-	noexcept(LengthDifference_<UndirectionalIteratorT_, IsFreeAccessIterator<UndirectionalIteratorT_>::value>::length_difference_(begin__, end__))
-) -> decltype(LengthDifference_<UndirectionalIteratorT_, IsFreeAccessIterator<UndirectionalIteratorT_>::value>::length_difference_(begin__, end__)) {
-#	else
-typename IteratorDifference<UndirectionalIteratorT_>::Type length_difference(UndirectionalIteratorT_ const& begin__, UndirectionalIteratorT_ const& end__) {
-#	endif
-	return LengthDifference_<UndirectionalIteratorT_, IsFreeAccessIterator<UndirectionalIteratorT_>::value>::length_difference_(begin__, end__);
+inline DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_) length_difference(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_AS(static_cast<DD_MODIFY_TRAIT(IteratorDifference, UndirectionalIteratorT_)>(
+	LengthDifference_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::length_difference(begin__, end__)
+)) {
+	return LengthDifference_<IsFreeAccessIterator<UndirectionalIteratorT_>::value>::length_difference(begin__, end__);
 }
 
 
