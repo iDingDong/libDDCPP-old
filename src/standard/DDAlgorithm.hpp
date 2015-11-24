@@ -37,6 +37,7 @@
 #	include "bits/DD_partition.hpp"
 #	include "bits/DD_partition_by.hpp"
 #	include "bits/DD_merge.hpp"
+#	include "bits/DD_bubble_sort.hpp"
 #	include "bits/DD_insert_sort.hpp"
 #	include "bits/DD_select_sort.hpp"
 #	include "bits/DD_sort.hpp"

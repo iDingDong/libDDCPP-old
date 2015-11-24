@@ -1,7 +1,5 @@
 #include "test_algorithm.h"
 
-#include <cstdlib>
-#include <ctime>
 #include <algorithm>
 
 #include "standard/DDHub.hpp"
@@ -16,11 +14,12 @@ bool greater(T x, T y) {
 }
 
 void test_algorithm() {
-	std::srand(std::time(0));
 	DD::Array<int, 5> arr1 = { 5, 3, 2, 4, 1 };
 	DD::Array<int, 5> arr2 = { 1, 4, 5, 3, 2 };
+	DD::Array<int, 5> sorted_arr = { 1, 2, 3, 4, 5 };
+	DD::Array<int, 5> rsorted_arr = { 5, 4, 3, 2, 1 };
 	DD::Array<int, 3> arr3 = { 6, 7, 5 };
-	DD_IGNORE_UNUSED arr1, arr2, arr3;
+	DD_IGNORE_UNUSED arr1, arr2, sorted_arr, rsorted_arr, arr3;
 	{
 		int right_result[5] = { 5, 3, 2, 4, 1 };
 		int wrong_result[5] = { 2, 4, 1, 5, 3 };
@@ -264,6 +263,42 @@ void test_algorithm() {
 			find_bounds(temp, 1).end() != find_higher_bound(temp, 1)
 		) {
 			throw "'DD::find_lower_bound'/'DD::find_higher_bound' test failed.";
+		}
+	}
+	{
+		DD::Array<int, 5> temp_1 = arr1;
+		DD::Array<int, 5> temp_2 = arr2;
+		DD::bubble_sort(temp_1);
+		DD::bubble_sort(temp_2);
+		if (
+			!equal(temp_1, sorted_arr) ||
+			!equal(temp_2, sorted_arr)
+		) {
+			throw "'DD::bubble_sort' test failed.";
+		}
+	}
+	{
+		DD::Array<int, 5> temp_1 = arr1;
+		DD::Array<int, 5> temp_2 = arr2;
+		DD::insert_sort(temp_1);
+		DD::insert_sort(temp_2);
+		if (
+			!equal(temp_1, sorted_arr) ||
+			!equal(temp_2, sorted_arr)
+		) {
+			throw "'DD::insert_sort' test failed.";
+		}
+	}
+	{
+		DD::Array<int, 5> temp_1 = arr1;
+		DD::Array<int, 5> temp_2 = arr2;
+		DD::select_sort(temp_1);
+		DD::select_sort(temp_2);
+		if (
+			!equal(temp_1, sorted_arr) ||
+			!equal(temp_2, sorted_arr)
+		) {
+			throw "'DD::select_sort' test failed.";
 		}
 	}
 }

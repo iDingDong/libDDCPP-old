@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_Range.hpp"
 #	include "DD_swap_target.hpp"
 
 
@@ -30,6 +31,13 @@ ProcessType select_sort(
 		using DD::swap_target;
 		swap_target(begin__, tagged__);
 	}
+}
+
+template <typename UndirectionalRangeT_>
+inline ProcessType select_sort(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(::DD::detail_::select_sort(DD_SPLIT_RANGE(range__))) {
+	::DD::detail_::select_sort(DD_SPLIT_RANGE(range__));
 }
 
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1447082147 source:d:\develop\repositories\libddcpp\src\main.cpp
+1448352361 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448253522 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448352318 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -73,6 +73,7 @@
 	"bits/DD_partition.hpp"
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
+	"bits/DD_bubble_sort.hpp"
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_select_sort.hpp"
 	"bits/DD_sort.hpp"
@@ -560,7 +561,8 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1448257268 d:\develop\repositories\libddcpp\src\standard\bits\dd_select_sort.hpp
+1448353085 d:\develop\repositories\libddcpp\src\standard\bits\dd_select_sort.hpp
+	"DD_Range.hpp"
 	"DD_swap_target.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\test_meta.h
@@ -918,7 +920,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1448000917 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1448352423 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1327,4 +1329,9 @@
 1448254753 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_bounds.hpp
 	"DD_find_lower_bound.hpp"
 	"DD_find_higher_bound.hpp"
+
+1448352704 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
+	"DD_Range.hpp"
+	"DD_next.hpp"
+	"DD_swap_target.hpp"
 
