@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448352318 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448368847 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -74,8 +74,9 @@
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
 	"bits/DD_bubble_sort.hpp"
-	"bits/DD_insert_sort.hpp"
 	"bits/DD_select_sort.hpp"
+	"bits/DD_insert_sort.hpp"
+	"bits/DD_quick_sort.hpp"
 	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_adjacent_unique.hpp"
@@ -582,10 +583,8 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1448253715 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448368902 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
-	<cstdlib>
-	<ctime>
 	<algorithm>
 	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
@@ -1333,5 +1332,12 @@
 1448352704 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
 	"DD_Range.hpp"
 	"DD_next.hpp"
+	"DD_swap_target.hpp"
+
+1448371246 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
+	"DD_IsFreeAccessIterator.hpp"
+	"DD_Range.hpp"
+	"DD_next.hpp"
+	"DD_previous.hpp"
 	"DD_swap_target.hpp"
 

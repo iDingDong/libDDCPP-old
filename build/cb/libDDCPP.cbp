@@ -13,6 +13,9 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="../../src/dummy/bits/DD_Identification.hpp" />
+		<Unit filename="../../src/dummy/bits/DD_Object.hpp" />
+		<Unit filename="../../src/dummy/bits/DD_dummy_definitions.hpp" />
 		<Unit filename="../../src/main.cpp" />
 		<Unit filename="../../src/math/DDArithmetics.hpp" />
 		<Unit filename="../../src/math/bits/DD_Complex.hpp" />
@@ -202,6 +205,7 @@
 		<Unit filename="../../src/standard/bits/DD_advance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_binary_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bind.hpp" />
+		<Unit filename="../../src/standard/bits/DD_bubble_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_check_bound.hpp" />
 		<Unit filename="../../src/standard/bits/DD_compatibility_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_construct.hpp" />
