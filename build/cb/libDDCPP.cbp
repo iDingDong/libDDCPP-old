@@ -206,6 +206,7 @@
 		<Unit filename="../../src/standard/bits/DD_binary_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bind.hpp" />
 		<Unit filename="../../src/standard/bits/DD_bubble_sort.hpp" />
+		<Unit filename="../../src/standard/bits/DD_build_heap.hpp" />
 		<Unit filename="../../src/standard/bits/DD_check_bound.hpp" />
 		<Unit filename="../../src/standard/bits/DD_compatibility_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_construct.hpp" />
@@ -242,6 +243,7 @@
 		<Unit filename="../../src/standard/bits/DD_get_string_end.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_string_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_global_definitions.hpp" />
+		<Unit filename="../../src/standard/bits/DD_heap_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_heapify.hpp" />
 		<Unit filename="../../src/standard/bits/DD_insert_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_invoke.hpp" />
