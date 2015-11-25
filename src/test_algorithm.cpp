@@ -313,4 +313,16 @@ void test_algorithm() {
 			throw "'DD::quick_sort' test failed.";
 		}
 	}
+	{
+		DD::Array<int, 5> temp_1 = arr1;
+		DD::Array<int, 5> temp_2 = arr2;
+		DD::heap_sort(temp_1);
+		DD::heap_sort(temp_2);
+		if (
+			!equal(temp_1, sorted_arr) ||
+			!equal(temp_2, sorted_arr)
+		) {
+			throw "'DD::heap_sort' test failed.";
+		}
+	}
 }

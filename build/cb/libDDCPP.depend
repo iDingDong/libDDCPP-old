@@ -41,7 +41,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448368847 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1448467359 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -77,6 +77,7 @@
 	"bits/DD_select_sort.hpp"
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_quick_sort.hpp"
+	"bits/DD_heap_sort.hpp"
 	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_adjacent_unique.hpp"
@@ -583,7 +584,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1448368902 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448468172 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<algorithm>
 	"standard/DDHub.hpp"
@@ -1340,4 +1341,14 @@
 	"DD_next.hpp"
 	"DD_previous.hpp"
 	"DD_swap_target.hpp"
+
+1448468531 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
+	"DD_build_heap.hpp"
+
+1448468429 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
+	"DD_heapify.hpp"
+
+1448468382 d:\develop\repositories\libddcpp\src\standard\bits\dd_heapify.hpp
+	"DD_debugger_definitions.hpp"
+	"DD_middle.hpp"
 
