@@ -562,7 +562,7 @@
 	"DD_IsBaseOf.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1448353085 d:\develop\repositories\libddcpp\src\standard\bits\dd_select_sort.hpp
+1448422553 d:\develop\repositories\libddcpp\src\standard\bits\dd_select_sort.hpp
 	"DD_Range.hpp"
 	"DD_swap_target.hpp"
 
@@ -1329,12 +1329,12 @@
 	"DD_find_lower_bound.hpp"
 	"DD_find_higher_bound.hpp"
 
-1448352704 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
+1448422693 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
 	"DD_Range.hpp"
 	"DD_next.hpp"
 	"DD_swap_target.hpp"
 
-1448371246 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
+1448421967 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Range.hpp"
 	"DD_next.hpp"

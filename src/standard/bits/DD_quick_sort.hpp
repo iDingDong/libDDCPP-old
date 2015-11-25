@@ -45,6 +45,37 @@ struct QuickSort_ {
 		}
 	}
 
+	template <typename BidirectionalIteratorT__, typename BinaryPredicateT_>
+	static ProcessType quick_sort(
+		BidirectionalIteratorT__ begin___,
+		BidirectionalIteratorT__ end___,
+		BinaryPredicateT_ less___
+	) {
+		while (begin___ != end___) {
+			BidirectionalIteratorT__ low___(begin___);
+			BidirectionalIteratorT__ high___(end___);
+			for (; ; ) {
+				while (!less___(*--high___, *low___)) {
+					if (low___ == high___) {
+						goto outside_;
+					}
+				}
+				swap_target(low___, high___);
+				do {
+					if (low___ == high___) {
+						goto outside_;
+					}
+				} while (!less___(*high___, *++low___));
+				swap_target(low___, high___);
+			}
+			outside_:
+			if (high___ != end___) {
+				quick_sort(::DD::next(high___), end___);
+			}
+			end___ = low___;
+		}
+	}
+
 
 };
 
@@ -80,6 +111,35 @@ struct QuickSort_<true> {
 		}
 	}
 
+	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
+	static ProcessType quick_sort(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___,
+		BinaryPredicateT__ less___
+	) {
+		while (begin___ < end___) {
+			FreeAccessIteratorT__ low___(begin___);
+			FreeAccessIteratorT__ high___(end___);
+			for (; ; ) {
+				while (!less___(*--high___, *low___)) {
+					if (low___ >= high___) {
+						goto outside_;
+					}
+				}
+				swap_target(low___, high___);
+				do {
+					if (low___ >= high___) {
+						goto outside_;
+					}
+				} while (!less___(*high___, *++low___));
+				swap_target(low___, high___);
+			}
+			outside_:
+			quick_sort(::DD::next(high___), end___);
+			end___ = low___;
+		}
+	}
+
 
 };
 
@@ -93,11 +153,28 @@ inline ProcessType quick_sort(
 	QuickSort_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::quick_sort(begin__, end__);
 }
 
+template <typename BidirectionalIteratorT_, typename BinaryPredicateT_>
+inline ProcessType quick_sort(
+	BidirectionalIteratorT_ begin__,
+	BidirectionalIteratorT_ end__,
+	BinaryPredicateT_ less__
+) DD_NOEXCEPT_AS(QuickSort_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::quick_sort(begin__ DD_COMMA end__ DD_COMMA less__)) {
+	QuickSort_<IsFreeAccessIterator<BidirectionalIteratorT_>::value>::quick_sort(begin__, end__, less__);
+}
+
 template <typename BidirectionalRangeT_>
 inline ProcessType quick_sort(
 	BidirectionalRangeT_& range__
 ) DD_NOEXCEPT_AS(::DD::detail_::quick_sort(DD_SPLIT_RANGE(range__))) {
 	::DD::detail_::quick_sort(DD_SPLIT_RANGE(range__));
+}
+
+template <typename BidirectionalRangeT_, typename BinaryPredicateT_>
+inline ProcessType quick_sort(
+	BidirectionalRangeT_& range__,
+	BinaryPredicateT_ less__
+) DD_NOEXCEPT_AS(::DD::detail_::quick_sort(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
+	::DD::detail_::quick_sort(DD_SPLIT_RANGE(range__), less__);
 }
 
 
