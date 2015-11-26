@@ -33,7 +33,7 @@
 
 
 DD_DETAIL_BEGIN_
-DD_STATIC_ASSERT(DDCPP_VESSEL_GROWTH_RATIO > 1, "'DDCPP_VESSEL_GROWTH_RATIO' should be defined greater than 1");
+DD_STATIC_ASSERT((DDCPP_VESSEL_GROWTH_RATIO) > 1, "'DDCPP_VESSEL_GROWTH_RATIO' should be defined greater than 1");
 
 
 
@@ -474,7 +474,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		LengthType capacity_ = this->get_capacity();
 		if (capacity_) {
 			try {
-				stretch(capacity_ * DDCPP_VESSEL_GROWTH_RATIO);
+				stretch(capacity_ * (DDCPP_VESSEL_GROWTH_RATIO));
 			} catch (AllocationFailure& error_) {
 				stretch(capacity_ + 1);
 			}

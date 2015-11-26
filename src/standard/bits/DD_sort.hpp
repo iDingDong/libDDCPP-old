@@ -13,6 +13,10 @@
 
 
 
+#	if !defined(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO)
+#		define DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO 2
+#	endif
+
 #	if !defined(DDCPP_SORT_MAX_FINAL_INTERVAL)
 #		define DDCPP_SORT_MAX_FINAL_INTERVAL 8
 #	endif
@@ -55,7 +59,7 @@ ProcessType lazy_intro_sort_(
 	FreeAccessIteratorT_ end__,
 	LengthType depth_limit__
 ) {
-	while (DDCPP_SORT_MAX_FINAL_INTERVAL < length_difference(begin__, end__)) {
+	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < length_difference(begin__, end__)) {
 		if (!depth_limit__) {
 			::DD::heap_sort(begin__, end__);
 			break;
@@ -126,9 +130,13 @@ struct Sort_<IteratorCatagoryValue::free_access> {
 	) DD_NOEXCEPT_IF(noexcept(::DD::detail_::lazy_intro_sort_(
 		begin___ DD_COMMA
 		end___ DD_COMMA
-		2 * ::DD::detail_::logarithms_2_(length_difference(begin___ DD_COMMA end___))
+		(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(length_difference(begin___ DD_COMMA end___))
 	)) && noexcept(::DD::insert_sort(begin___, end___))) {
-		::DD::detail_::lazy_intro_sort_(begin___, end___, 2 * ::DD::detail_::logarithms_2_(length_difference(begin___, end___)));
+		::DD::detail_::lazy_intro_sort_(
+			begin___,
+			end___,
+			(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(length_difference(begin___, end___))
+		);
 		::DD::insert_sort(begin___, end___);
 	}
 
