@@ -259,6 +259,7 @@
 		<Unit filename="../../src/standard/bits/DD_make_strict_parasitic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_make_unique.hpp" />
 		<Unit filename="../../src/standard/bits/DD_max.hpp" />
+		<Unit filename="../../src/standard/bits/DD_median_target.hpp" />
 		<Unit filename="../../src/standard/bits/DD_merge.hpp" />
 		<Unit filename="../../src/standard/bits/DD_meta_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_middle.hpp" />

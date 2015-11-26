@@ -412,6 +412,18 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 #	else
 	public:
+	Vessel_(LengthType length_) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+		try {
+			while (!this->is_full()) {
+				unguarded_push_back(ValueType());
+			}
+		} catch (...) {
+			destruct_();
+			throw;
+		}
+	}
+
+	public:
 	template <typename ValueT__>
 	Vessel_(LengthType length_, ValueT__ const& value___) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
@@ -673,6 +685,10 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 #	else
 	public:
 	Vessel() {
+	}
+
+	public:
+	Vessel(LengthType length_) : SuperType(length_) {
 	}
 
 	public:

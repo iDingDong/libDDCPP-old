@@ -587,7 +587,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1448537635 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448541235 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -984,7 +984,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1448532344 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1448556565 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1129,9 +1129,9 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1448532896 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
-	<cmath>
+1448557510 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
+	"DD_median_target.hpp"
 	"DD_heap_sort.hpp"
 	"DD_insert_sort.hpp"
 	"DD_select_sort.hpp"
@@ -1356,4 +1356,7 @@
 1448468382 d:\develop\repositories\libddcpp\src\standard\bits\dd_heapify.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_middle.hpp"
+
+1448556818 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
+	"DD_global_definitions.hpp"
 
