@@ -6,227 +6,150 @@
 
 #	include <cmath>
 
-#	include "DD_ReadOnlyCall.hpp"
-#	include "DD_IteratorValue.hpp"
-#	include "DD_IteratorDifference.hpp"
-#	include "DD_LessThan.hpp"
-#	include "DD_length_difference.hpp"
+#	include "DD_middle.hpp"
+#	include "DD_heap_sort.hpp"
 #	include "DD_insert_sort.hpp"
+#	include "DD_select_sort.hpp"
 
 
 
-#	ifndef DDCPP_SORT_FINAL_INSERT_LIMIT
-#		define DDCPP_SORT_FINAL_INSERT_LIMIT 8
+#	if !defined(DDCPP_SORT_MAX_FINAL_INTERVAL)
+#		define DDCPP_SORT_MAX_FINAL_INTERVAL 8
 #	endif
 
 
 
 DD_DETAIL_BEGIN_
-template <typename LengthT_>
-inline LengthT_ logarithms_2_(LengthT_ length_) {
-	return std::log(length_) / std::log(2);
+inline LengthType logarithms_2_(LengthType length_) DD_NOEXCEPT {
+	LengthType result_ = LengthType();
+	while (length_ /= 2) {
+		++result_;
+	}
+	return result_;
 }
+
 
 
 template <typename IteratorT_>
-IteratorT_ find_median_(
-	IteratorT_ begin__,
-	IteratorT_ middle__,
-	IteratorT_ end__
+inline IteratorT_ median_target(
+	IteratorT_ first__,
+	IteratorT_ second__,
+	IteratorT_ third__
 ) {
-	if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*middle__, *begin__)) {
-		if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*end__, *middle__)) {
-			return middle__;
-		} else if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*end__, *begin__)) {
-			return end__;
+	if (*first__ < *second__) {
+		if (*second__ < *third__) {
+			return second__;
 		}
-		return begin__;
+		return *first__ < *third__ ? third__ : first__;
 	}
-	if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*middle__, *end__)) {
-		return middle__;
-	} else if (LessThan<DD_MODIFY_TRAIT(IteratorValue, IteratorT_)>::call(*begin__, *end__)) {
-		return end__;
+	if (*third__ < *second__) {
+		return second__;
 	}
-	return begin__;
+	return *third__ < *first__ ? third__ : first__;
 }
 
 
 template <typename FreeAccessIteratorT_>
-FreeAccessIteratorT_ unguarded_partition_(
+ProcessType lazy_intro_sort_(
 	FreeAccessIteratorT_ begin__,
 	FreeAccessIteratorT_ end__,
-	FreeAccessIteratorT_ pivot__
+	LengthType depth_limit__
 ) {
-	for (; ; ++begin__) {
-		while (LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(*begin__, *pivot__)) {
-			++begin__;
-		}
-		while (LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(*pivot__, --*end__)) {
-		}
-		if (!(begin__ < end__)) {
+	while (DDCPP_SORT_MAX_FINAL_INTERVAL < length_difference(begin__, end__)) {
+		if (!depth_limit__) {
+			::DD::heap_sort(begin__, end__);
 			break;
 		}
-		using ::DD::swap_target;
-		swap_target(begin__, end__);
-	}
-	return begin__;
-}
-
-
-template <typename FreeAccessIteratorT_>
-inline FreeAccessIteratorT_ unguarded_partition_pivot_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__
-) {
-	FreeAccessIteratorT_ middle__ = begin__ + length_difference(begin__, end__) / 2;
-	using ::DD::swap_target;
-	swap_target(begin__, find_median_(begin__, middle__, end__));
-	return unguarded_partition_(begin__ + 1, end__, begin__);
-}
-
-
-template <typename FreeAccessIteratorT_>
-ProcessType push_heap(
-	FreeAccessIteratorT_ begin__,
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) hole_index_,
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) top_index_,
-	DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)& value_
-) {
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) parent_ = (hole_index_ - 1) / 2;
-	for (; hole_index_ > top_index_ && LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(
-		*(begin__ + parent_), value_
-	); parent_ = (hole_index_ - 1) / 2) {
-		*(begin__ + hole_index_) = *(begin__ + parent_);
-		hole_index_ = parent_;
-	}
-	*(begin__ + hole_index_) = value_;
-}
-
-
-template <typename FreeAccessIteratorT_>
-ProcessType adjust_heap_(
-	FreeAccessIteratorT_ begin__,
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) hole_index_,
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) length_,
-	DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)& value_
-) {
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) const top_index_ = hole_index_;
-	DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_) second_child_ = hole_index_;
-	while (second_child_ < (length_ - 1) / 2) {
-		++second_child_;
-		second_child_ *= 2;
-		if (LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(
-			*(begin__ + second_child_),
-			*(begin__ + second_child_ - 1)
-		)) {
-			--second_child_;
+		--depth_limit__;
+		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__));
+		FreeAccessIteratorT_ low__(begin__);
+		FreeAccessIteratorT_ high__(end__);
+		for (; ; ) {
+			do {
+				if (low__ >= --high__) {
+					goto out_side_;
+				}
+			} while (!(*high__ < *low__));
+			swap_target(low__, high__);
+			do {
+				if (++low__ >= high__) {
+					goto out_side_;
+				}
+			} while (!(*high__ < *low__));
+			swap_target(low__, high__);
 		}
-		*(begin__ + hole_index_) = *(begin__ + second_child_);
-		hole_index_ = second_child_;
-	}
-	if (length_ % 2 == 0 && second_child_ == (length_ - 2) / 2) {
-		++second_child_;
-		second_child_ *= 2;
-		*(begin__ + hole_index_) = *(begin__ + second_child_ - 1);
-		hole_index_ = second_child_ - 1;
-	}
-	push_heap_(begin__, hole_index_, top_index_, value_);
-}
-
-
-template <typename FreeAccessIteratorT_>
-inline ProcessType pop_heap_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ last__,
-	FreeAccessIteratorT_ result__
-) {
-	DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_) value_ = *result__;
-	*result__ = *begin__;
-	adjust_heap_(begin__, DD_MODIFY_TRAIT(IteratorDifference, FreeAccessIteratorT_)(), length_difference(begin__, last__), value_);
-}
-
-
-template <typename FreeAccessIteratorT_>
-ProcessType heap_select_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ middle__,
-	FreeAccessIteratorT_ end__
-) {
-	make_heap_(begin__, middle__);
-	for (FreeAccessIteratorT_ current__ = middle__; current__ < end__; ++ current__) {
-		if (LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(*current__, *begin__)) {
-			pop_heap_(begin__, middle__, current__);
-		}
+		out_side_:
+		::DD::detail_::lazy_intro_sort_(begin__, low__, depth_limit__);
+		begin__ = high__ + 1;
 	}
 }
 
 
-template <typename FreeAccessIteratorT_>
-ProcessType sort_heap_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__
-) {
-	while (length_difference(begin__, end__) > 1) {
-		--end__;
-		pop_heap_(begin__, end__, end__);
+
+template <IteratorCatagoryValue iterator_catagory_c_>
+struct Sort_ {
+	template <typename UndirectionalIteratorT__>
+	static ProcessType sort(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::select_sort(begin___, end___)) {
+		::DD::select_sort(begin___, end___);
 	}
-}
 
 
-template <typename FreeAccessIteratorT_>
-inline ProcessType partitial_sort_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ middle__,
-	FreeAccessIteratorT_ end__
-) {
-	heap_select_(begin__, middle__, end__);
-	sort_heap_(begin__, middle__);
-}
+
+};
 
 
-template <typename FreeAccessIteratorT_>
-ProcessType introspective_sort_loop_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__,
-	DD_MODIFY_TRAIT(Iterator, FreeAccessIteratorT_) depth_limit_
-) {
-	while (length_difference(begin__, end__) > DDCPP_SORT_FINAL_INSERT_LIMIT) {
-		if (depth_limit_) {
-			FreeAccessIteratorT_ current__(unguarded_partition_pivot_(begin__, end__));
-			introspective_sort_loop_(current__, end__, --depth_limit_);
-			end__ = current__;
-		} else {
-			partitial_sort_(begin__, end__, end__);
-		}
+
+template <>
+struct Sort_<IteratorCatagoryValue::bidirectional> {
+	template <typename BidirectionalIteratorT__>
+	static ProcessType sort(
+		BidirectionalIteratorT__ begin___,
+		BidirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::select_sort(begin___, end___)) {
+		::DD::select_sort(begin___, end___);
 	}
-}
 
 
-template <typename FreeAccessIteratorT_>
-ProcessType final_insert_sort_(
-	DD_MODIFY_TRAIT(ReadOnlyCall, FreeAccessIteratorT_) begin__,
-	DD_MODIFY_TRAIT(ReadOnlyCall, FreeAccessIteratorT_) end__
-) {
-	for (FreeAccessIteratorT_ current__ = begin__; ++current__ < end__; ) {
-		DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_) temp_ = *current__;
-		FreeAccessIteratorT_ front__ = current__;
-		for (; LessThan<DD_MODIFY_TRAIT(IteratorValue, FreeAccessIteratorT_)>::call(temp_, *(front__ - 1)) && front__ > begin__; --front__) {
-			*front__ = *(front__ - 1);
-		}
-		*front__ = temp_;
+};
+
+
+
+template <>
+struct Sort_<IteratorCatagoryValue::free_access> {
+	template <typename FreeAccessIteratorT__>
+	static ProcessType sort(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___
+	) DD_NOEXCEPT_IF(noexcept(::DD::detail_::lazy_intro_sort_(
+		begin___ DD_COMMA
+		end___ DD_COMMA
+		2 * ::DD::detail_::logarithms_2_(length_difference(begin___ DD_COMMA end___))
+	)) && noexcept(::DD::insert_sort(begin___, end___))) {
+		::DD::detail_::lazy_intro_sort_(begin___, end___, 2 * ::DD::detail_::logarithms_2_(length_difference(begin___, end___)));
+		::DD::insert_sort(begin___, end___);
 	}
-}
 
 
-template <typename FreeAccessIteratorT_>
+};
+
+
+
+template <typename UndirectionalIteratorT_>
 inline ProcessType sort(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__
-) {
-	if (begin__ < end__) {
-		introspective_sort_loop_(begin__, end__, logarithms_2_(length_difference(begin__, end__)) * 2);
-		final_insert_sort_<FreeAccessIteratorT_>(begin__, end__);
-	}
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_AS(Sort_<IteratorCatagory<UndirectionalIteratorT_>::value>::sort(begin__, end__)) {
+	Sort_<IteratorCatagory<UndirectionalIteratorT_>::value>::sort(begin__, end__);
+}
+
+template <typename UndirectionalRangeT_>
+inline ProcessType sort(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(::DD::detail_::sort(DD_SPLIT_RANGE(range__))) {
+	::DD::detail_::sort(DD_SPLIT_RANGE(range__));
 }
 
 

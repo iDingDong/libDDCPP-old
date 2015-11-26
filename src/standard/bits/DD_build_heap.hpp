@@ -25,7 +25,7 @@ inline ProcessType build_heap(
 	FreeAccessIteratorT_ end__,
 	BinaryPredicateT_ less__
 ) {
-	for (FreeAccessIteratorT_ current__(::DD::middle(begin__, end__)); current__ >= begin__; --current__) {
+	for (FreeAccessIteratorT_ current__(::DD::middle(begin__, end__ - 1)); current__ >= begin__; --current__) {
 		::DD::heapify(begin__, end__, current__, less__);
 	}
 }

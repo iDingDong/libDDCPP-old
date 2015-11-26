@@ -584,7 +584,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1448468172 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448529057 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<algorithm>
 	"standard/DDHub.hpp"
@@ -1123,14 +1123,12 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1448257474 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1448529257 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	<cmath>
-	"DD_ReadOnlyCall.hpp"
-	"DD_IteratorValue.hpp"
-	"DD_IteratorDifference.hpp"
-	"DD_LessThan.hpp"
-	"DD_length_difference.hpp"
+	"DD_middle.hpp"
+	"DD_heap_sort.hpp"
 	"DD_insert_sort.hpp"
+	"DD_select_sort.hpp"
 
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
@@ -1342,10 +1340,10 @@
 	"DD_previous.hpp"
 	"DD_swap_target.hpp"
 
-1448468531 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
+1448523137 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
 	"DD_build_heap.hpp"
 
-1448468429 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
+1448523065 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
 	"DD_heapify.hpp"
 
 1448468382 d:\develop\repositories\libddcpp\src\standard\bits\dd_heapify.hpp
