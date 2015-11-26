@@ -1,12 +1,17 @@
 #include "test_algorithm.h"
 
+#include <ctime>
+#include <cstdlib>
 #include <algorithm>
 
 #include "standard/DDHub.hpp"
 
 #include "standard/DDArray.hpp"
+#include "standard/DDVessel.hpp"
 #include "standard/DDUtility.hpp"
 #include "standard/DDAlgorithm.hpp"
+
+#define SPEED_TEST DD_OFF
 
 template <typename T>
 bool greater(T x, T y) {
@@ -337,4 +342,26 @@ void test_algorithm() {
 			throw "'DD::sort' test failed.";
 		}
 	}
+#	if SPEED_TEST
+	{
+		DD::LengthType constexpr length_c = 50000000;
+		DD::Vessel<int> test_sort_1(length_c);
+		std::srand(static_cast<unsigned>(std::time(DD::nil_pointer)));
+		DD::generate(test_sort_1, std::rand);
+		auto test_sort_2 = test_sort_1;
+		std::time_t start;
+		std::time_t finish;
+
+		time(&start);
+		DD::sort(test_sort_1);
+		time(&finish);
+		DD_PRINT "'DD::sort': ", std::difftime(finish, start), DD::end_line;
+
+		time(&start);
+		std::sort(DD_SPLIT_RANGE(test_sort_2));
+		time(&finish);
+		DD_PRINT "'std::sort': ", std::difftime(finish, start), DD::end_line;
+
+	}
+#	endif
 }

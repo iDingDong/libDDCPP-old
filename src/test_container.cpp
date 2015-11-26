@@ -1,6 +1,7 @@
 #include "test_container.h"
 #include "test_object.hpp"
 
+#include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
 #include "standard/DDVessel.hpp"
 

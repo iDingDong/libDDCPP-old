@@ -396,12 +396,24 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		}
 	}
 
-#	endif
+	public:
+	template <typename... ArgumentsT__>
+	Vessel_(LengthType length_, ArgumentsT__ const&... arguments___) DD_NOEXCEPT_IF(
+		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().unguarded_emplace_back(arguments___...))
+	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+		try {
+			while (!this->is_full()) {
+				unguarded_emplace_back(arguments___...);
+			}
+		} catch (...) {
+			destruct_();
+			throw;
+		}
+	}
+#	else
 	public:
 	template <typename ValueT__>
-	Vessel_(LengthType length_, ValueT__ const& value___) DD_NOEXCEPT_IF(
-		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().unguarded_push_back(value___))
-	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+	Vessel_(LengthType length_, ValueT__ const& value___) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
 			while (!this->is_full()) {
 				unguarded_push_back(value___);
@@ -411,6 +423,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 			throw;
 		}
 	}
+#	endif
 
 	public:
 	template <typename UndirectionalIteratorT__>
@@ -650,18 +663,23 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 	template <typename ValueT__>
 	constexpr Vessel(InitializerList<ValueT__> initializer) noexcept(noexcept(SuperType(initializer))) : SuperType(initializer) {
 	}
+
+	public:
+	template <typename... ArgumentsT__>
+	constexpr Vessel(LengthType length_, ArgumentsT__ const&... arguments___) noexcept(
+		noexcept(SuperType(length_, arguments___...))
+	) : SuperType(length_, arguments___...) {
+	}
 #	else
 	public:
 	Vessel() {
 	}
-#	endif
 
 	public:
 	template <typename ValueT__>
-	Vessel(LengthType length_, ValueT__ const& value___) DD_NOEXCEPT_AS(
-		SuperType(length_ DD_COMMA value___)
-	) : SuperType(length_, value___) {
+	Vessel(LengthType length_, ValueT__ const& value___) : SuperType(length_, value___) {
 	}
+#	endif
 
 
 #	if __cplusplus >= 201103L
