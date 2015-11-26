@@ -8,16 +8,19 @@
 #	else
 #		include "DD_IteratorValue.hpp"
 #	endif
-#	include "DD_IsBidirectionalIterator.hpp"
+#	include "DD_IteratorCatagory.hpp"
+#	include "DD_find_min.hpp"
+#	include "DD_find_max.hpp"
 #	include "DD_swap_target.hpp"
+#	include "DD_transfer_forward.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <ValidityType is_bidirectional_iterator_c_>
+template <IteratorCatagoryValue iterator_catagory_c_>
 struct InsertSort_ {
 	template <typename UndirectionalIteratorT__>
-	static ProcessType insert_sort_(
+	static ProcessType insert_sort(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
 	) DD_NOEXCEPT_IF(
@@ -41,7 +44,7 @@ struct InsertSort_ {
 	}
 
 	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
-	static ProcessType insert_sort_(
+	static ProcessType insert_sort(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___,
 		BinaryPredicateT__ less___
@@ -71,17 +74,17 @@ struct InsertSort_ {
 
 
 template <>
-struct InsertSort_<true> {
+struct InsertSort_<IteratorCatagoryValue::bidirectional> {
 	template <typename BidirectionalIteratorT__>
-	static ProcessType insert_sort_(
+	static ProcessType insert_sort(
 		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___
 	) DD_NOEXCEPT_IF(
 		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
-		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
-		noexcept(*begin___ < *end___)
+		noexcept(::DD::find_min(begin___ DD_COMMA end___))
 	) {
 		if (begin___ != end___) {
+			swap_target(begin___, ::DD::find_min(begin___, end___));
 			for (BidirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
 				front___ = current___;
 #	if __cplusplus >= 201103L
@@ -89,9 +92,6 @@ struct InsertSort_<true> {
 				for (auto previous___(front___); temp_ < *--previous___; ) {
 					*front___ = move(*previous___);
 					--front___;
-					if (front___ == begin___) {
-						break;
-					}
 				}
 				*front___ = move(temp_);
 #	else
@@ -99,9 +99,6 @@ struct InsertSort_<true> {
 				for (BidirectionalIteratorT__ previous___(front___); temp_ < *--previous___; ) {
 					*front___ = *previous___;
 					--front___;
-					if (previous___ == begin___) {
-						break;
-					}
 				}
 				*front___ = temp_;
 #	endif
@@ -110,16 +107,16 @@ struct InsertSort_<true> {
 	}
 
 	template <typename BidirectionalIteratorT__, typename BinaryPredicateT__>
-	static ProcessType insert_sort_(
+	static ProcessType insert_sort(
 		BidirectionalIteratorT__ begin___,
 		BidirectionalIteratorT__ end___,
 		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_IF(
 		noexcept(IteratorValueType<BidirectionalIteratorT__>(move(*begin___))) &&
-		noexcept(++const_cast<BidirectionalIteratorT__&>(begin___) == end___) &&
-		noexcept(less___(*begin___, *end___))
+		noexcept(::DD::find_min(begin___ DD_COMMA end___ DD_COMMA less___))
 	) {
 		if (begin___ != end___) {
+			swap_target(begin___, ::DD::find_min(begin___, end___, less___));
 			for (BidirectionalIteratorT__ current___(begin___), front___; ++current___ != end___; ) {
 				front___ = current___;
 #	if __cplusplus >= 201103L
@@ -127,9 +124,6 @@ struct InsertSort_<true> {
 				for (auto previous___(front___); less___(temp_, *--previous___); ) {
 					*front___ = move(*previous___);
 					--front___;
-					if (front___ == begin___) {
-						break;
-					}
 				}
 				*front___ = move(temp_);
 #	else
@@ -137,12 +131,61 @@ struct InsertSort_<true> {
 				for (BidirectionalIteratorT__ previous___(front___); less___(temp_, *--previous___); ) {
 					*front___ = *previous___;
 					--front___;
-					if (previous___ == begin___) {
-						break;
-					}
 				}
 				*front___ = temp_;
 #	endif
+			}
+		}
+	}
+
+
+};
+
+
+
+template <>
+struct InsertSort_<IteratorCatagoryValue::free_access> {
+	template <typename FreeAccessIteratorT__>
+	static ProcessType insert_sort(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___
+	) DD_NOEXCEPT_IF(
+		noexcept(++begin___ < --end___ - 1) &&
+		noexcept(swap_target(::DD::find_max(begin___ DD_COMMA end___) DD_COMMA end___ - 1)) &&
+		noexcept(transfer_forward(begin___ DD_COMMA end___))
+	) {
+		if (begin___ < end___ - 1) {
+			swap_target(::DD::find_max(begin___, end___), end___ - 1);
+			FreeAccessIteratorT__ current___(end___ - 3);
+			for (; begin___ < current___; --current___) {
+				FreeAccessIteratorT__ front___(current___ + 1);
+				while (*front___ < *current___) {
+					++front___;
+				}
+				transfer_forward(current___, front___ - 1);
+			}
+		}
+	}
+
+	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
+	static ProcessType insert_sort(
+		FreeAccessIteratorT__ begin___,
+		FreeAccessIteratorT__ end___,
+		BinaryPredicateT__ less___
+	) DD_NOEXCEPT_IF(
+		noexcept(++begin___ < --end___ - 1) &&
+		noexcept(swap_target(::DD::find_max(begin___ DD_COMMA end___ DD_COMMA less___) DD_COMMA end___ - 1)) &&
+		noexcept(transfer_forward(begin___ DD_COMMA end___))
+	) {
+		if (begin___ < end___ - 1) {
+			swap_target(::DD::find_max(begin___, end___, less___), end___ - 1);
+			FreeAccessIteratorT__ current___(end___ - 3);
+			for (; begin___ < current___; -- current___) {
+				FreeAccessIteratorT__ front___(current___ + 1);
+				while (less___(*front___, *current___)) {
+					++front___;
+				}
+				transfer_forward(current___, front___ - 1);
 			}
 		}
 	}
@@ -158,12 +201,12 @@ inline ProcessType insert_sort(
 	UndirectionalIteratorT_ end__
 ) DD_NOEXCEPT_AS(
 	InsertSort_<
-		IsBidirectionalIterator<UndirectionalIteratorT_>::value
-	>::insert_sort_(begin__ DD_COMMA end__)
+		IteratorCatagory<UndirectionalIteratorT_>::value
+	>::insert_sort(begin__ DD_COMMA end__)
 ) {
 	InsertSort_<
-		IsBidirectionalIterator<UndirectionalIteratorT_>::value
-	>::insert_sort_(begin__, end__);
+		IteratorCatagory<UndirectionalIteratorT_>::value
+	>::insert_sort(begin__, end__);
 }
 
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
@@ -173,12 +216,12 @@ inline ProcessType insert_sort(
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(
 	InsertSort_<
-		IsBidirectionalIterator<UndirectionalIteratorT_>::value
-	>::insert_sort_(begin__ DD_COMMA end__ DD_COMMA less__)
+		IteratorCatagory<UndirectionalIteratorT_>::value
+	>::insert_sort(begin__ DD_COMMA end__ DD_COMMA less__)
 ) {
 	InsertSort_<
-		IsBidirectionalIterator<UndirectionalIteratorT_>::value
-	>::insert_sort_(begin__, end__, less__);
+		IteratorCatagory<UndirectionalIteratorT_>::value
+	>::insert_sort(begin__, end__, less__);
 }
 
 template <typename UndirectionalRangeT_>

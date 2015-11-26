@@ -553,11 +553,14 @@
 	"DD_Range.hpp"
 	"DD_copy.hpp"
 
-1448257074 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
+1448541093 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
 	"DD_move.hpp"
 	"DD_IteratorValue.hpp"
-	"DD_IsBidirectionalIterator.hpp"
+	"DD_IteratorCatagory.hpp"
+	"DD_find_min.hpp"
+	"DD_find_max.hpp"
 	"DD_swap_target.hpp"
+	"DD_transfer_forward.hpp"
 
 1443513187 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbidirectionaliterator.hpp
 	"DD_IsBaseOf.hpp"
@@ -584,7 +587,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1448532658 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1448537635 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1304,7 +1307,7 @@
 1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
 	"DD_Function.hpp"
 
-1448166831 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
+1448539180 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
 	"DD_Iterator.hpp"
 	"DD_move.hpp"
 	"DD_Range.hpp"

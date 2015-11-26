@@ -11,7 +11,7 @@
 #include "standard/DDUtility.hpp"
 #include "standard/DDAlgorithm.hpp"
 
-#define SPEED_TEST DD_OFF
+#define SPEED_TEST DD_ON
 
 template <typename T>
 bool greater(T x, T y) {
