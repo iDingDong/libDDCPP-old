@@ -26,12 +26,12 @@ DD_DETAIL_BEGIN_
 inline LengthType DD_CONSTEXPR logarithms_2_(LengthType length_) DD_NOEXCEPT {
 #	if __cplusplus >= 201402L || __cplusplus < 201103L
 	LengthType result_ = LengthType();
-	while (length_ /= 2u) {
+	while (length_ /= 2U) {
 		++result_;
 	}
 	return result_;
 #	else
-	return length_ /= 2u ? ::DD::detail_::logarithms_2_(length_) : 0u;
+	return length_ /= 2U ? ::DD::detail_::logarithms_2_(length_) : 0U;
 #	endif
 }
 
