@@ -150,7 +150,7 @@
 	"DD_Range.hpp"
 	"DD_Pair.hpp"
 
-1444031279 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
+1448646042 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
 	"DD_forward.hpp"
 	"DD_Comparable.hpp"
 	"DD_swap.hpp"
@@ -226,9 +226,9 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1448255249 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
+1448643040 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
 	<cstring>
-	"DD_IsPod.hpp"
+	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 	"DD_IsSame.hpp"
@@ -810,11 +810,11 @@
 1443513054 d:\develop\repositories\libddcpp\src\math\bits\dd_math_definitions.hpp
 	"../../standard/bits/DD_global_definitions.hpp"
 
-1443513194 d:\develop\repositories\libddcpp\src\math\bits\dd_square_root.hpp
+1448645574 d:\develop\repositories\libddcpp\src\math\bits\dd_square_root.hpp
 	"../../standard/bits/DD_IsIntegral.hpp"
 	"DD_math_definitions.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_rational.hpp
+1448645409 d:\develop\repositories\libddcpp\src\math\bits\dd_rational.hpp
 	"../../standard/bits/DD_Tags.hpp"
 	"../../standard/bits/DD_IsUnsigned.hpp"
 	"../../standard/bits/DD_IsBaseOf.hpp"
@@ -849,7 +849,7 @@
 1447764345 d:\develop\repositories\libddcpp\src\standard\bits\dd_binaryoperators.hpp
 	"DD_fabricate.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
+1448645280 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
 1444048035 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
@@ -1006,7 +1006,7 @@
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratornested.hpp
 	"DD_global_definitions.hpp"
 
-1443513184 d:\develop\repositories\libddcpp\src\standard\bits\dd_isscalar.hpp
+1448643005 d:\develop\repositories\libddcpp\src\standard\bits\dd_isscalar.hpp
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 	"DD_IsEnum.hpp"
@@ -1113,11 +1113,12 @@
 	"DD_BinarySearchTree.hpp"
 	"DD_Allocator.hpp"
 
-1445318457 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
+1448641844 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
+	"DD_IntegralConstant.hpp"
 	"DD_ReadOnlyCall.hpp"
 	"DD_Functor.hpp"
 
-1444315099 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
+1448645255 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
 	"DD_ValueTypeNested.hpp"
 
 1444187649 d:\develop\repositories\libddcpp\src\standard\bits\dd_logical_not_of.hpp

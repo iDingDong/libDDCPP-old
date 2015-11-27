@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_IntegralConstant.hpp"
 #	include "DD_ReadOnlyCall.hpp"
 #	include "DD_Functor.hpp"
 
@@ -17,6 +18,8 @@ struct LessThan : BinaryFunctor<ValidityType, DD_MODIFY_TRAIT(ReadOnlyCall, Valu
 		SuperType,
 		BinaryFunctor<ValidityType DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT1_) DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT2_)>
 	);
+
+	DD_ALIAS(Default, TrueType);
 
 	DD_INHERIT_TEMPLATE_ALIAS(ResultType);
 	DD_INHERIT_TEMPLATE_ALIAS(FirstArgumentType);

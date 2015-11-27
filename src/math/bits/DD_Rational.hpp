@@ -135,10 +135,12 @@ Pair<NumeratorT_, DenominatorT_> constexpr normalize_(
 	Pair<NumeratorT_, DenominatorT_> const& pair_
 ) noexcept(
 	noexcept(greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second)) &&
-	noexcept(Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__))
+	noexcept(Pair<NumeratorT_, DenominatorT_>(
+		pair_.first / fabricate<Pair<NumeratorT_, DenominatorT_>>(), pair_.second / fabricate<Pair<NumeratorT_, DenominatorT_>>()
+	))
 ) {
 	auto temp__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second);
-	return Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__)
+	return Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__);
 }
 #	else
 template <typename NumeratorT_, typename DenominatorT_>

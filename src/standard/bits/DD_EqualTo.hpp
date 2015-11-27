@@ -18,6 +18,8 @@ struct EqualTo : BinaryFunctor<ValidityType, DD_MODIFY_TRAIT(ReadOnlyCall, Value
 		BinaryFunctor<ValidityType DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT1_) DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT2_)>
 	);
 
+	DD_ALIAS(Default, TrueType);
+
 	DD_INHERIT_TEMPLATE_ALIAS(ResultType);
 	DD_INHERIT_TEMPLATE_ALIAS(FirstArgumentType);
 	DD_INHERIT_TEMPLATE_ALIAS(SecondArgumentType);

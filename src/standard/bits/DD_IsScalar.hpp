@@ -5,7 +5,7 @@
 
 
 #	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsEnum'.
+#		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsScalar'.
 
 
 

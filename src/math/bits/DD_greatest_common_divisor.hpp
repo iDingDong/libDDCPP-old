@@ -14,7 +14,7 @@ inline IntegerT_ DD_CONSTEXPR greatest_common_divisor(
 	IntegerT_ integer_1__,
 #	if __cplusplus >= 201402L || __cplusplus < 201103L
 	IntegerT_ integer_2__
-) DD_NOEXCEPT_IF(noexcept(IntegerT__()) && noexcept(integer_1__ = integer_2__ DD_COMMA integer_2__ % integer_2__)) {
+) DD_NOEXCEPT_IF(noexcept(IntegerT_()) && noexcept(integer_1__ = integer_2__ DD_COMMA integer_2__ % integer_2__)) {
 	for (IntegerT_ temp__; temp__ = integer_1__ % integer_2__; ) {
 		integer_1__ = integer_2__;
 		integer_2__ = temp__;

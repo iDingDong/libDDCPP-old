@@ -64,7 +64,7 @@ struct EmptyBinaryTreeNode {
 
 	NodeConstPointerType DD_CONSTEXPR get_minimum() const DD_NOEXCEPT {
 #	if __cplusplus >= 201402L
-		NodePointerType current_ = this;
+		NodeConstPointerType current_ = this;
 		if (current_->has_left()) {
 			current_ = current_->left;
 		}

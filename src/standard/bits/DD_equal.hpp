@@ -7,7 +7,7 @@
 #	include <cstring>
 
 #	if __cplusplus >= 201103L
-#		include "DD_IsPod.hpp"
+#		include "DD_IsScalar.hpp"
 #	else
 #		include "DD_IsArithmetic.hpp"
 #	endif
@@ -73,7 +73,9 @@ struct Equal_ {
 			FreeAccessIteratorT1___ const& end_1____,
 			FreeAccessIteratorT2___ const& begin_2____,
 			FreeAccessIteratorT2___ const& end_2____
-		) DD_NOEXCEPT_AS(begin_1____[length_difference(begin_1____, end_1____)] != begin_2____[length_difference(begin_2____, end_2____)]) {
+		) DD_NOEXCEPT_AS(
+			begin_1____[length_difference(begin_1____, end_1____)] != begin_2____[length_difference(begin_2____, end_2____)]
+		) {
 #	if __cplusplus >= 201103L
 			auto length_ = length_difference(begin_1____, end_1____);
 #	else
@@ -97,7 +99,9 @@ struct Equal_ {
 			FreeAccessIteratorT2___ const& begin_2____,
 			FreeAccessIteratorT2___ const& end_2____,
 			BinaryPredicate___ const& equal____
-		) DD_NOEXCEPT_AS(equal____(begin_1____[length_difference(begin_1____, end_1____)], begin_2____[length_difference(begin_2____, end_2____)])) {
+		) DD_NOEXCEPT_AS(
+			equal____(begin_1____[length_difference(begin_1____, end_1____)], begin_2____[length_difference(begin_2____, end_2____)])
+		) {
 #	if __cplusplus >= 201103L
 			auto length_ = length_difference(begin_1____, end_1____);
 #	else
@@ -228,7 +232,7 @@ inline ValidityType equal(
 ) DD_NOEXCEPT_AS(
 	Equal_<
 		AndType<
-			IsPod<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
+			IsScalar<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
 			IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_> DD_COMMA
 			IsSame<
 				RemoveCVType<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
@@ -240,7 +244,7 @@ inline ValidityType equal(
 	return Equal_<
 #	if __cplusplus >= 201103L
 		AndType<
-			IsPod<IteratorValueType<UndirectionalIteratorT1_>>,
+			IsScalar<IteratorValueType<UndirectionalIteratorT1_>>,
 			IsPointer<UndirectionalIteratorT1_, UndirectionalIteratorT2_>,
 			IsSame<
 				RemoveCVType<IteratorValueType<UndirectionalIteratorT1_>>,
@@ -265,7 +269,7 @@ inline ValidityType equal(
 ) DD_NOEXCEPT_AS(
 	Equal_<
 		AndType<
-			IsPod<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
+			IsScalar<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
 			IsPointer<UndirectionalIteratorT1_ DD_COMMA UndirectionalIteratorT2_> DD_COMMA
 			IsSame<
 				RemoveCVType<IteratorValueType<UndirectionalIteratorT1_>> DD_COMMA
@@ -277,7 +281,7 @@ inline ValidityType equal(
 	return Equal_<
 #	if __cplusplus >= 201103L
 		AndType<
-			IsPod<IteratorValueType<UndirectionalIteratorT1_>>,
+			IsScalar<IteratorValueType<UndirectionalIteratorT1_>>,
 			IsPointer<UndirectionalIteratorT1_, UndirectionalIteratorT2_>,
 			IsSame<
 				RemoveCVType<IteratorValueType<UndirectionalIteratorT1_>>,

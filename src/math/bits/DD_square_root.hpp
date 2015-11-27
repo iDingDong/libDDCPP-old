@@ -45,9 +45,8 @@ struct SquareRoot_<ResultT_, true> {
 #	endif
 		ResultT_ low__ = ResultT_();
 		ResultT_ high__ = number__;
-		ResultT_ current__;
 		do {
-			current__ = (low__ + high__) / 2;
+			ResultT_ current__ = (low__ + high__) / 2;
 			NumberT_ current_power__ = current__ * current__;
 			if (current_power__ < number__) {
 				low__ = current__;
