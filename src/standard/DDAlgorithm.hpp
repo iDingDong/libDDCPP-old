@@ -8,6 +8,7 @@
 #	include "bits/DD_max.hpp"
 #	include "bits/DD_min_max.hpp"
 #	include "bits/DD_equal.hpp"
+#	include "bits/DD_less.hpp"
 #	include "bits/DD_mismatch.hpp"
 #	include "bits/DD_find.hpp"
 #	include "bits/DD_find_if.hpp"

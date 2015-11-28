@@ -13,7 +13,6 @@
 #	endif
 #	include "DD_IsSame.hpp"
 #	include "DD_IteratorValue.hpp"
-#	include "DD_LessThan.hpp"
 #	include "DD_get_pointer.hpp"
 #	include "DD_length_difference.hpp"
 #	include "DD_mismatch.hpp"
@@ -30,10 +29,7 @@ struct Less_ {
 		UndirectionalIteratorT2_ begin_2__
 	) {
 		::DD::mate(begin_1__, begin_2__) = ::DD::mismatch(begin_1__, end_1__, begin_2__);
-		return begin_1__ != end_1__ && LessThan<
-			DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT1_),
-			DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT2_)
-		>::call(*begin_1__ < *begin_2__);
+		return begin_1__ != end_1__ && *begin_1__ < *begin_2__;
 	}
 
 
@@ -90,6 +86,10 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::less;
+
+
+
 DD_END_
 
 
