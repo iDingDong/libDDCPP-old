@@ -386,11 +386,10 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1448810725 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
+1448810742 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_IteratorDifference.hpp"
 	"DD_Iterator.hpp"
-	"DD_Range.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratordifference.hpp
 	"DD_NestedTypeCheck.hpp"
@@ -905,11 +904,12 @@
 	"standard/DDTrait.hpp"
 	"standard/bits/DD_TypeInfo.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
+1448813655 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
 	"bits/DD_NestedTypeCheck.hpp"
 	"bits/DD_MemberFunctionCheck.hpp"
 	"bits/DD_Conditional.hpp"
 	"bits/DD_TypeList.hpp"
+	"bits/DD_ConstantList.hpp"
 	"bits/DD_get_last_argument.hpp"
 
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_typelist.hpp
@@ -1373,4 +1373,7 @@
 	"DD_get_pointer.hpp"
 	"DD_length_difference.hpp"
 	"DD_min.hpp"
+
+1448813854 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
+	"DD_ValueTypeNested.hpp"
 

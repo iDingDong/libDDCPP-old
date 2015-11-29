@@ -10,22 +10,23 @@
 
 
 #	endif
-#	include "DD_global_definitions.hpp"
+#	include "DD_ValueTypeNested.hpp"
 
 
 
-DD_BEGIN_
-template <typename ValueT_, ValuesT_... values_c__>
+DD_DETAIL_BEGIN_
+template <typename ValueT_, ValueT_... values_c__>
 struct ConstantList {
 	public:
 	using ThisType = ConstantList<ValueT_, values_c__...>;
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
-	template <ValuesT__... values_c___>
+	template <ValueType... values_c___>
 	using PushFront = ConstantList<ValueT_, values_c__..., values_c___...>;
 
 	public:
-	template <ValuesT__... values_c___>
+	template <ValueType... values_c___>
 	using PushBack = ConstantList<ValueT_, values_c__..., values_c___...>;
 
 
@@ -34,12 +35,41 @@ struct ConstantList {
 
 
 
-template <>
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+struct GenerateConstantArithmeticProgression {
+	using Type = typename ConstantList<ValueT_, begin__>::template PushBack<
+		typename GenerateConstantArithmeticProgression<ValueT_, begin__ + step__, end__, step__>::Type
+	>;
+
+
+};
 
 
 
-template <typename ValueT_, ValueT_ value__>
-struct Generate
+template <typename ValueT_, ValueT_ value__, ValueT_ step__>
+struct GenerateConstantArithmeticProgression<ValueT_, value__, value__, step__> {
+	using Type = ConstantList<ValueT_, value__>;
+
+
+};
+
+
+
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+using GenerateConstantArithmeticProgressionType = typename GenerateConstantArithmeticProgression<
+	ValueT_, begin__, end__, step__
+>::Type;
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::ConstantList;
+using detail_::GenerateConstantArithmeticProgression;
+using detail_::GenerateConstantArithmeticProgressionType;
 
 
 
