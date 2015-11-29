@@ -16,7 +16,6 @@
 #	include "DD_get_pointer.hpp"
 #	include "DD_length_difference.hpp"
 #	include "DD_min.hpp"
-#	include "DD_mismatch.hpp"
 
 
 
@@ -29,8 +28,12 @@ struct Less_ {
 		UndirectionalIteratorT1__ end_1___,
 		UndirectionalIteratorT2__ begin_2___
 	) {
-		::DD::mate(begin_1___, begin_2___) = ::DD::mismatch(begin_1___, end_1___, begin_2___);
-		return begin_1___ != end_1___ && *begin_1___ < *begin_2___;
+		while (begin_1___ != end_1___ && !(*begin_2___ < *begin_1___)) {
+			if (*begin_1___ < *begin_2___) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
@@ -40,8 +43,15 @@ struct Less_ {
 		UndirectionalIteratorT2__ begin_2___,
 		UndirectionalIteratorT2__ end_2___
 	) {
-		::DD::mate(begin_1___, begin_2___) = ::DD::mismatch(begin_1___, end_1___, begin_2___, end_2___);
-		return begin_1___ != end_1___ && begin_2___!= end_2___ && *begin_1___ < *begin_2___;
+		while (begin_2___ != end_2___) {
+			if (begin_1___ == end_1___ || *begin_1___ < *begin_2___) {
+				return true;
+			}
+			if (*begin_2___ < *begin_1___) {
+				break;
+			}
+		}
+		return false;
 	}
 
 
@@ -104,6 +114,21 @@ inline ValidityType less(
 #	endif
 }
 
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_>
+inline ValidityType less(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	BinaryPredicateT_ less__
+) {
+	while (begin_1__ != end_1__ && !less__(*begin_2__, *begin_1__)) {
+		if (less__(*begin_1__, *begin_2__)) {
+			return true;
+		}
+	}
+	return false;
+}
+
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_>
 inline ValidityType less(
 	UndirectionalIteratorT1_ begin_1__,
@@ -129,6 +154,46 @@ inline ValidityType less(
 		IsArithmetic<typename IteratorValue<UndirectionalIteratorT1_>::Type>
 	>::value>::less(begin_1__, end_1__, begin_2__, end_2__);
 #	endif
+}
+
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_>
+inline ValidityType less(
+	UndirectionalIteratorT1_ begin_1__,
+	UndirectionalIteratorT1_ end_1__,
+	UndirectionalIteratorT2_ begin_2__,
+	UndirectionalIteratorT2_ end_2__,
+	BinaryPredicateT_ less__
+) {
+	while (begin_2__ != end_2__) {
+		if (begin_1__ == end_1__ || less__(*begin_1__, *begin_2__)) {
+			return true;
+		}
+		if (less__(*begin_2__, *begin_1__)) {
+			break;
+		}
+	}
+	return false;
+}
+
+template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_>
+inline ValidityType less(
+	UndirectionalRangeT1_& range_1__,
+	UndirectionalRangeT1_& range_2__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(
+	::DD::detail_::less(DD_SPLIT_RANGE(range_1__) DD_COMMA DD_SPLIT_RANGE(range_2__)))
+) {
+	return ::DD::detail_::less(DD_SPLIT_RANGE(range_1__), DD_SPLIT_RANGE(range_2__));
+}
+
+template <typename UndirectionalRangeT1_, typename UndirectionalRangeT2_, typename BinaryPredicateT_>
+inline ValidityType less(
+	UndirectionalRangeT1_& range_1__,
+	UndirectionalRangeT1_& range_2__,
+	BinaryPredicateT_ less__
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(
+	::DD::detail_::less(DD_SPLIT_RANGE(range_1__) DD_COMMA DD_SPLIT_RANGE(range_2__) DD_COMMA less__))
+) {
+	return ::DD::detail_::less(DD_SPLIT_RANGE(range_1__), DD_SPLIT_RANGE(range_2__), less__);
 }
 
 

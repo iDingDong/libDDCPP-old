@@ -386,9 +386,11 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1448277130 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
-	"DD_IteratorDifference.hpp"
+1448810725 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
 	"DD_IsFreeAccessIterator.hpp"
+	"DD_IteratorDifference.hpp"
+	"DD_Iterator.hpp"
+	"DD_Range.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratordifference.hpp
 	"DD_NestedTypeCheck.hpp"
@@ -1362,7 +1364,7 @@
 1448556818 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
 	"DD_global_definitions.hpp"
 
-1448768510 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
+1448810653 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
@@ -1371,5 +1373,4 @@
 	"DD_get_pointer.hpp"
 	"DD_length_difference.hpp"
 	"DD_min.hpp"
-	"DD_mismatch.hpp"
 
