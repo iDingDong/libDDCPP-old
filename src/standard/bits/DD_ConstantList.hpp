@@ -62,6 +62,33 @@ using GenerateConstantArithmeticProgressionType = typename GenerateConstantArith
 
 
 
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+struct GenerateConstantGeometricProgression {
+	using Type = typename ConstantList<ValueT_, begin__>::template PushBack<
+		typename GenerateConstantGeometricProgression<ValueT_, begin__ * step__, end__, step__>::Type
+	>;
+
+
+};
+
+
+
+template <typename ValueT_, ValueT_ value__, ValueT_ step__>
+struct GenerateConstantGeometricProgression<ValueT_, value__, value__, step__> {
+	using Type = ConstantList<ValueT_, value__>;
+
+
+};
+
+
+
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+using GenerateConstantGeometricProgressionType = typename GenerateConstantGeometricProgression<
+	ValueT_, begin__, end__, step__
+>::Type;
+
+
+
 DD_DETAIL_END_
 
 
@@ -70,6 +97,8 @@ DD_BEGIN_
 using detail_::ConstantList;
 using detail_::GenerateConstantArithmeticProgression;
 using detail_::GenerateConstantArithmeticProgressionType;
+using detail_::GenerateConstantGeometricProgression;
+using detail_::GenerateConstantGeometricProgressionType;
 
 
 
