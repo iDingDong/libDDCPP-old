@@ -31,7 +31,7 @@ inline LengthType DD_CONSTEXPR logarithms_2_(LengthType length_) DD_NOEXCEPT {
 	}
 	return result_;
 #	else
-	return length_ /= 2U ? ::DD::detail_::logarithms_2_(length_) : 0U;
+	return length_ / 2U ? ::DD::detail_::logarithms_2_(length_ / 2U) : 0U;
 #	endif
 }
 
