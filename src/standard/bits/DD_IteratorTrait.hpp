@@ -9,6 +9,14 @@
 #	include "DD_IsUndirectionalIterator.hpp"
 #	include "DD_IsBidirectionalIterator.hpp"
 #	include "DD_IsFreeAccessIterator.hpp"
+#	include "DD_Iterator.hpp"
+#	include "DD_ConstIterator.hpp"
+#	include "DD_ReverseIterator.hpp"
+#	include "DD_ConstReverseIterator.hpp"
+#	include "DD_IteratorValue.hpp"
+#	include "DD_IteratorReference.hpp"
+#	include "DD_IteratorPointer.hpp"
+#	include "DD_IteratorDifference.hpp"
 
 
 

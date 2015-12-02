@@ -66,6 +66,8 @@
 		<Unit filename="../../src/standard/bits/DD_Comparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_CompatStlIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Conditional.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ConstIterator.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ConstReverseIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstantList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstantSequence.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ContainedByPack.hpp" />
@@ -181,6 +183,7 @@
 		<Unit filename="../../src/standard/bits/DD_RemoveReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveVolatile.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ReverseIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrictAutoPointer.hpp" />

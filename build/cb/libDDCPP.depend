@@ -377,7 +377,7 @@
 	"DD_IsCharactor.hpp"
 	"DD_RemovePointer.hpp"
 
-1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator.hpp
+1449025393 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator.hpp
 	"DD_NestedTypeCheck.hpp"
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
@@ -428,15 +428,18 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1447855529 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1449028575 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
+	"DD_ConstIterator.hpp"
+	"DD_ReverseIterator.hpp"
+	"DD_ConstReverseIterator.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_fabricate.hpp"
 	"DD_length_difference.hpp"
 	"DD_Pair.hpp"
 
-1447763251 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
+1449028455 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
 	"DD_CompatStlIterator.hpp"
 	"DD_NestedTypeCheck.hpp"
 	"DD_Or.hpp"
@@ -627,12 +630,20 @@
 	"DD_ValueTypeNested.hpp"
 	"DD_IteratorTrait.hpp"
 
-1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratortrait.hpp
+1449028060 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratortrait.hpp
 	"DD_Trait.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_IsUndirectionalIterator.hpp"
 	"DD_IsBidirectionalIterator.hpp"
 	"DD_IsFreeAccessIterator.hpp"
+	"DD_Iterator.hpp"
+	"DD_ConstIterator.hpp"
+	"DD_ReverseIterator.hpp"
+	"DD_ConstReverseIterator.hpp"
+	"DD_IteratorValue.hpp"
+	"DD_IteratorReference.hpp"
+	"DD_IteratorPointer.hpp"
+	"DD_IteratorDifference.hpp"
 
 1443929994 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
 	"DD_IsVoid.hpp"
@@ -1133,7 +1144,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1448622152 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1448905571 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_heap_sort.hpp"
@@ -1376,4 +1387,21 @@
 
 1448853167 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
 	"DD_ValueTypeNested.hpp"
+
+1449025573 d:\develop\repositories\libddcpp\src\standard\bits\dd_constiterator.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_RemoveCV.hpp"
+	"DD_RemoveReference.hpp"
+
+1449025999 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverseiterator.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_RemoveCV.hpp"
+	"DD_RemoveReference.hpp"
+	"DD_IteratorReverse.hpp"
+
+1449027736 d:\develop\repositories\libddcpp\src\standard\bits\dd_constreverseiterator.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_RemoveCV.hpp"
+	"DD_RemoveReference.hpp"
+	"DD_IteratorReverse.hpp"
 

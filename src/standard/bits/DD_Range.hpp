@@ -8,7 +8,10 @@
 #		include "DD_forward.hpp"
 #	else
 #		include "DD_Iterator.hpp"
+#		include "DD_ConstIterator.hpp"
 #	endif
+#	include "DD_ReverseIterator.hpp"
+#	include "DD_ConstReverseIterator.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_fabricate.hpp"
 #	include "DD_length_difference.hpp"
@@ -22,8 +25,10 @@
 
 #	if __cplusplus >= 201103L
 #		define DD_SPLIT_RANGE(...) ::DD::detail_::begin(__VA_ARGS__), ::DD::detail_::end(__VA_ARGS__)
+#		define DD_SPLIT_RANGE_REVERSELY(...) ::DD::detail_::rbegin(__VA_ARGS__), ::DD::detail_::rend(__VA_ARGS__)
 #	else
 #		define DD_SPLIT_RANGE(ARG_range_) ::DD::begin(range__), ::DD::end(range__)
+#		define DD_SPLIT_RANGE_REVERSELY(ARG_range_) ::DD::rbegin(range__), ::DD::rend(range__)
 #	endif
 
 #	define DD_RANGE_NESTED\
@@ -63,9 +68,9 @@ template <typename RangeT_>
 #	if __cplusplus >= 201402L
 auto begin(RangeT_ const& range__) noexcept(noexcept(range__.begin())) {
 #	elif __cplusplus >= 201103L
-auto begin(RangeT_ const& range__) noexcept(noexcept(range__.begin())) ->decltype(range__.begin()) {
+auto begin(RangeT_ const& range__) noexcept(noexcept(range__.begin())) -> decltype(range__.begin()) {
 #	else
-typename Iterator<RangeT_>::Type begin(RangeT_ const& range__) {
+typename ConstIterator<RangeT_>::Type begin(RangeT_ const& range__) {
 #	endif
 	return range__.begin();
 }
@@ -84,7 +89,7 @@ template <typename RangeT_>
 #	if __cplusplus >= 201402L
 auto end(RangeT_& range__) noexcept(noexcept(range__.end())) {
 #	elif __cplusplus >= 201103L
-auto end(RangeT_& range__) noexcept(noexcept(range__.end())) ->decltype(range__.end()) {
+auto end(RangeT_& range__) noexcept(noexcept(range__.end())) -> decltype(range__.end()) {
 #	else
 typename Iterator<RangeT_>::Type end(RangeT_& range__) {
 #	endif
@@ -95,9 +100,9 @@ template <typename RangeT_>
 #	if __cplusplus >= 201402L
 auto end(RangeT_ const& range__) noexcept(noexcept(range__.end())) {
 #	elif __cplusplus >= 201103L
-auto end(RangeT_ const& range__) noexcept(noexcept(range__.end())) ->decltype(range__.end()) {
+auto end(RangeT_ const& range__) noexcept(noexcept(range__.end())) -> decltype(range__.end()) {
 #	else
-typename Iterator<RangeT_>::Type end(RangeT_ const& range__) {
+typename ConstIterator<RangeT_>::Type end(RangeT_ const& range__) {
 #	endif
 	return range__.end();
 }
@@ -109,6 +114,70 @@ ValueT_ constexpr* end(ArrayType<ValueT_, length_c_>& array_) noexcept {
 ValueT_* end(ValueT_ (&array_)[length_c_]) throw() {
 #	endif
 	return array_ + length_c_;
+}
+
+
+template <typename RangeT_>
+#	if __cplusplus >= 201402L
+auto constexpr rbegin(RangeT_& range__) noexcept(noexcept(range__.rbegin())) {
+#	elif __cplusplus >= 201103L
+auto constexpr rbegin(RangeT_& range__) noexcept(noexcept(range__.rbegin())) -> decltype(range__.rbegin()) {
+#	else
+typename ReverseIterator<RangeT_>::Type rbegin() {
+#	endif
+	return range__.rbegin();
+}
+
+template <typename RangeT_>
+#	if __cplusplus >= 201402L
+auto constexpr rbegin(RangeT_ const& range__) noexcept(noexcept(range__.rbegin())) {
+#	elif __cplusplus >= 201103L
+auto constexpr rbegin(RangeT_ const& range__) noexcept(noexcept(range__.rbegin())) -> decltype(range__.rbegin()) {
+#	else
+typename ConstReverseIterator<RangeT_>::Type rbegin() {
+#	endif
+	return range__.rbegin();
+}
+
+template <typename ValueT_, LengthType length_c_>
+#	if __cplusplus >= 201103L
+ValueT_ constexpr* rbegin(ArrayType<ValueT_, length_c_>& array_) noexcept {
+#	else
+ValueT_* rbegin(ValueT_ (&array_)[length_c_]) throw() {
+#	endif
+	return ::DD::detail_::end(array_) - 1;
+}
+
+
+template <typename RangeT_>
+#	if __cplusplus >= 201402L
+auto constexpr rend(RangeT_& range__) noexcept(noexcept(range__.rend())) {
+#	elif __cplusplus >= 201103L
+auto constexpr rend(RangeT_& range__) noexcept(noexcept(range__.rend())) -> decltype(range__.rend()) {
+#	else
+typename ReverseIterator<RangeT_>::Type rend() {
+#	endif
+	return range__.rend();
+}
+
+template <typename RangeT_>
+#	if __cplusplus >= 201402L
+auto constexpr rend(RangeT_ const& range__) noexcept(noexcept(range__.rend())) {
+#	elif __cplusplus >= 201103L
+auto constexpr rend(RangeT_ const& range__) noexcept(noexcept(range__.rend())) -> decltype(range__.rend()) {
+#	else
+typename ConstReverseIterator<RangeT_>::Type rend() {
+#	endif
+	return range__.rend();
+}
+
+template <typename ValueT_, LengthType length_c_>
+#	if __cplusplus >= 201103L
+ValueT_ constexpr* rend(ArrayType<ValueT_, length_c_>& array_) noexcept {
+#	else
+ValueT_* rend(ValueT_ (&array_)[length_c_]) throw() {
+#	endif
+	return ::DD::detail_::begin(array_) - 1;
 }
 
 
