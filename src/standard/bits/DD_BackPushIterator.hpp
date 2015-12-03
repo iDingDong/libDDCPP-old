@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_BackPushIterator.hpp
 #ifndef DD_BACK_PUSH_ITERATOR_HPP_INCLUDED_
-#	define DD_BACK_PUSH_ITERATOR_HPP_INCLUDED_
+#	define DD_BACK_PUSH_ITERATOR_HPP_INCLUDED_ 1
 
 
 
@@ -194,6 +194,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::BackPushIterator;
 
 
 
