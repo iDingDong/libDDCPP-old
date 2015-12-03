@@ -14,6 +14,7 @@
 #	include "DD_ConstReverseIterator.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_fabricate.hpp"
+#	include "DD_previous.hpp"
 #	include "DD_length_difference.hpp"
 #	include "DD_Pair.hpp"
 
@@ -251,19 +252,13 @@ struct Range {
 
 
 	public:
-	ReverseIterator rbegin() const DD_NOEXCEPT_AS(
-		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(m_range_.second)))
-	) {
-		ReverseIterator temp_(m_range_.second);
-		return ++temp_;
+	ReverseIterator rbegin() const DD_NOEXCEPT_AS(ReverseIterator(::DD::previous(end()))) {
+		return ReverseIterator(::DD::previous(end()));
 	}
 
 	public:
-	ReverseIterator rend() const DD_NOEXCEPT_AS(
-		ReverseIterator(++const_cast<ReverseIterator&>(ReverseIterator(m_range_.first)))
-	) {
-		ReverseIterator temp_(m_range_.first);
-		return ++temp_;
+	ReverseIterator rend() const DD_NOEXCEPT_AS(ReverseIterator(::DD::previous(begin()))) {
+		return ReverseIterator(::DD::previous(begin()));
 	}
 
 

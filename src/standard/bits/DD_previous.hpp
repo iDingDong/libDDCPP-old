@@ -31,7 +31,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-using detail_::retreat;
+using detail_::previous;
 
 
 

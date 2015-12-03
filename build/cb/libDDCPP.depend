@@ -428,7 +428,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1449028575 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1449112677 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
 	"DD_ConstIterator.hpp"
@@ -436,6 +436,7 @@
 	"DD_ConstReverseIterator.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_fabricate.hpp"
+	"DD_previous.hpp"
 	"DD_length_difference.hpp"
 	"DD_Pair.hpp"
 
@@ -1214,7 +1215,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1444970864 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
+1449112711 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
 	"DD_retreat.hpp"
 
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
