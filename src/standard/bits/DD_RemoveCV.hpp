@@ -31,7 +31,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::RemoveCV;
-DD_TRAIT_MODIFIER(RemoveCV)
+#	if __cplusplus >= 201103L
+using detail_::RemoveCVType;
+#	endif
 
 
 

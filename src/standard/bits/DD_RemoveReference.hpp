@@ -58,7 +58,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::RemoveReference;
-DD_TRAIT_MODIFIER(RemoveReference)
+#	if __cplusplus >= 201103L
+using detail_::RemoveReferenceType;
+#	endif
 
 
 

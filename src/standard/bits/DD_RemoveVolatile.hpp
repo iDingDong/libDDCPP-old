@@ -47,7 +47,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::RemoveVolatile;
-DD_TRAIT_MODIFIER(RemoveVolatile);
+#	if __cplusplus >= 201103L
+using detail_::RemoveVolatileType;
+#	endif
 
 
 

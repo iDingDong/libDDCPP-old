@@ -56,7 +56,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::RemoveExtent;
-DD_TRAIT_MODIFIER(RemoveExtent)
+#	if __cplusplus >= 201103L
+using detail_::RemoveExtentType;
+#	endif
 
 
 

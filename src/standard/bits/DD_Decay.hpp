@@ -49,7 +49,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::Decay;
-DD_TRAIT_MODIFIER(Decay)
+#	if __cplusplus >= 201103L
+using detail_::DecayType;
+#	endif
 
 
 

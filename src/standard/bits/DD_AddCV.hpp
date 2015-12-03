@@ -31,8 +31,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::AddCV;
-DD_TRAIT_MODIFIER(AddCV)
-
+#	if __cplusplus >= 201103L
+using detail_::AddCVType;
+#	endif
 
 
 DD_END_

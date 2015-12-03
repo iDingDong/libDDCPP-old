@@ -53,7 +53,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::AddRvalueReference;
-DD_TRAIT_MODIFIER(AddRvalueReference)
+#	if __cplusplus >= 201103L
+using detail_::AddRvalueReferenceType;
+#	endif
 
 
 

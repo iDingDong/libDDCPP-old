@@ -28,7 +28,9 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::AddPointer;
-DD_TRAIT_MODIFIER(AddPointer)
+#	if __cplusplus >= 201103L
+using detail_::AddPointerType;
+#	endif
 
 
 
