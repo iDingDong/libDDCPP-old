@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_debugger_definitions.hpp"
 #	include "DD_ValueTypeNested.hpp"
 
 

@@ -55,6 +55,7 @@
 		<Unit filename="../../src/standard/bits/DD_Array.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ArrayIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AtPack.hpp" />
+		<Unit filename="../../src/standard/bits/DD_BackPushIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BiggestTypeOfPack.h" />
 		<Unit filename="../../src/standard/bits/DD_BinaryOperators.hpp" />
 		<Unit filename="../../src/standard/bits/DD_BinarySearchTree.hpp" />

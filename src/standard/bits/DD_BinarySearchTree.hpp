@@ -5,6 +5,7 @@
 
 
 #	include "DD_Value.hpp"
+#	include "DD_Illogic.hpp"
 #	include "DD_logical_not_of.hpp"
 #	include "DD_BinaryTreeNode.hpp"
 #	include "DD_LessThan.hpp"
