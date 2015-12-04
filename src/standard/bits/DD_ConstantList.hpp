@@ -11,10 +11,25 @@
 
 #	endif
 #	include "DD_ValueTypeNested.hpp"
+#	include "DD_Concatenate.hpp"
 
 
 
 DD_DETAIL_BEGIN_
+template <typename ValueT_, ValueT_... values_c__>
+struct ConstantList;
+
+
+
+template <typename ValueT_, ValueT_... values_c_1__, ValueT_... values_c_2__>
+struct Concatenate<ConstantList<ValueT_, values_c_1__...>, ConstantList<ValueT_, values_c_2__...>> {
+	using Type = ConstantList<ValueT_, values_c_1__..., values_c_2__...>;
+
+
+};
+
+
+
 template <typename ValueT_, ValueT_... values_c__>
 struct ConstantList {
 	public:
@@ -29,15 +44,18 @@ struct ConstantList {
 	template <ValueType... values_c___>
 	using PushBack = ConstantList<ValueT_, values_c__..., values_c___...>;
 
+	public:
+	template <typename ConstantListT_>
+	using Concatenate = ::DD::ConcatenateType<ThisType, ConstantListT_>;
 
 
 };
 
 
 
-template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__ = 1>
 struct GenerateConstantArithmeticProgression {
-	using Type = typename ConstantList<ValueT_, begin__>::template PushBack<
+	using Type = typename ConstantList<ValueT_, begin__>::template Concatenate<
 		typename GenerateConstantArithmeticProgression<ValueT_, begin__ + step__, end__, step__>::Type
 	>;
 
@@ -48,23 +66,23 @@ struct GenerateConstantArithmeticProgression {
 
 template <typename ValueT_, ValueT_ value__, ValueT_ step__>
 struct GenerateConstantArithmeticProgression<ValueT_, value__, value__, step__> {
-	using Type = ConstantList<ValueT_, value__>;
+	using Type = ConstantList<ValueT_>;
 
 
 };
 
 
 
-template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__ = 1>
 using GenerateConstantArithmeticProgressionType = typename GenerateConstantArithmeticProgression<
 	ValueT_, begin__, end__, step__
 >::Type;
 
 
 
-template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__ = 2>
 struct GenerateConstantGeometricProgression {
-	using Type = typename ConstantList<ValueT_, begin__>::template PushBack<
+	using Type = typename ConstantList<ValueT_, begin__>::template Concatenate<
 		typename GenerateConstantGeometricProgression<ValueT_, begin__ * step__, end__, step__>::Type
 	>;
 
@@ -75,14 +93,14 @@ struct GenerateConstantGeometricProgression {
 
 template <typename ValueT_, ValueT_ value__, ValueT_ step__>
 struct GenerateConstantGeometricProgression<ValueT_, value__, value__, step__> {
-	using Type = ConstantList<ValueT_, value__>;
+	using Type = ConstantList<ValueT_>;
 
 
 };
 
 
 
-template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__>
+template <typename ValueT_, ValueT_ begin__, ValueT_ end__, ValueT_ step__ = 2>
 using GenerateConstantGeometricProgressionType = typename GenerateConstantGeometricProgression<
 	ValueT_, begin__, end__, step__
 >::Type;

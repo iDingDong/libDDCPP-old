@@ -12,6 +12,7 @@
 #	endif
 #	include "DD_IsMemberFunctionPointer.hpp"
 #	include "DD_Decay.hpp"
+#	include "DD_ConstantList.hpp"
 #	include "DD_fabricate.hpp"
 #	include "DD_move.hpp"
 #	include "DD_invoke.hpp"
@@ -34,30 +35,9 @@
 
 
 DD_DETAIL_BEGIN_
-template <SubscriptType... subscripts_c_>
-struct Indexs_ {
-};
-
-
-
-template <SubscriptType subscript_c_, SubscriptType... subscripts_c>
-struct MakeIndexs_ : MakeIndexs_<subscript_c_ - 1, subscript_c_ - 1, subscripts_c...> {
-};
-
-
-
-template <SubscriptType... subscripts_c_>
-struct MakeIndexs_<0, subscripts_c_...> {
-	using Type = Indexs_<subscripts_c_...>;
-
-
-};
-
-
-
-template <SubscriptType index_c_>
+template <LengthType index_c_>
 struct PlaceHolder_ {
-	static constexpr SubscriptType index = index_c_;
+	static constexpr LengthType index = index_c_;
 
 
 };
@@ -130,7 +110,7 @@ struct ArgumentAt_ {
 
 
 
-template <SubscriptType index_c_, typename TupleT_>
+template <LengthType index_c_, typename TupleT_>
 struct ArgumentAt_<PlaceHolder_<index_c_>, TupleT_> {
 	using Type = typename TupleT_::template At<index_c_>;
 
@@ -144,7 +124,7 @@ inline ArgumentT_&& select_(ArgumentT_&& argument__, Tuple<ArgumentsT_...>& argu
 	return forward<ArgumentT_>(argument__);
 }
 
-template <SubscriptType index_c_, typename... ArgumentsT_>
+template <LengthType index_c_, typename... ArgumentsT_>
 inline auto select_(
 	PlaceHolder_<index_c_> place_holder__,
 	Tuple<ArgumentsT_...>& arguments_pack_
@@ -159,9 +139,8 @@ struct BindCall_;
 
 
 
-
-template <SubscriptType... indexs_c_>
-struct BindCall_<Indexs_<indexs_c_...>> {
+template <LengthType... indexs_c_>
+struct BindCall_<ConstantList<LengthType, indexs_c_...>> {
 	template <typename FunctionT__, typename TupleT1__, typename TupleT2__>
 	static typename ResultOf_<FunctionT__>::Type call_(
 		FunctionT__ const& function___,
@@ -237,13 +216,13 @@ struct BindFunctor_ : Functor<typename ResultOf_<FunctionT_>::Type, ArgumentsT_.
 	public:
 	template <typename... ArgumentsT__>
 	ResultType operator ()(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
+		noexcept(BindCall_<GenerateConstantArithmeticProgressionType<LengthType, 0, ArgumentsPack::length>>::call_(
 			fabricate<ThisType>().get_function(),
 			fabricate<ThisType>().get_arguments(),
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
 		))
 	) {
-		return BindCall_<typename MakeIndexs_<ArgumentsPack::length>::Type>::call_(
+		return BindCall_<GenerateConstantArithmeticProgressionType<LengthType, 0, ArgumentsPack::length>>::call_(
 			get_function(),
 			get_arguments(),
 			make_tuple(forward<ArgumentsT__>(arguments___)...)
@@ -278,7 +257,7 @@ DD_DETAIL_END_
 
 
 DD_PLACE_HOLDER_BEGIN_
-template <SubscriptType index_c_>
+template <LengthType index_c_>
 using PlaceHolder = ::DD::detail_::PlaceHolder_<index_c_>;
 
 

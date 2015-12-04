@@ -66,6 +66,7 @@
 		<Unit filename="../../src/standard/bits/DD_Common.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Comparable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_CompatStlIterator.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Concatenate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Conditional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstReverseIterator.hpp" />
