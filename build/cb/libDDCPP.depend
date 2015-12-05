@@ -1388,9 +1388,9 @@
 	"DD_length_difference.hpp"
 	"DD_min.hpp"
 
-1449210887 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
+1449300859 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
 	"DD_ValueTypeNested.hpp"
-	"DD_Concatenate.hpp"
+	"DD_StaticConcatenate.hpp"
 
 1449025573 d:\develop\repositories\libddcpp\src\standard\bits\dd_constiterator.hpp
 	"DD_NestedTypeCheck.hpp"
@@ -1422,5 +1422,8 @@
 	"DD_address_of.hpp"
 
 1449209580 d:\develop\repositories\libddcpp\src\standard\bits\dd_concatenate.hpp
+	"DD_global_definitions.hpp"
+
+1449300769 d:\develop\repositories\libddcpp\src\standard\bits\dd_staticconcatenate.hpp
 	"DD_global_definitions.hpp"
 

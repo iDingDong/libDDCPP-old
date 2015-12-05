@@ -11,7 +11,7 @@
 
 #	endif
 #	include "DD_ValueTypeNested.hpp"
-#	include "DD_Concatenate.hpp"
+#	include "DD_StaticConcatenate.hpp"
 
 
 
@@ -22,7 +22,7 @@ struct ConstantList;
 
 
 template <typename ValueT_, ValueT_... values_c_1__, ValueT_... values_c_2__>
-struct Concatenate<ConstantList<ValueT_, values_c_1__...>, ConstantList<ValueT_, values_c_2__...>> {
+struct StaticConcatenate<ConstantList<ValueT_, values_c_1__...>, ConstantList<ValueT_, values_c_2__...>> {
 	using Type = ConstantList<ValueT_, values_c_1__..., values_c_2__...>;
 
 
@@ -46,7 +46,7 @@ struct ConstantList {
 
 	public:
 	template <typename ConstantListT_>
-	using Concatenate = ::DD::ConcatenateType<ThisType, ConstantListT_>;
+	using Concatenate = StaticConcatenateType<ThisType, ConstantListT_>;
 
 
 };
