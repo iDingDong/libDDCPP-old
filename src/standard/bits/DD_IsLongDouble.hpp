@@ -26,19 +26,24 @@ struct IsLongDouble_<double> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsLongDouble : AndType<IsLongDouble_<RemoveCVType<ObjectsT_>>...> {
+};
+#	else
+template <typename ObjectT_>
+struct IsLongDouble : IsLongDouble_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsLongDouble = AndType<detail_::IsLongDouble_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsLongDouble : detail_::IsLongDouble_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsLongDouble;
 
 
 

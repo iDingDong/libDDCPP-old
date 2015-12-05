@@ -30,13 +30,18 @@ struct IsMemberFunctionPointer_<FunctionT_ ClassT_::*> : IsFunction<FunctionT_> 
 
 
 
+template <typename... ObjectsT_>
+struct IsMemberFunctionPointer : AndType<detail_::IsMemberFunctionPointer_<RemoveCVType<ObjectsT_>>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsMemberFunctionPointer = AndType<detail_::IsMemberFunctionPointer_<RemoveCVType<ObjectsT_>>...>;
+using detail_::IsMemberFunctionPointer;
 
 
 

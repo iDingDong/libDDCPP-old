@@ -26,19 +26,24 @@ struct IsFloat_<float> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsFloat : AndType<IsFloat_<RemoveCVType<ObjectsT_>>...> {
+};
+#	else
+template <typename ObjectT_>
+struct IsFloat : IsFloat_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsFloat = AndType<detail_::IsFloat_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsFloat : detail_::IsFloat_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsFloat;
 
 
 

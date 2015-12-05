@@ -16,9 +16,19 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-using IsEnum = AndType<StdBoolConstant<std::is_enum<ObjectsT_>>...>;
+struct IsEnum : AndType<StdBoolConstant<std::is_enum<ObjectsT_>>...> {
+};
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::IsEnum;
 
 
 

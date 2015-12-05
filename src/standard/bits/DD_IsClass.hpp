@@ -3,6 +3,7 @@
 #	define DD_IS_CLASS_HPP_INCLUDED_ 1
 
 
+
 #	if __cplusplus < 201103L
 #		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsClass'.
 
@@ -38,13 +39,18 @@ struct IsClass_ {
 
 
 
+template <typename... ObjectsT_>
+struct IsClass : AndType<BoolConstant<IsClass_<ObjectsT_>::value>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsClass = AndType<BoolConstant<detail_::IsClass_<ObjectsT_>::value>...>;
+using detail_::IsClass;
 
 
 

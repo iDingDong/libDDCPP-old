@@ -54,13 +54,18 @@ struct IsBaseOf_<ObjectT_, ObjectT_> {
 
 
 
+template <typename BaseT_, typename... DerivedsT_>
+struct IsBaseOf : AndType<BoolConstant<IsBaseOf_<BaseT_, DerivedsT_>::value>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename BaseT_, typename... DerivedsT_>
-using IsBaseOf = AndType<BoolConstant<detail_::IsBaseOf_<BaseT_, DerivedsT_>::value>...>;
+using detail_::IsBaseOf;
 
 
 

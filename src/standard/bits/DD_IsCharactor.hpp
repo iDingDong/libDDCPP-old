@@ -17,8 +17,8 @@
 
 
 
-#	if __cplusplus >= 201103L
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
 template <typename ObjectT_>
 using IsCharactor_ = OrType<
 	IsChar<ObjectT_>,
@@ -31,20 +31,28 @@ using IsCharactor_ = OrType<
 
 
 
+template <typename... ObjectsT_>
+struct IsCharactor : AndType<IsCharactor_<ObjectsT_>...> {
+};
+#	else
+template <typename ObjectT_>
+struct IsCharactor : BoolConstant<
+	IsChar<ObjectT_>::value ||
+	IsUnsignedChar<ObjectT_>::value ||
+	IsSignedChar<ObjectT_>::value ||
+	IsWChar<ObjectT_>::value
+> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
-#	endif
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsCharactor = AndType<detail_::IsCharactor_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct IsCharactor : BoolConstant<IsChar<ObjectT_>::value || IsUnsignedChar<ObjectT_>::value || IsSignedChar<ObjectT_>::value || IsWChar<ObjectT_>::value> {
-};
-#	endif
+using detail_::IsCharactor;
 
 
 

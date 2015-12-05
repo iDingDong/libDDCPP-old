@@ -4,20 +4,34 @@
 
 
 
-#	include "DD_IsBaseOf.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_IsBaseOf.hpp"
+#	elif
+#		include "DD_IsSame.hpp"
+#	endif
 #	include "DD_IteratorCatagory.hpp"
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... IteratorsT_>
-using IsUndirectionalIterator = IsBaseOf<UndirectionalIterator, IteratorCatagoryType<IteratorsT_>...>;
+struct IsUndirectionalIterator : IsBaseOf<UndirectionalIterator, IteratorCatagoryType<IteratorsT_>...> {
+};
 #	else
 template <typename IteratorT_>
-struct IsUndirectionalIterator : IsBaseOf<UndirectionalIterator, typename IteratorCatagory<IteratorT_>::Type> {
+struct IsUndirectionalIterator : IsSame<UndirectionalIterator, typename IteratorCatagory<IteratorT_>::Type> {
 };
 #	endif
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::IsUndirectionalIterator;
 
 
 

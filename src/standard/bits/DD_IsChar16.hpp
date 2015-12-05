@@ -6,10 +6,10 @@
 
 #	if __cplusplus < 201103L
 #		error ISO/IEC 14882:2011 or a later version support is required for'DD::IsChar16'.
+
+
+
 #	endif
-
-
-
 #	include "DD_And.hpp"
 #	include "DD_RemoveCV.hpp"
 
@@ -28,13 +28,18 @@ struct IsChar16_<char16_t> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsChar16 : AndType<IsChar16_<RemoveCVType<ObjectsT_>>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsChar16 = AndType<detail_::IsChar16_<RemoveCVType<ObjectsT_>>...>;
+using detail_::IsChar16;
 
 
 

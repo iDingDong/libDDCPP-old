@@ -28,13 +28,18 @@ struct IsChar32_<char32_t> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsChar32 : AndType<IsChar32_<RemoveCVType<ObjectsT_>>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsChar32 = AndType<detail_::IsChar32_<RemoveCVType<ObjectsT_>>...>;
+using detail_::IsChar32;
 
 
 

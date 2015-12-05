@@ -166,13 +166,18 @@ struct IsFunction_<ResultT_(ArgumentsT_... ...) const volatile&&> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsFunction : AndType<IsFunction_<ObjectsT_>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsFunction = AndType<detail_::IsFunction_<ObjectsT_>...>;
+using detail_::IsFunction;
 
 
 

@@ -29,13 +29,18 @@ struct IsLvalueReference_<ObjectT_&> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsLvalueReference : AndType<detail_::IsLvalueReference_<ObjectsT_>...> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsLvalueReference = AndType<detail_::IsLvalueReference_<ObjectsT_>...>;
+using detail_::IsLvalueReference;
 
 
 

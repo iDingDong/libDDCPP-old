@@ -31,19 +31,24 @@ struct IsConst_<ObjectT_ const> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsConst : AndType<IsConst_<ObjectsT_>...> {
+};
+#	else
+template <typename ObjectT_>
+struct IsConst : IsConst_<ObjectT_> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsConst = AndType<detail_::IsConst_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct IsConst : detail_::IsConst_<ObjectT_> {
-};
-#	endif
+using detail_::IsConst;
 
 
 
