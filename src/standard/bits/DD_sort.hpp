@@ -85,6 +85,11 @@ ProcessType lazy_intro_sort_(
 		}
 		--depth_limit__;
 		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__, less__));
+#	if __cplusplus >= 201103L
+		IteratorValueType<FreeAccessIteratorT_> temp_(::DD::move(*begin__));
+#	else
+		typename IteratorValue<FreeAccessIteratorT_>::Type temp_(*begin__);
+#	endif
 		FreeAccessIteratorT_ low__(begin__);
 		FreeAccessIteratorT_ high__(end__);
 		for (; ; ) {
@@ -92,16 +97,29 @@ ProcessType lazy_intro_sort_(
 				if (low__ >= --high__) {
 					goto out_side_;
 				}
-			} while (!less__(*high__ < *low__));
-			swap_target(low__, high__);
+			} while (!less__(*high__ < temp_));
+#	if __cplusplus >= 201103L
+			*low__ = ::DD::move(*high__);
+#	else
+			*low__ = *high__;
+#	endif
 			do {
 				if (++low__ >= high__) {
 					goto out_side_;
 				}
-			} while (!less__(*high__ < *low__));
-			swap_target(low__, high__);
+			} while (!less__(temp_ < *low__));
+#	if __cplusplus >= 201103L
+			*high__ = ::DD::move(*low__);
+#	else
+			*high__ = *low__;
+#	endif
 		}
 		out_side_:
+#	if __cplusplus >= 201103L
+		*low__ = ::DD::move(temp_);
+#	else
+		*low__ = temp_;
+#	endif
 		::DD::detail_::lazy_intro_sort_(begin__, low__, less__, depth_limit__);
 		begin__ = high__ + 1;
 	}
