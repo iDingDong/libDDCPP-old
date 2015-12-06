@@ -466,6 +466,33 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
+		::DD::swap(this->m_begin_, other_->m_begin_);
+		::DD::swap(this->m_end_, other_->m_end_);
+		::DD::swap(this->m_storage_end_, other_->m_storage_end_);
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+		Pair<Iterator, UndirectionalIteratorT__> result_ = ::DD::copy(begin___, end___, this->begin(), this->end());
+		if (result_.first != end___) {
+			concatenate(result_.first, end___);
+		} else {
+			trim_back(result_.second);
+		}
+	}
+
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType clone(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
+		clone(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
 	ProcessType stretch(LengthType new_capacity_) {
 		PointerType temp_begin_ = AllocatorType::allocate(new_capacity_);
 		PointerType temp_end_;
@@ -615,6 +642,30 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+		reserve(this->size() + ::DD::length_difference(begin___, end___));
+		this->m_end_ = ::DD::copy_construct(begin___, end___, this->end());
+	}
+
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType concatenate(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().concatenate(DD_SPLIT_RANGE(range___))
+	) {
+		concatenate(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	ProcessType trim_back(Iterator new_end_) DD_NOEXCEPT {
+		AllocatorType::destruct(new_end_, this->end());
+		this->m_end_ = ::DD::get_pointer(new_end_);
+	}
+
+
+	public:
 	ProcessType erase(Iterator position_) {
 		DD_ASSERT(check_bound(*this, position), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
 		transfer_forward(position_, this->end() - 1);
@@ -641,6 +692,37 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	ProcessType destruct_() const DD_NOEXCEPT {
 		AllocatorType::destruct(this->m_begin_, this->m_end_);
 		AllocatorType::deallocate(this->m_begin_, this->get_capacity());
+	}
+
+
+	public:
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(origin_)) {
+		clone(origin_);
+		return *this;
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().swap(origin_)) {
+		swap(origin_);
+		return *this;
+	}
+
+#	endif
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ThisType& operator =(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(range___)) {
+		clone(range___);
+		return *this;
+	}
+
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ThisType& operator +=(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().concatenate(range___)) {
+		concatenate(range___);
+		return *this;
 	}
 
 
