@@ -39,19 +39,30 @@ struct IsNilPointer_<std::nullptr_t> : TrueType {
 
 
 #	endif
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsNilPointer : AndType<IsNilPointer<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsNilPointer<ObjectT_> : IsNilPointer_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsNilPointer : IsNilPointer_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsNilPointer = AndType<detail_::IsNilPointer_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsNilPointer : detail_::IsNilPointer_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsNilPointer;
 
 
 

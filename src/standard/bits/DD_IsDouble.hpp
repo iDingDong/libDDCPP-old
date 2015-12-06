@@ -28,7 +28,14 @@ struct IsDouble_<double> : TrueType {
 
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-using IsDouble = AndType<IsDouble_<RemoveCVType<ObjectsT_>>...>;
+struct IsDouble : AndType<IsDouble<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsDouble<ObjectT_> : IsDouble_<RemoveCVType<ObjectT_>> {
+};
 #	else
 template <typename ObjectT_>
 struct IsDouble : IsDouble_<typename RemoveCV<ObjectT_>::Type> {

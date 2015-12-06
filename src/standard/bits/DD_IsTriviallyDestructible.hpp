@@ -9,7 +9,9 @@
 
 #		include "DD_IntegralConstant.hpp"
 #	else
-#		include "DD_IsScalar.hpp"
+#		include "DD_And;"
+#		include "DD_IsArithmetic.hpp"
+#		include "DD_IsPointer.hpp"
 #	endif
 
 
@@ -17,10 +19,17 @@
 DD_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-using IsTriviallyDestructible = AndType<StdBoolConstant<std::is_trivially_destructible<ObjectsT_>>...>;
+struct IsTriviallyDestructible : AndType<IsTriviallyDestructible<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsTriviallyDestructible<ObjectT_> : StdBoolConstant<std::is_trivially_destructible<ObjectT_>> {
+};
 #	else
 template <typename ObjectT_>
-struct IsTriviallyDestructible : IsScalar<ObjectT_> {
+struct IsTriviallyDestructible : typename And<IsArithmetic<ObjectT_>, IsPointer<ObjectT_> >::Type {
 };
 #	endif
 

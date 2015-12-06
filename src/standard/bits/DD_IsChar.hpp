@@ -28,7 +28,13 @@ struct IsChar_<char> : TrueType {
 
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsChar : AndType<IsChar_<RemoveCVType<ObjectsT_>>...> {
+struct IsChar : AndType<IsChar<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsChar<ObjectT_> : IsChar_<RemoveCVType<ObjectT_>> {
 };
 #	else
 template <typename ObjectT_>

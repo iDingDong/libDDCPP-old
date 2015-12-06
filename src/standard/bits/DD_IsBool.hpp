@@ -28,7 +28,13 @@ struct IsBool_<bool> : TrueType {
 
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsBool : AndType<IsBool_<RemoveCVType<ObjectsT_>>...> {
+struct IsBool : AndType<IsBool<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsBool<ObjectT_> : IsBool_<RemoveCVType<ObjectT_>> {
 };
 #	else
 template <typename ObjectT_>

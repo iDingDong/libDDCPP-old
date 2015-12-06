@@ -16,7 +16,13 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... IteratorsT_>
-struct IsBidirectionalIterator : IsBaseOf<BidirectionalIterator, IteratorCatagoryType<IteratorsT_>...> {
+struct IsBidirectionalIterator : AndType<IsBidirectionalIterator<IteratorsT_>...> {
+};
+
+
+
+template <typename IteratorT_>
+struct IsBidirectionalIterator<IteratorT_> : IsBaseOf<BidirectionalIterator, IteratorCatagoryType<IteratorT_>> {
 };
 #	else
 template <typename IteratorT_>

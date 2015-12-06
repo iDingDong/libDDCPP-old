@@ -18,7 +18,14 @@
 
 DD_BEGIN_
 template <typename... ObjectsT_>
-using IsUnion = AndType<StdIntegralConstant<std::is_union<ObjectsT_>>...>;
+struct IsUnion : AndType<IsUnion<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsUnion<ObjectT_> : StdIntegralConstant<std::is_union<ObjectT_>> {
+};
 
 
 

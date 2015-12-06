@@ -16,8 +16,14 @@
 
 
 DD_DETAIL_BEGIN_
+template <typename BaseT_, typename... DerivedsT_>
+struct IsBaseOf : AndType<BoolConstant<IsBaseOf<BaseT_, DerivedsT_>::value>...> {
+};
+
+
+
 template <typename BaseT_, typename DerivedT_>
-struct IsBaseOf_ {
+struct IsBaseOf<BaseT_, DerivedT_> {
 	template <typename BaseT__, typename DerivedT__>
 	struct Host_ {
 		DD_CONSTEXPR operator BaseT__*() const DD_NOEXCEPT;
@@ -36,7 +42,7 @@ struct IsBaseOf_ {
 
 
 	static ValidityType constexpr value = OrType<
-		AndType<decltype(IsBaseOf_<BaseT_, DerivedT_>::match_(Host_<BaseT_, DerivedT_>(), int())), IsClass<BaseT_, DerivedT_>>,
+		AndType<decltype(match_(Host_<BaseT_, DerivedT_>(), int())), IsClass<BaseT_, DerivedT_>>,
 		StdIntegralConstant<std::is_base_of<BaseT_, DerivedT_>>
 	>::value;
 
@@ -46,16 +52,10 @@ struct IsBaseOf_ {
 
 
 template <typename ObjectT_>
-struct IsBaseOf_<ObjectT_, ObjectT_> {
+struct IsBaseOf<ObjectT_, ObjectT_> {
 	static ValidityType constexpr value = IsClass<ObjectT_>::value || std::is_base_of<ObjectT_, ObjectT_>::value;
 
 
-};
-
-
-
-template <typename BaseT_, typename... DerivedsT_>
-struct IsBaseOf : AndType<BoolConstant<IsBaseOf_<BaseT_, DerivedsT_>::value>...> {
 };
 
 

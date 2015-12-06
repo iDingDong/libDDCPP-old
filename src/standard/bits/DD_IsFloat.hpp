@@ -28,7 +28,13 @@ struct IsFloat_<float> : TrueType {
 
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsFloat : AndType<IsFloat_<RemoveCVType<ObjectsT_>>...> {
+struct IsFloat : AndType<IsFloat<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsFloat<ObjectT_> : IsFloat_<RemoveCVType<ObjectT_>> {
 };
 #	else
 template <typename ObjectT_>

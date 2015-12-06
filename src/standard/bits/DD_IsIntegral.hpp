@@ -27,8 +27,14 @@
 
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsIntegral : AndType<IsIntegral<ObjectsT_>...> {
+};
+
+
+
 template <typename ObjectT_>
-using IsIntegral_ = OrType<
+struct IsIntegral<ObjectT_> : OrType<
 	IsBool<ObjectT_>,
 	IsCharactor<ObjectT_>,
 	IsUnsignedShort<ObjectT_>,
@@ -40,12 +46,8 @@ using IsIntegral_ = OrType<
 	IsUnsignedLongLong<ObjectT_>,
 	IsSignedLongLong<ObjectT_>,
 	StdBoolConstant<std::is_integral<ObjectT_>>
->;
-
-
-
-template <typename... ObjectsT_>
-using IsIntegral = AndType<IsIntegral_<ObjectsT_>...>;
+> {
+};
 #	else
 template <typename ObjectT_>
 struct IsIntegral : BoolConstant<

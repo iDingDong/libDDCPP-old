@@ -26,19 +26,30 @@ struct IsUnsignedChar_<unsigned char> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsUnsignedChar : AndType<IsUnsignedChar<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsUnsignedChar<ObjectT_> : IsUnsignedChar_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsUnsignedChar : IsUnsignedChar_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsUnsignedChar = AndType<detail_::IsUnsignedChar_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsUnsignedChar : detail_::IsUnsignedChar_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsUnsignedChar;
 
 
 

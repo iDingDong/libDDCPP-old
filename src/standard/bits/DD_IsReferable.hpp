@@ -17,8 +17,14 @@
 
 
 DD_BEGIN_
+template <typename... ObjectsT_>
+struct IsReferable : AndType<IsReferable<ObjectsT_>...> {
+};
+
+
+
 template <typename ObjectT_>
-struct IsReferable : OrType<std::is_object<ObjectT_>, IsReference<ObjectT_>> {
+struct IsReferable<ObjectT_> : OrType<std::is_object<ObjectT_>, IsReference<ObjectT_>> {
 };
 
 

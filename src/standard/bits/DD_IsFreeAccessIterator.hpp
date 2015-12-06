@@ -16,7 +16,13 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... IteratorsT_>
-struct IsFreeAccessIterator : IsBaseOf<FreeAccessIterator, IteratorCatagoryType<IteratorsT_>...> {
+struct IsFreeAccessIterator : AndType<IsFreeAccessIterator<IteratorsT_>...> {
+};
+
+
+
+template <typename IteratorT_>
+struct IsFreeAccessIterator<IteratorT_> : IsBaseOf<FreeAccessIterator, IteratorCatagoryType<IteratorT_>> {
 };
 #	else
 template <typename IteratorT_>

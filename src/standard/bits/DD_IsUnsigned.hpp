@@ -25,19 +25,30 @@ struct IsUnsigned_<ObjectT_, true> : BoolConstant<ObjectT_(0) < ObjectT_(-1)> {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsUnsigned : AndType<IsUnsigned<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsUnsigned<ObjectT_> : IsUnsigned_<ObjectT_, IsArithmetic<ObjectT_>::value> {
+};
+#	else
+template <typename ObjectT_>
+struct IsUnsigned : IsUnsigned_<ObjectT_, IsArithmetic<ObjectT_>::value> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsUnsigned = AndType<detail_::IsUnsigned_<ObjectsT_, IsArithmetic<ObjectsT_>::value>...>;
-#	else
-template <typename ObjectT_>
-struct IsUnsigned : detail_::IsUnsigned_<ObjectT_, IsArithmetic<ObjectT_>::value> {
-};
-#	endif
+using detail_::IsUnsigned;
 
 
 

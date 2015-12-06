@@ -15,9 +15,25 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-using IsPod = AndType<StdBoolConstant<std::is_pod<ObjectsT_>>...>;
+struct IsPod : AndType<IsPod<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsPod : StdBoolConstant<std::is_pod<ObjectT_>> {
+};
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+
 
 
 

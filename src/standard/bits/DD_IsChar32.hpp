@@ -29,7 +29,13 @@ struct IsChar32_<char32_t> : TrueType {
 
 
 template <typename... ObjectsT_>
-struct IsChar32 : AndType<IsChar32_<RemoveCVType<ObjectsT_>>...> {
+struct IsChar32 : AndType<IsChar32<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsChar32<ObjectT_> : IsChar32_<RemoveCVType<ObjectT_>> {
 };
 
 

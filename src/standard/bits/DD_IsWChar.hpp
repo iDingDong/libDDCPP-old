@@ -26,19 +26,30 @@ struct IsWChar_<wchar_t> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsWChar : AndType<IsWChar<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsWChar<ObjectT_> : IsWChar_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsWChar : IsWChar_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsWChar = AndType<detail_::IsWChar_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsWChar : detail_::IsWChar_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsWChar;
 
 
 

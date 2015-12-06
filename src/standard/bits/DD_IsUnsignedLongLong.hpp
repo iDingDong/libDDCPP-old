@@ -32,13 +32,24 @@ struct IsUnsignedLongLong_<unsigned long long> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsUnsignedLongLong : AndType<IsUnsignedLongLong<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsUnsignedLongLong<ObjectT_> : IsUnsignedLongLong_<RemoveCVType<ObjectT_>> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsUnsignedLongLong = AndType<detail_::IsUnsignedLongLong_<RemoveCVType<ObjectsT_>>...>;
+using detail_::IsUnsignedLongLong;
 
 
 

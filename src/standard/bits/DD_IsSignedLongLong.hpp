@@ -28,13 +28,24 @@ struct IsSignedLongLong_<signed long long> : TrueType {
 
 
 
+template <typename... ObjectsT_>
+struct IsSignedLongLong : AndType<IsSignedLongLong<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsSignedLongLong<ObjectT_> : IsSignedLongLong_<RemoveCVType<ObjectT_>> {
+};
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsSignedLongLong = AndType<detail_::IsSignedLongLong_<RemoveCVType<ObjectsT_>>...>;
+using detail_::IsSignedLongLong;
 
 
 

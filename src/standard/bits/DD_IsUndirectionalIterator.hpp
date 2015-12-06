@@ -16,7 +16,13 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... IteratorsT_>
-struct IsUndirectionalIterator : IsBaseOf<UndirectionalIterator, IteratorCatagoryType<IteratorsT_>...> {
+struct IsUndirectionalIterator : AndType<IsUndirectionalIterator<IteratorsT_>...> {
+};
+
+
+
+template <typename IteratorT_>
+struct IsUndirectionalIterator<IteratorT_> : IsBaseOf<UndirectionalIterator, IteratorCatagoryType<IteratorT_>> {
 };
 #	else
 template <typename IteratorT_>

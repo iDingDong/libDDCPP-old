@@ -16,37 +16,33 @@
 
 
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsArray : AndType<IsArray<ObjectsT_>...> {
+};
+#	endif
+
+
+
 template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct IsArray_ : StdBoolConstant<std::is_array<ObjectT_>> {
+struct IsArray<ObjectT_> : StdBoolConstant<std::is_array<ObjectT_>> {
 #	else
-struct IsArray_ : FalseType {
+struct IsArray : FalseType {
 #	endif
 };
 
 
 
 template <typename ValueT_>
-struct IsArray_<ValueT_[]> : TrueType {
+struct IsArray<ValueT_[]> : TrueType {
 };
 
 
 
 template <typename ValueT_, LengthType length_c_>
-struct IsArray_<ValueT_[length_c_]> : TrueType {
+struct IsArray<ValueT_[length_c_]> : TrueType {
 };
-
-
-
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-struct IsArray : AndType<IsArray_<ObjectsT_>...> {
-};
-#	else
-template <typename ObjectT_>
-struct IsArray : IsArray_<ObjectT_> {
-};
-#	endif
 
 
 

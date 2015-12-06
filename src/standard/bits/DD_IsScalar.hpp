@@ -18,7 +18,14 @@
 
 DD_BEGIN_
 template <typename... ObjectsT_>
-using IsScalar = AndType<OrType<IsArithmetic<ObjectsT_>, IsPointer<ObjectsT_>, IsEnum<ObjectsT_>>...>;
+struct IsScalar : AndType<IsScalar<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsScalar<ObjectT_> : OrType<IsArithmetic<ObjectT_>, IsPointer<ObjectT_>, IsEnum<ObjectT_>> {
+};
 
 
 

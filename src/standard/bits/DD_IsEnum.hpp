@@ -18,7 +18,13 @@
 
 DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-struct IsEnum : AndType<StdBoolConstant<std::is_enum<ObjectsT_>>...> {
+struct IsEnum : AndType<IsEnum<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsEnum<ObjectT_> : StdBoolConstant<std::is_enum<ObjectT_>> {
 };
 
 

@@ -16,8 +16,14 @@
 
 
 DD_DETAIL_BEGIN_
+template <typename... ObjectsT_>
+struct IsClass : AndType<BoolConstant<IsClass<ObjectsT_>::value>...> {
+};
+
+
+
 template <typename ObjectT_>
-struct IsClass_ {
+struct IsClass<ObjectT_> {
 	template <typename ObjectT__>
 	static ValidityType constexpr match_(int ObjectT__::*) noexcept {
 		return true;
@@ -30,17 +36,11 @@ struct IsClass_ {
 
 
 	static ValidityType constexpr value =
-		(IsClass_<ObjectT_>::match_<ObjectT_>(nil_pointer) && !IsUnion<ObjectT_>::value ) ||
+		(match_<ObjectT_>(nil_pointer) && !IsUnion<ObjectT_>::value ) ||
 		std::is_class<ObjectT_>::value
 	;
 
 
-};
-
-
-
-template <typename... ObjectsT_>
-struct IsClass : AndType<BoolConstant<IsClass_<ObjectsT_>::value>...> {
 };
 
 

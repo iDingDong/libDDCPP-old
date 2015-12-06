@@ -26,19 +26,30 @@ struct IsUnsignedLong_<unsigned long> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsUnsignedLong : AndType<IsUnsignedLong<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsUnsignedLong<ObjectT_> : IsUnsignedLong_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsUnsignedLong : IsUnsignedLong_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsUnsignedLong = AndType<detail_::IsUnsignedLong_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsUnsignedLong : detail_::IsUnsignedLong_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsUnsignedLong;
 
 
 

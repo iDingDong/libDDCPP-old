@@ -17,7 +17,14 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-using IsNoexceptCopyConstructible = AndType<StdBoolConstant<std::is_nothrow_copy_constructible<ObjectT_>>...>;
+struct IsNoexceptCopyConstructible : AndType<IsNoexceptCopyConstructible<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsNoexceptCopyConstructible<ObjectT_> : StdBoolConstant<std::is_nothrow_copy_constructible<ObjectT_>> {
+};
 #	else
 template <typename ObjectT_>
 struct IsNoexceptCopyConstructible : IsScalar<ObjectT_> {

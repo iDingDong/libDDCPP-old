@@ -16,8 +16,14 @@
 
 
 DD_DETAIL_BEGIN_
+template <typename... ObjectsT_>
+struct IsNoexceptMoveAssignable : AndType<IsNoexceptMoveAssignable<ObjectsT_>...> {
+};
+
+
+
 template <typename ObjectT_>
-struct IsNoexceptMoveAssignable_ : StdBoolConstant<std::is_nothrow_move_assignable<ObjectT_>> {
+struct IsNoexceptMoveAssignable<ObjectT_> : StdBoolConstant<std::is_nothrow_move_assignable<ObjectT_>> {
 };
 
 
@@ -27,8 +33,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-template <typename... ObjectsT_>
-using IsNoexceptMoveAssignable = AndType<detail_::IsNoexceptMoveAssignable_<ObjectsT_>...>;
+using detail_::IsNoexceptMoveAssignable;
 
 
 

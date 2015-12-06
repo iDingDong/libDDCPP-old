@@ -18,7 +18,14 @@
 
 DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-using IsNoexceptMoveConstructible = AndType<StdBoolConstant<std::is_nothrow_move_constructible<ObjectsT_>>...>;
+struct IsNoexceptMoveConstructible : AndType<IsNoexceptMoveConstructible<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsNoexceptMoveConstructible<ObjectT_> : StdBoolConstant<std::is_nothrow_move_constructible<ObjectT_>> {
+};
 
 
 

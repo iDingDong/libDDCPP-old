@@ -5,8 +5,8 @@
 
 
 #	include "DD_IsVoid.hpp"
-#	include "DD_IsArithmetic.hpp"
-#	include "DD_IsReference.hpp"
+#	include "DD_IsUnsigned.hpp"
+#	include "DD_IsReferable.hpp"
 #	include "DD_IsPointer.hpp"
 #	include "DD_IsArray.hpp"
 #	if __cplusplus >= 201103L
@@ -17,6 +17,9 @@
 #	include "DD_IsSame.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsBaseOf.hpp"
+#	endif
+#	include "DD_IsNoexceptCopyConstructible.hpp"
+#	if __cplusplus >= 201103L
 #		include "DD_IsNoexceptMoveConstructible.hpp"
 #		include "DD_IsNoexceptMoveAssignable.hpp"
 #	endif
@@ -34,61 +37,65 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename ObjectT_>
 struct Trait {
 	DD_ALIAS(ObjectType, ObjectT_);
 
-	DD_ALIAS(IsVoid, DD::IsVoid<ObjectType>);
-	DD_ALIAS(IsBool, DD::IsBool<ObjectType>);
-	DD_ALIAS(IsUnsignedChar, DD::IsUnsignedChar<ObjectType>);
-	DD_ALIAS(IsSignedChar, DD::IsSignedChar<ObjectType>);
-	DD_ALIAS(IsChar, DD::IsChar<ObjectType>);
-	DD_ALIAS(IsWChar, DD::IsWChar<ObjectType>);
+	DD_ALIAS(IsVoid, ::DD::IsVoid<ObjectType>);
+	DD_ALIAS(IsUnsigned, ::DD::IsUnsigned<ObjectType>);
+
+	DD_ALIAS(IsBool, ::DD::IsBool<ObjectType>);
+	DD_ALIAS(IsUnsignedChar, ::DD::IsUnsignedChar<ObjectType>);
+	DD_ALIAS(IsSignedChar, ::DD::IsSignedChar<ObjectType>);
+	DD_ALIAS(IsChar, ::DD::IsChar<ObjectType>);
+	DD_ALIAS(IsWChar, ::DD::IsWChar<ObjectType>);
 #	if __cplusplus >= 201103L
-	using IsChar16 = DD::IsChar16<ObjectType>;
-	using IsChar32 = DD::IsChar32<ObjectType>;
+	using IsChar16 = ::DD::IsChar16<ObjectType>;
+	using IsChar32 = ::DD::IsChar32<ObjectType>;
 #	endif
-	DD_ALIAS(IsCharactor, DD::IsCharactor<ObjectType>);
-	DD_ALIAS(IsUnsignedShort, DD::IsUnsignedShort<ObjectType>);
-	DD_ALIAS(IsSignedShort, DD::IsSignedShort<ObjectType>);
-	DD_ALIAS(IsUnsignedInt, DD::IsUnsignedInt<ObjectType>);
-	DD_ALIAS(IsSignedInt, DD::IsSignedInt<ObjectType>);
-	DD_ALIAS(IsUnsignedLong, DD::IsUnsignedLong<ObjectType>);
-	DD_ALIAS(IsSignedLong, DD::IsSignedLong<ObjectType>);
+	DD_ALIAS(IsCharactor, ::DD::IsCharactor<ObjectType>);
+	DD_ALIAS(IsUnsignedShort, ::DD::IsUnsignedShort<ObjectType>);
+	DD_ALIAS(IsSignedShort, ::DD::IsSignedShort<ObjectType>);
+	DD_ALIAS(IsUnsignedInt, ::DD::IsUnsignedInt<ObjectType>);
+	DD_ALIAS(IsSignedInt, ::DD::IsSignedInt<ObjectType>);
+	DD_ALIAS(IsUnsignedLong, ::DD::IsUnsignedLong<ObjectType>);
+	DD_ALIAS(IsSignedLong, ::DD::IsSignedLong<ObjectType>);
 #	if __cplusplus >= 201103L
-	using IsUnsignedLongLong = DD::IsUnsignedLongLong<ObjectType>;
-	using IsSignedLongLong = DD::IsSignedLongLong<ObjectType>;
+	using IsUnsignedLongLong = ::DD::IsUnsignedLongLong<ObjectType>;
+	using IsSignedLongLong = ::DD::IsSignedLongLong<ObjectType>;
 #	endif
-	DD_ALIAS(IsIntegral, DD::IsIntegral<ObjectType>);
-	DD_ALIAS(IsFloatingPoint, DD::IsFloatingPoint<ObjectType>);
-	DD_ALIAS(IsArithmetic, DD::IsArithmetic<ObjectType>);
+	DD_ALIAS(IsIntegral, ::DD::IsIntegral<ObjectType>);
+	DD_ALIAS(IsFloatingPoint, ::DD::IsFloatingPoint<ObjectType>);
+	DD_ALIAS(IsArithmetic, ::DD::IsArithmetic<ObjectType>);
 #	if __cplusplus >= 201103L
-	using IsFunction = DD::IsFunction<ObjectType>;
-	using IsLvalueReference = DD::IsLvalueReference<ObjectType>;
-	using IsRvalueReference = DD::IsRvalueReference<ObjectType>;
+	using IsFunction = ::DD::IsFunction<ObjectType>;
+	using IsLvalueReference = ::DD::IsLvalueReference<ObjectType>;
+	using IsRvalueReference = ::DD::IsRvalueReference<ObjectType>;
 #	endif
-	DD_ALIAS(IsReference, DD::IsReference<ObjectType>);
-	DD_ALIAS(IsPointer, DD::IsPointer<ObjectType>);
-	DD_ALIAS(IsArray, DD::IsArray<ObjectType>);
+	DD_ALIAS(IsReference, ::DD::IsReference<ObjectType>);
+	DD_ALIAS(IsPointer, ::DD::IsPointer<ObjectType>);
+	DD_ALIAS(IsArray, ::DD::IsArray<ObjectType>);
+	DD_ALIAS(IsReferable, ::DD::IsReferable<ObjectType>);
 #	if __cplusplus >= 201103L
-	using IsUnion = DD::IsUnion<ObjectType>;
-	using IsClass = DD::IsClass<ObjectType>;
+	using IsUnion = ::DD::IsUnion<ObjectType>;
+	using IsClass = ::DD::IsClass<ObjectType>;
 #	endif
-	DD_ALIAS(IsConst, DD::IsConst<ObjectType>);
-	DD_ALIAS(IsVolatile, DD::IsVolatile<ObjectType>);
+	DD_ALIAS(IsConst, ::DD::IsConst<ObjectType>);
+	DD_ALIAS(IsVolatile, ::DD::IsVolatile<ObjectType>);
+	DD_ALIAS(IsNoexceptCopyConstructible, ::DD::IsNoexceptCopyConstructible<ObjectType>);
 #	if __cplusplus >= 201103L
 	using IsNoexceptMoveConstructible = DD::IsNoexceptMoveConstructible<ObjectType>;
 	using IsNoexceptMoveAssignable = DD::IsNoexceptMoveAssignable<ObjectType>;
 	template <typename... ObjectsT__>
-	using IsSame = DD::IsSame<ObjectType, ObjectsT__...>;
+	using IsSame = ::DD::IsSame<ObjectType, ObjectsT__...>;
 	template <typename... ObjectsT__>
-	using IsBaseOf = DD::IsBaseOf<ObjectType, ObjectsT__...>;
+	using IsBaseOf = ::DD::IsBaseOf<ObjectType, ObjectsT__...>;
 #	else
 
 
 	template <typename ObjectT__>
-	struct IsSame : DD::IsSame<ObjectType, ObjectT__> {
+	struct IsSame : ::DD::IsSame<ObjectType, ObjectT__> {
 	};
 
 #	endif
@@ -112,6 +119,15 @@ struct Trait {
 
 
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::Trait;
 
 
 

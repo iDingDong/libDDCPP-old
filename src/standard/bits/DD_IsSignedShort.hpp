@@ -26,19 +26,30 @@ struct IsSignedShort_<signed short> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsSignedShort : AndType<IsSignedShort<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsSignedShort<ObjectT_> : IsSignedShort_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsSignedShort : IsSignedShort_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsSignedShort = AndType<detail_::IsSignedShort_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsSignedShort : detail_::IsSignedShort_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsSignedShort;
 
 
 

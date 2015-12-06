@@ -15,18 +15,26 @@
 
 
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsVoid : AndType<IsVoid<ObjectsT_>...> {
+};
+
+
+
+#	endif
 template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct IsVoid_ : StdBoolConstant<std::is_void<ObjectT_>> {
+struct IsVoid<ObjectT_> : StdBoolConstant<std::is_void<ObjectT_>> {
 #	else
-struct IsVoid_ : FalseType {
+struct IsVoid : FalseType {
 #	endif
 };
 
 
 
 template <>
-struct IsVoid_<void> : TrueType {
+struct IsVoid<void> : TrueType {
 };
 
 
@@ -36,14 +44,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsVoid = AndType<detail_::IsVoid_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct IsVoid : detail_::IsVoid_<ObjectT_> {
-};
-#	endif
+using detail_::IsVoid;
 
 
 

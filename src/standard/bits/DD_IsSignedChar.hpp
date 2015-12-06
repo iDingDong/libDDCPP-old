@@ -26,19 +26,30 @@ struct IsSignedChar_<signed char> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsSignedChar : AndType<IsSignedChar<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsSignedChar<ObjectT_> : IsSignedChar_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsSignedChar : IsSignedChar_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsSignedChar = AndType<detail_::IsSignedChar_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsSignedChar : detail_::IsSignedChar_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsSignedChar;
 
 
 

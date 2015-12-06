@@ -17,20 +17,20 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename ObjectT_>
-struct IsLvalueReference_ : StdBoolConstant<std::is_lvalue_reference<ObjectT_>> {
-};
-
-
-
-template <typename ObjectT_>
-struct IsLvalueReference_<ObjectT_&> : TrueType {
-};
-
-
-
 template <typename... ObjectsT_>
-struct IsLvalueReference : AndType<detail_::IsLvalueReference_<ObjectsT_>...> {
+struct IsLvalueReference : AndType<IsLvalueReference<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsLvalueReference<ObjectT_> : StdBoolConstant<std::is_lvalue_reference<ObjectT_>> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsLvalueReference<ObjectT_&> : TrueType {
 };
 
 

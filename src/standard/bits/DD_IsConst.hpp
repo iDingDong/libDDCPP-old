@@ -15,31 +15,27 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename ObjectT_>
-#	if __cplusplus >= 201103L
-struct IsConst_ : StdBoolConstant<std::is_const<ObjectT_>> {
-#	else
-struct IsConst_ : FalseType {
-#	endif
-};
-
-
-
-template <typename ObjectT_>
-struct IsConst_<ObjectT_ const> : TrueType {
-};
-
-
-
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsConst : AndType<IsConst_<ObjectsT_>...> {
+struct IsConst : AndType<IsConst<ObjectsT_>...> {
 };
-#	else
-template <typename ObjectT_>
-struct IsConst : IsConst_<ObjectT_> {
-};
+
+
+
 #	endif
+template <typename ObjectT_>
+#	if __cplusplus >= 201103L
+struct IsConst<ObjectT_> : StdBoolConstant<std::is_const<ObjectT_>> {
+#	else
+struct IsConst : FalseType {
+#	endif
+};
+
+
+
+template <typename ObjectT_>
+struct IsConst<ObjectT_ const> : TrueType {
+};
 
 
 

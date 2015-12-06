@@ -12,9 +12,13 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsArithmetic : AndType<
-	OrType<IsIntegral<ObjectsT_>, IsFloatingPoint<ObjectsT_>, StdIntegralConstant<std::is_arithmetic<ObjectsT_>>>...
-> {
+struct IsArithmetic : AndType<IsArithmetic<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsArithmetic<ObjectT_> : OrType<IsIntegral<ObjectT_>, IsFloatingPoint<ObjectT_>, StdIntegralConstant<std::is_arithmetic<ObjectT_>>> {
 };
 #	else
 template <typename ObjectT_>

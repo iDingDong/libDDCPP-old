@@ -26,19 +26,30 @@ struct IsSignedInt_<signed int> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsSignedInt : AndType<IsSignedInt<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsSignedInt<ObjectT_> : IsSignedInt_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsSignedInt : IsSignedInt_<typename RemoveCV<ObjectT_>::Type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsSignedInt = AndType<detail_::IsSignedInt_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsSignedInt : detail_::IsSignedInt_<typename RemoveCV<ObjectT_>::Type> {
-};
-#	endif
+using detail_::IsSignedInt;
 
 
 

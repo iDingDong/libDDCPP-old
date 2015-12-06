@@ -43,39 +43,47 @@ struct HasBeginAndEnd_ : And<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>> {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsRange : AndType<IsRange<ObjectsT_>...> {
+};
+
+
+
+#	endif
 template <typename ObjectT_>
-struct IsRange_ : detail_::HasBeginAndEnd_<ObjectT_> {
+struct IsRange<ObjectT_> : HasBeginAndEnd_<ObjectT_> {
 };
 
 
 
 template <typename ValueT_, LengthType length_c_>
-struct IsRange_<ValueT_[length_c_]> : TrueType {
+struct IsRange<ValueT_[length_c_]> : TrueType {
 };
 
 
 
 #	if DDCPP_CONSIDER_CSTRING_AS_RANGE
 template <typename ValueT_>
-struct IsRange_<ValueT_*> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
+struct IsRange<ValueT_*> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
 template <typename ValueT_>
-struct IsRange_<ValueT_* const> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
+struct IsRange<ValueT_* const> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
 template <typename ValueT_>
-struct IsRange_<ValueT_* volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
+struct IsRange<ValueT_* volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
 
 template <typename ValueT_>
-struct IsRange_<ValueT_* const volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
+struct IsRange<ValueT_* const volatile> : IsCharactor<DD_MODIFY_TRAIT(RemovePointer, ValueT_)> {
 };
 
 
@@ -86,14 +94,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsRange = AndType<detail_::IsRange_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct IsRange : detail_::IsRange_<ObjectT_> {
-};
-#	endif
+using detail_::IsRange;
 
 
 

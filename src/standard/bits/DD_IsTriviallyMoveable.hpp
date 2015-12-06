@@ -17,7 +17,13 @@
 
 DD_DETAIL_BEGIN_
 template <typename... ObjectsT_>
-struct IsTriviallyMoveable : AndType<IsTriviallyMoveConstructible<ObjectsT_...>, IsTriviallyMoveAssignable<ObjectsT_...>> {
+struct IsTriviallyMoveable : AndType<IsTriviallyMoveable<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsTriviallyMoveable<ObjectT_> : AndType<IsTriviallyMoveConstructible<ObjectT_>, IsTriviallyMoveAssignable<ObjectT_>> {
 };
 
 

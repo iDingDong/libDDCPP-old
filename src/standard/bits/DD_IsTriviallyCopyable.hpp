@@ -17,7 +17,16 @@
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename... ObjectsT_>
-struct IsTriviallyCopyable : AndType<IsTriviallyCopyConstructible<ObjectsT_...>, IsTriviallyCopyAssignable<ObjectsT_...>, IsTriviallyMoveable<ObjectsT_...>> {
+struct IsTriviallyCopyable : AndType<IsTriviallyCopyable<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsTriviallyCopyable<ObjectT_> : AndType<
+	IsTriviallyCopyConstructible<ObjectT_>,
+	IsTriviallyCopyAssignable<ObjectT_>,
+	IsTriviallyMoveable<ObjectT_>> {
 };
 #	else
 template <typename ObjectT_>

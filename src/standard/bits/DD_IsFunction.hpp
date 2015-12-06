@@ -16,158 +16,158 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename ObjectT_>
-struct IsFunction_ : StdIntegralConstant<std::is_function<ObjectT_>> {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...)> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...)> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) volatile> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const volatile> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) volatile> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const volatile> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...)&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) volatile&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const volatile&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...)&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) volatile&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const volatile&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...)&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) volatile&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_...) const volatile&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...)&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) volatile&&> : TrueType {
-};
-
-
-
-template <typename ResultT_, typename... ArgumentsT_>
-struct IsFunction_<ResultT_(ArgumentsT_... ...) const volatile&&> : TrueType {
-};
-
-
-
 template <typename... ObjectsT_>
-struct IsFunction : AndType<IsFunction_<ObjectsT_>...> {
+struct IsFunction : AndType<IsFunction<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsFunction<ObjectT_> : StdIntegralConstant<std::is_function<ObjectT_>> {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...)> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...)> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) volatile> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const volatile> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) volatile> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const volatile> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...)&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) volatile&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const volatile&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...)&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) volatile&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const volatile&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...)&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) volatile&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_...) const volatile&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...)&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) volatile&&> : TrueType {
+};
+
+
+
+template <typename ResultT_, typename... ArgumentsT_>
+struct IsFunction<ResultT_(ArgumentsT_... ...) const volatile&&> : TrueType {
 };
 
 

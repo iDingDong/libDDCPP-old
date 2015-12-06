@@ -15,18 +15,26 @@
 
 
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsVolatile : AndType<IsVolatile<ObjectsT_>...> {
+};
+
+
+
+#	endif
 template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-struct IsVolatile_ : StdBoolConstant<std::is_volatile<ObjectT_>> {
+struct IsVolatile<ObjectT_> : StdBoolConstant<std::is_volatile<ObjectT_>> {
 #	else
-struct IsVolatile_ : FalseType {
+struct IsVolatile : FalseType {
 #	endif
 };
 
 
 
 template <typename ObjectT_>
-struct IsVolatile_<ObjectT_ volatile> : TrueType {
+struct IsVolatile<ObjectT_ volatile> : TrueType {
 };
 
 
@@ -36,14 +44,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsVolatile = AndType<detail_::IsVolatile_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct IsVolatile : detail_::IsVolatile_<ObjectT_> {
-};
-#	endif
+using detail_::IsVolatile;
 
 
 

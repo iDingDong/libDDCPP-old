@@ -47,19 +47,30 @@ struct IsPointer_<std::nullptr_t> : TrueType {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsPointer : AndType<IsPointer<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct IsPointer<ObjectT_> : IsPointer_<RemoveCVType<ObjectT_>> {
+};
+#	else
+template <typename ObjectT_>
+struct IsPointer : IsPointer_<typename RemoveCV<ObjectT_>::type> {
+};
+#	endif
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
-#	if __cplusplus >= 201103L
-template <typename... ObjectsT_>
-using IsPointer = AndType<detail_::IsPointer_<RemoveCVType<ObjectsT_>>...>;
-#	else
-template <typename ObjectT_>
-struct IsPointer : detail_::IsPointer_<typename RemoveCV<ObjectT_>::type> {
-};
-#	endif
+using detail_::IsPointer;
 
 
 

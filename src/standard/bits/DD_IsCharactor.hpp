@@ -19,20 +19,21 @@
 
 DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
+template <typename... ObjectsT_>
+struct IsCharactor : AndType<IsCharactor<ObjectsT_>...> {
+};
+
+
+
 template <typename ObjectT_>
-using IsCharactor_ = OrType<
+struct IsCharactor<ObjectT_> : OrType<
 	IsChar<ObjectT_>,
 	IsUnsignedChar<ObjectT_>,
 	IsSignedChar<ObjectT_>,
 	IsWChar<ObjectT_>,
 	IsChar16<ObjectT_>,
 	IsChar32<ObjectT_>
->;
-
-
-
-template <typename... ObjectsT_>
-struct IsCharactor : AndType<IsCharactor_<ObjectsT_>...> {
+> {
 };
 #	else
 template <typename ObjectT_>
