@@ -42,6 +42,11 @@ struct RangeTag {
 
 
 
+struct ReserveTag {
+} DD_CONSTANT reserve_tag;
+
+
+
 template <typename ValueT_>
 struct VesselBase_ {
 	public:
@@ -458,6 +463,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		this->m_storage_end_ = get_pointer(this->end());
 	}
 
+	public:
+	DD_CONSTEXPR Vessel_(ReserveTag tag, LengthType length_) DD_NOEXCEPT_AS(
+		SuperType(AllocatorType::allocate(length_) DD_COMMA 0 DD_COMMA length_)
+	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+	}
+
 
 	public:
 	~Vessel_() DD_NOEXCEPT {
@@ -643,9 +654,28 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_concatenate(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		::DD::get_pointer(::DD::copy_construct(begin___ DD_COMMA end___ DD_COMMA fabricate<ThisType>().end()))
+	) {
+		this->m_end_ = ::DD::get_pointer(::DD::copy_construct(begin___, end___, this->end()));
+	}
+
+
+	public:
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType unguarded_concatenate(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().unguarded_concatenate(DD_SPLIT_RANGE(range___))
+	) {
+		unguarded_concatenate(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
 	ProcessType concatenate(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
-		reserve(this->size() + ::DD::length_difference(begin___, end___));
-		this->m_end_ = ::DD::copy_construct(begin___, end___, this->end());
+		reserve(this->get_length() + ::DD::length_difference(begin___, end___));
+		unguarded_concatenate(begin___, end___);
 	}
 
 
@@ -685,6 +715,13 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	ProcessType shrink() DD_NOEXCEPT_AS(fabricate<ThisType>().stretch(fabricate<ThisType>().get_length())) {
 		stretch(this->get_length());
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType add(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+
 	}
 
 
@@ -786,6 +823,7 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 
 
 #	endif
+#	if __cplusplus >= 201103L
 	public:
 	ThisType& operator =(ThisType const& origin_) = default;
 
@@ -793,7 +831,20 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 	ThisType& operator =(ThisType&& origin_) = default;
 
 
+#	endif
 };
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+inline Vessel<ValueT_, AllocatorT_> DD_CONSTEXPR operator +(
+	Vessel<ValueT_, AllocatorT_> const& vessel_1_,
+	Vessel<ValueT_, AllocatorT_> const& vessel_2_
+) {
+	Vessel<ValueT_, AllocatorT_> result_(reserve_tag, vessel_1_.get_length() + vessel_2_.get_length());
+	result_.unguarded_concatenate(vessel_1_, vessel_2_);
+	return result_;
+}
 
 
 
