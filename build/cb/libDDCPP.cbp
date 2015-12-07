@@ -18,7 +18,9 @@
 		<Unit filename="../../src/dummy/bits/DD_dummy_definitions.hpp" />
 		<Unit filename="../../src/main.cpp" />
 		<Unit filename="../../src/math/DDArithmetics.hpp" />
+		<Unit filename="../../src/math/DDMatrix.hpp" />
 		<Unit filename="../../src/math/bits/DD_Complex.hpp" />
+		<Unit filename="../../src/math/bits/DD_Matrix.hpp" />
 		<Unit filename="../../src/math/bits/DD_Rational.hpp" />
 		<Unit filename="../../src/math/bits/DD_absolute.hpp" />
 		<Unit filename="../../src/math/bits/DD_greatest_common_divisor.hpp" />

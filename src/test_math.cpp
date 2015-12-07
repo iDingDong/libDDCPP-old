@@ -1,7 +1,10 @@
 #include "test_math.h"
 
-#include "math/DDArithmetics.hpp"
 #include <iostream>
+
+#include "math/DDArithmetics.hpp"
+#include "math/DDMatrix.hpp"
+
 void test_math() {
 	{
 		if (
