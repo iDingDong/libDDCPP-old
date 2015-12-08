@@ -813,10 +813,11 @@
 	"DD_StrictPointer.hpp"
 	"DD_swap.hpp"
 
-1441685287 source:d:\develop\repositories\libddcpp\src\test_math.cpp
+1449505004 source:d:\develop\repositories\libddcpp\src\test_math.cpp
 	"test_math.h"
-	"math/DDArithmetics.hpp"
 	<iostream>
+	"math/DDArithmetics.hpp"
+	"math/DDMatrix.hpp"
 
 1443513054 d:\develop\repositories\libddcpp\src\math\ddarithmetics.hpp
 	"bits/DD_absolute.hpp"
@@ -1432,4 +1433,11 @@
 
 1449300769 d:\develop\repositories\libddcpp\src\standard\bits\dd_staticconcatenate.hpp
 	"DD_global_definitions.hpp"
+
+1449504686 d:\develop\repositories\libddcpp\src\math\ddmatrix.hpp
+	"bits/DD_Matrix.hpp"
+
+1449596220 d:\develop\repositories\libddcpp\src\math\bits\dd_matrix.hpp
+	"DD_math_definitions.hpp"
+	"../../standard/bits/DD_Array.hpp"
 

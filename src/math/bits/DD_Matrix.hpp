@@ -166,6 +166,17 @@ struct Matrix {
 	}
 
 
+	public:
+	ThisType& operator +=(ThisType const& other_) DD_NOEXCEPT_AS(other_[rows][columns] += other_[rows][columns]) {
+		for (LengthType i_ = 0; i_ < rows; ++i_) {
+			for (LengthType j_ = 0; j_ < columns; ++j_) {
+				(*this)[i_][j_] += other_[i_][j_];
+			}
+		}
+		return *this;
+	}
+
+
 };
 
 
@@ -175,6 +186,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::Matrix;
 
 
 
