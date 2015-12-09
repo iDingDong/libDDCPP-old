@@ -25,6 +25,8 @@ int main() {
 		DD_PRINT "All tests successfully operated.";
 	} catch (char const* prompt) {
 		DD_PRINT prompt;
+	} catch (DD::Exception& error_) {
+		DD_PRINT error_.get_prompt();
 	}
 	DD_PRINT DD::end_line;
 	return 0;

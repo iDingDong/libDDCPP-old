@@ -276,8 +276,8 @@ void test_algorithm() {
 		DD::bubble_sort(temp_1);
 		DD::bubble_sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::bubble_sort' test failed.";
 		}
@@ -288,8 +288,8 @@ void test_algorithm() {
 		DD::insert_sort(temp_1);
 		DD::insert_sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::insert_sort' test failed.";
 		}
@@ -300,8 +300,8 @@ void test_algorithm() {
 		DD::select_sort(temp_1);
 		DD::select_sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::select_sort' test failed.";
 		}
@@ -312,8 +312,8 @@ void test_algorithm() {
 		DD::quick_sort(temp_1);
 		DD::quick_sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::quick_sort' test failed.";
 		}
@@ -324,8 +324,8 @@ void test_algorithm() {
 		DD::heap_sort(temp_1);
 		DD::heap_sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::heap_sort' test failed.";
 		}
@@ -336,8 +336,8 @@ void test_algorithm() {
 		DD::sort(temp_1);
 		DD::sort(temp_2);
 		if (
-			!equal(temp_1, sorted_arr) ||
-			!equal(temp_2, sorted_arr)
+			!DD::equal(temp_1, sorted_arr) ||
+			!DD::equal(temp_2, sorted_arr)
 		) {
 			throw "'DD::sort' test failed.";
 		}

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1449131722 source:d:\develop\repositories\libddcpp\src\main.cpp
+1449682074 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDHub.hpp"
@@ -226,7 +226,7 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1448643040 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
+1449680435 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
@@ -594,7 +594,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449404954 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1449680746 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -784,7 +784,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1447082014 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1449682194 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -947,7 +947,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1448352423 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1449681063 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
