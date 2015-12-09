@@ -1154,9 +1154,10 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1449404569 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1449642548 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
+	"DD_pivot_partition.hpp"
 	"DD_heap_sort.hpp"
 	"DD_insert_sort.hpp"
 	"DD_select_sort.hpp"
@@ -1365,12 +1366,10 @@
 	"DD_next.hpp"
 	"DD_swap_target.hpp"
 
-1448421967 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
+1449642056 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
 	"DD_IsFreeAccessIterator.hpp"
-	"DD_Range.hpp"
 	"DD_next.hpp"
-	"DD_previous.hpp"
-	"DD_swap_target.hpp"
+	"DD_pivot_partition.hpp"
 
 1448523137 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
 	"DD_build_heap.hpp"
@@ -1440,4 +1439,10 @@
 1449596220 d:\develop\repositories\libddcpp\src\math\bits\dd_matrix.hpp
 	"DD_math_definitions.hpp"
 	"../../standard/bits/DD_Array.hpp"
+
+1449642199 d:\develop\repositories\libddcpp\src\standard\bits\dd_pivot_partition.hpp
+	"DD_Iterator.hpp"
+	"DD_IteratorValue.hpp"
+	"DD_LessThan.hpp"
+	"DD_Range.hpp"
 

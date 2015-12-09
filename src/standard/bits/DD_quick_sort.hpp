@@ -5,10 +5,8 @@
 
 
 #	include "DD_IsFreeAccessIterator.hpp"
-#	include "DD_Range.hpp"
 #	include "DD_next.hpp"
-#	include "DD_previous.hpp"
-#	include "DD_swap_target.hpp"
+#	include "DD_pivot_partition.hpp"
 
 
 
@@ -21,27 +19,11 @@ struct QuickSort_ {
 		BidirectionalIteratorT__ end___
 	) {
 		while (begin___ != end___) {
-			BidirectionalIteratorT__ low___(begin___);
-			BidirectionalIteratorT__ high___(end___);
-			for (; ; ) {
-				while (!(*--high___ < *low___)) {
-					if (low___ == high___) {
-						goto outside_;
-					}
-				}
-				swap_target(low___, high___);
-				do {
-					if (low___ == high___) {
-						goto outside_;
-					}
-				} while (!(*high___ < *++low___));
-				swap_target(low___, high___);
+			BidirectionalIteratorT__ pivot___(::DD::unguarded_pivot_partition(begin___, end___));
+			if (pivot___ != end___) {
+				quick_sort(::DD::next(pivot___), end___);
 			}
-			outside_:
-			if (high___ != end___) {
-				quick_sort(::DD::next(high___), end___);
-			}
-			end___ = low___;
+			end___ = pivot___;
 		}
 	}
 
@@ -52,27 +34,11 @@ struct QuickSort_ {
 		BinaryPredicateT_ less___
 	) {
 		while (begin___ != end___) {
-			BidirectionalIteratorT__ low___(begin___);
-			BidirectionalIteratorT__ high___(end___);
-			for (; ; ) {
-				while (!less___(*--high___, *low___)) {
-					if (low___ == high___) {
-						goto outside_;
-					}
-				}
-				swap_target(low___, high___);
-				do {
-					if (low___ == high___) {
-						goto outside_;
-					}
-				} while (!less___(*high___, *++low___));
-				swap_target(low___, high___);
+			BidirectionalIteratorT__ pivot___(::DD::unguarded_pivot_partition(begin___, end___, less___));
+			if (pivot___ != end___) {
+				quick_sort(::DD::next(pivot___), end___, less___);
 			}
-			outside_:
-			if (high___ != end___) {
-				quick_sort(::DD::next(high___), end___);
-			}
-			end___ = low___;
+			end___ = pivot___;
 		}
 	}
 
@@ -89,25 +55,9 @@ struct QuickSort_<true> {
 		FreeAccessIteratorT__ end___
 	) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ low___(begin___);
-			FreeAccessIteratorT__ high___(end___);
-			for (; ; ) {
-				while (!(*--high___ < *low___)) {
-					if (low___ >= high___) {
-						goto outside_;
-					}
-				}
-				swap_target(low___, high___);
-				do {
-					if (low___ >= high___) {
-						goto outside_;
-					}
-				} while (!(*high___ < *++low___));
-				swap_target(low___, high___);
-			}
-			outside_:
-			quick_sort(::DD::next(high___), end___);
-			end___ = low___;
+			FreeAccessIteratorT__ pivot___(::DD::unguarded_pivot_partition(begin___, end___));
+			quick_sort(::DD::next(pivot___), end___);
+			end___ = pivot___;
 		}
 	}
 
@@ -118,25 +68,9 @@ struct QuickSort_<true> {
 		BinaryPredicateT__ less___
 	) {
 		while (begin___ < end___) {
-			FreeAccessIteratorT__ low___(begin___);
-			FreeAccessIteratorT__ high___(end___);
-			for (; ; ) {
-				while (!less___(*--high___, *low___)) {
-					if (low___ >= high___) {
-						goto outside_;
-					}
-				}
-				swap_target(low___, high___);
-				do {
-					if (low___ >= high___) {
-						goto outside_;
-					}
-				} while (!less___(*high___, *++low___));
-				swap_target(low___, high___);
-			}
-			outside_:
-			quick_sort(::DD::next(high___), end___);
-			end___ = low___;
+			FreeAccessIteratorT__ pivot___(::DD::unguarded_pivot_partition(begin___, end___, less___));
+			quick_sort(::DD::next(pivot___), end___, less___);
+			end___ = pivot___;
 		}
 	}
 

@@ -282,6 +282,7 @@
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point_by.hpp" />
+		<Unit filename="../../src/standard/bits/DD_pivot_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_previous.hpp" />
 		<Unit filename="../../src/standard/bits/DD_print.hpp" />
 		<Unit filename="../../src/standard/bits/DD_quick_sort.hpp" />

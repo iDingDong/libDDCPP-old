@@ -6,6 +6,7 @@
 
 #	include "DD_middle.hpp"
 #	include "DD_median_target.hpp"
+#	include "DD_pivot_partition.hpp"
 #	include "DD_heap_sort.hpp"
 #	include "DD_insert_sort.hpp"
 #	include "DD_select_sort.hpp"
@@ -49,25 +50,9 @@ ProcessType lazy_intro_sort_(
 		}
 		--depth_limit__;
 		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__));
-		FreeAccessIteratorT_ low__(begin__);
-		FreeAccessIteratorT_ high__(end__);
-		for (; ; ) {
-			do {
-				if (low__ >= --high__) {
-					goto out_side_;
-				}
-			} while (!(*high__ < *low__));
-			swap_target(low__, high__);
-			do {
-				if (++low__ >= high__) {
-					goto out_side_;
-				}
-			} while (!(*high__ < *low__));
-			swap_target(low__, high__);
-		}
-		out_side_:
-		::DD::detail_::lazy_intro_sort_(begin__, low__, depth_limit__);
-		begin__ = high__ + 1;
+		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__));
+		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, depth_limit__);
+		end__ = pivot__;
 	}
 }
 
@@ -85,43 +70,9 @@ ProcessType lazy_intro_sort_(
 		}
 		--depth_limit__;
 		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__, less__));
-#	if __cplusplus >= 201103L
-		IteratorValueType<FreeAccessIteratorT_> temp_(::DD::move(*begin__));
-#	else
-		typename IteratorValue<FreeAccessIteratorT_>::Type temp_(*begin__);
-#	endif
-		FreeAccessIteratorT_ low__(begin__);
-		FreeAccessIteratorT_ high__(end__);
-		for (; ; ) {
-			do {
-				if (low__ >= --high__) {
-					goto out_side_;
-				}
-			} while (!less__(*high__ < temp_));
-#	if __cplusplus >= 201103L
-			*low__ = ::DD::move(*high__);
-#	else
-			*low__ = *high__;
-#	endif
-			do {
-				if (++low__ >= high__) {
-					goto out_side_;
-				}
-			} while (!less__(temp_ < *low__));
-#	if __cplusplus >= 201103L
-			*high__ = ::DD::move(*low__);
-#	else
-			*high__ = *low__;
-#	endif
-		}
-		out_side_:
-#	if __cplusplus >= 201103L
-		*low__ = ::DD::move(temp_);
-#	else
-		*low__ = temp_;
-#	endif
-		::DD::detail_::lazy_intro_sort_(begin__, low__, less__, depth_limit__);
-		begin__ = high__ + 1;
+		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__, less__));
+		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, less__, depth_limit__);
+		end__ = pivot__;
 	}
 }
 
