@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1449725039 source:d:\develop\repositories\libddcpp\src\main.cpp
+1449734914 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDHub.hpp"
@@ -784,7 +784,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1449682416 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1449738732 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -947,12 +947,13 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1449724967 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1449736192 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
 	"standard/DDUtility.hpp"
 	"standard/DDArray.hpp"
+	"standard/DDVessel.hpp"
 	"standard/DDAlgorithm.hpp"
 
 1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
@@ -989,7 +990,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1447917974 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1449738732 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
@@ -1329,8 +1330,7 @@
 1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
 	"DD_Function.hpp"
 
-1449722080 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
-	"DD_Pair.hpp"
+1449739111 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
 	"DD_Function.hpp"
 
 1448539180 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
