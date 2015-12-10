@@ -16,8 +16,7 @@ inline ProcessType heap_sort(
 ) {
 	::DD::build_heap(begin__, end__);
 	while (begin__ < --end__) {
-		using ::DD::swap_target;
-		swap_target(begin__, end__);
+		::DD::swap_target(begin__, end__);
 		::DD::heapify(begin__, end__, begin__);
 	}
 }
@@ -30,8 +29,7 @@ inline ProcessType heap_sort(
 ) {
 	::DD::build_heap(begin__, end__, less__);
 	while (begin__ < --end__) {
-		using ::DD::swap_target;
-		swap_target(begin__, end__);
+		::DD::swap_target(begin__, end__);
 		::DD::heapify(begin__, end__, begin__, less__);
 	}
 }

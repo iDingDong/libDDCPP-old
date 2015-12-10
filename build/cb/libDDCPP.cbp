@@ -87,6 +87,7 @@
 		<Unit filename="../../src/standard/bits/DD_Function.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Functor.hpp" />
 		<Unit filename="../../src/standard/bits/DD_GetPackBack.hpp" />
+		<Unit filename="../../src/standard/bits/DD_GreaterThan.hpp" />
 		<Unit filename="../../src/standard/bits/DD_HashOf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Illogic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Incrementable.hpp" />
@@ -278,6 +279,7 @@
 		<Unit filename="../../src/standard/bits/DD_move_range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next_permutation.hpp" />
+		<Unit filename="../../src/standard/bits/DD_partial_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />

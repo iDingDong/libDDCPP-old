@@ -40,7 +40,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1449740182 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1449752591 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -74,8 +74,8 @@
 	"bits/DD_partition.hpp"
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
+	"bits/DD_partial_sort.hpp"
 	"bits/DD_bubble_sort.hpp"
-	"bits/DD_select_sort.hpp"
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_quick_sort.hpp"
 	"bits/DD_heap_sort.hpp"
@@ -595,7 +595,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449715097 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1449752450 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1156,7 +1156,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1449752551 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"
@@ -1242,7 +1242,7 @@
 1448255856 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer.hpp
 	"DD_transfer_backward.hpp"
 
-1448255841 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_backward.hpp
+1449749836 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer_backward.hpp
 	"DD_IteratorReverse.hpp"
 	"DD_transfer_forward.hpp"
 
@@ -1372,7 +1372,7 @@
 	"DD_next.hpp"
 	"DD_pivot_partition.hpp"
 
-1448523137 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
+1449750247 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
 	"DD_build_heap.hpp"
 
 1448523065 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
@@ -1450,4 +1450,15 @@
 1449740213 d:\develop\repositories\libddcpp\src\standard\bits\dd_transform.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
+
+1449752278 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sort.hpp
+	"DD_IteratorValue.hpp"
+	"DD_IteratorReverse.hpp"
+	"DD_GreaterThan.hpp"
+	"DD_build_heap.hpp"
+
+1449751845 d:\develop\repositories\libddcpp\src\standard\bits\dd_greaterthan.hpp
+	"DD_IntegralConstant.hpp"
+	"DD_ReadOnlyCall.hpp"
+	"DD_Functor.hpp"
 

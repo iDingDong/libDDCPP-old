@@ -15,8 +15,8 @@ inline ProcessType transfer_backward(
 	BidirectionalIteratorT_ from_,
 	BidirectionalIteratorT_ to_
 ) {
-	DD_ALIAS(ReverseIterator, DD_MODIFY_TRAIT(IteratorReverse, BidirectionalIteratorT_));
-	::DD::transfer_forward(ReverseIterator(from_), ReverseIterator(to_));
+	DD_ALIAS(ReverseIterator_, DD_MODIFY_TRAIT(IteratorReverse, BidirectionalIteratorT_));
+	::DD::transfer_forward(ReverseIterator_(from_), ReverseIterator_(to_));
 }
 
 

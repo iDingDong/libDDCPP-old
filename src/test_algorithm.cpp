@@ -342,9 +342,24 @@ void test_algorithm() {
 			throw "'DD::sort' test failed.";
 		}
 	}
+	{
+		DD::Array<int, 5> temp_1 = arr1;
+		DD::Array<int, 5> temp_2 = arr2;
+		DD::partial_sort(temp_1.begin(), temp_1.begin() + 2, temp_1.end());
+		DD::partial_sort(temp_2.begin(), temp_2.begin() + 3, temp_2.end());
+		if (
+			!DD::equal(temp_1.begin(), temp_1.begin() + 2, sorted_arr.begin()) ||
+			!DD::equal(temp_2.begin(), temp_2.begin() + 3, sorted_arr.begin())
+		) {
+			throw "'DD::partial_sort' test failed.";
+		}
+	}
+
+
+
 #	if SPEED_TEST
 	{
-		DD::LengthType constexpr length_c = 100000000;
+		DD::LengthType constexpr length_c = 50000000;
 		DD::Vessel<unsigned char> test_sort_1(length_c);
 		std::srand(static_cast<unsigned>(std::time(DD::nil_pointer)));
 		DD::generate(test_sort_1, [] { return static_cast<unsigned char>(std::rand() % 256); });
@@ -354,11 +369,17 @@ void test_algorithm() {
 
 		time(&start);
 		DD::sort(test_sort_1);
+		if (!DD::is_sorted(test_sort_1)) {
+			DD_PRINT "'DD::sort' failed.";
+		}
 		time(&finish);
 		DD_PRINT "'DD::sort': ", std::difftime(finish, start), DD::end_line;
 
 		time(&start);
 		std::sort(DD_SPLIT_RANGE(test_sort_2));
+		if (!DD::is_sorted(test_sort_2)) {
+			DD_PRINT "'std::sort' failed.";
+		}
 		time(&finish);
 		DD_PRINT "'std::sort': ", std::difftime(finish, start), DD::end_line;
 
