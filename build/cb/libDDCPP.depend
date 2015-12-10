@@ -40,7 +40,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1449715095 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1449740182 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -68,6 +68,7 @@
 	"bits/DD_fill.hpp"
 	"bits/DD_generate.hpp"
 	"bits/DD_transfer.hpp"
+	"bits/DD_transform.hpp"
 	"bits/DD_replace.hpp"
 	"bits/DD_replace_if.hpp"
 	"bits/DD_partition.hpp"
@@ -1330,7 +1331,7 @@
 1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
 	"DD_Function.hpp"
 
-1449739111 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
+1449739190 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
 	"DD_Function.hpp"
 
 1448539180 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
@@ -1444,5 +1445,9 @@
 	"DD_Iterator.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_LessThan.hpp"
+	"DD_Range.hpp"
+
+1449740213 d:\develop\repositories\libddcpp\src\standard\bits\dd_transform.hpp
+	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 

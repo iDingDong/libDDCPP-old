@@ -33,6 +33,7 @@
 #	include "bits/DD_fill.hpp"
 #	include "bits/DD_generate.hpp"
 #	include "bits/DD_transfer.hpp"
+#	include "bits/DD_transform.hpp"
 #	include "bits/DD_replace.hpp"
 #	include "bits/DD_replace_if.hpp"
 #	include "bits/DD_partition.hpp"

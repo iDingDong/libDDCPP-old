@@ -302,6 +302,7 @@
 		<Unit filename="../../src/standard/bits/DD_transfer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transfer_backward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transfer_forward.hpp" />
+		<Unit filename="../../src/standard/bits/DD_transform.hpp" />
 		<Unit filename="../../src/test_algorithm.cpp" />
 		<Unit filename="../../src/test_algorithm.h" />
 		<Unit filename="../../src/test_container.cpp" />
