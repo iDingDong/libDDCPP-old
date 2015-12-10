@@ -280,6 +280,7 @@
 		<Unit filename="../../src/standard/bits/DD_next.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next_permutation.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partial_sort.hpp" />
+		<Unit filename="../../src/standard/bits/DD_partial_sum.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />
