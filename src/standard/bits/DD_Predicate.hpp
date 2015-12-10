@@ -10,18 +10,35 @@
 
 
 #	endif
+#	include "DD_Pair.hpp"
 #	include "DD_Function.hpp"
 
 
 
-#	define DD_GENERATE_Predicate_BINARY_OPERATORS_(ARG_name_, ARG_operator_)\
+#	define DD_GENERATE_PREDICATE_BINARY_OPERATORS_(ARG_name_, ARG_operator_)\
+	template <typename ResultT_, typename... ArgumentsT_>\
+	struct PredicateBinaryOperatorWrapperOf##ARG_name_ {\
+		public:\
+		Pair<Predicate<ResultT_(ArgumentsT_...)>> m_predicates_;\
+	\
+	\
+		public:\
+		ResultT_ operator ()(ArgumentsT_... arguments__) {\
+			return m_predicates_.first(arguments__...) ARG_operator_ m_predicates_.second(arguments__...);\
+		}\
+	\
+	\
+	};\
+	\
+	\
+	\
 	template <typename ResultT_, typename... ArgumentsT_>\
 	inline Predicate<ResultT_(ArgumentsT_...)> constexpr ARG_name_(\
 		Predicate<ResultT_(ArgumentsT_...)> predicate_1_,\
 		Predicate<ResultT_(ArgumentsT_...)> predicate_2_\
 	) {\
-		return Predicate<ResultT_(ArgumentsT_...)>([predicate_1_, predicate_2_](ArgumentsT_... arguments__) mutable {\
-			return predicate_1_(arguments__...) ARG_operator_ predicate_2_(arguments__...);\
+		return Predicate<ResultT_(ArgumentsT_...)>(PredicateBinaryOperatorWrapperOf##ARG_name_<ResultT_, ArgumentsT_...>{\
+			Pair<Predicate<ResultT_(ArgumentsT_...)>>(predicate_1_, predicate_2_)\
 		});\
 	}\
 	\
@@ -84,15 +101,15 @@ inline Predicate<ResultT_(ArgumentsT_...)> constexpr make_predicate(PointerType<
 
 
 
-DD_GENERATE_Predicate_BINARY_OPERATORS_(add, +)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(subtract, -)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(multiply, *)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(divide, /)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(mod, %)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(bit_or, |)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(bit_and, &)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(logical_or, ||)
-DD_GENERATE_Predicate_BINARY_OPERATORS_(logical_and, &&)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(add, +)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(subtract, -)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(multiply, *)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(divide, /)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(mod, %)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(bit_or, |)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(bit_and, &)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(logical_or, ||)
+DD_GENERATE_PREDICATE_BINARY_OPERATORS_(logical_and, &&)
 
 
 

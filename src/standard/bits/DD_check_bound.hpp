@@ -4,7 +4,6 @@
 
 
 
-#	include "DD_Iterator.hpp"
 #	include "DD_Range.hpp"
 
 
@@ -12,19 +11,19 @@
 DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_>
 inline ValidityType check_bound(
-	FreeAccessIteratorT_ const& begin__,
-	FreeAccessIteratorT_ const& end__,
-	FreeAccessIteratorT_ const& iterator__
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ end__,
+	FreeAccessIteratorT_ iterator__
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(!(iterator__ < begin__) && iterator__ < end__)) {
 	return !(iterator__ < begin__) && iterator__ < end__;
 }
 
-template <typename FreeAccessRangeT_>
+template <typename FreeAccessRangeT_, typename FreeAccessIteratorT_>
 inline ValidityType check_bound(
-	FreeAccessRangeT_ const& range__,
-	DD_MODIFY_TRAIT(Iterator, FreeAccessRangeT_) const& iterator_
-) DD_NOEXCEPT_AS(check_bound(DD_SPLIT_RANGE(range__) DD_COMMA iterator_)) {
-	return check_bound(DD_SPLIT_RANGE(range__), iterator_);
+	FreeAccessRangeT_& range__,
+	FreeAccessIteratorT_ iterator_
+) DD_NOEXCEPT_AS(::DD::detail_::check_bound(DD_SPLIT_RANGE(range__) DD_COMMA iterator_)) {
+	return ::DD::detail_::check_bound(DD_SPLIT_RANGE(range__), iterator_);
 }
 
 

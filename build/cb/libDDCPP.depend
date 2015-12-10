@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1449682074 source:d:\develop\repositories\libddcpp\src\main.cpp
+1449725039 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDHub.hpp"
@@ -40,7 +40,7 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1448731991 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -100,7 +100,7 @@
 	"DD_IsLvalueReference.hpp"
 	"DD_RemoveReference.hpp"
 
-1449376794 d:\develop\repositories\libddcpp\src\standard\bits\dd_islvaluereference.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_islvaluereference.hpp
 	<type_traits>
 	"DD_And.hpp"
 
@@ -110,11 +110,11 @@
 1445867086 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
 	"DD_global_definitions.hpp"
 
-1449143635 d:\develop\repositories\libddcpp\src\standard\bits\dd_removereference.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removereference.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449379501 d:\develop\repositories\libddcpp\src\standard\bits\dd_issame.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issame.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
@@ -150,7 +150,7 @@
 	"DD_Range.hpp"
 	"DD_Pair.hpp"
 
-1448646042 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_pair.hpp
 	"DD_forward.hpp"
 	"DD_Comparable.hpp"
 	"DD_swap.hpp"
@@ -181,14 +181,14 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_sizetrait.hpp
 	"DD_global_definitions.hpp"
 
-1449372549 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptmoveconstructible.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptmoveconstructible.hpp
 	<type_traits>
 	"DD_And.hpp"
 
 1445763988 d:\develop\repositories\libddcpp\src\standard\bits\dd_or.hpp
 	"DD_IntegralConstant.hpp"
 
-1449370991 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptmoveassignable.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptmoveassignable.hpp
 	<type_traits>
 	"DD_And.hpp"
 
@@ -214,19 +214,19 @@
 1443513192 d:\develop\repositories\libddcpp\src\standard\bits\dd_voidtype.hpp
 	"DD_global_definitions.hpp"
 
-1449143594 d:\develop\repositories\libddcpp\src\standard\bits\dd_removecv.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removecv.hpp
 	"DD_RemoveConst.hpp"
 	"DD_RemoveVolatile.hpp"
 
-1449143570 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeconst.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeconst.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449143647 d:\develop\repositories\libddcpp\src\standard\bits\dd_removevolatile.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removevolatile.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449680435 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
@@ -242,11 +242,11 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1449372651 d:\develop\repositories\libddcpp\src\standard\bits\dd_isarithmetic.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isarithmetic.hpp
 	"DD_IsIntegral.hpp"
 	"DD_IsFloatingPoint.hpp"
 
-1449376693 d:\develop\repositories\libddcpp\src\standard\bits\dd_isintegral.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isintegral.hpp
 	<type_traits>
 	"DD_IsBool.hpp"
 	"DD_IsCharactor.hpp"
@@ -259,12 +259,12 @@
 	"DD_IsUnsignedLongLong.hpp"
 	"DD_IsSignedLongLong.hpp"
 
-1449373213 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbool.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbool.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449375488 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischaractor.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischaractor.hpp
 	"DD_Or.hpp"
 	"DD_IsChar.hpp"
 	"DD_IsUnsignedChar.hpp"
@@ -273,119 +273,119 @@
 	"DD_IsChar16.hpp"
 	"DD_IsChar32.hpp"
 
-1449373294 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449381563 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedchar.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedchar.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449379749 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedchar.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedchar.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449382118 d:\develop\repositories\libddcpp\src\standard\bits\dd_iswchar.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_iswchar.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449373377 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar16.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar16.hpp
 	"DD_And.hpp"
 	"DD_RemoveCV.hpp"
 
-1449373431 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar32.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ischar32.hpp
 	"DD_And.hpp"
 	"DD_RemoveCV.hpp"
 
-1449381705 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedshort.hpp
-	"DD_And.hpp"
-	"DD_IntegralConstant.hpp"
-	"DD_RemoveCV.hpp"
-
-1449379989 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedshort.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedshort.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449381665 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedint.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedshort.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449379794 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedint.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedint.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449381666 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedlong.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedint.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449379838 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedlong.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedlong.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449381805 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedlonglong.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedlong.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449380833 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedlonglong.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsignedlonglong.hpp
+	"DD_And.hpp"
+	"DD_IntegralConstant.hpp"
+	"DD_RemoveCV.hpp"
+
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issignedlonglong.hpp
 	"DD_And.hpp"
 	"DD_RemoveCV.hpp"
 
-1449376378 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfloatingpoint.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfloatingpoint.hpp
 	<type_traits>
 	"DD_Or.hpp"
 	"DD_IsFloat.hpp"
 	"DD_IsDouble.hpp"
 	"DD_IsLongDouble.hpp"
 
-1449375839 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfloat.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfloat.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449375710 d:\develop\repositories\libddcpp\src\standard\bits\dd_isdouble.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isdouble.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449376753 d:\develop\repositories\libddcpp\src\standard\bits\dd_islongdouble.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_islongdouble.hpp
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 
-1449378396 d:\develop\repositories\libddcpp\src\standard\bits\dd_ispointer.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ispointer.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_RemoveCV.hpp"
 	"DD_Nil.hpp"
 
-1449378566 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrange.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrange.hpp
 	"DD_MemberFunctionCheck.hpp"
 	"DD_And.hpp"
 	"DD_Iterator.hpp"
 	"DD_IsCharactor.hpp"
 	"DD_RemovePointer.hpp"
 
-1449025393 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator.hpp
 	"DD_NestedTypeCheck.hpp"
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
 
-1449143621 d:\develop\repositories\libddcpp\src\standard\bits\dd_removepointer.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removepointer.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1448810742 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_IteratorDifference.hpp"
 	"DD_Iterator.hpp"
@@ -393,20 +393,20 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratordifference.hpp
 	"DD_NestedTypeCheck.hpp"
 
-1449376585 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfreeaccessiterator.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfreeaccessiterator.hpp
 	"DD_IsBaseOf.hpp"
 	"DD_IsSame.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1449372989 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbaseof.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbaseof.hpp
 	"DD_Or.hpp"
 	"DD_IsClass.hpp"
 
-1449375550 d:\develop\repositories\libddcpp\src\standard\bits\dd_isclass.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isclass.hpp
 	"DD_Nil.hpp"
 	"DD_IsUnion.hpp"
 
-1449381249 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunion.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunion.hpp
 	<type_traits>
 	"DD_And.hpp"
 
@@ -428,7 +428,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1449112677 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
 	"DD_ConstIterator.hpp"
@@ -440,7 +440,7 @@
 	"DD_length_difference.hpp"
 	"DD_Pair.hpp"
 
-1449028455 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreverse.hpp
 	"DD_CompatStlIterator.hpp"
 	"DD_NestedTypeCheck.hpp"
 	"DD_Or.hpp"
@@ -559,7 +559,7 @@
 	"DD_Range.hpp"
 	"DD_copy.hpp"
 
-1448541093 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
+1449715046 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
 	"DD_move.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_IteratorCatagory.hpp"
@@ -568,7 +568,7 @@
 	"DD_swap_target.hpp"
 	"DD_transfer_forward.hpp"
 
-1449373106 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbidirectionaliterator.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbidirectionaliterator.hpp
 	"DD_IsBaseOf.hpp"
 	"DD_IsSame.hpp"
 	"DD_IteratorCatagory.hpp"
@@ -594,7 +594,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449680746 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1449715097 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -632,7 +632,7 @@
 	"DD_ValueTypeNested.hpp"
 	"DD_IteratorTrait.hpp"
 
-1449028060 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratortrait.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratortrait.hpp
 	"DD_Trait.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_IsUndirectionalIterator.hpp"
@@ -647,7 +647,7 @@
 	"DD_IteratorPointer.hpp"
 	"DD_IteratorDifference.hpp"
 
-1449381480 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
 	"DD_IsVoid.hpp"
 	"DD_IsUnsigned.hpp"
 	"DD_IsReferable.hpp"
@@ -670,58 +670,58 @@
 	"DD_RemoveExtent.hpp"
 	"DD_ReadOnlyCall.hpp"
 
-1449381917 d:\develop\repositories\libddcpp\src\standard\bits\dd_isvoid.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isvoid.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 
-1449378978 d:\develop\repositories\libddcpp\src\standard\bits\dd_isreference.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isreference.hpp
 	"DD_Or.hpp"
 	"DD_IsLvalueReference.hpp"
 	"DD_IsRvalueReference.hpp"
 	"DD_IntegralConstant.hpp"
 
-1449379088 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrvaluereference.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrvaluereference.hpp
 	<type_traits>
 	"DD_And.hpp"
 
-1449372846 d:\develop\repositories\libddcpp\src\standard\bits\dd_isarray.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isarray.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_Nil.hpp"
 
-1449376568 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfunction.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isfunction.hpp
 	<type_traits>
 	"DD_And.hpp"
 
-1449375625 d:\develop\repositories\libddcpp\src\standard\bits\dd_isconst.hpp
-	<type_traits>
-	"DD_And.hpp"
-	"DD_IntegralConstant.hpp"
-
-1449382017 d:\develop\repositories\libddcpp\src\standard\bits\dd_isvolatile.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isconst.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
 
-1449143446 d:\develop\repositories\libddcpp\src\standard\bits\dd_addcv.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isvolatile.hpp
+	<type_traits>
+	"DD_And.hpp"
+	"DD_IntegralConstant.hpp"
+
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addcv.hpp
 	"DD_AddConst.hpp"
 	"DD_AddVolatile.hpp"
 
-1449143396 d:\develop\repositories\libddcpp\src\standard\bits\dd_addconst.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addconst.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449143495 d:\develop\repositories\libddcpp\src\standard\bits\dd_addvolatile.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addvolatile.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449143572 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeallextents.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeallextents.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449143530 d:\develop\repositories\libddcpp\src\standard\bits\dd_decay.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_decay.hpp
 	"DD_Conditional.hpp"
 	"DD_IsArray.hpp"
 	"DD_IsFunction.hpp"
@@ -733,14 +733,14 @@
 1446530983 d:\develop\repositories\libddcpp\src\standard\bits\dd_conditional.hpp
 	"DD_global_definitions.hpp"
 
-1449143460 d:\develop\repositories\libddcpp\src\standard\bits\dd_addpointer.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addpointer.hpp
 	"DD_RemoveReference.hpp"
 
-1449143609 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeextent.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_removeextent.hpp
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449381161 d:\develop\repositories\libddcpp\src\standard\bits\dd_isundirectionaliterator.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isundirectionaliterator.hpp
 	"DD_IsBaseOf.hpp"
 	"DD_IsSame.hpp"
 	"DD_IteratorCatagory.hpp"
@@ -784,7 +784,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1449682194 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1449682416 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -798,7 +798,7 @@
 1444052538 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_RunTimeError.hpp"
 
-1449381029 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
 	<type_traits>
 	"DD_IntegralConstant.hpp"
 	"DD_And;"
@@ -813,7 +813,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_swap.hpp"
 
-1449505004 source:d:\develop\repositories\libddcpp\src\test_math.cpp
+1449715097 source:d:\develop\repositories\libddcpp\src\test_math.cpp
 	"test_math.h"
 	<iostream>
 	"math/DDArithmetics.hpp"
@@ -830,11 +830,11 @@
 1443513054 d:\develop\repositories\libddcpp\src\math\bits\dd_math_definitions.hpp
 	"../../standard/bits/DD_global_definitions.hpp"
 
-1448645574 d:\develop\repositories\libddcpp\src\math\bits\dd_square_root.hpp
+1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_square_root.hpp
 	"../../standard/bits/DD_IsIntegral.hpp"
 	"DD_math_definitions.hpp"
 
-1448645409 d:\develop\repositories\libddcpp\src\math\bits\dd_rational.hpp
+1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_rational.hpp
 	"../../standard/bits/DD_Tags.hpp"
 	"../../standard/bits/DD_IsUnsigned.hpp"
 	"../../standard/bits/DD_IsBaseOf.hpp"
@@ -847,7 +847,7 @@
 	"../../standard/bits/DD_Pair.hpp"
 	"DD_greatest_common_divisor.hpp"
 
-1449381493 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsigned.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isunsigned.hpp
 	"DD_IsArithmetic.hpp"
 
 1444020561 d:\develop\repositories\libddcpp\src\standard\bits\dd_common.hpp
@@ -857,11 +857,11 @@
 1444398915 d:\develop\repositories\libddcpp\src\standard\bits\dd_declare_value.hpp
 	"DD_AddRvalueReference.hpp"
 
-1449143484 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
 	<type_traits>
 	"DD_IsReferable.hpp"
 
-1449378785 d:\develop\repositories\libddcpp\src\standard\bits\dd_isreferable.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isreferable.hpp
 	<type_traits>
 	"DD_Or.hpp"
 	"DD_IsReference.hpp"
@@ -869,7 +869,7 @@
 1447764345 d:\develop\repositories\libddcpp\src\standard\bits\dd_binaryoperators.hpp
 	"DD_fabricate.hpp"
 
-1448645280 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
+1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
 1444048035 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
@@ -922,7 +922,7 @@
 	"standard/DDTrait.hpp"
 	"standard/bits/DD_TypeInfo.hpp"
 
-1448813655 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
 	"bits/DD_NestedTypeCheck.hpp"
 	"bits/DD_MemberFunctionCheck.hpp"
 	"bits/DD_Conditional.hpp"
@@ -947,7 +947,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1449681063 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1449724967 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -955,7 +955,7 @@
 	"standard/DDArray.hpp"
 	"standard/DDAlgorithm.hpp"
 
-1449210917 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_bind.hpp
 	"DD_IsMemberFunctionPointer.hpp"
 	"DD_Decay.hpp"
 	"DD_ConstantList.hpp"
@@ -968,7 +968,7 @@
 1444146262 d:\develop\repositories\libddcpp\src\standard\bits\dd_functor.hpp
 	"DD_global_definitions.hpp"
 
-1449377946 d:\develop\repositories\libddcpp\src\standard\bits\dd_ismemberfunctionpointer.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_ismemberfunctionpointer.hpp
 	<type_traits>
 	"DD_IsFunction.hpp"
 	"DD_RemoveCV.hpp"
@@ -1006,7 +1006,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1449462896 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1449716058 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1028,12 +1028,12 @@
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratornested.hpp
 	"DD_global_definitions.hpp"
 
-1449379605 d:\develop\repositories\libddcpp\src\standard\bits\dd_isscalar.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isscalar.hpp
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 	"DD_IsEnum.hpp"
 
-1449375778 d:\develop\repositories\libddcpp\src\standard\bits\dd_isenum.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isenum.hpp
 	<type_traits>
 	"DD_And.hpp"
 
@@ -1053,7 +1053,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1449378255 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptcopyconstructible.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isnoexceptcopyconstructible.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
@@ -1135,26 +1135,26 @@
 	"DD_BinarySearchTree.hpp"
 	"DD_Allocator.hpp"
 
-1448641844 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
 	"DD_IntegralConstant.hpp"
 	"DD_ReadOnlyCall.hpp"
 	"DD_Functor.hpp"
 
-1449131898 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_ValueTypeNested.hpp"
 
 1444187649 d:\develop\repositories\libddcpp\src\standard\bits\dd_logical_not_of.hpp
 	"DD_global_definitions.hpp"
 
-1449131928 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarysearchtree.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarysearchtree.hpp
 	"DD_Value.hpp"
 	"DD_Illogic.hpp"
 	"DD_logical_not_of.hpp"
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1449642548 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"
@@ -1206,7 +1206,7 @@
 	"DD_destruct.hpp"
 	"DD_SizeTrait.hpp"
 
-1449380805 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
 	"DD_IsTriviallyCopyConstructible.hpp"
 	"DD_IsTriviallyCopyAssignable.hpp"
 	"DD_IsTriviallyMoveable.hpp"
@@ -1217,7 +1217,7 @@
 	"DD_And.hpp"
 	"DD_IsScalar.hpp"
 
-1449381127 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveable.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveable.hpp
 	"DD_IsTriviallyMoveConstructible.hpp"
 	"DD_IsTriviallyMoveAssignable.hpp"
 
@@ -1225,7 +1225,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1449112711 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
 	"DD_retreat.hpp"
 
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
@@ -1234,8 +1234,7 @@
 1448178610 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_length.hpp
 	"DD_get_string_length.hpp"
 
-1445179927 d:\develop\repositories\libddcpp\src\standard\bits\dd_check_bound.hpp
-	"DD_Iterator.hpp"
+1449717323 d:\develop\repositories\libddcpp\src\standard\bits\dd_check_bound.hpp
 	"DD_Range.hpp"
 
 1448255856 d:\develop\repositories\libddcpp\src\standard\bits\dd_transfer.hpp
@@ -1330,7 +1329,8 @@
 1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
 	"DD_Function.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
+1449722080 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
+	"DD_Pair.hpp"
 	"DD_Function.hpp"
 
 1448539180 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
@@ -1366,7 +1366,7 @@
 	"DD_next.hpp"
 	"DD_swap_target.hpp"
 
-1449642056 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_next.hpp"
 	"DD_pivot_partition.hpp"
@@ -1381,10 +1381,10 @@
 	"DD_debugger_definitions.hpp"
 	"DD_middle.hpp"
 
-1448556818 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
 	"DD_global_definitions.hpp"
 
-1448810653 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
@@ -1394,35 +1394,35 @@
 	"DD_length_difference.hpp"
 	"DD_min.hpp"
 
-1449300859 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_constantlist.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_StaticConcatenate.hpp"
 
-1449025573 d:\develop\repositories\libddcpp\src\standard\bits\dd_constiterator.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_constiterator.hpp
 	"DD_NestedTypeCheck.hpp"
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
 
-1449025999 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverseiterator.hpp
-	"DD_NestedTypeCheck.hpp"
-	"DD_RemoveCV.hpp"
-	"DD_RemoveReference.hpp"
-	"DD_IteratorReverse.hpp"
-
-1449027736 d:\develop\repositories\libddcpp\src\standard\bits\dd_constreverseiterator.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_reverseiterator.hpp
 	"DD_NestedTypeCheck.hpp"
 	"DD_RemoveCV.hpp"
 	"DD_RemoveReference.hpp"
 	"DD_IteratorReverse.hpp"
 
-1449143288 d:\develop\repositories\libddcpp\src\standard\dditerator.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_constreverseiterator.hpp
+	"DD_NestedTypeCheck.hpp"
+	"DD_RemoveCV.hpp"
+	"DD_RemoveReference.hpp"
+	"DD_IteratorReverse.hpp"
+
+1449715095 d:\develop\repositories\libddcpp\src\standard\dditerator.hpp
 	"bits/DD_IteratorTrait.hpp"
 	"bits/DD_back_pusher.hpp"
 
-1449143250 d:\develop\repositories\libddcpp\src\standard\bits\dd_back_pusher.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_back_pusher.hpp
 	"DD_BackPushIterator.hpp"
 
-1449143244 d:\develop\repositories\libddcpp\src\standard\bits\dd_backpushiterator.hpp
+1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_backpushiterator.hpp
 	"DD_IteratorCatagory.hpp"
 	"DD_forward.hpp"
 	"DD_address_of.hpp"
@@ -1430,17 +1430,17 @@
 1449209580 d:\develop\repositories\libddcpp\src\standard\bits\dd_concatenate.hpp
 	"DD_global_definitions.hpp"
 
-1449300769 d:\develop\repositories\libddcpp\src\standard\bits\dd_staticconcatenate.hpp
+1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_staticconcatenate.hpp
 	"DD_global_definitions.hpp"
 
-1449504686 d:\develop\repositories\libddcpp\src\math\ddmatrix.hpp
+1449715095 d:\develop\repositories\libddcpp\src\math\ddmatrix.hpp
 	"bits/DD_Matrix.hpp"
 
-1449596220 d:\develop\repositories\libddcpp\src\math\bits\dd_matrix.hpp
+1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_matrix.hpp
 	"DD_math_definitions.hpp"
 	"../../standard/bits/DD_Array.hpp"
 
-1449642199 d:\develop\repositories\libddcpp\src\standard\bits\dd_pivot_partition.hpp
+1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_pivot_partition.hpp
 	"DD_Iterator.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_LessThan.hpp"
