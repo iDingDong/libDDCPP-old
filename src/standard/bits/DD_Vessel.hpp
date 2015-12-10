@@ -487,7 +487,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
-		Pair<Iterator, UndirectionalIteratorT__> result_ = ::DD::copy(begin___, end___, this->begin(), this->end());
+		Pair<UndirectionalIteratorT__, Iterator> result_ = ::DD::copy(begin___, end___, this->begin(), this->end());
 		if (result_.first != end___) {
 			concatenate(result_.first, end___);
 		} else {
@@ -621,14 +621,14 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	ProcessType pop_front() DD_NOEXCEPT_AS(fabricate<ThisType>().begin()) {
-		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
+		DD_ASSERT(!this->is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
 		erase(this->begin());
 	}
 
 
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
+		DD_ASSERT(!this->is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
 		AllocatorType::destruct(--this->m_end_);
 	}
 
@@ -697,7 +697,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	ProcessType erase(Iterator position_) {
-		DD_ASSERT(check_bound(*this, position), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
+		DD_ASSERT(::DD::check_bound(*this, position_), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
 		transfer_forward(position_, this->end() - 1);
 		pop_back();
 	}
