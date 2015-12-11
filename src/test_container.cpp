@@ -17,7 +17,7 @@ void test_container() {
 			throw "'DD::Vessel' test failed.";
 		}
 		{
-			DD::Vessel<Test> ves(3, Test());
+			DD::Vessel<Test> ves(DD::batch_tag, 3, Test());
 			if (
 				Test::count != 3
 			) {

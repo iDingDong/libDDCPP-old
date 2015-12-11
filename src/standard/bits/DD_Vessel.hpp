@@ -37,8 +37,8 @@ DD_STATIC_ASSERT((DDCPP_VESSEL_GROWTH_RATIO) > 1, "'DDCPP_VESSEL_GROWTH_RATIO' s
 
 
 
-struct RangeTag {
-} DD_CONSTANT range_tag;
+struct BatchTag {
+} DD_CONSTANT batch_tag;
 
 
 
@@ -401,9 +401,39 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		}
 	}
 
+#	endif
+
+	public:
+	DD_CONSTEXPR Vessel_(ReserveTag tag, LengthType length_) DD_NOEXCEPT_AS(
+		SuperType(AllocatorType::allocate(length_) DD_COMMA 0 DD_COMMA length_)
+	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	Vessel_(UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
+		noexcept(SuperType(AllocatorType::allocate(length_) DD_COMMA length_)) &&
+		noexcept(copy_construct(begin___ DD_COMMA next(begin___ DD_COMMA length_)))
+	) : SuperType(AllocatorType::allocate(length_), length_) {
+		copy_construct(begin___, next(begin___, length_));
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	Vessel_(UndirectionalIteratorT__ const& begin___, UndirectionalIteratorT__ const& end___) DD_NOEXCEPT_IF(
+		noexcept(SuperType()) &&
+		noexcept(AllocatorType::allocate(length_difference(begin___ DD_COMMA end___))) &&
+		noexcept(copy_construct(begin___ DD_COMMA end___ DD_COMMA fabricate<ThisType>().begin()))
+	) : SuperType() {
+		this->m_begin_ = AllocatorType::allocate(length_difference(begin___, end___));
+		this->m_end_ = get_pointer(copy_construct(begin___, end___, this->begin()));
+		this->m_storage_end_ = get_pointer(this->end());
+	}
+
+#	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	Vessel_(LengthType length_, ArgumentsT__ const&... arguments___) DD_NOEXCEPT_IF(
+	Vessel_(BatchTag tag_, LengthType length_, ArgumentsT__ const&... arguments___) DD_NOEXCEPT_IF(
 		noexcept(AllocatorType::allocate(length_)) && noexcept(fabricate<ThisType>().unguarded_emplace_back(arguments___...))
 	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
@@ -417,7 +447,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 #	else
 	public:
-	Vessel_(LengthType length_) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+	Vessel_(BatchTag tag_, LengthType length_) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
 			while (!this->is_full()) {
 				unguarded_push_back(ValueType());
@@ -430,7 +460,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	template <typename ValueT__>
-	Vessel_(LengthType length_, ValueT__ const& value___) : SuperType(AllocatorType::allocate(length_), 0, length_) {
+	Vessel_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(AllocatorType::allocate(length_), 0, length_) {
 		try {
 			while (!this->is_full()) {
 				unguarded_push_back(value___);
@@ -441,33 +471,6 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		}
 	}
 #	endif
-
-	public:
-	template <typename UndirectionalIteratorT__>
-	Vessel_(RangeTag tag, UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
-		noexcept(SuperType(AllocatorType::allocate(length_) DD_COMMA length_)) &&
-		noexcept(copy_construct(begin___ DD_COMMA next(begin___ DD_COMMA length_)))
-	) : SuperType(AllocatorType::allocate(length_), length_) {
-		copy_construct(begin___, next(begin___, length_));
-	}
-
-	public:
-	template <typename UndirectionalIteratorT__>
-	Vessel_(RangeTag tag, UndirectionalIteratorT__ const& begin___, UndirectionalIteratorT__ const& end___) DD_NOEXCEPT_IF(
-		noexcept(SuperType()) &&
-		noexcept(AllocatorType::allocate(length_difference(begin___ DD_COMMA end___))) &&
-		noexcept(copy_construct(begin___ DD_COMMA end___ DD_COMMA fabricate<ThisType>().begin()))
-	) : SuperType() {
-		this->m_begin_ = AllocatorType::allocate(length_difference(begin___, end___));
-		this->m_end_ = get_pointer(copy_construct(begin___, end___, this->begin()));
-		this->m_storage_end_ = get_pointer(this->end());
-	}
-
-	public:
-	DD_CONSTEXPR Vessel_(ReserveTag tag, LengthType length_) DD_NOEXCEPT_AS(
-		SuperType(AllocatorType::allocate(length_) DD_COMMA 0 DD_COMMA length_)
-	) : SuperType(AllocatorType::allocate(length_), 0, length_) {
-	}
 
 
 	public:
@@ -781,26 +784,7 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 
 
 #	if __cplusplus >= 201103L
-	public:
-	constexpr Vessel() = default;
-
-	public:
-	constexpr Vessel(ThisType const& origin_) = default;
-
-	public:
-	constexpr Vessel(ThisType&& origin_) = default;
-
-	public:
-	template <typename ValueT__>
-	constexpr Vessel(InitializerList<ValueT__> initializer) noexcept(noexcept(SuperType(initializer))) : SuperType(initializer) {
-	}
-
-	public:
-	template <typename... ArgumentsT__>
-	constexpr Vessel(LengthType length_, ArgumentsT__ const&... arguments___) noexcept(
-		noexcept(SuperType(length_, arguments___...))
-	) : SuperType(length_, arguments___...) {
-	}
+	using SuperType::SuperType;
 #	else
 	public:
 	Vessel() {
@@ -811,27 +795,30 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 	}
 
 	public:
+	Vessel(ReverseTag_ tag_, LengthType length_) : SuperType(tag_, length_) {
+	}
+
+	public:
+	template <typename UndirectionalIteratorT_>
+	Vessel(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ end__) : SuperType(begin__, end__) {
+	}
+
+	public:
+	template <typename UndirectionalRangeT_>
+	Vessel(UndirectionalRangeT_& range__) : SuperType(range__) {
+	}
+
+	public:
+	Vessel(BatchTag tag_, LengthType length_) : SuperType(tag_, length_) {
+	}
+
+	public:
 	template <typename ValueT__>
-	Vessel(LengthType length_, ValueT__ const& value___) : SuperType(length_, value___) {
+	Vessel(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(tag_, length_, value___) {
 	}
 #	endif
 
 
-#	if __cplusplus >= 201103L
-	public:
-	~Vessel() = default;
-
-
-#	endif
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType const& origin_) = default;
-
-	public:
-	ThisType& operator =(ThisType&& origin_) = default;
-
-
-#	endif
 };
 
 
@@ -853,10 +840,12 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-using detail_::RangeTag;
+using detail_::BatchTag;
+using detail_::ReserveTag;
 using detail_::Vessel;
 
-using detail_::range_tag;
+using detail_::batch_tag;
+using detail_::reserve_tag;
 
 
 
