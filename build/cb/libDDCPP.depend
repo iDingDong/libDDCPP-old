@@ -786,7 +786,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1449738732 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1449828879 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -1009,7 +1009,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1449819995 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1449820111 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"

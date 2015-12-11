@@ -58,7 +58,11 @@ class Allocator<void> {
 
 	public:
 	static ProcessType deallocate(PointerType pointer_, SizeType size_) DD_NOEXCEPT {
+#	if __cplusplus >= 201402L
+		::operator delete(pointer_, size_);
+#	else
 		::operator delete(pointer_);
+#	endif
 	}
 
 
