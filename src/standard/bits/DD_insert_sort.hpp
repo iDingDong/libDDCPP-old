@@ -11,8 +11,9 @@
 #	include "DD_IteratorCatagory.hpp"
 #	include "DD_find_min.hpp"
 #	include "DD_find_max.hpp"
+#	include "DD_find_higher_bound.hpp"
 #	include "DD_swap_target.hpp"
-#	include "DD_transfer_forward.hpp"
+#	include "DD_transfer_backward.hpp"
 
 
 
@@ -149,21 +150,9 @@ struct InsertSort_<IteratorCatagoryValue::free_access> {
 	static ProcessType insert_sort(
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___
-	) DD_NOEXCEPT_IF(
-		noexcept(++begin___ < --end___ - 1) &&
-		noexcept(swap_target(::DD::find_max(begin___ DD_COMMA end___) DD_COMMA end___ - 1)) &&
-		noexcept(transfer_forward(begin___ DD_COMMA end___))
 	) {
-		if (begin___ < end___ - 1) {
-			swap_target(::DD::find_max(begin___, end___), end___ - 1);
-			FreeAccessIteratorT__ current___(end___ - 3);
-			for (; begin___ < current___; --current___) {
-				FreeAccessIteratorT__ front___(current___ + 1);
-				while (*front___ < *current___) {
-					++front___;
-				}
-				transfer_forward(current___, front___ - 1);
-			}
+		for (FreeAccessIteratorT__ current___ = begin___ + 1; current___ < end___; ++current___) {
+			::DD::transfer_backward(current___, ::DD::find_higher_bound(begin___, current___, *current___));
 		}
 	}
 
@@ -172,21 +161,9 @@ struct InsertSort_<IteratorCatagoryValue::free_access> {
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___,
 		BinaryPredicateT__ less___
-	) DD_NOEXCEPT_IF(
-		noexcept(++begin___ < --end___ - 1) &&
-		noexcept(swap_target(::DD::find_max(begin___ DD_COMMA end___ DD_COMMA less___) DD_COMMA end___ - 1)) &&
-		noexcept(transfer_forward(begin___ DD_COMMA end___))
 	) {
-		if (begin___ < end___ - 1) {
-			swap_target(::DD::find_max(begin___, end___, less___), end___ - 1);
-			FreeAccessIteratorT__ current___(end___ - 3);
-			for (; begin___ < current___; -- current___) {
-				FreeAccessIteratorT__ front___(current___ + 1);
-				while (less___(*front___, *current___)) {
-					++front___;
-				}
-				transfer_forward(current___, front___ - 1);
-			}
+		for (FreeAccessIteratorT__ current___ = begin___ + 1; current___ < end___; ++current___) {
+			::DD::transfer_backward(current___, ::DD::find_higher_bound(begin___, current___, *current___, less___));
 		}
 	}
 

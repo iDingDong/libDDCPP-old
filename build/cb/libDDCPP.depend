@@ -511,7 +511,7 @@
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Range.hpp"
 
-1448255727 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted_until.hpp
+1449922926 d:\develop\repositories\libddcpp\src\standard\bits\dd_is_sorted_until.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
@@ -561,14 +561,15 @@
 	"DD_Range.hpp"
 	"DD_copy.hpp"
 
-1449715046 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
+1449923783 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
 	"DD_move.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_IteratorCatagory.hpp"
 	"DD_find_min.hpp"
 	"DD_find_max.hpp"
+	"DD_find_higher_bound.hpp"
 	"DD_swap_target.hpp"
-	"DD_transfer_forward.hpp"
+	"DD_transfer_backward.hpp"
 
 1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_isbidirectionaliterator.hpp
 	"DD_IsBaseOf.hpp"
@@ -596,7 +597,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449752677 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1449929592 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -617,7 +618,7 @@
 	"DD_ArrayIterator.hpp"
 	"DD_equal.hpp"
 
-1445617484 d:\develop\repositories\libddcpp\src\standard\bits\dd_debugger_definitions.hpp
+1449838563 d:\develop\repositories\libddcpp\src\standard\bits\dd_debugger_definitions.hpp
 	"DD_global_definitions.hpp"
 	<cassert>
 
@@ -786,7 +787,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1449828879 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1449828916 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	"DD_ValueTypeNested.hpp"
@@ -1157,7 +1158,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1449752551 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1449929627 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"
@@ -1442,7 +1443,7 @@
 	"DD_math_definitions.hpp"
 	"../../standard/bits/DD_Array.hpp"
 
-1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_pivot_partition.hpp
+1449924258 d:\develop\repositories\libddcpp\src\standard\bits\dd_pivot_partition.hpp
 	"DD_Iterator.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_LessThan.hpp"

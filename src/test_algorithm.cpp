@@ -11,7 +11,7 @@
 #include "standard/DDUtility.hpp"
 #include "standard/DDAlgorithm.hpp"
 
-#define SPEED_TEST DD_OFF
+#define SPEED_TEST DD_ON
 
 template <typename T>
 bool greater(T x, T y) {
@@ -359,8 +359,8 @@ void test_algorithm() {
 
 #	if SPEED_TEST
 	{
-		DD::LengthType constexpr length_c = 50000000;
-		DD::Vessel<unsigned char> test_sort_1(length_c);
+		DD::LengthType constexpr length_c = 100000000;
+		DD::Vessel<unsigned char> test_sort_1(DD::batch_tag, length_c);
 		std::srand(static_cast<unsigned>(std::time(DD::nil_pointer)));
 		DD::generate(test_sort_1, [] { return static_cast<unsigned char>(std::rand() % 256); });
 		auto test_sort_2 = test_sort_1;
@@ -371,6 +371,7 @@ void test_algorithm() {
 		DD::sort(test_sort_1);
 		if (!DD::is_sorted(test_sort_1)) {
 			DD_PRINT "'DD::sort' failed.";
+			DD_PRINT DD::is_sorted_until(test_sort_1) - test_sort_1.begin();
 		}
 		time(&finish);
 		DD_PRINT "'DD::sort': ", std::difftime(finish, start), DD::end_line;

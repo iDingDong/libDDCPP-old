@@ -46,9 +46,9 @@ inline BidirectionalIteratorT_ unguarded_pivot_partition(
 	}
 	outside_:
 #	if __cplusplus >= 201103L
-		*begin__ = ::DD::move(key_);
+	*begin__ = ::DD::move(key_);
 #	else
-		*begin__ = key_;
+	*begin__ = key_;
 #	endif
 	return begin__;
 }

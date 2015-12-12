@@ -43,17 +43,18 @@ ProcessType lazy_intro_sort_(
 	FreeAccessIteratorT_ end__,
 	LengthType depth_limit__
 ) {
-	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < length_difference(begin__, end__)) {
+	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < end__ - begin__) {
 		if (!depth_limit__) {
 			::DD::heap_sort(begin__, end__);
-			break;
+			return;
 		}
 		--depth_limit__;
-		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__));
+		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1));
 		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__));
 		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, depth_limit__);
 		end__ = pivot__;
 	}
+	::DD::insert_sort(begin__, end__);
 }
 
 template <typename FreeAccessIteratorT_, typename BinaryPrediateT_>
@@ -63,17 +64,18 @@ ProcessType lazy_intro_sort_(
 	BinaryPrediateT_ less__,
 	LengthType depth_limit__
 ) {
-	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < length_difference(begin__, end__)) {
+	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < end__ - begin__) {
 		if (!depth_limit__) {
 			::DD::heap_sort(begin__, end__);
-			break;
+			return;
 		}
 		--depth_limit__;
-		swap_target(begin__, median_target(begin__, ::DD::middle(begin__, end__), end__, less__));
+		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1, less__));
 		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__, less__));
 		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, less__, depth_limit__);
 		end__ = pivot__;
 	}
+	::DD::insert_sort(begin__, end__, less__);
 }
 
 
@@ -135,14 +137,13 @@ struct Sort_<IteratorCatagoryValue::free_access> {
 	) DD_NOEXCEPT_IF(noexcept(::DD::detail_::lazy_intro_sort_(
 		begin___ DD_COMMA
 		end___ DD_COMMA
-		(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(length_difference(begin___ DD_COMMA end___))
+		(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(end___ - begin___)
 	)) && noexcept(::DD::insert_sort(begin___ DD_COMMA end___))) {
 		::DD::detail_::lazy_intro_sort_(
 			begin___,
 			end___,
-			(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(length_difference(begin___, end___))
+			(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(end___ - begin___)
 		);
-		::DD::insert_sort(begin___, end___);
 	}
 
 	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
@@ -162,7 +163,6 @@ struct Sort_<IteratorCatagoryValue::free_access> {
 			less___,
 			(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(length_difference(begin___, end___))
 		);
-		::DD::insert_sort(begin___, end___, less___);
 	}
 
 

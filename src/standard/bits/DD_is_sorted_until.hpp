@@ -52,7 +52,10 @@ struct IsSortedUntil_<true> {
 		FreeAccessIteratorT__ begin___,
 		FreeAccessIteratorT__ end___
 	) DD_NOEXCEPT_AS(++begin___ < end___ && *begin___ < *(begin___ - 1)) {
-		while (++begin___ < end___ && !(*begin___ < *(begin___ - 1))) {
+		if (begin___ < end___) {
+			do {
+				++begin___;
+			} while (begin___ < end___ && !(*begin___ < *(begin___ - 1)));
 		}
 		return begin___;
 	}
@@ -63,7 +66,10 @@ struct IsSortedUntil_<true> {
 		FreeAccessIteratorT__ end___,
 		BinaryPredicateT__ less___
 	) DD_NOEXCEPT_AS(++begin___ < end___ && less___(*begin___ DD_COMMA *(begin___ - 1))) {
-		while (++begin___ < end___ && !less___(*begin___, *(begin___ - 1))) {
+		if (begin___ < end___) {
+			do {
+				++begin___;
+			} while (begin___ < end___ && !less___(*begin___, *(begin___ - 1)));
 		}
 		return begin___;
 	}
