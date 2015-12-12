@@ -40,10 +40,11 @@
 1444890959 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_global_definitions.hpp"
 
-1449760723 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1449939478 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
+	"bits/DD_accumulate.hpp"
 	"bits/DD_partial_sum.hpp"
 	"bits/DD_equal.hpp"
 	"bits/DD_less.hpp"
@@ -597,7 +598,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449929592 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1449929686 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1468,4 +1469,7 @@
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 	"DD_next.hpp"
+
+1449939512 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
+	"DD_Range.hpp"
 
