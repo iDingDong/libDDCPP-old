@@ -4,13 +4,30 @@
 
 
 
-#	include "DD_address_of.hpp"
 #	include "DD_IteratorCatagory.hpp"
-#	include "DD_ListIterator.hpp"
+#	include "DD_address_of.hpp"
+#	include "DD_swap.hpp"
 
 
 
 DD_DETAIL_BEGIN_
+template <int workaround_ = 0>
+ProcessType unguarded_swap_list_node_implement_(ListNode<void>* node_1_, ListNode<void>* node_2_) DD_NOEXCEPT {
+	::DD::swap(node_1_->previous, node_2_->previous);
+	::DD::swap(node_1_->next, node_2_->next);
+	node_1_->previous->next = node_1_;
+	node_1_->next->previous = node_1_;
+	node_2_->previous->next = node_2_;
+	node_2_->next->previous = node_2_;
+}
+
+
+inline ProcessType unguarded_swap_list_node_(ListNode<void>* node_1_, ListNode<void>* node_2_) DD_NOEXCEPT {
+	unguarded_swap_list_node_implement_(node_1_, node_2_);
+}
+
+
+
 template <typename ValueT_>
 struct ListIterator;
 
@@ -68,52 +85,35 @@ struct ListIterator<void> {
 
 
 	public:
-	ValidityType DD_CONSTEXP is_valid() const DD_NOEXCEPT {
+	NodePointerType DD_CONSTEXPR get_node_pointer() const DD_NOEXCEPT {
 		return m_pointer_;
 	}
 
 
-	protected:
-	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT {
-		DD_ASSERT(m_pointer_ && other_.m_pointer, "'DD::ListIterator::swap_target': Invalid argument");
-		NodePointerType temp_ = m_pointer_->previous;
-		if (temp_) {
-			temp_->next = other_.m_pointer_;
-		}
-		temp_ = m_pointer_->next;
-		if (temp_) {
-			temp_->previous = other_.m_pointer_;
-		}
-		temp_ = other_.m_pointer_->previous;
-		other_.m_pointer_->previous = m_pointer_->previous;
-		m_pointer_->previous = temp_;
-		if (temp_) {
-			temp_->next = m_pointer_;
-		}
-		temp_ = other_.m_pointer_->next;
-		other_.m_pointer_->next = m_pointer_->next;
-		m_pointer_->next = temp_;
-		if (temp_) {
-			temp_->previous = m_pointer_;
-		}
+	public:
+	ValidityType DD_CONSTEXP is_valid() const DD_NOEXCEPT {
+		return get_node_pointer();
+	}
+
+
+	public:
+	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
+		::DD::detail_::unguarded_swap_list_node_(get_node_pointer() DD_COMMA other_.get_node_pointer())
+	) {
+		DD_ASSERT(is_valid() && other_.is_valid(), "'DD::ListIterator::swap_target': Invalid iterator dereferenced");
+		::DD::detail_::unguarded_swap_list_node_(get_node_pointer(), other_.get_node_pointer());
 	}
 
 
 #	if __cplusplus >= 201103L
-	protected:
+	public:
 	ThisType& operator =(ThisType const& origin_) = default;
 
-	protected:
+	public:
 	ThisType& operator =(ThisType&& origin_) = default;
-#	else
-	protected:
-	ThisType& operator =(ThisType const& origin_) throw() {
-		m_pointer_ = origin_.m_pointer;
-		return *this;
-	}
+
+
 #	endif
-
-
 	public:
 	ThisType& operator ++() DD_NOEXCEPT {
 		this->m_pointer_ = this->m_pointer_->next;
@@ -156,7 +156,7 @@ struct ListIterator<void> {
 
 
 template <typename ValueT_>
-struct ListIterator : ListIterator<void> {
+struct ListIterator : protected ListIterator<void> {
 	public:
 	DD_ALIAS(SuperType, ListIterator<void>);
 	DD_ALIAS(ThisType, ListIterator<ValueT_>);
@@ -198,8 +198,32 @@ struct ListIterator : ListIterator<void> {
 
 #	endif
 	public:
-	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
-		return m_pointer_;
+	NodePointerType DD_CONSTEXPR get_node_pointer() const DD_NOEXCEPT_AS(
+		static_cast<NodePointerType>(static_cast<SuperType const&>(::DD::fabricate<ThisType const>()).get_node_pointer())
+	) {
+		return static_cast<NodePointerType>(static_cast<SuperType const&>(*this).get_node_pointer());
+	}
+
+
+	public:
+	PointerType DD_CONSTEXPR unguarded_get_pointer() const DD_NOEXCEPT_AS(
+		static_cast<PointerType>(::DD::address_of(::DD::fabricate<ThisType const>().get_node_pointer()->value))
+	) {
+		return ::DD::address_of(get_node_pointer()->value);
+	}
+
+
+	public:
+	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT_AS(static_cast<PointerType>(
+		::DD::fabricate<ThisType const>().is_valid() ? ::DD::fabricate<ThisType const>().unguarded_get_pointer() : PointerType()
+	)) {
+		return is_valid() ? unguarded_get_pointer() : PointerType();
+	}
+
+
+	public:
+	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
+		return static_cast<SuperType const&>(*this).is_valid();
 	}
 
 
@@ -223,14 +247,26 @@ struct ListIterator : ListIterator<void> {
 #	endif
 
 	public:
+	ThisType& operator ++() DD_NOEXCEPT {
+		++static_cast<SuperType&>(*this);
+		return *this;
+	}
+
+	public:
+	ThisType operator ++(int) DD_NOEXCEPT {
+
+	}
+
+
+	public:
 	ReferenceType DD_CONSTEXPR operator *() const DD_NOEXCEPT {
-		return get_pointer()->value;
+		return *unguarded_get_pointer();
 	}
 
 
 	public:
 	PointerType DD_CONSTEXPR operator ->() const DD_NOEXCEPT {
-		return ::DD::address_of(**this);
+		return get_pointer();
 	}
 
 
