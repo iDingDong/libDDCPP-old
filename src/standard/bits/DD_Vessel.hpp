@@ -37,16 +37,6 @@ DD_STATIC_ASSERT((DDCPP_VESSEL_GROWTH_RATIO) > 1, "'DDCPP_VESSEL_GROWTH_RATIO' s
 
 
 
-struct BatchTag {
-} DD_CONSTANT batch_tag;
-
-
-
-struct ReserveTag {
-} DD_CONSTANT reserve_tag;
-
-
-
 template <typename ValueT_>
 struct VesselBase_ {
 	public:
@@ -853,12 +843,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-using detail_::BatchTag;
-using detail_::ReserveTag;
 using detail_::Vessel;
-
-using detail_::batch_tag;
-using detail_::reserve_tag;
 
 
 

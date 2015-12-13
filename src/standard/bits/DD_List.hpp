@@ -303,9 +303,6 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	}
 
 	public:
-	List()
-
-	public:
 	template <typename UndirectionalIteratorT__>
 	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
 	}
