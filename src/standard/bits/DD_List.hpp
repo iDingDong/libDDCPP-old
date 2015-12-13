@@ -5,16 +5,14 @@
 
 
 #	include "DD_IteratorNested.hpp"
+#	include "DD_NeedInstance.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_address_of.hpp"
-#	include "DD_next.hpp"
-#	include "DD_Range.hpp"
 #	include "DD_Allocator.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
-#	include "DD_ListNode.hpp"
 #	include "DD_ListIterator.hpp"
 #	include "DD_length_difference.hpp"
 
@@ -22,14 +20,14 @@
 
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
-struct List_;
+struct ListBase_;
 
 
 
 template <>
-struct List_<void> {
+struct ListBase_<void> {
 	protected:
-	DD_ALIAS(ThisType, List_<void>);
+	DD_ALIAS(ThisType, ListBase_<void>);
 	DD_ALIAS(ValueType, void);
 
 	protected:
@@ -67,14 +65,14 @@ struct List_<void> {
 
 
 	protected:
-	DD_CONSTEXPR List_() DD_NOEXCEPT : m_sentry_{ ::DD::address_of(m_sentry_), ::DD::address_of(m_sentry_) } {
+	DD_CONSTEXPR ListBase_() DD_NOEXCEPT : m_sentry_{ ::DD::address_of(m_sentry_), ::DD::address_of(m_sentry_) } {
 	}
 
 	protected:
-	DD_DELETE_COPY_CONSTRUCTOR(List_)
+	DD_DELETE_COPY_CONSTRUCTOR(ListBase_)
 
 	protected:
-	DD_DELETE_MOVE_CONSTRUCTOR(List_)
+	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
 
 
 	protected:
@@ -141,7 +139,14 @@ struct List_<void> {
 
 
 	protected:
-	ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
+	static ProcessType transfer(Iterator from_, Iterator to_) DD_NOEXCEPT {
+		::DD::detail_::unguarded_delink_list_node_(from_.get_node_pointer_());
+		::DD::detail_::unguarded_enlink_list_node_(to_.get_node_pointer_(), from_.get_node_pointer_())
+	}
+
+
+	protected:
+	static ProcessType unguarded_splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
 		::DD::detail_::unguarded_delink_list_node_(begin_.get_node_pointer(), (--end_).get_node_pointer());
 		::DD::detail_::unguarded_enlink_list_node_(
 			position_.get_node_pointer(),
@@ -152,21 +157,45 @@ struct List_<void> {
 
 	protected:
 	template <typename ListRangeT__>
-	ProcessType splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+	static ProcessType unguarded_splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+		unguarded_splice(position_, DD_SPLIT_RANGE(range___));
+	}
+
+
+	protected:
+	static ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
+		if (begin_ != end_) {
+			unguarded_splice(position_, begin_, end_);
+		}
+	}
+
+	protected:
+	template <typename ListRangeT__>
+	static ProcessType splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
 		splice(position_, DD_SPLIT_RANGE(range___));
 	}
 
 
 	protected:
-	DD_DELETE_ALL_ASSIGNMENTS(List_)
+	DD_DELETE_ALL_ASSIGNMENTS(ListBase_)
 
 
 };
 
 
 
-template <typename ValueT_, typename AllocatorT_>
-struct List : List_<ValueT_> {
+template <typename ValueT_>
+struct ListBase_ : List<void> {
+	public:
+	DD_ALIAS(SuperType)
+
+
+};
+
+
+
+template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
+struct List_ : ListBase_<ValueT_> {
 	public:
 	struct Iterator : ListIterator<ValueType> {
 		public:
@@ -240,6 +269,52 @@ struct List : List_<ValueT_> {
 
 
 	};
+
+
+};
+
+
+
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
+#	else
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
+#	endif
+struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
+	public:
+	DD_ALIAS(SuperType, List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value>);
+	DD_ALIAS(ThisType, List<ValueT_, AllocatorT_>);
+
+	public:
+	DD_INHERIT_ALIAS(ValueType);
+	DD_INHERIT_ALIAS(ValueConstType);
+	DD_INHERIT_ALIAS(ReferenceType);
+	DD_INHERIT_ALIAS(ConstReferenceType);
+	DD_INHERIT_ALIAS(PointerType);
+	DD_INHERIT_ALIAS(ConstPointerType);
+
+
+#	if __cplusplus >= 201103L
+	public:
+	using SuperType::SuperType;
+#	else
+	public:
+	List() {
+	}
+
+	public:
+	List()
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	List(UndirectionalRangeT__& range___) : SuperType(range___) {
+	}
+#	endif
 
 
 };

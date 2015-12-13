@@ -386,6 +386,13 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	) {
 	}
 
+#	endif
+
+#	if __cplusplus >= 201103L
+	public:
+	Vessel_(ThisType& origin_) : ThisType(static_cast<ThisType const&>(origin_)) {
+	}
+
 	public:
 	template <typename ValueT__>
 	Vessel_(InitializerList<ValueT__> initializer) noexcept(
@@ -420,7 +427,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	Vessel_(UndirectionalIteratorT__ const& begin___, UndirectionalIteratorT__ const& end___) DD_NOEXCEPT_IF(
+	Vessel_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_IF(
 		noexcept(SuperType()) &&
 		noexcept(AllocatorType::allocate(length_difference(begin___ DD_COMMA end___))) &&
 		noexcept(copy_construct(begin___ DD_COMMA end___ DD_COMMA fabricate<ThisType>().begin()))
@@ -428,6 +435,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		this->m_begin_ = AllocatorType::allocate(length_difference(begin___, end___));
 		this->m_end_ = get_pointer(copy_construct(begin___, end___, this->begin()));
 		this->m_storage_end_ = get_pointer(this->end());
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	Vessel_(UndirectionalRangeT__& range___) : SuperType() {
+		clone(range___);
 	}
 
 #	if __cplusplus >= 201103L
