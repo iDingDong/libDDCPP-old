@@ -21,20 +21,25 @@
 
 
 DD_DETAIL_BEGIN_
+template <typename ValueT_>
+struct List_;
+
+
+
 template <>
 struct List_<void> {
-	public:
+	protected:
 	DD_ALIAS(ThisType, List_<void>);
 	DD_ALIAS(ValueType, void);
 
-	public:
+	protected:
 	DD_ALIAS(ValueConstType, void);
 	DD_ALIAS(ReferenceType, void);
 	DD_ALIAS(ConstReferenceType, void);
 	DD_ALIAS(PointerType, void);
 	DD_ALIAS(ConstPointerType, void);
 
-	public:
+	protected:
 	DD_ALIAS(NodeType, ListNode<void>);
 	DD_ALIAS(NodeConstType, NodeType const);
 	DD_ALIAS(NodeReferenceType, NodeType&);
@@ -42,7 +47,7 @@ struct List_<void> {
 	DD_ALIAS(NodePointerType, NodeType*);
 	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
-	public:
+	protected:
 	DD_ALIAS(NodeType, EmptyNode);
 	DD_ALIAS(NodeConstType, NodeType const);
 	DD_ALIAS(NodeReferenceType, NodeType&);
@@ -51,7 +56,7 @@ struct List_<void> {
 	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
 
-	public:
+	protected:
 	DD_ALIAS(Iterator, ListIterator<void>);
 	DD_ALIAS(ConstIterator, ListIterator<void>);
 	DD_ITERATOR_NESTED
@@ -61,14 +66,14 @@ struct List_<void> {
 	NodeType m_sentry_;
 
 
-	public:
+	protected:
 	DD_CONSTEXPR List_() DD_NOEXCEPT : m_sentry_{ ::DD::address_of(m_sentry_), ::DD::address_of(m_sentry_) } {
 	}
 
-	public:
+	protected:
 	DD_DELETE_COPY_CONSTRUCTOR(List_)
 
-	public:
+	protected:
 	DD_DELETE_MOVE_CONSTRUCTOR(List_)
 
 
@@ -83,60 +88,158 @@ struct List_<void> {
 	}
 
 
-	public:
+	protected:
 	Iterator DD_CONSTEXPR begin() DD_NOEXCEPT {
 		return ::DD::next(sentry_());
 	}
 
-	public:
+	protected:
 	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT {
 		return ::DD::next(sentry_());
 	}
 
 
-	public:
+	protected:
 	Iterator DD_CONSTEXPR end() DD_NOEXCEPT {
 		return sentry_();
 	}
 
-	public:
+	protected:
 	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT {
 		return sentry_();
 	}
 
 
-	public:
+	protected:
 	DD_RANGE_NESTED
 
 
-	public:
+	protected:
 	ReverseIterator DD_CONSTEXPR rbegin() DD_NOEXCEPT {
 		return ReverseIterator(::DD::previous(sentry_()));
 	}
 
-	public:
+	protected:
 	ConstReverseIterator DD_CONSTEXPR rbegin() const DD_NOEXCEPT {
 		return ConstReverseIterator(::DD::previous(sentry_()));
 	}
 
 
-	public:
+	protected:
 	ReverseIterator DD_CONSTEXPR rend() DD_NOEXCEPT {
 		return ReverseIterator(sentry_());
 	}
 
-	public:
+	protected:
 	ConstReverseIterator DD_CONSTEXPR rend() const DD_NOEXCEPT {
 		return ConstReverseIterator(sentry_());
 	}
 
 
-	public:
+	protected:
 	DD_REVERSE_RANGE_NESTED
 
 
-	public:
+	protected:
+	ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
+		::DD::detail_::unguarded_delink_list_node_(begin_.get_node_pointer(), (--end_).get_node_pointer());
+		::DD::detail_::unguarded_enlink_list_node_(
+			position_.get_node_pointer(),
+			begin_.get_node_poitner(),
+			end_.get_node_pointer()
+		);
+	}
+
+	protected:
+	template <typename ListRangeT__>
+	ProcessType splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+		splice(position_, DD_SPLIT_RANGE(range___));
+	}
+
+
+	protected:
 	DD_DELETE_ALL_ASSIGNMENTS(List_)
+
+
+};
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+struct List : List_<ValueT_> {
+	public:
+	struct Iterator : ListIterator<ValueType> {
+		public:
+		DD_ALIAS(SuperType, ListIterator<ValueType>);
+		DD_ALIAS(ThisType, Iterator);
+
+		public:
+		DD_INHERIT_ALIAS(ValueType);
+		DD_INHERIT_ALIAS(ValueConstType);
+		DD_INHERIT_ALIAS(ReferenceType);
+		DD_INHERIT_ALIAS(ConstReferenceType);
+		DD_INHERIT_ALIAS(PointerType);
+		DD_INHERIT_ALIAS(ConstPointerType);
+
+		public:
+		DD_INHERIT_ALIAS(NodeType);
+		DD_INHERIT_ALIAS(NodeConstType);
+		DD_INHERIT_ALIAS(NodeReferenceType);
+		DD_INHERIT_ALIAS(NodeConstType);
+		DD_INHERIT_ALIAS(NodePointerType);
+		DD_INHERIT_ALIAS(NodeConstPointerType);
+
+#	if __cplusplus >= 201103L
+		public:
+		using SuperType::SuperType;
+#	else
+		public:
+		Iterator() {
+		}
+
+		public:
+		Iterator(NodePointerType pointer_) : SuperType(pointer_) {
+		}
+#	endif
+
+
+		public:
+		ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
+			static_cast<SuperType&>(fabricate<SuperType>()).swap_target(other_)
+		) {
+			static_cast<SuperType&>(*this).swap_target(other_);
+		}
+
+
+		public:
+		ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(fabricate<ThisType>())) {
+			++static_cast<SuperType&>(*this);
+			return *this;
+		}
+
+		public:
+		ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++fabricate<ThisType>())) {
+			ThisType result_(*this);
+			++*this;
+			return *this;
+		}
+
+
+		public:
+		ThisType& operator --() DD_NOEXCEPT_AS(--static_cast<SuperType&>(fabricate<ThisType>())) {
+			--static_cast<SuperType&>(*this);
+			return *this;
+		}
+
+		public:
+		ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--fabricate<ThisType>())) {
+			ThisType result_(*this);
+			--*this;
+			return *this;
+		}
+
+
+	};
 
 
 };
