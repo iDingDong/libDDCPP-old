@@ -33,21 +33,21 @@
 #	endif
 
 #	define DD_RANGE_NESTED\
-	ConstIterator cbegin() const DD_NOEXCEPT_AS(ThisType().begin()) {\
+	ConstIterator DD_CONSTEXPR cbegin() const DD_NOEXCEPT_AS(ThisType().begin()) {\
 		return begin();\
 	}\
 	\
 	\
-	ConstIterator cend() const DD_NOEXCEPT_AS(ThisType().end()) {\
+	ConstIterator DD_CONSTEXPR cend() const DD_NOEXCEPT_AS(ThisType().end()) {\
 		return end();\
 	}
 #	define DD_REVERSE_RANGE_NESTED\
-	ReverseIterator crbegin() const DD_NOEXCEPT_AS(ThisType().rbegin()) {\
+	ReverseIterator DD_CONSTEXPR crbegin() const DD_NOEXCEPT_AS(ThisType().rbegin()) {\
 		return rbegin();\
 	}\
 	\
 	\
-	ReverseIterator crend() const DD_NOEXCEPT_AS(ThisType().rend()) {\
+	ReverseIterator DD_CONSTEXPR crend() const DD_NOEXCEPT_AS(ThisType().rend()) {\
 		return rend();\
 	}
 

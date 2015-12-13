@@ -6,28 +6,12 @@
 
 #	include "DD_IteratorCatagory.hpp"
 #	include "DD_address_of.hpp"
+#	include "DD_ListNode.hpp"
 #	include "DD_swap.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <int workaround_ = 0>
-ProcessType unguarded_swap_list_node_implement_(ListNode<void>* node_1_, ListNode<void>* node_2_) DD_NOEXCEPT {
-	::DD::swap(node_1_->previous, node_2_->previous);
-	::DD::swap(node_1_->next, node_2_->next);
-	node_1_->previous->next = node_1_;
-	node_1_->next->previous = node_1_;
-	node_2_->previous->next = node_2_;
-	node_2_->next->previous = node_2_;
-}
-
-
-inline ProcessType unguarded_swap_list_node_(ListNode<void>* node_1_, ListNode<void>* node_2_) DD_NOEXCEPT {
-	unguarded_swap_list_node_implement_(node_1_, node_2_);
-}
-
-
-
 template <typename ValueT_>
 struct ListIterator;
 
@@ -38,6 +22,8 @@ struct ListIterator<void> {
 	public:
 	DD_ALIAS(ThisType, ListIterator<NodeT_>);
 	DD_ALIAS(ValueType, void);
+
+	public:
 	DD_ALIAS(ValueConstType, void);
 	DD_ALIAS(ReferenceType, void);
 	DD_ALIAS(ConstReferenceType, void);
