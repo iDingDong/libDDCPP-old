@@ -8,15 +8,57 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
+DD_MEMBER_FUNCTION_CHECK(HasSwapTarget_, swap, ::DD::ProcessType, MACRO_ObjectT__ const&)
+
+
+
+template <ValidityType has_swap_target_c_>
+struct SwapTarget_ {
+	template <typename PointerT__>
+	static ProcessType swap_target(
+		PointerT__ pointer_1___,
+		PointerT__ pointer_2___
+	) DD_NOEXCEPT_AS(::DD::swap(*pointer_1___, *pointer_2___)) {
+		::DD::swap(*pointer_1___, *pointer_2___);
+	}
+
+
+};
+
+
+
+template <>
+struct SwapTarget_<true> {
+	template <typename PointerT__>
+	static ProcessType swap_target(
+		PointerT__ pointer_1___,
+		PointerT__ pointer_2___
+	) DD_NOEXCEPT_AS(pointer_1___.swap_target(pointer_2___)) {
+		pointer_1___.swap_target(pointer_2___);
+	}
+
+
+};
+
+
+
 template <typename PointerT_>
 inline ProcessType swap_target(
 	PointerT_ pointer_1__,
 	PointerT_ pointer_2__
-) DD_NOEXCEPT_AS(swap(*pointer_1__, *pointer_2__)) {
-	using DD::swap;
-	swap(*pointer_1__, *pointer_2__);
+) DD_NOEXCEPT_AS(SwapTarget_<HasSwapTarget_<PointerT_>::value>::swap_target(pointer_1__ DD_COMMA pointer_2__)) {
+	SwapTarget_<HasSwapTarget_<PointerT_>::value>::swap_target(pointer_1__, pointer_2__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::swap_target;
 
 
 

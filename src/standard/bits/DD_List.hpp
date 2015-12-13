@@ -62,6 +62,11 @@ struct ListBase_ {
 
 
 	protected:
+	DD_DELETE_ALL_ASSIGNMENTS(ListBase_)
+
+
+	protected:
+
 
 
 };
@@ -69,10 +74,15 @@ struct ListBase_ {
 
 
 template <typename ValueT_>
-struct List_ : ListBase_ {
+struct List_;
+
+
+
+template <>
+struct List_<void> : ListBase_ {
 	protected:
 	DD_ALIAS(SuperType, ListBase_);
-	DD_ALIAS(ThisType, List_<ValueT_>);
+	DD_ALIAS(ThisType, List_<void>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	protected:

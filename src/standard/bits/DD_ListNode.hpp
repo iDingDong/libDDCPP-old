@@ -8,8 +8,27 @@
 
 
 
-DD_BEGIN_
-struct EmptyListNode {
+DD_DETAIL_BEGIN_
+template <typename ValueT_>
+struct ValueStorage {
+	DD_ALIAS(ThisType, ValueStorage<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
+
+
+	ValueType value;
+
+
+};
+
+
+
+template <typename ValueT_>
+struct ListNode;
+
+
+
+template <>
+struct ListNode<void> {
 	DD_ALIAS(ThisType, EmptyListNode);
 
 
@@ -22,20 +41,22 @@ struct EmptyListNode {
 
 
 template <typename ValueT_>
-struct ListNode : EmptyListNode {
+struct ListNode : ListNode<void>, ValueStorage<ValueT_> {
 	DD_ALIAS(ThisType, ListNode<ValueT_>);
-	DD_ALIAS(ValueType, ValueT_);
-
-	DD_ALIAS(ReferenceType, ValueType&);
-	DD_ALIAS(ConstReferenceType, ValueType const&);
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ConstPointerType, ValueType*);
-
-
-	ValueType value;
+	DD_VALUE_TYPE_NESTED(ValueT_)
 
 
 };
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::ValueStorage;
+using detail_::ListNode;
 
 
 
