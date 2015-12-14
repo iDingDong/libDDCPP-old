@@ -10,10 +10,9 @@
 	"test_utility.h"
 	"test_math.h"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\ddglobal.hpp
+1450108305 d:\develop\repositories\libddcpp\src\standard\ddglobal.hpp
 	"bits/DD_TypeInfo.hpp"
 	"bits/DD_BuildInTypes.hpp"
-	"bits/DD_Nil.hpp"
 	"bits/DD_Tags.hpp"
 
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_typeinfo.hpp
@@ -36,8 +35,8 @@
 1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_relationship_operators.hpp
 	"DD_global_definitions.hpp"
 
-1450028677 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
-	"DD_global_definitions.hpp"
+1450109170 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
+	"DD_Nil.hpp"
 
 1449939478 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
@@ -429,7 +428,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1450100228 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1450111186 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
 	"DD_ConstIterator.hpp"
@@ -862,7 +861,7 @@
 1444398915 d:\develop\repositories\libddcpp\src\standard\bits\dd_declare_value.hpp
 	"DD_AddRvalueReference.hpp"
 
-1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
+1450096426 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
 	<type_traits>
 	"DD_IsReferable.hpp"
 
@@ -1171,28 +1170,30 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1444971026 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450116409 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
+	"DD_NeedInstance.hpp"
 	"DD_forward.hpp"
 	"DD_address_of.hpp"
-	"DD_previous.hpp"
 	"DD_Allocator.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
-	"DD_container_definitions.hpp"
-	"DD_ListNode.hpp"
 	"DD_ListIterator.hpp"
 	"DD_length_difference.hpp"
 
 1444577957 d:\develop\repositories\libddcpp\src\standard\bits\dd_container_definitions.hpp
 
-1444578001 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
+1450109259 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
 	"DD_ValueTypeNested.hpp"
+	"DD_swap.hpp"
 
-1443513184 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
-	"DD_address_of.hpp"
-	"DD_iterator_definitions.hpp"
+1450116369 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+	"DD_RemoveConst.hpp"
 	"DD_IteratorCatagory.hpp"
+	"DD_EqualityComparable.hpp"
+	"DD_address_of.hpp"
+	"DD_previous.hpp"
+	"DD_ListNode.hpp"
 
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
 	"DD_global_definitions.hpp"
@@ -1231,7 +1232,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
+1450112894 d:\develop\repositories\libddcpp\src\standard\bits\dd_previous.hpp
 	"DD_retreat.hpp"
 
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
@@ -1256,7 +1257,7 @@
 	"DD_move_range.hpp"
 	"DD_copy.hpp"
 
-1444970887 d:\develop\repositories\libddcpp\src\standard\bits\dd_next.hpp
+1450112704 d:\develop\repositories\libddcpp\src\standard\bits\dd_next.hpp
 	"DD_advance.hpp"
 
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_advance.hpp
@@ -1315,12 +1316,13 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450058823 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450113949 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
 	"standard/DDVessel.hpp"
+	"standard/DDList.hpp"
 	"standard/DDAlgorithm.hpp"
 
 1447425796 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp

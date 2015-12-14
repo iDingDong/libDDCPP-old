@@ -45,14 +45,6 @@ struct ListBase_<void> {
 	DD_ALIAS(NodePointerType, NodeType*);
 	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
-	protected:
-	DD_ALIAS(NodeType, EmptyNode);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
-
 
 	protected:
 	DD_ALIAS(Iterator, ListIterator<void>);
@@ -74,73 +66,82 @@ struct ListBase_<void> {
 	protected:
 	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
 
+	protected:
+	ListBase_(NilTag tag_) DD_NOEXCEPT {
+	}
+
 
 	protected:
 	Iterator sentry_() DD_NOEXCEPT {
-		return Iterator(m_sentry_);
+		return Iterator(::DD::address_of(m_sentry_));
 	}
 
 	protected:
-	ConstIterator DD_CONSTEXPR sentry_() const DD_NOEXCEPT {
-		return Iterator(m_sentry_);
+	ConstIterator DD_UNCONSTRIANED_CONSTEXPR sentry_() const DD_NOEXCEPT {
+		return ConstIterator(const_cast<NodePointerType>(::DD::address_of(m_sentry_)));
 	}
 
 
 	protected:
-	Iterator DD_CONSTEXPR begin() DD_NOEXCEPT {
+	Iterator begin() DD_NOEXCEPT {
 		return ::DD::next(sentry_());
 	}
 
 	protected:
-	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT {
+	ConstIterator DD_UNCONSTRIANED_CONSTEXPR begin() const DD_NOEXCEPT {
 		return ::DD::next(sentry_());
 	}
 
 
 	protected:
-	Iterator DD_CONSTEXPR end() DD_NOEXCEPT {
+	Iterator end() DD_NOEXCEPT {
 		return sentry_();
 	}
 
 	protected:
-	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT {
+	ConstIterator DD_UNCONSTRIANED_CONSTEXPR end() const DD_NOEXCEPT {
 		return sentry_();
 	}
 
 
 	protected:
-	DD_RANGE_NESTED
-
-
-	protected:
-	ReverseIterator DD_CONSTEXPR rbegin() DD_NOEXCEPT {
+	ReverseIterator rbegin() DD_NOEXCEPT {
 		return ReverseIterator(::DD::previous(sentry_()));
 	}
 
 	protected:
-	ConstReverseIterator DD_CONSTEXPR rbegin() const DD_NOEXCEPT {
+	ConstReverseIterator DD_UNCONSTRIANED_CONSTEXPR rbegin() const DD_NOEXCEPT {
 		return ConstReverseIterator(::DD::previous(sentry_()));
 	}
 
 
 	protected:
-	ReverseIterator DD_CONSTEXPR rend() DD_NOEXCEPT {
+	ReverseIterator rend() DD_NOEXCEPT {
 		return ReverseIterator(sentry_());
 	}
 
 	protected:
-	ConstReverseIterator DD_CONSTEXPR rend() const DD_NOEXCEPT {
+	ConstReverseIterator DD_UNCONSTRIANED_CONSTEXPR rend() const DD_NOEXCEPT {
 		return ConstReverseIterator(sentry_());
 	}
 
 
 	protected:
-	DD_REVERSE_RANGE_NESTED
+	ProcessType reset_() DD_NOEXCEPT {
+		m_sentry_.previous = ::DD::address_of(m_sentry_);
+		m_sentry_.next = ::DD::address_of(m_sentry_);
+	}
 
 
 	protected:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
 		::DD::swap(m_sentry_, other_.m_sentry_);
+	}
+
+
+	protected:
+	ProcessType enlink_(Iterator position_, Iterator new_node_) DD_NOEXCEPT {
+		::DD::detail_::enlink_list_node_(position_, new_node_);
 	}
 
 
@@ -151,7 +152,7 @@ struct ListBase_<void> {
 
 	protected:
 	template <typename ListRangeT__>
-	static ProcessType unguarded_splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+	static ProcessType unguarded_splice(Iterator position_, ListRangeT__& range___) DD_NOEXCEPT {
 		unguarded_splice(position_, DD_SPLIT_RANGE(range___));
 	}
 
@@ -165,7 +166,7 @@ struct ListBase_<void> {
 
 	protected:
 	template <typename ListRangeT__>
-	static ProcessType splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+	static ProcessType splice(Iterator position_, ListRangeT__& range___) DD_NOEXCEPT {
 		splice(position_, DD_SPLIT_RANGE(range___));
 	}
 
@@ -193,14 +194,6 @@ struct ListBase_ : ListBase_<void> {
 	DD_ALIAS(NodePointerType, NodeType*);
 	DD_ALIAS(NodeConstPointerType, NodeConstType*);
 
-	protected:
-	DD_ALIAS(NodeType, EmptyNode);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
-
 
 	protected:
 	DD_ALIAS(Iterator, ListIterator<ValueType>);
@@ -221,6 +214,10 @@ struct ListBase_ : ListBase_<void> {
 
 	protected:
 	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_);
+
+	protected:
+	DD_CONSTEXPR ListBase_(NilTag tag_) DD_NOEXCEPT : SuperType(tag_) {
+	}
 
 
 	protected:
@@ -282,33 +279,13 @@ struct ListBase_ : ListBase_<void> {
 
 
 	protected:
-#	if __cplusplus >= 201103L
-	template <typename... ArgumentsT__>
-	ProcessType construct_node_(Iterator new_node_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(::DD::construct(new_node_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		::DD::construct(new_node_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT_>
-	ProcessType construct_node_(Iterator new_node_, ValueT__ const& value___) {
-		::DD::construct(new_node_, value___);
-	}
-#	endif
-
-
-	protected:
-	template <typename... ArgumentsT_>
-
-
-	protected:
 	static ProcessType unguarded_splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
 		SuperType::unguarded_splice(position_, begin_, end_);
 	}
 
 	protected:
 	template <typename ListRangeT__>
-	static ProcessType unguarded_splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+	static ProcessType unguarded_splice(Iterator position_, ListRangeT__& range___) DD_NOEXCEPT {
 		SuperType::unguarded_splice(position_, range___);
 	}
 
@@ -320,7 +297,7 @@ struct ListBase_ : ListBase_<void> {
 
 	protected:
 	template <typename ListRangeT__>
-	static ProcessType splice(Iterator position_, ListRangeT_& range___) DD_NOEXCEPT {
+	static ProcessType splice(Iterator position_, ListRangeT__& range___) DD_NOEXCEPT {
 		SuperType::splice(position_, range___);
 	}
 
@@ -337,47 +314,48 @@ template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
 struct List_ : ListBase_<ValueT_> {
 	public:
 	DD_ALIAS(SuperType, ListBase_<ValueT_>);
-	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(ThisType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(AllocatorType, AllocatorT_);
 	static ValidityType DD_CONSTANT need_instance = need_instance_c_;
 
 	public:
-	DD_INHERIT_ALIAS(ValueType);
-	DD_INHERIT_ALIAS(ValueConstType);
-	DD_INHERIT_ALIAS(ReferenceType);
-	DD_INHERIT_ALIAS(ConstReferenceType);
-	DD_INHERIT_ALIAS(PointerType);
-	DD_INHERIT_ALIAS(ConstPointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(ValueType);
+	DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(PointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
 
 	public:
-	DD_INHERIT_ALIAS(NodeType);
-	DD_INHERIT_ALIAS(NodeConstType);
-	DD_INHERIT_ALIAS(NodeReferenceType);
-	DD_INHERIT_ALIAS(NodeConstType);
-	DD_INHERIT_ALIAS(NodePointerType);
-	DD_INHERIT_ALIAS(NodeConstPointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
 
 
 	public:
-	struct Iterator : ListIterator<ValueType> {
+	struct Iterator : SuperType::Iterator {
 		public:
-		DD_ALIAS(SuperType, ListIterator<ValueType>);
+		DD_ALIAS(SuperType, typename SuperType::Iterator);
 		DD_ALIAS(ThisType, Iterator);
 
 		public:
-		DD_INHERIT_ALIAS(ValueType);
-		DD_INHERIT_ALIAS(ValueConstType);
-		DD_INHERIT_ALIAS(ReferenceType);
-		DD_INHERIT_ALIAS(ConstReferenceType);
-		DD_INHERIT_ALIAS(PointerType);
-		DD_INHERIT_ALIAS(ConstPointerType);
+		DD_INHERIT_TEMPLATE_ALIAS(ValueType);
+		DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
+		DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
+		DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
+		DD_INHERIT_TEMPLATE_ALIAS(PointerType);
+		DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
 
 		public:
-		DD_INHERIT_ALIAS(NodeType);
-		DD_INHERIT_ALIAS(NodeConstType);
-		DD_INHERIT_ALIAS(NodeReferenceType);
-		DD_INHERIT_ALIAS(NodeConstType);
-		DD_INHERIT_ALIAS(NodePointerType);
-		DD_INHERIT_ALIAS(NodeConstPointerType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodeType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
+		DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
 
 #	if __cplusplus >= 201103L
 		public:
@@ -415,7 +393,7 @@ struct List_ : ListBase_<ValueT_> {
 		ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++fabricate<ThisType>())) {
 			ThisType result_(*this);
 			++*this;
-			return *this;
+			return result_;
 		}
 
 
@@ -429,7 +407,7 @@ struct List_ : ListBase_<ValueT_> {
 		ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--fabricate<ThisType>())) {
 			ThisType result_(*this);
 			--*this;
-			return *this;
+			return result_;
 		}
 
 
@@ -437,7 +415,7 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	DD_ALIAS(ConstIterator, typename List_<ValueConstType, AllocatorType, need_instance>::Iterator);
+	DD_ALIAS(ConstIterator, typename List_<ValueConstType DD_COMMA AllocatorType DD_COMMA need_instance>::Iterator);
 	DD_ITERATOR_NESTED
 
 
@@ -449,9 +427,183 @@ struct List_ : ListBase_<ValueT_> {
 	};
 #	endif
 
+	public:
+	List_(ThisType const& origin_) : SuperType(nil_tag) {
+		clone_initialize_(origin_);
+	}
+
+	public:
+	List_(ThisType&& origin_) : SuperType(nil_tag) {
+		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
+		origin_.reset_();
+	}
+
+
+	public:
+	~List_() DD_NOEXCEPT {
+		destruct();
+	}
+
+
+	public:
+	Iterator begin() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::begin())) {
+		return Iterator(SuperType::begin());
+	}
+
+	public:
+	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::begin())) {
+		return ConstIterator(SuperType::begin());
+	}
+
+
+	public:
+	Iterator end() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::end())) {
+		return Iterator(SuperType::end());
+	}
+
+	public:
+	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::end())) {
+		return ConstIterator(SuperType::end());
+	}
+
+
+	public:
+	DD_RANGE_NESTED
+
+
+	public:
+	Iterator rbegin() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::rbegin())) {
+		return Iterator(SuperType::rbegin());
+	}
+
+	public:
+	ConstIterator DD_CONSTEXPR rbegin() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::rbegin())) {
+		return ConstIterator(SuperType::rbegin());
+	}
+
+
+	public:
+	Iterator rend() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::rend())) {
+		return Iterator(SuperType::rend());
+	}
+
+	public:
+	ConstIterator DD_CONSTEXPR rend() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::rend())) {
+		return ConstIterator(SuperType::rend());
+	}
+
+
+	public:
+	DD_REVERSE_RANGE_NESTED
+
 
 	private:
-	Iterator create_node_() {
+#	if __cplusplus >= 201103L
+	template <typename... ArgumentsT__>
+	static Iterator create_node_(ArgumentsT__&&... arguments___) {
+#	else
+	template <typename ValueT__>
+	static Iterator create_node_(ValueT__ const& value___) {
+#	endif
+		NodePointerType new_node_ = static_cast<NodePointerType>(AllocatorType::Basic::allocate(sizeof(NodeType)));
+		try {
+#	if __cplusplus >= 201103L
+			AllocatorType::construct(::DD::address_of(new_node_->value), ::DD::forward<ArgumentsT__>(arguments___)...);
+#	else
+			AllocatorType::construct(::DD::address_of(new_node_->value), value___);
+#	endif
+		} catch(...) {
+			AllocatorType::Basic::deallocate(new_node_, sizeof(NodeType));
+		}
+		return Iterator(new_node_);
+	}
+
+
+	private:
+	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
+		AllocatorType::destruct(target_.unguarded_get_pointer());
+		AllocatorType::Basic::deallocate(target_.get_node_pointer(), sizeof(NodeType));
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_front(ArgumentsT__&&... arguments___) {
+		emplace(begin(), forward<ArgumentsT__>(arguments___)...);
+	}
+
+
+	public:
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__&& value___) {
+		insert(begin(), forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__ const& value___) {
+		insert(begin(), value___);
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_back(ArgumentsT__&&... arguments___) {
+		emplace(end(), forward<ArgumentsT__>(arguments___)...);
+	}
+
+
+	public:
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__&& value___) {
+		insert(end(), forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__ const& value___) {
+		insert(end(), value___);
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace(Iterator position_, ArgumentsT__&&... arguments___) {
+		SuperType::enlink_(position_, create_node_(::DD::forward<ArgumentsT__>(arguments___)...));
+	}
+
+
+	public:
+	template <typename ValueT__>
+	ProcessType insert(Iterator position_, ValueT__&& value___) {
+		emplace(position_, forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType insert(Iterator position_, ValueT__ const& value___) {
+		SuperType::enlink_(position_, create_node_(value___));
+	}
+#	endif
+
+
+	public:
+	ProcessType clear() DD_NOEXCEPT {
+		destruct();
+		SuperType::reset_();
+	}
+
+
+	private:
+	ProcessType destruct() DD_NOEXCEPT {
+		for (Iterator current_(begin()); current_ != end(); ) {
+			destroy_node_(current_++);
+		}
 	}
 
 
@@ -466,16 +618,8 @@ template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
 #	endif
 struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	public:
-	DD_ALIAS(SuperType, List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value>);
-	DD_ALIAS(ThisType, List<ValueT_, AllocatorT_>);
-
-	public:
-	DD_INHERIT_ALIAS(ValueType);
-	DD_INHERIT_ALIAS(ValueConstType);
-	DD_INHERIT_ALIAS(ReferenceType);
-	DD_INHERIT_ALIAS(ConstReferenceType);
-	DD_INHERIT_ALIAS(PointerType);
-	DD_INHERIT_ALIAS(ConstPointerType);
+	DD_ALIAS(SuperType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA NeedInstance<AllocatorT_>::value>);
+	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_>);
 
 
 #	if __cplusplus >= 201103L
@@ -486,15 +630,15 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	List() {
 	}
 
-	public:
-	template <typename UndirectionalIteratorT__>
-	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
-	}
+	//public:
+	//template <typename UndirectionalIteratorT__>
+	//List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
+	//}
 
-	public:
-	template <typename UndirectionalRangeT__>
-	List(UndirectionalRangeT__& range___) : SuperType(range___) {
-	}
+	//public:
+	//template <typename UndirectionalRangeT__>
+	//List(UndirectionalRangeT__& range___) : SuperType(range___) {
+	//}
 #	endif
 
 

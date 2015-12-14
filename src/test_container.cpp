@@ -4,6 +4,7 @@
 #include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
 #include "standard/DDVessel.hpp"
+#include "standard/DDList.hpp"
 
 #include "standard/DDAlgorithm.hpp"
 
@@ -64,6 +65,22 @@ void test_container() {
 			Test::count != 0
 		) {
 			throw "'DD::Vessel' test failed.";
+		}
+	}
+	{
+		{
+			DD::List<Test> lst;
+			lst.push_back(Test());
+			if (
+				Test::count != 1
+			) {
+				throw "'DD::List' test failed.";
+			}
+		}
+		if (
+			Test::count != 0
+		) {
+			throw "'DD::List' test failed.";
 		}
 	}
 }

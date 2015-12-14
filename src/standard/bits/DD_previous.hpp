@@ -10,13 +10,13 @@
 
 DD_DETAIL_BEGIN_
 template <typename BidirectionalIteratorT_>
-inline BidirectionalIteratorT_ previous(BidirectionalIteratorT_ iterator__) DD_NOEXCEPT_AS(retreat(iterator__)) {
+inline BidirectionalIteratorT_ DD_UNCONSTRIANED_CONSTEXPR previous(BidirectionalIteratorT_ iterator__) DD_NOEXCEPT_AS(retreat(iterator__)) {
 	retreat(iterator__);
 	return iterator__;
 }
 
 template <typename BidirectionalIteratorT_, typename DifferenceT_>
-inline BidirectionalIteratorT_ previous(
+inline BidirectionalIteratorT_ DD_UNCONSTRIANED_CONSTEXPR previous(
 	BidirectionalIteratorT_ iterator__,
 	DifferenceT_ const& step__
 ) DD_NOEXCEPT_AS(retreat(iterator__, step__)) {

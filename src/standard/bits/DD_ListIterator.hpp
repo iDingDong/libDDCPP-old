@@ -6,6 +6,7 @@
 
 #	include "DD_RemoveConst.hpp"
 #	include "DD_IteratorCatagory.hpp"
+#	include "DD_EqualityComparable.hpp"
 #	include "DD_address_of.hpp"
 #	include "DD_previous.hpp"
 #	include "DD_ListNode.hpp"
@@ -19,9 +20,13 @@ struct ListIterator;
 
 
 template <>
-struct ListIterator<void> {
+#	if __cplusplus >= 201103L
+struct ListIterator<void> : EqualityComparable<ListIterator<void>> {
+#	else
+struct ListIterator<void> : EqualityComparable<ListIterator<void> > {
+#	endif
 	public:
-	DD_ALIAS(ThisType, ListIterator<NodeT_>);
+	DD_ALIAS(ThisType, ListIterator<void>);
 	DD_ALIAS(ValueType, void);
 
 	public:
@@ -78,15 +83,19 @@ struct ListIterator<void> {
 
 
 	public:
-	ValidityType DD_CONSTEXP is_valid() const DD_NOEXCEPT {
+	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_node_pointer();
 	}
 
 
 	public:
-	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
-		::DD::detail_::swap_list_node_(get_node_pointer() DD_COMMA other_.get_node_pointer())
-	) {
+	ValidityType DD_CONSTEXPR equal(ThisType const& other_) const DD_NOEXCEPT {
+		return get_node_pointer() == other_.get_node_pointer();
+	}
+
+
+	public:
+	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT {
 		DD_ASSERT(is_valid() && other_.is_valid(), "'DD::ListIterator::swap_target': Invalid iterator dereferenced");
 		::DD::detail_::swap_list_node_(get_node_pointer(), other_.get_node_pointer());
 	}
@@ -103,7 +112,7 @@ struct ListIterator<void> {
 #	endif
 	public:
 	ThisType& operator ++() DD_NOEXCEPT {
-		this->m_pointer_ = this->m_pointer_->next;
+		m_pointer_ = m_pointer_->next;
 		return *this;
 	}
 
@@ -117,7 +126,7 @@ struct ListIterator<void> {
 
 	public:
 	ThisType& operator --() DD_NOEXCEPT {
-		this->m_pointer_ = this->m_pointer_->previous;
+		m_pointer_ = m_pointer_->previous;
 		return *this;
 	}
 
@@ -142,7 +151,11 @@ struct ListIterator<void> {
 
 
 template <typename ValueT_>
-struct ListIterator : protected ListIterator<void> {
+#	if __cplusplus >= 201103L
+struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT_>> {
+#	else
+struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT_> > {
+#	endif
 	public:
 	DD_ALIAS(SuperType, ListIterator<void>);
 	DD_ALIAS(ThisType, ListIterator<ValueT_>);
@@ -212,6 +225,12 @@ struct ListIterator : protected ListIterator<void> {
 
 
 	public:
+	ValidityType DD_CONSTEXPR equal(ThisType const& other_) const DD_NOEXCEPT {
+		return SuperType::equal(other_);
+	}
+
+
+	public:
 	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return SuperType::is_valid();
 	}
@@ -244,7 +263,23 @@ struct ListIterator : protected ListIterator<void> {
 
 	public:
 	ThisType operator ++(int) DD_NOEXCEPT {
+		ThisType result_(*this);
+		++*this;
+		return result_;
+	}
 
+
+	public:
+	ThisType& operator --() DD_NOEXCEPT {
+		--static_cast<SuperType&>(*this);
+		return *this;
+	}
+
+	public:
+	ThisType operator --(int) DD_NOEXCEPT {
+		ThisType result_(*this);
+		--*this;
+		return result_;
 	}
 
 
@@ -294,7 +329,7 @@ inline ProcessType unguarded_splice_list_node_(ListIterator<ValueT_> position_, 
 
 template <typename ValueT_>
 inline ProcessType splice_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) {
-	if (begin__ != end__) {
+	if (begin_ != end_) {
 		unguarded_splice_list_node_(position_, begin_, end_);
 	}
 }
@@ -338,7 +373,7 @@ inline Pair<ListIterator<ValueT_> > move_range(
 template <typename ValueT_>
 inline ProcessType transfer(
 	ListIterator<ValueT_> from_,
-	ListIterator<ValueT_> to_,
+	ListIterator<ValueT_> to_
 ) DD_NOEXCEPT_AS(::DD::detail_::transfer_list_node_(from_.get_node_pointer() DD_COMMA to_.get_node_pointer())) {
 	::DD::detail_::transfer_list_node_(from_.get_node_pointer(), to_.get_node_pointer());
 }
@@ -347,7 +382,7 @@ inline ProcessType transfer(
 template <typename ValueT_>
 inline ProcessType transfer_forward(
 	ListIterator<ValueT_> from_,
-	ListIterator<ValueT_> to_,
+	ListIterator<ValueT_> to_
 ) DD_NOEXCEPT_AS(::DD::detail_::transfer(from_ DD_COMMA to_)) {
 	::DD::detail_::transfer(from_, to_);
 }
@@ -356,7 +391,7 @@ inline ProcessType transfer_forward(
 template <typename ValueT_>
 inline ProcessType transfer_backward(
 	ListIterator<ValueT_> from_,
-	ListIterator<ValueT_> to_,
+	ListIterator<ValueT_> to_
 ) DD_NOEXCEPT_AS(::DD::detail_::transfer(from_ DD_COMMA to_)) {
 	::DD::detail_::transfer(from_, to_);
 }
@@ -365,7 +400,7 @@ inline ProcessType transfer_backward(
 template <typename ValueT_>
 ProcessType inplace_merge(
 	ListIterator<ValueT_> begin_,
-	ListIterator<ValueT_> middle,
+	ListIterator<ValueT_> middle_,
 	ListIterator<ValueT_> end_
 ) {
 	while (middle_ != end_ && begin_ != middle_) {
@@ -380,7 +415,7 @@ ProcessType inplace_merge(
 template <typename ValueT_, typename BinaryPredicateT_>
 ProcessType inplace_merge(
 	ListIterator<ValueT_> begin_,
-	ListIterator<ValueT_> middle,
+	ListIterator<ValueT_> middle_,
 	ListIterator<ValueT_> end_,
 	BinaryPredicateT_ less__
 ) {
@@ -391,6 +426,15 @@ ProcessType inplace_merge(
 			++begin_;
 		}
 	}
+}
+
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator ==(
+	ListIterator<ValueT_> const& iterator_1_,
+	ListIterator<ValueT_> const& iterator_2_
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(iterator_1_.equal(iterator_2_))) {
+	return iterator_1_.equal(iterator_2_);
 }
 
 

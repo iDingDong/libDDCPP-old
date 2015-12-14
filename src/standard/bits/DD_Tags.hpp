@@ -4,13 +4,18 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_Nil.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 struct Tag {
 } DD_CONSTANT tag;
+
+
+
+struct NilTag {
+} DD_CONSTANT nil_tag;
 
 
 
@@ -45,6 +50,7 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::Tag;
+using detail_::NilTag;
 using detail_::DefaultTag;
 using detail_::ConstructTag;
 using detail_::UnguardedTag;
@@ -52,6 +58,7 @@ using detail_::BatchTag;
 using detail_::ReserveTag;
 
 using detail_::tag;
+using detail_::nil_tag;
 using detail_::default_tag;
 using detail_::construct_tag;
 using detail_::unguarded_tag;

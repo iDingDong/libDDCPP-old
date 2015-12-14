@@ -30,7 +30,7 @@ struct ListNode;
 
 template <>
 struct ListNode<void> {
-	DD_ALIAS(ThisType, EmptyListNode);
+	DD_ALIAS(ThisType, ListNode<void>);
 
 
 	ThisType* previous;
@@ -113,7 +113,7 @@ inline ProcessType splice_list_node_(
 	ListNode<void>* last_
 ) {
 	delink_list_node_(first_, last_);
-	enlink_list_node_(position_, first_, last_)
+	enlink_list_node_(position_, first_, last_);
 }
 
 
