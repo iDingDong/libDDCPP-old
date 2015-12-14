@@ -41,8 +41,8 @@ using SignedInt64 = std::int64_t;
 #	elif defined(WIN64_)
 typedef UnsignedChar UnsignedInt8;
 typedef SignedChar SignedInt8;
-typedef UnsignedShort UnsignedInt16;
-typedef SignedShort SignedInt16;
+typedef UnsignedShortInt UnsignedInt16;
+typedef SignedShortInt SignedInt16;
 typedef UnsignedInt UnsignedInt32;
 typedef SignedInt SignedInt32;
 typedef UnsignedLongInt UnsignedInt64;
@@ -50,8 +50,8 @@ typedef SignedLongInt SignedInt64;
 #	else
 typedef UnsignedChar UnsignedInt8;
 typedef SignedChar SignedInt8;
-typedef UnsignedShort UnsignedInt16;
-typedef SignedShort SignedInt16;
+typedef UnsignedShortInt UnsignedInt16;
+typedef SignedShortInt SignedInt16;
 typedef UnsignedLongInt UnsignedInt32;
 typedef SignedLongInt SignedInt32;
 #	endif

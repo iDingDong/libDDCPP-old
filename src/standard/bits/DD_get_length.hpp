@@ -13,7 +13,7 @@ template <typename ValueT_, LengthType length_c_>
 #	if __cplusplus >= 201103L
 inline LengthType constexpr get_length(ArrayType<ValueT_, length_c_> const& array_) noexcept {
 #	else
-inline LengthType get_length(ValueT_(&array_)[length_c_] array_) throw() {
+inline LengthType get_length(ValueT_(&array_)[length_c_]) throw() {
 #	endif
 	return length_c_;
 }

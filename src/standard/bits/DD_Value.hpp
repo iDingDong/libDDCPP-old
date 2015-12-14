@@ -68,7 +68,7 @@ DD_NESTED_TYPE_TRAIT(Value, ValueType, RemoveReferenceType<typename ::DD::detail
 #		endif
 #	else
 #		if DDCPP_COMPAT_STL
-DD_NESTED_TYPE_TRAIT(Value, ValueType, typename ::DD::detail_::Value_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type);
+DD_NESTED_TYPE_TRAIT(Value, ValueType, typename ::DD::detail_::Value_<typename RemoveCV<MACRO_ObjectT_>::Type>::Type)
 #		else
 template <typename ObjectT_>
 struct Value : Value_<typename RemoveCV<ObjectT_>::Type> {

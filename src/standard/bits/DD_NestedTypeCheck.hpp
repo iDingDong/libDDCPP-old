@@ -136,7 +136,7 @@
 			\
 			template <typename MACRO_ObjectT_>\
 			struct ARG_Checker_ {\
-				typedef typename MACRO_detail_::_##ARG_Checker_<\
+				typedef typename MACRO_detail_::ARG_Checker_##_<\
 					MACRO_ObjectT_,\
 					MACRO_detail_::CHECK_##ARG_Checker_##_<MACRO_ObjectT_>::value\
 				>::Type Type;\

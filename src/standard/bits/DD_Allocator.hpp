@@ -77,7 +77,7 @@ class Allocator<void> {
 #	else
 	template <typename ValueT__>
 	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		::DD::construct(pointer_, value__);
+		::DD::construct(pointer_, value___);
 	}
 #	endif
 

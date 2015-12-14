@@ -14,8 +14,8 @@
 #	include "DD_IsTriviallyCopyable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyMoveable.hpp"
+#		include "DD_Decay.hpp"
 #	endif
-#	include "DD_Decay.hpp"
 #	include "DD_Comparable.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_construct.hpp"
@@ -143,8 +143,14 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	SizeTrait<value_size> m_storage_;
 
 
+#	if __cplusplus >= 201103L
 	public:
 	constexpr Optional() = default;
+#	else
+	public:
+	Optional() throw() {
+	}
+#	endif
 
 	public:
 	Optional(ThisType const& origin_) DD_NOEXCEPT_AS(

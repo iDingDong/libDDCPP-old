@@ -5,7 +5,6 @@
 #include "standard/DDIterator.hpp"
 
 #include "standard/DDHub.hpp"
-#include "standard/bits/DD_RedBlackTree.hpp"
 #include "test_meta.h"
 #include "test_memory.h"
 #include "test_algorithm.h"

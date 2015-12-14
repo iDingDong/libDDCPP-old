@@ -146,7 +146,7 @@ struct BackPushIterator {
 #	endif
 
 	public:
-	constexpr BackPushIterator(ContainerReferenceType container_) DD_NOEXCEPT : m_target_(address_of(container_)) {
+	DD_CONSTEXPR BackPushIterator(ContainerReferenceType container_) DD_NOEXCEPT : m_target_(address_of(container_)) {
 	}
 
 

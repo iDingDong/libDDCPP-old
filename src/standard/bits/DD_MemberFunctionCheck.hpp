@@ -4,12 +4,6 @@
 
 
 
-#	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for 'DD_MEMBER_FUNCTION_CHECK'.
-
-
-
-#	endif
 #	include "DD_Nil.hpp"
 #	include "DD_meta_definitions.hpp"
 #	if __cplusplus < 201103L

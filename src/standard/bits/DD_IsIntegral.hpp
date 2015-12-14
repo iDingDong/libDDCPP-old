@@ -6,8 +6,8 @@
 
 #	if __cplusplus > 201103L
 #		include <type_traits>
-#	endif
 
+#	endif
 #	include "DD_IsBool.hpp"
 
 #	include "DD_IsCharactor.hpp"

@@ -76,12 +76,20 @@ struct EmptyBinaryTreeNode {
 	}
 
 
-	template <int workaround_ = 0>
+	template <int workaround_>
 	ProcessType left_rotate() DD_NOEXCEPT;
 
+	ProcessType left_rotate() DD_NOEXCEPT {
+		left_rotate<0>();
+	}
 
-	template <int workaround_ = 0>
+
+	template <int workaround_>
 	ProcessType right_rotate() DD_NOEXCEPT;
+
+	ProcessType right_rotate() DD_NOEXCEPT {
+		right_rotate<0>();
+	}
 
 
 };

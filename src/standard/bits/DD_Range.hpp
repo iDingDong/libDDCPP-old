@@ -28,8 +28,8 @@
 #		define DD_SPLIT_RANGE(...) ::DD::detail_::begin(__VA_ARGS__), ::DD::detail_::end(__VA_ARGS__)
 #		define DD_SPLIT_RANGE_REVERSELY(...) ::DD::detail_::rbegin(__VA_ARGS__), ::DD::detail_::rend(__VA_ARGS__)
 #	else
-#		define DD_SPLIT_RANGE(ARG_range_) ::DD::begin(range__), ::DD::end(range__)
-#		define DD_SPLIT_RANGE_REVERSELY(ARG_range_) ::DD::rbegin(range__), ::DD::rend(range__)
+#		define DD_SPLIT_RANGE(ARG_range_) ::DD::detail_::begin(ARG_range_), ::DD::detail_::end(ARG_range_)
+#		define DD_SPLIT_RANGE_REVERSELY(ARG_range_) ::DD::detail_::rbegin(ARG_range_), ::DD::detail_::rend(ARG_range_)
 #	endif
 
 #	define DD_RANGE_NESTED\
@@ -124,7 +124,7 @@ auto constexpr rbegin(RangeT_& range__) noexcept(noexcept(range__.rbegin())) {
 #	elif __cplusplus >= 201103L
 auto constexpr rbegin(RangeT_& range__) noexcept(noexcept(range__.rbegin())) -> decltype(range__.rbegin()) {
 #	else
-typename ReverseIterator<RangeT_>::Type rbegin() {
+typename ReverseIterator<RangeT_>::Type rbegin(RangeT_& range__) {
 #	endif
 	return range__.rbegin();
 }
@@ -135,7 +135,7 @@ auto constexpr rbegin(RangeT_ const& range__) noexcept(noexcept(range__.rbegin()
 #	elif __cplusplus >= 201103L
 auto constexpr rbegin(RangeT_ const& range__) noexcept(noexcept(range__.rbegin())) -> decltype(range__.rbegin()) {
 #	else
-typename ConstReverseIterator<RangeT_>::Type rbegin() {
+typename ConstReverseIterator<RangeT_>::Type rbegin(RangeT_& range__) {
 #	endif
 	return range__.rbegin();
 }
@@ -156,7 +156,7 @@ auto constexpr rend(RangeT_& range__) noexcept(noexcept(range__.rend())) {
 #	elif __cplusplus >= 201103L
 auto constexpr rend(RangeT_& range__) noexcept(noexcept(range__.rend())) -> decltype(range__.rend()) {
 #	else
-typename ReverseIterator<RangeT_>::Type rend() {
+typename ReverseIterator<RangeT_>::Type rend(RangeT_& range__) {
 #	endif
 	return range__.rend();
 }
@@ -167,7 +167,7 @@ auto constexpr rend(RangeT_ const& range__) noexcept(noexcept(range__.rend())) {
 #	elif __cplusplus >= 201103L
 auto constexpr rend(RangeT_ const& range__) noexcept(noexcept(range__.rend())) -> decltype(range__.rend()) {
 #	else
-typename ConstReverseIterator<RangeT_>::Type rend() {
+typename ConstReverseIterator<RangeT_>::Type rend(RangeT_& range__) {
 #	endif
 	return range__.rend();
 }
@@ -221,7 +221,7 @@ struct Range {
 
 	public:
 	template <typename IteratorT1__, typename IteratorT2__>
-	Range(IteratorT1__ const& begin___, IteratorT2__ const& end__) : m_range_(begin___, end___) {
+	Range(IteratorT1__ const& begin___, IteratorT2__ const& end___) : m_range_(begin___, end___) {
 	}
 #	endif
 

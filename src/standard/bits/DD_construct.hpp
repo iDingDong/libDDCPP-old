@@ -16,16 +16,14 @@ DD_DETAIL_BEGIN_
 #	if __cplusplus >= 201103L
 template <typename PointerT_, typename... ArgumentsT_>
 ProcessType construct(PointerT_ const& pointer__, ArgumentsT_&&... arguments__) noexcept(
-	noexcept(new (address_of(*pointer__)) IteratorValueType<PointerT_>(forward<ArgumentsT_>(arguments__)...))
+	noexcept(new (::DD::address_of(*pointer__)) IteratorValueType<PointerT_>(forward<ArgumentsT_>(arguments__)...))
 ) {
-	new (address_of(*pointer__)) IteratorValueType<PointerT_>(forward<ArgumentsT_>(arguments__)...);
+	new (::DD::address_of(*pointer__)) IteratorValueType<PointerT_>(forward<ArgumentsT_>(arguments__)...);
 }
 #	else
 template <typename PointerT_, typename ValueT_>
-ProcessType construct(PointerT_ const& pointer__, ValueT_ const& value__) noexcept(
-	noexcept(new (address_of(*pointer__)) IteratorValueType<PointerT_>(value__))
-) {
-	new (address_of(*pointer__)) typename IteratorValue<PointerT_>::Type(value__);
+ProcessType construct(PointerT_ const& pointer__, ValueT_ const& value__) {
+	new (::DD::address_of(*pointer__)) typename IteratorValue<PointerT_>::Type(value__);
 }
 #	endif
 

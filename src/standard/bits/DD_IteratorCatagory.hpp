@@ -61,24 +61,13 @@ enum class IteratorCatagoryValue {
 
 };
 #	else
-struct IteratorCatagoryValue {
-	static IteratorCatagoryValue const fixed;
-	static IteratorCatagoryValue const undirectional;
-	static IteratorCatagoryValue const bidirectional;
-	static IteratorCatagoryValue const free_access;
-
-
-	int value;
-
+enum IteratorCatagoryValue {
+	fixed = 1,
+	undirectional = 2,
+	bidirectional = 3,
+	free_access = 4
 
 };
-
-
-
-IteratorCatagoryValue const IteratorCatagoryValue::fixed = { 1 };
-IteratorCatagoryValue const IteratorCatagoryValue::undirectional = { 2 };
-IteratorCatagoryValue const IteratorCatagoryValue::bidirectional = { 3 };
-IteratorCatagoryValue const IteratorCatagoryValue::free_access = { 4 };
 #	endif
 
 
@@ -97,12 +86,12 @@ struct IteratorCatagory : IteratorCatagory_<DD_MODIFY_TRAIT(RemoveCV, IteratorT_
 	;
 #	else
 	static IteratorCatagoryValue DD_CONSTANT value = IsSame<FreeAccessIterator, Type>::value ?
-		IteratorCatagoryValue::free_access :
+		free_access :
 		IsSame<BidirectionalIterator, Type>::value ?
-			IteratorCatagoryValue::bidirectional :
+			bidirectional :
 			IsSame<UndirectionalIterator, Type>::value ?
-				IteratorCatagoryValue::undirectional :
-				IteratorCatagoryValue::fixed
+				undirectional :
+				fixed
 	;
 #	endif
 

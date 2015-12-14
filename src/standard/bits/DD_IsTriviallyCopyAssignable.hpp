@@ -9,7 +9,7 @@
 
 #		include "DD_And.hpp"
 #	else
-#		include "DD_IsScalar.hpp"
+#		include "DD_IsArithmetic.hpp"
 #	endif
 
 
@@ -27,7 +27,7 @@ struct IsTriviallyCopyAssignable<ObjectT_> : StdBoolConstant<std::is_trivially_c
 };
 #	else
 template <typename ObjectT_>
-struct IsTriviallyCopyAssignable : IsScalar<ObjectT_> {
+struct IsTriviallyCopyAssignable : IsArithmetic<ObjectT_> {
 };
 #	endif
 

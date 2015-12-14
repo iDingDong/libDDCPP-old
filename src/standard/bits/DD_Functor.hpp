@@ -47,7 +47,11 @@ struct BinaryFunctor : Functor<ResultT_> {
 	DD_ALIAS(FirstArgumentType, ArgumentT1_);
 	DD_ALIAS(SecondArgumentType, ArgumentT2_);
 
-	DD_ALIAS(FunctionType, ResultT_(ArgumentT1_ DD_COMMA ArgumentT2_));
+#	if __cplusplus >= 201103L
+	using FunctionType = ResultT_(ArgumentT1_, ArgumentT2_);
+#	else
+	typedef ResultT_ FunctionType(ArgumentT1_, ArgumentT2_);
+#	endif
 
 
 };

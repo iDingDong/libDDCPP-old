@@ -22,7 +22,7 @@ struct LengthDifference_ {
 		auto result_ = IteratorDifference<UndirectionalIteratorT__>();
 #	else
 		typedef typename IteratorDifference<UndirectionalIteratorT__>::Type ResultType_;
-		ResultType result_ = ResultType();
+		ResultType_ result_ = ResultType_();
 #	endif
 		for (; begin___ != end___; ++begin___) {
 			++result_;

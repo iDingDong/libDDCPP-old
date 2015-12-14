@@ -6,7 +6,7 @@
 
 #	if __cplusplus >= 201103L
 #		include "DD_IsBaseOf.hpp"
-#	elif
+#	else
 #		include "DD_IsSame.hpp"
 #	endif
 #	include "DD_IteratorCatagory.hpp"

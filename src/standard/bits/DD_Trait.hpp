@@ -6,7 +6,11 @@
 
 #	include "DD_IsVoid.hpp"
 #	include "DD_IsUnsigned.hpp"
-#	include "DD_IsReferable.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_IsReferable.hpp"
+#	else
+#		include "DD_IsReference.hpp"
+#	endif
 #	include "DD_IsPointer.hpp"
 #	include "DD_IsArray.hpp"
 #	if __cplusplus >= 201103L
@@ -70,13 +74,13 @@ struct Trait {
 	DD_ALIAS(IsArithmetic, ::DD::IsArithmetic<ObjectType>);
 #	if __cplusplus >= 201103L
 	using IsFunction = ::DD::IsFunction<ObjectType>;
+	using IsReferable = ::DD::IsReferable<ObjectType>;
 	using IsLvalueReference = ::DD::IsLvalueReference<ObjectType>;
 	using IsRvalueReference = ::DD::IsRvalueReference<ObjectType>;
 #	endif
 	DD_ALIAS(IsReference, ::DD::IsReference<ObjectType>);
 	DD_ALIAS(IsPointer, ::DD::IsPointer<ObjectType>);
 	DD_ALIAS(IsArray, ::DD::IsArray<ObjectType>);
-	DD_ALIAS(IsReferable, ::DD::IsReferable<ObjectType>);
 #	if __cplusplus >= 201103L
 	using IsUnion = ::DD::IsUnion<ObjectType>;
 	using IsClass = ::DD::IsClass<ObjectType>;

@@ -9,7 +9,7 @@
 
 #		include "DD_And.hpp"
 #	else
-#		include "DD_IsScalar.hpp"
+#		include "DD_IsArithmetic.hpp"
 #	endif
 
 
@@ -27,7 +27,7 @@ struct IsNoexceptCopyConstructible<ObjectT_> : StdBoolConstant<std::is_nothrow_c
 };
 #	else
 template <typename ObjectT_>
-struct IsNoexceptCopyConstructible : IsScalar<ObjectT_> {
+struct IsNoexceptCopyConstructible : IsArithmetic<ObjectT_> {
 };
 #	endif
 

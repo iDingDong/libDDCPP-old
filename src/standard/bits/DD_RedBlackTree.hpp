@@ -47,14 +47,24 @@ struct RedBlackTreeBase__ {
 	}
 
 
-	protected:
-	template <int workaround_ = 0>
+	private:
+	template <int workaround_>
 	ProcessType detach_node_(NodePointerType node_) DD_NOEXCEPT;
+
+	protected:
+	ProcessType detach_node_(NodePointerType node_) DD_NOEXCEPT {
+		detach_node_<0>(node_);
+	}
 
 
 	private:
-	template <int workaround_ = 0>
+	template <int workaround_>
 	ProcessType detach_fix_up_(NodePointerType node_, ValidityType left_removed_) DD_NOEXCEPT;
+
+	private:
+	ProcessType detach_fix_up_(NodePointerType node_, ValidityType left_removed_) DD_NOEXCEPT {
+		detach_fix_up_<0>(node_, left_removed_);
+	}
 
 
 };
@@ -214,7 +224,11 @@ ProcessType RedBlackTreeBase_<NodeT_, less_c_>::insert_fix_up_(
 
 template <
 	typename ValueT_,
+#	if __cplusplus >= 201103L
 	typename LessThan<RedBlackTreeNode<ValueT_>>::FunctionType& less_c_,
+#	else
+	typename LessThan<RedBlackTreeNode<ValueT_> >::FunctionType& less_c_,
+#	endif
 	typename AllocatorT_,
 	ValidityType need_instance_c_
 >
@@ -264,7 +278,11 @@ struct RedBlackTree_ : RedBlackTreeBase_<ValueT_, less_c_> {
 
 
 
+#	if __cplusplus >= 201103L
 template <typename ValueT_, typename LessThan<RedBlackTreeNode<ValueT_>>::FunctionType& less_c_, typename AllocatorT_>
+#	else
+template <typename ValueT_, typename LessThan<RedBlackTreeNode<ValueT_> >::FunctionType& less_c_, typename AllocatorT_>
+#	endif
 struct RedBlackTree_<ValueT_, less_c_, AllocatorT_, true> {
 };
 
@@ -272,7 +290,11 @@ struct RedBlackTree_<ValueT_, less_c_, AllocatorT_, true> {
 
 template <
 	typename ValueT_,
+#	if __cplusplus >= 201103L
 	typename LessThan<RedBlackTreeNode<ValueT_>>::FunctionType& less_c_ = LessThan<RedBlackTreeNode<ValueT_>>::call,
+#	else
+	typename LessThan<RedBlackTreeNode<ValueT_> >::FunctionType& less_c_ = LessThan<RedBlackTreeNode<ValueT_> >::call,
+#	endif
 	typename AllocatorT_ = Allocator<ValueT_>
 >
 struct RedBlackTree : RedBlackTree_<ValueT_, less_c_, AllocatorT_, NeedInstance<AllocatorT_>::value> {

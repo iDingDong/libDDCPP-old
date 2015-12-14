@@ -9,7 +9,7 @@
 
 #		include "DD_IntegralConstant.hpp"
 #	else
-#		include "DD_And;"
+#		include "DD_And.hpp"
 #		include "DD_IsArithmetic.hpp"
 #		include "DD_IsPointer.hpp"
 #	endif
@@ -29,7 +29,7 @@ struct IsTriviallyDestructible<ObjectT_> : StdBoolConstant<std::is_trivially_des
 };
 #	else
 template <typename ObjectT_>
-struct IsTriviallyDestructible : typename And<IsArithmetic<ObjectT_>, IsPointer<ObjectT_> >::Type {
+struct IsTriviallyDestructible : And<IsArithmetic<ObjectT_>, IsPointer<ObjectT_> >::Type {
 };
 #	endif
 

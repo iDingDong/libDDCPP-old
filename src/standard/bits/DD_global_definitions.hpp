@@ -17,10 +17,6 @@
 #		define DDCPP_DEFAULT_WARNING DD_ON
 #	endif
 
-#	if !defined(DDCPP_VERSION_WARNING)
-#		define DDCPP_VERSION_WARNING DDCPP_DEFAULT_WARNING
-#	endif
-
 #	if !defined(DDCPP_IMPERFECT_REALIZATION_WARNING)
 #		define DDCPP_IMPERFECT_REALIZATION_WARNING DDCPP_DEFAULT_WARNING
 #	endif
@@ -41,8 +37,6 @@
 
 #	if !defined(__cplusplus)
 #		error Compiler should support ISO C++.
-#	elif __cplusplus < 201103L && DDCPP_VERSION_WARNING
-#		warning ISO/IEC 14882:2011 or a later version support is recommended. Define 'DDCPP_VERSION_WARNING' as 'DD_OFF' to ignore this warning.
 #	endif
 
 

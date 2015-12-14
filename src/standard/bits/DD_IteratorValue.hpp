@@ -8,18 +8,26 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename IteratorT_>
-#	if __cplusplus >= 201103L
-using IteratorValue = Value<IteratorT_>;
-#	else
 struct IteratorValue : Value<IteratorT_> {
-}
-#	endif
+};
 
 
 
 DD_TRAIT_MODIFIER(IteratorValue)
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::IteratorValue;
+#	if __cplusplus >= 201103L
+using detail_::IteratorValueType;
+#	endif
 
 
 

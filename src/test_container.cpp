@@ -58,7 +58,7 @@ void test_container() {
 			) {
 				throw "'DD::Vessel' test failed.";
 			}
-
+			DD::swap(another_ves, ves);
 		}
 		if (
 			Test::count != 0

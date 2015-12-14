@@ -19,7 +19,7 @@ DD_NESTED_TYPE_TRAIT(GetNeedInstance_, NeedInstance, FalseType)
 
 
 template <typename ObjectT_>
-struct NeedInstance_ : BoolConstant<DD_MODIFY_TRAIT(GetNeedInstance_, ObjectT_)::value> {
+struct NeedInstance_ : BoolConstant<GetNeedInstance_<ObjectT_>::Type::value> {
 };
 
 

@@ -20,7 +20,6 @@ struct Array : Array<Array<ValueT_, lengths_c_...>, length_c_> {
 
 
 
-
 #	endif
 #	if __cplusplus >= 201103L
 template <typename ValueT_, LengthType length_c_>
@@ -191,7 +190,7 @@ struct Array : ValueTypeNested<ValueT_> {
 		return array;
 	}
 
-	constexpr operator ConstPointerType() const DD_NOEXCEPT {
+	DD_CONSTEXPR operator ConstPointerType() const DD_NOEXCEPT {
 		return array;
 	}
 

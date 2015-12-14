@@ -484,9 +484,9 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
-		::DD::swap(this->m_begin_, other_->m_begin_);
-		::DD::swap(this->m_end_, other_->m_end_);
-		::DD::swap(this->m_storage_end_, other_->m_storage_end_);
+		::DD::swap(this->m_begin_, other_.m_begin_);
+		::DD::swap(this->m_end_, other_.m_end_);
+		::DD::swap(this->m_storage_end_, other_.m_storage_end_);
 	}
 
 
@@ -820,6 +820,12 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 	Vessel(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(tag_, length_, value___) {
 	}
 #	endif
+
+
+	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
+		SuperType::swap(other_);
+	}
 
 
 };

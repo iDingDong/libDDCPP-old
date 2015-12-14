@@ -65,6 +65,12 @@
 #	endif
 
 #	if __cplusplus >= 201103L
+#		define DD_DEFAULT_FUNCTION_TEMPLATE_ARGUMENT(ARG_Expression_) = (ARG_Expression_)
+#	else
+#		define DD_DEFAULT_FUNCTION_TEMPLATE_ARGUMENT(ARG_Expression_)
+#	endif
+
+#	if __cplusplus >= 201103L
 #		define DD_IN_CLASS_INITIALIZE(ARG_Expression_) = ARG_Expression_
 #	else
 #		define DD_IN_CLASS_INITIALIZE(ARG_Expression_)

@@ -21,6 +21,15 @@ struct GetLineProxy_ {
 	LengthType capacity_;
 
 
+#	if __cplusplus < 201103L
+	GetLineProxy_(
+		ValueType& initial_value_,
+		LengthType initial_capacity_
+	) : value_(initial_value_), capacity_(initial_capacity_) {
+	}
+
+
+#	endif
 };
 
 
@@ -36,19 +45,37 @@ struct GetUntilProxy_ {
 	LengthType capacity_;
 
 
+#	if __cplusplus < 201103L
+	GetUntilProxy_(
+		ValueType& initial_value_,
+		CharType initial_delimiter_,
+		LengthType initial_capacity_
+	) : value_(initial_value_), delimiter_(initial_delimiter_), capacity_(initial_capacity_) {
+	}
+
+
+#	endif
 };
 
 
 
 template <typename CharT_>
 GetLineProxy_<CharT_*> get_line(CharT_* buffer_, LengthType capacity_) {
+#	if __cplusplus >= 201103L
 	return GetLineProxy_<CharT_*>{ buffer_, capacity_ };
+#	else
+	return GetLineProxy_<CharT_*>(buffer_, capacity_);
+#	endif
 }
 
 
 template <typename CharT_>
 GetUntilProxy_<CharT_*> get_until(CharT_* buffer_, CharT_ delimiter__, LengthType capacity_) {
+#	if __cplusplus >= 201103L
 	return GetUntilProxy_<CharT_*>{ buffer_, delimiter__, capacity_ };
+#	else
+	return GetUntilProxy_<CharT_*>(buffer_, delimiter__, capacity_);
+#	endif
 }
 
 
@@ -80,14 +107,14 @@ struct Scan {
 
 
 	template <typename CharT__>
-	ThisType const& operator ,(GetLineProxy_<CharT__*>&& proxy_) const {
+	ThisType const& operator ,(GetLineProxy_<CharT__*> const& proxy_) const {
 		std::cin.getline(proxy_.value_, proxy_.capacity_);
 		return *this;
 	}
 
 
 	template <typename CharT__>
-	ThisType const& operator ,(GetUntilProxy_<CharT__*>&& proxy_) const {
+	ThisType const& operator ,(GetUntilProxy_<CharT__*> const& proxy_) const {
 		std::cin.getline(proxy_.value_, proxy_.capacity_, proxy_.delimiter_);
 		return *this;
 	}

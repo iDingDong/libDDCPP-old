@@ -4,11 +4,9 @@
 
 
 
-#	if __cplusplus >= 201103L
 #		include "DD_MemberFunctionCheck.hpp"
+#	if __cplusplus >= 201103L
 #		include "DD_move.hpp"
-#	else
-#		include "DD_global_definitions.hpp"
 #	endif
 
 
@@ -30,7 +28,7 @@ struct Swap_ {
 		object_1___ = ::DD::move(object_2___);
 		object_2___ = ::DD::move(temp___);
 #	else
-		ObjectT_ temp___(object_1___);
+		ObjectT__ temp___(object_1___);
 		object_1___ = object_2___;
 		object_2___ = temp___;
 #	endif
