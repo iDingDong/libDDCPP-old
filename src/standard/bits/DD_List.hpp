@@ -161,6 +161,12 @@ struct ListBase_<void> {
 
 
 	protected:
+	ProcessType link_(Iterator iterator_1_, Iterator iterator_2_) DD_NOEXCEPT {
+		::DD::detail_::link_list_node_(iterator_1_, iterator_2_);
+	}
+
+
+	protected:
 	ProcessType enlink_(Iterator position_, Iterator new_node_) DD_NOEXCEPT {
 		::DD::detail_::enlink_list_node_(position_, new_node_);
 	}
@@ -483,7 +489,8 @@ struct List_ : ListBase_<ValueT_> {
 	template <typename... ArgumentsT__>
 	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(nil_tag) {
 		try {
-			clone_initialize_(BatchRange<ValueType>(forward<ArgumentsT__>(arguments___)...));
+			BatchRange<ValueType> batcher_ = { ValueType(forward<ArgumentsT__>(arguments___)...), length_ };
+			clone_initialize_(batcher_);
 		} catch(...) {
 			destruct();
 			throw;
@@ -588,13 +595,13 @@ struct List_ : ListBase_<ValueT_> {
 		Iterator current_(SuperType::sentry_());
 		try {
 			for (; begin___ != end___; ++current_, ++begin___) {
-				::DD::detail_::link_list_node_(current_, create_node_(*begin___));
+				SuperType::link_(current_, create_node_(*begin___));
 			}
 		} catch(...) {
-			link_list_node_(current_, SuperType::sentry_());
+			SuperType::link_(current_, SuperType::sentry_());
 			throw;
 		}
-		link_list_node_(current_, SuperType::sentry_());
+		SuperType::link_(current_, SuperType::sentry_());
 	}
 
 	private:

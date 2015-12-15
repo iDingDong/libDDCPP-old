@@ -69,10 +69,16 @@ void test_container() {
 	}
 	{
 		{
-			DD::List<Test> lst;
-			lst.push_back(Test());
+			DD::List<Test> lst_1{ Test(), Test() };
+			lst_1.push_back(Test());
 			if (
-				Test::count != 1
+				Test::count != 3
+			) {
+				throw "'DD::List' test failed.";
+			}
+			DD::List<Test> lst_2(DD::batch_tag, 3);
+			if (
+				Test::count != 6
 			) {
 				throw "'DD::List' test failed.";
 			}

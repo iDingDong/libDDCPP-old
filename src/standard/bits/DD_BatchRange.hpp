@@ -68,7 +68,7 @@ struct BatchIterator :
 
 
 	public:
-	PointerType DD_CONSTEXPR get_offset() const DD_NOEXCEPT {
+	DifferenceType DD_CONSTEXPR get_offset() const DD_NOEXCEPT {
 		return m_offset_;
 	}
 
@@ -175,23 +175,23 @@ struct BatchRange {
 
 	public:
 	Iterator DD_CONSTEXPR begin() DD_NOEXCEPT_AS(Iterator(value)) {
-		Iterator(value);
+		return Iterator(value);
 	}
 
 	public:
 	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT_AS(Iterator(value)) {
-		ConstIterator(value);
+		return ConstIterator(value);
 	}
 
 
 	public:
 	Iterator DD_CONSTEXPR end() DD_NOEXCEPT_AS(Iterator(value, length)) {
-		Iterator(value, length);
+		return Iterator(value, length);
 	}
 
 	public:
 	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT_AS(Iterator(value, length)) {
-		ConstIterator(value, length);
+		return ConstIterator(value, length);
 	}
 
 
