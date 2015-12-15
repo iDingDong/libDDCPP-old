@@ -631,6 +631,14 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 
+	public:
+	static ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().SuperType::splice(position_ DD_COMMA begin_ DD_COMMA end_)
+	) {
+		SuperType::splice(position_, begin_, end_);
+	}
+
+
 	private:
 #	if __cplusplus >= 201103L
 	template <typename... ArgumentsT__>
@@ -654,6 +662,26 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	private:
+	template <typename UndirectionalIteratorT__>
+	static ProcessType created_range_between_(
+		Iterator head_,
+		Iterator tail_,
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) {
+		try {
+			for (; begin___ != end___; ++head_, ++begin___) {
+				SuperType::link_(head_, create_node_(*begin___));
+			}
+		} catch(...) {
+			SuperType::link_(head_, tail_);
+			throw;
+		}
+		SuperType::link_(head_, tail_);
+	}
+
+
+	private:
 	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
 		AllocatorType::destruct(target_.unguarded_get_pointer());
 		AllocatorType::Basic::deallocate(target_.get_node_pointer(), sizeof(NodeType));
@@ -662,17 +690,13 @@ struct List_ : ListBase_<ValueT_> {
 
 	private:
 	template <typename UndirectionalIteratorT__>
-	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
-		Iterator current_(SuperType::sentry_());
-		try {
-			for (; begin___ != end___; ++current_, ++begin___) {
-				SuperType::link_(current_, create_node_(*begin___));
-			}
-		} catch(...) {
-			SuperType::link_(current_, SuperType::sentry_());
-			throw;
-		}
-		SuperType::link_(current_, SuperType::sentry_());
+	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(created_range_between_(
+		Iterator(fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
+		Iterator(fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
+		begin___ DD_COMMA
+		end___
+	)) {
+		created_range_between_(Iterator(SuperType::sentry_()), Iterator(SuperType::sentry_()), begin___, end___);
 	}
 
 	private:
@@ -765,10 +789,21 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	static ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
-		fabricate<ThisType>().SuperType::splice(position_ DD_COMMA begin_ DD_COMMA end_)
+	template <typename UndirectionalIteratorT__>
+	static ProcessType insert_range(
+		Iterator position_,
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(created_range_between_(::DD::previous(position_) DD_COMMA position_ DD_COMMA begin___ DD_COMMA end___)) {
+		created_range_between_(::DD::previous(position_), position_, begin___, end___);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	static ProcessType insert_range(Iterator position_, UndirectionalRangeT__& begin___) DD_NOEXCEPT_AS(
+		insert_range(position_ DD_COMMA DD_SPLIT_RANGE(begin___))
 	) {
-		SuperType::splice(position_, begin_, end_);
+		insert_range(position_, DD_SPLIT_RANGE(begin___));
 	}
 
 

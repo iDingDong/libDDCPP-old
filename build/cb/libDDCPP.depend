@@ -1171,7 +1171,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450175515 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450199368 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1185,8 +1185,8 @@
 
 1444577957 d:\develop\repositories\libddcpp\src\standard\bits\dd_container_definitions.hpp
 
-1450175454 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
-	"DD_ValueTypeNested.hpp"
+1450193117 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
+	"DD_ValueStorage.hpp"
 	"DD_swap.hpp"
 
 1450174206 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
@@ -1318,7 +1318,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450174437 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450192338 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1488,4 +1488,7 @@
 	"DD_BinaryOperators.hpp"
 	"DD_IteratorCatagory.hpp"
 	"DD_address_of.hpp"
+
+1450192969 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuestorage.hpp
+	"DD_ValueTypeNested.hpp"
 
