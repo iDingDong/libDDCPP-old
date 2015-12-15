@@ -138,6 +138,14 @@ void test_container() {
 			) {
 				throw "'DD::List' test failed.";
 			}
+
+			lst_1.splice(lst_1.end(), lst_4.begin(), lst_4.end());
+			if (
+				lst_1.get_length() != 4 ||
+				Test::count != 8
+			) {
+				throw "'DD::List' test failed.";
+			}
 		}
 		if (
 			Test::count != 0

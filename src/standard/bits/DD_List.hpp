@@ -765,6 +765,14 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
+	static ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().SuperType::splice(position_ DD_COMMA begin_ DD_COMMA end_)
+	) {
+		SuperType::splice(position_, begin_, end_);
+	}
+
+
+	public:
 	static ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::delink_(position_)) {
 		SuperType::delink_(position_);
 		destroy_node_(position_);
