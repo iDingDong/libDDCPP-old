@@ -156,7 +156,7 @@ struct ListBase_<void> {
 
 	protected:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
-		::DD::swap(m_sentry_, other_.m_sentry_);
+		sentry_().swap_target(other_.sentry_());
 	}
 
 
@@ -240,7 +240,7 @@ struct ListBase_ : ListBase_<void> {
 
 	protected:
 	DD_ALIAS(Iterator, ListIterator<ValueType>);
-	DD_ALIAS(ConstIterator, ListIterator<ValueType const>);
+	DD_ALIAS(ConstIterator, ListIterator<ValueConstType>);
 	DD_ITERATOR_NESTED
 
 

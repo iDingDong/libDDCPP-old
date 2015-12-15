@@ -57,39 +57,52 @@ inline ProcessType link_list_node_(ListNode<void>* node_1_, ListNode<void>* node
 }
 
 
+inline ProcessType fit_previous_list_node_(ListNode<void>* node_) DD_NOEXCEPT {
+	node_->previous->next = node_;
+}
+
+
+inline ProcessType fit_next_list_node_(ListNode<void>* node_) DD_NOEXCEPT {
+	node_->next->previous = node_;
+}
+
+
+inline ProcessType fit_list_node_(ListNode<void>* node_) DD_NOEXCEPT {
+	fit_previous_list_node_(node_);
+	fit_next_list_node_(node_);
+}
+
+inline ProcessType fit_list_node_(ListNode<void>* first_, ListNode<void>* last_) DD_NOEXCEPT {
+	fit_previous_list_node_(first_);
+	fit_next_list_node_(last_);
+}
+
+
 inline ProcessType enlink_list_node_(ListNode<void>* position_, ListNode<void>* node_) DD_NOEXCEPT {
-	node_->previous = position_->previous;
-	node_->next = position_;
-	position_->previous->next = node_;
-	position_->previous = node_;
+	link_list_node_(position_->previous, node_);
+	link_list_node_(node_, position_);
 }
 
 inline ProcessType enlink_list_node_(ListNode<void>* position_, ListNode<void>* first_, ListNode<void>* last_) DD_NOEXCEPT {
-	first_->previous = position_->previous;
-	last_->next = position_;
-	position_->previous->next = first_;
-	position_->previous = last_;
+	link_list_node_(position_->previous, first_);
+	link_list_node_(last_, position_);
 }
 
 
 inline ProcessType delink_list_node_(ListNode<void>* node_) DD_NOEXCEPT {
-	node_->previous->next = node_->next;
-	node_->next->previous = node_->previous;
+	link_list_node_(node_->previous, node_->next);
 }
 
 inline ProcessType delink_list_node_(ListNode<void>* first_, ListNode<void>* last_) DD_NOEXCEPT {
-	first_->previous->next = last_->next;
-	last_->next->previous = first_->previous;
+	link_list_node_(first_->previous, last_->next);
 }
 
 
 inline ProcessType swap_list_node_(ListNode<void>* node_1_, ListNode<void>* node_2_) DD_NOEXCEPT {
 	::DD::swap(node_1_->previous, node_2_->previous);
 	::DD::swap(node_1_->next, node_2_->next);
-	node_1_->previous->next = node_1_;
-	node_1_->next->previous = node_1_;
-	node_2_->previous->next = node_2_;
-	node_2_->next->previous = node_2_;
+	fit_list_node_(node_1_);
+	fit_list_node_(node_2_);
 }
 
 inline ProcessType swap_list_node_(
@@ -100,10 +113,8 @@ inline ProcessType swap_list_node_(
 ) DD_NOEXCEPT {
 	::DD::swap(first_1_->previous, first_2_->previous);
 	::DD::swap(last_1_->next, last_2_->next);
-	first_1_->previous->next = first_1_;
-	last_1_->next->previous = last_1_;
-	first_2_->previous->next = first_2_;
-	last_2_->next->previous = last_2_;
+	fit_list_node_(first_1_, last_1_);
+	fit_list_node_(first_2_, last_2_);
 }
 
 

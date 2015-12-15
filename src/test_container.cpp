@@ -131,6 +131,13 @@ void test_container() {
 			) {
 				throw "'DD::List' test failed.";
 			}
+			DD::swap(lst_1, lst_4);
+			if (
+				lst_4.get_length() != 3 ||
+				Test::count != 8
+			) {
+				throw "'DD::List' test failed.";
+			}
 		}
 		if (
 			Test::count != 0

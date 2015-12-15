@@ -5,7 +5,6 @@
 
 
 #	include "DD_SpecificTypeNested.hpp"
-#	include "DD_RemoveConst.hpp"
 #	include "DD_IteratorCatagory.hpp"
 #	include "DD_EqualityComparable.hpp"
 #	include "DD_address_of.hpp"
@@ -158,7 +157,7 @@ struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
-	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<DD_MODIFY_TRAIT(RemoveConst, ValueT_)>)
+	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>)
 
 
 #	if __cplusplus >= 201103L
