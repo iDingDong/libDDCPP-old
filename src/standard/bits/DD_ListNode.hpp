@@ -1,28 +1,15 @@
 //	standard/bits/DD_ListNode.hpp
-#ifndef DD_LIST_NODE_HPP_
-#	define DD_LIST_NODE_HPP_ 1
+#ifndef DD_LIST_NODE_HPP_INCLUDED_
+#	define DD_LIST_NODE_HPP_INCLUDED_ 1
 
 
 
-#	include "DD_ValueTypeNested.hpp"
+#	include "DD_ValueStorage.hpp"
 #	include "DD_swap.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT_>
-struct ValueStorage {
-	DD_ALIAS(ThisType, ValueStorage<ValueT_>);
-	DD_VALUE_TYPE_NESTED(ValueT_)
-
-
-	ValueType value;
-
-
-};
-
-
-
 template <typename ValueT_>
 struct ListNode;
 

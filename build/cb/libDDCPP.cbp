@@ -203,9 +203,12 @@
 		<Unit filename="../../src/standard/bits/DD_TypeInfo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_TypeList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Uncopiable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_UndirectionalListIterator.hpp" />
+		<Unit filename="../../src/standard/bits/DD_UndirectionalListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UnusedIgnorer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Value.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ValueStorage.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ValueTypeNested.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Variant.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Vessel.hpp" />
