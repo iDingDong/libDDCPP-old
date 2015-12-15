@@ -385,10 +385,11 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1450099999 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
+1450162103 d:\develop\repositories\libddcpp\src\standard\bits\dd_length_difference.hpp
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_IteratorDifference.hpp"
 	"DD_Iterator.hpp"
+	"DD_next.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratordifference.hpp
 	"DD_NestedTypeCheck.hpp"
@@ -985,7 +986,7 @@
 	<type_traits>
 	"DD_IntegralConstant.hpp"
 
-1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
+1450161632 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_global_definitions.hpp"
 
 1444149044 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
@@ -1170,24 +1171,26 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450116409 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450164086 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
+	"DD_IteratorReverse.hpp"
 	"DD_forward.hpp"
 	"DD_address_of.hpp"
 	"DD_Allocator.hpp"
-	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
+	"DD_BatchRange.hpp"
 	"DD_ListIterator.hpp"
 	"DD_length_difference.hpp"
 
 1444577957 d:\develop\repositories\libddcpp\src\standard\bits\dd_container_definitions.hpp
 
-1450109259 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
+1450149865 d:\develop\repositories\libddcpp\src\standard\bits\dd_listnode.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_swap.hpp"
 
-1450116369 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+1450164028 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+	"DD_SpecificTypeNested.hpp"
 	"DD_RemoveConst.hpp"
 	"DD_IteratorCatagory.hpp"
 	"DD_EqualityComparable.hpp"
@@ -1475,4 +1478,15 @@
 
 1449939512 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
 	"DD_Range.hpp"
+
+1450161307 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
+	"DD_global_definitions.hpp"
+
+1450163836 d:\develop\repositories\libddcpp\src\standard\bits\dd_batchrange.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_RemoveConst.hpp"
+	"DD_Comparable.hpp"
+	"DD_BinaryOperators.hpp"
+	"DD_IteratorCatagory.hpp"
+	"DD_address_of.hpp"
 

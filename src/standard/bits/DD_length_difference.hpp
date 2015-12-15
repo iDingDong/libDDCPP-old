@@ -7,6 +7,7 @@
 #	include "DD_IsFreeAccessIterator.hpp"
 #	include "DD_IteratorDifference.hpp"
 #	include "DD_Iterator.hpp"
+#	include "DD_next.hpp"
 
 
 
@@ -18,16 +19,20 @@ struct LengthDifference_ {
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
 	) DD_NOEXCEPT_AS(++begin___ != end___) {
-#	if __cplusplus >= 201103L
-		auto result_ = IteratorDifference<UndirectionalIteratorT__>();
-#	else
+#	if __cplusplus < 201103L || __cplusplus >= 201402L
+#		if __cplusplus >= 201402L
+		auto result_ = IteratorDifferenceType<UndirectionalIteratorT__>();
+#		else
 		typedef typename IteratorDifference<UndirectionalIteratorT__>::Type ResultType_;
 		ResultType_ result_ = ResultType_();
-#	endif
+#		endif
 		for (; begin___ != end___; ++begin___) {
 			++result_;
 		}
 		return result_;
+#	else
+		return begin___ == end___ ? 0 : length_difference(::DD::next(begin___), end___) + 1;
+#	endif
 	}
 
 

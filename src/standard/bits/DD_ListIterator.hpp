@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_SpecificTypeNested.hpp"
 #	include "DD_RemoveConst.hpp"
 #	include "DD_IteratorCatagory.hpp"
 #	include "DD_EqualityComparable.hpp"
@@ -37,12 +38,7 @@ struct ListIterator<void> : EqualityComparable<ListIterator<void> > {
 	DD_ALIAS(ConstPointerType, void);
 
 	public:
-	DD_ALIAS(NodeType, ListNode<void>);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
+	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>)
 
 	public:
 	DD_ALIAS(CatagoryType, BidirectionalIterator);
@@ -162,12 +158,7 @@ struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
-	DD_ALIAS(NodeType, ListNode<DD_MODIFY_TRAIT(RemoveConst, ValueT_)>);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
+	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<DD_MODIFY_TRAIT(RemoveConst, ValueT_)>)
 
 
 #	if __cplusplus >= 201103L
@@ -300,35 +291,45 @@ struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT
 
 
 template <typename ValueT_>
-inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> new_node_) {
+inline ProcessType link_list_node_(ListIterator<ValueT_> iterator_1_, ListIterator<ValueT_> iterator_2_) DD_NOEXCEPT {
+	::DD::detail_::link_list_node_(iterator_1_.get_node_pointer(), iterator_2_.get_node_pointer());
+}
+
+
+template <typename ValueT_>
+inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> new_node_) DD_NOEXCEPT {
 	::DD::detail_::enlink_list_node_(position_.get_node_pointer(), new_node_.get_node_pointer());
 }
 
 template <typename ValueT_>
-inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) {
+inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
 	::DD::detail_::enlink_list_node_(position_.get_node_pointer(), first_.get_node_pointer(), last_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType delink_list_node_(ListIterator<ValueT_> node_) {
+inline ProcessType delink_list_node_(ListIterator<ValueT_> node_) DD_NOEXCEPT {
 	::DD::detail_::delink_list_node_(node_.get_node_pointer());
 }
 
 template <typename ValueT_>
-inline ProcessType delink_list_node_(ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) {
+inline ProcessType delink_list_node_(ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
 	::DD::detail_::delink_list_node_(first_.get_node_pointer(), last_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType unguarded_splice_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) {
+inline ProcessType unguarded_splice_list_node_(
+	ListIterator<ValueT_> position_,
+	ListIterator<ValueT_> begin_,
+	ListIterator<ValueT_> end_
+) DD_NOEXCEPT {
 	::DD::detail_::splice_list_node_(position_.get_node_pointer(), begin_.get_node_pointer(), ::DD::previous(end_).get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType splice_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) {
+inline ProcessType splice_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) DD_NOEXCEPT {
 	if (begin_ != end_) {
 		unguarded_splice_list_node_(position_, begin_, end_);
 	}

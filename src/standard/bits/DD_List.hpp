@@ -6,13 +6,14 @@
 
 #	include "DD_IteratorNested.hpp"
 #	include "DD_NeedInstance.hpp"
+#	include "DD_IteratorReverse.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_address_of.hpp"
 #	include "DD_Allocator.hpp"
-#	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
+#	include "DD_BatchRange.hpp"
 #	include "DD_ListIterator.hpp"
 #	include "DD_length_difference.hpp"
 
@@ -38,12 +39,11 @@ struct ListBase_<void> {
 	DD_ALIAS(ConstPointerType, void);
 
 	protected:
-	DD_ALIAS(NodeType, ListNode<ValueType>);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
+	DD_ALIAS(SizeType, ::DD::SizeType);
+	DD_ALIAS(LengthType, ::DD::LengthType);
+
+	protected:
+	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>);
 
 
 	protected:
@@ -126,10 +126,31 @@ struct ListBase_<void> {
 	}
 
 
+	public:
+	LengthType get_length() const DD_NOEXCEPT {
+		return ::DD::length_difference(begin(), end());
+	}
+
+
+	public:
+	ValidityType DD_CONSTEXPR is_empty() const DD_NOEXCEPT {
+		return begin() == end();
+	}
+
+
+	public:
+	ValidityType check_length(LengthType maximum_) {
+		LengthType result_ = LengthType();
+		for (Iterator current_ = begin(); result_ < maximum_ && current_ != end(); ++current_) {
+			++result_;
+		}
+		return result_;
+	}
+
+
 	protected:
 	ProcessType reset_() DD_NOEXCEPT {
-		m_sentry_.previous = ::DD::address_of(m_sentry_);
-		m_sentry_.next = ::DD::address_of(m_sentry_);
+		::DD::detail_::link_list_node_(sentry_(), sentry_());
 	}
 
 
@@ -187,12 +208,12 @@ struct ListBase_ : ListBase_<void> {
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	protected:
-	DD_ALIAS(NodeType, ListNode<ValueType>);
-	DD_ALIAS(NodeConstType, NodeType const);
-	DD_ALIAS(NodeReferenceType, NodeType&);
-	DD_ALIAS(NodeConstReferenceType, NodeConstType&);
-	DD_ALIAS(NodePointerType, NodeType*);
-	DD_ALIAS(NodeConstPointerType, NodeConstType*);
+	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>);
+
+
+	protected:
+	DD_INHERIT_ALIAS(SizeType);
+	DD_INHERIT_ALIAS(LengthType);
 
 
 	protected:
@@ -326,6 +347,10 @@ struct List_ : ListBase_<ValueT_> {
 	DD_INHERIT_TEMPLATE_ALIAS(PointerType);
 	DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
 
+	protected:
+	DD_INHERIT_TEMPLATE_ALIAS(SizeType);
+	DD_INHERIT_TEMPLATE_ALIAS(LengthType);
+
 	public:
 	DD_INHERIT_TEMPLATE_ALIAS(NodeType);
 	DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
@@ -429,7 +454,12 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	List_(ThisType const& origin_) : SuperType(nil_tag) {
-		clone_initialize_(origin_);
+		try {
+			clone_initialize_(origin_);
+		} catch(...) {
+			destruct();
+			throw;
+		}
 	}
 
 	public:
@@ -437,6 +467,32 @@ struct List_ : ListBase_<ValueT_> {
 		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
 		origin_.reset_();
 	}
+
+	public:
+	List_(InitializerList<ValueType> list_) : SuperType(nil_tag) {
+		try {
+			clone_initialize_(list_);
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(nil_tag) {
+		try {
+			clone_initialize_(BatchRange<ValueType>(forward<ArgumentsT__>(arguments___)...));
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
+#	else
+	public:
+	List_(BatchTag tag_, Lenth)
+#	endif
 
 
 	public:
@@ -523,6 +579,44 @@ struct List_ : ListBase_<ValueT_> {
 	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
 		AllocatorType::destruct(target_.unguarded_get_pointer());
 		AllocatorType::Basic::deallocate(target_.get_node_pointer(), sizeof(NodeType));
+	}
+
+
+	private:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+		Iterator current_(SuperType::sentry_());
+		try {
+			for (; begin___ != end___; ++current_, ++begin___) {
+				::DD::detail_::link_list_node_(current_, create_node_(*begin___));
+			}
+		} catch(...) {
+			link_list_node_(current_, SuperType::sentry_());
+			throw;
+		}
+		link_list_node_(current_, SuperType::sentry_());
+	}
+
+	private:
+	template <typename UndirectionalRangeT__>
+	ProcessType clone_initialize_(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().clone_initialize_(DD_SPLIT_RANGE(range___))
+	) {
+		clone_initialize_(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+		destruct();
+		clone_initialize_(begin___, end___);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType clone(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
+		clone(DD_SPLIT_RANGE(range___));
 	}
 
 
