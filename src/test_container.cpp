@@ -109,6 +109,28 @@ void test_container() {
 			) {
 				throw "'DD::List' test failed.";
 			}
+
+			DD::List<Test> lst_4 = lst_1;
+			if (
+				lst_4.get_length() != 3 ||
+				Test::count != 10
+			) {
+				throw "'DD::List' test failed.";
+			}
+			lst_4 = lst_3;
+			if (
+				lst_4.get_length() != 2 ||
+				Test::count != 9
+			) {
+				throw "'DD::List' test failed.";
+			}
+			lst_4 = DD::Vessel<Test>(DD::batch_tag, 1);
+			if (
+				lst_4.get_length() != 1 ||
+				Test::count != 8
+			) {
+				throw "'DD::List' test failed.";
+			}
 		}
 		if (
 			Test::count != 0

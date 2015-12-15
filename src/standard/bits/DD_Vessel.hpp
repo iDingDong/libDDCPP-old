@@ -839,6 +839,10 @@ struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> 
 	}
 
 
+	public:
+	using SuperType::operator =;
+
+
 };
 
 

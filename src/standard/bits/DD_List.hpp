@@ -625,6 +625,12 @@ struct List_ : ListBase_<ValueT_> {
 	DD_REVERSE_RANGE_NESTED
 
 
+	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
+		SuperType::swap(other_);
+	}
+
+
 	private:
 #	if __cplusplus >= 201103L
 	template <typename... ArgumentsT__>
@@ -796,6 +802,26 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 
+	public:
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(origin_)) {
+		clone(origin_);
+		return *this;
+	}
+
+	public:
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().swap(origin_)) {
+		swap(origin_);
+		return *this;
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ThisType& operator =(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(range___)) {
+		clone(range___);
+		return *this;
+	}
+
+
 };
 
 
@@ -848,6 +874,10 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
 		SuperType::swap(other_);
 	}
+
+
+	public:
+	using SuperType::operator =;
 
 
 };
