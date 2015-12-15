@@ -161,14 +161,30 @@ struct ListBase_<void> {
 
 
 	protected:
-	ProcessType link_(Iterator iterator_1_, Iterator iterator_2_) DD_NOEXCEPT {
+	static ProcessType link_(Iterator iterator_1_, Iterator iterator_2_) DD_NOEXCEPT {
 		::DD::detail_::link_list_node_(iterator_1_, iterator_2_);
 	}
 
 
 	protected:
-	ProcessType enlink_(Iterator position_, Iterator new_node_) DD_NOEXCEPT {
+	static ProcessType enlink_(Iterator position_, Iterator new_node_) DD_NOEXCEPT {
 		::DD::detail_::enlink_list_node_(position_, new_node_);
+	}
+
+	protected:
+	static ProcessType enlink_(Iterator position_, Iterator first_, Iterator last_) DD_NOEXCEPT {
+		::DD::detail_::enlink_list_node_(position_, first_, last_);
+	}
+
+
+	protected:
+	static ProcessType delink_(Iterator target_) DD_NOEXCEPT {
+		::DD::detail_::delink_list_node_(target_);
+	}
+
+	protected:
+	static ProcessType delink_(Iterator first_, Iterator last_) DD_NOEXCEPT {
+		::DD::detail_::delink_list_node_(first_, last_);
 	}
 
 
@@ -415,6 +431,14 @@ struct List_ : ListBase_<ValueT_> {
 
 
 		public:
+		ValidityType DD_CONSTEXPR operator ==(ThisType const& other_) const DD_NOEXCEPT_AS(static_cast<ValidityType>(
+			static_cast<SuperType const&>(fabricate<ThisType const>()) == static_cast<SuperType const&>(other_)
+		)) {
+			return static_cast<SuperType const&>(*this) == static_cast<SuperType const&>(other_);
+		}
+
+
+		public:
 		ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(fabricate<ThisType>())) {
 			++static_cast<SuperType&>(*this);
 			return *this;
@@ -484,13 +508,34 @@ struct List_ : ListBase_<ValueT_> {
 		}
 	}
 
+	public:
+	template <typename UndirectionalIteratorT__>
+	List_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(nil_tag) {
+		try {
+			clone_initialize_(begin___, end___);
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	List_(UndirectionalRangeT__ const& range___) : SuperType(nil_tag) {
+		try {
+			clone_initialize_(range___);
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
+
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
 	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(nil_tag) {
 		try {
-			BatchRange<ValueType> batcher_ = { ValueType(forward<ArgumentsT__>(arguments___)...), length_ };
-			clone_initialize_(batcher_);
+			clone_initialize_(BatchRange<ValueType>{ ValueType(forward<ArgumentsT__>(arguments___)...), length_ });
 		} catch(...) {
 			destruct();
 			throw;
@@ -498,7 +543,27 @@ struct List_ : ListBase_<ValueT_> {
 	}
 #	else
 	public:
-	List_(BatchTag tag_, Lenth)
+	List_(BatchTag tag_, LengthType length_) : SuperType(nil_tag) {
+		try {
+			BatchRange<ValueType> batcher_ = { ValueType(), length_ };
+			clone_initialize_(batcher_);
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
+
+	public:
+	template <typename ValueT__>
+	List_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(nil_tag) {
+		try {
+			BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
+			clone_initialize_(batcher_);
+		} catch(...) {
+			destruct();
+			throw;
+		}
+	}
 #	endif
 
 
@@ -606,7 +671,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	private:
 	template <typename UndirectionalRangeT__>
-	ProcessType clone_initialize_(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+	ProcessType clone_initialize_(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
 		fabricate<ThisType>().clone_initialize_(DD_SPLIT_RANGE(range___))
 	) {
 		clone_initialize_(DD_SPLIT_RANGE(range___));
@@ -622,7 +687,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType clone(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
+	ProcessType clone(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
 		clone(DD_SPLIT_RANGE(range___));
 	}
 
@@ -674,23 +739,46 @@ struct List_ : ListBase_<ValueT_> {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	ProcessType emplace(Iterator position_, ArgumentsT__&&... arguments___) {
+	static ProcessType emplace(Iterator position_, ArgumentsT__&&... arguments___) {
 		SuperType::enlink_(position_, create_node_(::DD::forward<ArgumentsT__>(arguments___)...));
 	}
 
 
 	public:
 	template <typename ValueT__>
-	ProcessType insert(Iterator position_, ValueT__&& value___) {
+	static ProcessType insert(Iterator position_, ValueT__&& value___) {
 		emplace(position_, forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
-	ProcessType insert(Iterator position_, ValueT__ const& value___) {
+	static ProcessType insert(Iterator position_, ValueT__ const& value___) {
 		SuperType::enlink_(position_, create_node_(value___));
 	}
 #	endif
+
+
+	public:
+	static ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::delink_(position_)) {
+		SuperType::delink_(position_);
+		destroy_node_(position_);
+	}
+
+
+	public:
+	static ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		fabricate<ThisType>().SuperType::delink_(begin_ DD_COMMA --end_)
+	) {
+		if (begin_ != end_) {
+			SuperType::delink_(begin_, ::DD::previous(end_));
+			for (; ; ) {
+				destroy_node_(begin_++);
+				if (begin_ == end_) {
+					break;
+				}
+			}
+		}
+	}
 
 
 	public:
@@ -722,6 +810,10 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	DD_ALIAS(SuperType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA NeedInstance<AllocatorT_>::value>);
 	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_>);
 
+	public:
+	DD_INHERIT_TEMPLATE_ALIAS(SizeType);
+	DD_INHERIT_TEMPLATE_ALIAS(LengthType);
+
 
 #	if __cplusplus >= 201103L
 	public:
@@ -731,16 +823,31 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 	List() {
 	}
 
-	//public:
-	//template <typename UndirectionalIteratorT__>
-	//List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
-	//}
+	public:
+	template <typename UndirectionalIteratorT__>
+	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
+	}
 
-	//public:
-	//template <typename UndirectionalRangeT__>
-	//List(UndirectionalRangeT__& range___) : SuperType(range___) {
-	//}
+	public:
+	template <typename UndirectionalRangeT__>
+	List(UndirectionalRangeT__& range___) : SuperType(range___) {
+	}
+
+	public:
+	List(BatchTag tag_, LengthType length_) : SuperType(tag_, length_) {
+	}
+
+	public:
+	template <typename ValueT__>
+	List(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(tag_, length_, value___) {
+	}
 #	endif
+
+
+	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
+		SuperType::swap(other_);
+	}
 
 
 };
