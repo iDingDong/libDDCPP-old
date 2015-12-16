@@ -424,7 +424,7 @@ struct List_ : ListBase_<ValueT_> {
 
 		public:
 		ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
-			fabricate<SuperType>().SuperType::swap_target(other_)
+			::DD::fabricate<SuperType>().SuperType::swap_target(other_)
 		) {
 			SuperType::swap_target(other_);
 		}
@@ -432,20 +432,20 @@ struct List_ : ListBase_<ValueT_> {
 
 		public:
 		ValidityType DD_CONSTEXPR operator ==(ThisType const& other_) const DD_NOEXCEPT_AS(static_cast<ValidityType>(
-			static_cast<SuperType const&>(fabricate<ThisType const>()) == static_cast<SuperType const&>(other_)
+			static_cast<SuperType const&>(::DD::fabricate<ThisType const>()) == static_cast<SuperType const&>(other_)
 		)) {
 			return static_cast<SuperType const&>(*this) == static_cast<SuperType const&>(other_);
 		}
 
 
 		public:
-		ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(fabricate<ThisType>())) {
+		ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
 			++static_cast<SuperType&>(*this);
 			return *this;
 		}
 
 		public:
-		ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++fabricate<ThisType>())) {
+		ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++::DD::fabricate<ThisType>())) {
 			ThisType result_(*this);
 			++*this;
 			return result_;
@@ -453,13 +453,13 @@ struct List_ : ListBase_<ValueT_> {
 
 
 		public:
-		ThisType& operator --() DD_NOEXCEPT_AS(--static_cast<SuperType&>(fabricate<ThisType>())) {
+		ThisType& operator --() DD_NOEXCEPT_AS(--static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
 			--static_cast<SuperType&>(*this);
 			return *this;
 		}
 
 		public:
-		ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--fabricate<ThisType>())) {
+		ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--::DD::fabricate<ThisType>())) {
 			ThisType result_(*this);
 			--*this;
 			return result_;
@@ -574,23 +574,23 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	Iterator begin() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::begin())) {
+	Iterator begin() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::begin())) {
 		return Iterator(SuperType::begin());
 	}
 
 	public:
-	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::begin())) {
+	ConstIterator DD_CONSTEXPR begin() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::begin())) {
 		return ConstIterator(SuperType::begin());
 	}
 
 
 	public:
-	Iterator end() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::end())) {
+	Iterator end() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::end())) {
 		return Iterator(SuperType::end());
 	}
 
 	public:
-	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::end())) {
+	ConstIterator DD_CONSTEXPR end() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::end())) {
 		return ConstIterator(SuperType::end());
 	}
 
@@ -600,23 +600,49 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	Iterator rbegin() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::rbegin())) {
+	ReferenceType front() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::fabricate<ThisType>().begin())) {
+		return *begin();
+	}
+
+	public:
+	ConstReferenceType front() const DD_NOEXCEPT_AS(
+		static_cast<ConstReferenceType>(*::DD::fabricate<ThisType const>().begin())
+	) {
+		return *begin();
+	}
+
+
+	public:
+	ReferenceType back() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::previous(::DD::fabricate<ThisType>().end()))) {
+		return *::DD::previous(end());
+	}
+
+	public:
+	ConstReferenceType back() const DD_NOEXCEPT_AS(
+		static_cast<ConstReferenceType>(*::DD::previous(::DD::fabricate<ThisType const>().end()))
+	) {
+		return **::DD::previous(end());
+	}
+
+
+	public:
+	Iterator rbegin() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::rbegin())) {
 		return Iterator(SuperType::rbegin());
 	}
 
 	public:
-	ConstIterator DD_CONSTEXPR rbegin() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::rbegin())) {
+	ConstIterator DD_CONSTEXPR rbegin() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::rbegin())) {
 		return ConstIterator(SuperType::rbegin());
 	}
 
 
 	public:
-	Iterator rend() DD_NOEXCEPT_AS(Iterator(fabricate<ThisType>().SuperType::rend())) {
+	Iterator rend() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::rend())) {
 		return Iterator(SuperType::rend());
 	}
 
 	public:
-	ConstIterator DD_CONSTEXPR rend() const DD_NOEXCEPT_AS(ConstIterator(fabricate<ThisType const>().SuperType::rend())) {
+	ConstIterator DD_CONSTEXPR rend() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::rend())) {
 		return ConstIterator(SuperType::rend());
 	}
 
@@ -626,16 +652,56 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::swap(other_)) {
 		SuperType::swap(other_);
 	}
 
 
 	public:
+	ProcessType join_front(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		splice(::DD::fabricate<ThisType>().begin() DD_COMMA begin_ DD_COMMA end_)
+	) {
+		splice(begin(), begin_, end_);
+	}
+
+	public:
+	template <typename ListRangeT__>
+	ProcessType join_front(ListRangeT__& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().join_front(DD_SPLIT_RANGE(range___))
+	) {
+		join_front(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	ProcessType join_back(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		splice(::DD::fabricate<ThisType>().end() DD_COMMA begin_ DD_COMMA end_)
+	) {
+		splice(end(), begin_, end_);
+	}
+
+	public:
+	template <typename ListRangeT__>
+	ProcessType join_back(ListRangeT__& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().join_back(DD_SPLIT_RANGE(range___))
+	) {
+		join_back(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
 	static ProcessType splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
-		fabricate<ThisType>().SuperType::splice(position_ DD_COMMA begin_ DD_COMMA end_)
+		::DD::fabricate<ThisType>().SuperType::splice(position_ DD_COMMA begin_ DD_COMMA end_)
 	) {
 		SuperType::splice(position_, begin_, end_);
+	}
+
+	public:
+	template <typename ListRangeT__>
+	static ProcessType splice(Iterator position_, ListRangeT__& range___) DD_NOEXCEPT_AS(
+		SuperType::splice(position_ DD_COMMA DD_SPLIT_RANGE(range___))
+	) {
+		SuperType::splice(position_, DD_SPLIT_RANGE(range___));
 	}
 
 
@@ -691,8 +757,8 @@ struct List_ : ListBase_<ValueT_> {
 	private:
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(created_range_between_(
-		Iterator(fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
-		Iterator(fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
+		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
+		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
 		begin___ DD_COMMA
 		end___
 	)) {
@@ -702,7 +768,7 @@ struct List_ : ListBase_<ValueT_> {
 	private:
 	template <typename UndirectionalRangeT__>
 	ProcessType clone_initialize_(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
-		fabricate<ThisType>().clone_initialize_(DD_SPLIT_RANGE(range___))
+		::DD::fabricate<ThisType>().clone_initialize_(DD_SPLIT_RANGE(range___))
 	) {
 		clone_initialize_(DD_SPLIT_RANGE(range___));
 	}
@@ -717,7 +783,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType clone(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
+	ProcessType clone(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().clone(DD_SPLIT_RANGE(range___))) {
 		clone(DD_SPLIT_RANGE(range___));
 	}
 
@@ -790,6 +856,40 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_front(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		insert_range(::DD::fabricate<ThisType>().begin() DD_COMMA begin___ DD_COMMA end___)
+	) {
+		insert_range(begin(), begin___, end___);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType concatenate_front(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_front(DD_SPLIT_RANGE(range___))
+	) {
+		concatenate_front(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		insert_range(::DD::fabricate<ThisType>().end() DD_COMMA begin___ DD_COMMA end___)
+	) {
+		insert_range(end(), begin___, end___);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(DD_SPLIT_RANGE(range___))
+	) {
+		concatenate_back(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
 	static ProcessType insert_range(
 		Iterator position_,
 		UndirectionalIteratorT__ begin___,
@@ -808,7 +908,31 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	static ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::delink_(position_)) {
+	ProcessType pop_front() DD_NOEXCEPT_AS(erase(::DD::fabricate<ThisType>().begin())) {
+		erase(begin());
+	}
+
+
+	public:
+	ProcessType pop_back() DD_NOEXCEPT_AS(erase(::DD::previous(::DD::fabricate<ThisType>().end()))) {
+		erase(::DD::previous(end()));
+	}
+
+
+	public:
+	ProcessType trim_front(Iterator end_) DD_NOEXCEPT_AS(erase_range(fabricate<ThisType>().begin(), end_)) {
+		erase_range(begin(), end_);
+	}
+
+
+	public:
+	ProcessType trim_back(Iterator begin_) DD_NOEXCEPT_AS(erase_range(begin_, fabricate<ThisType>().end())) {
+		erase_range(begin_, end());
+	}
+
+
+	public:
+	static ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::delink_(position_)) {
 		SuperType::delink_(position_);
 		destroy_node_(position_);
 	}
@@ -816,7 +940,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	static ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
-		fabricate<ThisType>().SuperType::delink_(begin_ DD_COMMA --end_)
+		::DD::fabricate<ThisType>().SuperType::delink_(begin_ DD_COMMA --end_)
 	) {
 		if (begin_ != end_) {
 			SuperType::delink_(begin_, ::DD::previous(end_));
@@ -846,22 +970,29 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(origin_)) {
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().clone(origin_)) {
 		clone(origin_);
 		return *this;
 	}
 
 	public:
-	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(fabricate<ThisType>().swap(origin_)) {
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().swap(origin_)) {
 		swap(origin_);
 		return *this;
 	}
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ThisType& operator =(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(fabricate<ThisType>().clone(range___)) {
+	ThisType& operator =(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().clone(range___)) {
 		clone(range___);
 		return *this;
+	}
+
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ThisType& operator +=(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().concatenate_back(range___)) {
+		concatenate_back(range___);
 	}
 
 
@@ -914,7 +1045,7 @@ struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
 
 
 	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(fabricate<ThisType>().SuperType::swap(other_)) {
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::swap(other_)) {
 		SuperType::swap(other_);
 	}
 

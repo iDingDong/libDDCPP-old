@@ -7,6 +7,7 @@
 #	include "DD_SpecificTypeNested.hpp"
 #	include "DD_IteratorCatagory.hpp"
 #	include "DD_EqualityComparable.hpp"
+#	include "DD_fabricate.hpp"
 #	include "DD_address_of.hpp"
 #	include "DD_previous.hpp"
 #	include "DD_ListNode.hpp"
