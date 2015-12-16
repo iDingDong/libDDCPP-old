@@ -801,6 +801,19 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	}
 
 
+	public:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().push_back(forward<ValueT__>(value___))) {
+		push_back(forward<ValueT__>(value___));
+	}
+#	else
+	ThisType& operator <<(ValueT__ const& value___) {
+		push_back(value___);
+	}
+#	endif
+
+
 };
 
 
