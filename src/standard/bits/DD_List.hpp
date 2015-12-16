@@ -167,8 +167,9 @@ struct ListBase_<void> {
 
 
 	protected:
-	static ProcessType enlink_(Iterator position_, Iterator new_node_) DD_NOEXCEPT {
-		::DD::detail_::enlink_list_node_(position_, new_node_);
+	static Iterator enlink_(Iterator position_, Iterator node_) DD_NOEXCEPT {
+		::DD::detail_::enlink_list_node_(position_, node_);
+		return node_;
 	}
 
 	protected:
@@ -835,21 +836,21 @@ struct List_ : ListBase_<ValueT_> {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	static ProcessType emplace(Iterator position_, ArgumentsT__&&... arguments___) {
-		SuperType::enlink_(position_, create_node_(::DD::forward<ArgumentsT__>(arguments___)...));
+	static Iterator emplace(Iterator position_, ArgumentsT__&&... arguments___) {
+		return Iterator(SuperType::enlink_(position_, create_node_(::DD::forward<ArgumentsT__>(arguments___)...)));
 	}
 
 
 	public:
 	template <typename ValueT__>
-	static ProcessType insert(Iterator position_, ValueT__&& value___) {
-		emplace(position_, forward<ValueT__>(value___));
+	static Iterator insert(Iterator position_, ValueT__&& value___) {
+		return emplace(position_, forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
-	static ProcessType insert(Iterator position_, ValueT__ const& value___) {
-		SuperType::enlink_(position_, create_node_(value___));
+	static Iterator insert(Iterator position_, ValueT__ const& value___) {
+		return Iterator(SuperType::enlink_(position_, create_node_(value___)));
 	}
 #	endif
 

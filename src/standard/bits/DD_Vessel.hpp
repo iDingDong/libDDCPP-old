@@ -640,12 +640,14 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ProcessType insert(Iterator position_, ValueT__&& value__) {
+	Iterator insert(Iterator position_, ValueT__&& value__) {
 #	else
-	ProcessType insert(Iterator position_, ValueT__ const& value__) {
+	Iterator insert(Iterator position_, ValueT__ const& value__) {
 #	endif
 		if (this->is_full()) {
+			LengthType index_ = position_ - this->begin();
 			reserve();
+			position_ = this->begin() + index_;
 		}
 #	if __cplusplus >= 201103L
 		push_back(forward<ValueT__>(value__));
@@ -653,6 +655,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		push_back(value__);
 #	endif
 		transfer_backward(this->end() - 1, position_);
+		return position_;
 	}
 
 
