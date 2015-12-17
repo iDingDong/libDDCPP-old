@@ -12,7 +12,7 @@
 #	include "DD_length_difference.hpp"
 #	include "DD_release.hpp"
 #	include "DD_AccessDenied.hpp"
-#	include "DD_Allocator.hpp"
+#	include "DD_Allocateable.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
 #	include "DD_BatchRange.hpp"
@@ -37,9 +37,9 @@ DD_STATIC_ASSERT((DDCPP_VESSEL_GROWTH_RATIO) > 1, "'DDCPP_VESSEL_GROWTH_RATIO' s
 
 
 template <typename ValueT_>
-struct VesselBase_ {
+struct Vessel_ {
 	public:
-	DD_ALIAS(ThisType, VesselBase_<ValueT_>);
+	DD_ALIAS(ThisType, Vessel_<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
@@ -59,34 +59,34 @@ struct VesselBase_ {
 
 
 	protected:
-	DD_CONSTEXPR VesselBase_() DD_NOEXCEPT : m_begin_(), m_end_(), m_storage_end_() {
+	DD_CONSTEXPR Vessel_() DD_NOEXCEPT : m_begin_(), m_end_(), m_storage_end_() {
 	}
 
 	protected:
-	DD_DELETE_COPY_CONSTRUCTOR(VesselBase_)
+	DD_DELETE_COPY_CONSTRUCTOR(Vessel_)
 
 	protected:
-	DD_DELETE_MOVE_CONSTRUCTOR(VesselBase_)
+	DD_DELETE_MOVE_CONSTRUCTOR(Vessel_)
 
 	protected:
-	DD_CONSTEXPR VesselBase_(UnguardedTag tag_) DD_NOEXCEPT {
+	DD_CONSTEXPR Vessel_(UnguardedTag tag_) DD_NOEXCEPT {
 	}
 
 	protected:
-	DD_CONSTEXPR VesselBase_(UnguardedTag tag_, PointerType begin_) DD_NOEXCEPT : m_begin_(begin_) {
+	DD_CONSTEXPR Vessel_(UnguardedTag tag_, PointerType begin_) DD_NOEXCEPT : m_begin_(begin_) {
 	}
 
 #	if __cplusplus >= 201103L
 	protected:
-	constexpr VesselBase_(
+	constexpr Vessel_(
 		PointerType begin_,
 		LengthType length_,
 		LengthType capacity_
-	) noexcept : VesselBase_(begin_, begin_ + length_, begin_ + capacity_) {
+	) noexcept : Vessel_(begin_, begin_ + length_, begin_ + capacity_) {
 	}
 #	else
 	protected:
-	VesselBase_(
+	Vessel_(
 		PointerType begin_,
 		LengthType length_,
 		LengthType capacity_
@@ -95,7 +95,7 @@ struct VesselBase_ {
 #	endif
 
 	protected:
-	DD_CONSTEXPR VesselBase_(
+	DD_CONSTEXPR Vessel_(
 		PointerType begin_,
 		PointerType end_,
 		PointerType storage_end_
@@ -105,9 +105,9 @@ struct VesselBase_ {
 
 	protected:
 #	if __cplusplus >= 201103L
-	~VesselBase_() = default;
+	~Vessel_() = default;
 #	else
-	~VesselBase_() throw() {
+	~Vessel_() throw() {
 	}
 #	endif
 
@@ -268,7 +268,7 @@ struct VesselBase_ {
 
 
 	public:
-	DD_DELETE_ALL_ASSIGNMENTS(VesselBase_)
+	DD_DELETE_ALL_ASSIGNMENTS(Vessel_)
 
 
 	public:
@@ -302,11 +302,16 @@ struct VesselBase_ {
 
 
 
-template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
-struct Vessel_ : VesselBase_<ValueT_> {
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
+#	else
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
+#	endif
+struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	public:
-	DD_ALIAS(SuperType, VesselBase_<ValueT_>);
-	DD_ALIAS(ThisType, Vessel_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
+	DD_ALIAS(SuperType, Vessel_<ValueT_>);
+	DD_ALIAS(ThisType, Vessel<ValueT_ DD_COMMA AllocatorT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(AllocatorType, AllocatorT_);
 
@@ -322,25 +327,25 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr Vessel_() = default;
+	constexpr Vessel() = default;
 #	else
-	Vessel_() throw() {
+	Vessel() throw() {
 	}
 #	endif
 
 	public:
-	Vessel_(ThisType const& origin_) : SuperType(unguarded_tag, AllocatorType::allocate(origin_.get_length())) {
+	Vessel(ThisType const& origin_) : SuperType(unguarded_tag, AllocateAgent::allocate(origin_.get_length())) {
 		try {
 			this->m_end_ = copy_construct(origin_, this->begin());
 		} catch (...) {
-			AllocatorType::deallocate(this->m_begin_, this->get_length());
+			AllocateAgent::deallocate(this->m_begin_, this->get_length());
 			throw;
 		}
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr Vessel_(ThisType&& origin_) DD_NOEXCEPT : SuperType(
+	constexpr Vessel(ThisType&& origin_) DD_NOEXCEPT_AS(AllocateAgent()) : SuperType(
 		release(origin_.m_begin_),
 		release(origin_.m_end_),
 		release(origin_.m_storage_end_)
@@ -350,38 +355,46 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	endif
 
 	public:
-	template <typename ValueT__>
-	Vessel_(AllocatorType const& allocator__) {
+	Vessel(AllocatorType const& allocator_) DD_NOEXCEPT_AS(AllocateAgent(allocator_)) : AllocateAgent(allocator_) {
 	}
 
 #	if __cplusplus >= 201103L
 	public:
-	Vessel_(InitializerList<ValueType> initializer_) noexcept(
+	Vessel(InitializerList<ValueType> initializer_) noexcept(
+		noexcept(AllocateAgent()) &&
 		noexcept(::DD::fabricate<ThisType>().clone_initialize_(initializer_))
 	) : SuperType(unguarded_tag) {
 		clone_initialize_(initializer_);
 	}
 
 	public:
-	Vessel_(AllocatorType const& allocator_, InitializerList<ValueType> initializer_) : ThisType(initializer_) {
+	Vessel(AllocatorType const& allocator_, InitializerList<ValueType> initializer_) noexcept(
+		noexcept(AllocateAgent(allocator_)) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(initializer_))
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		clone_initialize_(initializer_);
 	}
 
 #	endif
 	public:
-	DD_CONSTEXPR Vessel_(ReserveTag tag, LengthType length_) DD_NOEXCEPT_AS(
-		SuperType(length_ > 0 ? AllocatorType::allocate(length_) : PointerType() DD_COMMA 0 DD_COMMA length_)
-	) : SuperType(length_ > 0 ? AllocatorType::allocate(length_) : PointerType(), 0, length_) {
+	DD_CONSTEXPR Vessel(
+		ReserveTag tag,
+		LengthType length_
+	) : SuperType(length_ > 0 ? AllocateAgent::allocate(length_) : PointerType(), 0, length_) {
 	}
 
 	public:
-	DD_CONSTEXPR Vessel_(AllocatorType const& allocator_, ReserveTag tag, LengthType length_) DD_NOEXCEPT_AS(
-		SuperType(length_ > 0 ? AllocatorType::allocate(length_) : PointerType() DD_COMMA 0 DD_COMMA length_)
-	) : SuperType(length_ > 0 ? AllocatorType::allocate(length_) : PointerType(), 0, length_) {
+	DD_CONSTEXPR Vessel(
+		AllocatorType const& allocator_,
+		ReserveTag tag,
+		LengthType length_
+	) : AllocateAgent(allocator_), SuperType(length_ > 0 ? AllocateAgent::allocate(length_) : PointerType(), 0, length_) {
 	}
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	Vessel_(UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
+	Vessel(UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent()) &&
 		noexcept(::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA length_))
 	) : SuperType(unguarded_tag) {
 		clone_initialize_(begin___, length_);
@@ -389,83 +402,92 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	Vessel_(AllocatorType const& allocator_, UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA length_)
-	) : SuperType(unguarded_tag) {
+	Vessel(AllocatorType const& allocator_, UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent(allocator_)) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA length_))
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		clone_initialize_(begin___, length_);
 	}
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	Vessel_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA end___)
+	Vessel(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent()) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA end___))
 	) : SuperType(unguarded_tag) {
 		clone_initialize_(begin___, end___);
 	}
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	Vessel_(AllocatorType const& allocator_, UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA end___)
-	) : SuperType(unguarded_tag) {
+	Vessel(AllocatorType const& allocator_, UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent(allocator_)) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(begin___ DD_COMMA end___))
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		clone_initialize_(begin___, end___);
 	}
 
 	public:
 	template <typename UndirectionalRangeT__>
-	Vessel_(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().clone_initialize_(range___)
+	Vessel(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent()) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(range___))
 	) : SuperType(unguarded_tag) {
 		clone_initialize_(range___);
 	}
 
 	public:
 	template <typename UndirectionalRangeT__>
-	Vessel_(AllocatorType const& allocator_, UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().clone_initialize_(range___)
-	) : SuperType(unguarded_tag) {
+	Vessel(AllocatorType const& allocator_, UndirectionalRangeT__ const& range___) DD_NOEXCEPT_IF(
+		noexcept(AllocateAgent(allocator_)) &&
+		noexcept(::DD::fabricate<ThisType>().clone_initialize_(range___))
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		clone_initialize_(range___);
 	}
 
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	Vessel_(BatchTag tag_, LengthType length_, ArgumentsT__ &&... arguments___) DD_NOEXCEPT_IF(
-		noexcept(AllocatorType::allocate(length_)) && noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(arguments___...))
-	) : SuperType(unguarded_tag) {
+	Vessel(BatchTag tag_, LengthType length_, ArgumentsT__ &&... arguments___) : SuperType(unguarded_tag) {
 		clone_initialize_(BatchRange<ValueType>{ ValueType(::DD::forward<ArgumentsT__>(arguments___)...), length_ });
 	}
 
 	public:
 	template <typename... ArgumentsT__>
-	Vessel_(AllocatorType const& allocator_, BatchTag tag_, LengthType length_, ArgumentsT__ &&... arguments___) DD_NOEXCEPT_IF(
-		noexcept(AllocatorType::allocate(length_)) && noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(arguments___...))
-	) : SuperType(unguarded_tag) {
+	Vessel(
+		AllocatorType const& allocator_,
+		BatchTag tag_, LengthType length_,
+		ArgumentsT__ &&... arguments___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		clone_initialize_(BatchRange<ValueType>{ ValueType(::DD::forward<ArgumentsT__>(arguments___)...), length_ });
 	}
 #	else
 	public:
-	Vessel_(BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
+	Vessel(BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
 		BatchRange<ValueType> batcher_ = { ValueType(), length_ };
 		clone_initialize_(batcher_);
 	}
 
 	public:
-	Vessel_(AllocatorType const& allocator_, BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
+	Vessel(AllocatorType const& allocator_, BatchTag tag_, LengthType length_) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		BatchRange<ValueType> batcher_ = { ValueType(), length_ };
 		clone_initialize_(batcher_);
 	}
 
 	public:
 	template <typename ValueT__>
-	Vessel_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
+	Vessel(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
 		BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
 		clone_initialize_(batcher_);
 	}
 
 	public:
 	template <typename ValueT__>
-	Vessel_(AllocatorType const& allocator_, BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
+	Vessel(
+		AllocatorType const& allocator_,
+		BatchTag tag_, LengthType length_,
+		ValueT__ const& value___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
 		BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
 		clone_initialize_(batcher_);
 	}
@@ -473,7 +495,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 
 	public:
-	~Vessel_() DD_NOEXCEPT {
+	~Vessel() DD_NOEXCEPT {
 		destruct_();
 	}
 
@@ -490,9 +512,14 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, LengthType length_) {
 		if (length_ > 0) {
-			this->m_begin_ = AllocatorType::allocate(length_);
+			this->m_begin_ = AllocateAgent::allocate(length_);
+			try {
+				this->m_end_ = ::DD::get_pointer(::DD::copy_construct_length(begin___, this->begin(), length_).second);
+			} catch (...) {
+				AllocateAgent::deallocate(this->m_begin_, length_);
+				throw;
+			}
 			this->m_storage_end_ = this->m_begin_ + length_;
-			this->m_end_ = ::DD::get_pointer(::DD::copy_construct_length(begin___, this->begin(), length_).second);
 		} else {
 			this->m_begin_ = PointerType();
 			this->m_end_ = PointerType();
@@ -536,12 +563,12 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	ProcessType stretch(LengthType new_capacity_) {
-		PointerType temp_begin_ = AllocatorType::allocate(new_capacity_);
+		PointerType temp_begin_ = AllocateAgent::allocate(new_capacity_);
 		PointerType temp_end_;
 		try {
 			temp_end_ = transconstruct(this->m_begin_, this->m_end_, temp_begin_);
 		} catch (...) {
-			AllocatorType::deallocate(temp_begin_, new_capacity_);
+			AllocateAgent::deallocate(temp_begin_, new_capacity_);
 		}
 		destruct_();
 		this->m_begin_ = temp_begin_;
@@ -782,7 +809,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	private:
 	ProcessType destruct_() const DD_NOEXCEPT {
 		::DD::destruct(this->m_begin_, this->m_end_);
-		AllocatorType::deallocate(this->m_begin_, this->get_capacity());
+		AllocateAgent::deallocate(this->m_begin_, this->get_capacity());
 	}
 
 
@@ -828,69 +855,6 @@ struct Vessel_ : VesselBase_<ValueT_> {
 		push_back(value___);
 	}
 #	endif
-
-
-};
-
-
-
-template <typename ValueT_, typename AllocatorT_>
-struct Vessel_<ValueT_, AllocatorT_, true> : VesselBase_<ValueT_> {
-};
-
-
-
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
-struct Vessel : Vessel_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
-	public:
-	DD_ALIAS(SuperType, Vessel_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA NeedInstance<AllocatorT_>::value>);
-	DD_ALIAS(ThisType, Vessel<ValueT_ DD_COMMA AllocatorT_>);
-
-
-#	if __cplusplus >= 201103L
-	using SuperType::SuperType;
-#	else
-	public:
-	Vessel() {
-	}
-
-	public:
-	Vessel(LengthType length_) : SuperType(length_) {
-	}
-
-	public:
-	Vessel(ReverseTag_ tag_, LengthType length_) : SuperType(tag_, length_) {
-	}
-
-	public:
-	template <typename UndirectionalIteratorT_>
-	Vessel(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ end__) : SuperType(begin__, end__) {
-	}
-
-	public:
-	template <typename UndirectionalRangeT_>
-	Vessel(UndirectionalRangeT_& range__) : SuperType(range__) {
-	}
-
-	public:
-	Vessel(BatchTag tag_, LengthType length_) : SuperType(tag_, length_) {
-	}
-
-	public:
-	template <typename ValueT__>
-	Vessel(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(tag_, length_, value___) {
-	}
-#	endif
-
-
-	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::swap(other_)) {
-		SuperType::swap(other_);
-	}
-
-
-	public:
-	using SuperType::operator =;
 
 
 };

@@ -214,7 +214,7 @@ struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, Argum
 
 	public:
 	~Function() noexcept {
-		destruct();
+		destruct_();
 	}
 
 
@@ -239,14 +239,14 @@ struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, Argum
 
 	public:
 	void reset() noexcept {
-		destruct();
+		destruct_();
 		m_holder_ = nil_pointer;
 	}
 
 	public:
 	template <typename FunctionT__>
 	void reset(FunctionT__&& function___) {
-		destruct();
+		destruct_();
 		m_holder_ = make_holder_(forward<FunctionT__>(function___));
 	}
 
@@ -267,7 +267,7 @@ struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, Argum
 
 
 	private:
-	void destruct() noexcept {
+	void destruct_() noexcept {
 		if (is_valid()) {
 			SizeType size_ = m_holder_->get_size_();
 			::DD::destruct(m_holder_);

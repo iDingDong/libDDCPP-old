@@ -999,7 +999,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1450354659 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1450371881 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
@@ -1016,7 +1016,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450350954 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450371966 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1025,7 +1025,7 @@
 	"DD_length_difference.hpp"
 	"DD_release.hpp"
 	"DD_AccessDenied.hpp"
-	"DD_Allocator.hpp"
+	"DD_Allocateable.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
 	"DD_BatchRange.hpp"
