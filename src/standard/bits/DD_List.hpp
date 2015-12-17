@@ -11,7 +11,7 @@
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_address_of.hpp"
-#	include "DD_Allocator.hpp"
+#	include "DD_Allocateable.hpp"
 #	include "DD_InitializerList.hpp"
 #	include "DD_BatchRange.hpp"
 #	include "DD_ListIterator.hpp"
@@ -21,14 +21,14 @@
 
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
-struct ListBase_;
+struct List_;
 
 
 
 template <>
-struct ListBase_<void> {
+struct List_<void> {
 	protected:
-	DD_ALIAS(ThisType, ListBase_<void>);
+	DD_ALIAS(ThisType, List_<void>);
 	DD_ALIAS(ValueType, void);
 
 	protected:
@@ -57,17 +57,17 @@ struct ListBase_<void> {
 
 
 	protected:
-	DD_CONSTEXPR ListBase_() DD_NOEXCEPT : m_sentry_{ ::DD::address_of(m_sentry_), ::DD::address_of(m_sentry_) } {
+	DD_CONSTEXPR List_() DD_NOEXCEPT : m_sentry_{ ::DD::address_of(m_sentry_), ::DD::address_of(m_sentry_) } {
 	}
 
 	protected:
-	DD_DELETE_COPY_CONSTRUCTOR(ListBase_)
+	DD_DELETE_COPY_CONSTRUCTOR(List_)
 
 	protected:
-	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
+	DD_DELETE_MOVE_CONSTRUCTOR(List_)
 
 	protected:
-	ListBase_(UnguardedTag tag_) DD_NOEXCEPT {
+	List_(UnguardedTag tag_) DD_NOEXCEPT {
 	}
 
 
@@ -216,7 +216,7 @@ struct ListBase_<void> {
 
 
 	protected:
-	DD_DELETE_ALL_ASSIGNMENTS(ListBase_)
+	DD_DELETE_ALL_ASSIGNMENTS(List_)
 
 
 };
@@ -224,10 +224,10 @@ struct ListBase_<void> {
 
 
 template <typename ValueT_>
-struct ListBase_ : ListBase_<void> {
+struct List_ : List_<void> {
 	protected:
-	DD_ALIAS(SuperType, ListBase_<void>);
-	DD_ALIAS(ThisType, ListBase_<ValueT_>);
+	DD_ALIAS(SuperType, List_<void>);
+	DD_ALIAS(ThisType, List_<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	protected:
@@ -247,20 +247,20 @@ struct ListBase_ : ListBase_<void> {
 
 	protected:
 #	if __cplusplus >= 201103L
-	constexpr ListBase_() = default;
+	constexpr List_() = default;
 #	else
-	ListBase_() throw() {
+	List_() throw() {
 	}
 #	endif
 
 	protected:
-	DD_DELETE_COPY_CONSTRUCTOR(ListBase_);
+	DD_DELETE_COPY_CONSTRUCTOR(List_);
 
 	protected:
-	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_);
+	DD_DELETE_MOVE_CONSTRUCTOR(List_);
 
 	protected:
-	DD_CONSTEXPR ListBase_(UnguardedTag tag_) DD_NOEXCEPT : SuperType(tag_) {
+	DD_CONSTEXPR List_(UnguardedTag tag_) DD_NOEXCEPT : SuperType(tag_) {
 	}
 
 
@@ -347,20 +347,24 @@ struct ListBase_ : ListBase_<void> {
 
 
 	protected:
-	DD_DELETE_ALL_ASSIGNMENTS(ListBase_);
+	DD_DELETE_ALL_ASSIGNMENTS(List_);
 
 
 };
 
 
 
-template <typename ValueT_, typename AllocatorT_, ValidityType need_instance_c_>
-struct List_ : ListBase_<ValueT_> {
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
+#	else
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
+#	endif
+struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
-	DD_ALIAS(SuperType, ListBase_<ValueT_>);
-	DD_ALIAS(ThisType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
+	DD_ALIAS(SuperType, List_<ValueT_>);
+	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_>);
 	DD_ALIAS(AllocatorType, AllocatorT_);
-	static ValidityType DD_CONSTANT need_instance = need_instance_c_;
 
 	public:
 	DD_INHERIT_TEMPLATE_ALIAS(ValueType);
@@ -471,105 +475,130 @@ struct List_ : ListBase_<ValueT_> {
 
 
 	public:
-	DD_ALIAS(ConstIterator, typename List_<ValueConstType DD_COMMA AllocatorType DD_COMMA need_instance>::Iterator);
+	DD_ALIAS(ConstIterator, typename List<ValueConstType DD_COMMA AllocatorType>::Iterator);
 	DD_ITERATOR_NESTED
 
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr List_() = default;
+	constexpr List() = default;
 #	else
-	List_() {
+	List() {
 	};
 #	endif
 
 	public:
-	List_(ThisType const& origin_) : SuperType(unguarded_tag) {
-		try {
-			clone_initialize_(origin_);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(ThisType const& origin_) : SuperType(unguarded_tag) {
+		clone_initialize_(origin_);
 	}
 
+#	if __cplusplus >= 201103L
 	public:
-	List_(ThisType&& origin_) : SuperType(unguarded_tag) {
+	List(ThisType&& origin_) : SuperType(unguarded_tag) {
 		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
 		origin_.reset_();
 	}
 
+#	endif
 	public:
-	List_(InitializerList<ValueType> list_) : SuperType(unguarded_tag) {
-		try {
-			clone_initialize_(list_);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(AllocatorType const& allocator_) DD_NOEXCEPT_AS(AllocateAgent(allocator_)) : AllocateAgent(allocator_) {
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	List(InitializerList<ValueType> list_) : SuperType(unguarded_tag) {
+		clone_initialize_(list_);
+	}
+
+	public:
+	List(AllocatorType const& allocator_, InitializerList<ValueType> list_) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		clone_initialize_(list_);
+	}
+
+#	endif
+	public:
+	template <typename UndirectionalIteratorT__>
+	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(unguarded_tag) {
+		clone_initialize_(begin___, end___);
 	}
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	List_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(unguarded_tag) {
-		try {
-			clone_initialize_(begin___, end___);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(
+		AllocatorType const& allocator_,
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		clone_initialize_(begin___, end___);
 	}
 
 	public:
 	template <typename UndirectionalRangeT__>
-	List_(UndirectionalRangeT__ const& range___) : SuperType(unguarded_tag) {
-		try {
-			clone_initialize_(range___);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(UndirectionalRangeT__ const& range___) : SuperType(unguarded_tag) {
+		clone_initialize_(range___);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	List(
+		AllocatorType const& allocator_,
+		UndirectionalRangeT__ const& range___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		clone_initialize_(range___);
 	}
 
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(unguarded_tag) {
-		try {
-			clone_initialize_(BatchRange<ValueType>{ ValueType(forward<ArgumentsT__>(arguments___)...), length_ });
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(unguarded_tag) {
+		clone_initialize_(BatchRange<ValueType>{ ValueType(forward<ArgumentsT__>(arguments___)...), length_ });
+	}
+
+	public:
+	template <typename... ArgumentsT__>
+	List(
+		AllocatorType const& allocator_,
+		BatchTag tag_, LengthType length_,
+		ArgumentsT__&&... arguments___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		clone_initialize_(BatchRange<ValueType>{ ValueType(forward<ArgumentsT__>(arguments___)...), length_ });
 	}
 #	else
 	public:
-	List_(BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
-		try {
-			BatchRange<ValueType> batcher_ = { ValueType(), length_ };
-			clone_initialize_(batcher_);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
+		BatchRange<ValueType> batcher_ = { ValueType(), length_ };
+		clone_initialize_(batcher_);
+	}
+
+	public:
+	List(AllocatorType const& allocator_, BatchTag tag_, LengthType length_) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		BatchRange<ValueType> batcher_ = { ValueType(), length_ };
+		clone_initialize_(batcher_);
 	}
 
 	public:
 	template <typename ValueT__>
-	List_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
-		try {
-			BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
-			clone_initialize_(batcher_);
-		} catch(...) {
-			destruct();
-			throw;
-		}
+	List(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
+		BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
+		clone_initialize_(batcher_);
+	}
+
+	public:
+	template <typename ValueT__>
+	List(
+		AllocatorType const& allocator_,
+		BatchTag tag_,
+		LengthType length_,
+		ValueT__ const& value___
+	) : AllocateAgent(allocator_), SuperType(unguarded_tag) {
+		BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
+		clone_initialize_(batcher_);
 	}
 #	endif
 
 
 	public:
-	~List_() DD_NOEXCEPT {
+	~List() DD_NOEXCEPT {
 		destruct();
 	}
 
@@ -714,7 +743,7 @@ struct List_ : ListBase_<ValueT_> {
 	template <typename ValueT__>
 	static Iterator create_node_(ValueT__ const& value___) {
 #	endif
-		NodePointerType new_node_ = static_cast<NodePointerType>(AllocatorType::Basic::allocate(sizeof(NodeType)));
+		NodePointerType new_node_ = static_cast<NodePointerType>(AllocateAgent::basic_allocate(sizeof(NodeType)));
 		try {
 #	if __cplusplus >= 201103L
 			::DD::construct(::DD::address_of(new_node_->value), ::DD::forward<ArgumentsT__>(arguments___)...);
@@ -722,7 +751,7 @@ struct List_ : ListBase_<ValueT_> {
 			::DD::construct(::DD::address_of(new_node_->value), value___);
 #	endif
 		} catch(...) {
-			AllocatorType::Basic::deallocate(new_node_, sizeof(NodeType));
+			AllocateAgent::basic_deallocate(new_node_, sizeof(NodeType));
 		}
 		return Iterator(new_node_);
 	}
@@ -751,7 +780,7 @@ struct List_ : ListBase_<ValueT_> {
 	private:
 	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
 		::DD::destruct(target_.unguarded_get_pointer());
-		AllocatorType::Basic::deallocate(target_.get_node_pointer(), sizeof(NodeType));
+		AllocateAgent::basic_deallocate(target_.get_node_pointer(), sizeof(NodeType));
 	}
 
 
@@ -1007,64 +1036,6 @@ struct List_ : ListBase_<ValueT_> {
 		push_back(value___);
 	}
 #	endif
-
-
-};
-
-
-
-#	if __cplusplus >= 201103L
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
-#	else
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
-#	endif
-struct List : List_<ValueT_, AllocatorT_, NeedInstance<AllocatorT_>::value> {
-	public:
-	DD_ALIAS(SuperType, List_<ValueT_ DD_COMMA AllocatorT_ DD_COMMA NeedInstance<AllocatorT_>::value>);
-	DD_ALIAS(ThisType, List<ValueT_ DD_COMMA AllocatorT_>);
-
-	public:
-	DD_INHERIT_TEMPLATE_ALIAS(SizeType);
-	DD_INHERIT_TEMPLATE_ALIAS(LengthType);
-
-
-#	if __cplusplus >= 201103L
-	public:
-	using SuperType::SuperType;
-#	else
-	public:
-	List() {
-	}
-
-	public:
-	template <typename UndirectionalIteratorT__>
-	List(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(begin___, end___) {
-	}
-
-	public:
-	template <typename UndirectionalRangeT__>
-	List(UndirectionalRangeT__& range___) : SuperType(range___) {
-	}
-
-	public:
-	List(BatchTag tag_, LengthType length_) : SuperType(tag_, length_) {
-	}
-
-	public:
-	template <typename ValueT__>
-	List(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(tag_, length_, value___) {
-	}
-#	endif
-
-
-	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::swap(other_)) {
-		SuperType::swap(other_);
-	}
-
-
-	public:
-	using SuperType::operator =;
 
 
 };
