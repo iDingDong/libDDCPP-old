@@ -791,9 +791,10 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1450099005 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1450334886 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
+	<iostream>
 	"DD_ValueTypeNested.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_AllocationFailure.hpp"
@@ -812,12 +813,13 @@
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1450288199 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1450334864 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+	"DD_SpecificTypeNested.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
+	"DD_release.hpp"
 	"DD_Allocator.hpp"
-	"DD_StrictPointer.hpp"
 	"DD_swap.hpp"
 
 1449715097 source:d:\develop\repositories\libddcpp\src\test_math.cpp
@@ -997,7 +999,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1450327728 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1450335588 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"

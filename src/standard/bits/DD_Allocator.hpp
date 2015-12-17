@@ -7,6 +7,8 @@
 #	include <cstdlib>
 #	include <new>
 
+#	include <iostream>
+
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_IntegralConstant.hpp"
 #	include "DD_AllocationFailure.hpp"

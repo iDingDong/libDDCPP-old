@@ -48,6 +48,10 @@ struct FunctionHolderBase_ {
 
 
 	public:
+	virtual SizeType get_size_() const DD_NOEXCEPT = 0;
+
+
+	public:
 	virtual ThisType* get_clone_() const = 0;
 
 
@@ -90,6 +94,10 @@ struct FunctionHolderBase_<AllocatorT_, true, ResultT_, ArgumentsT_...> {
 
 	public:
 	virtual ~FunctionHolderBase_() = default;
+
+
+	public:
+	virtual SizeType get_size_() const DD_NOEXCEPT = 0;
 
 
 	public:
@@ -165,6 +173,12 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 
 
 	public:
+	SizeType get_size_() const DD_NOEXCEPT override {
+		return sizeof(ThisType);
+	}
+
+
+	public:
 	TypeInfo const& get_type_() const override {
 		return typeid(m_function_);
 	}
@@ -224,6 +238,12 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 
 	public:
 	~FunctionHolder_() override = default;
+
+
+	public:
+	SizeType get_size_() const DD_NOEXCEPT override {
+		return sizeof(ThisType);
+	}
 
 
 	public:
@@ -369,7 +389,9 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Func
 	private:
 	void destruct() noexcept {
 		if (is_valid()) {
-			m_holder_->destroy();
+			SizeType size_ = m_holder_->get_size_();
+			::DD::destruct(m_holder_);
+			AllocatorType::Basic::deallocate(m_holder_, size_);
 		}
 	}
 
@@ -523,7 +545,10 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_
 	private:
 	void destruct() noexcept {
 		if (is_valid()) {
-			m_holder_->destroy(get_allocator());
+			SizeType size_ = m_holder_->get_size_();
+			::DD::destruct(m_holder_);
+			using BasicType_ = typename AllocatorType::Basic;
+			get_allocator().BasicType_::deallocate(m_holder_, size_);
 		}
 	}
 
