@@ -38,7 +38,7 @@
 1450109170 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1449939478 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1450290739 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -65,6 +65,8 @@
 	"bits/DD_partition_point_by.hpp"
 	"bits/DD_is_sorted.hpp"
 	"bits/DD_is_sorted_until.hpp"
+	"bits/DD_copy_length.hpp"
+	"bits/DD_copy_construct_length.hpp"
 	"bits/DD_fill.hpp"
 	"bits/DD_generate.hpp"
 	"bits/DD_transfer.hpp"
@@ -810,7 +812,7 @@
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1446807061 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1450288199 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
@@ -1012,7 +1014,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450257664 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450322522 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1024,12 +1026,13 @@
 	"DD_Allocator.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
+	"DD_BatchRange.hpp"
 	"DD_get_pointer.hpp"
 	"DD_check_bound.hpp"
 	"DD_transconstruct.hpp"
 	"DD_transfer.hpp"
-	"DD_copy.hpp"
-	"DD_copy_construct.hpp"
+	"DD_copy_length.hpp"
+	"DD_copy_construct_length.hpp"
 
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratornested.hpp
 	"DD_global_definitions.hpp"
@@ -1171,7 +1174,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450257989 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450291343 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1319,16 +1322,17 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450192338 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450321903 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
+	"standard/DDUtility.hpp"
 	"standard/DDAlgorithm.hpp"
 
-1447425796 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp
+1450290517 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp
 	"DD_construct.hpp"
 	"DD_copy.hpp"
 
@@ -1482,7 +1486,7 @@
 1450161307 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
 	"DD_global_definitions.hpp"
 
-1450166245 d:\develop\repositories\libddcpp\src\standard\bits\dd_batchrange.hpp
+1450321406 d:\develop\repositories\libddcpp\src\standard\bits\dd_batchrange.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_RemoveConst.hpp"
 	"DD_Comparable.hpp"
@@ -1492,4 +1496,10 @@
 
 1450192969 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuestorage.hpp
 	"DD_ValueTypeNested.hpp"
+
+1450290158 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_length.hpp
+	"DD_copy.hpp"
+
+1450321969 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct_length.hpp
+	"DD_copy_construct.hpp"
 

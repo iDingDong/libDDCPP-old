@@ -135,7 +135,9 @@ struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 
 
 inline ProcessType destroy_variant_holder_(VariantHolderBase_* pointer_) DD_NOEXCEPT {
-	pointer_->destroy_();
+	if (pointer_) {
+		pointer_->destroy_();
+	}
 }
 
 

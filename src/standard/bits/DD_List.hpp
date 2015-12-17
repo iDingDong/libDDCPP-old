@@ -67,7 +67,7 @@ struct ListBase_<void> {
 	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_)
 
 	protected:
-	ListBase_(NilTag tag_) DD_NOEXCEPT {
+	ListBase_(UnguardedTag tag_) DD_NOEXCEPT {
 	}
 
 
@@ -260,7 +260,7 @@ struct ListBase_ : ListBase_<void> {
 	DD_DELETE_MOVE_CONSTRUCTOR(ListBase_);
 
 	protected:
-	DD_CONSTEXPR ListBase_(NilTag tag_) DD_NOEXCEPT : SuperType(tag_) {
+	DD_CONSTEXPR ListBase_(UnguardedTag tag_) DD_NOEXCEPT : SuperType(tag_) {
 	}
 
 
@@ -484,7 +484,7 @@ struct List_ : ListBase_<ValueT_> {
 #	endif
 
 	public:
-	List_(ThisType const& origin_) : SuperType(nil_tag) {
+	List_(ThisType const& origin_) : SuperType(unguarded_tag) {
 		try {
 			clone_initialize_(origin_);
 		} catch(...) {
@@ -494,13 +494,13 @@ struct List_ : ListBase_<ValueT_> {
 	}
 
 	public:
-	List_(ThisType&& origin_) : SuperType(nil_tag) {
+	List_(ThisType&& origin_) : SuperType(unguarded_tag) {
 		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
 		origin_.reset_();
 	}
 
 	public:
-	List_(InitializerList<ValueType> list_) : SuperType(nil_tag) {
+	List_(InitializerList<ValueType> list_) : SuperType(unguarded_tag) {
 		try {
 			clone_initialize_(list_);
 		} catch(...) {
@@ -511,7 +511,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	List_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(nil_tag) {
+	List_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) : SuperType(unguarded_tag) {
 		try {
 			clone_initialize_(begin___, end___);
 		} catch(...) {
@@ -522,7 +522,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	List_(UndirectionalRangeT__ const& range___) : SuperType(nil_tag) {
+	List_(UndirectionalRangeT__ const& range___) : SuperType(unguarded_tag) {
 		try {
 			clone_initialize_(range___);
 		} catch(...) {
@@ -534,7 +534,7 @@ struct List_ : ListBase_<ValueT_> {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(nil_tag) {
+	List_(BatchTag tag_, LengthType length_, ArgumentsT__&&... arguments___) : SuperType(unguarded_tag) {
 		try {
 			clone_initialize_(BatchRange<ValueType>{ ValueType(forward<ArgumentsT__>(arguments___)...), length_ });
 		} catch(...) {
@@ -544,7 +544,7 @@ struct List_ : ListBase_<ValueT_> {
 	}
 #	else
 	public:
-	List_(BatchTag tag_, LengthType length_) : SuperType(nil_tag) {
+	List_(BatchTag tag_, LengthType length_) : SuperType(unguarded_tag) {
 		try {
 			BatchRange<ValueType> batcher_ = { ValueType(), length_ };
 			clone_initialize_(batcher_);
@@ -556,7 +556,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	public:
 	template <typename ValueT__>
-	List_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(nil_tag) {
+	List_(BatchTag tag_, LengthType length_, ValueT__ const& value___) : SuperType(unguarded_tag) {
 		try {
 			BatchRange<ValueT__ const&> batcher_ = { value___, length_ };
 			clone_initialize_(batcher_);

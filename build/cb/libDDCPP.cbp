@@ -227,6 +227,8 @@
 		<Unit filename="../../src/standard/bits/DD_construct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_copy.hpp" />
 		<Unit filename="../../src/standard/bits/DD_copy_construct.hpp" />
+		<Unit filename="../../src/standard/bits/DD_copy_construct_length.hpp" />
+		<Unit filename="../../src/standard/bits/DD_copy_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count_if.hpp" />
 		<Unit filename="../../src/standard/bits/DD_debugger_definitions.hpp" />

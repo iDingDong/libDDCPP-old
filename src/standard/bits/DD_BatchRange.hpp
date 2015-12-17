@@ -74,6 +74,12 @@ struct BatchIterator :
 
 
 	public:
+	DifferenceType DD_CONSTEXPR get_difference(ThisType const& other_) const DD_NOEXCEPT {
+		return other_.get_offset() - get_offset();
+	}
+
+
+	public:
 	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
@@ -125,6 +131,20 @@ struct BatchIterator :
 		ThisType result_(*this);
 		--*this;
 		return result_;
+	}
+
+
+	public:
+	ThisType& operator +=(DifferenceType offset_) DD_NOEXCEPT {
+		m_offset_ += offset_;
+		return *this;
+	}
+
+
+	public:
+	ThisType& operator -=(DifferenceType offset_) DD_NOEXCEPT {
+		m_offset_ -= offset_;
+		return *this;
 	}
 
 
@@ -214,6 +234,16 @@ ValidityType DD_CONSTEXPR operator <(
 	BatchIterator<ValueT_> const& iterator_2_
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(iterator_1_.less(iterator_2_))) {
 	return iterator_1_.less(iterator_2_);
+}
+
+
+
+template <typename ValueT_>
+inline typename BatchIterator<ValueT_>::DifferenceType DD_CONSTEXPR operator -(
+	BatchIterator<ValueT_> const& iterator_1_,
+	BatchIterator<ValueT_> const& iterator_2_
+) DD_NOEXCEPT_AS(static_cast<typename BatchIterator<ValueT_>::DifferenceType>(iterator_1_.get_difference(iterator_2_))) {
+	return iterator_2_.get_difference(iterator_1_);
 }
 
 
