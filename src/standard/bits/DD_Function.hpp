@@ -60,6 +60,10 @@ struct FunctionHolderBase_ {
 
 
 	public:
+	virtual ProcessType destroy() DD_NOEXCEPT = 0;
+
+
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 
@@ -98,6 +102,10 @@ struct FunctionHolderBase_<AllocatorT_, true, ResultT_, ArgumentsT_...> {
 
 	public:
 	virtual ResultT_ call_(ArgumentsT_... arguments__) = 0;
+
+
+	public:
+	virtual ProcessType destroy(AllocatorType& allocator_) DD_NOEXCEPT = 0;
 
 
 	public:
@@ -169,6 +177,13 @@ struct FunctionHolder_ : FunctionHolderBase_<AllocatorT_, need_instance_c_, Resu
 
 
 	public:
+	ProcessType destroy() DD_NOEXCEPT override {
+		::DD::destruct(this);
+		AllocatorType::Basic::deallocate(this, sizeof(ThisType));
+	}
+
+
+	public:
 	DD_DELETE_ALL_ASSIGNMENTS(FunctionHolderBase_)
 
 
@@ -233,6 +248,14 @@ struct FunctionHolder_<FunctionT_, AllocatorT_, true, ResultT_, ArgumentsT_...> 
 	public:
 	ResultT_ call_(ArgumentsT_... arguments__) override {
 		return m_function_(arguments__...);
+	}
+
+
+	public:
+	ProcessType destroy(AllocatorType& allocator_) DD_NOEXCEPT override {
+		::DD::destruct(this);
+		using BasicType_ = typename AllocatorType::Basic;
+		allocator_.BasicType_::deallocate(this, sizeof(ThisType));
 	}
 
 
@@ -346,8 +369,7 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, need_instance_c_> : Func
 	private:
 	void destruct() noexcept {
 		if (is_valid()) {
-			AllocatorType::Basic::destruct(m_holder_);
-			AllocatorType::Basic::deallocate(m_holder_);
+			m_holder_->destroy();
 		}
 	}
 
@@ -501,8 +523,7 @@ struct Function_<ResultT_(ArgumentsT_...), AllocatorT_, true> : Functor<ResultT_
 	private:
 	void destruct() noexcept {
 		if (is_valid()) {
-			get_allocator().AllocatorType::Basic::destruct(m_holder_);
-			get_allocator().AllocatorType::Basic::deallocate(m_holder_);
+			m_holder_->destroy(get_allocator());
 		}
 	}
 

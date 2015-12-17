@@ -8,6 +8,7 @@
 #	if __cplusplus < 201103L
 #		include "DD_RemoveCV.hpp"
 #	endif
+#	include "DD_fabricate.hpp"
 #	include "DD_RemoveReference.hpp"
 
 
@@ -39,7 +40,7 @@ struct Value_<ValueT_*> {
 #	elif DDCPP_COMPAT_STL
 template <typename ObjectT_>
 struct Value__ {
-	using Type = decltype(*ObjectT_());
+	using Type = decltype(*fabricate<ObjectT_>());
 
 
 };

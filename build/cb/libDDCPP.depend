@@ -997,7 +997,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1449738732 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1450327728 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
@@ -1091,9 +1091,10 @@
 	"DD_DefaultDeleter.hpp"
 	"DD_swap.hpp"
 
-1450095929 d:\develop\repositories\libddcpp\src\standard\bits\dd_value.hpp
+1450327728 d:\develop\repositories\libddcpp\src\standard\bits\dd_value.hpp
 	"DD_NestedTypeCheck.hpp"
 	"DD_RemoveCV.hpp"
+	"DD_fabricate.hpp"
 	"DD_RemoveReference.hpp"
 
 1443937574 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
