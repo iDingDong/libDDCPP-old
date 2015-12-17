@@ -577,10 +577,10 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	template <typename... ArgumentsT__>
 	ProcessType unguarded_emplace_back(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(AllocatorType::construct(::DD::fabricate<ThisType>().m_end_, forward<ArgumentsT__>(arguments___)...))
+		noexcept(::DD::construct(::DD::fabricate<ThisType>().m_end_, forward<ArgumentsT__>(arguments___)...))
 	) {
 		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_emplace_back'");
-		AllocatorType::construct(this->m_end_, forward<ArgumentsT__>(arguments___)...);
+		::DD::construct(this->m_end_, forward<ArgumentsT__>(arguments___)...);
 		++this->m_end_;
 	}
 
@@ -626,7 +626,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 #	else
 	ProcessType unguarded_push_back(ValueT__ const& value___) {
 		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_push_back'");
-		AllocatorType::construct(this->m_end_, value___);
+		::DD::construct(this->m_end_, value___);
 		++this->m_end_;
 	}
 #	endif
@@ -718,7 +718,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
 		DD_ASSERT(!this->is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
-		AllocatorType::destruct(--this->m_end_);
+		::DD::destruct(--this->m_end_);
 	}
 
 
@@ -732,7 +732,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	public:
 	ProcessType trim_back(Iterator begin_) DD_NOEXCEPT {
-		AllocatorType::destruct(begin_, this->end());
+		::DD::destruct(begin_, this->end());
 		this->m_end_ = ::DD::get_pointer(begin_);
 	}
 
@@ -781,7 +781,7 @@ struct Vessel_ : VesselBase_<ValueT_> {
 
 	private:
 	ProcessType destruct_() const DD_NOEXCEPT {
-		AllocatorType::destruct(this->m_begin_, this->m_end_);
+		::DD::destruct(this->m_begin_, this->m_end_);
 		AllocatorType::deallocate(this->m_begin_, this->get_capacity());
 	}
 

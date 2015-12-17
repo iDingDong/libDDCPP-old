@@ -213,7 +213,7 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	public:
 	~Optional() DD_NOEXCEPT {
 		if (is_valid()) {
-			destruct(get_pointer());
+			::DD::destruct(get_pointer());
 		}
 	}
 
@@ -315,15 +315,15 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	private:
 	template <typename... ArgumentsT__>
 	ProcessType emplace_(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(construct(get_pointer(), forward<ArgumentsT__>(arguments___)...))
+		noexcept(::DD::construct(get_pointer(), forward<ArgumentsT__>(arguments___)...))
 	) {
-		construct(get_pointer_(), forward<ArgumentsT__>(arguments___)...);
+		::DD::construct(get_pointer_(), forward<ArgumentsT__>(arguments___)...);
 	}
 
 	public:
 	template <typename... ArgumentsT__>
 	ProcessType emplace(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(construct(get_pointer(), forward<ArgumentsT__>(arguments___)...))
+		noexcept(fabricate<ThisType>().emplace_(forward<ArgumentsT__>(arguments___)...))
 	) {
 		DD_ASSERT(!is_valid(), "Failed to construct over other instance: 'DD::Optional::emplace'");
 		emplace_(forward<ArgumentsT__>(arguments___)...);
@@ -333,14 +333,14 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	private:
 	template <typename ValueT__>
 	ProcessType emplace_(ValueT__ const& value___) {
-		construct(get_pointer_(), forward<ArgumentsT>(arguments___)...);
+		::DD::construct(get_pointer_(), value___);
 	}
 
 	public:
 	template <typename ValueT__>
 	ProcessType emplace(ValueT__ const& value___) {
 		DD_ASSERT(!is_valid(), "Failed to construct over other instance: 'DD::Optional::emplace'");
-		emplace_(forward<ArgumentsT>(arguments___)...);
+		emplace_(value___);
 		m_validity_ = true;
 	}
 #	endif
@@ -365,7 +365,7 @@ struct Optional : Comparable< Optional<ValueT_> >, Optional_ {
 	ProcessType reset() DD_NOEXCEPT {
 		if (is_valid()) {
 			m_validity_ = false;
-			destruct(get_pointer());
+			::DD::destruct(get_pointer());
 		}
 	}
 

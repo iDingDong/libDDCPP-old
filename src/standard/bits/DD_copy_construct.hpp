@@ -17,9 +17,9 @@ struct CopyConstruct_ {
 		UndirectionalIteratorT1__ begin___,
 		UndirectionalIteratorT1__ end___,
 		UndirectionalIteratorT2__ result_begin___
-	) DD_NOEXCEPT_AS(construct(result_begin___ DD_COMMA *begin___) DD_COMMA ++begin___ != end___) {
+	) DD_NOEXCEPT_AS(::DD::construct(result_begin___ DD_COMMA *begin___) DD_COMMA ++begin___ != end___) {
 		for (; begin___ != end___; ++begin___, ++result_begin___) {
-			construct(result_begin___, *begin___);
+			::DD::construct(result_begin___, *begin___);
 		}
 		return result_begin___;
 	}

@@ -165,36 +165,6 @@ struct Pool_ {
 	}
 
 
-	public:
-#	if __cplusplus >= 201103L
-	template <typename ValueT__, typename... ArgumentsT__>
-	static ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(BasicAllocatorType::construct(pointer_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		BasicAllocatorType::construct(pointer_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT__>
-	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		BasicAllocatorType::construct(pointer_, value__);
-	}
-#	endif
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* pointer_) DD_NOEXCEPT {
-		BasicAllocatorType::destruct(pointer_);
-	}
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		BasicAllocatorType::destruct(begin_, end_);
-	}
-
-
 };
 
 
@@ -344,36 +314,6 @@ struct Pool_<AllocatorT_, true> {
 	}
 
 
-	public:
-#	if __cplusplus >= 201103L
-	template <typename ValueT__, typename... ArgumentsT__>
-	ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(m_allocator_.construct(pointer_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		m_allocator_.construct(pointer_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT__>
-	ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		m_allocator_.construct(pointer_, value__);
-	}
-#	endif
-
-
-	public:
-	template <typename ValueT__>
-	ProcessType destruct(ValueT__* pointer_) DD_NOEXCEPT {
-		m_allocator_.destruct(pointer_);
-	}
-
-
-	public:
-	template <typename ValueT__>
-	ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		m_allocator_.destruct(begin_, end_);
-	}
-
-
 };
 
 
@@ -436,36 +376,6 @@ class Pool {
 	public:
 	static ProcessType deallocate(PointerType pointer_, SizeType size_) DD_NOEXCEPT {
 		m_pool_.deallocate(pointer_, size_);
-	}
-
-
-	public:
-#	if __cplusplus >= 201103L
-	template <typename ValueT__, typename... ArgumentsT__>
-	static ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(m_pool_.construct(pointer_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		m_pool_.construct(pointer_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT__>
-	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		m_pool_.construct(pointer_, value__);
-	}
-#	endif
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* pointer_) DD_NOEXCEPT {
-		m_pool_.destruct(pointer_);
-	}
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		m_pool_.destruct(begin_, end_);
 	}
 
 

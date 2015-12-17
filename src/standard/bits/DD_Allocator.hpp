@@ -34,8 +34,13 @@ class Allocator<void> {
 	DD_ALIAS(ValueType, void);
 
 	public:
+	DD_ALIAS(ValueConstType, void);
+	DD_ALIAS(ReferenceType, void);
+	DD_ALIAS(ConstReferenceType, void);
 	DD_ALIAS(PointerType, ValueType*);
+	DD_ALIAS(ConstPointerType, ValueConstType*);
 	DD_ALIAS(SizeType, DD::SizeType);
+	DD_ALIAS(LengthType, SizeType);
 
 	public:
 	DD_ALIAS(Basic, Allocator<void>);
@@ -68,36 +73,6 @@ class Allocator<void> {
 	}
 
 
-	public:
-#	if __cplusplus >= 201103L
-	template <typename ValueT__, typename... ArgumentsT__>
-	static ProcessType construct(ValueT__* pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(::DD::construct(pointer_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		::DD::construct(pointer_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT__>
-	static ProcessType construct(ValueT__* pointer_, ValueT__ const& value___) {
-		::DD::construct(pointer_, value___);
-	}
-#	endif
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* pointer_) DD_NOEXCEPT {
-		::DD::destruct(pointer_);
-	}
-
-
-	public:
-	template <typename ValueT__>
-	static ProcessType destruct(ValueT__* begin_, ValueT__* end_) DD_NOEXCEPT {
-		::DD::destruct(begin_, end_);
-	}
-
-
 };
 
 
@@ -110,8 +85,8 @@ class Allocator : Allocator<void> {
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
 	public:
-	DD_ALIAS(LengthType, DD::LengthType);
 	DD_ALIAS(SizeType, DD::SizeType);
+	DD_ALIAS(LengthType, DD::LengthType);
 
 	public:
 	DD_ALIAS(Basic, SuperType);
@@ -136,34 +111,6 @@ class Allocator : Allocator<void> {
 	public:
 	static ProcessType deallocate(PointerType pointer_, LengthType length_) DD_NOEXCEPT {
 		Basic::deallocate(pointer_, unit * length_);
-	}
-
-
-	public:
-#	if __cplusplus >= 201103L
-	template <typename... ArgumentsT__>
-	static ProcessType construct(PointerType pointer_, ArgumentsT__&&... arguments___) noexcept(
-		noexcept(Basic::construct(pointer_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		Basic::construct(pointer_, forward<ArgumentsT__>(arguments___)...);
-	}
-#	else
-	template <typename ValueT__>
-	static ProcessType construct(PointerType pointer_, ValueT__ const& value___) {
-		Basic::construct(pointer_, value___);
-	}
-#	endif
-
-
-	public:
-	static ProcessType destruct(PointerType pointer_) DD_NOEXCEPT {
-		Basic::destruct(pointer_);
-	}
-
-
-	public:
-	static ProcessType destruct(PointerType begin_, PointerType end_) DD_NOEXCEPT {
-		Basic::destruct(begin_, end_);
 	}
 
 

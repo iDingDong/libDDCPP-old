@@ -5,12 +5,9 @@
 
 
 #	include "DD_Tags.hpp"
-#	include "DD_ValueTypeNested.hpp"
 #	include "DD_Value.hpp"
 #	include "DD_NeedInstance.hpp"
-#	if __cplusplus >= 201103L
-#		include "DD_forward.hpp"
-#	endif
+#	include "DD_Allocator.hpp"
 
 
 
@@ -46,7 +43,7 @@ class Deleter_ {
 	public:
 	static ProcessType destroy(PointerType pointer_) DD_NOEXCEPT {
 		if (pointer_) {
-			AllocatorType::destruct(pointer_);
+			::DD::destruct(pointer_);
 			AllocatorType::deallocate(pointer_, 1);
 		}
 	}
@@ -116,7 +113,7 @@ class Deleter_<AllocatorT_, true> {
 	public:
 	ProcessType destroy(PointerType pointer_) DD_NOEXCEPT {
 		if (pointer_) {
-			m_allocator_.destruct(pointer_);
+			::DD::destruct(pointer_);
 			m_allocator_.deallocate(pointer_, 1);
 		}
 	}
@@ -135,7 +132,11 @@ class Deleter_<AllocatorT_, true> {
 
 
 
-template <typename AllocatorT_>
+#	if __cplusplus >= 201103L
+template <typename AllocatorT_ = Allocator<void>>
+#	else
+template <typename AllocatorT_ = Allocator<void> >
+#	endif
 class Deleter : Deleter_<AllocatorT_, NeedInstance<AllocatorT_>::value> {
 };
 

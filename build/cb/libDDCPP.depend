@@ -791,7 +791,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1450334886 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1450353593 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	<iostream>
@@ -813,7 +813,7 @@
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1450334864 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1450344218 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
@@ -999,13 +999,13 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1450335588 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1450354659 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_move.hpp"
 	"DD_release.hpp"
-	"DD_Allocator.hpp"
+	"DD_Allocateable.hpp"
 	"DD_Functor.hpp"
 
 1450098193 d:\develop\repositories\libddcpp\src\standard\bits\dd_needinstance.hpp
@@ -1016,7 +1016,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450322522 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450350954 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1048,7 +1048,7 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1447167984 d:\develop\repositories\libddcpp\src\standard\bits\dd_transconstruct.hpp
+1450350941 d:\develop\repositories\libddcpp\src\standard\bits\dd_transconstruct.hpp
 	<cstring>
 	"DD_IsPointer.hpp"
 	"DD_IsSame.hpp"
@@ -1099,12 +1099,11 @@
 	"DD_fabricate.hpp"
 	"DD_RemoveReference.hpp"
 
-1443937574 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+1450351056 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
 	"DD_Tags.hpp"
-	"DD_ValueTypeNested.hpp"
 	"DD_Value.hpp"
 	"DD_NeedInstance.hpp"
-	"DD_forward.hpp"
+	"DD_Allocator.hpp"
 
 1443937083 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
 	"DD_Conditional.hpp"
@@ -1112,7 +1111,7 @@
 	"DD_RemoveReference.hpp"
 	"DD_RemoveCV.hpp"
 
-1444018933 d:\develop\repositories\libddcpp\src\standard\bits\dd_pool.hpp
+1450350943 d:\develop\repositories\libddcpp\src\standard\bits\dd_pool.hpp
 	"DD_NeedInstance.hpp"
 	"DD_Array.hpp"
 	"DD_Allocator.hpp"
@@ -1177,7 +1176,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450291343 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450350943 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1207,7 +1206,7 @@
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
 	"DD_global_definitions.hpp"
 
-1450099969 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
+1450350942 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
 	"DD_Tags.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_IsSame.hpp"
@@ -1335,7 +1334,7 @@
 	"standard/DDUtility.hpp"
 	"standard/DDAlgorithm.hpp"
 
-1450290517 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp
+1450350942 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct.hpp
 	"DD_construct.hpp"
 	"DD_copy.hpp"
 
@@ -1347,7 +1346,7 @@
 1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
 	"DD_Function.hpp"
 
-1449739190 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
+1450354678 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicate.hpp
 	"DD_Function.hpp"
 
 1448539180 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_range.hpp
@@ -1505,4 +1504,8 @@
 
 1450321969 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct_length.hpp
 	"DD_copy_construct.hpp"
+
+1450353665 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
+	"DD_NeedInstance.hpp"
+	"DD_Allocator.hpp"
 

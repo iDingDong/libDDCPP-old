@@ -38,37 +38,79 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename FunctionT_>
+template <typename FunctionT_, typename AllocatorT_ = Allocator<void>>
 struct Predicate;
 
 
 
-template <typename ResultT_, typename... ArgumentsT_>
-struct Predicate<ResultT_(ArgumentsT_...)> : Function<ResultT_(ArgumentsT_...)> {
-	using SuperType = Function<ResultT_(ArgumentsT_...)>;
-	using ThisType = Predicate<ResultT_(ArgumentsT_...)>;
+template <typename AllocatorT_, typename ResultT_, typename... ArgumentsT_>
+struct Predicate<ResultT_(ArgumentsT_...), AllocatorT_> : Function<ResultT_(ArgumentsT_...), AllocatorT_> {
+	public:
+	using SuperType = Function<ResultT_(ArgumentsT_...), AllocatorT_>;
+	using ThisType = Predicate<ResultT_(ArgumentsT_...), AllocatorT_>;
+	using AllocatorType = AllocatorT_;
 
 
+	public:
 	constexpr Predicate() = default;
 
-	constexpr Predicate(ThisType const& origin_) = default;
+	public:
+	Predicate(ThisType const& origin_) = default;
 
-	constexpr Predicate(ThisType&& origin_) = default;
+	public:
+	Predicate(ThisType&& origin_) = default;
 
-	constexpr Predicate(ThisType& origin_) : Predicate(static_cast<ThisType const&>(origin_)) {
+	public:
+	Predicate(ThisType& origin_) noexcept(
+		noexcept(SuperType(static_cast<SuperType&>(origin_)))
+	) : SuperType(static_cast<SuperType&>(origin_)) {
 	}
 
+	public:
+	explicit Predicate(AllocatorType const& allocator_) noexcept(
+		noexcept(SuperType(allocator_))
+	) : SuperType(allocator_) {
+	}
+
+	public:
 	template <typename FunctionT__>
-	constexpr Predicate(FunctionT__&& function___) : SuperType(forward<FunctionT__>(function___)) {
+	Predicate(FunctionT__&& function___) noexcept(
+		noexcept(SuperType(forward<FunctionT__>(function___)))
+	) : SuperType(forward<FunctionT__>(function___)) {
+	}
+
+	public:
+	template <typename FunctionT__>
+	Predicate(AllocatorType const& allocator_, FunctionT__&& function___) noexcept(
+		noexcept(SuperType(allocator_, forward<FunctionT__>(function___)))
+	) : SuperType(allocator_, forward<FunctionT__>(function___)) {
 	}
 
 
-	~Predicate() = default;
+	public:
+	ProcessType swap(ThisType& other_) noexcept(noexcept(fabricate<ThisType>().SuperType::swap(other_))) {
+		SuperType::swap(other_);
+	}
 
 
+	public:
 	ThisType& operator =(ThisType const& origin_) = default;
 
+	public:
 	ThisType& operator =(ThisType&& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType& origin_) {
+		static_cast<SuperType&>(*this) = static_cast<SuperType&>(origin_);
+		return *this;
+	}
+
+	public:
+	template <typename FunctionT__>
+	ThisType& operator =(FunctionT__&& function___) {
+		static_cast<SuperType&>(*this) = forward<FunctionT__>(function___);
+		return *this;
+	}
 
 
 };

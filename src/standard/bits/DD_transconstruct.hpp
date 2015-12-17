@@ -34,21 +34,21 @@ struct Transconstruct_ {
 			UndirectionalIteratorT1___ begin____,
 			UndirectionalIteratorT1___ end____,
 			UndirectionalIteratorT2___ destination____
-		) DD_NOEXCEPT_AS(construct(destination____ DD_COMMA move(*begin____))) {
+		) DD_NOEXCEPT_AS(::DD::construct(destination____ DD_COMMA move(*begin____))) {
 			UndirectionalIteratorT2___ current____ = destination____;
 			try {
 				for (; begin____ < end____; ++begin____, ++current____) {
 #	if __cplusplus >= 201103L
-					construct(current____, move(*begin____));
+					::DD::construct(current____, move(*begin____));
 #	else
-					construct(current____, *begin____);
+					::DD::construct(current____, *begin____);
 #	endif
 				}
 			} catch (...) {
 #	if __cplusplus >= 201103L
 				move(destination____, current____, begin____);
 #	endif
-				destruct(destination____, current____);
+				::DD::destruct(destination____, current____);
 				throw;
 			}
 			return current____;
@@ -65,12 +65,12 @@ struct Transconstruct_ {
 			UndirectionalIteratorT1___ begin____,
 			UndirectionalIteratorT1___ end____,
 			UndirectionalIteratorT2___ destination____
-		) DD_NOEXCEPT_AS(construct(destination____ DD_COMMA move(*begin____))) {
+		) DD_NOEXCEPT_AS(::DD::construct(destination____ DD_COMMA move(*begin____))) {
 			for (; begin____ < end____; ++begin____, ++destination____) {
 #	if __cplusplus >= 201103L
-				construct(destination____, move(*begin____));
+				::DD::construct(destination____, move(*begin____));
 #	else
-				construct(destination____, *begin____);
+				::DD::construct(destination____, *begin____);
 #	endif
 			}
 			return destination____;
@@ -86,11 +86,11 @@ struct Transconstruct_ {
 		UndirectionalIteratorT1___ end___,
 		UndirectionalIteratorT2___ destination___
 	) DD_NOEXCEPT_AS(Transconstruct__<
-			noexcept(construct(destination___ DD_COMMA move(*begin___)))
+			noexcept(::DD::construct(destination___ DD_COMMA move(*begin___)))
 	>::transconstruct(begin___ DD_COMMA end___ DD_COMMA destination___)) {
 #	if __cplusplus >= 201103L
 		return Transconstruct__<
-			noexcept(construct(destination___, move(*begin___)))
+			noexcept(::DD::construct(destination___, move(*begin___)))
 		>::transconstruct(begin___, end___, destination___);
 #	else
 		return Transconstruct__<

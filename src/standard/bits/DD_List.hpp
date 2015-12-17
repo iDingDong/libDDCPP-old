@@ -717,9 +717,9 @@ struct List_ : ListBase_<ValueT_> {
 		NodePointerType new_node_ = static_cast<NodePointerType>(AllocatorType::Basic::allocate(sizeof(NodeType)));
 		try {
 #	if __cplusplus >= 201103L
-			AllocatorType::construct(::DD::address_of(new_node_->value), ::DD::forward<ArgumentsT__>(arguments___)...);
+			::DD::construct(::DD::address_of(new_node_->value), ::DD::forward<ArgumentsT__>(arguments___)...);
 #	else
-			AllocatorType::construct(::DD::address_of(new_node_->value), value___);
+			::DD::construct(::DD::address_of(new_node_->value), value___);
 #	endif
 		} catch(...) {
 			AllocatorType::Basic::deallocate(new_node_, sizeof(NodeType));
@@ -750,7 +750,7 @@ struct List_ : ListBase_<ValueT_> {
 
 	private:
 	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
-		AllocatorType::destruct(target_.unguarded_get_pointer());
+		::DD::destruct(target_.unguarded_get_pointer());
 		AllocatorType::Basic::deallocate(target_.get_node_pointer(), sizeof(NodeType));
 	}
 

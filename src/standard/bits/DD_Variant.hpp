@@ -37,14 +37,6 @@ DD_ALIAS(VariantAllocator_, DDCPP_VARIANT_ALLOCATOR);
 
 
 
-//struct VariantHolderBase_;
-
-
-
-//inline ProcessType destroy_variant_holder_(VariantHolderBase_* pointer_) DD_NOEXCEPT;
-
-
-
 struct VariantHolderBase_ {
 	public:
 	DD_ALIAS(ThisType, VariantHolderBase_);
