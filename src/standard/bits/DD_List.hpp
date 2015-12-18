@@ -897,7 +897,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType concatenate_front(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+	ProcessType concatenate_front(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().concatenate_front(DD_SPLIT_RANGE(range___))
 	) {
 		concatenate_front(DD_SPLIT_RANGE(range___));
@@ -914,7 +914,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+	ProcessType concatenate_back(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().concatenate_back(DD_SPLIT_RANGE(range___))
 	) {
 		concatenate_back(DD_SPLIT_RANGE(range___));
@@ -933,7 +933,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType insert_range(Iterator position_, UndirectionalRangeT__& begin___) DD_NOEXCEPT_AS(
+	ProcessType insert_range(Iterator position_, UndirectionalRangeT__ const& begin___) DD_NOEXCEPT_AS(
 		insert_range(position_ DD_COMMA DD_SPLIT_RANGE(begin___))
 	) {
 		insert_range(position_, DD_SPLIT_RANGE(begin___));
