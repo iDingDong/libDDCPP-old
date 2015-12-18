@@ -69,11 +69,12 @@ inline ProcessType delink_after_undirectional_list_node_(
 	link_undirectional_list_node_(position_, position_->next->next);
 }
 
-inline ProcessType delink_after_undirectional_list_node_(
+
+inline ProcessType delink_between_undirectional_list_node_(
 	UndirectionalListNode<void>* head_,
-	UndirectionalListNode<void>* last_
+	UndirectionalListNode<void>* tail_
 ) DD_NOEXCEPT {
-	link_undirectional_list_node_(head_, last->next);
+	link_undirectional_list_node_(head_, tail_);
 }
 
 
@@ -93,7 +94,7 @@ inline ProcessType splice_after_undirectional_list_node_(
 	UndirectionalListNode<void>* last_
 ) DD_NOEXCEPT {
 	UndirectionalListNode<void>* first_ = head_->next;
-	delink_after_undirectional_list_node_(head_, last_);
+	delink_between_undirectional_list_node_(head_, last_->last);
 	enlink_after_undirectional_list_node_(position_, first_, last_);
 }
 

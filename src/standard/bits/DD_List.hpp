@@ -156,7 +156,7 @@ struct List_<void> {
 
 	protected:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
-		sentry_().swap_target(other_.sentry_());
+		sentry_().swap_target_position(other_.sentry_());
 	}
 
 
@@ -682,7 +682,11 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::swap(other_)) {
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_IF(
+		noexcept(::DD::swap(static_cast<AllocateAgent&>(fabricate<ThisType>()) DD_COMMA static_cast<AllocateAgent&>(other_))) &&
+		noexcept(::DD::fabricate<ThisType>().SuperType::swap(other_))
+	) {
+		::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
 		SuperType::swap(other_);
 	}
 

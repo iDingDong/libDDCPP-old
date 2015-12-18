@@ -45,11 +45,7 @@ struct ListIterator<void> : EqualityComparable<ListIterator<void> > {
 
 
 	private:
-#	if __cplusplus >= 201103L
-	NodePointerType m_pointer_ = NodePointerType();
-#	else
-	NodePointerType m_pointer_;
-#	endif
+	NodePointerType m_pointer_ DD_IN_CLASS_INITIALIZE(NodePointerType());
 
 
 #	if __cplusplus >= 201103L
@@ -91,9 +87,17 @@ struct ListIterator<void> : EqualityComparable<ListIterator<void> > {
 
 
 	public:
-	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT {
-		DD_ASSERT(is_valid() && other_.is_valid(), "'DD::ListIterator::swap_target': Invalid iterator dereferenced");
+	ProcessType swap_target_position(ThisType const& other_) const DD_NOEXCEPT {
+		DD_ASSERT(is_valid() && other_.is_valid(), "'DD::ListIterator::swap_target_position': Invalid iterator dereferenced");
 		::DD::detail_::swap_list_node_(get_node_pointer(), other_.get_node_pointer());
+	}
+
+
+	public:
+	ProcessType swap_target(ThisType& other_) DD_NOEXCEPT {
+		DD_ASSERT(is_valid() && other_.is_valid(), "'DD::ListIterator::swap_target': Invalid iterator dereferenced");
+		swap_target_position(other_);
+		::DD::swap(*this, other_);
 	}
 
 

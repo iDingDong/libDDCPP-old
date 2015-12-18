@@ -231,9 +231,12 @@ struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, Argum
 
 
 	public:
-	void swap(ThisType& target_) noexcept(noexcept(swap(m_holder_, target_.m_holder_))) {
-		using ::DD::swap;
-		swap(m_holder_, target_.m_holder_);
+	void swap(ThisType& other_) noexcept(
+		noexcept(::DD::swap(static_cast<AllocateAgent&>(fabricate<ThisType>()), static_cast<AllocateAgent&>(other_))) &&
+		noexcept(::DD::swap(m_holder_, other_.m_holder_))
+	) {
+		::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
+		::DD::swap(m_holder_, other_.m_holder_);
 	}
 
 

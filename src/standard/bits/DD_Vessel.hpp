@@ -502,6 +502,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
+		::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
 		::DD::swap(this->m_begin_, other_.m_begin_);
 		::DD::swap(this->m_end_, other_.m_end_);
 		::DD::swap(this->m_storage_end_, other_.m_storage_end_);
