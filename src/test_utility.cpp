@@ -46,7 +46,7 @@ void test_utility() {
 	}
 	{
 		{
-			DD::Variant variant_1((Test()));
+			DD::Variant<> variant_1((Test()));
 			if (variant_1.get_type() != typeid(Test)) {
 				throw "'DD::Variant' test failed.";
 			}

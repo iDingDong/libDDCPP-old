@@ -158,37 +158,37 @@ struct Allocateable_<AllocatorT_, true> {
 	}
 
 
-	public:
+	protected:
 	GlobalPointerType basic_allocate(SizeType size_) const {
-		return AllocatorType::Basic::allocate(size_);
+		return get_allocator().AllocatorType::Basic::allocate(size_);
 	}
 
 
-	public:
+	protected:
 	PointerType allocate(LengthType length_) const {
-		return AllocatorType::allocate(length_);
+		return get_allocator().allocate(length_);
 	}
 
 
-	public:
+	protected:
 	ProcessType basic_deallocate(GlobalPointerType pointer_) const DD_NOEXCEPT {
-		return AllocatorType::Basic::deallocate(pointer_);
+		return get_allocator().AllocatorType::Basic::deallocate(pointer_);
 	}
 
-	public:
+	protected:
 	ProcessType basic_deallocate(GlobalPointerType pointer_, SizeType size_) const DD_NOEXCEPT {
-		return AllocatorType::Basic::deallocate(pointer_, size_);
+		return get_allocator().AllocatorType::Basic::deallocate(pointer_, size_);
 	}
 
 
-	public:
+	protected:
 	ProcessType deallocate(PointerType pointer_) const DD_NOEXCEPT {
-		return AllocatorType::deallocate(pointer_);
+		return get_allocator().deallocate(pointer_);
 	}
 
-	public:
+	protected:
 	ProcessType deallocate(PointerType pointer_, LengthType length_) const DD_NOEXCEPT {
-		return AllocatorType::deallocate(pointer_, length_);
+		return get_allocator().deallocate(pointer_, length_);
 	}
 
 

@@ -813,13 +813,13 @@
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1450344218 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1450415358 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
 	"DD_release.hpp"
-	"DD_Allocator.hpp"
+	"DD_Allocateable.hpp"
 	"DD_swap.hpp"
 
 1449715097 source:d:\develop\repositories\libddcpp\src\test_math.cpp
@@ -956,7 +956,7 @@
 	"bits/DD_Result.hpp"
 	"bits/DD_ArithmeticTrait.hpp"
 
-1449736192 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
+1450415289 source:d:\develop\repositories\libddcpp\src\test_utility.cpp
 	"test_utility.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1324,7 +1324,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450321903 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450415199 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1505,7 +1505,7 @@
 1450321969 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct_length.hpp
 	"DD_copy_construct.hpp"
 
-1450353665 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
+1450415455 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
 	"DD_NeedInstance.hpp"
 	"DD_Allocator.hpp"
 

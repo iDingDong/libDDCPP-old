@@ -63,7 +63,7 @@ void test_container() {
 			}
 			DD::swap(another_ves, ves);
 
-			DD::Vessel<DD::Variant> variant_ves = { 1, "haha", 1.0 };
+			DD::Vessel<DD::Variant<>> variant_ves = { 1, "haha", 1.0 };
 			if (
 				variant_ves.get_length() != 3 ||
 				variant_ves[0].get_type() != typeid(1) ||

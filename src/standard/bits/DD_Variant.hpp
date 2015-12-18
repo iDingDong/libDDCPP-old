@@ -11,15 +11,11 @@
 #		include "DD_forward.hpp"
 #	endif
 #	include "DD_release.hpp"
-#	include "DD_Allocator.hpp"
-//#	include "DD_StrictPointer.hpp"
+#	include "DD_Allocateable.hpp"
 #	include "DD_swap.hpp"
 
 
 
-#	if !defined(DDCPP_VARIANT_ALLOCATOR)
-#		define DDCPP_VARIANT_ALLOCATOR ::DD::Allocator<void>
-#	endif
 #	if !defined(DDCPP_VARIANT_IMPLICIT_CAST)
 #		define DDCPP_VARIANT_IMPLICIT_CAST DD_OFF
 #	endif
@@ -33,10 +29,6 @@
 
 
 DD_DETAIL_BEGIN_
-DD_ALIAS(VariantAllocator_, DDCPP_VARIANT_ALLOCATOR);
-
-
-
 struct VariantHolderBase_ {
 	public:
 	DD_ALIAS(ThisType, VariantHolderBase_);
@@ -56,12 +48,11 @@ struct VariantHolderBase_ {
 
 
 	public:
-	virtual ThisType* get_clone_() const = 0;
+	virtual TypeInfo const& get_type_() const = 0;
 
 
 	public:
-	virtual TypeInfo const& get_type_() const = 0;
-
+	virtual ProcessType clone_to_(ThisType* pointer_) const = 0;
 
 };
 
@@ -97,16 +88,14 @@ struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 
 
 	public:
-	SuperType* get_clone_() const {
-		ThisType* new_holder_ = static_cast<ThisType*>(VariantAllocator_::allocate(sizeof(ThisType)));
-		::DD::construct(new_holder_, ThisType(m_value_));
-		return new_holder_;
+	TypeInfo const& get_type_() const DD_OVERRIDE {
+		return typeid(m_value_);
 	}
 
 
 	public:
-	TypeInfo const& get_type_() const DD_OVERRIDE {
-		return typeid(m_value_);
+	ProcessType clone_to_(SuperType* pointer_) const DD_OVERRIDE {
+		::DD::construct(static_cast<ThisType*>(pointer_), *this);
 	}
 
 
@@ -114,8 +103,14 @@ struct VariantHolder_ DD_FINAL : VariantHolderBase_ {
 
 
 
-struct Variant {
+#	if __cplusplus >= 201103L
+template <typename AllocatorT_ = Allocator<void>>
+#	else
+template <typename AllocatorT_ = Allocator<void> >
+#	endif
+struct Variant : Allocateable<AllocatorT_> {
 	public:
+	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(ThisType, Variant);
 
 	private:
@@ -136,7 +131,15 @@ struct Variant {
 #	endif
 
 	public:
-	Variant(ThisType const& origin_) : m_holder_(origin_.m_holder_->get_clone_()) {
+	Variant(ThisType const& origin_) : m_holder_(static_cast<HolderPointerType>(
+		AllocateAgent::basic_allocate(origin_.m_holder_->get_size_())
+	)) {
+		try {
+			origin_.m_holder_->clone_to_(m_holder_);
+		} catch (...) {
+			AllocateAgent::basic_deallocate(m_holder_, origin_.m_holder_->get_size_());
+			throw;
+		}
 	}
 
 #	if __cplusplus >= 201103L
@@ -148,24 +151,10 @@ struct Variant {
 	public:
 	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	Variant(ValueT__&& value___) : m_holder_(static_cast<HolderPointerType>(
-		VariantAllocator_::Basic::allocate(sizeof(VariantHolder_<DecayType<ValueT__>>))
-	)) {
-		try {
-			::DD::construct(static_cast<VariantHolder_<DecayType<ValueT__>>*>(m_holder_), forward<ValueT__>(value___));
-		} catch (...) {
-			VariantAllocator_::deallocate(m_holder_, sizeof(VariantHolder_<DecayType<ValueT__>>));
-		}
+	Variant(ValueT__&& value___) : m_holder_(make_holder_(::DD::forward<ValueT__>(value___))) {
 	}
 #	else
-	Variant(ValueT__ const& value___) : m_holder_(static_cast<HolderPointerType>(
-		VariantAllocator_::Basic::allocate(sizeof(VariantHolder_<DecayType<ValueT__>>))
-	)) {
-		try {
-			::DD::construct(static_cast<VariantHolder_<DecayType<ValueT__>>*>(m_holder_), value___);
-		} catch (...) {
-			VariantAllocator_::deallocate(m_holder_, sizeof(VariantHolder_<DecayType<ValueT__>>));
-		}
+	Variant(ValueT__ const& value___) : m_holder_(make_holder_(value___)) {
 	}
 #	endif
 
@@ -173,6 +162,30 @@ struct Variant {
 	public:
 	~Variant() DD_NOEXCEPT {
 		destruct();
+	}
+
+
+	private:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	HolderPointerType make_holder_(ValueT__&& value___) {
+		using ResultType_ = VariantHolder_<DecayType<ValueT__>>;
+#	else
+	HolderPointerType make_holder_(ValueT__ const& value___) {
+		typedef VariantHolder_<ValueT__> ResultType_;
+#	endif
+		ResultType_* result_ = static_cast<ResultType_*>(AllocateAgent::basic_allocate(sizeof(ResultType_)));
+		try {
+#	if __cplusplus >= 201103L
+			::DD::construct(result_, ::DD::forward<ValueT__>(value___));
+#	else
+			::DD::construct(result_, value___);
+#	endif
+		} catch (...) {
+			AllocateAgent::basic_deallocate(result_, sizeof(ResultType_));
+			throw;
+		}
+		return result_;
 	}
 
 
@@ -214,7 +227,7 @@ struct Variant {
 		if (is_valid()) {
 			SizeType size_ = m_holder_->get_size_();
 			::DD::destruct(m_holder_);
-			VariantAllocator_::deallocate(m_holder_, size_);
+			AllocateAgent::basic_deallocate(m_holder_, size_);
 		}
 	}
 
