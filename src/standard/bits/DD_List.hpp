@@ -150,7 +150,7 @@ struct List_<void> {
 
 	protected:
 	ProcessType reset_() DD_NOEXCEPT {
-		::DD::detail_::link_list_node_(sentry_(), sentry_());
+		::DD::detail_::link_list_(sentry_(), sentry_());
 	}
 
 
@@ -162,36 +162,36 @@ struct List_<void> {
 
 	protected:
 	static ProcessType link_(Iterator iterator_1_, Iterator iterator_2_) DD_NOEXCEPT {
-		::DD::detail_::link_list_node_(iterator_1_, iterator_2_);
+		::DD::detail_::link_list_(iterator_1_, iterator_2_);
 	}
 
 
 	protected:
 	static Iterator enlink_(Iterator position_, Iterator node_) DD_NOEXCEPT {
-		::DD::detail_::enlink_list_node_(position_, node_);
+		::DD::detail_::enlink_list_(position_, node_);
 		return node_;
 	}
 
 	protected:
 	static ProcessType enlink_(Iterator position_, Iterator first_, Iterator last_) DD_NOEXCEPT {
-		::DD::detail_::enlink_list_node_(position_, first_, last_);
+		::DD::detail_::enlink_list_(position_, first_, last_);
 	}
 
 
 	protected:
 	static ProcessType delink_(Iterator target_) DD_NOEXCEPT {
-		::DD::detail_::delink_list_node_(target_);
+		::DD::detail_::delink_list_(target_);
 	}
 
 	protected:
 	static ProcessType delink_(Iterator first_, Iterator last_) DD_NOEXCEPT {
-		::DD::detail_::delink_list_node_(first_, last_);
+		::DD::detail_::delink_list_(first_, last_);
 	}
 
 
 	protected:
 	static ProcessType unguarded_splice(Iterator position_, Iterator begin_, Iterator end_) DD_NOEXCEPT {
-		::DD::detail_::splice_list_node_(position_, begin_, end_);
+		::DD::detail_::splice_list_(position_, begin_, end_);
 	}
 
 	protected:

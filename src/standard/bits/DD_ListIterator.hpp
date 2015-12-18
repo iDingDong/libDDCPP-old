@@ -291,35 +291,35 @@ struct ListIterator : ListIterator<void>, EqualityComparable<ListIterator<ValueT
 
 
 template <typename ValueT_>
-inline ProcessType link_list_node_(ListIterator<ValueT_> iterator_1_, ListIterator<ValueT_> iterator_2_) DD_NOEXCEPT {
+inline ProcessType link_list_(ListIterator<ValueT_> iterator_1_, ListIterator<ValueT_> iterator_2_) DD_NOEXCEPT {
 	::DD::detail_::link_list_node_(iterator_1_.get_node_pointer(), iterator_2_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> new_node_) DD_NOEXCEPT {
+inline ProcessType enlink_list_(ListIterator<ValueT_> position_, ListIterator<ValueT_> new_node_) DD_NOEXCEPT {
 	::DD::detail_::enlink_list_node_(position_.get_node_pointer(), new_node_.get_node_pointer());
 }
 
 template <typename ValueT_>
-inline ProcessType enlink_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
+inline ProcessType enlink_list_(ListIterator<ValueT_> position_, ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
 	::DD::detail_::enlink_list_node_(position_.get_node_pointer(), first_.get_node_pointer(), last_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType delink_list_node_(ListIterator<ValueT_> node_) DD_NOEXCEPT {
+inline ProcessType delink_list_(ListIterator<ValueT_> node_) DD_NOEXCEPT {
 	::DD::detail_::delink_list_node_(node_.get_node_pointer());
 }
 
 template <typename ValueT_>
-inline ProcessType delink_list_node_(ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
+inline ProcessType delink_list_(ListIterator<ValueT_> first_, ListIterator<ValueT_> last_) DD_NOEXCEPT {
 	::DD::detail_::delink_list_node_(first_.get_node_pointer(), last_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline ProcessType unguarded_splice_list_node_(
+inline ProcessType unguarded_splice_list_(
 	ListIterator<ValueT_> position_,
 	ListIterator<ValueT_> begin_,
 	ListIterator<ValueT_> end_
@@ -329,9 +329,9 @@ inline ProcessType unguarded_splice_list_node_(
 
 
 template <typename ValueT_>
-inline ProcessType splice_list_node_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) DD_NOEXCEPT {
+inline ProcessType splice_list_(ListIterator<ValueT_> position_, ListIterator<ValueT_> begin_, ListIterator<ValueT_> end_) DD_NOEXCEPT {
 	if (begin_ != end_) {
-		unguarded_splice_list_node_(position_, begin_, end_);
+		unguarded_splice_list_(position_, begin_, end_);
 	}
 }
 
