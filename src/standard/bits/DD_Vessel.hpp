@@ -345,7 +345,9 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr Vessel(ThisType&& origin_) DD_NOEXCEPT_AS(AllocateAgent()) : SuperType(
+	constexpr Vessel(ThisType&& origin_) noexcept(
+		noexcept(AllocateAgent(::DD::move(origin_)))
+	) : AllocateAgent(::DD::move(origin_)), SuperType(
 		release(origin_.m_begin_),
 		release(origin_.m_end_),
 		release(origin_.m_storage_end_)

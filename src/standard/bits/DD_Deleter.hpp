@@ -7,7 +7,11 @@
 #	include "DD_Tags.hpp"
 #	include "DD_Value.hpp"
 #	include "DD_NeedInstance.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_forward.hpp"
+#	endif
 #	include "DD_Allocator.hpp"
+#	include "DD_destruct.hpp"
 
 
 

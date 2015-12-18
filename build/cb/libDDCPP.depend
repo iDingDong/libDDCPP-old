@@ -547,7 +547,7 @@
 	"DD_swap_target.hpp"
 	"DD_Range.hpp"
 
-1450445397 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_target.hpp
+1450454798 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_target.hpp
 	"DD_swap.hpp"
 
 1448257640 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition.hpp
@@ -791,7 +791,7 @@
 	"DD_StrictPointer.hpp"
 	"DD_Allocator.hpp"
 
-1450353593 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1450458900 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	<iostream>
@@ -800,8 +800,6 @@
 	"DD_AllocationFailure.hpp"
 	"DD_IsTriviallyDestructible.hpp"
 	"DD_debugger_definitions.hpp"
-	"DD_construct.hpp"
-	"DD_destruct.hpp"
 
 1444052538 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_RunTimeError.hpp"
@@ -1016,7 +1014,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450444595 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450457725 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1074,12 +1072,12 @@
 	"DD_And.hpp"
 	"DD_IsArithmetic.hpp"
 
-1450096400 d:\develop\repositories\libddcpp\src\standard\bits\dd_construct.hpp
+1450461843 d:\develop\repositories\libddcpp\src\standard\bits\dd_construct.hpp
 	"DD_forward.hpp"
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
 
-1443877860 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct.hpp
+1450461827 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct.hpp
 	"DD_IsTriviallyDestructible.hpp"
 	"DD_address_of.hpp"
 	"DD_IteratorValue.hpp"
@@ -1099,11 +1097,13 @@
 	"DD_fabricate.hpp"
 	"DD_RemoveReference.hpp"
 
-1450351056 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+1450459976 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
 	"DD_Tags.hpp"
 	"DD_Value.hpp"
 	"DD_NeedInstance.hpp"
+	"DD_forward.hpp"
 	"DD_Allocator.hpp"
+	"DD_destruct.hpp"
 
 1443937083 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
 	"DD_Conditional.hpp"
@@ -1176,7 +1176,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450445619 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450457728 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1431,8 +1431,9 @@
 	"DD_RemoveReference.hpp"
 	"DD_IteratorReverse.hpp"
 
-1449715095 d:\develop\repositories\libddcpp\src\standard\dditerator.hpp
+1450453081 d:\develop\repositories\libddcpp\src\standard\dditerator.hpp
 	"bits/DD_IteratorTrait.hpp"
+	"bits/DD_UniversalFreeAccessIterator.hpp"
 	"bits/DD_back_pusher.hpp"
 
 1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_back_pusher.hpp
@@ -1508,4 +1509,14 @@
 1450415455 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
 	"DD_NeedInstance.hpp"
 	"DD_Allocator.hpp"
+
+1450460166 d:\develop\repositories\libddcpp\src\standard\bits\dd_universalfreeaccessiterator.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_SpecificTypeNested.hpp"
+	"DD_Conditional.hpp"
+	"DD_Value.hpp"
+	"DD_IteratorCatagory.hpp"
+	"DD_Comparable.hpp"
+	"DD_BinaryOperators.hpp"
+	"DD_address_of.hpp"
 

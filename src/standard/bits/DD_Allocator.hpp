@@ -16,8 +16,6 @@
 #		include "DD_IsTriviallyDestructible.hpp"
 #	endif
 #	include "DD_debugger_definitions.hpp"
-#	include "DD_construct.hpp"
-#	include "DD_destruct.hpp"
 
 
 

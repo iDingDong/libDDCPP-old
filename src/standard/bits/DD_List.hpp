@@ -494,7 +494,9 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 #	if __cplusplus >= 201103L
 	public:
-	List(ThisType&& origin_) : SuperType(unguarded_tag) {
+	List(ThisType&& origin_) noexcept(
+		noexcept(AllocateAgent(::DD::move(origin_)))
+	) : AllocateAgent(::DD::move(origin_)), SuperType(unguarded_tag) {
 		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
 		origin_.reset_();
 	}

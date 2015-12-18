@@ -10,8 +10,7 @@
 
 DD_DETAIL_BEGIN_
 DD_MEMBER_FUNCTION_CHECK(HasSwapTarget1_, swap, ::DD::ProcessType, MACRO_ObjectT__ const&)
-DD_MEMBER_FUNCTION_CHECK(HasSwapTarget2_, swap, ::DD::ProcessType, MACRO_ObjectT__&)
-DD_MEMBER_FUNCTION_CHECK(HasSwapTarget3_, swap, ::DD::ProcessType, MACRO_ObjectT__)
+DD_MEMBER_FUNCTION_CHECK(HasSwapTarget2_, swap, ::DD::ProcessType, MACRO_ObjectT__)
 
 
 
@@ -50,10 +49,10 @@ inline ProcessType swap_target(
 	PointerT_ pointer_1__,
 	PointerT_ pointer_2__
 ) DD_NOEXCEPT_AS(SwapTarget_<
-	HasSwapTarget1_<PointerT_>::value || HasSwapTarget2_<PointerT_>::value || HasSwapTarget3_<PointerT_>::value
+	HasSwapTarget1_<PointerT_>::value || HasSwapTarget2_<PointerT_>::value
 >::swap_target(pointer_1__, pointer_2__)) {
 	SwapTarget_<
-		HasSwapTarget1_<PointerT_>::value || HasSwapTarget2_<PointerT_>::value || HasSwapTarget3_<PointerT_>::value
+		HasSwapTarget1_<PointerT_>::value || HasSwapTarget2_<PointerT_>::value
 	>::swap_target(pointer_1__, pointer_2__);
 }
 

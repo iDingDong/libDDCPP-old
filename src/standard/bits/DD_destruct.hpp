@@ -14,7 +14,7 @@ DD_DETAIL_BEGIN_
 template <ValidityType is_trivially_destructible_>
 struct Destruct_ {
 	template <typename PointerT_>
-	static ProcessType destruct(PointerT_ const& pointer__) DD_NOEXCEPT {
+	static ProcessType destruct(PointerT_ pointer__) DD_NOEXCEPT {
 		DD_ALIAS(ValueType, DD_MODIFY_TRAIT(IteratorValue, PointerT_));
 		pointer__->~ValueType();
 	}
@@ -47,12 +47,12 @@ struct Destruct_<true> {
 
 
 template <typename PointerT_>
-inline ProcessType destruct(PointerT_ const& pointer__) DD_NOEXCEPT {
+inline ProcessType destruct(PointerT_ pointer__) DD_NOEXCEPT {
 	Destruct_<IsTriviallyDestructible<DD_MODIFY_TRAIT(IteratorValue, PointerT_)>::value>::destruct(pointer__);
 }
 
 template <typename UndirectionalIteratorT_>
-inline ProcessType destruct(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ const& end__) DD_NOEXCEPT {
+inline ProcessType destruct(UndirectionalIteratorT_ begin__, UndirectionalIteratorT_ end__) DD_NOEXCEPT {
 	Destruct_<IsTriviallyDestructible<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT_)>::value>::destruct(begin__, end__);
 }
 

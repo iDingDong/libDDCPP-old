@@ -190,6 +190,7 @@
 		<Unit filename="../../src/standard/bits/DD_RemoveVolatile.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Result.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReverseIterator.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Ring.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SpecificTypeNested.hpp" />
@@ -207,6 +208,7 @@
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_UniversalFreeAccessIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UnusedIgnorer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Value.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ValueStorage.hpp" />
