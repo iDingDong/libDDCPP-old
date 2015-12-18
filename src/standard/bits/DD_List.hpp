@@ -738,10 +738,10 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	private:
 #	if __cplusplus >= 201103L
 	template <typename... ArgumentsT__>
-	static Iterator create_node_(ArgumentsT__&&... arguments___) {
+	Iterator create_node_(ArgumentsT__&&... arguments___) {
 #	else
 	template <typename ValueT__>
-	static Iterator create_node_(ValueT__ const& value___) {
+	Iterator create_node_(ValueT__ const& value___) {
 #	endif
 		NodePointerType new_node_ = static_cast<NodePointerType>(AllocateAgent::basic_allocate(sizeof(NodeType)));
 		try {
@@ -759,7 +759,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	private:
 	template <typename UndirectionalIteratorT__>
-	static ProcessType created_range_between_(
+	ProcessType created_range_between_(
 		Iterator head_,
 		Iterator tail_,
 		UndirectionalIteratorT__ begin___,
@@ -778,7 +778,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 	private:
-	static ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
+	ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
 		::DD::destruct(target_.unguarded_get_pointer());
 		AllocateAgent::basic_deallocate(target_.get_node_pointer(), sizeof(NodeType));
 	}
@@ -786,7 +786,10 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	private:
 	template <typename UndirectionalIteratorT__>
-	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(created_range_between_(
+	ProcessType clone_initialize_(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().created_range_between_(
 		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
 		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
 		begin___ DD_COMMA
@@ -865,20 +868,20 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	static Iterator emplace(Iterator position_, ArgumentsT__&&... arguments___) {
+	Iterator emplace(Iterator position_, ArgumentsT__&&... arguments___) {
 		return Iterator(SuperType::enlink_(position_, create_node_(::DD::forward<ArgumentsT__>(arguments___)...)));
 	}
 
 
 	public:
 	template <typename ValueT__>
-	static Iterator insert(Iterator position_, ValueT__&& value___) {
+	Iterator insert(Iterator position_, ValueT__&& value___) {
 		return emplace(position_, forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
-	static Iterator insert(Iterator position_, ValueT__ const& value___) {
+	Iterator insert(Iterator position_, ValueT__ const& value___) {
 		return Iterator(SuperType::enlink_(position_, create_node_(value___)));
 	}
 #	endif
@@ -920,7 +923,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	static ProcessType insert_range(
+	ProcessType insert_range(
 		Iterator position_,
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
@@ -930,7 +933,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	static ProcessType insert_range(Iterator position_, UndirectionalRangeT__& begin___) DD_NOEXCEPT_AS(
+	ProcessType insert_range(Iterator position_, UndirectionalRangeT__& begin___) DD_NOEXCEPT_AS(
 		insert_range(position_ DD_COMMA DD_SPLIT_RANGE(begin___))
 	) {
 		insert_range(position_, DD_SPLIT_RANGE(begin___));
@@ -962,14 +965,14 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 	public:
-	static ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::delink_(position_)) {
+	ProcessType erase(Iterator position_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::delink_(position_)) {
 		SuperType::delink_(position_);
 		destroy_node_(position_);
 	}
 
 
 	public:
-	static ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+	ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().SuperType::delink_(begin_ DD_COMMA --end_)
 	) {
 		if (begin_ != end_) {
