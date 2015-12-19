@@ -27,7 +27,7 @@
 
 DD_DETAIL_BEGIN_
 template <ValidityType can_trivially_operate_c_>
-struct DestructRing_ {
+struct RingOperation_ {
 	template <typename ValueT_>
 	ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
@@ -71,7 +71,7 @@ struct DestructRing_ {
 
 
 template <>
-struct DestructRing_<true> {
+struct RingOperation_<true> {
 	template <typename ValueT_>
 	ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
@@ -288,7 +288,7 @@ struct Ring_ {
 					new_end_
 				);
 			} catch (...) {
-				::DD::move_range(new_storage_begin_, new_end_, m_begin_);
+				::DD::destruct(new_storage_begin_, new_end_);
 				throw;
 			}
 		} else {
@@ -383,7 +383,7 @@ struct Ring_ {
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
 		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
-		DestructRing_<IsTriviallyDestructible<ValueType>::value>::destruct_element_(
+		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, --m_length_;
 		);
 	}
@@ -391,7 +391,7 @@ struct Ring_ {
 
 	private:
 	ProcessType destruct_() DD_NOEXCEPT {
-		DestructRing_<IsTriviallyDestructible<ValueType>::value>::destruct_ring_(
+		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_ring_(
 			m_storage_begin_, m_begin_, m_storage_end_, m_length_
 		);
 	}

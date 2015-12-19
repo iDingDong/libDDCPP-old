@@ -45,9 +45,6 @@ struct Transconstruct_ {
 #	endif
 				}
 			} catch (...) {
-#	if __cplusplus >= 201103L
-				move(destination____, current____, begin____);
-#	endif
 				::DD::destruct(destination____, current____);
 				throw;
 			}
@@ -113,7 +110,7 @@ struct Transconstruct_<true> {
 		ValueT__* destination___
 	) {
 		DD_MODIFY_TRAIT(IteratorDifference, ValueT__*) length_ = length_difference(begin___, end___);
-		std::memcpy(begin___, destination___, sizeof(ValueT__) * length_);
+		std::memcpy(destination___, begin___, sizeof(ValueT__) * length_);
 		return destination___ + length_;
 	}
 
