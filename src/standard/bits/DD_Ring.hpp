@@ -13,6 +13,15 @@
 #	include "DD_destruct.hpp"
 #	include "DD_UniversalFreeAccessIterator.hpp"
 #	include "DD_swap.hpp"
+#	include "DD_copy_length.hpp"
+#	include "DD_copy_construct_length.hpp"
+#	include "DD_transconstruct.hpp"
+
+
+
+#	if !defined(DDCPP_RING_GROWTH_RATIO)
+#		define DDCPP_RING_GROWTH_RATIO 2
+#	endif
 
 
 
@@ -41,6 +50,22 @@ struct DestructRing_ {
 	}
 
 
+	template <typename ValueT_>
+	ProcessType destruct_element_(
+		ValueT_* storage_begin_,
+		ValueT_* begin_,
+		ValueT_* storage_end_,
+		LengthType index_
+	) DD_NOEXCEPT {
+		right_offset_ = storage_end_ - begin_;
+		if (index_ < right_offset_) {
+			::DD::destruct(begin_ + index_);
+		} else {
+			::DD::destruct(storage_begin_ + length_ - right_offset_);
+		}
+	}
+
+
 };
 
 
@@ -53,6 +78,16 @@ struct DestructRing_<true> {
 		ValueT_* begin_,
 		ValueT_* storage_end_,
 		LengthType length_
+	) DD_NOEXCEPT {
+	}
+
+
+	template <typename ValueT_>
+	ProcessType destruct_element_(
+		ValueT_* storage_begin_,
+		ValueT_* begin_,
+		ValueT_* storage_end_,
+		LengthType index_
 	) DD_NOEXCEPT {
 	}
 
@@ -97,10 +132,7 @@ struct Ring_ {
 		m_storage_end_(origin_.m_storage_end_),
 		m_length_(origin_.m_length_)
 	{
-		origin_.m_storage_begin_ = PointerType();
-		origin_.m_begin_ = PointerType();
-		origin_.m_storage_end_ = PointerType();
-		origin_.m_length_ = LengthType();
+		origin_.reset_();
 	}
 
 	protected:
@@ -216,6 +248,15 @@ struct Ring_ {
 
 
 	protected:
+	ProcessType reset_() DD_NOEXCEPT {
+		m_storage_begin_ = PointerType();
+		m_begin_ = PointerType();
+		m_storage_end_ = PointerType();
+		m_length_ = LengthType();
+	}
+
+
+	protected:
 	ProcessType swap(ThisType& origin_) DD_NOEXCEPT {
 		::DD::swap(m_storage_begin_, origin_.m_storage_begin_);
 		::DD::swap(m_begin_, origin_.m_storage_end_);
@@ -224,13 +265,88 @@ struct Ring_ {
 	}
 
 
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_clone(UndirectionalIteratorT__ begin___, LengthType length_) {
+		right_offset_ = get_right_offset_();
+		if (length_ < get_length()) {
+			if (length_ < offset_) {
+			}
+		}
+	}
+
+
+	protected:
+	ProcessType transfer_to_(PointerType new_storage_begin_) {
+		LengthType right_offset_ = get_right_offset_();
+		if (right_offset_ < get_length()) {
+			PointerType new_end_ = ::DD::transconstruct(m_begin_, m_storage_end_, new_storage_begin_);
+			try {
+				::DD::transconstruct(
+					m_storage_begin_,
+					m_storage_begin_ + get_length() - right_offset_;
+					new_end_
+				);
+			} catch (...) {
+				::DD::move_range(new_storage_begin_, new_end_, m_begin_);
+				throw;
+			}
+		} else {
+			::DD::transconstruct(m_begin_, m_begin_ + get_length(), new_storage_begin_);
+		}
+		destruct_();
+	}
+
+
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	ProcessType unguarded_emplace_back() noexcept(noexcept(::DD::construct(
+	ProcessType unguarded_emplace_front(ArgumentsT__&&... arguments___) noexcept(noexcept(::DD::construct(
 		::DD::fabricate<ThisType>().get_pointer(::DD::fabricate<ThisType>().get_length()),
 		::DD::forward<ArgumentsT__>(arguments___)...)
 	)) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_emplace_front': Out of range");
+		PointerType m_position_ = m_begin_ - 1;
+		if (m_position_ < m_storage_begin_) {
+			m_position_ = m_storage_end_ - 1;
+		}
+		::DD::construct(m_position_, ::DD::forward<ArgumentsT__>(arguments___)...);
+		m_begin_ = m_position_;
+		++m_length_;
+	}
+
+	public:
+	template <typename ValueT__>
+	ProcessType unguarded_push_front(ValueT__&& value___) noexcept(
+		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_front(forward<ValueT__>(value___)))
+	) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_front': Out of range");
+		unguarded_emplace_front(forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType unguarded_push_front(ValueT__ const& value___) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_front': Out of range");
+		PointerType m_position_ = m_begin_ - 1;
+		if (m_position_ < m_storage_begin_) {
+			m_position_ = m_storage_end_ - 1;
+		}
+		::DD::construct(m_position_, value___);
+		m_begin_ = m_position_;
+		++m_length_;
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType unguarded_emplace_back(ArgumentsT__&&... arguments___) noexcept(noexcept(::DD::construct(
+		::DD::fabricate<ThisType>().get_pointer(::DD::fabricate<ThisType>().get_length()),
+		::DD::forward<ArgumentsT__>(arguments___)...)
+	)) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_emplace_back': Out of range");
 		::DD::construct(get_pointer(get_length()), ::DD::forward<ArgumentsT__>(arguments___)...);
 		++m_length_;
 	}
@@ -240,16 +356,37 @@ struct Ring_ {
 	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
 		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(forward<ValueT__>(value___)))
 	) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_back': Out of range");
 		unguarded_emplace_back(forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_back(ValueT__ const& value___) {
+		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_back': Out of range");
 		::DD::construct(get_pointer(get_length()), value___);
 		++m_length_;
 	}
 #	endif
+
+
+	public:
+	ProcessType pop_front() DD_NOEXCEPT {
+		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
+		::DD::destruct(m_begin_);
+		if (++m_begin_ == m_storage_end_) {
+			m_begin_ = m_storage_begin_;
+		}
+	}
+
+
+	public:
+	ProcessType pop_back() DD_NOEXCEPT {
+		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
+		DestructRing_<IsTriviallyDestructible<ValueType>::value>::destruct_element_(
+			m_storage_begin_, m_begin_, m_storage_end_, --m_length_;
+		);
+	}
 
 
 	private:
@@ -329,6 +466,151 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 #	endif
 
 
+	public:
+	~Ring() {
+		destruct_();
+	}
+
+
+	private:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, LengthType length_) {
+		if (length_ > 0) {
+			try {
+				this->m_storage_begin_ = AllocateAgent::allocate(length_);
+				try {
+					::DD::copy_construct_length(this->m_storage_begin_, this->m_begin_);
+				} catch (...) {
+					AllocateAgent::deallocate(this->m_storage_begin_, length_);
+				}
+				this->m_storage_end_ = this->m_storage_begin_ + length_;
+				this->m_begin_ = this->m_storage_begin_;
+				this->m_length_ = length_;
+			}
+		} else {
+			this->reset_();
+		}
+	}
+
+	private:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+		clone_initialize_(begin___, ::DD::length_difference(begin___, end___));
+	}
+
+	private:
+	template <typename UndirectionalRangeT__>
+	ProcessType clone_initialize_(UndirectionalRangeT__ const& range___) {
+		clone_initialize_(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType clone(UndirectionalIteratorT__ begin___, LengthType length_) {
+		reserve(length_);
+		SuperType::unguarded_clone(begin___, length_);
+	}
+
+
+	public:
+	ProcessType stretch(LengthType new_capacity_) {
+		PointerType new_storage_begin_ = AllocateAgent::allocate(new_capacity_);
+		try {
+			SuperType::transfer_to_(new_storage_begin_);
+		} catch (...) {
+			AllocateAgent::deallocate(new_storage_begin_, new_capacity_);
+			throw;
+		}
+		destruct_();
+	}
+
+
+	public:
+	ProcessType reserve() {
+		LengthType capacity_ = this->get_capacity();
+		if (capacity_) {
+			try {
+				stretch(capacity_ * (DDCPP_RING_GROWTH_RATIO));
+			} catch (AllocationFailure& exception_) {
+				stretch(capacity_ + 1);
+			}
+		} else {
+			stretch(1);
+		}
+	}
+
+	public:
+	ProcessType reserve(LengthType new_capacity_) {
+		if (this->get_capacity() < new_capacity_) {
+			stretch(new_capacity_);
+		}
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_front(ArgumentsT__&&... arguments___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		this->unguarded_emplace_front(::DD::forward<ArgumentsT__>(arguments___));
+	}
+
+	public:
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__&& value___) {
+		emplace_front(::DD::forward<ValueT___>(value___)...);
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType push_front(ValueT__ const& value___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		this->unguarded_push_front(value___);
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_back(ArgumentsT__&&... arguments___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___));
+	}
+
+	public:
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__&& value___) {
+		emplace_back(::DD::forward<ValueT___>(value___)...);
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType push_back(ValueT__ const& value___) {
+		if (this->is_full()) {
+			reserve();
+		}
+		this->unguarded_push_back(value___);
+	}
+#	endif
+
+
+	private:
+	ProcessType destruct_() DD_NOEXCEPT {
+		AllocateAgent::deallocate(this->m_storage_begin_, this->get_capacity());
+	}
+
+
+
+
+
 };
 
 
@@ -338,6 +620,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::Ring;
 
 
 

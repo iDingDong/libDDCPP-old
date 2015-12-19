@@ -586,7 +586,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 		if (capacity_) {
 			try {
 				stretch(capacity_ * (DDCPP_VESSEL_GROWTH_RATIO));
-			} catch (AllocationFailure& error_) {
+			} catch (AllocationFailure& exception_) {
 				stretch(capacity_ + 1);
 			}
 		} else {

@@ -39,6 +39,7 @@
 		<Unit filename="../../src/standard/DDList.hpp" />
 		<Unit filename="../../src/standard/DDMemory.hpp" />
 		<Unit filename="../../src/standard/DDMeta.hpp" />
+		<Unit filename="../../src/standard/DDRing.hpp" />
 		<Unit filename="../../src/standard/DDString.hpp" />
 		<Unit filename="../../src/standard/DDTrait.hpp" />
 		<Unit filename="../../src/standard/DDUtility.hpp" />
