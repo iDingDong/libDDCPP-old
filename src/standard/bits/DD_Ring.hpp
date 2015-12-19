@@ -431,6 +431,14 @@ struct Ring_ {
 	}
 
 
+	public:
+	ProcessType clear() DD_NOEXCEPT {
+		destruct_();
+		m_begin_ = m_storage_begin_;
+		m_length_ = 0;
+	}
+
+
 	private:
 	ProcessType destruct_() DD_NOEXCEPT {
 		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_ring_(
@@ -509,6 +517,58 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 
 	public:
+	Iterator begin() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::begin())) {
+		return Iterator(SuperType::begin());
+	}
+
+	public:
+	ConstIterator begin() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::begin())) {
+		return ConstIterator(SuperType::begin());
+	}
+
+
+	public:
+	Iterator end() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::end())) {
+		return Iterator(SuperType::end());
+	}
+
+	public:
+	ConstIterator end() const DD_NOEXCEPT_AS(ConstIterator(::DD::fabricate<ThisType const>().SuperType::end())) {
+		return ConstIterator(SuperType::end());
+	}
+
+
+	public:
+	DD_RANGE_NESTED
+
+
+	public:
+	ReverseIterator rbegin() DD_NOEXCEPT_AS(ReverseIterator(::DD::fabricate<ThisType>().SuperType::rbegin())) {
+		return ReverseIterator(SuperType::rbegin());
+	}
+
+	public:
+	ConstReverseIterator rbegin() const DD_NOEXCEPT_AS(ConstReverseIterator(::DD::fabricate<ThisType const>().SuperType::rbegin())) {
+		return ConstReverseIterator(SuperType::rbegin());
+	}
+
+
+	public:
+	ReverseIterator rend() DD_NOEXCEPT_AS(ReverseIterator(::DD::fabricate<ThisType>().SuperType::rend())) {
+		return ReverseIterator(SuperType::rend());
+	}
+
+	public:
+	ConstReverseIterator rend() const DD_NOEXCEPT_AS(ConstReverseIterator(::DD::fabricate<ThisType const>().SuperType::rend())) {
+		return ConstReverseIterator(SuperType::rend());
+	}
+
+
+	public:
+	DD_REVERSE_RANGE_NESTED
+
+
+	public:
 	~Ring() {
 		destruct_();
 	}
@@ -573,6 +633,9 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 			throw;
 		}
 		destruct_();
+		this->m_storage_begin_ = new_storage_begin_;
+		this->m_begin_ = this->m_storage_begin_;
+		this->m_storage_end_ = this->m_storage_begin_ + new_capacity_;
 	}
 
 

@@ -71,7 +71,7 @@ struct UniversalFreeAccessIterator :
 	public:
 	template <typename ContainerT__>
 	DD_CONSTEXPR UniversalFreeAccessIterator(
-		UniversalFreeAccessIterator<ContainerT__> const& origin_
+		UniversalFreeAccessIterator<ContainerT__, const_qualified_c_> const& origin_
 	) : m_target_(::DD::address_of(static_cast<ContainerReferenceType>(origin_.get_container()))), m_index_(origin_.get_index()) {
 	}
 
@@ -126,7 +126,7 @@ struct UniversalFreeAccessIterator :
 
 
 	public:
-	ValidityType DD_CONSTEXPR difference(ThisType const& other_) const DD_NOEXCEPT {
+	DifferenceType DD_CONSTEXPR difference(ThisType const& other_) const DD_NOEXCEPT {
 		return other_.get_index() - get_index();
 	}
 
@@ -206,30 +206,30 @@ struct UniversalFreeAccessIterator :
 
 
 
-template <typename ContainerT_>
+template <typename ContainerT_, ValidityType const_qualified_c_>
 inline ValidityType DD_CONSTEXPR operator ==(
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_1_,
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_2_
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_1_,
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_2_
 ) {
 	return iterator_1_.equal(iterator_2_);
 }
 
 
-template <typename ContainerT_>
+template <typename ContainerT_, ValidityType const_qualified_c_>
 inline ValidityType DD_CONSTEXPR operator <(
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_1_,
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_2_
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_1_,
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_2_
 ) {
 	return iterator_1_.less(iterator_2_);
 }
 
 
-template <typename ContainerT_>
+template <typename ContainerT_, ValidityType const_qualified_c_>
 inline typename UniversalFreeAccessIterator<ContainerT_>::DifferenceType DD_CONSTEXPR operator -(
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_1_,
-	UniversalFreeAccessIterator<ContainerT_> const& iterator_2_
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_1_,
+	UniversalFreeAccessIterator<ContainerT_, const_qualified_c_> const& iterator_2_
 ) {
-	return iterator_2_.distance(iterator_1_);
+	return iterator_2_.difference(iterator_1_);
 }
 
 

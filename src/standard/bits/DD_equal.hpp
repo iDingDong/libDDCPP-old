@@ -99,7 +99,7 @@ struct Equal_ {
 			FreeAccessIteratorT1___ end_1____,
 			FreeAccessIteratorT2___ begin_2____,
 			FreeAccessIteratorT2___ end_2____,
-			BinaryPredicate___ const& equal____
+			BinaryPredicate___ equal____
 		) DD_NOEXCEPT_AS(
 			equal____(
 				*(begin_1____ + length_difference(begin_1____ DD_COMMA end_1____)) DD_COMMA

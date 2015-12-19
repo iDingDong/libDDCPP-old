@@ -166,4 +166,44 @@ void test_container() {
 			throw "'DD::List' test failed.";
 		}
 	}
+	{
+		{
+			DD::Array<int, 5> arr_1 = { 1, 7, -12, 33, 5 };
+			DD::Ring<int> ring_1;
+			for (auto i : arr_1) {
+				ring_1.push_back(i);
+			}
+			if (!DD::equal(ring_1, arr_1)) {
+				throw "'DD::Ring' test failed.";
+			}
+
+			DD::Array<int, 6> arr_2 = { -222, 1, 7, -12, 33, 5 };
+			ring_1.push_front(arr_2[0]);
+			if (!DD::equal(ring_1, arr_2)) {
+				throw "'DD::Ring' test failed.";
+			}
+		}
+		{
+			DD::Ring<Test> ring_1;
+			ring_1.push_back(Test());
+			if (
+				ring_1.get_length() != 1 ||
+				Test::count != 1
+			) {
+				throw "'DD::Ring' test failed.";
+			}
+			ring_1.push_front(Test());
+			if (
+				ring_1.get_length() != 2 ||
+				Test::count != 2
+			) {
+				throw "'DD::Ring' test failed.";
+			}
+		}
+		if (
+			Test::count != 0
+		) {
+			throw "'DD::List' test failed.";
+		}
+	}
 }
