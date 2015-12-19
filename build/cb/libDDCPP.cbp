@@ -239,6 +239,7 @@
 		<Unit filename="../../src/standard/bits/DD_declare_value.hpp" />
 		<Unit filename="../../src/standard/bits/DD_dereference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_destruct.hpp" />
+		<Unit filename="../../src/standard/bits/DD_destruct_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_equal.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fabricate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fill.hpp" />

@@ -29,13 +29,13 @@ DD_DETAIL_BEGIN_
 template <ValidityType can_trivially_operate_c_>
 struct RingOperation_ {
 	template <typename ValueT_>
-	ProcessType destruct_ring_(
+	static ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
 		ValueT_* begin_,
 		ValueT_* storage_end_,
 		LengthType length_
 	) DD_NOEXCEPT {
-		right_offset_ = storage_end_ - begin_;
+		LengthType right_offset_ = storage_end_ - begin_;
 		if (right_offset_ < length_) {
 			do {
 				::DD::destruct(begin_);
@@ -51,17 +51,17 @@ struct RingOperation_ {
 
 
 	template <typename ValueT_>
-	ProcessType destruct_element_(
+	static ProcessType destruct_element_(
 		ValueT_* storage_begin_,
 		ValueT_* begin_,
 		ValueT_* storage_end_,
 		LengthType index_
 	) DD_NOEXCEPT {
-		right_offset_ = storage_end_ - begin_;
+		LengthType right_offset_ = storage_end_ - begin_;
 		if (index_ < right_offset_) {
 			::DD::destruct(begin_ + index_);
 		} else {
-			::DD::destruct(storage_begin_ + length_ - right_offset_);
+			::DD::destruct(storage_begin_ + index_ - right_offset_);
 		}
 	}
 
@@ -73,7 +73,7 @@ struct RingOperation_ {
 template <>
 struct RingOperation_<true> {
 	template <typename ValueT_>
-	ProcessType destruct_ring_(
+	static ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
 		ValueT_* begin_,
 		ValueT_* storage_end_,
@@ -83,7 +83,7 @@ struct RingOperation_<true> {
 
 
 	template <typename ValueT_>
-	ProcessType destruct_element_(
+	static ProcessType destruct_element_(
 		ValueT_* storage_begin_,
 		ValueT_* begin_,
 		ValueT_* storage_end_,
@@ -107,7 +107,7 @@ struct Ring_ {
 
 	protected:
 	DD_ALIAS(Iterator, UniversalFreeAccessIterator<ThisType>);
-	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType, true>);
+	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType DD_COMMA true>);
 	DD_ITERATOR_NESTED
 
 
@@ -173,24 +173,24 @@ struct Ring_ {
 
 
 	protected:
-	ReversIterator rbegin() DD_NOEXCEPT {
-		return ReversIterator(end() - 1);
+	ReverseIterator rbegin() DD_NOEXCEPT {
+		return ReverseIterator(end() - 1);
 	}
 
 	protected:
-	ConstReversIterator rbegin() DD_NOEXCEPT {
-		return ConstReversIterator(end() - 1);
+	ConstReverseIterator rbegin() const DD_NOEXCEPT {
+		return ConstReverseIterator(end() - 1);
 	}
 
 
 	protected:
-	ReversIterator rend() DD_NOEXCEPT {
-		return ReversIterator(begin() - 1);
+	ReverseIterator rend() DD_NOEXCEPT {
+		return ReverseIterator(begin() - 1);
 	}
 
 	protected:
-	ConstReversIterator rend() DD_NOEXCEPT {
-		return ConstReversIterator(begin() - 1);
+	ConstReverseIterator rend() const DD_NOEXCEPT {
+		return ConstReverseIterator(begin() - 1);
 	}
 
 
@@ -236,13 +236,13 @@ struct Ring_ {
 
 	public:
 	PointerType DD_CONSTEXPR get_pointer(LengthType index_) DD_NOEXCEPT {
-		LengthType right_offset_ = get_right_offset_()
+		LengthType right_offset_ = get_right_offset_();
 		return index_ < right_offset_ ? m_begin_ + index_ : m_storage_begin_ + index_ - right_offset_;
 	}
 
 	public:
 	ConstPointerType DD_CONSTEXPR get_pointer(LengthType index_) const DD_NOEXCEPT {
-		LengthType right_offset_ = get_right_offset_()
+		LengthType right_offset_ = get_right_offset_();
 		return index_ < right_offset_ ? m_begin_ + index_ : m_storage_begin_ + index_ - right_offset_;
 	}
 
@@ -265,14 +265,56 @@ struct Ring_ {
 	}
 
 
-	public:
+	protected:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_clone(UndirectionalIteratorT__ begin___, LengthType length_) {
-		right_offset_ = get_right_offset_();
-		if (length_ < get_length()) {
-			if (length_ < offset_) {
+		LengthType origin_length_ = get_length();
+		LengthType right_offset_ = get_right_offset_();
+		if (origin_length_ < right_offset_) {
+			if (origin_length_ < length_) {
+				begin___ = ::DD::copy_length(begin___, m_begin_, origin_length_);
+				if (right_offset_ < length_) {
+					begin___ = ::DD::copy_construct_length(begin___, m_begin_ + origin_length_, right_offset_ - origin_length_);
+					m_length_ = right_offset_;
+					::DD::copy_construct_length(begin___, m_storage_begin_, length_ - right_offset_);
+				} else {
+					::DD::copy_construct_length(begin___, m_begin_ + origin_length_, length_ - origin_length_);
+				}
+			} else {
+				::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_begin_ + origin_length_);
+			}
+		} else {
+			if (right_offset_ < length_) {
+				begin___ = ::DD::copy_length(begin___, m_begin_, right_offset_);
+				length_ -= right_offset_;
+				origin_length_ -= right_offset_;
+				if (origin_length_ < length_) {
+					PointerType position_;
+					::DD::mate(begin___, position_) = ::DD::copy_length(begin___, m_storage_begin_, origin_length_);
+					::DD::copy_construct_length(begin___, position_, length_ - origin_length_);
+				} else {
+					::DD::destruct(::DD::copy_length(begin___, m_storage_begin_, length_).second, m_storage_begin_ + origin_length_);
+				}
+			} else {
+				::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_storage_end_);
+				::DD::destruct(m_storage_begin_, m_storage_begin_ + origin_length_ - right_offset_);
 			}
 		}
+		m_length_ = length_;
+	}
+
+
+	protected:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_clone_without_circuit(UndirectionalIteratorT__ begin___, LengthType length_) {
+		if (get_length() < length_) {
+			PointerType position_;
+			::DD::mate(begin___, position_) = ::DD::copy_length(begin___, m_begin_, get_length());
+			::DD::copy_construct_length(begin___, position_, length_ - get_length());
+		} else {
+			::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_begin_ + get_length());
+		}
+		m_length_ = length_;
 	}
 
 
@@ -284,7 +326,7 @@ struct Ring_ {
 			try {
 				::DD::transconstruct(
 					m_storage_begin_,
-					m_storage_begin_ + get_length() - right_offset_;
+					m_storage_begin_ + get_length() - right_offset_,
 					new_end_
 				);
 			} catch (...) {
@@ -384,7 +426,7 @@ struct Ring_ {
 	ProcessType pop_back() DD_NOEXCEPT {
 		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
 		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_element_(
-			m_storage_begin_, m_begin_, m_storage_end_, --m_length_;
+			m_storage_begin_, m_begin_, m_storage_end_, --m_length_
 		);
 	}
 
@@ -432,7 +474,7 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(SuperType, Ring_<ValueT_>);
-	DD_ALIAS(ThisType, Ring<ValueT_, AllocatorT_>);
+	DD_ALIAS(ThisType, Ring<ValueT_ DD_COMMA AllocatorT_>);
 	DD_ALIAS(AllocatorType, AllocatorT_);
 
 	public:
@@ -445,7 +487,7 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 	public:
 	DD_ALIAS(Iterator, UniversalFreeAccessIterator<ThisType>);
-	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType, true>);
+	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType DD_COMMA true>);
 	DD_ITERATOR_NESTED
 
 
@@ -472,21 +514,25 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	}
 
 
+	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().swap(other_)) {
+		SuperType::swap(other_);
+	}
+
+
 	private:
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone_initialize_(UndirectionalIteratorT__ begin___, LengthType length_) {
 		if (length_ > 0) {
+			this->m_storage_begin_ = AllocateAgent::allocate(length_);
 			try {
-				this->m_storage_begin_ = AllocateAgent::allocate(length_);
-				try {
-					::DD::copy_construct_length(this->m_storage_begin_, this->m_begin_);
-				} catch (...) {
-					AllocateAgent::deallocate(this->m_storage_begin_, length_);
-				}
-				this->m_storage_end_ = this->m_storage_begin_ + length_;
-				this->m_begin_ = this->m_storage_begin_;
-				this->m_length_ = length_;
+				::DD::copy_construct_length(this->m_storage_begin_, this->m_begin_);
+			} catch (...) {
+				AllocateAgent::deallocate(this->m_storage_begin_, length_);
 			}
+			this->m_storage_end_ = this->m_storage_begin_ + length_;
+			this->m_begin_ = this->m_storage_begin_;
+			this->m_length_ = length_;
 		} else {
 			this->reset_();
 		}
@@ -508,8 +554,12 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone(UndirectionalIteratorT__ begin___, LengthType length_) {
-		reserve(length_);
-		SuperType::unguarded_clone(begin___, length_);
+		if (this->get_capacity() < length_) {
+			stretch(length_);
+			SuperType::unguarded_clone_without_circuit(begin___, length_);
+		} else {
+			SuperType::unguarded_clone(begin___, length_);
+		}
 	}
 
 
@@ -555,13 +605,13 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 		if (this->is_full()) {
 			reserve();
 		}
-		this->unguarded_emplace_front(::DD::forward<ArgumentsT__>(arguments___));
+		this->unguarded_emplace_front(::DD::forward<ArgumentsT__>(arguments___)...);
 	}
 
 	public:
 	template <typename ValueT__>
 	ProcessType push_front(ValueT__&& value___) {
-		emplace_front(::DD::forward<ValueT___>(value___)...);
+		emplace_front(::DD::forward<ValueT__>(value___));
 	}
 #	else
 	public:
@@ -582,13 +632,13 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 		if (this->is_full()) {
 			reserve();
 		}
-		this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___));
+		this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...);
 	}
 
 	public:
 	template <typename ValueT__>
 	ProcessType push_back(ValueT__&& value___) {
-		emplace_back(::DD::forward<ValueT___>(value___)...);
+		emplace_back(::DD::forward<ValueT__>(value___));
 	}
 #	else
 	public:
@@ -608,7 +658,16 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	}
 
 
+	public:
+	ThisType& operator =(ThisType const& origin_) {
+		clone(origin_);
+		return *this;
+	}
 
+	public:
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT {
+		swap(origin_);
+	}
 
 
 };

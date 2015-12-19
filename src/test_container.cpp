@@ -3,6 +3,7 @@
 
 #include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
+#include "standard/DDRing.hpp"
 #include "standard/DDVessel.hpp"
 #include "standard/DDList.hpp"
 #include "standard/DDUtility.hpp"
