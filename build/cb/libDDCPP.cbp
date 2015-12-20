@@ -337,7 +337,7 @@
 			<debugger />
 			<DoxyBlocks>
 				<comment_style block="1" line="1" />
-				<doxyfile_project />
+				<doxyfile_project output_directory="doxygen" />
 				<doxyfile_build />
 				<doxyfile_warnings />
 				<doxyfile_output />

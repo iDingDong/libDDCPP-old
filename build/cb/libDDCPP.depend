@@ -19,7 +19,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1450095593 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1450591391 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -86,7 +86,7 @@
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_adjacent_unique.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
+1450592012 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
