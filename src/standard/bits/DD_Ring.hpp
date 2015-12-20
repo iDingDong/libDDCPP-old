@@ -14,6 +14,7 @@
 #	include "DD_UniversalFreeAccessIterator.hpp"
 #	include "DD_max.hpp"
 #	include "DD_swap.hpp"
+#	include "DD_for_each.hpp"
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
 #	include "DD_transconstruct.hpp"
@@ -67,6 +68,29 @@ struct RingOperation_ {
 	}
 
 
+	template <typename ValueT_>
+	static ProcessType destruct_element_(
+		ValueT_* storage_begin_,
+		ValueT_* begin_,
+		ValueT_* storage_end_,
+		LengthType begin_index_,
+		LengthType end_index_
+	) DD_NOEXCEPT {
+		LengthType right_offset_ = storage_end_ - begin_;
+		if (begin_index_ < right_offset_) {
+			if (right_offset_ < end_index_) {
+				::DD::destruct(begin_ + begin_index_, storage_end_);
+				::DD::destruct(storage_begin_, storage_begin_ + end_index_ - right_offset_);
+			} else {
+				::DD::destruct(begin_ + begin_index_, begin_ + end_index_);
+			}
+		} else {
+			storage_begin_ -= right_offset_;
+			::DD::destruct(storage_begin_ + begin_index_, storage_begin_ + end_index_);
+		}
+	}
+
+
 };
 
 
@@ -110,6 +134,9 @@ struct Ring_ {
 	DD_ALIAS(Iterator, UniversalFreeAccessIterator<ThisType>);
 	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType DD_COMMA true>);
 	DD_ITERATOR_NESTED
+
+	protected:
+	static ValidityType DD_CONSTANT is_trivially_destructible_ = IsTriviallyDestructible<ValueType>::value;
 
 
 	protected:
@@ -284,22 +311,20 @@ struct Ring_ {
 			} else {
 				::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_begin_ + origin_length_);
 			}
-		} else {
-			if (right_offset_ < length_) {
-				begin___ = ::DD::copy_length(begin___, m_begin_, right_offset_);
-				length_ -= right_offset_;
-				origin_length_ -= right_offset_;
-				if (origin_length_ < length_) {
-					PointerType position_;
-					::DD::mate(begin___, position_) = ::DD::copy_length(begin___, m_storage_begin_, origin_length_);
-					::DD::copy_construct_length(begin___, position_, length_ - origin_length_);
-				} else {
-					::DD::destruct(::DD::copy_length(begin___, m_storage_begin_, length_).second, m_storage_begin_ + origin_length_);
-				}
+		} else if (right_offset_ < length_) {
+			begin___ = ::DD::copy_length(begin___, m_begin_, right_offset_);
+			length_ -= right_offset_;
+			origin_length_ -= right_offset_;
+			if (origin_length_ < length_) {
+				PointerType position_;
+				::DD::mate(begin___, position_) = ::DD::copy_length(begin___, m_storage_begin_, origin_length_);
+				::DD::copy_construct_length(begin___, position_, length_ - origin_length_);
 			} else {
-				::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_storage_end_);
-				::DD::destruct(m_storage_begin_, m_storage_begin_ + origin_length_ - right_offset_);
+				::DD::destruct(::DD::copy_length(begin___, m_storage_begin_, length_).second, m_storage_begin_ + origin_length_);
 			}
+		} else {
+			::DD::destruct(::DD::copy_length(begin___, m_begin_, length_).second, m_storage_end_);
+			::DD::destruct(m_storage_begin_, m_storage_begin_ + origin_length_ - right_offset_);
 		}
 		m_length_ = length_;
 	}
@@ -338,6 +363,27 @@ struct Ring_ {
 			::DD::transconstruct(m_begin_, m_begin_ + get_length(), new_storage_begin_);
 		}
 		destruct_();
+	}
+
+
+	public:
+	template <typename FunctionT_>
+	ProcessType for_each(LengthType begin_index_, LengthType end_index_, FunctionT_ function__) {
+		LengthType right_offset_ = get_right_offset_();
+		if (begin_index_ < right_offset_) {
+			if (right_offset_ < end_index_) {
+				return ::DD::for_each(
+					m_storage_begin_,
+					m_storage_begin_ + end_index_ - right_offset_,
+					::DD::for_each(m_begin_ + begin_index_, m_storage_end_, function__)
+				);
+			} else {
+				return ::DD::for_each(m_begin_ + begin_index_, m_begin_ + end_index_, function__);
+			}
+		} else {
+			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+			return ::DD::for_each(reference_frame_ + begin_index_, reference_frame_ + end_index_, function__);
+		}
 	}
 
 
@@ -420,15 +466,43 @@ struct Ring_ {
 		if (++m_begin_ == m_storage_end_) {
 			m_begin_ = m_storage_begin_;
 		}
+		--m_length_;
 	}
 
 
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
 		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
-		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_element_(
+		RingOperation_<is_trivially_destructible_>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, --m_length_
 		);
+	}
+
+
+	public:
+	ProcessType trim_front(LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ <= get_length(), "'DD::Ring::trim_back': Out of range");
+		LengthType right_offset_ = get_right_offset_();
+		if (right_offset_ < index_) {
+			::DD::destruct(m_begin_, m_storage_end_);
+			m_begin_ = m_storage_begin_ + index_ - right_offset_;
+			::DD::destruct(m_storage_begin_, m_begin_);
+		} else {
+			PointerType position_ = m_begin_ + index_;
+			::DD::destruct(m_begin_, position_);
+			m_begin_ = position_;
+		}
+		m_length_ -= index_;
+	}
+
+
+	public:
+	ProcessType trim_back(LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ <= get_length(), "'DD::Ring::trim_back': Out of range");
+		RingOperation_<is_trivially_destructible_>::destruct_element_(
+			m_storage_begin_, m_begin_, m_storage_end_, index_, m_length_
+		);
+		m_length_ = index_;
 	}
 
 
@@ -442,7 +516,7 @@ struct Ring_ {
 
 	private:
 	ProcessType destruct_() DD_NOEXCEPT {
-		RingOperation_<IsTriviallyDestructible<ValueType>::value>::destruct_ring_(
+		RingOperation_<is_trivially_destructible_>::destruct_ring_(
 			m_storage_begin_, m_begin_, m_storage_end_, m_length_
 		);
 	}

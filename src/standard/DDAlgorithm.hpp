@@ -32,6 +32,7 @@
 #	include "bits/DD_partition_point_by.hpp"
 #	include "bits/DD_is_sorted.hpp"
 #	include "bits/DD_is_sorted_until.hpp"
+#	include "bits/DD_for_each.hpp"
 #	include "bits/DD_copy_length.hpp"
 #	include "bits/DD_copy_construct_length.hpp"
 #	include "bits/DD_fill.hpp"

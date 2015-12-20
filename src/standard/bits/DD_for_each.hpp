@@ -8,27 +8,37 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename UnaryFunctionT_>
-inline ProcessType for_each(
+inline UnaryFunctionT_ for_each(
 	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ const& end__,
-	UnaryFunctionT_ const& function_
-) DD_NOEXCEPT_AS(++begin__ != end__, operation(*begin__)) {
+	UndirectionalIteratorT_ end__,
+	UnaryFunctionT_ function_
+) DD_NOEXCEPT_AS(++begin__ != end__ DD_COMMA function_(*begin__)) {
 	for (; begin__ != end__; ++begin__) {
 		function_(*begin__);
 	}
+	return function_;
 }
 
 
 
 template <typename UndirectionalRangeT_, typename UnaryFunctionT_>
-inline ProcessType for_each(
-	UndirectionalRangeT_ const& range__,
-	UnaryFunctionT_ const& function_
-) DD_NOEXCEPT(for_each(DD_SPLIT_RANGE(range__), function_)) {
-	for_each(DD_SPLIT_RANGE(range__), function_);
+inline UnaryFunctionT_ for_each(
+	UndirectionalRangeT_& range__,
+	UnaryFunctionT_ function_
+) DD_NOEXCEPT_AS(static_cast<UnaryFunctionT_>(::DD::detail_::for_each(DD_SPLIT_RANGE(range__) DD_COMMA function_))) {
+	return ::DD::detail_::for_each(DD_SPLIT_RANGE(range__), function_);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::for_each;
 
 
 
