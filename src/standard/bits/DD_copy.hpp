@@ -20,7 +20,7 @@
 
 
 DD_DETAIL_BEGIN_
-template <ValidityType is_memmoveable_c_>
+template <ValidityType can_trivially_operate_c_>
 struct Copy_ {
 	template <typename UndirectionalIteratorT1__, typename UndirectionalIteratorT2__>
 	static UndirectionalIteratorT2__ copy(

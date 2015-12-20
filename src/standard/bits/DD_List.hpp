@@ -947,13 +947,13 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 	public:
-	ProcessType pop_front() DD_NOEXCEPT_AS(erase(::DD::fabricate<ThisType>().begin())) {
+	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().erase(::DD::fabricate<ThisType>().begin())) {
 		erase(begin());
 	}
 
 
 	public:
-	ProcessType pop_back() DD_NOEXCEPT_AS(erase(::DD::previous(::DD::fabricate<ThisType>().end()))) {
+	ProcessType pop_back() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().erase(::DD::previous(::DD::fabricate<ThisType>().end()))) {
 		erase(::DD::previous(end()));
 	}
 

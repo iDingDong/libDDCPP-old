@@ -233,6 +233,8 @@
 		<Unit filename="../../src/standard/bits/DD_copy_construct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_copy_construct_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_copy_length.hpp" />
+		<Unit filename="../../src/standard/bits/DD_copy_overlapped_backward.hpp" />
+		<Unit filename="../../src/standard/bits/DD_copy_overlapped_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count_if.hpp" />
 		<Unit filename="../../src/standard/bits/DD_debugger_definitions.hpp" />
@@ -281,6 +283,7 @@
 		<Unit filename="../../src/standard/bits/DD_make_unique.hpp" />
 		<Unit filename="../../src/standard/bits/DD_max.hpp" />
 		<Unit filename="../../src/standard/bits/DD_median_target.hpp" />
+		<Unit filename="../../src/standard/bits/DD_memory_move.hpp" />
 		<Unit filename="../../src/standard/bits/DD_merge.hpp" />
 		<Unit filename="../../src/standard/bits/DD_meta_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_middle.hpp" />

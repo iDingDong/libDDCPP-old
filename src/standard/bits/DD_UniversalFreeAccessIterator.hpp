@@ -196,7 +196,7 @@ struct UniversalFreeAccessIterator :
 
 #	if __cplusplus >= 201103L
 	public:
-	DD_CONSTEXPR operator ValidityType() const DD_NOEXCEPT {
+	explicit DD_CONSTEXPR operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 

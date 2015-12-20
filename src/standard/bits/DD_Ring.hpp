@@ -18,6 +18,9 @@
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
 #	include "DD_transconstruct.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_move_range.hpp"
+#	endif
 
 
 
@@ -476,6 +479,37 @@ struct Ring_ {
 		RingOperation_<is_trivially_destructible_>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, --m_length_
 		);
+	}
+
+
+	public:
+	ProcessType erase(LengthType index_) {
+		DD_ASSERT(index_ < get_length(), "'DD::Ring::erase': Out of range");
+		LengthType right_offset_ = get_right_offset_();
+		if (index_ < right_offset_) {
+			PointerType position_ = m_begin_ + index_;
+			DD_ALIAS(ReverseIterator_, DD_MODIFY_TRAIT(IteratorReverse, PointerType));
+			::DD::move_range(
+				ReverseIterator_(position_ - 1),
+				ReverseIterator_(m_begin_ - 1),
+				ReverseIterator_(position_)
+			);
+			pop_front();
+		} else {
+			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+			::DD::move_range(
+				reference_frame_ + index_ + 1,
+				reference_frame_ + get_length(),
+				reference_frame_ + index_
+			);
+			::DD::destruct(reference_frame_ + --m_length_);
+		}
+	}
+
+
+	public:
+	static ProcessType erase(Iterator position_) {
+		position_.get_container().erase(position_.get_index());
 	}
 
 

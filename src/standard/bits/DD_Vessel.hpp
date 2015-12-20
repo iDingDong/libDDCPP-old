@@ -629,15 +629,29 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 
 #	endif
+
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_front(ArgumentsT__&&... arguments___) noexcept(noexcept(
+		fabricate<ThisType>().emplace(fabricate<ThisType>().begin(), forward<ArgumentsT__>(arguments___)...)
+	)) {
+		emplace(this->begin(), forward<ArgumentsT__>(arguments___)...);
+	}
+
+
 	public:
 	template <typename ValueT__>
-#	if __cplusplus >= 201103L
 	ProcessType push_front(ValueT__&& value__) noexcept(
-		noexcept(::DD::fabricate<ThisType>(insert(::DD::fabricate<ThisType>().begin(), forward<ValueT__>(value__))))
+		noexcept(::DD::fabricate<ThisType>().emplace_front(forward<ValueT__>(value__)))
 	) {
-		insert(this->begin(), forward<ValueT__>(value__));
+		emplace_front(forward<ValueT__>(value__));
 	}
 #	else
+	public:
+	template <typename ValueT__>
 	ProcessType push_front(ValueT__&& value__) {
 		insert(this->begin(), value__);
 	}
@@ -680,26 +694,40 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 #	endif
 
 
-	public:
-	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	Iterator insert(Iterator position_, ValueT__&& value__) {
-#	else
-	Iterator insert(Iterator position_, ValueT__ const& value__) {
-#	endif
+	public:
+	template <typename... ArgumentsT__>
+	Iterator emplace(Iterator position_, ArgumentsT__&&... arguments___) {
 		if (this->is_full()) {
 			LengthType index_ = position_ - this->begin();
 			reserve();
 			position_ = this->begin() + index_;
 		}
-#	if __cplusplus >= 201103L
-		push_back(forward<ValueT__>(value__));
-#	else
-		push_back(value__);
-#	endif
+		unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...);
 		transfer_backward(this->end() - 1, position_);
 		return position_;
 	}
+
+
+	public:
+	template <typename ValueT__>
+	Iterator insert(Iterator position_, ValueT__&& value___) {
+		return emplace(position_, forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	Iterator insert(Iterator position_, ValueT__ const& value___) {
+		if (this->is_full()) {
+			LengthType index_ = position_ - this->begin();
+			reserve();
+			position_ = this->begin() + index_;
+		}
+		unguarded_push_back(value___);
+		transfer_backward(this->end() - 1, position_);
+		return position_;
+	}
+#	endif
 
 
 	public:

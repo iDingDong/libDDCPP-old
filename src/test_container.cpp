@@ -1,5 +1,6 @@
 #include "test_container.h"
 #include "test_object.hpp"
+#include "test_algorithm.h"
 
 #include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
@@ -204,6 +205,144 @@ void test_container() {
 			Test::count != 0
 		) {
 			throw "'DD::List' test failed.";
+		}
+	}
+
+	{
+		{
+			DD::Vessel<int> ves;
+			DD::List<int> lst;
+			DD::Ring<int> ring;
+			ves.push_back(1);
+			lst.push_back(1);
+			ring.push_back(1);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_front(2);
+			lst.push_front(2);
+			ring.push_front(2);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_back(3);
+			lst.push_back(3);
+			ring.push_back(3);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_front(4);
+			lst.push_front(4);
+			ring.push_front(4);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_back(5);
+			lst.push_back(5);
+			ring.push_back(5);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_front(6);
+			lst.push_front(6);
+			ring.push_front(6);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_back(7);
+			lst.push_back(7);
+			ring.push_back(7);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.push_front(8);
+			lst.push_front(8);
+			ring.push_front(8);
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.pop_back();
+			lst.pop_back();
+			ring.pop_back();
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.pop_front();
+			lst.pop_front();
+			ring.pop_front();
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.pop_back();
+			lst.pop_back();
+			ring.pop_back();
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.pop_front();
+			lst.pop_front();
+			ring.pop_front();
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.erase(::DD::next(ves.begin()));
+			lst.erase(::DD::next(lst.begin()));
+			ring.erase(::DD::next(ring.begin()));
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
 		}
 	}
 }

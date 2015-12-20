@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450100845 source:d:\develop\repositories\libddcpp\src\main.cpp
+1450594158 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDHub.hpp"
@@ -524,7 +524,7 @@
 1448255762 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_Range.hpp"
 
-1448165873 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1450598888 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_IsSame.hpp"
 	"DD_IsPointer.hpp"
@@ -586,7 +586,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_memory.h
 
-1450100400 d:\develop\repositories\libddcpp\src\test_algorithm.h
+1450609886 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/DDIterator.hpp"
 	"standard/DDUtility.hpp"
 	"standard/DDHub.hpp"
@@ -1015,7 +1015,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450519278 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450608951 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1177,7 +1177,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450457728 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450609390 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1325,7 +1325,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450539915 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450609427 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1512,7 +1512,7 @@
 	"DD_NeedInstance.hpp"
 	"DD_Allocator.hpp"
 
-1450539513 d:\develop\repositories\libddcpp\src\standard\bits\dd_universalfreeaccessiterator.hpp
+1450609712 d:\develop\repositories\libddcpp\src\standard\bits\dd_universalfreeaccessiterator.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_SpecificTypeNested.hpp"
 	"DD_Conditional.hpp"
@@ -1525,7 +1525,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450588825 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450609767 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1540,6 +1540,7 @@
 	"DD_copy_length.hpp"
 	"DD_copy_construct_length.hpp"
 	"DD_transconstruct.hpp"
+	"DD_move_range.hpp"
 
 1450588801 d:\develop\repositories\libddcpp\src\standard\bits\dd_for_each.hpp
 	"DD_Range.hpp"
