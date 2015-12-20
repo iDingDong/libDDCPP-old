@@ -19,9 +19,9 @@
 #	include "DD_get_pointer.hpp"
 #	include "DD_check_bound.hpp"
 #	include "DD_transconstruct.hpp"
-#	include "DD_transfer.hpp"
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
+#	include "DD_transfer_backward.hpp"
 
 
 
@@ -798,19 +798,19 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	public:
 	ProcessType erase(Iterator position_) {
 		DD_ASSERT(::DD::check_bound(*this, position_), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
-		transfer_forward(position_, this->end() - 1);
+		::DD::move_overlapped_forward(position_ + 1, this->end(), position_);
 		pop_back();
 	}
 
 
 	public:
 	ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().trim_back(move_range(end_ DD_COMMA ::DD::fabricate<ThisType>().end() DD_COMMA begin_))
+		::DD::fabricate<ThisType>().trim_back(move_overlapped_forward(end_ DD_COMMA ::DD::fabricate<ThisType>().end() DD_COMMA begin_))
 	) {
 #	if __cplusplus >= 201103L
-		trim_back(move_range(end_, this->end(), begin_));
+		trim_back(::DD::move_overlapped_forward(end_, this->end(), begin_));
 #	else
-		trim_back(copy(end_, this->end(), begin_));
+		trim_back(::DD::copy_overlapped_forward(end_, this->end(), begin_));
 #	endif
 	}
 

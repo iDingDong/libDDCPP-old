@@ -19,7 +19,11 @@
 #	include "DD_copy_construct_length.hpp"
 #	include "DD_transconstruct.hpp"
 #	if __cplusplus >= 201103L
-#		include "DD_move_range.hpp"
+#		include "DD_move_overlapped_backward.hpp"
+#		include "DD_move_overlapped_forward.hpp"
+#	else
+#		include "DD_copy_overlapped_backward.hpp"
+#		include "DD_copy_overlapped_forward.hpp"
 #	endif
 
 
@@ -488,16 +492,23 @@ struct Ring_ {
 		LengthType right_offset_ = get_right_offset_();
 		if (index_ < right_offset_) {
 			PointerType position_ = m_begin_ + index_;
-			DD_ALIAS(ReverseIterator_, DD_MODIFY_TRAIT(IteratorReverse, PointerType));
-			::DD::move_range(
-				ReverseIterator_(position_ - 1),
-				ReverseIterator_(m_begin_ - 1),
-				ReverseIterator_(position_)
+#	if __cplusplus >= 201103L
+			::DD::move_overlapped_backward(
+#	else
+			::DD::copy_overlapped_backward(
+#	endif
+				m_begin_,
+				position_,
+				position_ + 1
 			);
 			pop_front();
 		} else {
 			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
-			::DD::move_range(
+#	if __cplusplus >= 201103L
+			::DD::move_overlapped_forward(
+#	else
+			::DD::copy_overlapped_forward(
+#	endif
 				reference_frame_ + index_ + 1,
 				reference_frame_ + get_length(),
 				reference_frame_ + index_
@@ -510,6 +521,59 @@ struct Ring_ {
 	public:
 	static ProcessType erase(Iterator position_) {
 		position_.get_container().erase(position_.get_index());
+	}
+
+
+	public:
+	ProcessType erase_range(LengthType begin_index_, LengthType end_index_) {
+		LengthType right_offset_ = get_right_offset_();
+		if (begin_index_ < right_offset_) {
+			if (right_offset_ < end_index_) {
+				::DD::destruct(
+					m_begin_,
+#	if __cplusplus >= 201103L
+					::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
+#	else
+					::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
+#	endif
+				);
+			} else {
+				::DD::destruct(
+					m_begin_,
+#	if __cplusplus >= 201103L
+					::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
+#	else
+					::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
+#	endif
+				);
+				LengthType origin_length_ = get_length();
+				m_length_ -= right_offset_ - begin_index_;
+				PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+				::DD::destruct(
+#	if __cplusplus >= 201103L
+					::DD::move_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
+#	else
+					::DD::copy_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
+#	endif
+					reference_frame_ + get_length()
+				);
+				m_length_ -= end_index_ - right_offset_;
+			}
+		} else {
+			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+			::DD::destruct(
+#	if __cplusplus >= 201103L
+				::DD::move_overlapped_forward(
+#	else
+				::DD::copy_overlapped_forward(
+#	endif
+					reference_frame_ + end_index_,
+					reference_frame_ + get_length(),
+					reference_frame_ + begin_index_
+				),
+				reference_frame_ + get_length()
+			);
+		}
 	}
 
 

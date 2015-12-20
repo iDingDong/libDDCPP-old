@@ -291,6 +291,8 @@
 		<Unit filename="../../src/standard/bits/DD_min_max.hpp" />
 		<Unit filename="../../src/standard/bits/DD_mismatch.hpp" />
 		<Unit filename="../../src/standard/bits/DD_move.hpp" />
+		<Unit filename="../../src/standard/bits/DD_move_overlapped_backward.hpp" />
+		<Unit filename="../../src/standard/bits/DD_move_overlapped_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_move_range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next_permutation.hpp" />

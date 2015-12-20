@@ -5,7 +5,7 @@
 
 
 #	include "DD_IsPointer.hpp"
-#	include "DD_IsTriviallyCopyable.hpp"
+#	include "DD_IsTriviallyCopyAssignable.hpp"
 #	include "DD_IsFreeAccessIterator.hpp"
 #	include "DD_Iterator.hpp"
 #	include "DD_IteratorValue.hpp"
@@ -18,16 +18,16 @@
 DD_DETAIL_BEGIN_
 template <ValidityType can_trivially_operate_c_>
 struct CopyOverlappedForward_ {
-	template <typename BidirectionalIteratorT__>
-	static BidirectionalIteratorT__ copy_overlapped_forward(
-		BidirectionalIteratorT__ begin___,
-		BidirectionalIteratorT__ end___,
-		BidirectionalIteratorT__ result_end___
+	template <typename UndirectionalIteratorT__>
+	static UndirectionalIteratorT__ copy_overlapped_forward(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___,
+		UndirectionalIteratorT__ result_begin___
 	) {
-		while (begin___ != end___) {
-			*--result_end___ = *--end___;
+		for (; begin___ != end___; ++begin___, ++result_begin___) {
+			*result_begin___ = *begin___;
 		}
-		return result_end___;
+		return result_begin___;
 	}
 
 
@@ -41,10 +41,10 @@ struct CopyOverlappedForward_<true> {
 	static PointerT__ copy_overlapped_forward(
 		PointerT__ begin___,
 		PointerT__ end___,
-		PointerT__ result_end___
+		PointerT__ result_begin___
 	) {
-		DD::memory_move(begin___, end___, result_end__ -= (end___ - begin___));
-		return result_end__;
+		DD::memory_move(begin___, end___, result_begin___);
+		return result_begin___ + (end___ - begin___);
 	}
 
 
@@ -52,21 +52,30 @@ struct CopyOverlappedForward_<true> {
 
 
 
-template <typename BidirectionalIteratorT_>
-BidirectionalIteratorT_ copy_overlapped_forward(
-	BidirectionalIteratorT_ begin__,
-	BidirectionalIteratorT_ end__,
-	BidirectionalIteratorT_ result_end__
+template <typename UndirectionalIteratorT_>
+UndirectionalIteratorT_ copy_overlapped_forward(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__,
+	UndirectionalIteratorT_ result_begin__
 ) {
 	return CopyOverlappedForward_<
-		IsPointer<UndirectionalIteratorT1_, UndirectionalIteratorT2_>::value &&
-		IsTriviallyCopyable<ValueType>::value>
-	>::copy_overlapped_forward(begin__, end__, result_end__)
+		IsPointer<UndirectionalIteratorT_>::value &&
+		IsTriviallyCopyAssignable<DD_MODIFY_TRAIT(IteratorValue, UndirectionalIteratorT_)>::value
+	>::copy_overlapped_forward(begin__, end__, result_begin__);
 }
 
 
 
 DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::copy_overlapped_forward;
+
+
+
+DD_END_
 
 
 

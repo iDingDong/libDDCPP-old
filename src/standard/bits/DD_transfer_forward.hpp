@@ -9,9 +9,9 @@
 #	endif
 #	include "DD_next.hpp"
 #	if __cplusplus >= 201103L
-#		include "DD_move_range.hpp"
+#		include "DD_move_overlapped_forward.hpp"
 #	else
-#		include "DD_copy.hpp"
+#		include "DD_copy_overlapped_forward.hpp"
 #	endif
 
 
@@ -21,11 +21,11 @@ template <typename UndirectionalIteratorT_>
 inline ProcessType transfer_forward(UndirectionalIteratorT_ from_, UndirectionalIteratorT_ to_) {
 #	if __cplusplus >= 201103L
 	auto temp_(::DD::move(*from_));
-	::DD::move_range(::DD::next(from_), ::DD::next(to_), from_);
+	::DD::move_overlapped_forward(::DD::next(from_), ::DD::next(to_), from_);
 	*to_ = ::DD::move(temp_);
 #	else
 	typename IteratorValue<UndirectionalIteratorT_>::Type temp_ = *from_;
-	copy(next(from_), next(to_), from_);
+	::DD::copy_overlapped_forward(next(from_), next(to_), from_);
 	*to_ = temp_;
 #	endif
 }
