@@ -1324,7 +1324,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450539724 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450539915 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"standard/DDHub.hpp"
@@ -1524,7 +1524,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450539683 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450582650 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1533,6 +1533,7 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 	"DD_UniversalFreeAccessIterator.hpp"
+	"DD_max.hpp"
 	"DD_swap.hpp"
 	"DD_copy_length.hpp"
 	"DD_copy_construct_length.hpp"

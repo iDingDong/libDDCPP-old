@@ -12,6 +12,7 @@
 #	include "DD_construct.hpp"
 #	include "DD_destruct.hpp"
 #	include "DD_UniversalFreeAccessIterator.hpp"
+#	include "DD_max.hpp"
 #	include "DD_swap.hpp"
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
@@ -658,6 +659,17 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 		if (this->get_capacity() < new_capacity_) {
 			stretch(new_capacity_);
 		}
+	}
+
+
+	public:
+	ProcessType shrink() {
+		stretch(this->get_length());
+	}
+
+	public:
+	ProcessType shrink(LengthType length_) {
+		stretch(::DD::max(length_, this->get_length()));
 	}
 
 
