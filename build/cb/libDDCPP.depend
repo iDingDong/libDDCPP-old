@@ -1528,7 +1528,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450696777 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450716596 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1541,6 +1541,7 @@
 	"DD_max.hpp"
 	"DD_swap.hpp"
 	"DD_for_each.hpp"
+	"DD_length_difference.hpp"
 	"DD_copy_length.hpp"
 	"DD_copy_construct_length.hpp"
 	"DD_transconstruct.hpp"

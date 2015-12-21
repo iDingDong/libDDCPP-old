@@ -16,6 +16,7 @@
 #	include "DD_max.hpp"
 #	include "DD_swap.hpp"
 #	include "DD_for_each.hpp"
+#	include "DD_length_difference.hpp"
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
 #	include "DD_transconstruct.hpp"
@@ -155,6 +156,11 @@ struct Ring_ {
 
 
 	protected:
+	template <typename ValueT__>
+	friend struct Ring_;
+
+
+	protected:
 	DD_CONSTEXPR Ring_() DD_NOEXCEPT : m_storage_begin_(), m_begin_(), m_storage_end_(), m_length_() {
 	}
 
@@ -261,6 +267,12 @@ struct Ring_ {
 	protected:
 	LengthType DD_CONSTEXPR get_right_offset_() const DD_NOEXCEPT {
 		return m_storage_end_ - m_begin_;
+	}
+
+
+	public:
+	ValidityType DD_CONSTEXPR is_contigious() const DD_NOEXCEPT {
+		return get_length() <= get_right_offset_();
 	}
 
 
@@ -398,23 +410,36 @@ struct Ring_ {
 
 
 	public:
-	template <typename FunctionT_>
-	ProcessType for_each(LengthType begin_index_, LengthType end_index_, FunctionT_ function__) {
+	template <typename FunctionT__>
+	ProcessType for_each(FunctionT__ function___) {
+		LengthType right_offset_ = get_right_offset_();
+		if (right_offset_ < get_length()) {
+			return ::DD::for_each(
+				m_storage_begin_,
+				m_storage_begin_ + m_length_ - right_offset_,
+				::DD::for_each(m_begin_, m_storage_end_, function___)
+			);
+		}
+		return ::DD::for_each(m_begin_, m_begin_ + get_length(), function___);
+	}
+
+	public:
+	template <typename FunctionT__>
+	ProcessType for_each(LengthType begin_index_, LengthType end_index_, FunctionT__ function___) {
 		LengthType right_offset_ = get_right_offset_();
 		if (begin_index_ < right_offset_) {
 			if (right_offset_ < end_index_) {
 				return ::DD::for_each(
 					m_storage_begin_,
 					m_storage_begin_ + end_index_ - right_offset_,
-					::DD::for_each(m_begin_ + begin_index_, m_storage_end_, function__)
+					::DD::for_each(m_begin_ + begin_index_, m_storage_end_, function___)
 				);
 			} else {
-				return ::DD::for_each(m_begin_ + begin_index_, m_begin_ + end_index_, function__);
+				return ::DD::for_each(m_begin_ + begin_index_, m_begin_ + end_index_, function___);
 			}
-		} else {
-			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
-			return ::DD::for_each(reference_frame_ + begin_index_, reference_frame_ + end_index_, function__);
 		}
+		PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+		return ::DD::for_each(reference_frame_ + begin_index_, reference_frame_ + end_index_, function___);
 	}
 
 
@@ -543,6 +568,65 @@ struct Ring_ {
 
 
 	public:
+	template <typename ValueT__>
+	ProcessType unguarded_concatenate_front(
+		UniversalFreeAccessIterator<Ring_<ValueT__> const> begin___,
+		LengthType length_
+	) {
+		LengthType left_offset_ = get_left_offset_();
+		typename UniversalFreeAccessIterator<
+			Ring_<ValueT__> const
+		>::PointerType origin_begin_ = begin___.get_container().m_begin_;
+		LengthType origin_right_offset_ = begin___.get_container().m_storage_end_ - origin_begin_;
+		if (left_offset_ < length_) {
+			if (origin_right_offset_ < length_) {
+				if (left_offset_ < origin_right_offset_) {
+					::DD::copy_construct_length(origin_begin_, m_storage_begin_, left_offset_);
+					m_begin_ = m_storage_begin_;
+					m_length_ += left_offset_;
+					origin_right_offset_ -= left_offset_;
+					::DD::copy_construct_length(origin_begin_ + left_offset_, m_storage_end_ - origin_right_offset_, origin_right_offset_);
+					m_begin_ = m_storage_end_ - origin_right_offset_;
+					m_length_ += origin_right_offset_;
+					length_ -= (origin_right_offset_ + left_offset_);
+					::DD::copy_construct_length(begin___.get_container().m_storage_begin_, m_begin_ - length_, length_);
+					m_begin_ -= length_;
+				} else {
+					::DD::copy_construct_length(origin_begin_, m_begin_ - origin_right_offset_, origin_right_offset_);
+					m_begin_ -= origin_right_offset_;
+					m_length_ += origin_right_offset_;
+					origin_begin_ = ::DD::copy_construct_length(
+						begin___.get_container().m_storage_begin_, m_storage_begin_, left_offset_ - origin_right_offset_
+					).first;
+					m_begin_ = m_storage_begin_;
+					m_length_ += (left_offset_ - origin_right_offset_);
+					length_ -= left_offset_;
+					::DD::copy_construct_length(origin_begin_, m_storage_end_ - length_, length_);
+					m_begin_ = m_storage_end_ - length_;
+				}
+			} else {
+				::DD::copy_construct_length(origin_begin_, m_storage_begin_, left_offset_);
+				m_begin_ = m_storage_begin_;
+				m_length_ += left_offset_;
+				length_ -= left_offset_;
+				::DD::copy_construct_length(origin_begin_ + left_offset_, m_storage_end_ - length_, length_);
+				m_begin_ = m_storage_end_ - length_;
+			}
+		} else {
+			if (origin_right_offset_ < length_) {
+				::DD::copy_construct_length(origin_begin_, m_begin_ - origin_right_offset_, origin_right_offset_);
+				m_begin_ -= origin_right_offset_;
+				m_length_ += origin_right_offset_;
+				origin_begin_ = begin___.get_container().m_storage_begin_;
+				length_ -= origin_right_offset_;
+			}
+			::DD::copy_construct_length(origin_begin_, m_begin_ - length_, length_);
+			m_begin_ -= length_;
+		}
+		m_length_ += length_;
+	}
+
+	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_front(UndirectionalIteratorT__ begin___, LengthType length_) {
 		LengthType left_offset_ = get_left_offset_();
@@ -557,6 +641,25 @@ struct Ring_ {
 		}
 	}
 
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_concatenate_front(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().unguarded_concatenate_front(
+		begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___)
+	)) {
+		unguarded_concatenate_front(begin___, ::DD::length_difference(begin___, end___));
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType unguarded_concatenate_front(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().unguarded_concatenate_front(DD_SPLIT_RANGE(range___))
+	) {
+		unguarded_concatenate_front(DD_SPLIT_RANGE(range___));
+	}
+
 
 	private:
 	template <typename UndirectionalIteratorT__>
@@ -565,19 +668,85 @@ struct Ring_ {
 		LengthType length_
 	) DD_NOEXCEPT_AS(::DD::copy_construct_length(begin___, m_begin_ - length_, length_)) {
 		::DD::copy_construct_length(begin___, m_begin_ + get_length(), length_);
-		m_begin_ += length_;
+		m_length_ += length_;
 	}
 
+
+	public:
+	template <typename ValueT__>
+	ProcessType unguarded_concatenate_back(
+		UniversalFreeAccessIterator<Ring_<ValueT__> const> begin___,
+		LengthType length_
+	) {
+		LengthType right_offset_ = get_right_offset_();
+		typename UniversalFreeAccessIterator<
+			Ring_<ValueT__> const
+		>::PointerType origin_begin_ = begin___.get_container().m_begin_;
+		LengthType origin_right_offset_ = begin___.get_container().m_storage_end_ - origin_begin_;
+		if (get_length() < right_offset_) {
+			if (right_offset_ -= get_length() < length_) {
+				if (origin_right_offset_ < length_) {
+					if (right_offset_ < origin_right_offset_) {
+						::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), right_offset_);
+						m_length_ += right_offset_;
+						origin_right_offset_ -= right_offset_;
+						::DD::copy_construct_length(origin_begin_ + right_offset_, m_storage_begin_, origin_right_offset_);
+						m_length_ += origin_right_offset_;
+						length_ -= (origin_right_offset_ + right_offset_);
+						::DD::copy_construct_length(
+							begin___.get_container().m_storage_begin_, m_storage_begin_ + origin_right_offset_, length_
+						);
+					} else {
+						::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), origin_right_offset_);
+						m_length_ += origin_right_offset_;
+						right_offset_ -= origin_right_offset_;
+						origin_begin_ = ::DD::copy_construct_length(
+							begin___.get_container().m_storage_begin_, m_begin_ + get_length(), right_offset_
+						).first;
+						m_length_ += right_offset_;
+						length_ -= (origin_right_offset_ + right_offset_);
+						::DD::copy_construct_length(origin_begin_, m_storage_begin_, length_);
+					}
+				} else {
+					::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), right_offset_);
+					m_length_ += right_offset_;
+					length_ -= right_offset_;
+					::DD::copy_construct_length(origin_begin_ + right_offset_, m_storage_begin_, length_);
+				}
+			} else {
+				if (origin_right_offset_ < length_) {
+					::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), origin_right_offset_);
+					m_length_ += origin_right_offset_;
+					length_ -= origin_right_offset_;
+					::DD::copy_construct_length(begin___.get_container().m_storage_begin_, m_begin_ + get_length(), length_);
+				} else {
+					::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), length_);
+				}
+			}
+		} else {
+			if (origin_right_offset_ < length_) {
+				PointerType position_ = ::DD::copy_construct_length(
+					origin_begin_, m_storage_begin_ + get_length() - right_offset_, origin_right_offset_
+				).second;
+				m_length_ += origin_right_offset_;
+				length_ -= origin_right_offset_;
+				::DD::copy_construct_length(begin___.get_container().m_storage_begin_, position_, length_);
+			} else {
+				::DD::copy_construct_length(origin_begin_, m_storage_begin_ + get_length() - right_offset_, length_);
+			}
+		}
+		m_length_ += length_;
+	}
 
 	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) {
 		LengthType right_offset_ = get_right_offset_();
 		if (get_length() < right_offset_) {
-			if (right_offset_ < get_length() + length_) {
-				begin___ = ::DD::copy_construct_length(begin___, m_begin_ + get_length(), right_offset_ - get_length()).first;
-				length_ -= (right_offset_ - get_length());
-				m_length_ = right_offset_;
+			if (right_offset_ -= get_length() < length_) {
+				begin___ = ::DD::copy_construct_length(begin___, m_begin_ + get_length(), right_offset_).first;
+				m_length_ += right_offset_;
+				length_ -= right_offset_;
 				::DD::copy_construct_length(begin___, m_storage_begin_, length_);
 				m_length_ += length_;
 			} else {
@@ -587,6 +756,25 @@ struct Ring_ {
 			::DD::copy_construct_length(begin___, m_storage_begin_ + get_length() - right_offset_, length_);
 			m_length_ += length_;
 		}
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_concatenate_back(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().unguarded_concatenate_back(
+		begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___)
+	)) {
+		unguarded_concatenate_back(begin___, ::DD::length_difference(begin___, end___));
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType unguarded_concatenate_back(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().unguarded_concatenate_back(DD_SPLIT_RANGE(range___))
+	) {
+		unguarded_concatenate_back(DD_SPLIT_RANGE(range___));
 	}
 
 
