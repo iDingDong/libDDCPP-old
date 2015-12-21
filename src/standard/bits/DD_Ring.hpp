@@ -7,6 +7,7 @@
 #	include "DD_Tags.hpp"
 #	include "DD_IteratorNested.hpp"
 #	include "DD_IsTriviallyDestructible.hpp"
+#	include "DD_Illogic.hpp"
 #	include "DD_Range.hpp"
 #	include "DD_Allocateable.hpp"
 #	include "DD_construct.hpp"
@@ -282,6 +283,23 @@ struct Ring_ {
 	}
 
 
+	public:
+	ReferenceType at(LengthType index_) {
+		if (index_ >= get_length()) {
+			throw Illogic("Out of range: 'DD::Ring::at'");
+		}
+		return *get_pointer(index_);
+	}
+
+	public:
+	ConstReferenceType at(LengthType index_) const {
+		if (index_ >= get_length()) {
+			throw Illogic("Out of range: 'DD::Ring::at'");
+		}
+		return *get_pointer(index_);
+	}
+
+
 	protected:
 	ProcessType reset_() DD_NOEXCEPT {
 		m_storage_begin_ = PointerType();
@@ -401,7 +419,7 @@ struct Ring_ {
 		::DD::fabricate<ThisType>().get_pointer(::DD::fabricate<ThisType>().get_length()),
 		::DD::forward<ArgumentsT__>(arguments___)...)
 	)) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_emplace_front': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_emplace_front'");
 		PointerType m_position_ = m_begin_ - 1;
 		if (m_position_ < m_storage_begin_) {
 			m_position_ = m_storage_end_ - 1;
@@ -416,14 +434,14 @@ struct Ring_ {
 	ProcessType unguarded_push_front(ValueT__&& value___) noexcept(
 		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_front(forward<ValueT__>(value___)))
 	) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_front': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_push_front'");
 		unguarded_emplace_front(forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_front(ValueT__ const& value___) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_front': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_push_front'");
 		PointerType m_position_ = m_begin_ - 1;
 		if (m_position_ < m_storage_begin_) {
 			m_position_ = m_storage_end_ - 1;
@@ -442,7 +460,7 @@ struct Ring_ {
 		::DD::fabricate<ThisType>().get_pointer(::DD::fabricate<ThisType>().get_length()),
 		::DD::forward<ArgumentsT__>(arguments___)...)
 	)) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_emplace_back': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_emplace_back'");
 		::DD::construct(get_pointer(get_length()), ::DD::forward<ArgumentsT__>(arguments___)...);
 		++m_length_;
 	}
@@ -452,14 +470,14 @@ struct Ring_ {
 	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
 		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(forward<ValueT__>(value___)))
 	) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_back': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_push_back'");
 		unguarded_emplace_back(forward<ValueT__>(value___));
 	}
 #	else
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_back(ValueT__ const& value___) {
-		DD_ASSERT(is_full(), "'DD::Ring::unguarded_push_back': Out of range");
+		DD_ASSERT(is_full(), "Out of range: 'DD::Ring::unguarded_push_back'");
 		::DD::construct(get_pointer(get_length()), value___);
 		++m_length_;
 	}
@@ -468,7 +486,7 @@ struct Ring_ {
 
 	public:
 	ProcessType pop_front() DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Ring::pop_back'");
 		::DD::destruct(m_begin_);
 		if (++m_begin_ == m_storage_end_) {
 			m_begin_ = m_storage_begin_;
@@ -479,7 +497,7 @@ struct Ring_ {
 
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
-		DD_ASSERT(!is_empty(), "'DD::Ring::pop_back': Out of range");
+		DD_ASSERT(!is_empty(), "Out of range: 'DD::Ring::pop_back'");
 		RingOperation_<is_trivially_destructible_>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, --m_length_
 		);
@@ -487,8 +505,35 @@ struct Ring_ {
 
 
 	public:
+	ProcessType trim_front(LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ <= get_length(), "Out of range: 'DD::Ring::trim_back'");
+		LengthType right_offset_ = get_right_offset_();
+		if (right_offset_ < index_) {
+			::DD::destruct(m_begin_, m_storage_end_);
+			m_begin_ = m_storage_begin_ + index_ - right_offset_;
+			::DD::destruct(m_storage_begin_, m_begin_);
+		} else {
+			PointerType position_ = m_begin_ + index_;
+			::DD::destruct(m_begin_, position_);
+			m_begin_ = position_;
+		}
+		m_length_ -= index_;
+	}
+
+
+	public:
+	ProcessType trim_back(LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ <= get_length(), "Out of range: 'DD::Ring::trim_back'");
+		RingOperation_<is_trivially_destructible_>::destruct_element_(
+			m_storage_begin_, m_begin_, m_storage_end_, index_, m_length_
+		);
+		m_length_ = index_;
+	}
+
+
+	public:
 	ProcessType erase(LengthType index_) {
-		DD_ASSERT(index_ < get_length(), "'DD::Ring::erase': Out of range");
+		DD_ASSERT(index_ < get_length(), "Out of range: 'DD::Ring::erase'");
 		LengthType right_offset_ = get_right_offset_();
 		if (index_ < right_offset_) {
 			PointerType position_ = m_begin_ + index_;
@@ -526,6 +571,11 @@ struct Ring_ {
 
 	public:
 	ProcessType erase_range(LengthType begin_index_, LengthType end_index_) {
+		DD_ASSERT(begin_index_ <= end_index_, "Invalid range: 'DD::Ring::erase_range'");
+		DD_ASSERT(
+			(begin_index_ < get_length() && end_index_ <= get_length()) || begin_index_ == end_index_,
+			"Out of range: 'DD::Ring::erase_range'"
+		);
 		LengthType right_offset_ = get_right_offset_();
 		if (begin_index_ < right_offset_) {
 			if (right_offset_ < end_index_) {
@@ -578,29 +628,12 @@ struct Ring_ {
 
 
 	public:
-	ProcessType trim_front(LengthType index_) DD_NOEXCEPT {
-		DD_ASSERT(index_ <= get_length(), "'DD::Ring::trim_back': Out of range");
-		LengthType right_offset_ = get_right_offset_();
-		if (right_offset_ < index_) {
-			::DD::destruct(m_begin_, m_storage_end_);
-			m_begin_ = m_storage_begin_ + index_ - right_offset_;
-			::DD::destruct(m_storage_begin_, m_begin_);
-		} else {
-			PointerType position_ = m_begin_ + index_;
-			::DD::destruct(m_begin_, position_);
-			m_begin_ = position_;
-		}
-		m_length_ -= index_;
-	}
-
-
-	public:
-	ProcessType trim_back(LengthType index_) DD_NOEXCEPT {
-		DD_ASSERT(index_ <= get_length(), "'DD::Ring::trim_back': Out of range");
-		RingOperation_<is_trivially_destructible_>::destruct_element_(
-			m_storage_begin_, m_begin_, m_storage_end_, index_, m_length_
+	static ProcessType erase_range(Iterator begin_, Iterator end_) {
+		DD_ASSERT(
+			::DD::address_of(begin_.get_container()) == ::DD::address_of(end.get_container()),
+			"Invalid range: 'DD::Ring::erase_range'"
 		);
-		m_length_ = index_;
+		begin_.get_container().erase_range(begin_.get_index(), end_.get_index());
 	}
 
 
@@ -633,11 +666,13 @@ struct Ring_ {
 
 	public:
 	ReferenceType operator [](LengthType index_) DD_NOEXCEPT {
+		DD_ASSERT(index_ < get_length(), "Out of range: 'DD::Ring::operator []'");
 		return *(get_pointer(index_));
 	}
 
 	public:
 	ConstReferenceType operator [](LengthType index_) const DD_NOEXCEPT {
+		DD_ASSERT(index_ < get_length(), "Out of range: 'DD::Ring::operator []'");
 		return *(get_pointer(index_));
 	}
 
