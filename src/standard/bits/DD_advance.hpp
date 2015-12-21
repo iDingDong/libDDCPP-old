@@ -22,10 +22,10 @@ struct Advance_ {
 	static ProcessType advance(UndirectionalIteratorT__& iterator___, DifferenceT__ step___) DD_NOEXCEPT_IF(
 		noexcept(static_cast<bool>(step___)) &&
 		noexcept(--step___) &&
-		noexcept(advance(iterator___))
+		noexcept(::DD::detail_::advance(iterator___))
 	) {
 		for (; step___; --step___) {
-			advance(iterator___);
+			::DD::detail_::advance(iterator___);
 		}
 	}
 

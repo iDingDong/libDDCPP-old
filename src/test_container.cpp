@@ -343,6 +343,26 @@ void test_container() {
 			) {
 				throw "Container test failed.";
 			}
+			ves << 9 << 10;
+			lst << 9 << 10;
+			ring << 9 << 10;
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves.erase_range(::DD::next(ves.begin()), ::DD::next(ves.begin(), 3));
+			lst.erase_range(::DD::next(lst.begin()), ::DD::next(lst.begin(), 3));
+			ring.erase_range(::DD::next(ring.begin()), ::DD::next(ring.begin(), 3));
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
 		}
 	}
 }

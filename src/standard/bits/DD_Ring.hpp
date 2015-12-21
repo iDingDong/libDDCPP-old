@@ -579,35 +579,42 @@ struct Ring_ {
 		LengthType right_offset_ = get_right_offset_();
 		if (begin_index_ < right_offset_) {
 			if (right_offset_ < end_index_) {
-				::DD::destruct(
-					m_begin_,
+				{
+					PointerType origin_begin_ = m_begin_;
+					::DD::destruct(
+						origin_begin_,
 #	if __cplusplus >= 201103L
-					::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
+						m_begin_ = ::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
 #	else
-					::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
+						m_begin_ = ::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
 #	endif
-				);
+					);
+				}
+				{
+					LengthType origin_length_ = get_length();
+					m_length_ -= (right_offset_ - begin_index_);
+					PointerType reference_frame_ = m_storage_begin_ - right_offset_;
+					::DD::destruct(
+#	if __cplusplus >= 201103L
+						::DD::move_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
+#	else
+						::DD::copy_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
+#	endif
+						reference_frame_ + origin_length_
+					);
+					m_length_ -= (end_index_ - right_offset_);
+				}
 			} else {
+				PointerType origin_begin_ = m_begin_;
 				::DD::destruct(
-					m_begin_,
+					origin_begin_,
 #	if __cplusplus >= 201103L
-					::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
+					m_begin_ = ::DD::move_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
 #	else
-					::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_storage_end_)
+					m_begin_ = ::DD::copy_overlapped_backward(m_begin_, m_begin_ + begin_index_, m_begin_ + end_index_)
 #	endif
 				);
-				LengthType origin_length_ = get_length();
-				m_length_ -= right_offset_ - begin_index_;
-				PointerType reference_frame_ = m_storage_begin_ - right_offset_;
-				::DD::destruct(
-#	if __cplusplus >= 201103L
-					::DD::move_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
-#	else
-					::DD::copy_overlapped_forward(reference_frame_ + end_index_, reference_frame_ + origin_length_, m_storage_begin_),
-#	endif
-					reference_frame_ + get_length()
-				);
-				m_length_ -= end_index_ - right_offset_;
+				m_length_ -= (end_index_ - begin_index_);
 			}
 		} else {
 			PointerType reference_frame_ = m_storage_begin_ - right_offset_;
@@ -623,6 +630,7 @@ struct Ring_ {
 				),
 				reference_frame_ + get_length()
 			);
+			m_length_ -= (end_index_ - begin_index_);
 		}
 	}
 
@@ -783,8 +791,17 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 
 	public:
-	ProcessType swap(ThisType& other_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().swap(other_)) {
-		SuperType::swap(other_);
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT_IF(
+		noexcept(::DD::fabricate<ThisType>().swap(other_)) &&
+		noexcept(::DD::swap(static_cast<AllocateAgent&>(::DD::fabricate<ThisType>()), static_cast<AllocateAgent&>(other_)))
+	) {
+		::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
+		try {
+			SuperType::swap(other_);
+		} catch (...) {
+			::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
+			throw;
+		}
 	}
 
 
@@ -950,6 +967,23 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT {
 		swap(origin_);
 	}
+
+
+	public:
+	template <typename ValueT__>
+#	if __cplusplus >= 201103L
+	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().push_back(::DD::forward<ValueT__>(value___))
+	) {
+		push_back(::DD::forward<ValueT__>(value___));
+		return *this;
+	}
+#	else
+	ThisType& operator <<(ValueT__ const& value___) {
+		push_back(value___);
+		return *this;
+	}
+#	endif
 
 
 };
