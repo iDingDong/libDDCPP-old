@@ -1151,6 +1151,30 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 #	endif
 
 
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_front(UndirectionalIteratorT__ begin___, LengthType length_) {
+		if (length_ > this->get_free_space()) {
+			reserve_left(length_);
+			this->unguarded_concatenate_front_without_circuit_(begin___, length_);
+		} else {
+			this->unguarded_concatenate_front(begin___, length_);
+		}
+	}
+
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) {
+		if (length_ > this->get_free_space()) {
+			reserve_right(length_);
+			this->unguarded_concatenate_back_without_circuit_(begin___, length_);
+		} else {
+			this->unguarded_concatenate_back(begin___, length_);
+		}
+	}
+
+
 	private:
 	ProcessType destruct_() DD_NOEXCEPT {
 		AllocateAgent::deallocate(this->m_storage_begin_, this->get_capacity());
