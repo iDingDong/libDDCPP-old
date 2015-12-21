@@ -447,15 +447,6 @@ struct Ring_ {
 	}
 
 
-	protected:
-	template <typename ValueT__>
-	ProcessType unguarded_push_front_without_circuit_(ValueT__&& value___) noexcept(
-		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_front_without_circuit_(::DD::forward<ValueT__>(value___)))
-	) {
-		unguarded_emplace_front_without_circuit_(::DD::forward<ValueT__>(value___));
-	}
-
-
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_front(ValueT__&& value___) noexcept(
@@ -490,12 +481,11 @@ struct Ring_ {
 
 
 #	if __cplusplus >= 201103L
-	private:
+	protected:
 	template <typename... ArgumentsT__>
 	ProcessType unguarded_emplace_back_without_circuit_(ArgumentsT__&&... arguments___) noexcept(
 		noexcept(::DD::construct(m_begin_ + ::DD::fabricate<ThisType>().get_length(), ::DD::forward<ArgumentsT__>(arguments___)...))
 	) {
-
 		::DD::construct(m_begin_ + get_length(), ::DD::forward<ArgumentsT__>(arguments___)...);
 		++m_length_;
 	}
@@ -512,6 +502,7 @@ struct Ring_ {
 		++m_length_;
 	}
 
+
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
@@ -521,6 +512,14 @@ struct Ring_ {
 		unguarded_emplace_back(forward<ValueT__>(value___));
 	}
 #	else
+	protected:
+	template <typename ValueT__>
+	ProcessType unguarded_push_front_without_circuit_(ValueT__ const& value___) {
+		::DD::construct(m_begin_ + get_length(), value___);
+		++m_length_;
+	}
+
+
 	public:
 	template <typename ValueT__>
 	ProcessType unguarded_push_back(ValueT__ const& value___) {
@@ -1127,8 +1126,10 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	ProcessType emplace_back(ArgumentsT__&&... arguments___) {
 		if (this->is_full()) {
 			reserve_right();
+			this->unguarded_emplace_back_without_circuit_(::DD::forward<ArgumentsT__>(arguments___)...);
+		} else {
+			this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...);
 		}
-		this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...);
 	}
 
 	public:
@@ -1142,8 +1143,10 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	ProcessType push_back(ValueT__ const& value___) {
 		if (this->is_full()) {
 			reserve_right();
+			this->unguarded_push_back_without_circuit_(value___);
+		} else {
+			this->unguarded_push_back(value___);
 		}
-		this->unguarded_push_back(value___);
 	}
 #	endif
 
