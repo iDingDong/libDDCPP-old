@@ -25,7 +25,7 @@ struct MoveOverlappedBackward_ {
 		BidirectionalIteratorT__ result_end___
 	) {
 		while (begin___ != end___) {
-			*--result_end___ = ::DD::move(*--begin___);
+			*--result_end___ = ::DD::move(*--end___);
 		}
 		return result_end___;
 	}

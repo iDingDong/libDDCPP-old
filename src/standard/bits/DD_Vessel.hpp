@@ -22,6 +22,13 @@
 #	include "DD_copy_length.hpp"
 #	include "DD_copy_construct_length.hpp"
 #	include "DD_transfer_backward.hpp"
+#	if __cplusplus >= 201103L
+#		include "DD_move_overlapped_forward.hpp"
+#		include "DD_move_overlapped_backward.hpp"
+#	else
+#		include "DD_copy_overlapped_forward.hpp"
+#		include "DD_copy_overlapped_backward.hpp"
+#	endif
 
 
 
@@ -193,14 +200,20 @@ struct Vessel_ {
 
 
 	public:
-	LengthType get_length() const DD_NOEXCEPT {
-		return length_difference(begin(), end());
+	LengthType DD_CONSTEXPR get_length() const DD_NOEXCEPT {
+		return end() - begin();
 	}
 
 
 	public:
-	LengthType get_capacity() const DD_NOEXCEPT {
-		return length_difference(begin(), storage_end());
+	LengthType DD_CONSTEXPR get_capacity() const DD_NOEXCEPT {
+		return storage_end() - begin();
+	}
+
+
+	public:
+	LengthType DD_CONSTEXPR get_free_space() const DD_NOEXCEPT {
+		return storage_end() - end();
 	}
 
 
@@ -265,6 +278,135 @@ struct Vessel_ {
 		}
 		throw AccessDenied("Out of range: 'DD::Vessel::at'");
 	}
+
+
+	private:
+	ProcessType transfer_to_(Iterator new_begin_) DD_NOEXCEPT_AS(
+		::DD::transconstruct(::DD::fabricate<ThisType>().begin(), ::DD::fabricate<ThisType>().end(), new_begin_)
+	) {
+		::DD::transconstruct(begin(), end(), new_begin_);
+	}
+
+
+	private:
+	Iterator transfer_to_with_hole_(Iterator position_, Iterator new_begin_, LengthType hole_size_) {
+		Iterator pause_point_(::DD::transconstruct(begin(), position_, new_begin_));
+		try {
+			::DD::transconstruct(position_, end(), pause_point_ + hole_size_);
+		} catch (...) {
+			::DD::destruct(new_begin_, pause_point_);
+			throw;
+		}
+		return pause_point_;
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType unguarded_emplace_back(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(ValueType(::DD::forward<ArgumentsT__>(arguments___)...))
+	) {
+		DD_ASSERT(!is_full(), "Out of range: 'DD::Vessel::unguarded_emplace_back'");
+		::DD::construct(end(), ::DD::forward<ArgumentsT__>(arguments___)...);
+		++m_end_;
+	}
+
+
+	public:
+	template <typename ValueT__>
+	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
+		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(::DD::forward<ValueT__>(value___)))
+	) {
+		DD_ASSERT(!is_full(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		unguarded_emplace_back(::DD::forward<ValueT__>(value___));
+	}
+#	else
+	public:
+	template <typename ValueT__>
+	ProcessType unguarded_push_back(ValueT__ const& value___) {
+		DD_ASSERT(!is_full(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		::DD::construct(end(), value___);
+		++m_end_;
+	}
+#	endif
+
+
+#	if __cplusplus >= 201103L
+	protected:
+	template <typename... ArgumentsT__>
+	Iterator transfer_emplace_(Iterator position_, Iterator new_begin_, ArgumentsT__&&... arguments___) {
+		DD_ASSERT(position_ >= begin() && position_ <= end(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		::DD::construct(position_ - begin() + new_begin_, ::DD::forward<ArgumentsT__>(arguments___)...);
+		try {
+			return transfer_to_with_hole_(position_, new_begin_, 1);
+		} catch(...) {
+			::DD::destruct(position_);
+			throw;
+		}
+	}
+
+
+	public:
+	template <typename... ArgumentsT__>
+	Iterator unguarded_emplace(Iterator position_, ArgumentsT__&&... arguments___) {
+		DD_ASSERT(!is_full(), "Out of range: 'DD::Vessel::unguarded_emplace'");
+		DD_ASSERT(position_ >= begin() && position_ <= end(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		if (position_ == end()) {
+			unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...);
+		} else {
+			unguarded_push_back(::DD::move(back()));
+			::DD::move_overlapped_backward(position_, end() - 2, end() - 1);
+			*position_ = ValueType(::DD::forward<ArgumentsT__>(arguments___)...);
+		}
+		return position_;
+	}
+
+
+	protected:
+	template <typename ValueT__>
+	Iterator transfer_insert_(Iterator position_, Iterator new_begin_, ValueT__&& value___) {
+		return transfer_emplace_(position_, new_begin_, ::DD::forward<ValueT__>(value___));
+	}
+
+
+	public:
+	template <typename ValueT__>
+	Iterator unguarded_insert(Iterator position_, ValueT__&& value___) noexcept(
+		noexcept(static_cast<Iterator>(unguarded_emplace(position_, ::DD::forward<ValueT__>(value___))))
+	) {
+		return unguarded_emplace(position_, ::DD::forward<ValueT__>(value___));
+	}
+#	else
+	protected:
+	template <typename ValueT__>
+	Iterator transfer_insert_(Iterator position_, Iterator new_begin_, ValueT__ const& value___) {
+		DD_ASSERT(position_ >= begin() && position_ <= end(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		::DD::construct(position_, value___);
+		try {
+			return transfer_to_with_hole_(position_, new_begin_, 1);
+		} catch(...) {
+			::DD::destruct(position_);
+			throw;
+		}
+	}
+
+
+	public:
+	template <typename... ArgumentsT__>
+	Iterator unguarded_insert(Iterator position_, ArgumentsT__&&... arguments___) {
+		DD_ASSERT(!is_full(), "Out of range: 'DD::Vessel::unguarded_emplace'");
+		DD_ASSERT(position_ >= begin() && position_ <= end(), "Out of range: 'DD::Vessel::unguarded_push_back'");
+		if (position_ == end()) {
+			unguarded_push_back(value___);
+		} else {
+			unguarded_push_back(::DD::move(back()));
+			::DD::copy_overlapped_backward(position_, end() - 2, end() - 1);
+			*position_ = value___;
+		}
+		return position_;
+	}
+#	endif
 
 
 	public:
@@ -699,13 +841,34 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	template <typename... ArgumentsT__>
 	Iterator emplace(Iterator position_, ArgumentsT__&&... arguments___) {
 		if (this->is_full()) {
-			LengthType index_ = position_ - this->begin();
-			reserve();
-			position_ = this->begin() + index_;
+			PointerType new_begin_;
+			LengthType capacity_ = this->get_capacity();
+			if (capacity_) {
+				try {
+					new_begin_ = AllocateAgent::allocate(capacity_ * (DDCPP_VESSEL_GROWTH_RATIO));
+					capacity_ *= (DDCPP_VESSEL_GROWTH_RATIO);
+				} catch (AllocationFailure& exception_) {
+					new_begin_ = AllocateAgent::allocate(capacity_ + 1);
+					++capacity_;
+				}
+			} else {
+				new_begin_ = AllocateAgent::allocate(1);
+				capacity_ = 1;
+			}
+			try {
+				LengthType origin_length_ = this->get_length();
+				position_ = this->transfer_emplace_(position_, Iterator(new_begin_), ::DD::forward<ArgumentsT__>(arguments___)...);
+				destruct_();
+				this->m_begin_ = new_begin_;
+				this->m_end_ = new_begin_ + origin_length_ + 1;
+				this->m_storage_end_ = new_begin_ + capacity_;
+				return position_;
+			} catch (...) {
+				AllocateAgent::deallocate(new_begin_, capacity_);
+				throw;
+			}
 		}
-		unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...);
-		transfer_backward(this->end() - 1, position_);
-		return position_;
+		return this->unguarded_emplace(position_, ::DD::forward<ArgumentsT__>(arguments___)...);
 	}
 
 
@@ -719,13 +882,34 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	template <typename ValueT__>
 	Iterator insert(Iterator position_, ValueT__ const& value___) {
 		if (this->is_full()) {
-			LengthType index_ = position_ - this->begin();
-			reserve();
-			position_ = this->begin() + index_;
+			PointerType new_begin_;
+			LengthType capacity_ = this->get_capacity();
+			if (capacity_) {
+				try {
+					new_begin_ = AllocateAgent::allocate(capacity_ * (DDCPP_VESSEL_GROWTH_RATIO));
+					capacity_ *= (DDCPP_VESSEL_GROWTH_RATIO);
+				} catch (AllocationFailure& exception_) {
+					new_begin_ = AllocateAgent::allocate(capacity_ + 1);
+					++capacity_;
+				}
+			} else {
+				new_begin_ = AllocateAgent::allocate(1);
+				capacity_ = 1;
+			}
+			try {
+				LengthType origin_length_ = this->get_length();
+				position_ = this->transfer_emplace_(position_, Iterator(new_begin_), value___);
+				destruct_();
+				this->m_begin_ = new_begin_;
+				this->m_end_ = new_begin_ + origin_length_ + 1;
+				this->m_storage_end_ = new_begin_ + capacity_;
+				return position_;
+			} catch (...) {
+				AllocateAgent::deallocate(new_begin_, capacity_);
+				throw;
+			}
 		}
-		unguarded_push_back(value___);
-		transfer_backward(this->end() - 1, position_);
-		return position_;
+		return this->unguarded_emplace(position_, value___);
 	}
 #	endif
 

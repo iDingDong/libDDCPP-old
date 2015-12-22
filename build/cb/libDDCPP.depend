@@ -1017,7 +1017,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450669114 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450787208 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1036,6 +1036,10 @@
 	"DD_copy_length.hpp"
 	"DD_copy_construct_length.hpp"
 	"DD_transfer_backward.hpp"
+	"DD_move_overlapped_forward.hpp"
+	"DD_move_overlapped_backward.hpp"
+	"DD_copy_overlapped_forward.hpp"
+	"DD_copy_overlapped_backward.hpp"
 
 1443623839 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratornested.hpp
 	"DD_global_definitions.hpp"
@@ -1179,7 +1183,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450669097 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450785499 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1327,7 +1331,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450671122 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450786963 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
@@ -1528,7 +1532,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450716596 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450764998 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1581,7 +1585,7 @@
 	<cstring>
 	"DD_size_distance.hpp"
 
-1450629379 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_overlapped_backward.hpp
+1450786864 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_overlapped_backward.hpp
 	"DD_move.hpp"
 	"DD_copy_overlapped_backward.hpp"
 

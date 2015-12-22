@@ -1343,11 +1343,27 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	template <typename UndirectionalIteratorT__>
 	ProcessType concatenate_front(UndirectionalIteratorT__ begin___, LengthType length_) {
 		if (length_ > this->get_free_space()) {
-			reserve_left(length_);
+			stretch_left(length_);
 			this->unguarded_concatenate_front_without_circuit_(begin___, length_);
 		} else {
 			this->unguarded_concatenate_front(begin___, length_);
 		}
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_front(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_front(begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___))
+	) {
+		concatenate_front(begin___, ::DD::length_difference(begin___, end___));
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType concatenate_front(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_front(DD_SPLIT_RANGE(range___))
+	) {
+		concatenate_front(DD_SPLIT_RANGE(range___));
 	}
 
 
@@ -1355,11 +1371,27 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	template <typename UndirectionalIteratorT__>
 	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) {
 		if (length_ > this->get_free_space()) {
-			reserve_right(length_);
+			stretch_right(length_);
 			this->unguarded_concatenate_back_without_circuit_(begin___, length_);
 		} else {
 			this->unguarded_concatenate_back(begin___, length_);
 		}
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___))
+	) {
+		concatenate_back(begin___, ::DD::length_difference(begin___, end___));
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType concatenate_back(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(DD_SPLIT_RANGE(range___))
+	) {
+		concatenate_back(DD_SPLIT_RANGE(range___));
 	}
 
 
@@ -1396,6 +1428,15 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 		return *this;
 	}
 #	endif
+
+
+	template <typename UndirectionalRangeT__>
+	ThisType& operator +=(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(range___)
+	) {
+		concatenate_back(range___);
+		return *this;
+	}
 
 
 };

@@ -771,15 +771,29 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
 	) {
-		try {
-			for (; begin___ != end___; ++head_, ++begin___) {
-				SuperType::link_(head_, create_node_(*begin___));
+		if (begin___ != end___) {
+			Iterator first_;
+			try {
+				first_ = create_node_(*begin___);
+			} catch(...) {
+				SuperType::link_(head_, tail_);
+				throw;
 			}
-		} catch(...) {
+			Iterator last_(first_);
+			try {
+				for(; ++begin___ != end___; ++last_) {
+					SuperType::link_(last_, create_node_(*begin___));
+				}
+			} catch (...) {
+				SuperType::link_(head_, first_);
+				SuperType::link_(last_, tail_);
+				throw;
+			}
+			SuperType::link_(head_, first_);
+			SuperType::link_(last_, tail_);
+		} else {
 			SuperType::link_(head_, tail_);
-			throw;
 		}
-		SuperType::link_(head_, tail_);
 	}
 
 
