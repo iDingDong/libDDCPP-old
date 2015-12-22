@@ -526,7 +526,7 @@
 1448255762 d:\develop\repositories\libddcpp\src\standard\bits\dd_generate.hpp
 	"DD_Range.hpp"
 
-1450598888 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
+1450796963 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy.hpp
 	<cstring>
 	"DD_IsSame.hpp"
 	"DD_IsPointer.hpp"
@@ -1017,7 +1017,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450787208 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450796783 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1053,17 +1053,9 @@
 	<type_traits>
 	"DD_And.hpp"
 
-1450523280 d:\develop\repositories\libddcpp\src\standard\bits\dd_transconstruct.hpp
-	<cstring>
-	"DD_IsPointer.hpp"
-	"DD_IsSame.hpp"
-	"DD_IsTriviallyMoveConstructible.hpp"
-	"DD_IsNoexceptCopyConstructible.hpp"
-	"DD_IsTriviallyCopyConstructible.hpp"
-	"DD_move.hpp"
-	"DD_IteratorValue.hpp"
-	"DD_construct.hpp"
-	"DD_destruct.hpp"
+1450790175 d:\develop\repositories\libddcpp\src\standard\bits\dd_transconstruct.hpp
+	"DD_IsFreeAccessIterator.hpp"
+	"DD_transconstruct_length.hpp"
 
 1444750868 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallymoveconstructible.hpp
 	<type_traits>
@@ -1331,7 +1323,7 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450786963 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450796408 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
@@ -1532,7 +1524,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450764998 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450796343 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1588,4 +1580,13 @@
 1450786864 d:\develop\repositories\libddcpp\src\standard\bits\dd_move_overlapped_backward.hpp
 	"DD_move.hpp"
 	"DD_copy_overlapped_backward.hpp"
+
+1450790861 d:\develop\repositories\libddcpp\src\standard\bits\dd_transconstruct_length.hpp
+	"DD_RemoveCV.hpp"
+	"DD_IsTriviallyCopyable.hpp"
+	"DD_IsTriviallyDestructible.hpp"
+	"DD_move.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
+	"DD_copy_length.hpp"
 

@@ -23,6 +23,7 @@ void test_container() {
 		{
 			DD::Vessel<Test> ves(DD::batch_tag, 3, Test());
 			if (
+				ves.get_length() != 3 ||
 				Test::count != 3
 			) {
 				DD_PRINT "'Test::count' : ", Test::count, "\nExpected to be : ", 3, DD::end_line;
@@ -31,6 +32,7 @@ void test_container() {
 
 			ves.push_back(Test());
 			if (
+				ves.get_length() != 4 ||
 				Test::count != 4
 			) {
 				throw "'DD::Vessel' test failed.";
@@ -38,6 +40,7 @@ void test_container() {
 
 			ves.insert(ves.begin(), Test());
 			if (
+				ves.get_length() != 5 ||
 				Test::count != 5
 			) {
 				throw "'DD::Vessel' test failed.";
@@ -45,6 +48,7 @@ void test_container() {
 
 			ves.insert(ves.begin() + 1, Test());
 			if (
+				ves.get_length() != 6 ||
 				Test::count != 6
 			) {
 				throw "'DD::Vessel' test failed.";
@@ -52,6 +56,7 @@ void test_container() {
 
 			ves.erase(ves.begin());
 			if (
+				ves.get_length() != 5 ||
 				Test::count != 5
 			) {
 				throw "'DD::Vessel' test failed.";
@@ -59,6 +64,7 @@ void test_container() {
 
 			auto another_ves = ves;
 			if (
+				another_ves.get_length() != 5 ||
 				Test::count != 10
 			) {
 				throw "'DD::Vessel' test failed.";

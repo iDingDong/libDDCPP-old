@@ -393,10 +393,10 @@ struct Ring_ {
 		if (right_offset_ < get_length()) {
 			PointerType new_end_ = ::DD::transconstruct(m_begin_, m_storage_end_, new_storage_begin_);
 			try {
-				::DD::transconstruct(
+				::DD::transconstruct_length(
 					m_storage_begin_,
-					m_storage_begin_ + get_length() - right_offset_,
-					new_end_
+					new_end_,
+					get_length() - right_offset_
 				);
 			} catch (...) {
 				::DD::destruct(new_storage_begin_, new_end_);
@@ -1145,18 +1145,9 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	public:
 	ProcessType stretch(LengthType new_capacity_) {
 		DD_ASSERT(new_capacity_ >= this->get_length(), "New capacity is not enough for existing elements: 'DD::Ring::stretch'");
-		PointerType new_storage_begin_ = AllocateAgent::allocate(new_capacity_);
-		LengthType right_ = (new_capacity_ - this->get_length()) / 2;
-		try {
-			SuperType::transfer_to_(new_storage_begin_ + right_);
-		} catch (...) {
-			AllocateAgent::deallocate(new_storage_begin_, new_capacity_);
-			throw;
-		}
-		destruct_();
-		this->m_storage_begin_ = new_storage_begin_;
-		this->m_begin_ = new_storage_begin_ + right_;
-		this->m_storage_end_ = new_storage_begin_ + new_capacity_;
+		LengthType free_space_ = new_capacity_ - this->get_length();
+		LengthType left_ = free_space_ / 2;
+		stretch_ends(left_ , free_space_ - left_);
 	}
 
 
@@ -1179,7 +1170,18 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 	public:
 	ProcessType stretch_right(LengthType right_) {
-		stretch(this->get_length() + right_);
+		LengthType new_capacity_ = this->get_length() + right_;
+		PointerType new_storage_begin_ = AllocateAgent::allocate(new_capacity_);
+		try {
+			SuperType::transfer_to_(new_storage_begin_);
+		} catch (...) {
+			AllocateAgent::deallocate(new_storage_begin_, new_capacity_);
+			throw;
+		}
+		destruct_();
+		this->m_storage_begin_ = new_storage_begin_;
+		this->m_begin_ = new_storage_begin_;
+		this->m_storage_end_ = new_storage_begin_ + new_capacity_;
 	}
 
 

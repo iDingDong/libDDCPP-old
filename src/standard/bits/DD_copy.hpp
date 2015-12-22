@@ -68,7 +68,7 @@ struct Copy_<true> {
 	)) {
 		DD_MODIFY_TRAIT(IteratorDifference, PointerT1__) length_ = ::DD::size_distance(begin___, end___);
 		std::memcpy(::DD::get_pointer(result_begin___), ::DD::get_pointer(begin___), length_);
-		return result_begin___ + length_;
+		return result_begin___ + (end___ - begin___);
 	}
 
 	template <typename PointerT1__, typename PointerT2__>

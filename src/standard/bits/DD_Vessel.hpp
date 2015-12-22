@@ -711,7 +711,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 		PointerType temp_begin_ = AllocateAgent::allocate(new_capacity_);
 		PointerType temp_end_;
 		try {
-			temp_end_ = transconstruct(this->m_begin_, this->m_end_, temp_begin_);
+			temp_end_ = ::DD::transconstruct(this->m_begin_, this->m_end_, temp_begin_);
 		} catch (...) {
 			AllocateAgent::deallocate(temp_begin_, new_capacity_);
 		}
