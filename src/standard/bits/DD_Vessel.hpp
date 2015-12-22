@@ -111,12 +111,9 @@ struct Vessel_ {
 
 
 	protected:
-#	if __cplusplus >= 201103L
-	~Vessel_() = default;
-#	else
-	~Vessel_() throw() {
+	~Vessel_() DD_NOEXCEPT {
+		destruct_();
 	}
-#	endif
 
 
 	public:
@@ -280,11 +277,13 @@ struct Vessel_ {
 	}
 
 
-	private:
-	ProcessType transfer_to_(Iterator new_begin_) DD_NOEXCEPT_AS(
+	protected:
+	Iterator transfer_to_(Iterator new_begin_) DD_NOEXCEPT_AS(static_cast<Iterator>(
 		::DD::transconstruct(::DD::fabricate<ThisType>().begin(), ::DD::fabricate<ThisType>().end(), new_begin_)
-	) {
-		::DD::transconstruct(begin(), end(), new_begin_);
+	)) {
+		Iterator result_ = ::DD::transconstruct(begin(), end(), new_begin_);
+		destruct_();
+		return result_;
 	}
 
 
@@ -297,6 +296,7 @@ struct Vessel_ {
 			::DD::destruct(new_begin_, pause_point_);
 			throw;
 		}
+		destruct_();
 		return pause_point_;
 	}
 
@@ -407,6 +407,61 @@ struct Vessel_ {
 		return position_;
 	}
 #	endif
+
+
+	public:
+	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().begin()) {
+		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
+		erase(begin());
+	}
+
+
+	public:
+	ProcessType pop_back() DD_NOEXCEPT {
+		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
+		::DD::destruct(--m_end_);
+	}
+
+
+	public:
+	ProcessType trim_front(Iterator end_) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().erase_range(::DD::fabricate<ThisType>().begin() DD_COMMA end_)
+	) {
+		erase_range(begin(), end_);
+	}
+
+
+	public:
+	ProcessType trim_back(Iterator begin_) DD_NOEXCEPT {
+		::DD::destruct(begin_, end());
+		m_end_ = ::DD::get_pointer(begin_);
+	}
+
+
+	public:
+	ProcessType erase(Iterator position_) {
+		DD_ASSERT(::DD::check_bound(*this, position_), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
+		::DD::move_overlapped_forward(position_ + 1, end(), position_);
+		pop_back();
+	}
+
+
+	public:
+	ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().trim_back(move_overlapped_forward(end_ DD_COMMA ::DD::fabricate<ThisType>().end() DD_COMMA begin_))
+	) {
+#	if __cplusplus >= 201103L
+		trim_back(::DD::move_overlapped_forward(end_, end(), begin_));
+#	else
+		trim_back(::DD::copy_overlapped_forward(end_, end(), begin_));
+#	endif
+	}
+
+
+	private:
+	ProcessType destruct_() DD_NOEXCEPT {
+		::DD::destruct(begin(), end());
+	}
 
 
 	public:
@@ -709,16 +764,15 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	public:
 	ProcessType stretch(LengthType new_capacity_) {
 		PointerType temp_begin_ = AllocateAgent::allocate(new_capacity_);
-		PointerType temp_end_;
 		try {
-			temp_end_ = ::DD::transconstruct(this->m_begin_, this->m_end_, temp_begin_);
+			PointerType temp_end_ = ::DD::get_pointer(this->transfer_to_(Iterator(temp_begin_)));
+			destruct_();
+			this->m_begin_ = temp_begin_;
+			this->m_end_ = temp_end_;
+			this->m_storage_end_ = temp_begin_ + new_capacity_;
 		} catch (...) {
 			AllocateAgent::deallocate(temp_begin_, new_capacity_);
 		}
-		destruct_();
-		this->m_begin_ = temp_begin_;
-		this->m_end_ = temp_end_;
-		this->m_storage_end_ = temp_begin_ + new_capacity_;
 	}
 
 
@@ -748,48 +802,19 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 #	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
-	ProcessType unguarded_emplace_back(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(::DD::construct(::DD::fabricate<ThisType>().m_end_, forward<ArgumentsT__>(arguments___)...))
-	) {
-		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_emplace_back'");
-		::DD::construct(this->m_end_, forward<ArgumentsT__>(arguments___)...);
-		++this->m_end_;
-	}
-
-
-	public:
-	template <typename... ArgumentsT__>
-	ProcessType emplace_back(ArgumentsT__&&... arguments___) noexcept(
-		noexcept(::DD::fabricate<ThisType>().reserve()) &&
-		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...))
-	) {
-		if (this->is_full()) {
-			reserve();
-		}
-		unguarded_emplace_back(forward<ArgumentsT__>(arguments___)...);
-	}
-
-
-#	endif
-
-
-
-#	if __cplusplus >= 201103L
-	public:
-	template <typename... ArgumentsT__>
 	ProcessType emplace_front(ArgumentsT__&&... arguments___) noexcept(noexcept(
-		fabricate<ThisType>().emplace(fabricate<ThisType>().begin(), forward<ArgumentsT__>(arguments___)...)
+		::DD::fabricate<ThisType>().emplace(::DD::fabricate<ThisType>().begin(), ::DD::forward<ArgumentsT__>(arguments___)...)
 	)) {
-		emplace(this->begin(), forward<ArgumentsT__>(arguments___)...);
+		emplace(this->begin(), ::DD::forward<ArgumentsT__>(arguments___)...);
 	}
 
 
 	public:
 	template <typename ValueT__>
 	ProcessType push_front(ValueT__&& value__) noexcept(
-		noexcept(::DD::fabricate<ThisType>().emplace_front(forward<ValueT__>(value__)))
+		noexcept(::DD::fabricate<ThisType>().emplace_front(::DD::forward<ValueT__>(value__)))
 	) {
-		emplace_front(forward<ValueT__>(value__));
+		emplace_front(::DD::forward<ValueT__>(value__));
 	}
 #	else
 	public:
@@ -800,38 +825,35 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 #	endif
 
 
-	public:
-	template <typename ValueT__>
 #	if __cplusplus >= 201103L
-	ProcessType unguarded_push_back(ValueT__&& value___) noexcept(
-		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(forward<ValueT__>(value___)))
+	public:
+	template <typename... ArgumentsT__>
+	ProcessType emplace_back(ArgumentsT__&&... arguments___) noexcept(
+		noexcept(::DD::fabricate<ThisType>().reserve()) &&
+		noexcept(::DD::fabricate<ThisType>().unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...))
 	) {
-		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_push_back'");
-		unguarded_emplace_back(forward<ValueT__>(value___));
+		if (this->is_full()) {
+			reserve();
+		}
+		this->unguarded_emplace_back(::DD::forward<ArgumentsT__>(arguments___)...);
 	}
-#	else
-	ProcessType unguarded_push_back(ValueT__ const& value___) {
-		DD_ASSERT(!this->is_full(), "Failed to insert into a full container: 'DD::Vessel::unguarded_push_back'");
-		::DD::construct(this->m_end_, value___);
-		++this->m_end_;
-	}
-#	endif
 
 
 	public:
 	template <typename ValueT__>
-#	if __cplusplus >= 201103L
 	ProcessType push_back(ValueT__&& value___) noexcept(
-		noexcept(::DD::fabricate<ThisType>().emplace_back(forward<ValueT__>(value___)))
+		noexcept(::DD::fabricate<ThisType>().emplace_back(::DD::forward<ValueT__>(value___)))
 	) {
 		emplace_back(forward<ValueT__>(value___));
 	}
 #	else
+	public:
+	template <typename ValueT__>
 	ProcessType push_back(ValueT__ const& value___) {
 		if (this->is_full()) {
 			reserve();
 		}
-		unguarded_push_back(value___);
+		this->unguarded_push_back(value___);
 	}
 #	endif
 
@@ -874,8 +896,10 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename ValueT__>
-	Iterator insert(Iterator position_, ValueT__&& value___) {
-		return emplace(position_, forward<ValueT__>(value___));
+	Iterator insert(Iterator position_, ValueT__&& value___) noexcept(noexcept(
+		::DD::fabricate<ThisType>().emplace(position_, ::DD::forward<ValueT__>(value___))
+	)) {
+		return emplace(position_, ::DD::forward<ValueT__>(value___));
 	}
 #	else
 	public:
@@ -916,7 +940,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	ProcessType unguarded_concatenate(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+	ProcessType unguarded_concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
 		::DD::get_pointer(::DD::copy_construct(begin___ DD_COMMA end___ DD_COMMA ::DD::fabricate<ThisType>().end()))
 	) {
 		this->m_end_ = ::DD::get_pointer(::DD::copy_construct(begin___, end___, this->end()));
@@ -924,9 +948,8 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 
 	public:
-	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType unguarded_concatenate(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+	ProcessType unguarded_concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().unguarded_concatenate(DD_SPLIT_RANGE(range___))
 	) {
 		unguarded_concatenate(DD_SPLIT_RANGE(range___));
@@ -935,7 +958,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	ProcessType concatenate(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
 		reserve(this->get_length() + ::DD::length_difference(begin___, end___));
 		unguarded_concatenate(begin___, end___);
 	}
@@ -943,68 +966,10 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType concatenate(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
+	ProcessType concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().concatenate(DD_SPLIT_RANGE(range___))
 	) {
 		concatenate(DD_SPLIT_RANGE(range___));
-	}
-
-
-	public:
-	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().begin()) {
-		DD_ASSERT(!this->is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
-		erase(this->begin());
-	}
-
-
-	public:
-	ProcessType pop_back() DD_NOEXCEPT {
-		DD_ASSERT(!this->is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_back'.");
-		::DD::destruct(--this->m_end_);
-	}
-
-
-	public:
-	ProcessType trim_front(Iterator end_) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().erase_range(::DD::fabricate<ThisType>().begin() DD_COMMA end_)
-	) {
-		erase_range(this->begin(), end_);
-	}
-
-
-	public:
-	ProcessType trim_back(Iterator begin_) DD_NOEXCEPT {
-		::DD::destruct(begin_, this->end());
-		this->m_end_ = ::DD::get_pointer(begin_);
-	}
-
-
-	public:
-	ProcessType erase(Iterator position_) {
-		DD_ASSERT(::DD::check_bound(*this, position_), "Invalid iterator dereferenced: 'DD::Vessel::erase'");
-		::DD::move_overlapped_forward(position_ + 1, this->end(), position_);
-		pop_back();
-	}
-
-
-	public:
-	ProcessType erase_range(Iterator begin_, Iterator end_) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().trim_back(move_overlapped_forward(end_ DD_COMMA ::DD::fabricate<ThisType>().end() DD_COMMA begin_))
-	) {
-#	if __cplusplus >= 201103L
-		trim_back(::DD::move_overlapped_forward(end_, this->end(), begin_));
-#	else
-		trim_back(::DD::copy_overlapped_forward(end_, this->end(), begin_));
-#	endif
-	}
-
-
-	public:
-	ProcessType clear() DD_NOEXCEPT {
-		destruct_();
-		this->m_begin_ = PointerType();
-		this->m_end_ = PointerType();
-		this->m_storage_end_ = PointerType();
 	}
 
 
@@ -1023,7 +988,6 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	private:
 	ProcessType destruct_() const DD_NOEXCEPT {
-		::DD::destruct(this->m_begin_, this->m_end_);
 		AllocateAgent::deallocate(this->m_begin_, this->get_capacity());
 	}
 
