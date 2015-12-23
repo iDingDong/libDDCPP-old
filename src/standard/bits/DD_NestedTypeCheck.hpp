@@ -35,7 +35,8 @@
 			\
 			\
 			template <typename MACRO_ObjectT_>\
-			using ARG_Checker_ = ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_, ::DD::VoidType<>>::value>;
+			struct ARG_Checker_ : ::DD::BoolConstant<MACRO_detail_::ARG_Checker_##_<MACRO_ObjectT_, ::DD::VoidType<>>::value> {\
+			};
 
 
 #		define DD_NESTED_TYPE_TRAIT(ARG_Checker_, ARG_Target_, ...)\
@@ -67,9 +68,10 @@
 			\
 			\
 			template <typename MACRO_ObjectT_>\
-			using ARG_Checker_ = MACRO_detail_::ARG_Checker_##_<\
+			struct ARG_Checker_ : MACRO_detail_::ARG_Checker_##_<\
 				MACRO_ObjectT_, MACRO_detail_::MACRO_Helper_##ARG_Checker_<MACRO_ObjectT_>::value\
-			>;\
+			> {\
+			};\
 			\
 			\
 			\

@@ -38,7 +38,7 @@
 
 DD_DETAIL_BEGIN_
 template <ValidityType can_trivially_operate_c_>
-struct RingOperation_ {
+struct RingDestruction_ {
 	template <typename ValueT_>
 	static ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
@@ -105,7 +105,7 @@ struct RingOperation_ {
 
 
 template <>
-struct RingOperation_<true> {
+struct RingDestruction_<true> {
 	template <typename ValueT_>
 	static ProcessType destruct_ring_(
 		ValueT_* storage_begin_,
@@ -146,6 +146,10 @@ struct Ring_ {
 
 	protected:
 	static ValidityType DD_CONSTANT is_trivially_destructible_ = IsTriviallyDestructible<ValueType>::value;
+
+
+	public:
+	struct OriginalImplementation;
 
 
 	protected:
@@ -752,7 +756,7 @@ struct Ring_ {
 	}
 
 	public:
-	template <typename ValueT__>
+	template <typename ValueT__, typename AllocatorT__>
 	ProcessType unguarded_concatenate_back(
 #	if __cplusplus >= 201103L
 		UniversalFreeAccessIterator<Ring_<ValueT__>> begin___,
@@ -818,7 +822,7 @@ struct Ring_ {
 	public:
 	ProcessType pop_back() DD_NOEXCEPT {
 		DD_ASSERT(!is_empty(), "Out of range: 'DD::Ring::pop_back'");
-		RingOperation_<is_trivially_destructible_>::destruct_element_(
+		RingDestruction_<is_trivially_destructible_>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, --m_length_
 		);
 	}
@@ -844,7 +848,7 @@ struct Ring_ {
 	public:
 	ProcessType trim_back(LengthType index_) DD_NOEXCEPT {
 		DD_ASSERT(index_ <= get_length(), "Out of range: 'DD::Ring::trim_back'");
-		RingOperation_<is_trivially_destructible_>::destruct_element_(
+		RingDestruction_<is_trivially_destructible_>::destruct_element_(
 			m_storage_begin_, m_begin_, m_storage_end_, index_, m_length_
 		);
 		m_length_ = index_;
@@ -975,7 +979,7 @@ struct Ring_ {
 
 	protected:
 	ProcessType destruct_() DD_NOEXCEPT {
-		RingOperation_<is_trivially_destructible_>::destruct_ring_(
+		RingDestruction_<is_trivially_destructible_>::destruct_ring_(
 			m_storage_begin_, m_begin_, m_storage_end_, m_length_
 		);
 	}
@@ -1380,6 +1384,16 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	}
 
 	public:
+	template <typename ValueT__, typename AllocatorT__>
+	ProcessType concatenate_front(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__> const> begin___, LengthType length_) {
+#	if __cplusplus >= 201103L
+		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const>>(begin___), length_);
+#	else
+		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const> >(begin___), length_);
+#	endif
+	}
+
+	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType concatenate_front(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
 		::DD::fabricate<ThisType>().concatenate_front(begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___))
@@ -1405,6 +1419,16 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 		} else {
 			this->unguarded_concatenate_back(begin___, length_);
 		}
+	}
+
+	public:
+	template <typename ValueT__, typename AllocatorT__>
+	ProcessType concatenate_back(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__> const> begin___, LengthType length_) {
+#	if __cplusplus >= 201103L
+		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const>>(begin___), length_);
+#	else
+		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const> >(begin___), length_);
+#	endif
 	}
 
 	public:

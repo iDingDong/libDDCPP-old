@@ -209,7 +209,7 @@
 1450097051 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorvalue.hpp
 	"DD_Value.hpp"
 
-1450096978 d:\develop\repositories\libddcpp\src\standard\bits\dd_nestedtypecheck.hpp
+1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_nestedtypecheck.hpp
 	"DD_Nil.hpp"
 	"DD_meta_definitions.hpp"
 	"DD_VoidType.hpp"
@@ -656,7 +656,7 @@
 	"DD_IteratorPointer.hpp"
 	"DD_IteratorDifference.hpp"
 
-1450096944 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
+1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
 	"DD_IsVoid.hpp"
 	"DD_IsUnsigned.hpp"
 	"DD_IsReferable.hpp"
@@ -671,6 +671,7 @@
 	"DD_IsNoexceptCopyConstructible.hpp"
 	"DD_IsNoexceptMoveConstructible.hpp"
 	"DD_IsNoexceptMoveAssignable.hpp"
+	"DD_IsOriginalImplementation.hpp"
 	"DD_AddCV.hpp"
 	"DD_RemovePointer.hpp"
 	"DD_RemoveAllExtents.hpp"
@@ -1525,7 +1526,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450842478 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450854909 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1594,4 +1595,7 @@
 1450532301 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct_length.hpp
 	"DD_destruct.hpp"
 	"DD_next.hpp"
+
+1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_isoriginalimplementation.hpp
+	"DD_NestedTypeCheck.hpp"
 

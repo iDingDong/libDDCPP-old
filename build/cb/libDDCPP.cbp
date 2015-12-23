@@ -122,6 +122,7 @@
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptCopyConstructible.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveAssignable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsNoexceptMoveConstructible.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsOriginalImplementation.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsPod.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsRange.hpp" />
