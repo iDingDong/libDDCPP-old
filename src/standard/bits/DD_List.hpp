@@ -927,7 +927,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
-		insert_range(::DD::fabricate<ThisType>().end() DD_COMMA begin___ DD_COMMA end___)
+		::DD::fabricate<ThisType>().insert_range(::DD::fabricate<ThisType>().end() DD_COMMA begin___ DD_COMMA end___)
 	) {
 		insert_range(end(), begin___, end___);
 	}
@@ -947,7 +947,9 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 		Iterator position_,
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(created_range_between_(::DD::previous(position_) DD_COMMA position_ DD_COMMA begin___ DD_COMMA end___)) {
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().created_range_between_(
+		::DD::previous(position_) DD_COMMA position_ DD_COMMA begin___ DD_COMMA end___
+	)) {
 		created_range_between_(::DD::previous(position_), position_, begin___, end___);
 	}
 
@@ -1046,6 +1048,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	template <typename UndirectionalRangeT__>
 	ThisType& operator +=(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().concatenate_back(range___)) {
 		concatenate_back(range___);
+		return *this;
 	}
 
 

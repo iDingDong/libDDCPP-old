@@ -182,12 +182,12 @@ struct Ring_ {
 	}
 
 
+#	if __cplusplus >= 201103L
 	protected:
-	~Ring_() DD_NOEXCEPT {
-		destruct_();
-	}
+	~Ring_() = default;
 
 
+#	endif
 	protected:
 	Iterator begin() DD_NOEXCEPT {
 		return Iterator(*this, 0);
@@ -555,7 +555,7 @@ struct Ring_ {
 #	endif
 
 
-	private:
+	protected:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_front_without_circuit_(
 		UndirectionalIteratorT__ begin___,
@@ -627,6 +627,19 @@ struct Ring_ {
 	}
 
 	public:
+	template <typename ValueT__>
+	ProcessType unguarded_concatenate_front(
+#	if __cplusplus >= 201103L
+		UniversalFreeAccessIterator<Ring_<ValueT__>> begin___,
+#	else
+		UniversalFreeAccessIterator<Ring_<ValueT__> > begin___,
+#	endif
+		LengthType length_
+	) {
+		unguarded_concatenate_front(UniversalFreeAccessIterator<Ring_<ValueT__> const>(begin___), length_);
+	}
+
+	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_front(UndirectionalIteratorT__ begin___, LengthType length_) {
 		LengthType left_offset_ = get_left_offset_();
@@ -661,7 +674,7 @@ struct Ring_ {
 	}
 
 
-	private:
+	protected:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_back_without_circuit_(
 		UndirectionalIteratorT__ begin___,
@@ -684,7 +697,7 @@ struct Ring_ {
 		>::PointerType origin_begin_ = begin___.get_container().m_begin_;
 		LengthType origin_right_offset_ = begin___.get_container().m_storage_end_ - origin_begin_;
 		if (get_length() < right_offset_) {
-			if (right_offset_ -= get_length() < length_) {
+			if ((right_offset_ -= get_length()) < length_) {
 				if (origin_right_offset_ < length_) {
 					if (right_offset_ < origin_right_offset_) {
 						::DD::copy_construct_length(origin_begin_, m_begin_ + get_length(), right_offset_);
@@ -739,11 +752,24 @@ struct Ring_ {
 	}
 
 	public:
+	template <typename ValueT__>
+	ProcessType unguarded_concatenate_back(
+#	if __cplusplus >= 201103L
+		UniversalFreeAccessIterator<Ring_<ValueT__>> begin___,
+#	else
+		UniversalFreeAccessIterator<Ring_<ValueT__> > begin___,
+#	endif
+		LengthType length_
+	) {
+		unguarded_concatenate_back(UniversalFreeAccessIterator<Ring_<ValueT__> const>(begin___), length_);
+	}
+
+	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) {
 		LengthType right_offset_ = get_right_offset_();
 		if (get_length() < right_offset_) {
-			if (right_offset_ -= get_length() < length_) {
+			if ((right_offset_ -= get_length()) < length_) {
 				begin___ = ::DD::copy_construct_length(begin___, m_begin_ + get_length(), right_offset_).first;
 				m_length_ += right_offset_;
 				length_ -= right_offset_;
@@ -947,7 +973,7 @@ struct Ring_ {
 	}
 
 
-	private:
+	protected:
 	ProcessType destruct_() DD_NOEXCEPT {
 		RingOperation_<is_trivially_destructible_>::destruct_ring_(
 			m_storage_begin_, m_begin_, m_storage_end_, m_length_
@@ -1027,6 +1053,13 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 
 	public:
+	~Ring() DD_NOEXCEPT {
+		SuperType::destruct_();
+		destruct_();
+	}
+
+
+	public:
 	Iterator begin() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::begin())) {
 		return Iterator(SuperType::begin());
 	}
@@ -1076,12 +1109,6 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 	public:
 	DD_REVERSE_RANGE_NESTED
-
-
-	public:
-	~Ring() {
-		destruct_();
-	}
 
 
 	public:

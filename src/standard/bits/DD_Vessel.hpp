@@ -13,6 +13,7 @@
 #	include "DD_release.hpp"
 #	include "DD_AccessDenied.hpp"
 #	include "DD_Allocateable.hpp"
+#	include "DD_destruct_length.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_InitializerList.hpp"
 #	include "DD_BatchRange.hpp"
@@ -110,12 +111,12 @@ struct Vessel_ {
 	}
 
 
+#	if __cplusplus >= 201103L
 	protected:
-	~Vessel_() DD_NOEXCEPT {
-		destruct_();
-	}
+	~Vessel_() = default;
 
 
+#	endif
 	public:
 	Iterator begin() DD_NOEXCEPT {
 		return Iterator(m_begin_);
@@ -261,7 +262,7 @@ struct Vessel_ {
 	public:
 	ReferenceType at(LengthType index_) DD_NOEXCEPT {
 		Iterator temp_ = begin() + index_;
-		if (check_bound(*this, temp_)) {
+		if (::DD::check_bound(*this, temp_)) {
 			return *temp_;
 		}
 		throw AccessDenied("Out of range: 'DD::Vessel::at'");
@@ -270,7 +271,7 @@ struct Vessel_ {
 	public:
 	ConstReferenceType at(LengthType index_) const DD_NOEXCEPT {
 		ConstIterator temp_ = begin() + index_;
-		if (check_bound(*this, temp_)) {
+		if (::DD::check_bound(*this, temp_)) {
 			return *temp_;
 		}
 		throw AccessDenied("Out of range: 'DD::Vessel::at'");
@@ -410,6 +411,34 @@ struct Vessel_ {
 
 
 	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) DD_NOEXCEPT_AS(
+		::DD::fabricate<PointerType>() = ::DD::copy_length(begin___ DD_COMMA ::DD::fabricate<PointerType>() DD_COMMA length_).second
+	) {
+		DD_ASSERT(length_ <= get_free_space(), "Out of range: 'DD::Vessel::unguarded_concatenate_back'");
+		m_end_ = ::DD::copy_length(begin___, m_end_, length_).second;
+	}
+
+	public:
+	template <typename UndirectionalIteratorT__>
+	ProcessType unguarded_concatenate_back(
+		UndirectionalIteratorT__ begin___,
+		UndirectionalIteratorT__ end___
+	) DD_NOEXCEPT_AS(::DD::fabricate<PointerType>() = ::DD::copy_length(begin___ DD_COMMA end___ DD_COMMA ::DD::fabricate<PointerType>())) {
+		DD_ASSERT(::DD::length_difference(begin___ DD_COMMA end___) <= get_length(), "Out of range: 'DD::Vessel::unguarded_concatenate_back'");
+		m_end_ = ::DD::copy_length(begin___, end___, m_end_);
+	}
+
+	public:
+	template <typename UndirectionalRangeT__>
+	ProcessType unguarded_concatenate_back(
+		UndirectionalRangeT__ const& range___
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().unguarded_concatenate_back(DD_SPLIT_RANGE(range___))) {
+		unguarded_concatenate_back(DD_SPLIT_RANGE(range___));
+	}
+
+
+	public:
 	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().begin()) {
 		DD_ASSERT(!is_empty(), "Failed to pop from empty container: 'DD::Vessel::pop_front'.");
 		erase(begin());
@@ -458,7 +487,7 @@ struct Vessel_ {
 	}
 
 
-	private:
+	protected:
 	ProcessType destruct_() DD_NOEXCEPT {
 		::DD::destruct(begin(), end());
 	}
@@ -695,6 +724,7 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	~Vessel() DD_NOEXCEPT {
+		SuperType::destruct_();
 		destruct_();
 	}
 
@@ -940,36 +970,44 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	ProcessType unguarded_concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
-		::DD::get_pointer(::DD::copy_construct(begin___ DD_COMMA end___ DD_COMMA ::DD::fabricate<ThisType>().end()))
-	) {
-		this->m_end_ = ::DD::get_pointer(::DD::copy_construct(begin___, end___, this->end()));
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, LengthType length_) {
+		if (length_ < this->get_free_space()) {
+			this->unguarded_concatenate_back(begin___, length_);
+		} else {
+			LengthType origin_length_ = this->get_length();
+			PointerType new_begin_ = AllocateAgent::allocate(origin_length_ + length_);
+			try {
+				::DD::copy_construct_length(begin___, new_begin_ + origin_length_, length_);
+				try {
+					this->transfer_to_(Iterator(new_begin_));
+					destruct_();
+					this->m_begin_ = new_begin_;
+					this->m_end_ = new_begin_ + origin_length_ + length_;
+					this->m_storage_end_ = this->m_end_;
+				} catch (...) {
+					::DD::destruct_length(new_begin_ + origin_length_, length_);
+				}
+			} catch (...) {
+				AllocateAgent::deallocate(new_begin_, origin_length_ + length_);
+				throw;
+			}
+		}
 	}
-
-
-	public:
-	template <typename UndirectionalRangeT__>
-	ProcessType unguarded_concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().unguarded_concatenate(DD_SPLIT_RANGE(range___))
-	) {
-		unguarded_concatenate(DD_SPLIT_RANGE(range___));
-	}
-
 
 	public:
 	template <typename UndirectionalIteratorT__>
-	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
-		reserve(this->get_length() + ::DD::length_difference(begin___, end___));
-		unguarded_concatenate(begin___, end___);
+	ProcessType concatenate_back(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(begin___ DD_COMMA ::DD::length_difference(begin___ DD_COMMA end___))
+	) {
+		concatenate_back(begin___, ::DD::length_difference(begin___, end___));
 	}
-
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ProcessType concatenate_back(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(
-		::DD::fabricate<ThisType>().concatenate(DD_SPLIT_RANGE(range___))
+	ProcessType concatenate_back(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().concatenate_back(DD_SPLIT_RANGE(range___))
 	) {
-		concatenate(DD_SPLIT_RANGE(range___));
+		concatenate_back(DD_SPLIT_RANGE(range___));
 	}
 
 
@@ -1017,8 +1055,8 @@ struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 
 	public:
 	template <typename UndirectionalRangeT__>
-	ThisType& operator +=(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().concatenate(range___)) {
-		concatenate(range___);
+	ThisType& operator +=(UndirectionalRangeT__& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().concatenate_back(range___)) {
+		concatenate_back(range___);
 		return *this;
 	}
 

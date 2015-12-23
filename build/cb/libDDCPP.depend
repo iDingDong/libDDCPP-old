@@ -1017,7 +1017,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450799604 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1450802714 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1027,6 +1027,7 @@
 	"DD_release.hpp"
 	"DD_AccessDenied.hpp"
 	"DD_Allocateable.hpp"
+	"DD_destruct_length.hpp"
 	"DD_IteratorReverse.hpp"
 	"DD_InitializerList.hpp"
 	"DD_BatchRange.hpp"
@@ -1175,7 +1176,7 @@
 1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
 	"bits/DD_List.hpp"
 
-1450785499 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1450801881 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1323,14 +1324,14 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450796996 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1450802244 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
 	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
-	"standard/DDRing.hpp"
 	"standard/DDVessel.hpp"
+	"standard/DDRing.hpp"
 	"standard/DDList.hpp"
 	"standard/DDUtility.hpp"
 	"standard/DDAlgorithm.hpp"
@@ -1524,7 +1525,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1450796343 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1450842478 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1589,4 +1590,8 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 	"DD_copy_length.hpp"
+
+1450532301 d:\develop\repositories\libddcpp\src\standard\bits\dd_destruct_length.hpp
+	"DD_destruct.hpp"
+	"DD_next.hpp"
 

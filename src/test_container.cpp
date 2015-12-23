@@ -4,8 +4,8 @@
 
 #include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
-#include "standard/DDRing.hpp"
 #include "standard/DDVessel.hpp"
+#include "standard/DDRing.hpp"
 #include "standard/DDList.hpp"
 #include "standard/DDUtility.hpp"
 
@@ -71,12 +71,13 @@ void test_container() {
 			}
 			DD::swap(another_ves, ves);
 
-			DD::Vessel<DD::Variant<>> variant_ves = { 1, "haha", 1.0 };
+			DD::Vessel<DD::Variant<>> variant_ves = { 1, "haha", 1.0, Test() };
 			if (
-				variant_ves.get_length() != 3 ||
+				variant_ves.get_length() != 4 ||
 				variant_ves[0].get_type() != typeid(1) ||
 				variant_ves[1].get_type() != typeid(DD::DecayType<decltype("haha")>) ||
-				variant_ves[2].get_type() != typeid(1.0)
+				variant_ves[2].get_type() != typeid(1.0) ||
+				variant_ves[3].get_type() != typeid(Test)
 			) {
 				throw "'DD::Vessel' test failed.";
 			}
@@ -369,6 +370,9 @@ void test_container() {
 			) {
 				throw "Container test failed.";
 			}
+			ves += ves;
+			lst += lst;
+			ring += ring;
 		}
 	}
 }
