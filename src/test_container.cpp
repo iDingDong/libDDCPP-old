@@ -373,6 +373,23 @@ void test_container() {
 			ves += ves;
 			lst += lst;
 			ring += ring;
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
+			ves += ves;
+			lst += lst;
+			ring += ring;
+			if (
+				!DD::equal(ves, lst) ||
+				!DD::equal(lst, ring) ||
+				!DD::equal(ring, ves)
+			) {
+				throw "Container test failed.";
+			}
 		}
 	}
 }

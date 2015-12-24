@@ -572,9 +572,9 @@ struct Ring_ {
 
 
 	public:
-	template <typename ValueT__>
+	template <typename ValueT__, ValidityType is_const_qualified_c__>
 	ProcessType unguarded_concatenate_front(
-		UniversalFreeAccessIterator<Ring_<ValueT__> const> begin___,
+		UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__> begin___,
 		LengthType length_
 	) {
 		LengthType left_offset_ = get_left_offset_();
@@ -631,19 +631,6 @@ struct Ring_ {
 	}
 
 	public:
-	template <typename ValueT__>
-	ProcessType unguarded_concatenate_front(
-#	if __cplusplus >= 201103L
-		UniversalFreeAccessIterator<Ring_<ValueT__>> begin___,
-#	else
-		UniversalFreeAccessIterator<Ring_<ValueT__> > begin___,
-#	endif
-		LengthType length_
-	) {
-		unguarded_concatenate_front(UniversalFreeAccessIterator<Ring_<ValueT__> const>(begin___), length_);
-	}
-
-	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType unguarded_concatenate_front(UndirectionalIteratorT__ begin___, LengthType length_) {
 		LengthType left_offset_ = get_left_offset_();
@@ -690,9 +677,9 @@ struct Ring_ {
 
 
 	public:
-	template <typename ValueT__>
+	template <typename ValueT__, ValidityType is_const_qualified_c__>
 	ProcessType unguarded_concatenate_back(
-		UniversalFreeAccessIterator<Ring_<ValueT__> const> begin___,
+		UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__> begin___,
 		LengthType length_
 	) {
 		LengthType right_offset_ = get_right_offset_();
@@ -753,19 +740,6 @@ struct Ring_ {
 			}
 		}
 		m_length_ += length_;
-	}
-
-	public:
-	template <typename ValueT__, typename AllocatorT__>
-	ProcessType unguarded_concatenate_back(
-#	if __cplusplus >= 201103L
-		UniversalFreeAccessIterator<Ring_<ValueT__>> begin___,
-#	else
-		UniversalFreeAccessIterator<Ring_<ValueT__> > begin___,
-#	endif
-		LengthType length_
-	) {
-		unguarded_concatenate_back(UniversalFreeAccessIterator<Ring_<ValueT__> const>(begin___), length_);
 	}
 
 	public:
@@ -1384,12 +1358,12 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	}
 
 	public:
-	template <typename ValueT__, typename AllocatorT__>
-	ProcessType concatenate_front(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__> const> begin___, LengthType length_) {
+	template <typename ValueT__, typename AllocatorT__, ValidityType is_const_qualified_c__>
+	ProcessType concatenate_front(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__>, is_const_qualified_c__> begin___, LengthType length_) {
 #	if __cplusplus >= 201103L
-		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const>>(begin___), length_);
+		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__>>(begin___), length_);
 #	else
-		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const> >(begin___), length_);
+		concatenate_front(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__> >(begin___), length_);
 #	endif
 	}
 
@@ -1422,12 +1396,12 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	}
 
 	public:
-	template <typename ValueT__, typename AllocatorT__>
-	ProcessType concatenate_back(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__> const> begin___, LengthType length_) {
+	template <typename ValueT__, typename AllocatorT__, ValidityType is_const_qualified_c__>
+	ProcessType concatenate_back(UniversalFreeAccessIterator<Ring<ValueT__, AllocatorT__>, is_const_qualified_c__> begin___, LengthType length_) {
 #	if __cplusplus >= 201103L
-		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const>>(begin___), length_);
+		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__>>(begin___), length_);
 #	else
-		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__> const> >(begin___), length_);
+		concatenate_back(static_cast<UniversalFreeAccessIterator<Ring_<ValueT__>, is_const_qualified_c__> >(begin___), length_);
 #	endif
 	}
 
