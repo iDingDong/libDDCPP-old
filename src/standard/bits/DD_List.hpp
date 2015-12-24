@@ -150,7 +150,7 @@ struct List_<void> {
 
 	protected:
 	ProcessType reset_() DD_NOEXCEPT {
-		::DD::detail_::link_list_(sentry_(), sentry_());
+		link_(sentry_(), sentry_());
 	}
 
 
@@ -290,6 +290,28 @@ struct List_ : List_<void> {
 	DD_RANGE_NESTED
 
 
+	public:
+	ReferenceType front() DD_NOEXCEPT {
+		return *begin();
+	}
+
+	public:
+	ConstReferenceType front() const DD_NOEXCEPT {
+		return *begin();
+	}
+
+
+	public:
+	ReferenceType back() DD_NOEXCEPT {
+		return *::DD::previous(end());
+	}
+
+	public:
+	ConstReferenceType back() const DD_NOEXCEPT {
+		return *::DD::previous(end());
+	}
+
+
 	protected:
 	ReverseIterator DD_CONSTEXPR rbegin() DD_NOEXCEPT {
 		return ReverseIterator(SuperType::rbegin());
@@ -359,6 +381,99 @@ template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
 #	else
 template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
 #	endif
+struct List;
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+struct GuardedListIterator_ : ListIterator<ValueT_> {
+	public:
+	DD_ALIAS(SuperType, ListIterator<ValueT_>);
+	DD_ALIAS(ThisType, GuardedListIterator_<ValueT_ DD_COMMA AllocatorT_>);
+
+	public:
+	DD_INHERIT_TEMPLATE_ALIAS(ValueType);
+	DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(PointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
+
+	public:
+	DD_INHERIT_TEMPLATE_ALIAS(NodeType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
+
+#	if __cplusplus >= 201103L
+	public:
+	using SuperType::SuperType;
+#	else
+	public:
+	Iterator() {
+	}
+
+	public:
+	explicit Iterator(typename SuperType::SuperType origin_) : SuperType(origin_) {
+	}
+
+	public:
+	Iterator(NodePointerType pointer_) : SuperType(pointer_) {
+	}
+#	endif
+
+
+	public:
+	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
+		::DD::fabricate<SuperType>().SuperType::swap_target(other_)
+	) {
+		SuperType::swap_target(other_);
+	}
+
+
+	public:
+	ValidityType DD_CONSTEXPR operator ==(ThisType const& other_) const DD_NOEXCEPT_AS(static_cast<ValidityType>(
+		static_cast<SuperType const&>(::DD::fabricate<ThisType const>()) == static_cast<SuperType const&>(other_)
+	)) {
+		return static_cast<SuperType const&>(*this) == static_cast<SuperType const&>(other_);
+	}
+
+
+	public:
+	ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
+		++static_cast<SuperType&>(*this);
+		return *this;
+	}
+
+	public:
+	ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++::DD::fabricate<ThisType>())) {
+		ThisType result_(*this);
+		++*this;
+		return result_;
+	}
+
+
+	public:
+	ThisType& operator --() DD_NOEXCEPT_AS(--static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
+		--static_cast<SuperType&>(*this);
+		return *this;
+	}
+
+	public:
+	ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--::DD::fabricate<ThisType>())) {
+		ThisType result_(*this);
+		--*this;
+		return result_;
+	}
+
+
+};
+
+
+
+template <typename ValueT_, typename AllocatorT_>
 struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
@@ -386,95 +501,8 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
 	DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
 
-
 	public:
-	struct Iterator : SuperType::Iterator {
-		public:
-		DD_ALIAS(SuperType, typename SuperType::Iterator);
-		DD_ALIAS(ThisType, Iterator);
-
-		public:
-		DD_INHERIT_TEMPLATE_ALIAS(ValueType);
-		DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
-		DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
-		DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
-		DD_INHERIT_TEMPLATE_ALIAS(PointerType);
-		DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
-
-		public:
-		DD_INHERIT_TEMPLATE_ALIAS(NodeType);
-		DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
-		DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
-		DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
-		DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
-		DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
-
-#	if __cplusplus >= 201103L
-		public:
-		using SuperType::SuperType;
-#	else
-		public:
-		Iterator() {
-		}
-
-		public:
-		explicit Iterator(typename SuperType::SuperType origin_) : SuperType(origin_) {
-		}
-
-		public:
-		Iterator(NodePointerType pointer_) : SuperType(pointer_) {
-		}
-#	endif
-
-
-		public:
-		ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
-			::DD::fabricate<SuperType>().SuperType::swap_target(other_)
-		) {
-			SuperType::swap_target(other_);
-		}
-
-
-		public:
-		ValidityType DD_CONSTEXPR operator ==(ThisType const& other_) const DD_NOEXCEPT_AS(static_cast<ValidityType>(
-			static_cast<SuperType const&>(::DD::fabricate<ThisType const>()) == static_cast<SuperType const&>(other_)
-		)) {
-			return static_cast<SuperType const&>(*this) == static_cast<SuperType const&>(other_);
-		}
-
-
-		public:
-		ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
-			++static_cast<SuperType&>(*this);
-			return *this;
-		}
-
-		public:
-		ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++::DD::fabricate<ThisType>())) {
-			ThisType result_(*this);
-			++*this;
-			return result_;
-		}
-
-
-		public:
-		ThisType& operator --() DD_NOEXCEPT_AS(--static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
-			--static_cast<SuperType&>(*this);
-			return *this;
-		}
-
-		public:
-		ThisType operator --(int) DD_NOEXCEPT_AS(ThisType(--::DD::fabricate<ThisType>())) {
-			ThisType result_(*this);
-			--*this;
-			return result_;
-		}
-
-
-	};
-
-
-	public:
+	DD_ALIAS(Iterator, GuardedListIterator_<ValueType DD_COMMA AllocatorType>);
 	DD_ALIAS(ConstIterator, typename List<ValueConstType DD_COMMA AllocatorType>::Iterator);
 	DD_ITERATOR_NESTED
 
