@@ -276,6 +276,82 @@ struct UndirectionalList_ : UndirectionalList_<void> {
 
 
 
+template <typename ValueT_, typename AllocatorT_>
+struct GuardedUndirectionalListIterator_ : ListIterator<ValueT_> {
+	public:
+	DD_ALIAS(SuperType, UndirectionalListIterator<ValueT_>);
+	DD_ALIAS(ThisType, GuardedUndirectionalListIterator_<ValueT_ DD_COMMA AllocatorT_>);
+
+	public:
+	DD_INHERIT_TEMPLATE_ALIAS(ValueType);
+	DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(PointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
+
+	public:
+	DD_INHERIT_TEMPLATE_ALIAS(NodeType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstReferenceType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodePointerType);
+	DD_INHERIT_TEMPLATE_ALIAS(NodeConstPointerType);
+
+#	if __cplusplus >= 201103L
+	public:
+	using SuperType::SuperType;
+#	else
+	public:
+	GuardedUndirectionalListIterator_() {
+	}
+
+	public:
+	explicit GuardedUndirectionalListIterator_(typename SuperType::SuperType origin_) : SuperType(origin_) {
+	}
+
+	public:
+	GuardedUndirectionalListIterator_(NodePointerType pointer_) : SuperType(pointer_) {
+	}
+#	endif
+
+
+	public:
+	ProcessType swap_target(ThisType const& other_) const DD_NOEXCEPT_AS(
+		::DD::fabricate<SuperType>().SuperType::swap_target(other_)
+	) {
+		SuperType::swap_target(other_);
+	}
+
+
+	public:
+	ThisType& operator ++() DD_NOEXCEPT_AS(++static_cast<SuperType&>(::DD::fabricate<ThisType>())) {
+		++static_cast<SuperType&>(*this);
+		return *this;
+	}
+
+	public:
+	ThisType operator ++(int) DD_NOEXCEPT_AS(ThisType(++::DD::fabricate<ThisType>())) {
+		ThisType result_(*this);
+		++*this;
+		return result_;
+	}
+
+
+};
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+inline ValidityType DD_CONSTEXPR operator ==(
+	GuardedUndirectionalListIterator_<ValueT_, AllocatorT_> const& iterator_1__,
+	GuardedUndirectionalListIterator_<ValueT_, AllocatorT_> const& iterator_2__
+) DD_NOEXCEPT {
+	return iterator_1__.GuardedUndirectionalListIterator_<ValueT_, AllocatorT_>::SuperType::equal(iterator_2__);
+}
+
+
+
 DD_DETAIL_END_
 
 

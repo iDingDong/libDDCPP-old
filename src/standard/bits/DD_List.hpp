@@ -403,15 +403,15 @@ struct GuardedListIterator_ : ListIterator<ValueT_> {
 	using SuperType::SuperType;
 #	else
 	public:
-	Iterator() {
+	GuardedListIterator_() {
 	}
 
 	public:
-	explicit Iterator(typename SuperType::SuperType origin_) : SuperType(origin_) {
+	explicit GuardedListIterator_(typename SuperType::SuperType origin_) : SuperType(origin_) {
 	}
 
 	public:
-	Iterator(NodePointerType pointer_) : SuperType(pointer_) {
+	GuardedListIterator_(NodePointerType pointer_) : SuperType(pointer_) {
 	}
 #	endif
 
@@ -1090,6 +1090,16 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 };
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+inline ValidityType DD_CONSTEXPR operator ==(
+	GuardedListIterator_<ValueT_, AllocatorT_> const& iterator_1__,
+	GuardedListIterator_<ValueT_, AllocatorT_> const& iterator_2__
+) DD_NOEXCEPT {
+	return iterator_1__.GuardedListIterator_<ValueT_, AllocatorT_>::SuperType::equal(iterator_2__);
+}
 
 
 
