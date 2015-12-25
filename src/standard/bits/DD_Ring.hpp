@@ -293,13 +293,13 @@ struct Ring_ {
 
 
 	public:
-	PointerType DD_CONSTEXPR get_pointer(LengthType index_) DD_NOEXCEPT {
+	PointerType get_pointer(LengthType index_) DD_NOEXCEPT {
 		LengthType right_offset_ = get_right_offset_();
 		return index_ < right_offset_ ? m_begin_ + index_ : m_storage_begin_ + index_ - right_offset_;
 	}
 
 	public:
-	ConstPointerType DD_CONSTEXPR get_pointer(LengthType index_) const DD_NOEXCEPT {
+	ConstPointerType DD_UNCONSTRIANED_CONSTEXPR get_pointer(LengthType index_) const DD_NOEXCEPT {
 		LengthType right_offset_ = get_right_offset_();
 		return index_ < right_offset_ ? m_begin_ + index_ : m_storage_begin_ + index_ - right_offset_;
 	}
@@ -1018,7 +1018,7 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	DD_CONSTEXPR Ring() = default;
 
 	public:
-	DD_CONSTEXPR Ring(ThisType const& origin_) {
+	Ring(ThisType const& origin_) {
 		clone_initialize_(origin_);
 	}
 

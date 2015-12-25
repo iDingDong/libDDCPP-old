@@ -313,6 +313,20 @@ inline transfer_after_undirectional_list_(
 }
 
 
+template <typename ValueT_>
+inline ProcessType splice_after_undirectional_list_(
+	UndirectionalListIterator<ValueT_> position_,
+	UndirectionalListIterator<ValueT_> head_,
+	UndirectionalListIterator<ValueT_> tail_
+) DD_NOEXCEPT {
+	::DD::detail_::splice_after_undirectional_list_node_(
+		position_.get_node_pointer(),
+		head_.get_node_pointer(),
+		tail_.get_node_pointer()
+	);
+}
+
+
 
 DD_DETAIL_END_
 

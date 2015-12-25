@@ -10,13 +10,13 @@
 
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_>
-inline UndirectionalIteratorT_ DD_CONSTEXPR next(UndirectionalIteratorT_ iterator__) DD_NOEXCEPT_AS(advance(iterator__)) {
+inline UndirectionalIteratorT_ DD_UNCONSTRIANED_CONSTEXPR next(UndirectionalIteratorT_ iterator__) DD_NOEXCEPT_AS(advance(iterator__)) {
 	advance(iterator__);
 	return iterator__;
 }
 
 template <typename UndirectionalIteratorT_, typename DifferenceT_>
-inline UndirectionalIteratorT_ DD_CONSTEXPR next(
+inline UndirectionalIteratorT_ DD_UNCONSTRIANED_CONSTEXPR next(
 	UndirectionalIteratorT_ iterator__,
 	DifferenceT_ const& step__
 ) DD_NOEXCEPT_AS(advance(iterator__, step__)) {

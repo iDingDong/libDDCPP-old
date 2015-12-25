@@ -92,6 +92,7 @@
 		<Unit filename="../../src/standard/bits/DD_GetPackBack.hpp" />
 		<Unit filename="../../src/standard/bits/DD_GreaterThan.hpp" />
 		<Unit filename="../../src/standard/bits/DD_HashOf.hpp" />
+		<Unit filename="../../src/standard/bits/DD_HashTable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Illogic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Incrementable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Indexable.hpp" />
@@ -207,6 +208,7 @@
 		<Unit filename="../../src/standard/bits/DD_TypeInfo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_TypeList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Uncopiable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_UndirectionalList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />

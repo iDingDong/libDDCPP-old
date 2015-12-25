@@ -194,7 +194,7 @@ struct BatchRange {
 
 
 	public:
-	Iterator DD_CONSTEXPR begin() DD_NOEXCEPT_AS(Iterator(value)) {
+	Iterator begin() DD_NOEXCEPT_AS(Iterator(value)) {
 		return Iterator(value);
 	}
 
@@ -205,7 +205,7 @@ struct BatchRange {
 
 
 	public:
-	Iterator DD_CONSTEXPR end() DD_NOEXCEPT_AS(Iterator(value, length)) {
+	Iterator end() DD_NOEXCEPT_AS(Iterator(value, length)) {
 		return Iterator(value, length);
 	}
 

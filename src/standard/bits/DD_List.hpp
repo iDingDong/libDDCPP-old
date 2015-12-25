@@ -133,7 +133,7 @@ struct List_<void> {
 
 
 	public:
-	ValidityType DD_CONSTEXPR is_empty() const DD_NOEXCEPT {
+	ValidityType DD_UNCONSTRIANED_CONSTEXPR is_empty() const DD_NOEXCEPT {
 		return begin() == end();
 	}
 
@@ -265,7 +265,7 @@ struct List_ : List_<void> {
 
 
 	protected:
-	Iterator DD_CONSTEXPR begin() DD_NOEXCEPT {
+	Iterator begin() DD_NOEXCEPT {
 		return Iterator(SuperType::begin());
 	}
 
@@ -276,7 +276,7 @@ struct List_ : List_<void> {
 
 
 	protected:
-	Iterator DD_CONSTEXPR end() DD_NOEXCEPT {
+	Iterator end() DD_NOEXCEPT {
 		return Iterator(SuperType::end());
 	}
 
@@ -313,7 +313,7 @@ struct List_ : List_<void> {
 
 
 	protected:
-	ReverseIterator DD_CONSTEXPR rbegin() DD_NOEXCEPT {
+	ReverseIterator rbegin() DD_NOEXCEPT {
 		return ReverseIterator(SuperType::rbegin());
 	}
 
@@ -324,7 +324,7 @@ struct List_ : List_<void> {
 
 
 	protected:
-	ReverseIterator DD_CONSTEXPR rend() DD_NOEXCEPT {
+	ReverseIterator rend() DD_NOEXCEPT {
 		return ReverseIterator(SuperType::rend());
 	}
 
@@ -373,15 +373,6 @@ struct List_ : List_<void> {
 
 
 };
-
-
-
-#	if __cplusplus >= 201103L
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
-#	else
-template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
-#	endif
-struct List;
 
 
 
@@ -473,7 +464,11 @@ struct GuardedListIterator_ : ListIterator<ValueT_> {
 
 
 
-template <typename ValueT_, typename AllocatorT_>
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
+#	else
+template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
+#	endif
 struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
