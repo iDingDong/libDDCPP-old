@@ -290,28 +290,6 @@ struct List_ : List_<void> {
 	DD_RANGE_NESTED
 
 
-	public:
-	ReferenceType front() DD_NOEXCEPT {
-		return *begin();
-	}
-
-	public:
-	ConstReferenceType front() const DD_NOEXCEPT {
-		return *begin();
-	}
-
-
-	public:
-	ReferenceType back() DD_NOEXCEPT {
-		return *::DD::previous(end());
-	}
-
-	public:
-	ConstReferenceType back() const DD_NOEXCEPT {
-		return *::DD::previous(end());
-	}
-
-
 	protected:
 	ReverseIterator rbegin() DD_NOEXCEPT {
 		return ReverseIterator(SuperType::rbegin());
@@ -336,6 +314,32 @@ struct List_ : List_<void> {
 
 	protected:
 	DD_REVERSE_RANGE_NESTED
+
+
+	public:
+	ReferenceType front() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::fabricate<ThisType>().begin())) {
+		return *begin();
+	}
+
+	public:
+	ConstReferenceType front() const DD_NOEXCEPT_AS(
+		static_cast<ConstReferenceType>(*::DD::fabricate<ThisType const>().begin())
+	) {
+		return *begin();
+	}
+
+
+	public:
+	ReferenceType back() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::previous(::DD::fabricate<ThisType>().end()))) {
+		return *::DD::previous(end());
+	}
+
+	public:
+	ConstReferenceType back() const DD_NOEXCEPT_AS(
+		static_cast<ConstReferenceType>(*::DD::previous(::DD::fabricate<ThisType const>().end()))
+	) {
+		return **::DD::previous(end());
+	}
 
 
 	protected:
@@ -624,7 +628,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	~List() DD_NOEXCEPT {
-		destruct();
+		destruct_();
 	}
 
 
@@ -655,32 +659,6 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 	public:
-	ReferenceType front() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::fabricate<ThisType>().begin())) {
-		return *begin();
-	}
-
-	public:
-	ConstReferenceType front() const DD_NOEXCEPT_AS(
-		static_cast<ConstReferenceType>(*::DD::fabricate<ThisType const>().begin())
-	) {
-		return *begin();
-	}
-
-
-	public:
-	ReferenceType back() DD_NOEXCEPT_AS(static_cast<ReferenceType>(*::DD::previous(::DD::fabricate<ThisType>().end()))) {
-		return *::DD::previous(end());
-	}
-
-	public:
-	ConstReferenceType back() const DD_NOEXCEPT_AS(
-		static_cast<ConstReferenceType>(*::DD::previous(::DD::fabricate<ThisType const>().end()))
-	) {
-		return **::DD::previous(end());
-	}
-
-
-	public:
 	Iterator rbegin() DD_NOEXCEPT_AS(Iterator(::DD::fabricate<ThisType>().SuperType::rbegin())) {
 		return Iterator(SuperType::rbegin());
 	}
@@ -708,8 +686,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT_IF(
-		noexcept(::DD::swap(static_cast<AllocateAgent&>(fabricate<ThisType>()) DD_COMMA static_cast<AllocateAgent&>(other_))) &&
-		noexcept(::DD::fabricate<ThisType>().SuperType::swap(other_))
+		noexcept(::DD::swap(static_cast<AllocateAgent&>(fabricate<ThisType>()) DD_COMMA static_cast<AllocateAgent&>(other_)))
 	) {
 		::DD::swap(static_cast<AllocateAgent&>(*this), static_cast<AllocateAgent&>(other_));
 		SuperType::swap(other_);
@@ -853,7 +830,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	template <typename UndirectionalIteratorT__>
 	ProcessType clone(UndirectionalIteratorT__ begin___, UndirectionalIteratorT__ end___) {
-		destruct();
+		destruct_();
 		clone_initialize_(begin___, end___);
 	}
 
@@ -1034,13 +1011,13 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	public:
 	ProcessType clear() DD_NOEXCEPT {
-		destruct();
+		destruct_();
 		SuperType::reset_();
 	}
 
 
 	private:
-	ProcessType destruct() DD_NOEXCEPT {
+	ProcessType destruct_() DD_NOEXCEPT {
 		for (Iterator current_(begin()); current_ != end(); ) {
 			destroy_node_(current_++);
 		}
