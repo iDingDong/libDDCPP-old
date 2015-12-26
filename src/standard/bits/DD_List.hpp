@@ -765,35 +765,31 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 
 	private:
 	template <typename UndirectionalIteratorT__>
-	ProcessType created_range_between_(
+	ProcessType unguarded_create_range_between_(
 		Iterator head_,
 		Iterator tail_,
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
 	) {
-		if (begin___ != end___) {
-			Iterator first_;
-			try {
-				first_ = create_node_(*begin___);
-			} catch(...) {
-				SuperType::link_(head_, tail_);
-				throw;
+		Iterator first_;
+		try {
+			first_ = create_node_(*begin___);
+		} catch (...) {
+			SuperType::link_(head_, tail_);
+			throw;
+		}
+		Iterator last_(first_);
+		try {
+			for(; ++begin___ != end___; ++last_) {
+				SuperType::link_(last_, create_node_(*begin___));
 			}
-			Iterator last_(first_);
-			try {
-				for(; ++begin___ != end___; ++last_) {
-					SuperType::link_(last_, create_node_(*begin___));
-				}
-			} catch (...) {
-				SuperType::link_(head_, first_);
-				SuperType::link_(last_, tail_);
-				throw;
-			}
+		} catch (...) {
 			SuperType::link_(head_, first_);
 			SuperType::link_(last_, tail_);
-		} else {
-			SuperType::link_(head_, tail_);
+			throw;
 		}
+		SuperType::link_(head_, first_);
+		SuperType::link_(last_, tail_);
 	}
 
 
@@ -809,13 +805,17 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	ProcessType clone_initialize_(
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().created_range_between_(
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().unguarded_create_range_between_(
 		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
 		Iterator(::DD::fabricate<ThisType>().SuperType::sentry_()) DD_COMMA
 		begin___ DD_COMMA
 		end___
 	)) {
-		created_range_between_(Iterator(SuperType::sentry_()), Iterator(SuperType::sentry_()), begin___, end___);
+		if (begin___ != end___) {
+			unguarded_create_range_between_(Iterator(SuperType::sentry_()), Iterator(SuperType::sentry_()), begin___, end___);
+		} else {
+			this->reset_();
+		}
 	}
 
 	private:
@@ -947,10 +947,12 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 		Iterator position_,
 		UndirectionalIteratorT__ begin___,
 		UndirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().created_range_between_(
+	) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().unguarded_create_range_between_(
 		::DD::previous(position_) DD_COMMA position_ DD_COMMA begin___ DD_COMMA end___
 	)) {
-		created_range_between_(::DD::previous(position_), position_, begin___, end___);
+		if (begin___ != end___) {
+			unguarded_create_range_between_(::DD::previous(position_), position_, begin___, end___);
+		}
 	}
 
 	public:
