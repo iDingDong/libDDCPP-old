@@ -852,7 +852,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	template <typename ValueT__>
 	ProcessType push_front(ValueT__&& value___) {
-		insert(begin(), forward<ValueT__>(value___));
+		emplace_front(forward<ValueT__>(value___));
 	}
 #	else
 	public:
@@ -874,7 +874,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	template <typename ValueT__>
 	ProcessType push_back(ValueT__&& value___) {
-		insert(end(), forward<ValueT__>(value___));
+		emplace_back(forward<ValueT__>(value___));
 	}
 #	else
 	public:
