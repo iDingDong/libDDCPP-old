@@ -94,7 +94,7 @@ inline ProcessType splice_after_undirectional_list_node_(
 	UndirectionalListNode<void>* last_
 ) DD_NOEXCEPT {
 	UndirectionalListNode<void>* first_ = head_->next;
-	delink_between_undirectional_list_node_(head_, last_->last);
+	delink_between_undirectional_list_node_(head_, last_->next);
 	enlink_after_undirectional_list_node_(position_, first_, last_);
 }
 

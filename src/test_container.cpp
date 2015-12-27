@@ -5,8 +5,8 @@
 #include "standard/DDHub.hpp"
 #include "standard/DDArray.hpp"
 #include "standard/DDVessel.hpp"
-#include "standard/DDRing.hpp"
 #include "standard/DDList.hpp"
+#include "standard/DDRing.hpp"
 #include "standard/DDUtility.hpp"
 
 #include "standard/DDAlgorithm.hpp"

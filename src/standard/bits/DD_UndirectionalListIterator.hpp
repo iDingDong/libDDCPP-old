@@ -132,7 +132,7 @@ struct UndirectionalListIterator : UndirectionalListIterator<void>, EqualityComp
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
-	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>)
+	DD_SPECIFIC_TYPE_NESTED(Node, UndirectionalListNode<ValueType>)
 
 
 #	if __cplusplus >= 201103L
@@ -229,20 +229,6 @@ struct UndirectionalListIterator : UndirectionalListIterator<void>, EqualityComp
 
 
 	public:
-	ThisType& operator --() DD_NOEXCEPT {
-		--static_cast<SuperType&>(*this);
-		return *this;
-	}
-
-	public:
-	ThisType operator --(int) DD_NOEXCEPT {
-		ThisType result_(*this);
-		--*this;
-		return result_;
-	}
-
-
-	public:
 	ReferenceType DD_CONSTEXPR operator *() const DD_NOEXCEPT {
 		return *unguarded_get_pointer();
 	}
@@ -263,7 +249,7 @@ inline ProcessType link_undirectional_list_(
 	UndirectionalListIterator<ValueT_> iterator_1_,
 	UndirectionalListIterator<ValueT_> iterator_2_
 ) DD_NOEXCEPT {
-	::DD::detail_::link_undirectional_list_node_(iterator_1_.get_node_pointer(), interator_2_.get_node_pointer());
+	::DD::detail_::link_undirectional_list_node_(iterator_1_.get_node_pointer(), iterator_2_.get_node_pointer());
 }
 
 
@@ -300,12 +286,12 @@ inline ProcessType delink_between_undirectional_list_(
 	UndirectionalListIterator<ValueT_> head_,
 	UndirectionalListIterator<ValueT_> tail_
 ) DD_NOEXCEPT {
-	::DD::detail_::delink_between_undirectional_list_node_(position_.get_node_pointer());
+	::DD::detail_::delink_between_undirectional_list_node_(head_.get_node_pointer(), tail_.get_node_pointer());
 }
 
 
 template <typename ValueT_>
-inline transfer_after_undirectional_list_(
+inline ProcessType transfer_after_undirectional_list_(
 	UndirectionalListIterator<ValueT_> from_after_,
 	UndirectionalListIterator<ValueT_> to_after_
 ) DD_NOEXCEPT {
@@ -317,13 +303,23 @@ template <typename ValueT_>
 inline ProcessType splice_after_undirectional_list_(
 	UndirectionalListIterator<ValueT_> position_,
 	UndirectionalListIterator<ValueT_> head_,
-	UndirectionalListIterator<ValueT_> tail_
+	UndirectionalListIterator<ValueT_> last_
 ) DD_NOEXCEPT {
 	::DD::detail_::splice_after_undirectional_list_node_(
 		position_.get_node_pointer(),
 		head_.get_node_pointer(),
-		tail_.get_node_pointer()
+		last_.get_node_pointer()
 	);
+}
+
+
+
+template <typename ValueT_>
+inline ValidityType DD_CONSTEXPR operator ==(
+	UndirectionalListIterator<ValueT_> const& iterator_1_,
+	UndirectionalListIterator<ValueT_> const& iterator_2_
+) DD_NOEXCEPT_AS(static_cast<ValidityType>(iterator_1_.equal(iterator_2_))) {
+	return iterator_1_.equal(iterator_2_);
 }
 
 
