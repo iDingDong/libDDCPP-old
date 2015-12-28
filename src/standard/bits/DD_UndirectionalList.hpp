@@ -178,6 +178,12 @@ struct UndirectionalList_<void> {
 
 
 	protected:
+	static ProcessType transfer_after(Iterator from_after_, Iterator to_after_) DD_NOEXCEPT {
+		::DD::detail_::transfer_after_undirectional_list_(from_after_, to_after_);
+	}
+
+
+	protected:
 	static ProcessType unguarded_splice_after(Iterator position_, Iterator head_, Iterator last_) DD_NOEXCEPT {
 		::DD::detail_::splice_after_undirectional_list_(position_, head_, last_);
 	}
@@ -303,6 +309,12 @@ struct UndirectionalList_ : UndirectionalList_<void> {
 
 
 	protected:
+	static ProcessType transfer_after(Iterator from_after_, Iterator to_after_) DD_NOEXCEPT {
+		SuperType::transfer_after(from_after_, to_after_);
+	}
+
+
+	protected:
 	static ProcessType unguarded_splice_after(Iterator position_, Iterator head_, Iterator last_) DD_NOEXCEPT {
 		SuperType::unguarded_splice_after(position_, head_, last_);
 	}
@@ -312,6 +324,7 @@ struct UndirectionalList_ : UndirectionalList_<void> {
 	static ProcessType splice_after(Iterator position_, Iterator head_, Iterator last_) DD_NOEXCEPT {
 		SuperType::splice_after(position_, head_, last_);
 	}
+
 
 	protected:
 	DD_DELETE_ALL_ASSIGNMENTS(UndirectionalList_);
@@ -613,6 +626,12 @@ struct UndirectionalList : Allocateable<AllocatorT_>, UndirectionalList_<ValueT_
 	}
 
 
+	public:
+	static ProcessType transfer_after(Iterator from_after_, Iterator to_after_) DD_NOEXCEPT {
+		SuperType::transfer_after(from_after_, to_after_);
+	}
+
+
 	private:
 #	if __cplusplus >= 201103L
 	template <typename... ArgumentsT__>
@@ -855,28 +874,6 @@ struct UndirectionalList : Allocateable<AllocatorT_>, UndirectionalList_<ValueT_
 		clone(range___);
 		return *this;
 	}
-
-
-	public:
-	template <typename UndirectionalRangeT__>
-	ThisType& operator +=(UndirectionalRangeT__ const& range___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().concatenate_back(range___)) {
-		concatenate_back(range___);
-		return *this;
-	}
-
-
-	template <typename ValueT__>
-#	if __cplusplus >= 201103L
-	ThisType& operator <<(ValueT__&& value___) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().push_back(forward<ValueT__>(value___))) {
-		push_back(forward<ValueT__>(value___));
-		return *this;
-	}
-#	else
-	ThisType& operator <<(ValueT__ const& value___) {
-		push_back(value___);
-		return *this;
-	}
-#	endif
 
 
 };

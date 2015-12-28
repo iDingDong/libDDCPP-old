@@ -18,7 +18,7 @@
 
 
 DD_DETAIL_BEGIN_
-DD_ALIAS(HashType, SizeType);
+DD_ALIAS(HashValueType, SizeType);
 
 
 
@@ -30,8 +30,8 @@ struct Hash_;
 template <>
 struct Hash_<1> {
 	template <typename ValueT__>
-	static DD_UNCONSTRIANED_CONSTEXPR HashType hash(ValueT__ const& value___) DD_NOEXCEPT {
-		HashType result_ = HashType();
+	static DD_UNCONSTRIANED_CONSTEXPR HashValueType hash(ValueT__ const& value___) DD_NOEXCEPT {
+		HashValueType result_ = HashValueType();
 		reinterpret_cast<ValueT__&>(result_) = value___;
 		return result_;
 	}
@@ -81,6 +81,16 @@ struct HashOf : UnaryFunctor<HashType, ValueT_ const&> {
 
 
 DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::HashValueType;
+using detail_::HashOf;
+
+
+
+DD_END_
 
 
 
