@@ -214,7 +214,33 @@ void test_container() {
 			throw "'DD::List' test failed.";
 		}
 	}
-
+	{
+		{
+			DD::UndirectionalList<Test> ulst_1 = { Test(), Test() };
+			if (
+				Test::count != 2
+			) {
+				throw "'DD::UndirectionalList' test failed.";
+			}
+			ulst_1.push_front(Test());
+			if (
+				Test::count != 3
+			) {
+				throw "'DD::UndirectionalList' test failed.";
+			}
+			ulst_1.pop_front();
+			if (
+				Test::count != 2
+			) {
+				throw "'DD::UndirectionalList' test failed.";
+			}
+		}
+		if (
+			Test::count != 0
+		) {
+			throw "'DD::UndirectionalList' test failed.";
+		}
+	}
 	{
 		{
 			DD::Vessel<int> ves;

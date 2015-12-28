@@ -167,7 +167,7 @@ struct UndirectionalList_<void> {
 
 
 	protected:
-	static ProcessType delink_after(Iterator position_) DD_NOEXCEPT {
+	static ProcessType delink_after_(Iterator position_) DD_NOEXCEPT {
 		::DD::detail_::delink_after_undirectional_list_(position_);
 	}
 
@@ -796,19 +796,19 @@ struct UndirectionalList : Allocateable<AllocatorT_>, UndirectionalList_<ValueT_
 
 
 	public:
-	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().erase_after(::DD::fabricate<ThisType>().begin())) {
+	ProcessType pop_front() DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().erase_after(::DD::fabricate<ThisType>().before_begin())) {
 		erase_after(before_begin());
 	}
 
 
 	public:
-	ProcessType trim_front(Iterator end_) DD_NOEXCEPT_AS(erase_range_between(fabricate<ThisType>().begin(), end_)) {
-		erase_range_between(begin(), end_);
+	ProcessType trim_front(Iterator end_) DD_NOEXCEPT_AS(erase_range_between(fabricate<ThisType>().before_begin(), end_)) {
+		erase_range_between(before_begin(), end_);
 	}
 
 
 	public:
-	ProcessType erase_after(Iterator position_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::delink_(position_)) {
+	ProcessType erase_after(Iterator position_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().SuperType::delink_after_(position_)) {
 		SuperType::delink_after_(position_++);
 		destroy_node_(position_);
 	}
