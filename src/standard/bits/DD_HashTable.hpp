@@ -35,10 +35,10 @@ template <
 	typename EqualityPredicateT_ = EqualTo<ValueT_>,
 	typename AllocatorT_ = Allocator<ValueT_>
 >
-struct HashTable : CallableDependent<HasherT_>, CallableDependent<EqualityPredicateT_> {
+struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	public:
-	DD_ALIAS(HashAgent, CallableDependent<HasherT_>);
-	DD_ALIAS(CompareAgent, CallableDependent<EqualityPredicateT_>);
+	DD_ALIAS(HashAgent, Agent<HasherT_>);
+	DD_ALIAS(CompareAgent, Agent<EqualityPredicateT_>);
 	DD_ALIAS(ThisType, HashTable<ValueT_ DD_COMMA HasherT_ DD_COMMA EqualityPredicateT_ DD_COMMA AllocatorT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(HasherType, HasherT_);
@@ -98,32 +98,38 @@ struct HashTable : CallableDependent<HasherT_>, CallableDependent<EqualityPredic
 	}
 
 
-	private:
-	LengthType find_previous_bucket_offset_(ValueType const& value_) const DD_NOEXCEPT {
-		return HashAgent::call(value_) % get_bucket_quantity_();
+	public:
+	HashValueType hash(ValueType const& value_) {
+		return HashAgent::get_instance()(value_);
 	}
 
 
 	private:
-	LengthType find_bucket_offset_(ValueType const& value_) const DD_NOEXCEPT {
+	LengthType find_previous_bucket_offset_(ValueType const& value_) const {
+		return hash(value_) % get_bucket_quantity_();
+	}
+
+
+	private:
+	LengthType find_bucket_offset_(ValueType const& value_) const {
 		return find_previous_bucket_offset_() + 1;
 	}
 
 
 	private:
-	BucketPointerType find_previous_bucket_(ValueType const& value_) const DD_NOEXCEPT {
+	BucketPointerType find_previous_bucket_(ValueType const& value_) const {
 		return get_buckets_() + find_previous_bucket_offset_(value_);
 	}
 
 
 	private:
-	BucketPointerType find_bucket_(ValueType const& value_) const DD_NOEXCEPT {
+	BucketPointerType find_bucket_(ValueType const& value_) const {
 		return get_buckets_() + find_bucket_offset_(value_);
 	}
 
 
 	public:
-	NonConstIterator_ find_(ValueType const& value_) const DD_NOEXCEPT {
+	NonConstIterator_ find_(ValueType const& value_) const {
 		BucketPointerType previous_bucket_ = find_previous_bucket_(value_);
 		NonConstIterator_ result_ = ::DD::find(::DD::next(*previous_bucket_), ::DD::next(*(previous_bucket_ + 1)), value_);
 		return result_ == ::DD::next(*(previous_bucket_ + 1)) ? end() : result_;
@@ -131,13 +137,13 @@ struct HashTable : CallableDependent<HasherT_>, CallableDependent<EqualityPredic
 
 
 	public:
-	Iterator find(ValueType const& value_) const DD_NOEXCEPT {
+	Iterator find(ValueType const& value_) const {
 		return find_(value_);
 	}
 
 
 	public:
-	ProcessType fix_after_insertion_(BucketPointerType target_bucket_) DD_NOEXCEPT {
+	ProcessType fix_after_insertion_(BucketPointerType target_bucket_) {
 		LengthType bucket_quantity_ = get_bucket_quantity_()
 		for (
 			BucketPointerType current_ = target_bucket_ + 1;

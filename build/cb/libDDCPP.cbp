@@ -50,6 +50,7 @@
 		<Unit filename="../../src/standard/bits/DD_AddPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddRvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddVolatile.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Agent.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Allocateable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AllocationFailure.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Allocator.hpp" />
