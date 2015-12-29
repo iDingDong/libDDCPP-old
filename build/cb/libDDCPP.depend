@@ -1174,10 +1174,11 @@
 	"DD_insert_sort.hpp"
 	"DD_select_sort.hpp"
 
-1444577863 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
+1451232206 d:\develop\repositories\libddcpp\src\standard\ddlist.hpp
+	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1451205733 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1451323575 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1302,7 +1303,7 @@
 	"DD_ArithmeticLimit.hpp"
 	"DD_Array.hpp"
 
-1446092627 d:\develop\repositories\libddcpp\src\standard\bits\dd_hashof.hpp
+1451396216 d:\develop\repositories\libddcpp\src\standard\bits\dd_hashof.hpp
 	<cstring>
 	"DD_address_of.hpp"
 	"DD_Functor.hpp"
@@ -1325,15 +1326,15 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1450939578 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1451279116 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
 	"standard/DDHub.hpp"
 	"standard/DDArray.hpp"
 	"standard/DDVessel.hpp"
-	"standard/DDRing.hpp"
 	"standard/DDList.hpp"
+	"standard/DDRing.hpp"
 	"standard/DDUtility.hpp"
 	"standard/DDAlgorithm.hpp"
 
@@ -1509,8 +1510,8 @@
 1450321969 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct_length.hpp
 	"DD_copy_construct.hpp"
 
-1450415455 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
-	"DD_NeedInstance.hpp"
+1451395827 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
+	"DD_Agent.hpp"
 	"DD_Allocator.hpp"
 
 1450609712 d:\develop\repositories\libddcpp\src\standard\bits\dd_universalfreeaccessiterator.hpp
@@ -1598,4 +1599,23 @@
 
 1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_isoriginalimplementation.hpp
 	"DD_NestedTypeCheck.hpp"
+
+1451396311 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
+	"DD_NeedInstance.hpp"
+
+1451294181 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+	"DD_Allocator.hpp"
+	"DD_UndirectionalListIterator.hpp"
+
+1451232739 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistiterator.hpp
+	"DD_SpecificTypeNested.hpp"
+	"DD_IteratorCatagory.hpp"
+	"DD_EqualityComparable.hpp"
+	"DD_fabricate.hpp"
+	"DD_address_of.hpp"
+	"DD_UndirectionalListNode.hpp"
+
+1451232234 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistnode.hpp
+	"DD_ValueStorage.hpp"
+	"DD_swap.hpp"
 

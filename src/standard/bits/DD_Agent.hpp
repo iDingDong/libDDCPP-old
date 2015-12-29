@@ -12,7 +12,7 @@ DD_DETAIL_BEGIN_
 template <typename InstanceT_, ValidityType need_instance_c_>
 struct Agent_ {
 	protected:
-	DD_ALIAS(ThisType, CallableDependent_<FunctionT_ DD_COMMA need_instance_c_>);
+	DD_ALIAS(ThisType, Agent_<InstanceT_ DD_COMMA need_instance_c_>);
 	DD_ALIAS(InstanceType, InstanceT_);
 	static ValidityType DD_CONSTANT need_instance = need_instance_c_;
 
@@ -66,7 +66,7 @@ struct Agent_ {
 template <typename InstanceT_>
 struct Agent_<InstanceT_, true> {
 	protected:
-	DD_ALIAS(ThisType, CallableDependent_<FunctionT_ DD_COMMA true>);
+	DD_ALIAS(ThisType, Agent_<InstanceT_ DD_COMMA true>);
 	DD_ALIAS(InstanceType, InstanceT_);
 	static ValidityType DD_CONSTANT need_instance = true;
 
@@ -102,7 +102,7 @@ struct Agent_<InstanceT_, true> {
 
 #	endif
 	protected:
-	static InstanceType& get_instance() const DD_NOEXCEPT {
+	InstanceType& get_instance() const DD_NOEXCEPT {
 		return m_instance_;
 	}
 
@@ -116,6 +116,12 @@ struct Agent_<InstanceT_, true> {
 
 
 #	endif
+};
+
+
+
+template <typename InstanceT_>
+struct Agent : Agent_<InstanceT_, NeedInstance<InstanceT_>::value> {
 };
 
 
