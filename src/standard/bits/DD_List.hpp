@@ -149,7 +149,7 @@ struct List_<void> {
 
 
 	protected:
-	ProcessType reset_() DD_NOEXCEPT {
+	ProcessType unguarded_reset_() DD_NOEXCEPT {
 		link_(sentry_(), sentry_());
 	}
 
@@ -525,7 +525,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 		noexcept(AllocateAgent(::DD::move(origin_)))
 	) : AllocateAgent(::DD::move(origin_)), SuperType(unguarded_tag) {
 		*SuperType::sentry_().get_node_pointer() = *origin_.sentry_().get_node_pointer();
-		origin_.reset_();
+		origin_.unguarded_reset_();
 	}
 
 #	endif
@@ -814,7 +814,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 		if (begin___ != end___) {
 			unguarded_create_range_between_(Iterator(SuperType::sentry_()), Iterator(SuperType::sentry_()), begin___, end___);
 		} else {
-			this->reset_();
+			this->unguarded_reset_();
 		}
 	}
 
@@ -1014,7 +1014,7 @@ struct List : Allocateable<AllocatorT_>, List_<ValueT_> {
 	public:
 	ProcessType clear() DD_NOEXCEPT {
 		destruct_();
-		SuperType::reset_();
+		SuperType::unguarded_reset_();
 	}
 
 

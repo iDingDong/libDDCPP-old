@@ -7,8 +7,10 @@
 #	include "DD_HashOf.hpp"
 #	include "DD_EqualTo.hpp"
 #	include "DD_Allocator.hpp"
+#	include "DD_get_length.hpp"
 #	include "DD_Array.hpp"
 #	include "DD_UndirectionalList.hpp"
+#	include "DD_fill_construct_length.hpp"
 
 
 
@@ -63,9 +65,9 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 	private:
 	StorageType m_storage_;
-	BucketPointerType m_buckets_ DD_IN_CLASS_INITIALIZE(BucketPointerType());
-	LengthType m_growth_progress_ DD_IN_CLASS_INITIALIZE(LengthType());
 	LengthType m_length_ DD_IN_CLASS_INITIALIZE(LengthType());
+	LengthType m_growth_progress_ DD_IN_CLASS_INITIALIZE(LengthType());
+	BucketPointerType m_buckets_ DD_IN_CLASS_INITIALIZE(BucketPointerType());
 
 
 	private:
@@ -87,8 +89,20 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 
 	private:
+	static LengthType DD_CONSTEXPR get_quantity_of_(LengthType length_index_) DD_NOEXCEPT {
+		return (DDCPP_HASH_TABLE_CHART)[length_index_];
+	}
+
+
+	private:
+	LengthType DD_CONSTEXPR get_growth_index_() const DD_NOEXCEPT {
+		return m_growth_progress_;
+	}
+
+
+	private:
 	LengthType DD_CONSTEXPR get_bucket_quantity_() const DD_NOEXCEPT {
-		return (DDCPP_HASH_TABLE_CHART)[m_growth_progress_];
+		return get_quantity_of_(get_growth_index_());
 	}
 
 
@@ -99,40 +113,55 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 
 	public:
+	AllocatorType& get_allocator() DD_NOEXCEPT {
+		return get_storage_().get_allocator();
+	}
+
+
+	public:
 	HashValueType hash(ValueType const& value_) {
 		return HashAgent::get_instance()(value_);
 	}
 
 
 	private:
-	LengthType find_previous_bucket_offset_(ValueType const& value_) const {
-		return hash(value_) % get_bucket_quantity_();
+	LengthType find_bucket_offset_implement_(LengthType bucket_quantity_, ValueType const& value_) const {
+		hash(value_) % bucket_quantity_;
 	}
 
 
 	private:
 	LengthType find_bucket_offset_(ValueType const& value_) const {
-		return find_previous_bucket_offset_() + 1;
+		return find_bucket_offset_implement_(get_bucket_quantity_(), value_);
 	}
 
 
 	private:
-	BucketPointerType find_previous_bucket_(ValueType const& value_) const {
-		return get_buckets_() + find_previous_bucket_offset_(value_);
+	LengthType find_bucket_implement_(BucketPointerType buckets_, LengthType bucket_quantity_, ValueType const& value_) {
+		return buckets_ + find_bucket_offset_implement_(bucket_quantity_, value_);
 	}
 
 
 	private:
 	BucketPointerType find_bucket_(ValueType const& value_) const {
-		return get_buckets_() + find_bucket_offset_(value_);
+		return find_bucket_implement_(get_buckets_(), get_bucket_quantity_(), value_);
+	}
+
+
+	private:
+	Range<NonConstIterator_> get_bucket_range_(BucketPointerType target_bucket_) const {
+		return Range<ConstIterator>(
+			*target_bucket_,
+			target_bucket_ - get_buckets_() == get_bucket_quantity_() - 1 ? *get_buckets_() : *(target_bucket_ + 1)
+		);
 	}
 
 
 	public:
 	NonConstIterator_ find_(ValueType const& value_) const {
-		BucketPointerType previous_bucket_ = find_previous_bucket_(value_);
-		NonConstIterator_ result_ = ::DD::find(::DD::next(*previous_bucket_), ::DD::next(*(previous_bucket_ + 1)), value_);
-		return result_ == ::DD::next(*(previous_bucket_ + 1)) ? end() : result_;
+		Range<NonConstIterator_> range_ = get_bucket_range_(find_bucket_(value_));
+		NonConstIterator_ result_ = ::DD::find(range_, value_);
+		return result_ == range_.end() ? *get_buckets_() : result_;
 	}
 
 
@@ -143,14 +172,59 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 
 	public:
-	ProcessType fix_after_insertion_(BucketPointerType target_bucket_) {
-		LengthType bucket_quantity_ = get_bucket_quantity_()
+	static ProcessType fix_after_insertion_implement_(
+		BucketPointerType buckets_end_,
+		BucketPointerType target_bucket_
+	) DD_NOEXCEPT {
 		for (
 			BucketPointerType current_ = target_bucket_ + 1;
-			current_ - m_buckets_ <= bucket_quantity_ && ::DD::next(*current_) == *target_bucket_;
+			current_ != buckets_end_ && *current_ == *target_bucket_;
 			++current_
 		) {
-			*current_ = *target_bucket_;
+			++*current_;
+		}
+	}
+
+
+	public:
+	ProcessType fix_after_insertion_(BucketPointerType target_bucket_) DD_NOEXCEPT {
+		fix_after_insertion_implement_(get_buckets_() + get_bucket_quantity_(), target_bucket_);
+	}
+
+
+	private:
+	ProcessType stretch_to_(LengthType length_index_) {
+		LengthType new_growth_progress_ = get_quantity_of_(length_index_);
+		BucketPointerType new_buckets_ = static_cast<BucketPointerType>(
+			get_allocator().AllocatorType::Basic::allocate(sizeof(BucketType) * (new_growth_progress_ + 1));
+		);
+		try {
+			::DD::fill_construct_length(m_new_buckets_, new_growth_progress_, get_storage_().before_begin());
+			try {
+				for (NonConstIterator_ current__ = get_storage_().before_begin(); ::DD::next(current__) != get_storage_().end(); ) {
+					BucketPointerType target_bucket_ = find_bucket_implement_(
+						m_new_buckets_, new_growth_progress_, *::DD::next(current__)
+					);
+					get_storage_().transfer_after(current__++, *target_bucket_);
+					fix_after_insertion_implement_(m_new_buckets_ + new_growth_progress_, target_bucket_);
+				}
+			} catch (...) {
+				::DD::destruct(m_new_buckets_, m_new_buckets_ + new_growth_progress_);
+				reset();
+				throw;
+			}
+		} catch (...) {
+			get_allocator().AllocatorType::Basic::deallocate(new_buckets_, sizeof(BucketType) * (new_growth_progress_ + 1));
+			throw;
+		}
+	}
+
+
+	public:
+	ProcessType reserve() {
+		LengthType new_progress_ = get_bucket_quantity_() + 1;
+		if (new_progress_ < ::DD::get_length(DDCPP_HASH_TABLE_CHART)) {
+			stretch_to_(new_progress_);
 		}
 	}
 
@@ -161,7 +235,8 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	Iterator quick_emplace(ArgumentsT_... arguments___) {
 		ValueType value_(::DD::forward<ArgumentsT_>(arguments___)...);
 		BucketPointerType target_bucket_ = find_bucket_(value_);
-		*target_bucket_ = get_storage_().insert_after(*target_bucket_, ::DD::move(value_));
+		get_storage_().insert_after(*target_bucket_, ::DD::move(value_));
+		++m_length_;
 		fix_after_insertion_(target_bucket_);
 		return *target_bucket_;
 	}
@@ -177,6 +252,16 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	}
 #	else
 #	endif
+
+
+	public:
+	ProcessType reset() const DD_NOEXCEPT {
+		get_storage_().clear();
+		get_allocator().AllocatorType::Basic::deallocate(get_buckets_(), sizeof(BucketType) * get_bucket_quantity_());
+		m_buckets_ = BucketPointerType();
+		m_growth_progress_ = LengthType();
+		m_length_ = Length();
+	}
 
 
 };

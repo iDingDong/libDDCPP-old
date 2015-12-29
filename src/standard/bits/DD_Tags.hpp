@@ -44,6 +44,11 @@ struct ReserveTag : Tag {
 
 
 
+struct ImplementationTag : Tag {
+} DD_CONSTANT implementation_tag;
+
+
+
 DD_DETAIL_END_
 
 
