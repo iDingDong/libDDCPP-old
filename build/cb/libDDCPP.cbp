@@ -249,6 +249,7 @@
 		<Unit filename="../../src/standard/bits/DD_equal.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fabricate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_fill.hpp" />
+		<Unit filename="../../src/standard/bits/DD_fill_construct_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_bounds.hpp" />
 		<Unit filename="../../src/standard/bits/DD_find_first_of.hpp" />

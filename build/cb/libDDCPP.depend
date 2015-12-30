@@ -1248,7 +1248,8 @@
 1444971053 d:\develop\repositories\libddcpp\src\standard\bits\dd_retreat.hpp
 	"DD_IsFreeAccessIterator.hpp"
 
-1450100250 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_length.hpp
+1451458540 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_length.hpp
+	"DD_Range.hpp"
 	"DD_get_string_length.hpp"
 
 1449717323 d:\develop\repositories\libddcpp\src\standard\bits\dd_check_bound.hpp

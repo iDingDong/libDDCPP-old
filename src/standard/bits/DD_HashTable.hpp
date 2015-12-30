@@ -4,6 +4,7 @@
 
 
 
+#	include "DD_IteratorNested.hpp"
 #	include "DD_HashOf.hpp"
 #	include "DD_EqualTo.hpp"
 #	include "DD_Allocator.hpp"
@@ -53,7 +54,8 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	DD_ALIAS(HashValueType, ::DD::HashValueType);
 
 	private:
-	DD_SPECIFIC_TYPE_NESTED(Storage, UndirectionalList<ValueType DD_COMMA AllocatorType>);
+	DD_ALIAS(ListType_, UndirectionalList<ValueType DD_COMMA AllocatorType>);
+	DD_SPECIFIC_TYPE_NESTED(Storage, ListType_);
 	DD_SPECIFIC_TYPE_NESTED(Node, typename StorageType::NodeType);
 	DD_ALIAS(NonConstIterator_, typename StorageType::Iterator);
 	DD_SPECIFIC_TYPE_NESTED(Bucket, NonConstIterator_);
@@ -63,11 +65,46 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	DD_ALIAS(ConstIterator, Iterator);
 
 
+	public:
+	template <typename ValueT__, typename HasherT__, typename EqualityPredicateT__, typename AllocatorT__>
+	friend struct HashTable;
+
+
 	private:
 	StorageType m_storage_;
-	LengthType m_length_ DD_IN_CLASS_INITIALIZE(LengthType());
-	LengthType m_growth_progress_ DD_IN_CLASS_INITIALIZE(LengthType());
-	BucketPointerType m_buckets_ DD_IN_CLASS_INITIALIZE(BucketPointerType());
+	LengthType m_length_;
+	LengthType m_growth_progress_;
+	BucketPointerType m_buckets_;
+
+
+	public:
+	DD_CONSTEXPR HashTable() DD_NOEXCEPT_AS(StorageType()) : m_length_(), m_growth_progress_(), m_buckets_() {
+	}
+
+	public:
+	HashTable(ThisType const& origin_) :
+		m_storage_(origin_.get_storage_()),
+		m_length_(origin_.get_length())
+	{
+		clone_buckets_(origin_);
+	}
+
+	public:
+	HashTable(ThisType&& origin_) DD_NOEXCEPT_AS(StorageType(::DD::move(origin_.get_storage_()))) :
+		m_storage_(::DD::move(origin_.get_storage_())),
+		m_length_(origin_.get_length()),
+		m_growth_progress_(origin_.get_growth_progress_()),
+		m_buckets_(origin_.get_buckets_())
+	{
+		*m_buckets_ = get_storage_().before_begin();
+		origin_.m_buckets_ = BucketPointerType();
+	}
+
+
+	public:
+	~HashTable() {
+		destruct_();
+	}
 
 
 	private:
@@ -126,7 +163,7 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 	private:
 	LengthType find_bucket_offset_implement_(LengthType bucket_quantity_, ValueType const& value_) const {
-		hash(value_) % bucket_quantity_;
+		return hash(value_) % bucket_quantity_;
 	}
 
 
@@ -160,7 +197,7 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	public:
 	NonConstIterator_ find_(ValueType const& value_) const {
 		Range<NonConstIterator_> range_ = get_bucket_range_(find_bucket_(value_));
-		NonConstIterator_ result_ = ::DD::find(range_, value_);
+		NonConstIterator_ result_ = ::DD::find(range_, value_, CompareAgent::get_instance());
 		return result_ == range_.end() ? *get_buckets_() : result_;
 	}
 
@@ -168,6 +205,36 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	public:
 	Iterator find(ValueType const& value_) const {
 		return find_(value_);
+	}
+
+
+	private:
+	template <typename AllocatorT__>
+	ProcessType clone_buckets_(HashTable<ValueType, HasherType, EqualityPredicateType, AllocatorT__> const& origin_) {
+		m_growth_progress_ = origin_.get_growth_progress();
+		LengthType bucket_quantity_ = get_bucket_quantity_();
+		m_buckets_ = get_allocator().AllocatorType::Basic::allocate(sizeof(BucketType) * bucket_quantity_);
+		try {
+			typename HashTable<
+				ValueType, HasherType, EqualityPredicateType, AllocatorT__
+			>::BucketType current_origin_ = origin_.get_storage().before_begin();
+			BucketType current_ = get_storage_().before_begin();
+			for (LengthType index_ = LengthType(); index_ < bucket_quantity_; ++index_) {
+				try {
+					while (current_origin_ != *(origin_.get_buckets_() + index_)) {
+						++current_origin_;
+						++current_;
+					}
+					::DD::construct(get_buckets_() + index_, current_);
+				} catch (...) {
+					::DD::destruct(get_buckets_(), get_buckets_() + index_);
+					throw;
+				}
+			}
+		} catch (...) {
+			get_allocator().AllocatorType::Basic::deallocate(get_buckets_(), sizeof(BucketType) * bucket_quantity_);
+			throw;
+		}
 	}
 
 
@@ -196,20 +263,20 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 	ProcessType stretch_to_(LengthType length_index_) {
 		LengthType new_growth_progress_ = get_quantity_of_(length_index_);
 		BucketPointerType new_buckets_ = static_cast<BucketPointerType>(
-			get_allocator().AllocatorType::Basic::allocate(sizeof(BucketType) * (new_growth_progress_ + 1));
+			get_allocator().AllocatorType::Basic::allocate(sizeof(BucketType) * (new_growth_progress_ + 1))
 		);
 		try {
-			::DD::fill_construct_length(m_new_buckets_, new_growth_progress_, get_storage_().before_begin());
+			::DD::fill_construct_length(new_buckets_, new_growth_progress_, get_storage_().before_begin());
 			try {
 				for (NonConstIterator_ current__ = get_storage_().before_begin(); ::DD::next(current__) != get_storage_().end(); ) {
 					BucketPointerType target_bucket_ = find_bucket_implement_(
-						m_new_buckets_, new_growth_progress_, *::DD::next(current__)
+						new_buckets_, new_growth_progress_, *::DD::next(current__)
 					);
 					get_storage_().transfer_after(current__++, *target_bucket_);
-					fix_after_insertion_implement_(m_new_buckets_ + new_growth_progress_, target_bucket_);
+					fix_after_insertion_implement_(new_buckets_ + new_growth_progress_, target_bucket_);
 				}
 			} catch (...) {
-				::DD::destruct(m_new_buckets_, m_new_buckets_ + new_growth_progress_);
+				::DD::destruct(new_buckets_, new_buckets_ + new_growth_progress_);
 				reset();
 				throw;
 			}
@@ -217,6 +284,9 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 			get_allocator().AllocatorType::Basic::deallocate(new_buckets_, sizeof(BucketType) * (new_growth_progress_ + 1));
 			throw;
 		}
+		destruct_();
+		m_buckets_ = new_buckets_;
+		m_growth_progress_ = length_index_;
 	}
 
 
@@ -255,12 +325,20 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 
 	public:
-	ProcessType reset() const DD_NOEXCEPT {
+	ProcessType reset() DD_NOEXCEPT {
 		get_storage_().clear();
-		get_allocator().AllocatorType::Basic::deallocate(get_buckets_(), sizeof(BucketType) * get_bucket_quantity_());
+		destruct_();
 		m_buckets_ = BucketPointerType();
 		m_growth_progress_ = LengthType();
-		m_length_ = Length();
+		m_length_ = LengthType();
+	}
+
+
+	private:
+	ProcessType destruct_() DD_NOEXCEPT {
+		LengthType bucket_quantity_ = get_bucket_quantity_();
+		::DD::destruct(get_buckets_(), get_buckets_() + bucket_quantity_);
+		get_allocator().AllocatorType::Basic::deallocate(get_buckets_(), sizeof(BucketType) * bucket_quantity_);
 	}
 
 

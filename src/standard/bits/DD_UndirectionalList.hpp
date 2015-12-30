@@ -4,7 +4,9 @@
 
 
 
+#	include "DD_InitializerList.hpp"
 #	include "DD_Allocator.hpp"
+#	include "DD_BatchRange.hpp"
 #	include "DD_UndirectionalListIterator.hpp"
 
 

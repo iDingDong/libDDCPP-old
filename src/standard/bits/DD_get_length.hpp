@@ -4,11 +4,21 @@
 
 
 
+#	include "DD_Range.hpp"
 #	include "DD_get_string_length.hpp"
 
 
 
 DD_DETAIL_BEGIN_
+template <typename RangeT_>
+inline LengthType DD_CONSTEXPR get_length(RangeT_ const& range__) DD_NOEXCEPT_AS(
+	static_cast<LengthType>(::DD::length_difference(DD_SPLIT_RANGE(range__)))
+) {
+	return ::DD::length_difference(DD_SPLIT_RANGE(range__));
+}
+
+
+
 template <typename ValueT_, LengthType length_c_>
 #	if __cplusplus >= 201103L
 inline LengthType constexpr get_length(ArrayType<ValueT_, length_c_> const& array_) noexcept {

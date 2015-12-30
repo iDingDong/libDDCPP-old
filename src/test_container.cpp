@@ -3,6 +3,7 @@
 #include "test_algorithm.h"
 
 #include "standard/DDHub.hpp"
+#include "standard/bits/DD_HashTable.hpp"
 #include "standard/DDArray.hpp"
 #include "standard/DDVessel.hpp"
 #include "standard/DDList.hpp"

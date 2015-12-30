@@ -31,7 +31,9 @@ struct EqualTo : BinaryFunctor<ValidityType, DD_MODIFY_TRAIT(ReadOnlyCall, Value
 	}
 
 
-	ResultType operator ()(FirstArgumentType value_1_, SecondArgumentType value_2_) DD_NOEXCEPT_AS(ResultType>(call(value_1_, value_2_))) {
+	ResultType operator ()(FirstArgumentType value_1_, SecondArgumentType value_2_) DD_NOEXCEPT_AS(
+		static_cast<ResultType>(call(value_1_, value_2_))
+	) {
 		return call(value_1_, value_2_);
 	}
 
