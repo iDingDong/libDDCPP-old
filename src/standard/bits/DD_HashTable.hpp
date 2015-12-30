@@ -325,6 +325,13 @@ struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
 
 
 	public:
+	ProcessType clear() DD_NOEXCEPT {
+		get_storage_().clear();
+		::DD::fill_length(get_buckets_(), get_bucket_quantity_(), get_storage_().before_begin());
+	}
+
+
+	public:
 	ProcessType reset() DD_NOEXCEPT {
 		get_storage_().clear();
 		destruct_();

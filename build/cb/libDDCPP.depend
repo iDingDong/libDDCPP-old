@@ -1327,11 +1327,12 @@
 
 1447079623 d:\develop\repositories\libddcpp\src\test_container.h
 
-1451279116 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1451457651 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
 	"standard/DDHub.hpp"
+	"standard/bits/DD_HashTable.hpp"
 	"standard/DDArray.hpp"
 	"standard/DDVessel.hpp"
 	"standard/DDList.hpp"
@@ -1604,8 +1605,10 @@
 1451396311 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
 	"DD_NeedInstance.hpp"
 
-1451415443 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+1451458254 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+	"DD_InitializerList.hpp"
 	"DD_Allocator.hpp"
+	"DD_BatchRange.hpp"
 	"DD_UndirectionalListIterator.hpp"
 
 1451232739 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistiterator.hpp
@@ -1619,4 +1622,22 @@
 1451232234 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistnode.hpp
 	"DD_ValueStorage.hpp"
 	"DD_swap.hpp"
+
+1451458553 d:\develop\repositories\libddcpp\src\standard\bits\dd_hashtable.hpp
+	"DD_IteratorNested.hpp"
+	"DD_HashOf.hpp"
+	"DD_EqualTo.hpp"
+	"DD_Allocator.hpp"
+	"DD_get_length.hpp"
+	"DD_Array.hpp"
+	"DD_UndirectionalList.hpp"
+	"DD_fill_construct_length.hpp"
+
+1451458119 d:\develop\repositories\libddcpp\src\standard\bits\dd_equalto.hpp
+	"DD_ReadOnlyCall.hpp"
+	"DD_Functor.hpp"
+
+1451458079 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_construct_length.hpp
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
 
