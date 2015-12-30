@@ -36,11 +36,13 @@
 #	include "bits/DD_copy_length.hpp"
 #	include "bits/DD_copy_construct_length.hpp"
 #	if __cplusplus < 201103L
-#		include "bits/DD_move_overlapped_backward.hpp"
-#	else
 #		include "bits/DD_copy_overlapped_backward.hpp"
+#	else
+#		include "bits/DD_move_overlapped_backward.hpp"
 #	endif
 #	include "bits/DD_fill.hpp"
+#	include "bits/DD_fill_length.hpp"
+#	include "bits/DD_fill_construct_length.hpp"
 #	include "bits/DD_generate.hpp"
 #	include "bits/DD_transfer.hpp"
 #	include "bits/DD_transform.hpp"

@@ -18,7 +18,7 @@ UndirectionalIteratorT_ fill_construct_length(
 ) {
 	UndirectionalIteratorT_ current__(begin__);
 	try {
-		for (; length__; --length__, ++current__) {
+		for (; length__; ++current__, --length__) {
 			::DD::construct(current__, value__);
 		}
 	} catch (...) {
