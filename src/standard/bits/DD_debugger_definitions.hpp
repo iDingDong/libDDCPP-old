@@ -12,6 +12,10 @@
 #		define DDCPP_DEBUG DD_OFF
 #	endif
 
+#	if !defined(DDCPP_GUARD_DESTROY)
+#		define DDCPP_GUARD_DESTROY DDCPP_DEBUG
+#	endif
+
 #	if !defined(DDCPP_ENABLE_ASSERT)
 #		define DDCPP_ENABLE_ASSERT DDCPP_DEBUG
 #	endif
@@ -65,6 +69,22 @@ ProcessType assertion_handler(CStringConstType expression_, CStringConstType pro
 
 
 DD_USER_DEFINITION_END_
+
+
+
+DD_DETAIL_BEGIN_
+inline GlobalPointerType get_invalid_address_() DD_NOEXCEPT {
+#	if DDCPP_GUARD_DESTROY
+	static char c_;
+	return &c_;
+#	else
+	return GlobalPointerType();
+#	endif
+}
+
+
+
+DD_DETAIL_END_
 
 
 

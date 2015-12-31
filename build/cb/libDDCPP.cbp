@@ -82,6 +82,7 @@
 		<Unit filename="../../src/standard/bits/DD_DefaultDeleter.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Deleter.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dereferenceable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Destroy.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dynamic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EnableIf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualTo.hpp" />

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450594158 source:d:\develop\repositories\libddcpp\src\main.cpp
+1451550391 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDHub.hpp"
@@ -626,7 +626,7 @@
 	"DD_ArrayIterator.hpp"
 	"DD_equal.hpp"
 
-1449838563 d:\develop\repositories\libddcpp\src\standard\bits\dd_debugger_definitions.hpp
+1451549601 d:\develop\repositories\libddcpp\src\standard\bits\dd_debugger_definitions.hpp
 	"DD_global_definitions.hpp"
 	<cassert>
 
@@ -896,9 +896,10 @@
 1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1445590260 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1451550389 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
+	"bits/DD_Destroy.hpp"
 	"bits/DD_Pool.hpp"
 	"bits/DD_make_unique.hpp"
 	"bits/DD_make_strict_parasitic.hpp"
@@ -1644,4 +1645,10 @@
 
 1451492381 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_length.hpp
 	"DD_global_definitions.hpp"
+
+1451550426 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
+	"DD_debugger_definitions.hpp"
+	"DD_IteratorValue.hpp"
+	"DD_DefaultDeleter.hpp"
+	"DD_get_pointer.hpp"
 
