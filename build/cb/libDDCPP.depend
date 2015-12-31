@@ -202,8 +202,11 @@
 1448166795 d:\develop\repositories\libddcpp\src\standard\bits\dd_move.hpp
 	"DD_RemoveReference.hpp"
 
-1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
+1451582131 d:\develop\repositories\libddcpp\src\standard\bits\dd_dereference.hpp
+	"DD_debugger_definitions.hpp"
 	"DD_IteratorReference.hpp"
+	"DD_IteratorPointer.hpp"
+	"DD_get_pointer.hpp"
 
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorreference.hpp
 	"DD_IteratorValue.hpp"
@@ -789,13 +792,16 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1443868756 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+1451581852 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_Tags.hpp"
+	"DD_RemoveAllExtents.hpp"
 	"DD_Comparable.hpp"
 	"DD_forward.hpp"
-	"DD_StrictPointer.hpp"
-	"DD_Allocator.hpp"
+	"DD_move.hpp"
+	"DD_Agent.hpp"
+	"DD_destroy.hpp"
+	"DD_dereference.hpp"
 
 1450458900 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
@@ -885,29 +891,22 @@
 1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1444048035 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1451582055 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
-	<iostream>
-	<thread>
-	<mutex>
 	"standard/DDMemory.hpp"
 
 1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1451550389 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1451582008 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Destroy.hpp"
 	"bits/DD_Pool.hpp"
-	"bits/DD_make_unique.hpp"
-	"bits/DD_make_strict_parasitic.hpp"
 	"bits/DD_UniquePointer.hpp"
-	"bits/DD_StrictParasiticPointer.hpp"
-	"bits/DD_StrictAutoPointer.hpp"
 
-1443873330 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
+1451578861 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_freelist.hpp
@@ -1282,8 +1281,8 @@
 
 1445319345 d:\develop\repositories\libddcpp\src\standard\bits\dd_indexable.hpp
 
-1448255556 d:\develop\repositories\libddcpp\src\standard\bits\dd_kmp_find_range.hpp
-	"DD_StrictPointer.hpp"
+1451578042 d:\develop\repositories\libddcpp\src\standard\bits\dd_kmp_find_range.hpp
+	"DD_UniquePointer.hpp"
 	"DD_IsFreeAccessIterator.hpp"
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
@@ -1646,10 +1645,11 @@
 1451492381 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_length.hpp
 	"DD_global_definitions.hpp"
 
-1451550536 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
+1451582271 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_IteratorValue.hpp"
+	"DD_IteratorPointer.hpp"
 	"DD_DefaultDeleter.hpp"
 	"DD_get_pointer.hpp"
 

@@ -6,92 +6,85 @@
 
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_Tags.hpp"
+#	include "DD_RemoveAllExtents.hpp"
 #	include "DD_Comparable.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_forward.hpp"
+#		include "DD_move.hpp"
 #	endif
-#	include "DD_StrictPointer.hpp"
-#	include "DD_Allocator.hpp"
+#	include "DD_Agent.hpp"
+#	include "DD_destroy.hpp"
+#	include "DD_dereference.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT_, typename DeleterT_ = DefaultTag>
-struct UniquePointer : Comparable<ValueT_, DeleterT_> {
+template <
+	typename ValueT_,
+	typename DeleterT_ = DefaultDeleter<ValueT_>
+>
+struct UniquePointer :
+	Agent<DeleterT_>,
+#	if __cplusplus >= 201103L
+	Comparable<UniquePointer<ValueT_, DeleterT_>>
+#	else
+	Comparable<UniquePointer<ValueT_, DeleterT_> >
+#	endif
+{
 	public:
+	DD_ALIAS(DestroyAgent, Agent<DeleterT_>);
 	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA DeleterT_>);
+	DD_VALUE_TYPE_NESTED(DD_MODIFY_TRAIT(RemoveAllExtents, ValueT_))
 	DD_ALIAS(DeleterType, DeleterT_);
-	DD_VALUE_TYPE_NESTED(ValueT_)
 
-
-	DD_ALIAS(DifferenceType, DD::DifferenceType);
+	public:
+	DD_ALIAS(DifferenceType, ::DD::DifferenceType);
 
 
 	private:
 	PointerType m_pointer_ DD_IN_CLASS_INITIALIZE(PointerType());
-	DeleterType mutable m_deleter_ DD_IN_CLASS_INITIALIZE(DeleterType());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr UniquePointer() = default;
 #	else
-	UniquePointer() DD_NOEXCEPT : m_pointer_(), m_deleter_() {
+	UniquePointer() : m_pointer_() {
 	}
 #	endif
 
-	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
+	public:
+	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer);
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr UniquePointer(ThisType&& origin_) noexcept : m_pointer_(origin_.release()), m_deleter_(forward<DeleterType>(origin_.m_deleter_)) {
+	UniquePointer(ThisType&& origin_) noexcept(noexcept(DestroyAgent(::DD::move(static_cast<DestroyAgent&>(origin_))))) :
+		DestroyAgent(::DD::move(static_cast<DestroyAgent&>(origin_))), m_pointer_(origin_.m_pointer_)
+	{
+		origin_.m_pointer_ = PointerType();
 	}
 
 #	endif
-
 	public:
-	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT try : m_pointer_(pointer_), m_deleter_() {
-	} catch (...) {
-		deleter_(pointer_);
-		throw;
-	}
-
-#	if __cplusplus >= 201103L
-	public:
-	template <typename DeleterT__>
-	constexpr UniquePointer(DeleterT__&& deleter_) noexcept(
-		noexcept(DeleterType(forward<DeleterT__>(deleter_)))
-	) : m_deleter_(forward<DeleterT__>(deleter_)) {
+	explicit DD_CONSTEXPR UniquePointer(DeleterType const& deleter_) DD_NOEXCEPT_AS(DestroyAgent(deleter_)) :
+		DestroyAgent(deleter_), m_pointer_()
+	{
 	}
 
 	public:
-	template <typename DeleterT__>
-	constexpr UniquePointer(PointerType pointer_, DeleterT__&& deleter_) noexcept(
-		noexcept(DeleterType(forward<DeleterT__>(deleter_)))
-	) try : m_pointer_(pointer_), m_deleter_(forward<DeleterT__>(deleter_)) {
-	} catch (...) {
-		deleter_(pointer_);
-		throw;
-	}
-#	else
-	public:
-	template <typename DeleterT__>
-	UniquePointer(DeleterT__ const& deleter_) : m_pointer_(), m_deleter_(deleter_) {
+	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT_AS(DestroyAgent()) : m_pointer_(pointer_) {
 	}
 
 	public:
-	template <typename DeleterT__>
-	constexpr UniquePointer(PointerType pointer_, DeleterT__ const& deleter_) try : m_pointer_(pointer_), m_deleter_(deleter_) {
-	} catch (...) {
-		deleter_(pointer_);
-		throw;
+	DD_CONSTEXPR UniquePointer(DeleterType const& deleter_, PointerType pointer_) DD_NOEXCEPT_AS(DestroyAgent(deleter_)) :
+		DestroyAgent(deleter_), m_pointer_(pointer_)
+	{
 	}
-#	endif
 
 
 	public:
 	~UniquePointer() DD_NOEXCEPT {
-		destruct();
+		destruct_();
 	}
 
 
@@ -102,87 +95,97 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 
 	public:
-	DeleterType& get_deleter() const DD_NOEXCEPT {
-		return m_deleter_;
-	}
-
-
-	public:
 	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
 		return get_pointer();
 	}
 
 
 	public:
-	ProcessType reset() DD_NOEXCEPT {
-		destruct();
-		m_pointer_ = PointerType();
+	ProcessType swap(ThisType& origin_) DD_NOEXCEPT_AS(
+		::DD::swap(static_cast<DestroyAgent&>(::DD::fabricate<ThisType>()) DD_COMMA static_cast<DestroyAgent&>(origin_))
+	) {
+		::DD::swap(static_cast<DestroyAgent&>(*this), static_cast<DestroyAgent&>(origin_));
+		::DD::swap(m_pointer_, origin_.m_pointer_);
 	}
 
 
 	public:
+	ProcessType reset() DD_NOEXCEPT {
+		destruct_();
+		m_pointer_ = PointerType();
+	}
+
+	public:
 	ProcessType reset(PointerType pointer_) DD_NOEXCEPT {
-		destruct();
+		destruct_();
 		m_pointer_ = pointer_;
 	}
 
 
 	public:
 	PointerType release() DD_NOEXCEPT {
-		PointerType temp_(get_pointer());
+		PointerType original_pointer_(get_pointer());
 		m_pointer_ = PointerType();
-		return temp_;
+		return original_pointer_;
 	}
 
 
 	public:
-	ProcessType swap(ThisType& target_) DD_NOEXCEPT {
-		using ::DD::swap;
-		swap(m_pointer_, target_.m_pointer_);
-		swap(m_deleter_, target_.m_deleter_);
+	PointerType substitute(PointerType pointer_) DD_NOEXCEPT {
+		PointerType original_pointer_(get_pointer());
+		m_pointer_ = pointer_;
+		return original_pointer_;
 	}
 
 
 	private:
-	ProcessType destruct() const DD_NOEXCEPT {
-		get_deleter(get_pointer());
+	ProcessType destruct_() const DD_NOEXCEPT {
+		::DD::destroy(get_pointer(), DestroyAgent::get_instance());
 	}
 
 
-	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
+	public:
+	DD_DELETE_COPY_ASSIGNMENT(UniquePointer);
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& origin_) noexcept(true) {
-		swap(origin_);
+	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(
+		static_cast<DestroyAgent&>(::DD::fabricate<ThisType>()) = ::DD::move(static_cast<DestroyAgent&>(origin_))
+	) {
+		static_cast<DestroyAgent&>(*this) = ::DD::move(static_cast<DestroyAgent&>(origin_));
+		reset(origin_.release());
 		return *this;
 	}
 
 #	endif
-
 	public:
 	ThisType& operator =(PointerType pointer_) DD_NOEXCEPT {
 		reset(pointer_);
+		return *this;
 	}
 
 
 	public:
 	ReferenceType operator *() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator *' in " __FILE__ " at " DD_TO_STRING(__LINE__))
-		return *get_pointer();
+		return ::DD::dereference(get_pointer());
 	}
 
 
 	public:
 	PointerType operator ->() const DD_NOEXCEPT {
-		DD_ASSERT(is_valid(), "Invalid pointer dereferenced: 'DD::UniquePointer::operator ->' in " __FILE__ " at " DD_TO_STRING(__LINE__))
 		return get_pointer();
+	}
+
+
+	public:
+	ReferenceType operator [](DifferenceType index_) const DD_NOEXCEPT {
+		return ::DD::dereference(get_pointer() + index_);
 	}
 
 
 #	if __cplusplus >= 201103L
 	public:
-	explicit operator ValidityType() const DD_NOEXCEPT {
+	explicit constexpr operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 
@@ -192,52 +195,16 @@ struct UniquePointer : Comparable<ValueT_, DeleterT_> {
 
 
 
-template <typename ValueT_>
-struct UniquePointer<ValueT_, DefaultTag> : StrictPointer<ValueT_> {
-	public:
-	DD_ALIAS(ThisType, UniquePointer<ValueT_ DD_COMMA DefaultTag>);
-	DD_VALUE_TYPE_NESTED(ValueT_)
-	DD_ALIAS(SuperType, StrictPointer<ValueT_>);
-
-
-	public:
 #	if __cplusplus >= 201103L
-	constexpr UniquePointer() = default;
-#	else
-	UniquePointer() throw() : m_pointer_() {
-	}
-#	endif
+template <typename ValueT_, typename... ArgumentsT_>
+inline UniquePointer<ValueT_> make_unique(ArgumentsT_&&... arguments__) DD_NOEXCEPT_AS(
+	UniquePointer<ValueT_>(new ValueT_(::DD::forward<ArgumentsT_>(arguments__)...))
+) {
+	return UniquePointer<ValueT_>(new ValueT_(::DD::forward<ArgumentsT_>(arguments__)...));
+}
 
-	DD_DELETE_COPY_CONSTRUCTOR(UniquePointer)
-
-#	if __cplusplus >= 201103L
-	public:
-	constexpr UniquePointer(ThisType&& origin_) = default;
 
 #	endif
-
-
-	public:
-	DD_CONSTEXPR UniquePointer(PointerType pointer_) DD_NOEXCEPT : SuperType(pointer_) {
-	}
-
-
-	DD_DELETE_COPY_ASSIGNMENT(UniquePointer)
-
-#	if __cplusplus >= 201103L
-	public:
-	ThisType& operator =(ThisType&& origin_) noexcept {
-		this->swap(origin_);
-		return *this;
-	}
-
-#	endif
-
-
-};
-
-
-
 template <typename ValueT_, typename DeleterT_>
 inline ValidityType DD_CONSTEXPR operator ==(
 	UniquePointer<ValueT_, DeleterT_> const& unique_pointer_1_,
@@ -245,7 +212,6 @@ inline ValidityType DD_CONSTEXPR operator ==(
 ) DD_NOEXCEPT_AS(static_cast<ValidityType>(unique_pointer_1_.get_pointer() == unique_pointer_2_.get_pointer())) {
 	return unique_pointer_1_.get_pointer() == unique_pointer_2_.get_pointer();
 }
-
 
 
 template <typename ValueT_, typename DeleterT_>

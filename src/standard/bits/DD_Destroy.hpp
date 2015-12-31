@@ -7,6 +7,9 @@
 #	include "DD_debugger_definitions.hpp"
 #	include "DD_IntegralConstant.hpp"
 #	include "DD_IteratorValue.hpp"
+#	if DDCPP_GUARD_DESTROY
+#		include "DD_IteratorPointer.hpp"
+#	endif
 #	include "DD_DefaultDeleter.hpp"
 #	include "DD_get_pointer.hpp"
 
@@ -30,7 +33,10 @@ struct Destroy {
 	template <typename PointerT_, typename DeleterT_>
 	static ProcessType call(PointerT_ const& pointer__, DeleterT_ deleter__) DD_NOEXCEPT {
 #	if DDCPP_GUARD_DESTROY
-		DD_ASSERT(pointer_ != reinterpret_cast<ValueT_*>(get_invalid_address_()), "Dangling pointer dereferenced: 'DD::Destroy'");
+		DD_ASSERT(
+			pointer__ != reinterpret_cast<DD_MODIFY_TRAIT(IteratorPointer, PointerT_)>(get_invalid_address_()),
+			"Dangling pointer dereferenced: 'DD::Destroy'"
+		);
 #	endif
 		deleter__(::DD::get_pointer(pointer__));
 	}
@@ -38,7 +44,7 @@ struct Destroy {
 #	if DDCPP_GUARD_DESTROY
 	template <typename ValueT_>
 	static ProcessType call(ValueT_*& pointer_) DD_NOEXCEPT {
-		call(pointer__, DefaultDeleter<ValueT_>);
+		call(pointer_, DefaultDeleter<ValueT_>());
 	}
 
 #	endif
@@ -51,7 +57,7 @@ struct Destroy {
 #	if DDCPP_GUARD_DESTROY
 	template <typename ValueT_, typename DeleterT_>
 	ProcessType operator ()(ValueT_*& pointer_, DeleterT_ deleter__) DD_NOEXCEPT {
-		call(pointer__, deleter__);
+		call(pointer_, deleter__);
 	}
 
 #	endif
@@ -63,7 +69,7 @@ struct Destroy {
 #	if DDCPP_GUARD_DESTROY
 	template <typename ValueT_>
 	ProcessType operator ()(ValueT_*& pointer_) DD_NOEXCEPT {
-		call(pointer__);
+		call(pointer_);
 	}
 
 #	endif
