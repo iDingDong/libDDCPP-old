@@ -792,8 +792,7 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1451581852 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
-	"DD_ValueTypeNested.hpp"
+1451582947 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
 	"DD_Tags.hpp"
 	"DD_RemoveAllExtents.hpp"
 	"DD_Comparable.hpp"
@@ -906,8 +905,9 @@
 	"bits/DD_Pool.hpp"
 	"bits/DD_UniquePointer.hpp"
 
-1451578861 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
+1451584540 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
+	"DD_IntegralConstant.hpp"
 
 1443513051 d:\develop\repositories\libddcpp\src\standard\bits\dd_freelist.hpp
 	"DD_SizeTrait.hpp"
@@ -1645,11 +1645,13 @@
 1451492381 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_length.hpp
 	"DD_global_definitions.hpp"
 
-1451582271 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
+1451584484 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_IntegralConstant.hpp"
-	"DD_IteratorValue.hpp"
 	"DD_IteratorPointer.hpp"
-	"DD_DefaultDeleter.hpp"
+	"DD_UniversalDeleter.hpp"
 	"DD_get_pointer.hpp"
+
+1451584390 d:\develop\repositories\libddcpp\src\standard\bits\dd_universaldeleter.hpp
+	"DD_DefaultDeleter.hpp"
 

@@ -6,11 +6,10 @@
 
 #	include "DD_debugger_definitions.hpp"
 #	include "DD_IntegralConstant.hpp"
-#	include "DD_IteratorValue.hpp"
 #	if DDCPP_GUARD_DESTROY
 #		include "DD_IteratorPointer.hpp"
 #	endif
-#	include "DD_DefaultDeleter.hpp"
+#	include "DD_UniversalDeleter.hpp"
 #	include "DD_get_pointer.hpp"
 
 
@@ -44,13 +43,13 @@ struct Destroy {
 #	if DDCPP_GUARD_DESTROY
 	template <typename ValueT_>
 	static ProcessType call(ValueT_*& pointer_) DD_NOEXCEPT {
-		call(pointer_, DefaultDeleter<ValueT_>());
+		call(pointer_, universal_deleter);
 	}
 
 #	endif
 	template <typename PointerT_>
 	static ProcessType call(PointerT_ const& pointer__) DD_NOEXCEPT {
-		call(pointer__, DefaultDeleter<DD_MODIFY_TRAIT(IteratorValue, PointerT_)>());
+		call(pointer__, universal_deleter);
 	}
 
 

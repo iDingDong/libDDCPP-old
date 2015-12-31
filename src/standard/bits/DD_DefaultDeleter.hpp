@@ -5,34 +5,28 @@
 
 
 #	include "DD_ValueTypeNested.hpp"
+#	include "DD_IntegralConstant.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
-class DefaultDeleter {
+struct DefaultDeleter {
 	DD_ALIAS(ThisType, DefaultDeleter<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
-
-	public:
-	ProcessType operator ()(ValueType* pointer_) DD_NOEXCEPT {
-		destroy(pointer_);
-	}
+	DD_ALIAS(NeedInstance, FalseType);
 
 
-	public:
 	static ProcessType call(ValueType* pointer_) DD_NOEXCEPT {
 		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");
 		delete pointer_;
 	}
 
 
-	public:
-	ThisType& operator =(ThisType const& origin_) = default;
-
-	public:
-	ThisType& operator =(ThisType&& origin_) = default;
+	ProcessType operator ()(ValueType* pointer_) DD_NOEXCEPT {
+		destroy(pointer_);
+	}
 
 
 };
@@ -40,22 +34,21 @@ class DefaultDeleter {
 
 
 template <typename ValueT_>
-class DefaultDeleter<ValueT_[]> {
-	public:
+struct DefaultDeleter<ValueT_[]> {
 	DD_ALIAS(ThisType, DefaultDeleter<ValueT_[]>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
 
+	DD_ALIAS(NeedInstance, FalseType);
 
-	public:
-	ProcessType operator ()(ValueType* pointer_) DD_NOEXCEPT {
-		destroy(pointer_);
+
+	static ProcessType call(ValueType* pointer_) DD_NOEXCEPT {
+		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");
+		delete[] pointer_;
 	}
 
 
-	public:
-	static ProcessType destroy(ValueType* pointer_) DD_NOEXCEPT {
-		DD_STATIC_ASSERT(sizeof(ValueType) > 0, "Cannot delete a pointer to an imcomplete type.");
-		delete[] pointer_;
+	ProcessType operator ()(ValueType* pointer_) DD_NOEXCEPT {
+		call(pointer_);
 	}
 
 

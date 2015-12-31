@@ -180,6 +180,7 @@
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Parasitifer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ParasitiferPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Predicate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
@@ -212,6 +213,7 @@
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UndirectionalListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniquePointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_UniversalDeleter.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UniversalFreeAccessIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_UnusedIgnorer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Value.hpp" />
