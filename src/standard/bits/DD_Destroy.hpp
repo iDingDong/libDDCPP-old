@@ -5,6 +5,7 @@
 
 
 #	include "DD_debugger_definitions.hpp"
+#	include "DD_IntegralConstant.hpp"
 #	include "DD_IteratorValue.hpp"
 #	include "DD_DefaultDeleter.hpp"
 #	include "DD_get_pointer.hpp"
@@ -14,6 +15,7 @@
 DD_DETAIL_BEGIN_
 struct Destroy {
 	DD_ALIAS(ThisType, Destroy);
+	DD_ALIAS(NeedInstance, FalseType);
 
 
 #	if DDCPP_GUARD_DESTROY

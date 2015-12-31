@@ -1646,8 +1646,9 @@
 1451492381 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_length.hpp
 	"DD_global_definitions.hpp"
 
-1451550426 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
+1451550536 d:\develop\repositories\libddcpp\src\standard\bits\dd_destroy.hpp
 	"DD_debugger_definitions.hpp"
+	"DD_IntegralConstant.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_DefaultDeleter.hpp"
 	"DD_get_pointer.hpp"
