@@ -10,20 +10,20 @@
 
 #	if __cplusplus >= 201103L
 #		define DD_SPECIFIC_TYPE_NESTED(ARG_Name_, ...)\
-			DD_ALIAS(ARG_Name_##Type, __VA_ARGS__);\
-			DD_ALIAS(ARG_Name_##ConstType, ARG_Name_##Type const);\
-			DD_ALIAS(ARG_Name_##ReferenceType, ARG_Name_##Type&);\
-			DD_ALIAS(ARG_Name_##ConstReferenceType, ARG_Name_##ConstType&);\
-			DD_ALIAS(ARG_Name_##PointerType, ARG_Name_##Type*);\
-			DD_ALIAS(ARG_Name_##ConstPointerType, ARG_Name_##ConstType*);
+			using ARG_Name_##Type = __VA_ARGS__;\
+			using ARG_Name_##ConstType = ARG_Name_##Type const;\
+			using ARG_Name_##ReferenceType = ARG_Name_##Type&;\
+			using ARG_Name_##ConstReferenceType = ARG_Name_##ConstType&;\
+			using ARG_Name_##PointerType = ARG_Name_##Type*;\
+			using ARG_Name_##ConstPointerType = ARG_Name_##ConstType*;
 #	else
 #		define DD_SPECIFIC_TYPE_NESTED(ARG_Name_, ARG_Type_)\
-			DD_ALIAS(ARG_Name_##Type, ARG_Type_);\
-			DD_ALIAS(ARG_Name_##ConstType, ARG_Name_##Type const);\
-			DD_ALIAS(ARG_Name_##ReferenceType, ARG_Name_##Type&);\
-			DD_ALIAS(ARG_Name_##ConstReferenceType, ARG_Name_##ConstType&);\
-			DD_ALIAS(ARG_Name_##PointerType, ARG_Name_##Type*);\
-			DD_ALIAS(ARG_Name_##ConstPointerType, ARG_Name_##ConstType*);
+			typedef ARG_Type_ ARG_Name_##Type;\
+			typedef ARG_Name_##Type const ARG_Name_##ConstType;\
+			typedef ARG_Name_##Type& ARG_Name_##ReferenceType;\
+			typedef ARG_Name_##ConstType& ARG_Name_##ConstReferenceType;\
+			typedef ARG_Name_##Type* ARG_Name_##PointerType;\
+			typedef ARG_Name_##ConstType* ARG_Name_##ConstPointerType;
 #	endif
 
 

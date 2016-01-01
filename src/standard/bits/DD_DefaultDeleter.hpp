@@ -25,7 +25,7 @@ struct DefaultDeleter {
 
 
 	ProcessType operator ()(ValueType* pointer_) DD_NOEXCEPT {
-		destroy(pointer_);
+		call(pointer_);
 	}
 
 

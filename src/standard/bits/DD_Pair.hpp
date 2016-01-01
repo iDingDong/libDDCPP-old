@@ -28,8 +28,8 @@ struct Pair : Comparable<Pair<ValueT1_, ValueT2_> > {
 
 
 	public:
-	FirstValueType first;
-	SecondValueType second;
+	FirstValueType first DD_IN_CLASS_INITIALIZE(FirstValueType());
+	SecondValueType second DD_IN_CLASS_INITIALIZE(SecondValueType());
 
 
 #	if __cplusplus >= 201103L
@@ -43,7 +43,7 @@ struct Pair : Comparable<Pair<ValueT1_, ValueT2_> > {
 	constexpr Pair(ThisType&& origin_) = default;
 #	else
 	public:
-	Pair() {
+	Pair() : first(), second() {
 	}
 #	endif
 
@@ -69,6 +69,7 @@ struct Pair : Comparable<Pair<ValueT1_, ValueT2_> > {
 	) : first(forward<ValueT1__>(value_1___)), second(forward<ValueT2__>(value_2___)) {
 	}
 #	else
+
 	public:
 	template <typename ValueT1__, typename ValueT2__>
 	Pair(ValueT1__ const& value_1___, ValueT2_ const& value_2___) : first(value_1___), second(value_2___) {

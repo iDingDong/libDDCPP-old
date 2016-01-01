@@ -9,6 +9,7 @@
 #	include "bits/DD_Destroy.hpp"
 #	include "bits/DD_Pool.hpp"
 #	include "bits/DD_UniquePointer.hpp"
+#	include "bits/DD_ParasiticPointer.hpp"
 
 
 

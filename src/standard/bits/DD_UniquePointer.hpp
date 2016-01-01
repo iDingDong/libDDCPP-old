@@ -88,6 +88,12 @@ struct UniquePointer :
 
 
 	public:
+	DeleterType& get_deleter() const DD_NOEXCEPT {
+		return DestroyAgent::get_instance();
+	}
+
+
+	public:
 	PointerType DD_CONSTEXPR get_pointer() const DD_NOEXCEPT {
 		return m_pointer_;
 	}
@@ -230,6 +236,10 @@ DD_DETAIL_END_
 DD_BEGIN_
 using detail_::UniquePointer;
 
+#	if __cplusplus >= 201103L
+using detail_::make_unique;
+
+#	endif
 
 
 DD_END_
