@@ -39,6 +39,9 @@ void test_memory() {
 	{
 		{
 			DD::UniquePointer<Test[]> sp_1(new Test[3]);
+			if (Test::count != 3) {
+				throw "'DD::UniquePointer' test failed.";
+			}
 		}
 		if (Test::count != 0) {
 			throw "'DD::UniquePointer' test failed.";
