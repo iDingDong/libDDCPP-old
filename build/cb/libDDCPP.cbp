@@ -101,6 +101,7 @@
 		<Unit filename="../../src/standard/bits/DD_Indexable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_InitializerList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IntegralConstant.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IntrusivePointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsArithmetic.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsArray.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsBaseOf.hpp" />

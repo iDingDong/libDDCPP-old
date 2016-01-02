@@ -890,7 +890,7 @@
 1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1451641501 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1451735735 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	"standard/DDMemory.hpp"
@@ -898,13 +898,14 @@
 1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1451641652 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1451734542 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Destroy.hpp"
 	"bits/DD_Pool.hpp"
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
+	"bits/DD_IntrusivePointer.hpp"
 
 1451642152 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -919,7 +920,7 @@
 1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1451642133 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+1451736065 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
 	"DD_Tags.hpp"
 	"DD_SpecificTypeNested.hpp"
 	"DD_fabricate.hpp"
@@ -1670,4 +1671,9 @@
 	"DD_address_of.hpp"
 	"DD_UniversalDeleter.hpp"
 	"DD_destroy.hpp"
+
+1451736125 d:\develop\repositories\libddcpp\src\standard\bits\dd_intrusivepointer.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_fabricate.hpp"
+	"DD_Destroy.hpp"
 

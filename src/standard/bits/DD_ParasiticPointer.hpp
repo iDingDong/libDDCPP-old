@@ -18,6 +18,12 @@
 
 
 
+#	if !defined(DDCPP_ENABLE_INTRUSIVE_POINTER_ON_PARASITIFER)
+#		define DDCPP_ENABLE_INTRUSIVE_POINTER_ON_PARASITIFER DD_ON
+#	endif
+
+
+
 DD_DETAIL_BEGIN_
 template <typename ValueT_, typename DeleterT_ = UniversalDeleter>
 struct ParasiticPointer;
@@ -112,9 +118,21 @@ struct Parasitifer : Agent<DeleterT_> {
 	}
 
 
+	private:
+	ProcessType increase_reference_count_() DD_NOEXCEPT {
+		++m_reference_count_;
+	}
+
+
+	private:
+	ProcessType decrease_reference_count_() DD_NOEXCEPT {
+		--m_reference_count_;
+	}
+
+
 	public:
 	ProcessType refered() DD_NOEXCEPT {
-		++m_reference_count_;
+		increase_reference_count_();
 	}
 
 
@@ -124,7 +142,7 @@ struct Parasitifer : Agent<DeleterT_> {
 		if (get_reference_count() == 1) {
 			destroy_();
 		} else {
-			--m_reference_count_;
+			decrease_reference_count_();
 		}
 	}
 
@@ -139,6 +157,26 @@ struct Parasitifer : Agent<DeleterT_> {
 	}
 
 
+#	if DDCPP_ENABLE_INTRUSIVE_POINTER_ON_PARASITIFER
+	public:
+	ProcessType intrusively_refered() DD_NOEXCEPT {
+		increase_reference_count_();
+	}
+
+
+	public:
+	ProcessType intrusively_released() DD_NOEXCEPT {
+		decrease_reference_count_();
+	}
+
+
+	public:
+	LengthType intrusively_get_reference_count() const DD_NOEXCEPT {
+		return get_reference_count();
+	}
+
+
+#	endif
 	public:
 	DD_DELETE_ALL_ASSIGNMENTS(Parasitifer)
 
@@ -224,8 +262,14 @@ struct ParasiticPointer {
 
 
 	public:
+	LengthType DD_CONSTEXPR unguarded_get_reference_count() const DD_NOEXCEPT {
+		return get_parasitifer_pointer()->get_reference_count();
+	}
+
+
+	public:
 	LengthType DD_CONSTEXPR get_reference_count() const DD_NOEXCEPT {
-		return is_valid() ? get_parasitifer_pointer()->get_reference_count() : LengthType();
+		return is_valid() ? unguarded_get_reference_count() : LengthType();
 	}
 
 
@@ -236,7 +280,7 @@ struct ParasiticPointer {
 
 
 	private:
-	ProcessType process_after_refer_() DD_NOEXCEPT_AS(::DD::fabricate<ParasitiferPointerType>()->refered()) {
+	ProcessType process_after_refer_() const DD_NOEXCEPT_AS(::DD::fabricate<ParasitiferPointerType>()->refered()) {
 		if (is_valid()) {
 			get_parasitifer_pointer()->refered();
 		}
@@ -255,25 +299,25 @@ struct ParasiticPointer {
 		m_pointer_ = ParasitiferPointerType();
 	}
 
-	public:
-	ProcessType reset(ParasitiferPointerType pointer_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().process_after_refer_()) {
-		destruct_();
-		m_pointer_ = pointer_;
-		process_after_refer_();
-	}
-
-	public:
-	ProcessType reset(ThisType const& origin_) DD_NOEXCEPT_AS(ThisType(origin_)) {
-		ThisType temp_(origin_);
-		swap(temp_);
-	}
-
 #	if __cplusplus >= 201103L
 	public:
-	ProcessType reset(ThisType&& origin_) DD_NOEXCEPT {
+	ProcessType reset(ThisType&& origin_) noexcept {
 		swap(origin_);
 	}
 
+	public:
+	template <typename ObjectT_>
+	ProcessType reset(ObjectT_&& object__) noexcept(noexcept(ThisType(::DD::forward<ObjectT_>(object__)))) {
+		ThisType temp_(::DD::forward<ObjectT_>(object__));
+		swap(temp_);
+	}
+#	else
+	public:
+	template <typename ObjectT_>
+	ProcessType reset(ObjectT_ const& object__) {
+		ThisType temp_(object__);
+		swap(temp_);
+	}
 #	endif
 
 	public:
@@ -292,11 +336,26 @@ struct ParasiticPointer {
 
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& origin_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().reset(::DD::move(origin_))) {
+	ThisType& operator =(ThisType&& origin_) noexcept(noexcept(::DD::fabricate<ThisType>().reset(::DD::move(origin_)))) {
 		reset(::DD::move(origin_));
 		return *this;
 	}
 
+	public:
+	template <typename ObjectT__>
+	ThisType& operator =(ObjectT__&& object___) noexcept(
+		noexcept(::DD::fabricate<ThisType>().reset(::DD::forward<ObjectT__>(object___)))
+	) {
+		reset(::DD::forward<ObjectT__>(object___));
+		return *this;
+	}
+#	else
+	public:
+	template <typename ObjectT__>
+	ThisType& operator =(ObjectT__ const& object___) {
+		reset(object___);
+		return *this;
+	}
 #	endif
 
 	public:
