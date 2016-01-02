@@ -1,6 +1,6 @@
 //	DDCPP/standard/bits/DD_ParasiticPointer.hpp
 #ifndef DD_PARASITIC_POINTER_HPP_INCLUDED_
-#	define DD_PARASITIC_POINTER_HPP_INCLUDED_
+#	define DD_PARASITIC_POINTER_HPP_INCLUDED_ 1
 
 
 
@@ -118,32 +118,21 @@ struct Parasitifer : Agent<DeleterT_> {
 	}
 
 
-	private:
-	ProcessType increase_reference_count_() DD_NOEXCEPT {
-		++m_reference_count_;
-	}
-
-
-	private:
-	ProcessType decrease_reference_count_() DD_NOEXCEPT {
-		--m_reference_count_;
+	public:
+	LengthType is_uniquely_refered() const DD_NOEXCEPT {
+		return get_reference_count() == LengthType(1);
 	}
 
 
 	public:
-	ProcessType refered() DD_NOEXCEPT {
-		increase_reference_count_();
+	ProcessType referred() DD_NOEXCEPT {
+		++m_reference_count_;
 	}
 
 
 	public:
 	ProcessType released() DD_NOEXCEPT {
-		DD_ASSERT(get_reference_count() >= 1, "Unable to release a parasitifer never refered: DD::Parasitifer::released");
-		if (get_reference_count() == 1) {
-			destroy_();
-		} else {
-			decrease_reference_count_();
-		}
+		--m_reference_count_;
 	}
 
 
@@ -159,14 +148,14 @@ struct Parasitifer : Agent<DeleterT_> {
 
 #	if DDCPP_ENABLE_INTRUSIVE_POINTER_ON_PARASITIFER
 	public:
-	ProcessType intrusively_refered() DD_NOEXCEPT {
-		increase_reference_count_();
+	ProcessType intrusively_referred() DD_NOEXCEPT {
+		referred();
 	}
 
 
 	public:
 	ProcessType intrusively_released() DD_NOEXCEPT {
-		decrease_reference_count_();
+		released();
 	}
 
 
@@ -274,15 +263,27 @@ struct ParasiticPointer {
 
 
 	public:
+	DeleterType& get_deleter() const DD_NOEXCEPT {
+		return get_parasitifer_pointer()->get_deleter();
+	}
+
+
+	public:
+	ValidityType DD_CONSTEXPR is_unique() const DD_NOEXCEPT {
+		return is_valid() && get_parasitifer_pointer()->is_uniquely_refered();
+	}
+
+
+	public:
 	ValidityType DD_CONSTEXPR is_valid() const DD_NOEXCEPT {
-		return get_parasitifer_pointer();
+		return get_parasitifer_pointer() != ParasitiferPointerType();
 	}
 
 
 	private:
-	ProcessType process_after_refer_() const DD_NOEXCEPT_AS(::DD::fabricate<ParasitiferPointerType>()->refered()) {
+	ProcessType process_after_refer_() const DD_NOEXCEPT_AS(::DD::fabricate<ParasitiferPointerType>()->referred()) {
 		if (is_valid()) {
-			get_parasitifer_pointer()->refered();
+			get_parasitifer_pointer()->referred();
 		}
 	}
 
@@ -323,7 +324,12 @@ struct ParasiticPointer {
 	public:
 	ProcessType destruct_() DD_NOEXCEPT {
 		if (is_valid()) {
-			get_parasitifer_pointer()->released();
+			DD_ASSERT(unguarded_get_reference_count() >= LengthType(1), "Referring a parasitifer never referred: 'DD::Parasitifer'");
+			if (is_unique()) {
+				::DD::destroy(get_parasitifer_pointer(), get_deleter());
+			} else {
+				get_parasitifer_pointer()->released();
+			}
 		}
 	}
 

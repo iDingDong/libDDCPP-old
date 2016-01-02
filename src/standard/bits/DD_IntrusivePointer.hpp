@@ -1,10 +1,9 @@
 //	DDCPP/standard/bits/DD_IntrusivePointer.hpp
 #ifndef DD_INTRUSIVE_POINTER_HPP_INCLUDED_
-#	define DD_INTRUSIVE_POINTER_HPP_INCLUDED_
+#	define DD_INTRUSIVE_POINTER_HPP_INCLUDED_ 1
 
 
 
-#	include "DD_ValueTypeNested.hpp"
 #	include "DD_fabricate.hpp"
 #	include "DD_Agent.hpp"
 #	include "DD_Destroy.hpp"
@@ -14,7 +13,7 @@
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
 ProcessType refer_intrusived(ValueT_* pointer_) DD_NOEXCEPT {
-	pointer_->intrusively_refered();
+	pointer_->intrusively_referred();
 }
 
 
@@ -85,7 +84,7 @@ struct Intrusive : Agent<DeleterT_> {
 
 
 	protected:
-	ProcessType intrusively_refered() DD_NOEXCEPT {
+	ProcessType intrusively_referred() DD_NOEXCEPT {
 		++m_reference_count_;
 	}
 
