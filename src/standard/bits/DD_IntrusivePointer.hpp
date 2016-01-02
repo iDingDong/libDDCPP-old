@@ -65,7 +65,7 @@ struct Intrusive : Agent<DeleterT_> {
 
 
 	private:
-	LengthType m_reference_count_ DD_IN_CLASS_INITIALIZE(LengthType());
+	LengthType mutable m_reference_count_ DD_IN_CLASS_INITIALIZE(LengthType());
 
 
 	protected:
@@ -84,13 +84,13 @@ struct Intrusive : Agent<DeleterT_> {
 
 
 	protected:
-	ProcessType intrusively_referred() DD_NOEXCEPT {
+	ProcessType intrusively_referred() const DD_NOEXCEPT {
 		++m_reference_count_;
 	}
 
 
 	protected:
-	ProcessType intrusively_released() DD_NOEXCEPT {
+	ProcessType intrusively_released() const DD_NOEXCEPT {
 		--m_reference_count_;
 	}
 

@@ -920,7 +920,7 @@
 1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1451759620 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+1451759684 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
 	"DD_Tags.hpp"
 	"DD_SpecificTypeNested.hpp"
 	"DD_fabricate.hpp"
@@ -1672,7 +1672,7 @@
 	"DD_UniversalDeleter.hpp"
 	"DD_destroy.hpp"
 
-1451759605 d:\develop\repositories\libddcpp\src\standard\bits\dd_intrusivepointer.hpp
+1451761440 d:\develop\repositories\libddcpp\src\standard\bits\dd_intrusivepointer.hpp
 	"DD_fabricate.hpp"
 	"DD_Agent.hpp"
 	"DD_Destroy.hpp"
