@@ -137,7 +137,7 @@ struct Function;
 
 
 template <typename AllocatorT_, typename ResultT_, typename... ArgumentsT_>
-struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, ArgumentsT_...>, Allocateable<AllocatorT_> {
+struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, ArgumentsT_...>, protected Allocateable<AllocatorT_> {
 	public:
 	using SuperType = Functor<ResultT_, ArgumentsT_...>;
 	using AllocateAgent = Allocateable<AllocatorT_>;
@@ -221,6 +221,12 @@ struct Function<ResultT_(ArgumentsT_...), AllocatorT_> : Functor<ResultT_, Argum
 	public:
 	ValidityType constexpr is_valid() const noexcept {
 		return m_holder_;
+	}
+
+
+	public:
+	AllocatorType& get_allocator() const noexcept {
+		return AllocateAgent::get_allocator;
 	}
 
 

@@ -23,7 +23,7 @@ template <
 	typename DeleterT_ = DefaultDeleter<ValueT_>
 >
 struct UniquePointer :
-	Agent<DeleterT_>,
+	protected Agent<DeleterT_>,
 #	if __cplusplus >= 201103L
 	Comparable<UniquePointer<ValueT_, DeleterT_>>
 #	else

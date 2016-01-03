@@ -533,7 +533,7 @@ template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
 #	else
 template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
 #	endif
-struct Vessel : Allocateable<AllocatorT_>, Vessel_<ValueT_> {
+struct Vessel : protected Allocateable<AllocatorT_>, Vessel_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(SuperType, Vessel_<ValueT_>);

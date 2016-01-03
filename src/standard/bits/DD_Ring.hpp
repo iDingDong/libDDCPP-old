@@ -992,7 +992,7 @@ template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
 #	else
 template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
 #	endif
-struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
+struct Ring : protected Allocateable<AllocatorT_>, Ring_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(SuperType, Ring_<ValueT_>);
@@ -1087,6 +1087,12 @@ struct Ring : Allocateable<AllocatorT_>, Ring_<ValueT_> {
 
 	public:
 	DD_REVERSE_RANGE_NESTED
+
+
+	public:
+	AllocatorType& get_allocator() const DD_NOEXCEPT {
+		return AllocateAgent::get_allocator;
+	}
 
 
 	public:

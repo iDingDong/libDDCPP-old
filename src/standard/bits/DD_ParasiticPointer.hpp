@@ -31,7 +31,7 @@ struct ParasiticPointer;
 
 
 template <typename ValueT_, typename DeleterT_ = UniversalDeleter>
-struct Parasitifer : Agent<DeleterT_> {
+struct Parasitifer : protected Agent<DeleterT_> {
 	public:
 	DD_ALIAS(DestroyAgent, Agent<DeleterT_>);
 	DD_ALIAS(ThisType, Parasitifer<ValueT_ DD_COMMA DeleterT_>);

@@ -37,7 +37,7 @@ ProcessType destroy_intrusived(ValueT_* pointer_) DD_NOEXCEPT {
 
 
 template <typename DeleterT_ = UniversalDeleter>
-struct Intrusive : Agent<DeleterT_> {
+struct Intrusive : protected Agent<DeleterT_> {
 	protected:
 	DD_ALIAS(DestroyAgent, Agent<DeleterT_>);
 	DD_ALIAS(ThisType, Intrusive);

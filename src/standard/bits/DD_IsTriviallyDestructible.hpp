@@ -7,9 +7,9 @@
 #	if __cplusplus >= 201103L
 #		include <type_traits>
 
-#		include "DD_IntegralConstant.hpp"
-#	else
+#	endif
 #		include "DD_And.hpp"
+#	if __cplusplus < 201103L
 #		include "DD_IsArithmetic.hpp"
 #		include "DD_IsPointer.hpp"
 #	endif

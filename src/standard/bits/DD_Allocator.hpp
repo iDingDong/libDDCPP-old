@@ -41,7 +41,7 @@ class Allocator<void> {
 	DD_ALIAS(LengthType, SizeType);
 
 	public:
-	DD_ALIAS(Basic, Allocator<void>);
+	DD_ALIAS(Basic, ThisType);
 	DD_ALIAS(NeedInstance, FalseType);
 
 
@@ -76,7 +76,7 @@ class Allocator<void> {
 
 
 template <typename ValueT_>
-class Allocator : Allocator<void> {
+class Allocator : public Allocator<void> {
 	public:
 	DD_ALIAS(ThisType, Allocator<ValueT_>);
 	DD_ALIAS(SuperType, Allocator<void>);

@@ -417,7 +417,7 @@ template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_>>
 #	else
 template <typename ValueT_, typename AllocatorT_ = Allocator<ValueT_> >
 #	endif
-struct UndirectionalList : Allocateable<AllocatorT_>, UndirectionalList_<ValueT_> {
+struct UndirectionalList : protected Allocateable<AllocatorT_>, UndirectionalList_<ValueT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(SuperType, UndirectionalList_<ValueT_>);
@@ -617,6 +617,12 @@ struct UndirectionalList : Allocateable<AllocatorT_>, UndirectionalList_<ValueT_
 
 	public:
 	DD_RANGE_NESTED
+
+
+	public:
+	AllocatorType& get_allocator() const DD_NOEXCEPT {
+		return AllocateAgent::get_allocator;
+	}
 
 
 	public:

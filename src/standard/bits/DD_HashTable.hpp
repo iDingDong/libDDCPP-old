@@ -39,7 +39,7 @@ template <
 	typename EqualityPredicateT_ = EqualTo<ValueT_>,
 	typename AllocatorT_ = Allocator<ValueT_>
 >
-struct HashTable : Agent<HasherT_>, Agent<EqualityPredicateT_> {
+struct HashTable : protected Agent<HasherT_>, protected Agent<EqualityPredicateT_> {
 	public:
 	DD_ALIAS(HashAgent, Agent<HasherT_>);
 	DD_ALIAS(CompareAgent, Agent<EqualityPredicateT_>);

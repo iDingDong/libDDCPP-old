@@ -108,10 +108,11 @@ template <typename AllocatorT_ = Allocator<void>>
 #	else
 template <typename AllocatorT_ = Allocator<void> >
 #	endif
-struct Variant : Allocateable<AllocatorT_> {
+struct Variant : protected Allocateable<AllocatorT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(ThisType, Variant);
+	DD_ALIAS(AllocatorType, AllocatorT_);
 
 	private:
 	DD_SPECIFIC_TYPE_NESTED(Holder, VariantHolderBase_)
@@ -192,6 +193,12 @@ struct Variant : Allocateable<AllocatorT_> {
 	public:
 	ValidityType is_valid() const DD_NOEXCEPT {
 		return m_holder_;
+	}
+
+
+	public:
+	AllocatorType& get_allocator() const DD_NOEXCEPT {
+		return AllocateAgent::get_allocator;
 	}
 
 

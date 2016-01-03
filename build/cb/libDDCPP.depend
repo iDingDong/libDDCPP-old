@@ -122,7 +122,7 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_issame.hpp
+1451797537 d:\develop\repositories\libddcpp\src\standard\bits\dd_issame.hpp
 	<type_traits>
 	"DD_And.hpp"
 	"DD_IntegralConstant.hpp"
@@ -792,7 +792,7 @@
 	"DD_forward.hpp"
 	"DD_TypeList.hpp"
 
-1451666081 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
+1451797154 d:\develop\repositories\libddcpp\src\standard\bits\dd_uniquepointer.hpp
 	"DD_Tags.hpp"
 	"DD_RemoveAllExtents.hpp"
 	"DD_Comparable.hpp"
@@ -802,7 +802,7 @@
 	"DD_destroy.hpp"
 	"DD_dereference.hpp"
 
-1450458900 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1451798961 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	<iostream>
@@ -815,14 +815,13 @@
 1444052538 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocationfailure.hpp
 	"DD_RunTimeError.hpp"
 
-1450098994 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
+1451799035 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallydestructible.hpp
 	<type_traits>
-	"DD_IntegralConstant.hpp"
 	"DD_And.hpp"
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1450415358 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1451797559 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
@@ -920,7 +919,7 @@
 1443513186 d:\develop\repositories\libddcpp\src\standard\bits\dd_make_parasitic.hpp
 	"DD_ParasiticPointer.hpp"
 
-1451759684 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_parasiticpointer.hpp
 	"DD_Tags.hpp"
 	"DD_SpecificTypeNested.hpp"
 	"DD_fabricate.hpp"
@@ -1009,7 +1008,7 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1450445339 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
@@ -1026,7 +1025,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1450802714 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1106,13 +1105,10 @@
 	"DD_fabricate.hpp"
 	"DD_RemoveReference.hpp"
 
-1450459976 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
-	"DD_Tags.hpp"
+1451799269 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
 	"DD_Value.hpp"
-	"DD_NeedInstance.hpp"
-	"DD_forward.hpp"
-	"DD_Allocator.hpp"
 	"DD_destruct.hpp"
+	"DD_Allocateable.hpp"
 
 1443937083 d:\develop\repositories\libddcpp\src\standard\bits\dd_readonlycall.hpp
 	"DD_Conditional.hpp"
@@ -1186,7 +1182,7 @@
 	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1451415443 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1519,7 +1515,7 @@
 1450321969 d:\develop\repositories\libddcpp\src\standard\bits\dd_copy_construct_length.hpp
 	"DD_copy_construct.hpp"
 
-1451395827 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
+1451799800 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocateable.hpp
 	"DD_Agent.hpp"
 	"DD_Allocator.hpp"
 
@@ -1536,7 +1532,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1451054600 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"
@@ -1609,10 +1605,10 @@
 1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_isoriginalimplementation.hpp
 	"DD_NestedTypeCheck.hpp"
 
-1451396311 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
+1451799814 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
 	"DD_NeedInstance.hpp"
 
-1451458254 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
 	"DD_InitializerList.hpp"
 	"DD_Allocator.hpp"
 	"DD_BatchRange.hpp"
@@ -1672,7 +1668,7 @@
 	"DD_UniversalDeleter.hpp"
 	"DD_destroy.hpp"
 
-1451761440 d:\develop\repositories\libddcpp\src\standard\bits\dd_intrusivepointer.hpp
+1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_intrusivepointer.hpp
 	"DD_fabricate.hpp"
 	"DD_Agent.hpp"
 	"DD_Destroy.hpp"
