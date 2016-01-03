@@ -55,6 +55,7 @@ DD_ALIAS(ValidityType, bool);
 DD_ALIAS(CheckType, bool);
 
 DD_ALIAS(SizeType, std::size_t);
+DD_ALIAS(AlignmentType, SizeType);
 DD_ALIAS(LengthType, SizeType);
 
 DD_ALIAS(PointerDifferenceType, std::ptrdiff_t);
@@ -143,6 +144,7 @@ using detail_::ValidityType;
 using detail_::CheckType;
 using detail_::SizeType;
 using detail_::LengthType;
+using detail_::AlignmentType;
 using detail_::PointerDifferenceType;
 using detail_::DifferenceType;
 using detail_::SubscriptType;

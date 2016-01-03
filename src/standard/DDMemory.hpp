@@ -11,6 +11,7 @@
 #	include "bits/DD_UniquePointer.hpp"
 #	include "bits/DD_ParasiticPointer.hpp"
 #	include "bits/DD_IntrusivePointer.hpp"
+#	include "bits/DD_StrongPointer.hpp"
 
 
 

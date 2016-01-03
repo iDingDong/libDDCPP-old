@@ -70,6 +70,7 @@ void test_memory() {
 			throw "'DD::ParasiticPointer' test failed.";
 		}
 	}
+
 	{
 		{
 			DD::UniquePointer<Test> up_0 = DD::make_unique<Test>();
@@ -85,6 +86,7 @@ void test_memory() {
 			throw "'DD::UniquePointer' test failed.";
 		}
 	}
+
 	{
 		{
 			DD::IntrusivePointer<IntrusiveTest> ip_0 = new IntrusiveTest();
@@ -232,6 +234,37 @@ void test_memory() {
 		}
 		if (Test::count != 0) {
 			throw "'DD::IntrusivePointer' test failed.";
+		}
+	}
+
+	{
+		{
+			DD::StrongPointer<Test> stp_0(new Test());
+			if (
+				stp_0.get_strong_reference_count() != 1 ||
+				stp_0->count != 1
+			) {
+				throw "'DD::StrongPointer' test failed.";
+			}
+			{
+				auto stp_1 = DD::make_strong<Test>();
+				stp_0 = stp_1;
+				if (
+					stp_0.get_strong_reference_count() != 2 ||
+					stp_0->count != 1
+				) {
+					throw "'DD::StrongPointer' test failed.";
+				}
+			}
+			if (
+				stp_0.get_strong_reference_count() != 1 ||
+				stp_0->count != 1
+			) {
+				throw "'DD::StrongPointer' test failed.";
+			}
+		}
+		if (Test::count != 0) {
+			throw "'DD::StrongPointer' test failed.";
 		}
 	}
 }

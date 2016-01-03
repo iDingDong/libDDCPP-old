@@ -11,15 +11,16 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename AllocatorT_>
+#	if __cplusplus >= 201103L
+template <typename AllocatorT_ = Allocator<void>>
+#	else
+template <typename AllocatorT_ = Allocator<void> >
+#	endif
 struct Deleter : protected Allocateable<AllocatorT_> {
 	public:
 	DD_ALIAS(AllocateAgent, Allocateable<AllocatorT_>);
 	DD_ALIAS(ThisType, Deleter<AllocatorT_>);
 	DD_ALIAS(AllocatorType, AllocatorT_);
-
-	public:
-	DD_VALUE_TYPE_NESTED(DD_MODIFY_TRAIT(Value, AllocatorType))
 
 
 #	if __cplusplus >= 201103L
@@ -49,11 +50,8 @@ struct Deleter : protected Allocateable<AllocatorT_> {
 
 #	endif
 	public:
-	ProcessType call(PointerType pointer_) const DD_NOEXCEPT {
-		if (pointer_ != PointerType()) {
-			::DD::destruct(pointer_);
-			AllocateAgent::deallocate(pointer_, LengthType(1));
-		}
+	AllocatorType& get_allocator() const DD_NOEXCEPT {
+		return AllocateAgent::get_allocator();
 	}
 
 

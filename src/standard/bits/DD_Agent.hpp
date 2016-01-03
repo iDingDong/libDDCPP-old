@@ -5,6 +5,7 @@
 
 
 #	include "DD_NeedInstance.hpp"
+#	include "DD_get_instance.hpp"
 
 
 
@@ -45,8 +46,7 @@ struct Agent_ {
 #	endif
 	public:
 	static InstanceType& get_instance() DD_NOEXCEPT_AS(InstanceType()) {
-		static InstanceType instance_;
-		return instance_;
+		return ::DD::get_instance<InstanceType>();
 	}
 
 

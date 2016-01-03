@@ -51,6 +51,8 @@
 		<Unit filename="../../src/standard/bits/DD_AddRvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddVolatile.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Agent.hpp" />
+		<Unit filename="../../src/standard/bits/DD_AlignedStorage.hpp" />
+		<Unit filename="../../src/standard/bits/DD_AlignmentOf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Allocateable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AllocationFailure.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Allocator.hpp" />
@@ -187,6 +189,7 @@
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RedBlackTree.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ReferenceCounter.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReferenceWrapper.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveAllExtents.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RemoveCV.hpp" />
@@ -199,10 +202,12 @@
 		<Unit filename="../../src/standard/bits/DD_ReverseIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Ring.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
+		<Unit filename="../../src/standard/bits/DD_SingleStorage.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SpecificTypeNested.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StaticConcatenate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_String.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StrongPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />
@@ -267,6 +272,7 @@
 		<Unit filename="../../src/standard/bits/DD_for_each.hpp" />
 		<Unit filename="../../src/standard/bits/DD_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_generate.hpp" />
+		<Unit filename="../../src/standard/bits/DD_get_instance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_last_argument.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_pointer.hpp" />

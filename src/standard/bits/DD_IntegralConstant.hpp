@@ -30,21 +30,6 @@ struct IntegralConstant {
 
 
 
-#	if __cplusplus >= 201103L
-template <bool value_c_>
-using BoolConstant = IntegralConstant<bool, value_c_>;
-
-template <SizeType size_c_>
-using SizeConstant = IntegralConstant<SizeType, size_c_>;
-
-template <DifferenceType difference_c_>
-using DifferenceConstant = IntegralConstant<DifferenceType, difference_c_>;
-
-template <typename IntegralT_>
-using StdIntegralConstant = IntegralConstant<typename IntegralT_::value_type, IntegralT_::value>;
-template <typename IntegralT_>
-using StdBoolConstant = BoolConstant<IntegralT_::value>;
-#	else
 template <bool value_c_>
 struct BoolConstant : IntegralConstant<bool, value_c_> {
 };
@@ -72,7 +57,6 @@ struct StdIntegralConstant : IntegralConstant<typename IntegralT_::value_type, I
 template <typename IntegralT_>
 struct StdBoolConstant : BoolConstant<IntegralT_::value> {
 };
-#	endif
 
 
 

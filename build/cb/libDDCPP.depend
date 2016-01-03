@@ -19,7 +19,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1450591391 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1451802376 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -115,7 +115,7 @@
 1445763815 d:\develop\repositories\libddcpp\src\standard\bits\dd_and.hpp
 	"DD_IntegralConstant.hpp"
 
-1445867086 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
+1451802461 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
 	"DD_global_definitions.hpp"
 
 1450096644 d:\develop\repositories\libddcpp\src\standard\bits\dd_removereference.hpp
@@ -897,7 +897,7 @@
 1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1451734542 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1451822384 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Destroy.hpp"
@@ -905,6 +905,7 @@
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
 	"bits/DD_IntrusivePointer.hpp"
+	"bits/DD_StrongPointer.hpp"
 
 1451642152 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -1105,7 +1106,7 @@
 	"DD_fabricate.hpp"
 	"DD_RemoveReference.hpp"
 
-1451799269 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
+1451819138 d:\develop\repositories\libddcpp\src\standard\bits\dd_deleter.hpp
 	"DD_Value.hpp"
 	"DD_destruct.hpp"
 	"DD_Allocateable.hpp"
@@ -1605,8 +1606,9 @@
 1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_isoriginalimplementation.hpp
 	"DD_NestedTypeCheck.hpp"
 
-1451799814 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
+1451818054 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
 	"DD_NeedInstance.hpp"
+	"DD_get_instance.hpp"
 
 1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
 	"DD_InitializerList.hpp"
@@ -1672,4 +1674,19 @@
 	"DD_fabricate.hpp"
 	"DD_Agent.hpp"
 	"DD_Destroy.hpp"
+
+1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
+	"DD_global_definitions.hpp"
+
+1451822851 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+	"DD_SpecificTypeNested.hpp"
+	"DD_address_of.hpp"
+	"DD_Deleter.hpp"
+	"DD_Destroy.hpp"
+	"DD_construct.hpp"
+	"DD_ReferenceCounter.hpp"
+	"DD_Pair.hpp"
+
+1451822461 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
+	"DD_global_definitions.hpp"
 
