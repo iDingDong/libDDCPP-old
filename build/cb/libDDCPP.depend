@@ -1678,7 +1678,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1451845658 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1451845904 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_address_of.hpp"
 	"DD_Deleter.hpp"

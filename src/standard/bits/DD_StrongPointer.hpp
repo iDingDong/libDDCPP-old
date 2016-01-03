@@ -232,9 +232,23 @@ struct ReferenceManager_ :
 
 
 
-struct StrongPointerBase_ {
+template <typename ValueT_>
+struct StrongPointer;
+
+
+
+template <>
+struct StrongPointer<void> {
 	public:
-	DD_ALIAS(ThisType, StrongPointerBase_);
+	DD_ALIAS(ThisType, StrongPointer<void>);
+	DD_ALIAS(ValueType, void);
+
+	public:
+	DD_ALIAS(ValueConstType, void);
+	DD_ALIAS(ReferenceType, void);
+	DD_ALIAS(ConstReferenceType, void);
+	DD_ALIAS(PointerType, void*);
+	DD_ALIAS(ConstPointerType, void*);
 
 	public:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
@@ -246,31 +260,31 @@ struct StrongPointerBase_ {
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr StrongPointerBase_() = default;
+	constexpr StrongPointer() = default;
 #	else
-	StrongPointerBase_() throw() : m_pointer_(get_nil_reference_manager_()) {
+	StrongPointer() throw() : m_pointer_(get_nil_reference_manager_()) {
 	}
 #	endif
 
 
 	public:
-	StrongPointerBase_(ThisType const& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
+	StrongPointer(ThisType const& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
 	public:
-	StrongPointerBase_(ThisType&& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
+	StrongPointer(ThisType&& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
 		origin_.m_pointer_ = get_nil_reference_manager_();
 	}
 
 	public:
-	StrongPointerBase_(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_pointer_(manager_pointer_) {
+	StrongPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_pointer_(manager_pointer_) {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
 
 	public:
-	~StrongPointerBase_() DD_NOEXCEPT {
+	~StrongPointer() DD_NOEXCEPT {
 		destruct_();
 	}
 
@@ -288,7 +302,7 @@ struct StrongPointerBase_ {
 
 
 	protected:
-	GlobalPointerType get_global_pointer() const DD_NOEXCEPT {
+	PointerType get_global_pointer() const DD_NOEXCEPT {
 		return get_manager_pointer_()->get_global_pointer_();
 	}
 
@@ -382,9 +396,9 @@ struct WeakPointer;
 
 
 template <typename ValueT_>
-struct StrongPointer : StrongPointerBase_ {
+struct StrongPointer : StrongPointer<void> {
 	public:
-	DD_ALIAS(SuperType, StrongPointerBase_);
+	DD_ALIAS(SuperType, StrongPointer<void>);
 	DD_ALIAS(ThisType, StrongPointer<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
