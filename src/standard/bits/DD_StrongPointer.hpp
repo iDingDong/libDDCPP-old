@@ -25,11 +25,9 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT_>
 struct ReferenceManagerBase_ {
 	protected:
-	DD_ALIAS(ThisType, ReferenceManagerBase_<ValueT_>);
-	DD_VALUE_TYPE_NESTED(ValueT_)
+	DD_ALIAS(ThisType, ReferenceManagerBase_);
 
 
 	private:
@@ -43,7 +41,6 @@ struct ReferenceManagerBase_ {
 	ReferenceManagerBase_() throw() {
 	}
 #	endif
-
 
 	protected:
 	DD_DELETE_COPY_CONSTRUCTOR(ReferenceManagerBase_)
@@ -68,8 +65,8 @@ struct ReferenceManagerBase_ {
 
 
 	public:
-	virtual PointerType get_pointer_() const DD_NOEXCEPT {
-		return PointerType();
+	virtual GlobalPointerType get_global_pointer_() const DD_NOEXCEPT {
+		return GlobalPointerType();
 	}
 
 
@@ -117,25 +114,18 @@ template <typename ValueT_, typename DeleterT_, typename ThisDeleterT_>
 struct ReferenceManager_ :
 	protected Agent<DeleterT_>,
 	protected Agent<ThisDeleterT_>,
-	ReferenceManagerBase_<ValueT_>,
+	ReferenceManagerBase_,
 	protected ReferenceCounter
 {
 	private:
 	DD_ALIAS(DestroyAgent, Agent<DeleterT_>);
 	DD_ALIAS(DestroyThisAgent, Agent<ThisDeleterT_>);
-	DD_ALIAS(SuperType, ReferenceManagerBase_<ValueT_>);
+	DD_ALIAS(SuperType, ReferenceManagerBase_);
 	DD_ALIAS(CounterType, ReferenceCounter);
 	DD_ALIAS(ThisType, ReferenceManager_<ValueT_ DD_COMMA DeleterT_ DD_COMMA ThisDeleterT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_)
 	DD_ALIAS(DeleterType, DeleterT_);
 	DD_ALIAS(ThisDeleterType, ThisDeleterT_);
-
-	private:
-	DD_INHERIT_TEMPLATE_ALIAS(ValueType);
-	DD_INHERIT_TEMPLATE_ALIAS(ValueConstType);
-	DD_INHERIT_TEMPLATE_ALIAS(ReferenceType);
-	DD_INHERIT_TEMPLATE_ALIAS(ConstReferenceType);
-	DD_INHERIT_TEMPLATE_ALIAS(PointerType);
-	DD_INHERIT_TEMPLATE_ALIAS(ConstPointerType);
 
 
 	private:
@@ -163,8 +153,14 @@ struct ReferenceManager_ :
 
 
 	private:
-	PointerType get_pointer_() const DD_NOEXCEPT DD_OVERRIDE {
+	PointerType get_pointer_() const DD_NOEXCEPT {
 		return m_pointer_;
+	}
+
+
+	private:
+	GlobalPointerType get_global_pointer_() const DD_NOEXCEPT DD_OVERRIDE {
+		return get_pointer_();
 	}
 
 
@@ -237,13 +233,25 @@ struct ReferenceManager_ :
 
 
 template <typename ValueT_>
+struct WeakPointer;
+
+
+
+template <typename ValueT_>
 struct StrongPointer {
 	public:
 	DD_ALIAS(ThisType, StrongPointer<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
+	public:
+	DD_ALIAS(WeakType, WeakPointer<ValueType>);
+
 	private:
-	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_<ValueType>);
+	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
+
+
+	public:
+	friend WeakType;
 
 
 	private:
@@ -275,6 +283,11 @@ struct StrongPointer {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
+	private:
+	StrongPointer(ManagerPointerType manager_pointer_) : m_pointer_(manager_pointer_) {
+		get_manager_pointer_()->strongly_referred_();
+	}
+
 
 	public:
 	~StrongPointer() DD_NOEXCEPT {
@@ -284,7 +297,7 @@ struct StrongPointer {
 
 	private:
 	static ManagerPointerType get_nil_reference_manager_() DD_NOEXCEPT {
-		return ReferenceManagerBase_<ValueType>::get_nil_reference_manager_();
+		return ManagerType::get_nil_reference_manager_();
 	}
 
 
@@ -296,7 +309,7 @@ struct StrongPointer {
 
 	public:
 	PointerType get_pointer() const DD_NOEXCEPT {
-		return get_manager_pointer_()->get_pointer_();
+		return static_cast<PointerType>(get_manager_pointer_()->get_global_pointer_());
 	}
 
 
@@ -319,6 +332,12 @@ struct StrongPointer {
 
 
 	public:
+	PointerType is_unique() const DD_NOEXCEPT {
+		return get_strong_reference_count() == LengthType(1);
+	}
+
+
+	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
 		::DD::swap(m_pointer_, other_.m_pointer_);
 	}
@@ -326,7 +345,7 @@ struct StrongPointer {
 
 	public:
 	ProcessType reset() DD_NOEXCEPT {
-		get_manager_pointer_()->strongly_released_();
+		destruct_();
 		m_pointer_ = get_nil_reference_manager_();
 	}
 

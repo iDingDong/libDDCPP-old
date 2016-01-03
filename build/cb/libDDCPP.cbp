@@ -227,6 +227,7 @@
 		<Unit filename="../../src/standard/bits/DD_Variant.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Vessel.hpp" />
 		<Unit filename="../../src/standard/bits/DD_VoidType.hpp" />
+		<Unit filename="../../src/standard/bits/DD_WeakPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_accumulate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_address_of.hpp" />
 		<Unit filename="../../src/standard/bits/DD_adjacent_unique.hpp" />
