@@ -232,26 +232,12 @@ struct ReferenceManager_ :
 
 
 
-template <typename ValueT_>
-struct WeakPointer;
-
-
-
-template <typename ValueT_>
-struct StrongPointer {
+struct StrongPointerBase_ {
 	public:
-	DD_ALIAS(ThisType, StrongPointer<ValueT_>);
-	DD_VALUE_TYPE_NESTED(ValueT_);
+	DD_ALIAS(ThisType, StrongPointerBase_);
 
 	public:
-	DD_ALIAS(WeakType, WeakPointer<ValueType>);
-
-	private:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
-
-
-	public:
-	friend WeakType;
 
 
 	private:
@@ -260,56 +246,50 @@ struct StrongPointer {
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr StrongPointer() = default;
+	constexpr StrongPointerBase_() = default;
 #	else
-	StrongPointer() throw() : m_pointer_(get_nil_reference_manager_()) {
+	StrongPointerBase_() throw() : m_pointer_(get_nil_reference_manager_()) {
 	}
 #	endif
 
+
 	public:
-	StrongPointer(ThisType const& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
+	StrongPointerBase_(ThisType const& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
 	public:
-	StrongPointer(ThisType&& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
+	StrongPointerBase_(ThisType&& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
 		origin_.m_pointer_ = get_nil_reference_manager_();
 	}
 
 	public:
-	StrongPointer(PointerType pointer_) : m_pointer_(
-		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_)
-	) {
-		get_manager_pointer_()->strongly_referred_();
-	}
-
-	private:
-	StrongPointer(ManagerPointerType manager_pointer_) : m_pointer_(manager_pointer_) {
+	StrongPointerBase_(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_pointer_(manager_pointer_) {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
 
 	public:
-	~StrongPointer() DD_NOEXCEPT {
+	~StrongPointerBase_() DD_NOEXCEPT {
 		destruct_();
 	}
 
 
-	private:
+	protected:
 	static ManagerPointerType get_nil_reference_manager_() DD_NOEXCEPT {
 		return ManagerType::get_nil_reference_manager_();
 	}
 
 
-	private:
+	protected:
 	ManagerPointerType get_manager_pointer_() const DD_NOEXCEPT {
 		return m_pointer_;
 	}
 
 
-	public:
-	PointerType get_pointer() const DD_NOEXCEPT {
-		return static_cast<PointerType>(get_manager_pointer_()->get_global_pointer_());
+	protected:
+	GlobalPointerType get_global_pointer() const DD_NOEXCEPT {
+		return get_manager_pointer_()->get_global_pointer_();
 	}
 
 
@@ -326,13 +306,13 @@ struct StrongPointer {
 
 
 	public:
-	PointerType is_valid() const DD_NOEXCEPT {
+	ValidityType is_valid() const DD_NOEXCEPT {
 		return get_manager_pointer_() != get_nil_reference_manager_();
 	}
 
 
 	public:
-	PointerType is_unique() const DD_NOEXCEPT {
+	ValidityType is_unique() const DD_NOEXCEPT {
 		return get_strong_reference_count() == LengthType(1);
 	}
 
@@ -340,6 +320,125 @@ struct StrongPointer {
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
 		::DD::swap(m_pointer_, other_.m_pointer_);
+	}
+
+
+	public:
+	ProcessType reset() DD_NOEXCEPT {
+		ThisType temp_;
+		swap(temp_);
+	}
+
+	public:
+	ProcessType reset(ThisType const& origin_) DD_NOEXCEPT {
+		ThisType temp_(origin_);
+		swap(temp_);
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ProcessType reset(ThisType&& origin_) noexcept {
+		swap(origin_);
+	}
+#	endif
+
+
+	private:
+	ProcessType destruct_() DD_NOEXCEPT {
+		get_manager_pointer_()->strongly_released_();
+	}
+
+
+	public:
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT {
+		reset(origin_);
+		return *this;
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType&& origin_) noexcept {
+		reset(::DD::move(origin_));
+		return *this;
+	}
+
+#	endif
+
+#	if __cplusplus >= 201103L
+	public:
+	explicit operator ValidityType() const DD_NOEXCEPT {
+		return is_valid();
+	}
+
+
+#	endif
+};
+
+
+
+template <typename ValueT_>
+struct WeakPointer;
+
+
+
+template <typename ValueT_>
+struct StrongPointer : StrongPointerBase_ {
+	public:
+	DD_ALIAS(SuperType, StrongPointerBase_);
+	DD_ALIAS(ThisType, StrongPointer<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_);
+
+	public:
+	DD_ALIAS(WeakType, WeakPointer<ValueType>);
+
+	private:
+	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
+
+
+	public:
+	friend WeakType;
+
+
+#	if __cplusplus >= 201103L
+	public:
+	constexpr StrongPointer() = default;
+
+	public:
+	StrongPointer(ThisType const& origin_) = default;
+
+	public:
+	StrongPointer(ThisType&& origin_) = default;
+#	else
+	StrongPointer() throw() : SuperType(get_nil_reference_manager_()) {
+	}
+#	endif
+
+	public:
+	StrongPointer(PointerType pointer_) : SuperType(
+		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_)
+	) {
+	}
+
+	private:
+	StrongPointer(ManagerPointerType manager_pointer_) : SuperType(manager_pointer_) {
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	~StrongPointer() = default;
+
+
+#	endif
+	public:
+	PointerType get_pointer() const DD_NOEXCEPT {
+		return static_cast<PointerType>(get_global_pointer());
+	}
+
+
+	public:
+	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
+		SuperType::swap(other_);
 	}
 
 
@@ -400,24 +499,12 @@ struct StrongPointer {
 	}
 
 
-	private:
-	ProcessType destruct_() DD_NOEXCEPT {
-		get_manager_pointer_()->strongly_released_();
-	}
-
-
-	public:
-	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT_AS(::DD::fabricate<ThisType>().reset(origin_)) {
-		reset(origin_);
-		return *this;
-	}
-
 #	if __cplusplus >= 201103L
 	public:
-	ThisType& operator =(ThisType&& origin_) noexcept(noexcept(::DD::fabricate<ThisType>().reset(::DD::move(origin_)))) {
-		reset(::DD::move(origin_));
-		return *this;
-	}
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType&& origin_) = default;
 
 	public:
 	template <typename ObjectT__>

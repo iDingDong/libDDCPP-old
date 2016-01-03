@@ -202,6 +202,7 @@
 		<Unit filename="../../src/standard/bits/DD_ReverseIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Ring.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RunTimeError.hpp" />
+		<Unit filename="../../src/standard/bits/DD_SharedPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SingleStorage.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SpecificTypeNested.hpp" />

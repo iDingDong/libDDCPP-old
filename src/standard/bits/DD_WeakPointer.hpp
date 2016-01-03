@@ -112,8 +112,8 @@ struct WeakPointer {
 
 	public:
 	ProcessType reset() DD_NOEXCEPT {
-		destruct_();
-		m_pointer_ = get_nil_reference_manager_();
+		ThisType temp_;
+		swap(temp_);
 	}
 
 #	if __cplusplus >= 201103L
@@ -171,7 +171,7 @@ struct WeakPointer {
 
 #	if __cplusplus >= 201103L
 	public:
-	explicit constexpr operator ValidityType() const DD_NOEXCEPT {
+	explicit operator ValidityType() const DD_NOEXCEPT {
 		return is_valid();
 	}
 
