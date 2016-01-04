@@ -761,7 +761,7 @@
 	"DD_IsSame.hpp"
 	"DD_IteratorCatagory.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
+1451926055 d:\develop\repositories\libddcpp\src\standard\ddutility.hpp
 	"bits/DD_UnusedIgnorer.hpp"
 	"bits/DD_Uncopiable.hpp"
 	"bits/DD_Dereferenceable.hpp"
@@ -770,8 +770,8 @@
 	"bits/DD_HashOf.hpp"
 	"bits/DD_Range.hpp"
 	"bits/DD_Bitset.hpp"
-	"bits/DD_Optional.hpp"
 	"bits/DD_Variant.hpp"
+	"bits/DD_Optional.hpp"
 	"bits/DD_Predicate.hpp"
 	"bits/DD_bind.hpp"
 
@@ -821,13 +821,15 @@
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 
-1451797559 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
+1451929616 d:\develop\repositories\libddcpp\src\standard\bits\dd_variant.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_TypeInfo.hpp"
 	"DD_Decay.hpp"
 	"DD_forward.hpp"
 	"DD_release.hpp"
 	"DD_Allocateable.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
 	"DD_swap.hpp"
 
 1449715097 source:d:\develop\repositories\libddcpp\src\test_math.cpp
@@ -1214,20 +1216,17 @@
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp
 	"DD_global_definitions.hpp"
 
-1450350942 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
+1451930998 d:\develop\repositories\libddcpp\src\standard\bits\dd_optional.hpp
 	"DD_Tags.hpp"
 	"DD_ValueTypeNested.hpp"
 	"DD_IsSame.hpp"
-	"DD_IsLvalueReference.hpp"
-	"DD_IsRvalueReference.hpp"
 	"DD_IsTriviallyCopyable.hpp"
-	"DD_IsTriviallyMoveable.hpp"
 	"DD_Decay.hpp"
 	"DD_Comparable.hpp"
 	"DD_AccessDenied.hpp"
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
-	"DD_SizeTrait.hpp"
+	"DD_SingleStorage.hpp"
 
 1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_istriviallycopyable.hpp
 	"DD_IsTriviallyCopyConstructible.hpp"
@@ -1696,4 +1695,19 @@
 
 1451925981 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
 	"DD_StrongPointer.hpp"
+
+1451929921 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_AlignmentOf.hpp"
+	"DD_AlignedStorage.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
+
+1451929759 d:\develop\repositories\libddcpp\src\standard\bits\dd_alignmentof.hpp
+	<type_traits>
+	"DD_IntegralConstant.hpp"
+
+1451929833 d:\develop\repositories\libddcpp\src\standard\bits\dd_alignedstorage.hpp
+	<type_traits>
+	"DD_global_definitions.hpp"
 

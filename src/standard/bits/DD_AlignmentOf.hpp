@@ -18,7 +18,7 @@
 
 DD_DETAIL_BEGIN_
 template <typename ObjectT_>
-struct AlignmentOf : StdIntegralConstant<AlignmentType, std::alignment_of<ObjectT_>::value> {
+struct AlignmentOf : StdIntegralConstant<std::alignment_of<ObjectT_>> {
 };
 
 

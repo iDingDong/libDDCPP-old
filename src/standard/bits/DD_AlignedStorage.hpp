@@ -5,7 +5,7 @@
 
 
 #	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::AlignmentStorage'.
+#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::AlignedStorage'.
 
 
 
@@ -20,9 +20,9 @@ DD_DETAIL_BEGIN_
 template <SizeType size_c_, AlignmentType alignment_c_>
 struct AlignedStorage {
 #	if __cplusplus >= 201402L
-	using Type = std::alignment_storage_t<size_c_, alignment_c_>;
+	using Type = std::aligned_storage_t<size_c_, alignment_c_>;
 #	else
-	using Type = typename std::alignment_storage<size_c_, alignment_c_>::type;
+	using Type = typename std::aligned_storage<size_c_, alignment_c_>::type;
 #	endif
 
 
@@ -30,7 +30,8 @@ struct AlignedStorage {
 
 
 
-DD_TRAIT_MODIFIER(AlignedStorage);
+template <SizeType size_c_, AlignmentType alignment_c_>
+using AlignedStorageType = typename AlignedStorage<size_c_, alignment_c_>::Type;
 
 
 
