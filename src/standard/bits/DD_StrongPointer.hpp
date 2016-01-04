@@ -278,6 +278,14 @@ struct StrongPointer<void> {
 	}
 
 	public:
+	template <typename ValueT__>
+	StrongPointer(ValueT__* pointer_) : m_manager_pointer_(
+		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_)
+	) {
+		get_manager_pointer_()->strongly_referred_();
+	}
+
+	protected:
 	StrongPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
 		get_manager_pointer_()->strongly_referred_();
 	}
@@ -289,7 +297,7 @@ struct StrongPointer<void> {
 	}
 
 
-	protected:
+	private:
 	static ManagerPointerType get_nil_reference_manager_() DD_NOEXCEPT {
 		return ManagerType::get_nil_reference_manager_();
 	}
@@ -355,6 +363,35 @@ struct StrongPointer<void> {
 		swap(origin_);
 	}
 #	endif
+
+
+	private:
+	template <typename AllocatorT__, typename DeleterT__, typename ValueT__>
+	static ManagerPointerType create_manager_(AllocatorT__ allocator___, DeleterT__ const& deleter___, ValueT__* pointer_) {
+		if (pointer_) {
+			ReferenceManager_<
+				ValueT__, DeleterT__, Deleter<AllocatorT__>
+			>* result_ = static_cast<ReferenceManager_<
+				ValueT__, DeleterT__, Deleter<AllocatorT__>
+			>*>(allocator___.AllocatorT__::Basic::allocate(
+				sizeof(ReferenceManager_<ValueT__, DeleterT__, Deleter<AllocatorT__>>)
+			));
+			try {
+#	if __cplusplus >= 201103L
+				::DD::construct(result_, deleter___, Deleter<AllocatorT__>(allocator___), pointer_);
+#	else
+				new (result_) ReferenceManager_<
+					ValueT__, UniversalDeleter, Deleter<AllocatorT__>
+				>(deleter___, Deleter<AllocatorT__>(allocator___), pointer_);
+#	endif
+			} catch (...) {
+				allocator___.AllocatorT__::Basic::deallocate(result_, sizeof(*result_));
+				throw;
+			}
+			return result_;
+		}
+		return get_nil_reference_manager_();
+	}
 
 
 	private:
@@ -428,9 +465,7 @@ struct StrongPointer : StrongPointer<void> {
 #	endif
 
 	public:
-	StrongPointer(PointerType pointer_) : SuperType(
-		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_)
-	) {
+	StrongPointer(PointerType pointer_) : SuperType(pointer_) {
 	}
 
 	private:
@@ -482,35 +517,6 @@ struct StrongPointer : StrongPointer<void> {
 		swap(temp_);
 	}
 #	endif
-
-
-	private:
-	template <typename AllocatorT__, typename DeleterT__>
-	static ManagerPointerType create_manager_(AllocatorT__ allocator___, DeleterT__ const& deleter___, PointerType pointer_) {
-		if (pointer_) {
-			ReferenceManager_<
-				ValueType, DeleterT__, Deleter<AllocatorT__>
-			>* result_ = static_cast<ReferenceManager_<
-				ValueType, DeleterT__, Deleter<AllocatorT__>
-			>*>(allocator___.AllocatorT__::Basic::allocate(
-				sizeof(ReferenceManager_<ValueType, DeleterT__, Deleter<AllocatorT__>>)
-			));
-			try {
-#	if __cplusplus >= 201103L
-				::DD::construct(result_, deleter___, Deleter<AllocatorT__>(allocator___), pointer_);
-#	else
-				new (result_) ReferenceManager_<
-					ValueType, UniversalDeleter, Deleter<AllocatorT__>
-				>(deleter___, Deleter<AllocatorT__>(allocator___), pointer_);
-#	endif
-			} catch (...) {
-				allocator___.AllocatorT__::Basic::deallocate(result_, sizeof(*result_));
-				throw;
-			}
-			return result_;
-		}
-		return get_nil_reference_manager_();
-	}
 
 
 #	if __cplusplus >= 201103L

@@ -61,7 +61,7 @@ struct WeakPointer<void> {
 	}
 
 
-	protected:
+	private:
 	static ManagerPointerType get_nil_reference_manager_() DD_NOEXCEPT {
 		return ManagerType::get_nil_reference_manager_();
 	}
