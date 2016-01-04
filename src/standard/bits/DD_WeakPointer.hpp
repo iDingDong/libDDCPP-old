@@ -27,30 +27,30 @@ struct WeakPointer<void> {
 
 
 	private:
-	ManagerPointerType m_pointer_ DD_IN_CLASS_INITIALIZE(get_nil_reference_manager_());
+	ManagerPointerType m_manager_pointer_ DD_IN_CLASS_INITIALIZE(get_nil_reference_manager_());
 
 
 	public:
 #	if __cplusplus >= 201103L
 	constexpr WeakPointer() = default;
 #	else
-	WeakPointer() throw() : m_pointer_(get_nil_reference_manager_()) {
+	WeakPointer() throw() : m_manager_pointer_(get_nil_reference_manager_()) {
 	}
 #	endif
 
 
 	public:
-	WeakPointer(ThisType const& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
+	WeakPointer(ThisType const& origin_) DD_NOEXCEPT : m_manager_pointer_(origin_.get_manager_pointer_()) {
 		get_manager_pointer_()->weakly_referred_();
 	}
 
 	public:
-	WeakPointer(ThisType&& origin_) DD_NOEXCEPT : m_pointer_(origin_.get_manager_pointer_()) {
-		origin_.m_pointer_ = get_nil_reference_manager_();
+	WeakPointer(ThisType&& origin_) DD_NOEXCEPT : m_manager_pointer_(origin_.get_manager_pointer_()) {
+		origin_.m_manager_pointer_ = get_nil_reference_manager_();
 	}
 
 	public:
-	WeakPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_pointer_(manager_pointer_) {
+	WeakPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
 		get_manager_pointer_()->weakly_referred_();
 	}
 
@@ -69,7 +69,7 @@ struct WeakPointer<void> {
 
 	protected:
 	ManagerPointerType get_manager_pointer_() const DD_NOEXCEPT {
-		return m_pointer_;
+		return m_manager_pointer_;
 	}
 
 
@@ -99,7 +99,7 @@ struct WeakPointer<void> {
 
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
-		::DD::swap(m_pointer_, other_.m_pointer_);
+		::DD::swap(m_manager_pointer_, other_.m_manager_pointer_);
 	}
 
 
