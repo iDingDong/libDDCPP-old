@@ -267,4 +267,34 @@ void test_memory() {
 			throw "'DD::StrongPointer' test failed.";
 		}
 	}
+
+	{
+		DD::WeakPointer<Test> wp;
+		{
+			DD::StrongPointer<Test> sp_1(new Test());
+			wp = sp_1;
+			if (
+				wp.get_strong_reference_count() != 1 ||
+				wp.get_weak_reference_count() != 1 ||
+				Test::count != 1
+			) {
+				throw "'DD::WeakPointer' test failed.";
+			}
+			DD::StrongPointer<Test> sp_2 = wp.lock();
+			if (
+				wp.get_strong_reference_count() != 2 ||
+				wp.get_weak_reference_count() != 1 ||
+				Test::count != 1
+			) {
+				throw "'DD::WeakPointer' test failed.";
+			}
+		}
+		if (
+			!wp.is_expired() ||
+			wp.get_weak_reference_count() != 1 ||
+			Test::count != 0
+		) {
+			throw "'DD::WeakPointer' test failed.";
+		}
+	}
 }
