@@ -180,6 +180,7 @@ struct WeakPointer : WeakPointer<void> {
 	public:
 	WeakPointer(ThisType&& origin_) = default;
 #	else
+	public:
 	WeakPointer() throw() : SuperType(get_nil_reference_manager_()) {
 	}
 #	endif
@@ -260,14 +261,6 @@ struct WeakPointer : WeakPointer<void> {
 #	endif
 
 
-#	if __cplusplus >= 201103L
-	public:
-	explicit operator ValidityType() const DD_NOEXCEPT {
-		return is_valid();
-	}
-
-
-#	endif
 };
 
 

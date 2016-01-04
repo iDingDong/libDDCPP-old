@@ -460,6 +460,7 @@ struct StrongPointer : StrongPointer<void> {
 	public:
 	StrongPointer(ThisType&& origin_) = default;
 #	else
+	public:
 	StrongPointer() throw() : SuperType(get_nil_reference_manager_()) {
 	}
 #	endif
@@ -556,14 +557,6 @@ struct StrongPointer : StrongPointer<void> {
 	}
 
 
-#	if __cplusplus >= 201103L
-	public:
-	explicit constexpr operator ValidityType() const DD_NOEXCEPT {
-		return is_valid();
-	}
-
-
-#	endif
 };
 
 
