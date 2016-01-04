@@ -11,17 +11,33 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
+inline GlobalPointerType get_pointer(GlobalPointerType pointer__) DD_NOEXCEPT {
+	return pointer__;
+}
+
+
 template <typename PointerT_>
 #	if __cplusplus >= 201402L
-inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT {
+inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT_AS(::DD::address_of(*pointer__)) {
 #	elif __cplusplus >= 201103L
-inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT -> decltype(address_of(*pointer__)) {
+inline auto DD_CONSTEXPR get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT_AS(
+	::DD::address_of(*pointer__)
+) -> decltype(address_of(*pointer__)) {
 #	else
 inline typename IteratorPointer<PointerT_>::Type get_pointer(PointerT_ const& pointer__) DD_NOEXCEPT {
 #	endif
-	return address_of(*pointer__);
+	return ::DD::address_of(*pointer__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::get_pointer;
 
 
 
