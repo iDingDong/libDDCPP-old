@@ -29,14 +29,7 @@ template <>
 struct List_<void> {
 	protected:
 	DD_ALIAS(ThisType, List_<void>);
-	DD_ALIAS(ValueType, void);
-
-	protected:
-	DD_ALIAS(ValueConstType, void);
-	DD_ALIAS(ReferenceType, void);
-	DD_ALIAS(ConstReferenceType, void);
-	DD_ALIAS(PointerType, void);
-	DD_ALIAS(ConstPointerType, void);
+	DD_VALUE_TYPE_NESTED(void)
 
 	protected:
 	DD_ALIAS(SizeType, ::DD::SizeType);

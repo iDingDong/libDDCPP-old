@@ -802,7 +802,7 @@
 	"DD_destroy.hpp"
 	"DD_dereference.hpp"
 
-1451798961 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1452009074 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
 	<iostream>
@@ -1002,7 +1002,7 @@
 	<type_traits>
 	"DD_IntegralConstant.hpp"
 
-1452007739 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
+1452008499 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
 	"DD_AddConst.hpp"
 	"DD_AddLvalueReference.hpp"
 	"DD_AddPointer.hpp"
@@ -1187,7 +1187,7 @@
 	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1452009002 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1497,8 +1497,10 @@
 1449939512 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
 	"DD_Range.hpp"
 
-1452007681 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
-	"DD_global_definitions.hpp"
+1452008382 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
+	"DD_AddConst.hpp"
+	"DD_AddLvalueReference.hpp"
+	"DD_AddPointer.hpp"
 
 1451054451 d:\develop\repositories\libddcpp\src\standard\bits\dd_batchrange.hpp
 	"DD_ValueTypeNested.hpp"
@@ -1611,7 +1613,7 @@
 	"DD_NeedInstance.hpp"
 	"DD_get_instance.hpp"
 
-1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+1452009051 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
 	"DD_InitializerList.hpp"
 	"DD_Allocator.hpp"
 	"DD_BatchRange.hpp"
@@ -1679,7 +1681,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1451984914 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1452008929 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
@@ -1693,7 +1695,7 @@
 1451965132 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
 	"DD_global_definitions.hpp"
 
-1451981563 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
+1452008899 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
 	"DD_StrongPointer.hpp"
 
 1451984894 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
@@ -1712,5 +1714,9 @@
 
 1451929833 d:\develop\repositories\libddcpp\src\standard\bits\dd_alignedstorage.hpp
 	<type_traits>
+	"DD_global_definitions.hpp"
+
+1452008618 d:\develop\repositories\libddcpp\src\standard\bits\dd_addlvaluereference.hpp
+	"DD_IsReferable.hpp"
 	"DD_global_definitions.hpp"
 

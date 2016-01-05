@@ -13,14 +13,7 @@ template <>
 struct WeakPointer<void> {
 	public:
 	DD_ALIAS(ThisType, WeakPointer<void>);
-	DD_ALIAS(ValueType, void);
-
-	public:
-	DD_ALIAS(ValueConstType, void);
-	DD_ALIAS(ReferenceType, void);
-	DD_ALIAS(ConstReferenceType, void);
-	DD_ALIAS(PointerType, void*);
-	DD_ALIAS(ConstPointerType, void*);
+	DD_VALUE_TYPE_NESTED(void);
 
 	public:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);

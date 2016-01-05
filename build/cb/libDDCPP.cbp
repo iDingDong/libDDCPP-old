@@ -47,6 +47,7 @@
 		<Unit filename="../../src/standard/bits/DD_AccessDenied.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddCV.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddConst.hpp" />
+		<Unit filename="../../src/standard/bits/DD_AddLvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddRvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddVolatile.hpp" />

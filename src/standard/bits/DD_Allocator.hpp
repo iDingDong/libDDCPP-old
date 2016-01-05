@@ -29,14 +29,9 @@ template <>
 class Allocator<void> {
 	public:
 	DD_ALIAS(ThisType, Allocator<void>);
-	DD_ALIAS(ValueType, void);
+	DD_VALUE_TYPE_NESTED(void)
 
 	public:
-	DD_ALIAS(ValueConstType, void);
-	DD_ALIAS(ReferenceType, void);
-	DD_ALIAS(ConstReferenceType, void);
-	DD_ALIAS(PointerType, ValueType*);
-	DD_ALIAS(ConstPointerType, ValueConstType*);
 	DD_ALIAS(SizeType, DD::SizeType);
 	DD_ALIAS(LengthType, SizeType);
 
