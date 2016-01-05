@@ -41,6 +41,15 @@ struct SharedPointer : StrongPointer<void> {
 	}
 
 	public:
+	SharedPointer(StrongPointer<ValueType> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
+	}
+
+	public:
+	template <typename ValueT__>
+	explicit SharedPointer(StrongPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
+	}
+
+	public:
 	template <typename ValueT__>
 	explicit SharedPointer(SharedPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
 	}
