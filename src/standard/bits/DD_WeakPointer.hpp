@@ -32,7 +32,7 @@ struct WeakPointer<void> {
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr WeakPointer() = default;
+	WeakPointer() = default;
 #	else
 	WeakPointer() throw() : m_manager_pointer_(get_nil_reference_manager_()) {
 	}
@@ -172,7 +172,7 @@ struct WeakPointer : WeakPointer<void> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr WeakPointer() = default;
+	WeakPointer() = default;
 
 	public:
 	WeakPointer(ThisType const& origin_) = default;

@@ -373,7 +373,7 @@ struct StrongPointer<void> {
 
 	public:
 #	if __cplusplus >= 201103L
-	constexpr StrongPointer() = default;
+	StrongPointer() = default;
 #	else
 	StrongPointer() throw() : m_manager_pointer_(get_nil_reference_manager_()) {
 	}
@@ -581,7 +581,7 @@ struct StrongPointer : StrongPointer<void> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr StrongPointer() = default;
+	StrongPointer() = default;
 
 	public:
 	StrongPointer(ThisType const& origin_) = default;
@@ -727,6 +727,11 @@ StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__) {
 	return StrongPointer<ValueT_>(new ValueT_(argument__));
 }
 #	endif
+
+
+
+template <typename ValueT_>
+ValidityType operator ==
 
 
 

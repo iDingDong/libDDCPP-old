@@ -23,7 +23,7 @@ struct SharedPointer : StrongPointer<void> {
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr SharedPointer() = default;
+	SharedPointer() = default;
 
 	public:
 	SharedPointer(ThisType const& origin_) = default;
@@ -37,17 +37,17 @@ struct SharedPointer : StrongPointer<void> {
 #	endif
 
 	public:
-	template <typename ValueT__>
-	SharedPointer(SharedPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
+	SharedPointer(PointerType pointer_) : SuperType(pointer_), m_pointer_(pointer_) {
 	}
 
-#	if __cplusplus >= 201103L
-
-
-#	endif
 	public:
 	template <typename ValueT__>
-	SharedPointer(ValueT__* pointer_) : SuperType(pointer_), m_pointer_(pointer_) {
+	explicit SharedPointer(SharedPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
+	}
+
+	public:
+	template <typename ValueT__>
+	explicit SharedPointer(ValueT__* pointer_) : SuperType(pointer_), m_pointer_(pointer_) {
 	}
 
 
@@ -79,14 +79,14 @@ struct SharedPointer : StrongPointer<void> {
 	public:
 	template <typename ObjectT_>
 	ProcessType reset(ObjectT_&& object__) noexcept(noexcept(ThisType(::DD::forward<ObjectT_>(object__)))) {
-		ThisType temp_(::DD::forward<ObjectT_>(object__));
+		ThisType temp_ = ::DD::forward<ObjectT_>(object__);
 		swap(temp_);
 	}
 #	else
 	public:
 	template <typename ObjectT_>
 	ProcessType reset(ObjectT_ const& object__) {
-		ThisType temp_(object__);
+		ThisType temp_ = object__;
 		swap(temp_);
 	}
 #	endif
