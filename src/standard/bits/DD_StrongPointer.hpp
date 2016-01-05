@@ -463,6 +463,19 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 
 
 	public:
+	ValidityType equal(ThisType const& other_) const DD_NOEXCEPT {
+		return get_manager_pointer_() == other_.get_manager_pointer_();
+	}
+
+
+	public:
+	public:
+	ValidityType less(ThisType const& other_) const DD_NOEXCEPT {
+		return get_manager_pointer_() < other_.get_manager_pointer_();
+	}
+
+
+	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
 		::DD::swap(m_manager_pointer_, other_.m_manager_pointer_);
 	}
@@ -619,6 +632,18 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 
 
 	public:
+	ValidityType equal(ThisType const& other_) const DD_NOEXCEPT {
+		return SuperType::equal(other_);
+	}
+
+
+	public:
+	ValidityType less(ThisType const& other_) const DD_NOEXCEPT {
+		return SuperType::less(other_);
+	}
+
+
+	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
 		SuperType::swap(other_);
 	}
@@ -737,7 +762,7 @@ template <typename ValueT_>
 inline ValidityType operator ==(
 	StrongPointer<ValueT_> const& strong_pointer_1_, StrongPointer<ValueT_> const& strong_pointer_2_
 ) DD_NOEXCEPT {
-	return strong_pointer_1_.get_global_pointer() == strong_pointer_2_.get_global_pointer();
+	return strong_pointer_1_.equal(strong_pointer_2_);
 }
 
 
@@ -745,7 +770,7 @@ template <typename ValueT_>
 inline ValidityType operator <(
 	StrongPointer<ValueT_> const& strong_pointer_1_, StrongPointer<ValueT_> const& strong_pointer_2_
 ) DD_NOEXCEPT {
-	return strong_pointer_1_.get_global_pointer() < strong_pointer_2_.get_global_pointer();
+	return strong_pointer_1_.less(strong_pointer_2_);
 }
 
 

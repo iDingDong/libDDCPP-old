@@ -111,6 +111,18 @@ struct SharedPointer : Comparable<SharedPointer<ValueT_> >, StrongPointer<void> 
 
 
 	public:
+	ValidityType equal(ThisType const& other_) const DD_NOEXCEPT {
+		return SuperType::equal(other_);
+	}
+
+
+	public:
+	ValidityType less(ThisType const& other_) const DD_NOEXCEPT {
+		return SuperType::less(other_);
+	}
+
+
+	public:
 	ProcessType swap(ThisType& other_) {
 		SuperType::swap(other_);
 		::DD::swap(m_pointer_, other_.m_pointer_);
@@ -211,14 +223,14 @@ template <typename ValueT_>
 inline ValidityType operator ==(
 	SharedPointer<ValueT_> const& shared_pointer_1_, SharedPointer<ValueT_> const& shared_pointer_2_
 ) DD_NOEXCEPT {
-	return shared_pointer_1_.get_global_pointer() == shared_pointer_2_.get_global_pointer();
+	return shared_pointer_1_.equal(shared_pointer_2_);
 }
 
 template <typename ValueT_>
 inline ValidityType operator <(
 	SharedPointer<ValueT_> const& shared_pointer_1_, SharedPointer<ValueT_> const& shared_pointer_2_
 ) DD_NOEXCEPT {
-	return shared_pointer_1_.get_global_pointer() < shared_pointer_2_.get_global_pointer();
+	return shared_pointer_1_.less(shared_pointer_2_);
 }
 
 

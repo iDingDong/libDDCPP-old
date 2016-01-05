@@ -180,6 +180,7 @@
 		<Unit filename="../../src/standard/bits/DD_NeedInstance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NestedTypeCheck.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ObserverPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Optional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pair.hpp" />
