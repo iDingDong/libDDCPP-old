@@ -1678,7 +1678,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1451884297 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1451969699 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_address_of.hpp"
 	"DD_Deleter.hpp"
@@ -1686,8 +1686,9 @@
 	"DD_construct.hpp"
 	"DD_ReferenceCounter.hpp"
 	"DD_Pair.hpp"
+	"DD_SingleStorage.hpp"
 
-1451841148 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
+1451965132 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
 	"DD_global_definitions.hpp"
 
 1451884297 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
@@ -1696,7 +1697,7 @@
 1451925981 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
 	"DD_StrongPointer.hpp"
 
-1451929921 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp
+1451969716 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_AlignmentOf.hpp"
 	"DD_AlignedStorage.hpp"

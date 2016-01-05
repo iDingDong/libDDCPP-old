@@ -49,12 +49,12 @@ struct SingleStorage {
 
 	public:
 	PointerType get_pointer() noexcept {
-		static_cast<PointerType>(::DD::address_of(m_storage_));
+		return reinterpret_cast<PointerType>(::DD::address_of(m_storage_));
 	}
 
 	public:
 	ConstPointerType get_pointer() const noexcept {
-		static_cast<ConstPointerType>(::DD::address_of(m_storage_));
+		return reinterpret_cast<ConstPointerType>(::DD::address_of(m_storage_));
 	}
 
 

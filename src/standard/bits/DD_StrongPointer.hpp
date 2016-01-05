@@ -11,6 +11,7 @@
 #	include "DD_construct.hpp"
 #	include "DD_ReferenceCounter.hpp"
 #	include "DD_Pair.hpp"
+#	include "DD_SingleStorage.hpp"
 
 
 
@@ -213,7 +214,7 @@ struct ReferenceManager_ :
 
 
 	private:
-	ProcessType destroy_target_() DD_NOEXCEPT {
+	ProcessType destroy_target_() const DD_NOEXCEPT {
 		::DD::destroy(get_pointer_(), DestroyAgent::get_instance());
 	}
 
@@ -232,6 +233,118 @@ struct ReferenceManager_ :
 
 
 
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename DeleterT_>
+struct AggregateReferenceManager_ : protected Agent<DeleterT_>, ReferenceManagerBase_, protected ReferenceCounter {
+	private:
+	using DestroyAgent = Agent<DeleterT_>;
+	using SuperType = ReferenceManagerBase_;
+	using CounterType = ReferenceCounter;
+	using ThisType = AggregateReferenceManager_<ValueT_, DeleterT_>;
+	DD_VALUE_TYPE_NESTED(ValueT_)
+	using DeleterType = DeleterT_;
+
+
+	private:
+	SingleStorage<ValueType> mutable m_storage_;
+
+
+	private:
+	DD_DELETE_ALL_CONSTRUCTORS(AggregateReferenceManager_)
+
+
+	public:
+	template <typename... ArgumentsT__>
+	AggregateReferenceManager_(DeleterType const& deleter_, ArgumentsT__&&... arguments___) noexcept(
+		noexcept(DestroyAgent(deleter_)) && noexcept(m_storage_.construct(::DD::forward<ArgumentsT__>(arguments___)...))
+	) : DestroyAgent(deleter_) {
+		m_storage_.construct(::DD::forward<ArgumentsT__>(arguments___)...);
+	}
+
+
+	public:
+	~AggregateReferenceManager_() override = default;
+
+
+	private:
+	PointerType get_pointer_() const noexcept {
+		return has_strong_reference() ? m_storage_.get_pointer() : PointerType();
+	}
+
+
+	private:
+	GlobalPointerType get_global_pointer_() const noexcept override {
+		return get_pointer_();
+	}
+
+
+	private:
+	LengthType get_strong_reference_count_() const noexcept override {
+		return get_strong_reference_count();
+	}
+
+
+	private:
+	LengthType get_weak_reference_count_() const noexcept override {
+		return get_weak_reference_count();
+	}
+
+
+	private:
+	ProcessType strongly_referred_() noexcept override {
+		strongly_referred();
+	}
+
+
+	private:
+	ProcessType weakly_referred_() noexcept override {
+		weakly_referred();
+	}
+
+
+	private:
+	ProcessType strongly_released_() noexcept override {
+		strongly_released();
+		if (is_expired()) {
+			destruct_target_();
+			if (!has_weak_reference()) {
+				destroy_this_();
+			}
+		}
+	}
+
+
+	private:
+	ProcessType weakly_released_() noexcept override {
+		if (is_expired() && is_unique_weak_reference()) {
+			destroy_this_();
+		} else {
+			weakly_released();
+		}
+	}
+
+
+	private:
+	ProcessType destruct_target_() const noexcept {
+		m_storage_.destruct();
+	}
+
+
+	private:
+	ProcessType destroy_this_() noexcept {
+		::DD::destroy(this, DestroyAgent::get_instance());
+	}
+
+
+	private:
+	DD_DELETE_ALL_ASSIGNMENTS(AggregateReferenceManager_)
+
+
+};
+
+
+
+#	endif
 template <typename ValueT_>
 struct StrongPointer;
 
@@ -373,9 +486,7 @@ struct StrongPointer<void> {
 				ValueT__, DeleterT__, Deleter<AllocatorT__>
 			>* result_ = static_cast<ReferenceManager_<
 				ValueT__, DeleterT__, Deleter<AllocatorT__>
-			>*>(allocator___.AllocatorT__::Basic::allocate(
-				sizeof(ReferenceManager_<ValueT__, DeleterT__, Deleter<AllocatorT__>>)
-			));
+			>*>(allocator___.AllocatorT__::Basic::allocate(sizeof(*result_)));
 			try {
 #	if __cplusplus >= 201103L
 				::DD::construct(result_, deleter___, Deleter<AllocatorT__>(allocator___), pointer_);
@@ -432,6 +543,19 @@ struct WeakPointer;
 
 
 
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename... ArgumentsT_>
+StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__);
+#	else
+template <typename ValueT_>
+StrongPointer<ValueT_> make_strong();
+
+template <typename ValueT_, typename ArgumentT_>
+StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__);
+#	endif
+
+
+
 template <typename ValueT_>
 struct StrongPointer : StrongPointer<void> {
 	public:
@@ -448,6 +572,11 @@ struct StrongPointer : StrongPointer<void> {
 
 	public:
 	friend WeakType;
+#	if __cplusplus >= 201103L
+	template <typename ValueT__, typename... ArgumentsT__>
+	friend StrongPointer<ValueT__> make_strong(ArgumentsT__&&... arguments__);
+#	endif
+
 
 
 #	if __cplusplus >= 201103L
@@ -562,9 +691,30 @@ struct StrongPointer : StrongPointer<void> {
 
 
 #	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_, typename... ArgumentsT_>
+AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggregate_reference_manager_(
+	AllocatorT_ allocator__, ArgumentsT_&&... arguments__
+) {
+	AggregateReferenceManager_<
+		ValueT_, Deleter<AllocatorT_>
+	>* result_ = static_cast<AggregateReferenceManager_<
+		ValueT_, Deleter<AllocatorT_>
+	>*>(allocator__.AllocatorT_::Basic::allocate(sizeof(*result_)));
+	try {
+		::DD::construct(result_, Deleter<AllocatorT_>(allocator__), ::DD::forward<ArgumentsT_>(arguments__)...);
+	} catch (...) {
+		allocator__.AllocatorT_::Basic::deallocate(result_, sizeof(*result_));
+		throw;
+	}
+	return result_;
+}
+
+
 template <typename ValueT_, typename... ArgumentsT_>
 StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__) {
-	return StrongPointer<ValueT_>(new ValueT_(::DD::forward<ArgumentsT_>(arguments__)...));
+	return StrongPointer<ValueT_>(create_aggregate_reference_manager_<ValueT_>(
+		(DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), ::DD::forward<ArgumentsT_>(arguments__)...
+	));
 }
 #	else
 template <typename ValueT_>
