@@ -891,7 +891,7 @@
 1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1451881476 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1451984412 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	"standard/DDMemory.hpp"
@@ -1678,7 +1678,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1451981849 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1451984412 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
@@ -1695,7 +1695,7 @@
 1451981563 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
 	"DD_StrongPointer.hpp"
 
-1451982884 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
+1451984695 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
 	"DD_StrongPointer.hpp"
 
 1451969716 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp

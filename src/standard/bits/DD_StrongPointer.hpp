@@ -427,7 +427,7 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	}
 
 
-	protected:
+	public:
 	PointerType get_global_pointer() const DD_NOEXCEPT {
 		return get_manager_pointer_()->get_global_pointer_();
 	}
@@ -550,11 +550,11 @@ struct WeakPointer;
 
 #	if __cplusplus >= 201103L
 template <typename ValueT_, typename... ArgumentsT_>
-StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__);
+inline StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__);
+
+
+
 #	endif
-
-
-
 template <typename ValueT_>
 #	if __cplusplus >= 201103L
 struct StrongPointer : Comparable<StrongPointer<ValueT_>>, StrongPointer<void> {
@@ -695,7 +695,7 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 
 #	if __cplusplus >= 201103L
 template <typename ValueT_, typename AllocatorT_, typename... ArgumentsT_>
-AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggregate_reference_manager_(
+inline AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggregate_reference_manager_(
 	AllocatorT_ allocator__, ArgumentsT_&&... arguments__
 ) {
 	AggregateReferenceManager_<
@@ -714,19 +714,19 @@ AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggregate_refe
 
 
 template <typename ValueT_, typename... ArgumentsT_>
-StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__) {
+inline StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__) {
 	return StrongPointer<ValueT_>(create_aggregate_reference_manager_<ValueT_>(
 		(DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), ::DD::forward<ArgumentsT_>(arguments__)...
 	));
 }
 #	else
 template <typename ValueT_>
-StrongPointer<ValueT_> make_strong() {
+inline StrongPointer<ValueT_> make_strong() {
 	return StrongPointer<ValueT_>(new ValueT_());
 }
 
 template <typename ValueT_, typename ArgumentT_>
-StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__) {
+inline StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__) {
 	return StrongPointer<ValueT_>(new ValueT_(argument__));
 }
 #	endif

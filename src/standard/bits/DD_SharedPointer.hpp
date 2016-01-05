@@ -10,7 +10,11 @@
 
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
-struct SharedPointer : StrongPointer<void> {
+#	if __cplusplus >= 201103L
+struct SharedPointer : Comparable<SharedPointer<ValueT_>>, StrongPointer<void> {
+#	else
+struct SharedPointer : Comparable<SharedPointer<ValueT_> >, StrongPointer<void> {
+#	endif
 	public:
 	DD_ALIAS(SuperType, StrongPointer<void>);
 	DD_ALIAS(ThisType, SharedPointer<ValueT_>);
@@ -44,22 +48,54 @@ struct SharedPointer : StrongPointer<void> {
 	SharedPointer(StrongPointer<ValueType> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
 	}
 
+#	if __cplusplus >= 201103L
+	public:
+	SharedPointer(StrongPointer<ValueType>&& origin_) noexcept :
+		SuperType(::DD::move(origin_)),
+		m_pointer_(static_cast<PointerType>(SuperType::get_global_pointer()))
+	{
+	}
+
+#	endif
 	public:
 	template <typename ValueT__>
 	explicit SharedPointer(StrongPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
 	}
 
+#	if __cplusplus >= 201103L
+	public:
+	template <typename ValueT__>
+	explicit SharedPointer(StrongPointer<ValueT__>&& origin_) noexcept :
+		SuperType(::DD::move(origin_)),
+		m_pointer_(static_cast<PointerType>(SuperType::get_global_pointer()))
+	{
+	}
+
+#	endif
 	public:
 	template <typename ValueT__>
 	explicit SharedPointer(SharedPointer<ValueT__> const& origin_) : SuperType(origin_), m_pointer_(origin_.get_pointer()) {
 	}
 
+#	if __cplusplus >= 201103L
+	public:
+	template <typename ValueT__>
+	explicit SharedPointer(SharedPointer<ValueT__>&& origin_) noexcept : SuperType(::DD::move(origin_)), m_pointer_(origin_.get_pointer()) {
+	}
+
+#	endif
 	public:
 	template <typename ValueT__>
 	explicit SharedPointer(ValueT__* pointer_) : SuperType(pointer_), m_pointer_(pointer_) {
 	}
 
 
+#	if __cplusplus >= 201103L
+	public:
+	~SharedPointer() = default;
+
+
+#	endif
 	public:
 	PointerType get_pointer() const DD_NOEXCEPT {
 		return m_pointer_;
@@ -67,7 +103,7 @@ struct SharedPointer : StrongPointer<void> {
 
 
 	public:
-	ProcessType swap(ThisType const& other_) {
+	ProcessType swap(ThisType& other_) {
 		SuperType::swap(other_);
 		::DD::swap(m_pointer_, other_.m_pointer_);
 	}
@@ -142,12 +178,51 @@ struct SharedPointer : StrongPointer<void> {
 
 
 
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename... ArgumentsT_>
+inline SharedPointer<ValueT_> make_shared(ArgumentsT_&&... arguments__) noexcept(
+	noexcept(SharedPointer<ValueT_>(::DD::make_strong<ValueT_>(::DD::forward<ArgumentsT_>(arguments__)...)))
+) {
+	return SharedPointer<ValueT_>(::DD::make_strong<ValueT_>(::DD::forward<ArgumentsT_>(arguments__)...));
+}
+#	else
+template <typename ValueT_>
+inline SharedPointer<ValueT_> make_shared() {
+	return SharedPointer<ValueT_>(::DD::make_strong<ValueT_>());
+}
+
+template <typename ValueT_, typename ArgumentT_>
+inline SharedPointer<ValueT_> make_shared(ArgumentT_ const& argument__) {
+	return SharedPointer<ValueT_>(::DD::make_strong<ValueT_>(argument__));
+}
+#	endif
+
+
+
+template <typename ValueT_>
+inline ValidityType operator ==(
+	SharedPointer<ValueT_> const& shared_pointer_1_, SharedPointer<ValueT_> const& shared_pointer_2_
+) DD_NOEXCEPT {
+	return shared_pointer_1_.get_global_pointer() == shared_pointer_2_.get_global_pointer();
+}
+
+template <typename ValueT_>
+inline ValidityType operator <(
+	SharedPointer<ValueT_> const& shared_pointer_1_, SharedPointer<ValueT_> const& shared_pointer_2_
+) DD_NOEXCEPT {
+	return shared_pointer_1_.get_global_pointer() < shared_pointer_2_.get_global_pointer();
+}
+
+
+
 DD_DETAIL_END_
 
 
 
 DD_BEGIN_
 using detail_::SharedPointer;
+
+using detail_::make_shared;
 
 
 

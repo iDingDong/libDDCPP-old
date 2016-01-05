@@ -250,6 +250,7 @@ void test_memory() {
 				auto stp_1 = DD::make_strong<Test>();
 				stp_0 = stp_1;
 				if (
+					stp_0 != stp_1 ||
 					stp_0.get_strong_reference_count() != 2 ||
 					stp_0->count != 1
 				) {
@@ -295,6 +296,38 @@ void test_memory() {
 			Test::count != 0
 		) {
 			throw "'DD::WeakPointer' test failed.";
+		}
+	}
+
+	{
+		{
+			DD::SharedPointer<Test> shp_0(new Test());
+			if (
+				shp_0.get_strong_reference_count() != 1 ||
+				shp_0->count != 1
+			) {
+				throw "'DD::SharedPointer' test failed.";
+			}
+			{
+				auto shp_1 = DD::make_shared<Test>();
+				shp_0 = shp_1;
+				if (
+					shp_0 != shp_1 ||
+					shp_0.get_strong_reference_count() != 2 ||
+					shp_0->count != 1
+				) {
+					throw "'DD::SharedPointer' test failed.";
+				}
+			}
+			if (
+				shp_0.get_strong_reference_count() != 1 ||
+				shp_0->count != 1
+			) {
+				throw "'DD::SharedPointer' test failed.";
+			}
+		}
+		if (Test::count != 0) {
+			throw "'DD::SharedPointer' test failed.";
 		}
 	}
 }
