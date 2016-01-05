@@ -10,6 +10,11 @@
 
 DD_DETAIL_BEGIN_
 template <typename ValueT_>
+struct ObserverPointer;
+
+
+
+template <typename ValueT_>
 #	if __cplusplus >= 201103L
 struct SharedPointer : Comparable<SharedPointer<ValueT_>>, StrongPointer<void> {
 #	else
@@ -19,6 +24,9 @@ struct SharedPointer : Comparable<SharedPointer<ValueT_> >, StrongPointer<void> 
 	DD_ALIAS(SuperType, StrongPointer<void>);
 	DD_ALIAS(ThisType, SharedPointer<ValueT_>);
 	DD_VALUE_TYPE_NESTED(ValueT_)
+
+	public:
+	DD_ALIAS(ObserverType, ObserverPointer<ValueType>);
 
 
 	private:

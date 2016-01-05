@@ -18,6 +18,9 @@ struct WeakPointer<void> {
 	public:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
 
+	public:
+	DD_ALIAS(StrongType, StrongPointer<ValueType>);
+
 
 	private:
 	ManagerPointerType m_manager_pointer_ DD_IN_CLASS_INITIALIZE(get_nil_reference_manager_());
@@ -43,7 +46,9 @@ struct WeakPointer<void> {
 	}
 
 	public:
-	WeakPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
+	WeakPointer(
+		StrongPointer<ValueType> const& strong_pointer_
+	) DD_NOEXCEPT : m_manager_pointer_(strong_pointer_.get_manager_pointer_()) {
 		get_manager_pointer_()->weakly_referred_();
 	}
 
@@ -87,6 +92,12 @@ struct WeakPointer<void> {
 	public:
 	ValidityType is_expired() const DD_NOEXCEPT {
 		return !is_valid();
+	}
+
+
+	public:
+	StrongType lock() const DD_NOEXCEPT {
+		return is_valid() ? StrongType(get_manager_pointer_()) : StrongType();
 	}
 
 
@@ -179,7 +190,7 @@ struct WeakPointer : WeakPointer<void> {
 #	endif
 
 	public:
-	WeakPointer(StrongType const& strong_pointer_) DD_NOEXCEPT : SuperType(strong_pointer_.get_manager_pointer_()) {
+	WeakPointer(StrongType const& strong_pointer_) DD_NOEXCEPT : SuperType(strong_pointer_) {
 	}
 
 

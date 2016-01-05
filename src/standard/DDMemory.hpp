@@ -12,7 +12,7 @@
 #	include "bits/DD_ParasiticPointer.hpp"
 #	include "bits/DD_IntrusivePointer.hpp"
 #	include "bits/DD_WeakPointer.hpp"
-#	include "bits/DD_SharedPointer.hpp"
+#	include "bits/DD_ObserverPointer.hpp"
 
 
 

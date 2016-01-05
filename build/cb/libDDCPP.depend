@@ -898,7 +898,7 @@
 1447210594 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1451925974 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1452010986 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Destroy.hpp"
@@ -907,7 +907,7 @@
 	"bits/DD_ParasiticPointer.hpp"
 	"bits/DD_IntrusivePointer.hpp"
 	"bits/DD_WeakPointer.hpp"
-	"bits/DD_SharedPointer.hpp"
+	"bits/DD_ObserverPointer.hpp"
 
 1451642152 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -1681,7 +1681,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1452008929 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1452010969 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
@@ -1695,10 +1695,10 @@
 1451965132 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
 	"DD_global_definitions.hpp"
 
-1452008899 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
+1452011160 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
 	"DD_StrongPointer.hpp"
 
-1451984894 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
+1452010969 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
 	"DD_StrongPointer.hpp"
 
 1451969716 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp
@@ -1719,4 +1719,8 @@
 1452008618 d:\develop\repositories\libddcpp\src\standard\bits\dd_addlvaluereference.hpp
 	"DD_IsReferable.hpp"
 	"DD_global_definitions.hpp"
+
+1452011175 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
+	"DD_WeakPointer.hpp"
+	"DD_SharedPointer.hpp"
 

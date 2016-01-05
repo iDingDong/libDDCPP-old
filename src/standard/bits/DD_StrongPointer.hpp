@@ -351,6 +351,11 @@ struct StrongPointer;
 
 
 
+template <typename ValueT_>
+struct WeakPointer;
+
+
+
 template <>
 #	if __cplusplus >= 201103L
 struct StrongPointer<void> : Comparable<StrongPointer<void>> {
@@ -362,7 +367,14 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	DD_VALUE_TYPE_NESTED(void)
 
 	public:
+	DD_ALIAS(WeakType, WeakPointer<ValueType>);
+
+	protected:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
+
+
+	public:
+	friend WeakType;
 
 
 	private:
@@ -533,11 +545,6 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 
 #	endif
 };
-
-
-
-template <typename ValueT_>
-struct WeakPointer;
 
 
 
