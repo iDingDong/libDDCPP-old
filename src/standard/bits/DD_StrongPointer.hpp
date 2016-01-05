@@ -5,6 +5,7 @@
 
 
 #	include "DD_SpecificTypeNested.hpp"
+#	include "DD_Comparable.hpp"
 #	include "DD_address_of.hpp"
 #	include "DD_Deleter.hpp"
 #	include "DD_Destroy.hpp"
@@ -351,7 +352,11 @@ struct StrongPointer;
 
 
 template <>
-struct StrongPointer<void> {
+#	if __cplusplus >= 201103L
+struct StrongPointer<void> : Comparable<StrongPointer<void>> {
+#	else
+struct StrongPointer<void> : Comparable<StrongPointer<void> > {
+#	endif
 	public:
 	DD_ALIAS(ThisType, StrongPointer<void>);
 	DD_ALIAS(ValueType, void);
@@ -546,18 +551,16 @@ struct WeakPointer;
 #	if __cplusplus >= 201103L
 template <typename ValueT_, typename... ArgumentsT_>
 StrongPointer<ValueT_> make_strong(ArgumentsT_&&... arguments__);
-#	else
-template <typename ValueT_>
-StrongPointer<ValueT_> make_strong();
-
-template <typename ValueT_, typename ArgumentT_>
-StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__);
 #	endif
 
 
 
 template <typename ValueT_>
-struct StrongPointer : StrongPointer<void> {
+#	if __cplusplus >= 201103L
+struct StrongPointer : Comparable<StrongPointer<ValueT_>>, StrongPointer<void> {
+#	else
+struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> {
+#	endif
 	public:
 	DD_ALIAS(SuperType, StrongPointer<void>);
 	DD_ALIAS(ThisType, StrongPointer<ValueT_>);
@@ -731,7 +734,19 @@ StrongPointer<ValueT_> make_strong(ArgumentT_ const& argument__) {
 
 
 template <typename ValueT_>
-ValidityType operator ==
+inline ValidityType operator ==(
+	StrongPointer<ValueT_> const& strong_pointer_1_, StrongPointer<ValueT_> const& strong_pointer_2_
+) DD_NOEXCEPT {
+	return strong_pointer_1_.get_global_pointer() == strong_pointer_2_.get_global_pointer();
+}
+
+
+template <typename ValueT_>
+inline ValidityType operator <(
+	StrongPointer<ValueT_> const& strong_pointer_1_, StrongPointer<ValueT_> const& strong_pointer_2_
+) DD_NOEXCEPT {
+	return strong_pointer_1_.get_global_pointer() < strong_pointer_2_.get_global_pointer();
+}
 
 
 
