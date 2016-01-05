@@ -876,8 +876,7 @@
 1444398915 d:\develop\repositories\libddcpp\src\standard\bits\dd_declare_value.hpp
 	"DD_AddRvalueReference.hpp"
 
-1450096426 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
-	<type_traits>
+1452007131 d:\develop\repositories\libddcpp\src\standard\bits\dd_addrvaluereference.hpp
 	"DD_IsReferable.hpp"
 
 1450096569 d:\develop\repositories\libddcpp\src\standard\bits\dd_isreferable.hpp
@@ -891,7 +890,7 @@
 1449715095 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1451984412 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1451984894 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	"standard/DDMemory.hpp"
@@ -1003,8 +1002,10 @@
 	<type_traits>
 	"DD_IntegralConstant.hpp"
 
-1450161632 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
-	"DD_global_definitions.hpp"
+1452007739 d:\develop\repositories\libddcpp\src\standard\bits\dd_valuetypenested.hpp
+	"DD_AddConst.hpp"
+	"DD_AddLvalueReference.hpp"
+	"DD_AddPointer.hpp"
 
 1444149044 d:\develop\repositories\libddcpp\src\standard\bits\dd_illogic.hpp
 	"DD_Exception.hpp"
@@ -1496,7 +1497,7 @@
 1449939512 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
 	"DD_Range.hpp"
 
-1451641190 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
+1452007681 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
 	"DD_global_definitions.hpp"
 
 1451054451 d:\develop\repositories\libddcpp\src\standard\bits\dd_batchrange.hpp
@@ -1678,7 +1679,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1451984412 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1451984914 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
@@ -1695,7 +1696,7 @@
 1451981563 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
 	"DD_StrongPointer.hpp"
 
-1451984695 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
+1451984894 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp
 	"DD_StrongPointer.hpp"
 
 1451969716 d:\develop\repositories\libddcpp\src\standard\bits\dd_singlestorage.hpp

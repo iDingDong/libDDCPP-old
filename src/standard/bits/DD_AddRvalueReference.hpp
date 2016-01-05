@@ -10,8 +10,6 @@
 
 
 #	endif
-#	include <type_traits>
-
 #	include "DD_IsReferable.hpp"
 
 
@@ -19,7 +17,7 @@
 DD_DETAIL_BEGIN_
 template <typename ObjectT_, ValidityType is_referenceable_c_>
 struct AddRvalueReference_ {
-	DD_ALIAS(Type, ObjectT_);
+	using Type = ObjectT_;
 
 
 };
@@ -28,7 +26,7 @@ struct AddRvalueReference_ {
 
 template <typename ObjectT_>
 struct AddRvalueReference_<ObjectT_, true> {
-	DD_ALIAS(Type, ObjectT_&&);
+	using Type = ObjectT_&&;
 
 
 };
@@ -37,7 +35,7 @@ struct AddRvalueReference_<ObjectT_, true> {
 
 template <typename ObjectT_>
 struct AddRvalueReference {
-	DD_ALIAS(Type, typename AddRvalueReference_<ObjectT_ DD_COMMA IsReferable<ObjectT_>::value>::Type);
+	using Type = typename AddRvalueReference_<ObjectT_ DD_COMMA IsReferable<ObjectT_>::value>::Type;
 
 
 };

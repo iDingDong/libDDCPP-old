@@ -4,7 +4,9 @@
 
 
 
-#	include "DD_global_definitions.hpp"
+#	include "DD_AddConst.hpp"
+#	include "DD_AddLvalueReference.hpp"
+#	include "DD_AddPointer.hpp"
 
 
 
@@ -22,20 +24,20 @@
 #	if __cplusplus >= 201103L
 #		define DD_VALUE_TYPE_NESTED(...)\
 			using ValueType = __VA_ARGS__;\
-			using ValueConstType = ValueType const;\
-			using ReferenceType = ValueType&;\
-			using ConstReferenceType = ValueConstType&;\
-			using PointerType = ValueType*;\
-			using ConstPointerType = ValueConstType*;\
+			using ValueConstType = AddConstType<ValueType>;\
+			using ReferenceType = AddLvalueReferenceType<ValueType>;\
+			using ConstReferenceType = AddLvalueReferenceType<ValueConstType>;\
+			using PointerType = AddPointerType<ValueType>;\
+			using ConstPointerType = AddPointerType<ValueConstType>;\
 			DD_VALUE_TYPE_NESTED_COMPAT_STL
 #	else
 #		define DD_VALUE_TYPE_NESTED(ARG_ValueType_)\
 			typedef ARG_ValueType_ ValueType;\
-			typedef ValueType const ValueConstType;\
-			typedef ValueType& ReferenceType;\
-			typedef ValueConstType& ConstReferenceType;\
-			typedef ValueType* PointerType;\
-			typedef ValueConstType* ConstPointerType\
+			typedef typename AddConst<ValueType>::Type ValueConstType;\
+			typedef typename AddLvalueReference<ValueType>::Type ReferenceType;\
+			typedef typename AddLvalueReference<ValueConstType>::Type ConstReferenceType;\
+			typedef typename AddPointer<ValueType>::Type PointerType;\
+			typedef typename AddPointer<ValueConstType>::Type ConstPointerType\
 			DD_VALUE_TYPE_NESTED_COMPAT_STL
 #	endif
 
