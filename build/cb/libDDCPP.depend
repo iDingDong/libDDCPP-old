@@ -19,7 +19,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1451802376 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1452054342 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -1681,7 +1681,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1452013016 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1452059582 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"
@@ -1695,7 +1695,7 @@
 1451965132 d:\develop\repositories\libddcpp\src\standard\bits\dd_referencecounter.hpp
 	"DD_global_definitions.hpp"
 
-1452011160 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
+1452059398 d:\develop\repositories\libddcpp\src\standard\bits\dd_weakpointer.hpp
 	"DD_StrongPointer.hpp"
 
 1452013016 d:\develop\repositories\libddcpp\src\standard\bits\dd_sharedpointer.hpp

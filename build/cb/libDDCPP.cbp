@@ -211,6 +211,7 @@
 		<Unit filename="../../src/standard/bits/DD_StaticConcatenate.hpp" />
 		<Unit filename="../../src/standard/bits/DD_String.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrongPointer.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StronglyReferable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />

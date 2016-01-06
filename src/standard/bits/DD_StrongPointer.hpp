@@ -73,6 +73,12 @@ struct ReferenceManagerBase_ {
 
 
 	public:
+	GlobalConstPointerType get_global_const_pointer_() const DD_NOEXCEPT {
+		return get_global_pointer_();
+	}
+
+
+	public:
 	virtual LengthType get_strong_reference_count_() const DD_NOEXCEPT {
 		return LengthType();
 	}
@@ -160,37 +166,37 @@ struct ReferenceManager_ :
 	}
 
 
-	private:
+	public:
 	GlobalPointerType get_global_pointer_() const DD_NOEXCEPT DD_OVERRIDE {
 		return get_pointer_();
 	}
 
 
-	private:
+	public:
 	LengthType get_strong_reference_count_() const DD_NOEXCEPT DD_OVERRIDE {
 		return get_strong_reference_count();
 	}
 
 
-	private:
+	public:
 	LengthType get_weak_reference_count_() const DD_NOEXCEPT DD_OVERRIDE {
 		return get_weak_reference_count();
 	}
 
 
-	private:
+	public:
 	ProcessType strongly_referred_() DD_NOEXCEPT DD_OVERRIDE {
 		strongly_referred();
 	}
 
 
-	private:
+	public:
 	ProcessType weakly_referred_() DD_NOEXCEPT DD_OVERRIDE {
 		weakly_referred();
 	}
 
 
-	private:
+	public:
 	ProcessType strongly_released_() DD_NOEXCEPT DD_OVERRIDE {
 		strongly_released();
 		if (is_expired()) {
@@ -204,7 +210,7 @@ struct ReferenceManager_ :
 	}
 
 
-	private:
+	public:
 	ProcessType weakly_released_() DD_NOEXCEPT DD_OVERRIDE {
 		if (is_expired() && is_unique_weak_reference()) {
 			destroy_this_();
@@ -273,37 +279,37 @@ struct AggregateReferenceManager_ : protected Agent<DeleterT_>, ReferenceManager
 	}
 
 
-	private:
+	public:
 	GlobalPointerType get_global_pointer_() const noexcept override {
 		return get_pointer_();
 	}
 
 
-	private:
+	public:
 	LengthType get_strong_reference_count_() const noexcept override {
 		return get_strong_reference_count();
 	}
 
 
-	private:
+	public:
 	LengthType get_weak_reference_count_() const noexcept override {
 		return get_weak_reference_count();
 	}
 
 
-	private:
+	public:
 	ProcessType strongly_referred_() noexcept override {
 		strongly_referred();
 	}
 
 
-	private:
+	public:
 	ProcessType weakly_referred_() noexcept override {
 		weakly_referred();
 	}
 
 
-	private:
+	public:
 	ProcessType strongly_released_() noexcept override {
 		strongly_released();
 		if (is_expired()) {
@@ -315,7 +321,7 @@ struct AggregateReferenceManager_ : protected Agent<DeleterT_>, ReferenceManager
 	}
 
 
-	private:
+	public:
 	ProcessType weakly_released_() noexcept override {
 		if (is_expired() && is_unique_weak_reference()) {
 			destroy_this_();
@@ -356,6 +362,97 @@ struct WeakPointer;
 
 
 
+template <typename ValueT_>
+struct StronglyReferable;
+
+
+
+#	if __cplusplus >= 201103L
+template <typename ValueT_>
+inline ProcessType try_set_manager_for_strongly_referable_(
+	ReferenceManagerBase_* manager_pointer_,
+	StronglyReferable<ValueT_>* pointer_
+) noexcept;
+
+
+
+#	endif
+template <typename ValueT_>
+struct StronglyReferable {
+	protected:
+	DD_ALIAS(ThisType, StronglyReferable<ValueT_>);
+	DD_VALUE_TYPE_NESTED(ValueT_);
+
+	protected:
+	DD_ALIAS(StrongPointerType, StrongPointer<ValueType>);
+	DD_ALIAS(ConstStrongPointerType, StrongPointer<ValueConstType>);
+	DD_ALIAS(WeakPointerType, WeakPointer<ValueType>);
+	DD_ALIAS(ConstWeakPointerType, WeakPointer<ValueConstType>);
+
+	private:
+	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
+
+
+	private:
+	friend StrongPointer<void>;
+#	if __cplusplus >= 201103L
+	template <typename ValueT__>
+	friend inline ProcessType try_set_manager_for_strongly_referable_(
+		ReferenceManagerBase_* manager_pointer_,
+		StronglyReferable<ValueT__>* pointer_
+	) noexcept;
+#	endif
+
+
+	private:
+	WeakPointerType m_weak_pointer_;
+
+
+	protected:
+	StronglyReferable() DD_NOEXCEPT;
+
+	protected:
+	StronglyReferable(ThisType const& origin_) DD_NOEXCEPT;
+
+#	if __cplusplus >= 201103L
+	protected:
+	StronglyReferable(ThisType&& origin_) noexcept;
+
+#	endif
+
+	protected:
+	StrongPointerType get_strong_pointer() DD_NOEXCEPT;
+
+	protected:
+	ConstStrongPointerType get_strong_pointer() const DD_NOEXCEPT;
+
+
+	protected:
+	WeakPointerType get_weak_pointer() DD_NOEXCEPT;
+
+	protected:
+	ConstWeakPointerType get_weak_pointer() const DD_NOEXCEPT;
+
+
+	private:
+	ProcessType set_manager_(ManagerPointerType manager_pointer_) DD_NOEXCEPT;
+
+
+	protected:
+	ThisType& operator =(ThisType const& origin_) DD_NOEXCEPT {
+	}
+
+#	if __cplusplus >= 201103L
+	protected:
+	ThisType& operator =(ThisType&& origin_) noexcept {
+	}
+
+#	endif
+
+};
+
+
+
 template <>
 #	if __cplusplus >= 201103L
 struct StrongPointer<void> : Comparable<StrongPointer<void>> {
@@ -367,14 +464,18 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	DD_VALUE_TYPE_NESTED(void)
 
 	public:
+	DD_ALIAS(ConstStrongType, StrongPointer<ValueConstType>);
 	DD_ALIAS(WeakType, WeakPointer<ValueType>);
+	DD_ALIAS(ConstWeakType, WeakPointer<ValueConstType>);
 
 	protected:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
 
 
 	public:
+	friend ConstStrongType;
 	friend WeakType;
+	friend ConstWeakType;
 
 
 	private:
@@ -403,7 +504,7 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	public:
 	template <typename ValueT__>
 	StrongPointer(ValueT__* pointer_) : m_manager_pointer_(
-		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_)
+		create_manager_((DDCPP_DEFAULT_REFERENCE_MANAGER_ALLOCATOR), universal_deleter, pointer_, pointer_)
 	) {
 		get_manager_pointer_()->strongly_referred_();
 	}
@@ -413,6 +514,12 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 		get_manager_pointer_()->strongly_referred_();
 	}
 
+#	if __cplusplus >= 201103L
+	protected:
+	StrongPointer(UnguardedTag tag_, ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
+	}
+
+#	endif
 
 	public:
 	~StrongPointer() DD_NOEXCEPT {
@@ -469,7 +576,6 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 
 
 	public:
-	public:
 	ValidityType less(ThisType const& other_) const DD_NOEXCEPT {
 		return get_manager_pointer_() < other_.get_manager_pointer_();
 	}
@@ -498,12 +604,30 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	ProcessType reset(ThisType&& origin_) noexcept {
 		swap(origin_);
 	}
-#	endif
 
+#	endif
 
 	private:
 	template <typename AllocatorT__, typename DeleterT__, typename ValueT__>
-	static ManagerPointerType create_manager_(AllocatorT__ allocator___, DeleterT__ const& deleter___, ValueT__* pointer_) {
+	static ManagerPointerType create_manager_(
+		AllocatorT__ allocator___,
+		DeleterT__ const& deleter___,
+		ValueT__* pointer_,
+		StronglyReferable<ValueT__>* strongly_referable_target_
+	) {
+		ManagerPointerType result_ = create_manager_(allocator___, deleter___, pointer_);
+		strongly_referable_target_->set_manager_(result_);
+		return result_;
+	}
+
+	private:
+	template <typename AllocatorT__, typename DeleterT__, typename ValueT__,  typename... WorkaroundT__>
+	static ManagerPointerType create_manager_(
+		AllocatorT__ allocator___,
+		DeleterT__ const& deleter___,
+		ValueT__* pointer_,
+		WorkaroundT__... workaround___
+	) {
 		if (pointer_) {
 			ReferenceManager_<
 				ValueT__, DeleterT__, Deleter<AllocatorT__>
@@ -580,7 +704,10 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 	DD_VALUE_TYPE_NESTED(ValueT_);
 
 	public:
+	DD_ALIAS(ConstStrongType, StrongPointer<ValueConstType>);
 	DD_ALIAS(WeakType, WeakPointer<ValueType>);
+	DD_ALIAS(ConstWeakType, WeakPointer<ValueConstType>);
+
 
 	private:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
@@ -588,9 +715,10 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 
 	public:
 	friend WeakType;
+	friend StrongPointer<DD_MODIFY_TRAIT(RemoveConst, ValueType)>;
 #	if __cplusplus >= 201103L
 	template <typename ValueT__, typename... ArgumentsT__>
-	friend StrongPointer<ValueT__> make_strong(ArgumentsT__&&... arguments__);
+	friend inline StrongPointer<ValueT__> make_strong(ArgumentsT__&&... arguments__);
 #	endif
 
 
@@ -618,6 +746,12 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 	StrongPointer(ManagerPointerType manager_pointer_) : SuperType(manager_pointer_) {
 	}
 
+#	if __cplusplus >= 201103L
+	private:
+	StrongPointer(UnguardedTag tag_, ManagerPointerType manager_pointer_) : SuperType(tag_, manager_pointer_) {
+	}
+
+#	endif
 
 #	if __cplusplus >= 201103L
 	public:
@@ -642,6 +776,21 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 		return SuperType::less(other_);
 	}
 
+
+	public:
+	ConstStrongType get_const_strong_pointer() const DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
+		return ConstStrongType(get_manager_pointer_());
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ConstStrongType get_const_strong_pointer() const DD_CALLABLE_WITH_RVALUE_ONLY DD_NOEXCEPT {
+		ManagerPointerType manager_pointer_ = get_manager_pointer_();
+		m_manager_pointer_ = get_nil_reference_manager_();
+		return ConstStrongType(unguarded_tag, manager_pointer_);
+	}
+
+#	endif
 
 	public:
 	ProcessType swap(ThisType& other_) DD_NOEXCEPT {
@@ -719,6 +868,25 @@ struct StrongPointer : Comparable<StrongPointer<ValueT_> >, StrongPointer<void> 
 
 
 #	if __cplusplus >= 201103L
+template <typename ValueT_>
+inline ProcessType try_set_manager_for_strongly_referable_(
+	ReferenceManagerBase_* manager_pointer_,
+	StronglyReferable<ValueT_>* pointer_
+) noexcept {
+	pointer_->set_manager_(manager_pointer_);
+}
+
+
+
+template <typename... Workaround>
+inline ProcessType try_set_manager_for_strongly_referable_(
+	ReferenceManagerBase_* manager_pointer_,
+	Workaround... workaround
+) noexcept {
+}
+
+
+
 template <typename ValueT_, typename AllocatorT_, typename... ArgumentsT_>
 inline AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggregate_reference_manager_(
 	AllocatorT_ allocator__, ArgumentsT_&&... arguments__
@@ -734,6 +902,7 @@ inline AggregateReferenceManager_<ValueT_, Deleter<AllocatorT_>>* create_aggrega
 		allocator__.AllocatorT_::Basic::deallocate(result_, sizeof(*result_));
 		throw;
 	}
+	try_set_manager_for_strongly_referable_(result_, static_cast<ValueT_*>(result_->get_global_pointer_()));
 	return result_;
 }
 

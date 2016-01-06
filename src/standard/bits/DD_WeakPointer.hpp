@@ -34,7 +34,6 @@ struct WeakPointer<void> {
 	}
 #	endif
 
-
 	public:
 	WeakPointer(ThisType const& origin_) DD_NOEXCEPT : m_manager_pointer_(origin_.get_manager_pointer_()) {
 		get_manager_pointer_()->weakly_referred_();
@@ -51,6 +50,18 @@ struct WeakPointer<void> {
 	) DD_NOEXCEPT : m_manager_pointer_(strong_pointer_.get_manager_pointer_()) {
 		get_manager_pointer_()->weakly_referred_();
 	}
+
+	private:
+	WeakPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
+		get_manager_pointer_()->weakly_referred_();
+	}
+
+#	if __cplusplus >= 201103L
+	private:
+	WeakPointer(UnguardedTag tag_, ManagerPointerType manager_pointer_) DD_NOEXCEPT : m_manager_pointer_(manager_pointer_) {
+	}
+
+#	endif
 
 
 	public:
@@ -169,9 +180,16 @@ struct WeakPointer : WeakPointer<void> {
 
 	public:
 	DD_ALIAS(StrongType, StrongPointer<ValueType>);
+	DD_ALIAS(ConstStrongType, StrongPointer<ValueConstType>);
+	DD_ALIAS(ConstWeakType, WeakPointer<ValueConstType>);
 
 	private:
 	DD_SPECIFIC_TYPE_NESTED(Manager, ReferenceManagerBase_);
+
+
+	public:
+	friend StronglyReferable<ValueT_>;
+	friend WeakPointer<DD_MODIFY_TRAIT(RemoveConst, ValueType)>;
 
 
 #	if __cplusplus >= 201103L
@@ -193,6 +211,31 @@ struct WeakPointer : WeakPointer<void> {
 	WeakPointer(StrongType const& strong_pointer_) DD_NOEXCEPT : SuperType(strong_pointer_) {
 	}
 
+	private:
+	WeakPointer(ManagerPointerType manager_pointer_) DD_NOEXCEPT : SuperType(manager_pointer_) {
+	}
+
+#	if __cplusplus >= 201103L
+	private:
+	WeakPointer(UnguardedTag tag_, ManagerPointerType manager_pointer_) DD_NOEXCEPT : SuperType(tag_, manager_pointer_) {
+	}
+
+#	endif
+
+	public:
+	ConstWeakType get_const_weak_pointer() const DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT {
+		return ConstWeakType(get_manager_pointer_());
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ConstWeakType get_const_weak_pointer() const DD_CALLABLE_WITH_RVALUE_ONLY DD_NOEXCEPT {
+		ManagerPointerType manager_pointer_ = get_manager_pointer_();
+		m_manager_pointer_ = get_nil_reference_manager_();
+		return ConstWeakType(unguarded_tag, manager_pointer_);
+	}
+
+#	endif
 
 	public:
 	StrongType lock() const DD_NOEXCEPT {
@@ -232,6 +275,12 @@ struct WeakPointer : WeakPointer<void> {
 		swap(temp_);
 	}
 #	endif
+
+
+	private:
+	ProcessType set_manager_(ManagerPointerType manager_pointer_) DD_NOEXCEPT {
+		m_manager_pointer_ = manager_pointer_;
+	}
 
 
 	public:

@@ -74,6 +74,7 @@ using PointerType = ValueT*;
 
 #	endif
 DD_ALIAS(GlobalPointerType, void*);
+DD_ALIAS(GlobalConstPointerType, void const*);
 
 DD_ALIAS(CStringType, char*);
 
