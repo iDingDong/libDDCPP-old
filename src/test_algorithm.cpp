@@ -359,7 +359,7 @@ void test_algorithm() {
 
 #	if SPEED_TEST
 	{
-		DD::LengthType constexpr length_c = 100000000;
+		DD::LengthType constexpr length_c = 50000000;
 		DD::Vessel<unsigned char> test_sort_1(DD::batch_tag, length_c);
 		std::srand(static_cast<unsigned>(std::time(DD::nil_pointer)));
 		DD::generate(test_sort_1, [] { return static_cast<unsigned char>(std::rand() % 256); });

@@ -570,7 +570,7 @@
 	"DD_Range.hpp"
 	"DD_copy.hpp"
 
-1449923783 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
+1452105784 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
 	"DD_move.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_IteratorCatagory.hpp"
@@ -608,7 +608,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1449939647 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1452090350 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1175,7 +1175,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1449929627 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1452090228 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"

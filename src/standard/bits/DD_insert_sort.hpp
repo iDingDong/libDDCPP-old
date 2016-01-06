@@ -75,7 +75,11 @@ struct InsertSort_ {
 
 
 template <>
+#	if __cplusplus >= 201103L
 struct InsertSort_<IteratorCatagoryValue::bidirectional> {
+#	else
+struct InsertSort_<bidirectional> {
+#	endif
 	template <typename BidirectionalIteratorT__>
 	static ProcessType insert_sort(
 		BidirectionalIteratorT__ begin___,
@@ -145,7 +149,11 @@ struct InsertSort_<IteratorCatagoryValue::bidirectional> {
 
 
 template <>
+#	if __cplusplus >= 201103L
 struct InsertSort_<IteratorCatagoryValue::free_access> {
+#	else
+struct InsertSort_<free_access> {
+#	endif
 	template <typename FreeAccessIteratorT__>
 	static ProcessType insert_sort(
 		FreeAccessIteratorT__ begin___,

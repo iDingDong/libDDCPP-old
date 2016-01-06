@@ -51,8 +51,13 @@ ProcessType lazy_intro_sort_(
 		--depth_limit__;
 		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1));
 		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__));
-		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, depth_limit__);
-		end__ = pivot__;
+		if (pivot__ - begin__ < end__ - pivot__ - 1) {
+			::DD::detail_::lazy_intro_sort_(begin__, pivot__, depth_limit__);
+			begin__ = pivot__ + 1;
+		} else {
+			::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, depth_limit__);
+			end__ = pivot__;
+		}
 	}
 	::DD::insert_sort(begin__, end__);
 }
@@ -72,8 +77,13 @@ ProcessType lazy_intro_sort_(
 		--depth_limit__;
 		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1, less__));
 		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__, less__));
-		::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, less__, depth_limit__);
-		end__ = pivot__;
+		if (pivot__ - begin__ < end__ - pivot__ - 1) {
+			::DD::detail_::lazy_intro_sort_(begin__, pivot__, less__, depth_limit__);
+			begin__ = pivot__ + 1;
+		} else {
+			::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, less__, depth_limit__);
+			end__ = pivot__;
+		}
 	}
 	::DD::insert_sort(begin__, end__, less__);
 }
