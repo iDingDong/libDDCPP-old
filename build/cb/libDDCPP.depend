@@ -1494,8 +1494,9 @@
 	"DD_Range.hpp"
 	"DD_next.hpp"
 
-1449939512 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
+1452273497 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
 	"DD_Range.hpp"
+	"DD_AddAssignWith.hpp"
 
 1452008382 d:\develop\repositories\libddcpp\src\standard\bits\dd_specifictypenested.hpp
 	"DD_AddConst.hpp"
@@ -1723,4 +1724,9 @@
 1452011175 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
 	"DD_WeakPointer.hpp"
 	"DD_SharedPointer.hpp"
+
+1452273615 d:\develop\repositories\libddcpp\src\standard\bits\dd_addassignwith.hpp
+	"DD_AddConst.hpp"
+	"DD_AddLvalueReference.hpp"
+	"DD_Functor.hpp"
 
