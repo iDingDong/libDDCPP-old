@@ -29,9 +29,9 @@ inline ValueT_ accumulate(
 	UndirectionalIteratorT_ end__,
 	ValueT_ initial_value__
 ) DD_NOEXCEPT_AS(static_cast<ValueT_>(
-	::DD::detail_::accumulate(begin__ DD_COMMA end__ DD_COMMA initial_value__ DD_COMMA AddAssignWith<>())
+	::DD::detail_::accumulate(begin__ DD_COMMA end__ DD_COMMA initial_value__ DD_COMMA add_assign_with)
 )) {
-	return ::DD::detail_::accumulate(begin__, end__, initial_value__, AddAssignWith<>());
+	return ::DD::detail_::accumulate(begin__, end__, initial_value__, add_assign_with);
 }
 
 template <typename UndirectionalRangeT_, typename ValueT_, typename BinaryFunctionT_>
@@ -50,9 +50,9 @@ inline ValueT_ accumulate(
 	UndirectionalRangeT_& range__,
 	ValueT_ initial_value__
 ) DD_NOEXCEPT_AS(static_cast<ValueT_>(
-	::DD::detail_::accumulate(range__ DD_COMMA initial_value__ DD_COMMA AddAssignWith<>())
+	::DD::detail_::accumulate(range__ DD_COMMA initial_value__ DD_COMMA add_assign_with)
 )) {
-	return ::DD::detail_::accumulate(range__, initial_value__, AddAssignWith<>());
+	return ::DD::detail_::accumulate(range__, initial_value__, add_assign_with);
 }
 
 

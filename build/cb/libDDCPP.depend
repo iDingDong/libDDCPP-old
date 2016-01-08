@@ -1156,9 +1156,8 @@
 	"DD_BinarySearchTree.hpp"
 	"DD_Allocator.hpp"
 
-1449715096 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
+1452275816 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthan.hpp
 	"DD_IntegralConstant.hpp"
-	"DD_ReadOnlyCall.hpp"
 	"DD_Functor.hpp"
 
 1449715095 d:\develop\repositories\libddcpp\src\standard\bits\dd_binarytreenode.hpp
@@ -1349,9 +1348,10 @@
 	"DD_construct.hpp"
 	"DD_copy.hpp"
 
-1448257677 d:\develop\repositories\libddcpp\src\standard\bits\dd_adjacent_unique.hpp
+1452275138 d:\develop\repositories\libddcpp\src\standard\bits\dd_adjacent_unique.hpp
 	"DD_move.hpp"
 	"DD_next.hpp"
+	"DD_EqualTo.hpp"
 	"DD_find_not.hpp"
 
 1447921861 d:\develop\repositories\libddcpp\src\standard\bits\dd_predicator.hpp
@@ -1494,7 +1494,7 @@
 	"DD_Range.hpp"
 	"DD_next.hpp"
 
-1452273497 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
+1452275056 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
 	"DD_Range.hpp"
 	"DD_AddAssignWith.hpp"
 
@@ -1642,8 +1642,8 @@
 	"DD_UndirectionalList.hpp"
 	"DD_fill_construct_length.hpp"
 
-1451458119 d:\develop\repositories\libddcpp\src\standard\bits\dd_equalto.hpp
-	"DD_ReadOnlyCall.hpp"
+1452275816 d:\develop\repositories\libddcpp\src\standard\bits\dd_equalto.hpp
+	"DD_IntegralConstant.hpp"
 	"DD_Functor.hpp"
 
 1451492336 d:\develop\repositories\libddcpp\src\standard\bits\dd_fill_construct_length.hpp
@@ -1725,8 +1725,7 @@
 	"DD_WeakPointer.hpp"
 	"DD_SharedPointer.hpp"
 
-1452273615 d:\develop\repositories\libddcpp\src\standard\bits\dd_addassignwith.hpp
-	"DD_AddConst.hpp"
-	"DD_AddLvalueReference.hpp"
+1452275794 d:\develop\repositories\libddcpp\src\standard\bits\dd_addassignwith.hpp
+	"DD_IntegralConstant.hpp"
 	"DD_Functor.hpp"
 

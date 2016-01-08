@@ -5,21 +5,17 @@
 
 
 #	include "DD_IntegralConstant.hpp"
-#	include "DD_ReadOnlyCall.hpp"
 #	include "DD_Functor.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-template <typename ValueT1_, typename ValueT2_ = ValueT1_>
-struct LessThan : BinaryFunctor<ValidityType, DD_MODIFY_TRAIT(ReadOnlyCall, ValueT1_), DD_MODIFY_TRAIT(ReadOnlyCall, ValueT2_)> {
-	DD_ALIAS(ThisType, LessThan<ValueT1_ DD_COMMA ValueT2_>);
-	DD_ALIAS(
-		SuperType,
-		BinaryFunctor<ValidityType DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT1_) DD_COMMA DD_MODIFY_TRAIT(ReadOnlyCall, ValueT2_)>
-	);
+template <typename LeftOperandT_ = void, typename RightOperandT_ = LeftOperandT_>
+struct LessThan : BinaryFunctor<ValidityType, LeftOperandT_ const&, RightOperandT_ const&> {
+	DD_ALIAS(SuperType, BinaryFunctor<ValidityType DD_COMMA LeftOperandT_ const& DD_COMMA RightOperandT_ const&>);
+	DD_ALIAS(ThisType, LessThan<LeftOperandT_ DD_COMMA RightOperandT_>);
 
-	DD_ALIAS(Default, TrueType);
+	DD_ALIAS(OriginalImplementation, TrueType);
 
 	DD_INHERIT_TEMPLATE_ALIAS(ResultType);
 	DD_INHERIT_TEMPLATE_ALIAS(FirstArgumentType);
@@ -27,17 +23,63 @@ struct LessThan : BinaryFunctor<ValidityType, DD_MODIFY_TRAIT(ReadOnlyCall, Valu
 	DD_INHERIT_TEMPLATE_ALIAS(FunctionType);
 
 
-	static ResultType call(FirstArgumentType value_1_, SecondArgumentType value_2_) DD_NOEXCEPT_AS(ResultType(value_1_ < value_2_)) {
-		return value_1_ < value_2_;
+	static ResultType DD_UNCONSTRIANED_CONSTEXPR call(
+		FirstArgumentType argument_1_,
+		SecondArgumentType argument_2_
+	) DD_NOEXCEPT_AS(
+		static_cast<ResultType>(argument_1_ < argument_2_)
+	) {
+		return argument_1_ < argument_2_;
 	}
 
 
-	ResultType operator ()(FirstArgumentType value_1_, SecondArgumentType value_2_) DD_NOEXCEPT_AS(ResultType(call(value_1_, value_2_))) {
-		return call(value_1_, value_2_);
+	ResultType DD_UNCONSTRIANED_CONSTEXPR operator ()(
+		FirstArgumentType argument_1_,
+		SecondArgumentType argument_2_
+	) DD_NOEXCEPT_AS(
+		static_cast<ResultType>(call(argument_1_ DD_COMMA argument_2_))
+	) {
+		return call(argument_1_, argument_2_);
 	}
 
 
 };
+
+
+
+template <>
+struct LessThan<void, void> {
+	DD_ALIAS(ThisType, LessThan<void DD_COMMA void>);
+
+	DD_ALIAS(OriginalImplementation, TrueType);
+
+
+	template <typename LeftOperandT__, typename RightOperandT__>
+	static typename LessThan<LeftOperandT__, RightOperandT__>::ResultType DD_UNCONSTRIANED_CONSTEXPR call(
+		LeftOperandT__ const& argument_1_,
+		RightOperandT__ const& argument_2_
+	) DD_NOEXCEPT_AS(static_cast<typename LessThan<LeftOperandT__ DD_COMMA RightOperandT__>::ResultType>(
+		LessThan<LeftOperandT__ DD_COMMA RightOperandT__>()(argument_1_ DD_COMMA argument_2_)
+	)) {
+		return LessThan<LeftOperandT__, RightOperandT__>()(argument_1_, argument_2_);
+	}
+
+	template <typename LeftOperandT__, typename RightOperandT__>
+	typename LessThan<LeftOperandT__, RightOperandT__>::ResultType DD_UNCONSTRIANED_CONSTEXPR operator ()(
+		LeftOperandT__ const& argument_1_,
+		RightOperandT__ const& argument_2_
+	) const DD_NOEXCEPT_AS(static_cast<typename LessThan<LeftOperandT__ DD_COMMA RightOperandT__>::ResultType>(
+		call(argument_1_ DD_COMMA argument_2_)
+	)) {
+		return call(argument_1_, argument_2_);
+	}
+
+
+};
+
+
+
+LessThan<void, void> DD_CONSTANT less_than;
 
 
 
@@ -47,6 +89,8 @@ DD_DETAIL_END_
 
 DD_BEGIN_
 using detail_::LessThan;
+
+using detail_::less_than;
 
 
 
