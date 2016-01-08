@@ -621,7 +621,7 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 	}
 
 	private:
-	template <typename AllocatorT__, typename DeleterT__, typename ValueT__,  typename... WorkaroundT__>
+	template <typename AllocatorT__, typename DeleterT__, typename ValueT__>
 	static ManagerPointerType create_manager_(
 		AllocatorT__ allocator___,
 		DeleterT__ const& deleter___,
