@@ -608,7 +608,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1452090350 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1452105662 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1681,7 +1681,7 @@
 1451823622 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_instance.hpp
 	"DD_global_definitions.hpp"
 
-1452059582 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
+1452216640 d:\develop\repositories\libddcpp\src\standard\bits\dd_strongpointer.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_address_of.hpp"

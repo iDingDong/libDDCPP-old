@@ -626,7 +626,7 @@ struct StrongPointer<void> : Comparable<StrongPointer<void> > {
 		AllocatorT__ allocator___,
 		DeleterT__ const& deleter___,
 		ValueT__* pointer_,
-		WorkaroundT__... workaround___
+		void const volatile* workaround_
 	) {
 		if (pointer_) {
 			ReferenceManager_<
@@ -878,10 +878,9 @@ inline ProcessType try_set_manager_for_strongly_referable_(
 
 
 
-template <typename... Workaround>
 inline ProcessType try_set_manager_for_strongly_referable_(
 	ReferenceManagerBase_* manager_pointer_,
-	Workaround... workaround
+	void const volatile* workaround_
 ) noexcept {
 }
 
