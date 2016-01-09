@@ -8,9 +8,10 @@
 #		include "DD_get_last_argument.hpp"
 #		include "DD_IsSame.hpp"
 #		include "DD_InitializerList.hpp"
+#	endif
+#	include "DD_LessThan.hpp"
+#	if __cplusplus >= 201103L
 #		include "DD_find_max.hpp"
-#	else
-#		include "DD_global_definitions.hpp"
 #	endif
 
 
@@ -51,27 +52,12 @@ struct Max_ {
 
 template <>
 struct Max_<true> {
-	template <typename ObjectT__>
-	static ObjectT__ constexpr const& max(
-		ObjectT__ const& object___
-	) noexcept {
-		return object___;
-	}
-
-	template <typename ObjectT__>
-	static ObjectT__ constexpr const& max(
-		ObjectT__ const& object_1___,
-		ObjectT__ const& object_2___
-	) noexcept(noexcept(object_2___ < object_1___)) {
-		return object_2___ < object_1___ ? object_1___ : object_2___;
-	};
-
 	template <typename ObjectT__, typename... ObjectsT__>
 	static ObjectT__ constexpr const& max(
 		ObjectT__ const& object___,
 		ObjectsT__ const&... objects___
-	) noexcept(noexcept(max(object___, max(objects___...)))) {
-		return max(object___, max(objects___...));
+	) noexcept(noexcept(Max_<false>::max(object___, objects___..., less_than))) {
+		return Max_<false>::max(object___, objects___..., less_than);
 	}
 
 
@@ -87,29 +73,21 @@ inline ObjectT_ constexpr const& max(
 	return Max_<IsSame<ObjectT_, ArgumentsT_...>::value>::max(object__, arguments__...);
 }
 
-template <typename ObjectT_>
-inline ObjectT_ constexpr const& max(
-	InitializerList<ObjectT_> initializer_list_
-) noexcept(noexcept(find_min(initializer_list_.cbegin(), initializer_list_.cengd()))) {
-	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd());
-}
-
 template <typename ObjectT_, typename BinaryPredicateT_>
 inline ObjectT_ constexpr const& max(
 	InitializerList<ObjectT_> initializer_list_,
 	BinaryPredicateT_ const& less__
-) noexcept(noexcept(find_min(initializer_list_.cbegin(), initializer_list_.cengd()))) {
-	return *find_max(initializer_list_.cbegin(), initializer_list_.cengd(), less__);
-}
-#	else
-template <typename ObjectT_>
-inline ObjectT_ const& max(
-	ObjectT_ const& object_1__,
-	ObjectT_ const& object_2__
-) {
-	return object_2__ < object_1__ ? object_1__ : object_2__;
+) noexcept(noexcept(::DD::find_max(initializer_list_.cbegin(), initializer_list_.cengd(), less__))) {
+	return *::DD::find_max(initializer_list_.cbegin(), initializer_list_.cengd(), less__);
 }
 
+template <typename ObjectT_>
+inline ObjectT_ constexpr const& max(
+	InitializerList<ObjectT_> initializer_list_
+) noexcept(noexcept(::DD::detail_::max(initializer_list_, less_than))) {
+	return ::DD::detail_::max(initializer_list_, less_than);
+}
+#	else
 template <typename ObjectT_, typename BinaryPredicateT_>
 inline ObjectT_ const& max(
 	ObjectT_ const& object_1__,
@@ -117,6 +95,14 @@ inline ObjectT_ const& max(
 	BinaryPredicateT_ const& less__
 ) {
 	return less__(object_2__, object_1__) ? object_1__ : object_2__;
+}
+
+template <typename ObjectT_>
+inline ObjectT_ const& max(
+	ObjectT_ const& object_1__,
+	ObjectT_ const& object_2__
+) {
+	return ::DD::detail_::max(object_1__, object_2__, less_than);
 }
 #	endif
 

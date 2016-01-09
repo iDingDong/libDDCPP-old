@@ -90,12 +90,12 @@
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_adjacent_unique.hpp"
 
-1450592012 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
+1452318518 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
+	"DD_LessThan.hpp"
 	"DD_find_min.hpp"
-	"DD_global_definitions.hpp"
 
 1443513193 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_last_argument.hpp
 	"DD_GetPackBack.hpp"
@@ -135,23 +135,23 @@
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_max.hpp
+1452318564 d:\develop\repositories\libddcpp\src\standard\bits\dd_max.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
+	"DD_LessThan.hpp"
 	"DD_find_max.hpp"
-	"DD_global_definitions.hpp"
 
 1448255476 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_max.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1448000917 d:\develop\repositories\libddcpp\src\standard\bits\dd_min_max.hpp
+1452318637 d:\develop\repositories\libddcpp\src\standard\bits\dd_min_max.hpp
 	"DD_get_last_argument.hpp"
 	"DD_IsSame.hpp"
 	"DD_InitializerList.hpp"
+	"DD_LessThan.hpp"
 	"DD_find_min_max.hpp"
-	"DD_Pair.hpp"
 
 1448255489 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_min_max.hpp
 	"DD_Iterator.hpp"
@@ -1484,10 +1484,8 @@
 	"DD_GreaterThan.hpp"
 	"DD_build_heap.hpp"
 
-1449751845 d:\develop\repositories\libddcpp\src\standard\bits\dd_greaterthan.hpp
-	"DD_IntegralConstant.hpp"
-	"DD_ReadOnlyCall.hpp"
-	"DD_Functor.hpp"
+1452317643 d:\develop\repositories\libddcpp\src\standard\bits\dd_greaterthan.hpp
+	"DD_LessThan.hpp"
 
 1449795229 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sum.hpp
 	"DD_Iterator.hpp"
