@@ -495,9 +495,10 @@
 1448121800 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if_not.hpp
 	"DD_global_definitions.hpp"
 
-1448255378 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
+1452360588 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_first_of.hpp
 	"DD_Range.hpp"
 	"DD_Iterator.hpp"
+	"DD_EqualTo.hpp"
 
 1448255431 d:\develop\repositories\libddcpp\src\standard\bits\dd_binary_find.hpp
 	"DD_middle.hpp"
@@ -1378,8 +1379,9 @@
 1448178731 d:\develop\repositories\libddcpp\src\standard\bits\dd_get_string_end.hpp
 	"DD_find.hpp"
 
-1448254398 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_lower_bound.hpp
+1452360844 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_lower_bound.hpp
 	"DD_middle.hpp"
+	"DD_LessThan.hpp"
 
 1448254446 d:\develop\repositories\libddcpp\src\standard\bits\dd_middle.hpp
 	"DD_Iterator.hpp"
@@ -1388,8 +1390,9 @@
 	"DD_next.hpp"
 	"DD_length_difference.hpp"
 
-1448254427 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_higher_bound.hpp
+1452361084 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_higher_bound.hpp
 	"DD_middle.hpp"
+	"DD_LessThan.hpp"
 
 1448254753 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_bounds.hpp
 	"DD_find_lower_bound.hpp"
