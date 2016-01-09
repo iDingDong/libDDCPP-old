@@ -52,6 +52,7 @@
 		<Unit filename="../../src/standard/bits/DD_AddPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddRvalueReference.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AddVolatile.hpp" />
+		<Unit filename="../../src/standard/bits/DD_AddWith.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Agent.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AlignedStorage.hpp" />
 		<Unit filename="../../src/standard/bits/DD_AlignmentOf.hpp" />

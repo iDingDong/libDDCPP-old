@@ -236,7 +236,7 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1452322309 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
+1452324782 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
@@ -474,13 +474,15 @@
 	"DD_global_definitions.hpp"
 	"DD_compatibility_definitions.hpp"
 
-1448255298 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
+1452356770 d:\develop\repositories\libddcpp\src\standard\bits\dd_mismatch.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
+	"DD_EqualTo.hpp"
 
-1448255334 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
+1452356734 d:\develop\repositories\libddcpp\src\standard\bits\dd_find.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
+	"DD_EqualTo.hpp"
 
 1448257735 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
 	"DD_Iterator.hpp"
@@ -1415,12 +1417,13 @@
 1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
 	"DD_global_definitions.hpp"
 
-1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
+1452356005 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
 	"DD_IsSame.hpp"
 	"DD_IteratorValue.hpp"
+	"DD_LessThan.hpp"
 	"DD_get_pointer.hpp"
 	"DD_length_difference.hpp"
 	"DD_min.hpp"

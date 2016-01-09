@@ -13,6 +13,7 @@
 #	endif
 #	include "DD_IsSame.hpp"
 #	include "DD_IteratorValue.hpp"
+#	include "DD_LessThan.hpp"
 #	include "DD_get_pointer.hpp"
 #	include "DD_length_difference.hpp"
 #	include "DD_min.hpp"
