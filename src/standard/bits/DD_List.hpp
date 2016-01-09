@@ -38,6 +38,8 @@ struct List_<void> {
 	protected:
 	DD_SPECIFIC_TYPE_NESTED(Node, ListNode<ValueType>);
 
+	public:
+	DD_ALIAS(IsRange, TrueType);
 
 	protected:
 	DD_ALIAS(Iterator, ListIterator<void>);
@@ -1068,6 +1070,10 @@ struct List : protected Allocateable<AllocatorT_>, List_<ValueT_> {
 
 
 };
+
+
+
+
 
 
 

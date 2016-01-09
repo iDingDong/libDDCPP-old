@@ -115,7 +115,7 @@
 1445763815 d:\develop\repositories\libddcpp\src\standard\bits\dd_and.hpp
 	"DD_IntegralConstant.hpp"
 
-1451802461 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
+1452324423 d:\develop\repositories\libddcpp\src\standard\bits\dd_integralconstant.hpp
 	"DD_global_definitions.hpp"
 
 1450096644 d:\develop\repositories\libddcpp\src\standard\bits\dd_removereference.hpp
@@ -236,14 +236,16 @@
 	<type_traits>
 	"DD_global_definitions.hpp"
 
-1450539031 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
+1452322309 d:\develop\repositories\libddcpp\src\standard\bits\dd_equal.hpp
 	<cstring>
 	"DD_IsScalar.hpp"
 	"DD_IsArithmetic.hpp"
 	"DD_IsPointer.hpp"
 	"DD_IsSame.hpp"
+	"DD_IsOriginalImplementation.hpp"
 	"DD_IsRange.hpp"
 	"DD_IteratorValue.hpp"
+	"DD_EqualTo.hpp"
 	"DD_length_difference.hpp"
 	"DD_size_distance.hpp"
 	"DD_Range.hpp"
@@ -379,9 +381,11 @@
 	"DD_RemoveCV.hpp"
 	"DD_Nil.hpp"
 
-1450099818 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrange.hpp
+1452324605 d:\develop\repositories\libddcpp\src\standard\bits\dd_isrange.hpp
+	"DD_NestedTypeCheck.hpp"
 	"DD_MemberFunctionCheck.hpp"
 	"DD_And.hpp"
+	"DD_Or.hpp"
 	"DD_Iterator.hpp"
 	"DD_IsCharactor.hpp"
 	"DD_RemovePointer.hpp"
@@ -439,7 +443,7 @@
 1443513191 d:\develop\repositories\libddcpp\src\standard\bits\dd_iteratorpointer.hpp
 	"DD_IteratorValue.hpp"
 
-1450111186 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
+1452324663 d:\develop\repositories\libddcpp\src\standard\bits\dd_range.hpp
 	"DD_forward.hpp"
 	"DD_Iterator.hpp"
 	"DD_ConstIterator.hpp"
@@ -1030,7 +1034,7 @@
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
 	"bits/DD_Vessel.hpp"
 
-1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
+1452324056 d:\develop\repositories\libddcpp\src\standard\bits\dd_vessel.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_Tags.hpp"
 	"DD_NeedInstance.hpp"
@@ -1186,7 +1190,7 @@
 	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1452009002 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1452324070 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1536,7 +1540,7 @@
 1450504884 d:\develop\repositories\libddcpp\src\standard\ddring.hpp
 	"bits/DD_Ring.hpp"
 
-1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
+1452324106 d:\develop\repositories\libddcpp\src\standard\bits\dd_ring.hpp
 	"DD_Tags.hpp"
 	"DD_IteratorNested.hpp"
 	"DD_IsTriviallyDestructible.hpp"

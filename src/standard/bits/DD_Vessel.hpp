@@ -55,6 +55,9 @@ struct Vessel_ {
 	DD_ALIAS(LengthType, DD::LengthType);
 
 	public:
+	DD_ALIAS(IsRange, TrueType);
+
+	public:
 	DD_ALIAS(Iterator, PointerType);
 	DD_ALIAS(ConstIterator, ConstPointerType);
 	DD_ITERATOR_NESTED
@@ -1089,6 +1092,16 @@ inline Vessel<ValueT_, AllocatorT_> DD_CONSTEXPR operator +(
 	result_.unguarded_concatenate(vessel_1_, vessel_2_);
 	return result_;
 }
+
+
+
+template <typename ValueT_, typename AllocatorT_>
+#	if __cplusplus >= 201103L
+struct IsRange<Vessel<ValueT_, AllocatorT_>> : TrueType {
+#	else
+struct IsRange<Range<IteratorT_>> : TrueType {
+#	endif
+};
 
 
 

@@ -139,6 +139,9 @@ struct Ring_ {
 	protected:
 	DD_ALIAS(LengthType, ::DD::LengthType);
 
+	public:
+	DD_ALIAS(IsRange, TrueType);
+
 	protected:
 	DD_ALIAS(Iterator, UniversalFreeAccessIterator<ThisType>);
 	DD_ALIAS(ConstIterator, UniversalFreeAccessIterator<ThisType DD_COMMA true>);

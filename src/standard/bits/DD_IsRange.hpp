@@ -4,8 +4,10 @@
 
 
 
+#	include "DD_NestedTypeCheck.hpp"
 #	include "DD_MemberFunctionCheck.hpp"
 #	include "DD_And.hpp"
+#	include "DD_Or.hpp"
 #	include "DD_Iterator.hpp"
 
 
@@ -24,6 +26,10 @@
 
 
 DD_DETAIL_BEGIN_
+DD_NESTED_TYPE_TRAIT(GetIsRange_, IsRange, FalseType)
+
+
+
 DD_MEMBER_FUNCTION_CHECK(HasBegin_, begin, DD_MODIFY_TRAIT(Iterator, MACRO_ObjectT__), )
 
 
@@ -32,12 +38,12 @@ DD_MEMBER_FUNCTION_CHECK(HasEnd_, end, DD_MODIFY_TRAIT(Iterator, MACRO_ObjectT__
 
 
 
+template <typename ObjectT_>
 #	if __cplusplus >= 201103L
-template <typename ObjectT_>
-using HasBeginAndEnd_ = AndType<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>>;
+struct HasBeginAndEnd_ : AndType<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>> {
+};
 #	else
-template <typename ObjectT_>
-struct HasBeginAndEnd_ : And<HasBegin_<ObjectT_>, HasEnd_<ObjectT_>> {
+struct HasBeginAndEnd_ : typename And<HasBegin_<ObjectT_>, HasEnd_<ObjectT_> >::Type {
 };
 #	endif
 
@@ -50,10 +56,14 @@ struct IsRange : AndType<IsRange<ObjectsT_>...> {
 
 
 
-#	endif
 template <typename ObjectT_>
-struct IsRange<ObjectT_> : HasBeginAndEnd_<ObjectT_> {
+struct IsRange<ObjectT_> : OrType<GetIsRange_Type<ObjectT_>, HasBeginAndEnd_<ObjectT_>> {
 };
+#	else
+template <typename ObjectT_>
+struct IsRange : typename Or<typename GetIsRange_<ObjectT_>::Type, HasBeginAndEnd_<ObjectT_> > {
+};
+#	endif
 
 
 

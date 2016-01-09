@@ -190,6 +190,9 @@ struct Range {
 	DD_ALIAS(Iterator, IteratorT_);
 
 	public:
+	DD_ALIAS(IsRange, TrueType);
+
+	public:
 	DD_ALIAS(DifferenceType, DD_MODIFY_TRAIT(IteratorDifference, Iterator));
 	DD_ALIAS(ReverseIterator, IteratorReverse<Iterator>);
 
@@ -240,13 +243,13 @@ struct Range {
 
 #	endif
 	public:
-	Iterator const& begin() const DD_NOEXCEPT {
+	Iterator begin() const DD_NOEXCEPT {
 		return m_range_.first;
 	}
 
 
 	public:
-	Iterator const& end() const DD_NOEXCEPT {
+	Iterator end() const DD_NOEXCEPT {
 		return m_range_.second;
 	}
 
