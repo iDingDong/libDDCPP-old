@@ -484,9 +484,10 @@
 	"DD_Range.hpp"
 	"DD_EqualTo.hpp"
 
-1448257735 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
+1452360251 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_not.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
+	"DD_EqualTo.hpp"
 
 1448255348 d:\develop\repositories\libddcpp\src\standard\bits\dd_find_if.hpp
 	"DD_Iterator.hpp"
