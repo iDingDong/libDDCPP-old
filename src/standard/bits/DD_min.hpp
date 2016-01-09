@@ -9,9 +9,10 @@
 #		include "DD_IsSame.hpp"
 #		include "DD_InitializerList.hpp"
 #	endif
-#	include "DD_LessThan.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_find_min.hpp"
+#	else
+#		include "DD_LessThan.hpp"
 #	endif
 
 
