@@ -1487,9 +1487,10 @@
 1452317643 d:\develop\repositories\libddcpp\src\standard\bits\dd_greaterthan.hpp
 	"DD_LessThan.hpp"
 
-1449795229 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sum.hpp
+1452319192 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sum.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
+	"DD_AddWith.hpp"
 	"DD_next.hpp"
 
 1452275056 d:\develop\repositories\libddcpp\src\standard\bits\dd_accumulate.hpp
@@ -1724,6 +1725,10 @@
 	"DD_SharedPointer.hpp"
 
 1452275794 d:\develop\repositories\libddcpp\src\standard\bits\dd_addassignwith.hpp
+	"DD_IntegralConstant.hpp"
+	"DD_Functor.hpp"
+
+1452318879 d:\develop\repositories\libddcpp\src\standard\bits\dd_addwith.hpp
 	"DD_IntegralConstant.hpp"
 	"DD_Functor.hpp"
 
