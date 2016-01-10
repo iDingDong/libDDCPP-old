@@ -38,7 +38,7 @@
 1451406770 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1451492506 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1452441972 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -88,6 +88,8 @@
 	"bits/DD_heap_sort.hpp"
 	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
+	"bits/DD_push_heap.hpp"
+	"bits/DD_pop_heap.hpp"
 	"bits/DD_adjacent_unique.hpp"
 
 1452361694 d:\develop\repositories\libddcpp\src\standard\bits\dd_min.hpp
@@ -587,7 +589,7 @@
 	"DD_copy.hpp"
 	"DD_LessThan.hpp"
 
-1452105784 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
+1452441770 d:\develop\repositories\libddcpp\src\standard\bits\dd_insert_sort.hpp
 	"DD_move.hpp"
 	"DD_IteratorValue.hpp"
 	"DD_IteratorCatagory.hpp"
@@ -625,7 +627,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1452105662 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1452411904 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1191,7 +1193,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1452409236 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1452411886 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"
@@ -1408,9 +1410,10 @@
 	"DD_find_lower_bound.hpp"
 	"DD_find_higher_bound.hpp"
 
-1448422693 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
+1452441642 d:\develop\repositories\libddcpp\src\standard\bits\dd_bubble_sort.hpp
 	"DD_Range.hpp"
 	"DD_next.hpp"
+	"DD_LessThan.hpp"
 	"DD_swap_target.hpp"
 
 1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_quick_sort.hpp
@@ -1418,7 +1421,7 @@
 	"DD_next.hpp"
 	"DD_pivot_partition.hpp"
 
-1449750247 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
+1452441890 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
 	"DD_build_heap.hpp"
 
 1452400136 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
@@ -1752,4 +1755,11 @@
 1452318879 d:\develop\repositories\libddcpp\src\standard\bits\dd_addwith.hpp
 	"DD_IntegralConstant.hpp"
 	"DD_Functor.hpp"
+
+1452408422 d:\develop\repositories\libddcpp\src\standard\bits\dd_push_heap.hpp
+	"DD_heapify.hpp"
+
+1452442076 d:\develop\repositories\libddcpp\src\standard\bits\dd_pop_heap.hpp
+	"DD_move.hpp"
+	"DD_heapify.hpp"
 

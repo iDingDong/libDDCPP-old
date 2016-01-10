@@ -359,29 +359,29 @@ void test_algorithm() {
 
 #	if SPEED_TEST
 	{
-		DD::LengthType constexpr length_c = 50000000;
-		DD::Vessel<unsigned char> test_sort_1(DD::batch_tag, length_c);
+		DD::LengthType constexpr length_c = 50000;
+		DD::Vessel<unsigned> test_sort_1(DD::batch_tag, length_c);
 		std::srand(static_cast<unsigned>(std::time(DD::nil_pointer)));
-		DD::generate(test_sort_1, [] { return static_cast<unsigned char>(std::rand() % 256); });
+		DD::generate(test_sort_1, [] { return static_cast<unsigned>(std::rand()); });
 		auto test_sort_2 = test_sort_1;
 		std::time_t start;
 		std::time_t finish;
 
 		time(&start);
 		DD::sort(test_sort_1);
+		time(&finish);
 		if (!DD::is_sorted(test_sort_1)) {
 			DD_PRINT "'DD::sort' failed.";
 			DD_PRINT DD::is_sorted_until(test_sort_1) - test_sort_1.begin();
 		}
-		time(&finish);
 		DD_PRINT "'DD::sort': ", std::difftime(finish, start), DD::end_line;
 
 		time(&start);
 		std::sort(DD_SPLIT_RANGE(test_sort_2));
+		time(&finish);
 		if (!DD::is_sorted(test_sort_2)) {
 			DD_PRINT "'std::sort' failed.";
 		}
-		time(&finish);
 		DD_PRINT "'std::sort': ", std::difftime(finish, start), DD::end_line;
 
 	}

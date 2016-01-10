@@ -4,19 +4,22 @@
 
 
 
+#	if __cplusplus >= 201103L
+#		include "DD_move.hpp"
+#	endif
 #	include "DD_heapify.hpp"
 
 
 
 DD_DETAIL_BEGIN_
 template <typename FreeAccessIteratorT_, typename BinaryPredicateT_>
-ProcessType pop_heap(
+inline ProcessType pop_heap(
 	FreeAccessIteratorT_ begin__,
 	FreeAccessIteratorT_ end__,
 	BinaryPredicateT_ less__
 ) {
 #	if __cplusplus >= 201103L
-	*begin__ = ::DD::move(*(end__ - 1)):
+	*begin__ = ::DD::move(*(end__ - 1));
 #	else
 	*begin__ = *(end__ - 1);
 #	endif

@@ -46,7 +46,7 @@ ProcessType lazy_intro_sort_(
 ) {
 	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < end__ - begin__) {
 		if (!depth_limit__) {
-			::DD::heap_sort(begin__, end__);
+			::DD::heap_sort(begin__, end__, less__);
 			return;
 		}
 		--depth_limit__;
