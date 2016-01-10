@@ -1205,7 +1205,7 @@
 	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1452324070 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1452442924 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1223,13 +1223,14 @@
 	"DD_ValueStorage.hpp"
 	"DD_swap.hpp"
 
-1450445531 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+1452443156 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_IteratorCatagory.hpp"
 	"DD_EqualityComparable.hpp"
 	"DD_fabricate.hpp"
 	"DD_address_of.hpp"
 	"DD_previous.hpp"
+	"DD_LessThan.hpp"
 	"DD_ListNode.hpp"
 
 1443513052 d:\develop\repositories\libddcpp\src\standard\bits\dd_iterator_definitions.hpp

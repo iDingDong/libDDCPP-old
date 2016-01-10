@@ -10,6 +10,7 @@
 #	include "DD_fabricate.hpp"
 #	include "DD_address_of.hpp"
 #	include "DD_previous.hpp"
+#	include "DD_LessThan.hpp"
 #	include "DD_ListNode.hpp"
 
 
@@ -402,21 +403,6 @@ inline ProcessType transfer_backward(
 }
 
 
-template <typename ValueT_>
-ProcessType inplace_merge(
-	ListIterator<ValueT_> begin_,
-	ListIterator<ValueT_> middle_,
-	ListIterator<ValueT_> end_
-) {
-	while (middle_ != end_ && begin_ != middle_) {
-		if (*middle_ < *begin_) {
-			::DD::detail_::transfer(middle_++, begin_);
-		} else {
-			++begin_;
-		}
-	}
-}
-
 template <typename ValueT_, typename BinaryPredicateT_>
 ProcessType inplace_merge(
 	ListIterator<ValueT_> begin_,
@@ -431,6 +417,15 @@ ProcessType inplace_merge(
 			++begin_;
 		}
 	}
+}
+
+template <typename ValueT_>
+inline ProcessType inplace_merge(
+	ListIterator<ValueT_> begin_,
+	ListIterator<ValueT_> middle_,
+	ListIterator<ValueT_> end_
+) DD_NOEXCEPT_AS(::DD::detail_::inplace_merge(begin_ DD_COMMA middle_ DD_COMMA end_ DD_COMMA less_than)) {
+	::DD::detail_::inplace_merge(begin_, middle_, end_, less_than);
 }
 
 
