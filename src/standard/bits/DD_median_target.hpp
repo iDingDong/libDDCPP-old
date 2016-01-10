@@ -15,7 +15,7 @@ inline IteratorT_ median_target(
 	IteratorT_ second__,
 	IteratorT_ third__,
 	BinaryPredicateT_ less__
-) {
+) DD_NOEXCEPT_AS(less__(*first__ DD_COMMA *second__)) {
 	if (less__(*first__, *second__)) {
 		if (less__(*second__, *third__)) {
 			return second__;
