@@ -9,16 +9,6 @@
 
 
 DD_DETAIL_BEGIN_
-template <typename FreeAccessIteratorT_>
-inline ProcessType build_heap(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__
-) {
-	for (FreeAccessIteratorT_ current__(::DD::middle(begin__, end__)); current__ >= begin__; --current__) {
-		::DD::heapify(begin__, end__, current__);
-	}
-}
-
 template <typename FreeAccessIteratorT_, typename BinaryPredicateT_>
 inline ProcessType build_heap(
 	FreeAccessIteratorT_ begin__,
@@ -28,6 +18,14 @@ inline ProcessType build_heap(
 	for (FreeAccessIteratorT_ current__(::DD::middle(begin__, end__ - 1)); current__ >= begin__; --current__) {
 		::DD::heapify(begin__, end__, current__, less__);
 	}
+}
+
+template <typename FreeAccessIteratorT_>
+inline ProcessType build_heap(
+	FreeAccessIteratorT_ begin__,
+	FreeAccessIteratorT_ end__
+) DD_NOEXCEPT_AS(::DD::detail_::build_heap(begin__ DD_COMMA end__ DD_COMMA less_than)) {
+	::DD::detail_::build_heap(begin__, end__, less_than);
 }
 
 

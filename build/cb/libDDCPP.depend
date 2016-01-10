@@ -1191,7 +1191,7 @@
 	"DD_BinaryTreeNode.hpp"
 	"DD_LessThan.hpp"
 
-1452090228 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
+1452409236 d:\develop\repositories\libddcpp\src\standard\bits\dd_sort.hpp
 	"DD_middle.hpp"
 	"DD_median_target.hpp"
 	"DD_pivot_partition.hpp"
@@ -1421,15 +1421,16 @@
 1449750247 d:\develop\repositories\libddcpp\src\standard\bits\dd_heap_sort.hpp
 	"DD_build_heap.hpp"
 
-1448523065 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
+1452400136 d:\develop\repositories\libddcpp\src\standard\bits\dd_build_heap.hpp
 	"DD_heapify.hpp"
 
-1448468382 d:\develop\repositories\libddcpp\src\standard\bits\dd_heapify.hpp
+1452408352 d:\develop\repositories\libddcpp\src\standard\bits\dd_heapify.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_middle.hpp"
+	"DD_LessThan.hpp"
 
-1449715097 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
-	"DD_global_definitions.hpp"
+1452409218 d:\develop\repositories\libddcpp\src\standard\bits\dd_median_target.hpp
+	"DD_LessThan.hpp"
 
 1452356005 d:\develop\repositories\libddcpp\src\standard\bits\dd_less.hpp
 	<cstring>
@@ -1499,8 +1500,7 @@
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 
-1449752278 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sort.hpp
-	"DD_IteratorValue.hpp"
+1452408105 d:\develop\repositories\libddcpp\src\standard\bits\dd_partial_sort.hpp
 	"DD_IteratorReverse.hpp"
 	"DD_GreaterThan.hpp"
 	"DD_build_heap.hpp"

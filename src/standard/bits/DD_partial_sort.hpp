@@ -4,7 +4,6 @@
 
 
 
-#	include "DD_IteratorValue.hpp"
 #	include "DD_IteratorReverse.hpp"
 #	include "DD_GreaterThan.hpp"
 #	include "DD_build_heap.hpp"

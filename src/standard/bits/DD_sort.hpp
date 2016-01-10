@@ -37,31 +37,6 @@ inline LengthType DD_CONSTEXPR logarithms_2_(LengthType length_) DD_NOEXCEPT {
 }
 
 
-template <typename FreeAccessIteratorT_>
-ProcessType lazy_intro_sort_(
-	FreeAccessIteratorT_ begin__,
-	FreeAccessIteratorT_ end__,
-	LengthType depth_limit__
-) {
-	while ((DDCPP_SORT_MAX_FINAL_INTERVAL) < end__ - begin__) {
-		if (!depth_limit__) {
-			::DD::heap_sort(begin__, end__);
-			return;
-		}
-		--depth_limit__;
-		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1));
-		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__));
-		if (pivot__ - begin__ < end__ - pivot__ - 1) {
-			::DD::detail_::lazy_intro_sort_(begin__, pivot__, depth_limit__);
-			begin__ = pivot__ + 1;
-		} else {
-			::DD::detail_::lazy_intro_sort_(pivot__ + 1, end__, depth_limit__);
-			end__ = pivot__;
-		}
-	}
-	::DD::insert_sort(begin__, end__);
-}
-
 template <typename FreeAccessIteratorT_, typename BinaryPrediateT_>
 ProcessType lazy_intro_sort_(
 	FreeAccessIteratorT_ begin__,
@@ -77,7 +52,7 @@ ProcessType lazy_intro_sort_(
 		--depth_limit__;
 		::DD::swap_target(begin__, ::DD::median_target(begin__, ::DD::middle(begin__, end__), end__ - 1, less__));
 		FreeAccessIteratorT_ pivot__(::DD::unguarded_pivot_partition(begin__, end__, less__));
-		if (pivot__ - begin__ < end__ - pivot__ - 1) {
+		if (pivot__ - begin__ < end__ - pivot__) {
 			::DD::detail_::lazy_intro_sort_(begin__, pivot__, less__, depth_limit__);
 			begin__ = pivot__ + 1;
 		} else {
@@ -92,14 +67,6 @@ ProcessType lazy_intro_sort_(
 
 template <IteratorCatagoryValue iterator_catagory_c_>
 struct Sort_ {
-	template <typename UndirectionalIteratorT__>
-	static ProcessType sort(
-		UndirectionalIteratorT__ begin___,
-		UndirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(::DD::select_sort(begin___ DD_COMMA end___)) {
-		::DD::select_sort(begin___, end___);
-	}
-
 	template <typename UndirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType sort(
 		UndirectionalIteratorT__ begin___,
@@ -116,14 +83,6 @@ struct Sort_ {
 
 template <>
 struct Sort_<IteratorCatagoryValue::bidirectional> {
-	template <typename BidirectionalIteratorT__>
-	static ProcessType sort(
-		BidirectionalIteratorT__ begin___,
-		BidirectionalIteratorT__ end___
-	) DD_NOEXCEPT_AS(::DD::select_sort(begin___ DD_COMMA end___)) {
-		::DD::select_sort(begin___, end___);
-	}
-
 	template <typename BidirectionalIteratorT__, typename BinaryPredicateT__>
 	static ProcessType sort(
 		BidirectionalIteratorT__ begin___,
@@ -140,22 +99,6 @@ struct Sort_<IteratorCatagoryValue::bidirectional> {
 
 template <>
 struct Sort_<IteratorCatagoryValue::free_access> {
-	template <typename FreeAccessIteratorT__>
-	static ProcessType sort(
-		FreeAccessIteratorT__ begin___,
-		FreeAccessIteratorT__ end___
-	) DD_NOEXCEPT_IF(noexcept(::DD::detail_::lazy_intro_sort_(
-		begin___ DD_COMMA
-		end___ DD_COMMA
-		(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(end___ - begin___)
-	)) && noexcept(::DD::insert_sort(begin___ DD_COMMA end___))) {
-		::DD::detail_::lazy_intro_sort_(
-			begin___,
-			end___,
-			(DDCPP_SORT_RECURSION_DEPTH_LIMIT_RATIO) * ::DD::detail_::logarithms_2_(end___ - begin___)
-		);
-	}
-
 	template <typename FreeAccessIteratorT__, typename BinaryPredicateT__>
 	static ProcessType sort(
 		FreeAccessIteratorT__ begin___,
@@ -180,14 +123,6 @@ struct Sort_<IteratorCatagoryValue::free_access> {
 
 
 
-template <typename UndirectionalIteratorT_>
-inline ProcessType sort(
-	UndirectionalIteratorT_ begin__,
-	UndirectionalIteratorT_ end__
-) DD_NOEXCEPT_AS(Sort_<IteratorCatagory<UndirectionalIteratorT_>::value>::sort(begin__ DD_COMMA end__)) {
-	Sort_<IteratorCatagory<UndirectionalIteratorT_>::value>::sort(begin__, end__);
-}
-
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
 inline ProcessType sort(
 	UndirectionalIteratorT_ begin__,
@@ -197,11 +132,12 @@ inline ProcessType sort(
 	Sort_<IteratorCatagory<UndirectionalIteratorT_>::value>::sort(begin__, end__, less__);
 }
 
-template <typename UndirectionalRangeT_>
+template <typename UndirectionalIteratorT_>
 inline ProcessType sort(
-	UndirectionalRangeT_& range__
-) DD_NOEXCEPT_AS(::DD::detail_::sort(DD_SPLIT_RANGE(range__))) {
-	::DD::detail_::sort(DD_SPLIT_RANGE(range__));
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_AS(::DD::detail_::sort(begin__ DD_COMMA end__ DD_COMMA less_than)) {
+	::DD::detail_::sort(begin__, end__, less_than);
 }
 
 template <typename UndirectionalRangeT_, typename BinaryPredicateT_>
@@ -210,6 +146,13 @@ inline ProcessType sort(
 	BinaryPredicateT_ less__
 ) DD_NOEXCEPT_AS(::DD::detail_::sort(DD_SPLIT_RANGE(range__) DD_COMMA less__)) {
 	::DD::detail_::sort(DD_SPLIT_RANGE(range__), less__);
+}
+
+template <typename UndirectionalRangeT_>
+inline ProcessType sort(
+	UndirectionalRangeT_& range__
+) DD_NOEXCEPT_AS(::DD::detail_::sort(range__ DD_COMMA less_than)) {
+	::DD::detail_::sort(range__, less_than);
 }
 
 
