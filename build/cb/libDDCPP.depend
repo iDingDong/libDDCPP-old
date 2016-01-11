@@ -38,7 +38,7 @@
 1451406770 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1452441972 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1452506572 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -81,12 +81,12 @@
 	"bits/DD_partition.hpp"
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
+	"bits/DD_inplace_merge.hpp"
 	"bits/DD_partial_sort.hpp"
 	"bits/DD_bubble_sort.hpp"
 	"bits/DD_insert_sort.hpp"
 	"bits/DD_quick_sort.hpp"
 	"bits/DD_heap_sort.hpp"
-	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_push_heap.hpp"
 	"bits/DD_pop_heap.hpp"
@@ -179,7 +179,7 @@
 1444579669 d:\develop\repositories\libddcpp\src\standard\bits\dd_lessthancomparable.hpp
 	"DD_global_definitions.hpp"
 
-1450100047 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap.hpp
+1452492965 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap.hpp
 	"DD_MemberFunctionCheck.hpp"
 	"DD_move.hpp"
 
@@ -583,7 +583,7 @@
 1448257648 d:\develop\repositories\libddcpp\src\standard\bits\dd_partition_by.hpp
 	"DD_swap_target.hpp"
 
-1452399203 d:\develop\repositories\libddcpp\src\standard\bits\dd_merge.hpp
+1452504841 d:\develop\repositories\libddcpp\src\standard\bits\dd_merge.hpp
 	"DD_Iterator.hpp"
 	"DD_Range.hpp"
 	"DD_copy.hpp"
@@ -1223,7 +1223,7 @@
 	"DD_ValueStorage.hpp"
 	"DD_swap.hpp"
 
-1452443156 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
+1452504998 d:\develop\repositories\libddcpp\src\standard\bits\dd_listiterator.hpp
 	"DD_SpecificTypeNested.hpp"
 	"DD_IteratorCatagory.hpp"
 	"DD_EqualityComparable.hpp"
@@ -1763,4 +1763,18 @@
 1452442076 d:\develop\repositories\libddcpp\src\standard\bits\dd_pop_heap.hpp
 	"DD_move.hpp"
 	"DD_heapify.hpp"
+
+1452506480 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge.hpp
+	"DD_length_difference.hpp"
+	"DD_inplace_merge_length.hpp"
+
+1452506660 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge_length.hpp
+	"DD_next.hpp"
+	"DD_Agent.hpp"
+	"DD_swap_length.hpp"
+	"DD_sort.hpp"
+
+1452493641 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_length.hpp
+	"DD_swap_target.hpp"
+	"DD_Pair.hpp"
 

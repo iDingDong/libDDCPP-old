@@ -15,8 +15,8 @@ DD_DETAIL_BEGIN_
 template <
 	typename UndirectionalIteratorT1_,
 	typename UndirectionalIteratorT2_,
-	typename UndirectionalIteratorT3_,
-	typename BinaryPredicateT_
+	typename BinaryPredicateT_,
+	typename UndirectionalIteratorT3_
 >
 UndirectionalIteratorT3_ merge(
 	UndirectionalIteratorT1_ begin_1__,
@@ -58,7 +58,7 @@ inline UndirectionalIteratorT3_ merge(
 	return ::DD::detail_::merge(begin_1__, end_1__, begin_2__, end_2__, less_than, result_begin__);
 }
 
-template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename UndirectionalIteratorT3_, typename BinaryPredicateT_>
+template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename BinaryPredicateT_, typename UndirectionalIteratorT3_>
 UndirectionalIteratorT3_ merge(
 	UndirectionalIteratorT1_ begin_1__,
 	UndirectionalIteratorT1_ end_1__,
@@ -67,10 +67,14 @@ UndirectionalIteratorT3_ merge(
 	BinaryPredicateT_ less__,
 	UndirectionalIteratorT3_ result_begin__,
 	UndirectionalIteratorT3_ result_end__
-) DD_NOEXCEPT_AS(copy(begin_1__, end_1__, result_begin__) DD_COMMA copy(begin_2__, end_2__, result_begin__) DD_COMMA less__(*begin_1__, *begin_2__)) {
+) DD_NOEXCEPT_AS(
+	::DD::copy(begin_1__ DD_COMMA end_1__ DD_COMMA result_begin__) DD_COMMA
+	::DD::copy(begin_2__ DD_COMMA end_2__ DD_COMMA result_begin__) DD_COMMA
+	less__(*begin_1__ DD_COMMA *begin_2__)
+) {
 	for (; begin_2__ != end_2__; ++result_begin__) {
 		if (begin_1__ == end_1__) {
-			return copy(begin_2__, end_2__, result_begin__, result_end__);
+			return ::DD::copy(begin_2__, end_2__, result_begin__, result_end__);
 		}
 		if (result_begin__ == result_end__) {
 			return result_begin__;
@@ -80,10 +84,10 @@ UndirectionalIteratorT3_ merge(
 			++begin_1__;
 		} else {
 			*result_begin__ = *begin_2__;
-			++begin_1__;
+			++begin_2__;
 		}
 	}
-	return copy(begin_1__, end_1__, result_begin__, result_end__);
+	return ::DD::copy(begin_1__, end_1__, result_begin__, result_end__);
 }
 
 template <typename UndirectionalIteratorT1_, typename UndirectionalIteratorT2_, typename UndirectionalIteratorT3_>
@@ -101,7 +105,7 @@ inline UndirectionalIteratorT3_ merge(
 }
 
 template <
-	typename UndirectionalRangeT1_, typename UndirectionalRangeT2_, typename UndirectionalRangeT3_, typename BinaryPredicateT_
+	typename UndirectionalRangeT1_, typename UndirectionalRangeT2_, typename BinaryPredicateT_, typename UndirectionalRangeT3_
 >
 inline DD_MODIFY_TRAIT(Iterator, UndirectionalRangeT3_) merge(
 	UndirectionalRangeT1_& range_1__,

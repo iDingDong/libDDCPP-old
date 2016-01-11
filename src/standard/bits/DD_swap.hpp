@@ -70,9 +70,8 @@ inline ProcessType swap(ArrayType<ObjectT_, length_c_>& array_1_, ArrayType<Obje
 #	else
 inline ProcessType swap(ObjectT_ (&array_1_)[length_c_], ObjectT_ (&array_2_)[length_c_]) {
 #	endif
-	using ::DD::detail_::swap;
 	for (LengthType i = 0; i < length_c_; ++i) {
-		swap(array_1_[i], array_2_[i]);
+		::DD::detail_::swap(array_1_[i], array_2_[i]);
 	}
 }
 

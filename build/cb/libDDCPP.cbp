@@ -288,6 +288,7 @@
 		<Unit filename="../../src/standard/bits/DD_global_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_heap_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_heapify.hpp" />
+		<Unit filename="../../src/standard/bits/DD_inplace_merge.hpp" />
 		<Unit filename="../../src/standard/bits/DD_insert_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_invoke.hpp" />
 		<Unit filename="../../src/standard/bits/DD_is_partitioned.hpp" />
@@ -335,6 +336,8 @@
 		<Unit filename="../../src/standard/bits/DD_size_distance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_swap.hpp" />
+		<Unit filename="../../src/standard/bits/DD_swap_length.hpp" />
+		<Unit filename="../../src/standard/bits/DD_swap_ranges.hpp" />
 		<Unit filename="../../src/standard/bits/DD_swap_target.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transconstruct.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transconstruct_length.hpp" />
