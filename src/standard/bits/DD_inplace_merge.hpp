@@ -11,7 +11,7 @@
 
 DD_DETAIL_BEGIN_
 template <typename UndirectionalIteratorT_, typename BinaryPredicateT_>
-ProcessType inplace_merge(
+inline ProcessType inplace_merge(
 	UndirectionalIteratorT_ begin__,
 	UndirectionalIteratorT_ middle__,
 	UndirectionalIteratorT_ end__,
@@ -25,6 +25,15 @@ ProcessType inplace_merge(
 	return ::DD::inplace_merge_length(
 		begin__, ::DD::length_difference(begin__, middle__), ::DD::length_difference(middle__, end__), less__
 	);
+}
+
+template <typename UndirectionalIteratorT_>
+inline ProcessType inplace_merge(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ middle__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_AS(::DD::detail_::inplace_merge(begin__ DD_COMMA middle__ DD_COMMA end__ DD_COMMA less_than)) {
+	::DD::detail_::inplace_merge(begin__, middle__, end__, less_than);
 }
 
 

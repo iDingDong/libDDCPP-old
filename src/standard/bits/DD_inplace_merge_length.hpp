@@ -7,7 +7,7 @@
 #	include "DD_next.hpp"
 #	include "DD_Agent.hpp"
 #	include "DD_swap_length.hpp"
-#	include "DD_sort.hpp"
+#	include "DD_insert_sort.hpp"
 
 
 
@@ -21,7 +21,7 @@ inline LengthType DD_UNCONSTRIANED_CONSTEXPR square_root_to_ceil_(LengthType len
 		if (length_ < square_value_) {
 			high_ = current_;
 		} else if (square_value_ < length_) {
-			current_ = low_;
+			low_ = current_;
 		} else {
 			return current_;
 		}
@@ -69,9 +69,9 @@ ProcessType inplace_merge_length(
 	if (left_length__ && right_length__) {
 		LengthT_ length__ = left_length__ + right_length__;
 		LengthT_ interval__ = ::DD::detail_::square_root_to_ceil_(length__);
-		LengthT_ full_interval_quantity__ = length__ / interval__;
-		UndirectionalIteratorT_ helper__ = ::DD::next(begin__, full_interval_quantity__ * interval__);
-		LengthT_ middle_interval_index__ = (left_length__ - 1) / interval__ + 1;
+		LengthT_ intervals_to_merge__ = (length__ - 1) / interval__ - 1;
+		UndirectionalIteratorT_ helper__(::DD::next(begin__, intervals_to_merge__ * interval__));
+		LengthT_ middle_interval_index__ = (left_length__ - 1) / interval__;
 		::DD::swap_length(
 			::DD::next(begin__, middle_interval_index__ * interval__),
 			helper__,
@@ -103,7 +103,10 @@ ProcessType inplace_merge_length(
 		) {
 			::DD::detail_::inplace_merge_interval_(current_front__, current__, interval__, helper__, less__);
 		}
-		::DD::sort(helper__, ::DD::next(helper__, length__ - full_interval_quantity__ * interval__), less__);
+		length__ -= intervals_to_merge__ * interval__;
+		for (; length__; --length__, ++helper__) {
+			::DD::transfer_backward(helper__, ::DD::find_higher_bound(begin__, helper__, *helper__));
+		}
 	}
 }
 

@@ -16,9 +16,11 @@ inline Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_> swap_length(
 	UndirectionalIteratorT2_ begin_2__,
 	LengthT_ length__
 ) {
+	//UndirectionalIteratorT1_ begin__(begin_1__);
 	for (; length__; --length__, ++begin_1__, ++begin_2__) {
 		::DD::detail_::swap_target(begin_1__, begin_2__);
 	}
+	return Pair<UndirectionalIteratorT1_, UndirectionalIteratorT2_>(begin_1__, begin_2__);
 }
 
 

@@ -38,7 +38,7 @@
 1451406770 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1452506572 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1452511515 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -84,9 +84,8 @@
 	"bits/DD_inplace_merge.hpp"
 	"bits/DD_partial_sort.hpp"
 	"bits/DD_bubble_sort.hpp"
-	"bits/DD_insert_sort.hpp"
 	"bits/DD_quick_sort.hpp"
-	"bits/DD_heap_sort.hpp"
+	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_push_heap.hpp"
 	"bits/DD_pop_heap.hpp"
@@ -627,7 +626,7 @@
 
 1443513051 d:\develop\repositories\libddcpp\src\test_math.h
 
-1452411904 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
+1452507434 source:d:\develop\repositories\libddcpp\src\test_algorithm.cpp
 	"test_algorithm.h"
 	<ctime>
 	<cstdlib>
@@ -1764,17 +1763,17 @@
 	"DD_move.hpp"
 	"DD_heapify.hpp"
 
-1452506480 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge.hpp
+1452507293 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge.hpp
 	"DD_length_difference.hpp"
 	"DD_inplace_merge_length.hpp"
 
-1452506660 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge_length.hpp
+1452511515 d:\develop\repositories\libddcpp\src\standard\bits\dd_inplace_merge_length.hpp
 	"DD_next.hpp"
 	"DD_Agent.hpp"
 	"DD_swap_length.hpp"
-	"DD_sort.hpp"
+	"DD_insert_sort.hpp"
 
-1452493641 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_length.hpp
+1452510572 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_length.hpp
 	"DD_swap_target.hpp"
 	"DD_Pair.hpp"
 
