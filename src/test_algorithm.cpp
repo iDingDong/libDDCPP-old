@@ -355,16 +355,6 @@ void test_algorithm() {
 		}
 	}
 
-	{
-		{
-			DD::Array<int, 10> temp_1 = { 1, 3, 7, 2, 3, 5, 6, 7, 9, 10 };
-			DD::inplace_merge(temp_1.begin(), temp_1.begin() + 3, temp_1.end());
-			print_container(temp_1);
-		}
-	}
-
-
-
 #	if SPEED_TEST
 	{
 		DD::LengthType constexpr length_c = 50000;

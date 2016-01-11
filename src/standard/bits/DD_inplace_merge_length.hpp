@@ -110,6 +110,17 @@ ProcessType inplace_merge_length(
 	}
 }
 
+template <typename UndirectionalIteratorT_, typename LengthT_>
+ProcessType inplace_merge_length(
+	UndirectionalIteratorT_ begin__,
+	LengthT_ left_length__,
+	LengthT_ right_length__
+) DD_NOEXCEPT_AS(::DD::detail_::inplace_merge_length(
+	begin__ DD_COMMA left_length__ DD_COMMA right_length__ DD_COMMA less_than
+)) {
+	::DD::detail_::inplace_merge_length(begin__, left_length__, right_length__, less_than);
+}
+
 
 
 DD_DETAIL_END_
