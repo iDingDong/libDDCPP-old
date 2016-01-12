@@ -26,6 +26,14 @@ ProcessType conservative_inplace_merge_sort(
 	}
 }
 
+template <typename UndirectionalIteratorT_>
+inline ProcessType conservative_inplace_merge_sort(
+	UndirectionalIteratorT_ begin__,
+	UndirectionalIteratorT_ end__
+) DD_NOEXCEPT_AS(::DD::detail_::conservative_inplace_merge_sort(begin__ DD_COMMA end__ DD_COMMA less_than)) {
+	::DD::detail_::conservative_inplace_merge_sort(begin__, end__, less_than);
+}
+
 
 
 DD_DETAIL_END_

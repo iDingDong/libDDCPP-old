@@ -38,7 +38,7 @@
 1451406770 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1452511515 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1452615902 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
@@ -81,10 +81,10 @@
 	"bits/DD_partition.hpp"
 	"bits/DD_partition_by.hpp"
 	"bits/DD_merge.hpp"
-	"bits/DD_inplace_merge.hpp"
 	"bits/DD_partial_sort.hpp"
 	"bits/DD_bubble_sort.hpp"
 	"bits/DD_quick_sort.hpp"
+	"bits/DD_conservative_inplace_merge_sort.hpp"
 	"bits/DD_sort.hpp"
 	"bits/DD_next_permutation.hpp"
 	"bits/DD_push_heap.hpp"
@@ -1776,4 +1776,8 @@
 1452510572 d:\develop\repositories\libddcpp\src\standard\bits\dd_swap_length.hpp
 	"DD_swap_target.hpp"
 	"DD_Pair.hpp"
+
+1452615837 d:\develop\repositories\libddcpp\src\standard\bits\dd_conservative_inplace_merge_sort.hpp
+	"DD_is_sorted_until.hpp"
+	"DD_inplace_merge.hpp"
 
