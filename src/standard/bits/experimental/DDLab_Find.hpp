@@ -5,12 +5,25 @@
 
 
 #	include "DD_experimental_definitions.hpp"
-#	include "../DD_find.hpp"
 
 
 
 DD_LAB_DETAIL_BEGIN_
 struct Find {
+	template <typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
+	static UndirectionalIteratorT_ call(
+		UndirectionalIteratorT_ begin__,
+		UndirectionalIteratorT_ end__,
+		ValueT_ value__,
+		BinaryPredicateT_ equal__
+	) {
+		while (begin__ != end__ && !equal__(*begin__, value__) {
+			++begin__;
+		}
+		return begin__;
+	}
+
+
 } DD_CONSTANT find;
 
 
