@@ -23,6 +23,15 @@ struct Find {
 		return begin__;
 	}
 
+	template <typename PolicyT_, typename UndirectionalIteratorT_, typename ValueT_, typename BinaryPredicateT_>
+	static UndirectionalIteratorT_ call(
+		PolicyT_&& executor_,
+		UndirectionalIteratorT_ begin__,
+		UndirectionalIteratorT_ end__,
+		ValueT_ value__,
+		BinaryPredicateT_ equal__
+	);
+
 
 } DD_CONSTANT find;
 
