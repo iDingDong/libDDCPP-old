@@ -977,10 +977,11 @@
 	"DD_Or.hpp"
 	"DD_IsSame.hpp"
 
-1445937691 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
+1453616779 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
 	"bits/DD_declare_value.hpp"
 	"bits/DD_Conditional.hpp"
 	"bits/DD_EnableIf.hpp"
+	"bits/DD_Not.hpp"
 	"bits/DD_Or.hpp"
 	"bits/DD_And.hpp"
 	"bits/DD_Result.hpp"
@@ -1040,9 +1041,10 @@
 	"DD_Allocateable.hpp"
 	"DD_Functor.hpp"
 
-1450098193 d:\develop\repositories\libddcpp\src\standard\bits\dd_needinstance.hpp
+1453616842 d:\develop\repositories\libddcpp\src\standard\bits\dd_needinstance.hpp
 	"DD_NestedTypeCheck.hpp"
-	"DD_And.hpp"
+	"DD_Not.hpp"
+	"DD_IsEmpty.hpp"
 	"DD_IntegralConstant.hpp"
 
 1443623685 d:\develop\repositories\libddcpp\src\standard\ddvessel.hpp
@@ -1633,7 +1635,7 @@
 1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_isoriginalimplementation.hpp
 	"DD_NestedTypeCheck.hpp"
 
-1451818054 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
+1453616132 d:\develop\repositories\libddcpp\src\standard\bits\dd_agent.hpp
 	"DD_NeedInstance.hpp"
 	"DD_get_instance.hpp"
 
@@ -1780,4 +1782,11 @@
 1452615837 d:\develop\repositories\libddcpp\src\standard\bits\dd_conservative_inplace_merge_sort.hpp
 	"DD_is_sorted_until.hpp"
 	"DD_inplace_merge.hpp"
+
+1453616826 d:\develop\repositories\libddcpp\src\standard\bits\dd_isempty.hpp
+	<type_traits>
+	"DD_And.hpp"
+
+1453616852 d:\develop\repositories\libddcpp\src\standard\bits\dd_not.hpp
+	"DD_IntegralConstant.hpp"
 

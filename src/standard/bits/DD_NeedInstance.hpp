@@ -6,7 +6,8 @@
 
 #	include "DD_NestedTypeCheck.hpp"
 #	if __cplusplus >= 201103L
-#		include "DD_And.hpp"
+#		include "DD_Not.hpp"
+#		include "DD_IsEmpty.hpp"
 #	else
 #		include "DD_IntegralConstant.hpp"
 #	endif
@@ -14,13 +15,29 @@
 
 
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
+DD_NESTED_TYPE_TRAIT(GetNeedInstance_, NeedInstance, NotType<IsEmpty<MACRO_ObjectT_>>)
+
+
+
+template <typename... ObjectsT_>
+struct NeedInstance : AndType<NeedInstance<ObjectsT_>...> {
+};
+
+
+
+template <typename ObjectT_>
+struct NeedInstance<ObjectT_> : BoolConstant<GetNeedInstance_<ObjectT_>::Type::value> {
+};
+#	else
 DD_NESTED_TYPE_TRAIT(GetNeedInstance_, NeedInstance, FalseType)
 
 
 
 template <typename ObjectT_>
-struct NeedInstance_ : BoolConstant<GetNeedInstance_<ObjectT_>::Type::value> {
+struct NeedInstance : BoolConstant<GetNeedInstance_<ObjectT_>::Type::value> {
 };
+#	endif
 
 
 
@@ -29,14 +46,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-#	if __cplusplus >=201103L
-template <typename... ObjectsT_>
-using NeedInstance = AndType<detail_::NeedInstance_<ObjectsT_>...>;
-#	else
-template <typename ObjectT_>
-struct NeedInstance : detail_::NeedInstance_<ObjectT_> {
-};
-#	endif
+using detail_::NeedInstance;
 
 
 
