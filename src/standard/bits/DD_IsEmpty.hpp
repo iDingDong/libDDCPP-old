@@ -13,12 +13,36 @@
 #	endif
 #	include <type_traits>
 
-#	include "DD_And.hpp"
+#	include "DD_Or.hpp"
+#	include "DD_IsClass.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-#	if __cplusplus >= 201103L
+template <typename ObjectT_>
+struct IsEmptyHelper_ : ObjectT_ {
+};
+
+
+
+template <>
+struct IsEmptyHelper_<void> {
+};
+
+
+
+template <typename ObjectT_, ValidityType is_class_c_>
+struct IsEmpty_ : FalseType {
+};
+
+
+
+template <typename ObjectT_>
+struct IsEmpty_<ObjectT_, true> : BoolConstant<sizeof(IsEmptyHelper_<ObjectT_>) == sizeof(IsEmptyHelper_<void>)> {
+};
+
+
+
 template <typename... ObjectsT_>
 struct IsEmpty : AndType<IsEmpty<ObjectsT_>...> {
 };
@@ -26,13 +50,8 @@ struct IsEmpty : AndType<IsEmpty<ObjectsT_>...> {
 
 
 template <typename ObjectT_>
-struct IsEmpty<ObjectT_> : StdBoolConstant<std::is_empty<ObjectT_>> {
+struct IsEmpty<ObjectT_> : OrType<IsEmpty_<ObjectT_, IsClass<ObjectT_>::value>, std::is_empty<ObjectT_>> {
 };
-#	else
-template <typename ObjectT_>
-struct IsEmpty : StdBoolConstant<std::is_empty<ObjectT_> > {
-};
-#	endif
 
 
 

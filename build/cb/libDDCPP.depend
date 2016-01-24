@@ -1783,9 +1783,10 @@
 	"DD_is_sorted_until.hpp"
 	"DD_inplace_merge.hpp"
 
-1453616826 d:\develop\repositories\libddcpp\src\standard\bits\dd_isempty.hpp
+1453617647 d:\develop\repositories\libddcpp\src\standard\bits\dd_isempty.hpp
 	<type_traits>
-	"DD_And.hpp"
+	"DD_Or.hpp"
+	"DD_IsClass.hpp"
 
 1453616852 d:\develop\repositories\libddcpp\src\standard\bits\dd_not.hpp
 	"DD_IntegralConstant.hpp"
