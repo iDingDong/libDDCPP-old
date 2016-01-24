@@ -119,6 +119,7 @@
 		<Unit filename="../../src/standard/bits/DD_IsClass.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsConst.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsDouble.hpp" />
+		<Unit filename="../../src/standard/bits/DD_IsEmpty.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsEnum.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsFloat.hpp" />
 		<Unit filename="../../src/standard/bits/DD_IsFloatingPoint.hpp" />
@@ -182,6 +183,7 @@
 		<Unit filename="../../src/standard/bits/DD_NeedInstance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NestedTypeCheck.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Not.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ObserverPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Optional.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Or.hpp" />
