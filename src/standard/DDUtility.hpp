@@ -5,6 +5,7 @@
 
 
 #	include "bits/DD_UnusedIgnorer.hpp"
+#	include "bits/DD_polymorphic_cast.hpp"
 #	include "bits/DD_Uncopiable.hpp"
 #	include "bits/DD_Dereferenceable.hpp"
 #	include "bits/DD_get_length.hpp"
