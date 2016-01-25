@@ -105,6 +105,7 @@ struct Trait {
 	};
 
 #	endif
+	DD_ALIAS(Alignment, ::DD::AlignmentOf<ObjectType>);
 
 	DD_ALIAS(ConstAdded, DD_MODIFY_TRAIT(AddConst, ObjectType));
 	DD_ALIAS(VolatileAdded, DD_MODIFY_TRAIT(AddVolatile, ObjectType));
