@@ -69,15 +69,11 @@ struct Array : ValueTypeNested<ValueT_> {
 		return array[index_];
 	}
 
-	ConstReferenceType DD_CONSTEXPR at(LengthType index_) const {
-#	if __cplusplus >= 201402L || __cplusplus < 201103L
+	ConstReferenceType at(LengthType index_) const {
 		if (index_ >= length_constant) {
 			throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__));
 		}
 		return array[index_];
-#	else
-		return index_ < length_constant ? array[index_] : throw AccessDenied("'DD::Array::at' in " __FILE__ " at " DD_TO_STRING(__LINE__)),  *array;
-#	endif
 	}
 
 
