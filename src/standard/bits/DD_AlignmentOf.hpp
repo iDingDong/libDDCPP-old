@@ -4,22 +4,33 @@
 
 
 
-#	if __cplusplus < 201103L
-#		error ISO/IEC 14882:2011 or a later version support is required for 'DD::AlignmentOf'.
-
-
+#	if __cplusplus >= 201103L
+#		include <type_traits>
 
 #	endif
-#	include <type_traits>
-
 #	include "DD_IntegralConstant.hpp"
 
 
-
 DD_DETAIL_BEGIN_
+#	if __cplusplus >= 201103L
 template <typename ObjectT_>
 struct AlignmentOf : StdIntegralConstant<std::alignment_of<ObjectT_>> {
 };
+#	else
+template <typename ObjectT_>
+struct AlignmentOfHelper_ {
+	char m_char_;
+	ObjectT_ m_object_;
+
+
+};
+
+
+
+template <typename ObjectT_>
+struct AlignmentOf : IntegralConstant<AlignmentType, sizeof(AlignmentOfHelper_<ObjectT_>) - sizeof(ObjectT_)> {
+};
+#	endif
 
 
 

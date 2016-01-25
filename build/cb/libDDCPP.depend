@@ -19,7 +19,7 @@
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
-1452054342 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
+1453712058 d:\develop\repositories\libddcpp\src\standard\bits\dd_global_definitions.hpp
 	<cstddef>
 	"DD_compatibility_definitions.hpp"
 
@@ -679,7 +679,7 @@
 	"DD_IteratorPointer.hpp"
 	"DD_IteratorDifference.hpp"
 
-1450850784 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
+1453712857 d:\develop\repositories\libddcpp\src\standard\bits\dd_trait.hpp
 	"DD_IsVoid.hpp"
 	"DD_IsUnsigned.hpp"
 	"DD_IsReferable.hpp"
@@ -695,6 +695,7 @@
 	"DD_IsNoexceptMoveConstructible.hpp"
 	"DD_IsNoexceptMoveAssignable.hpp"
 	"DD_IsOriginalImplementation.hpp"
+	"DD_AlignmentOf.hpp"
 	"DD_AddCV.hpp"
 	"DD_RemovePointer.hpp"
 	"DD_RemoveAllExtents.hpp"
@@ -955,11 +956,12 @@
 1449989504 d:\develop\repositories\libddcpp\src\standard\bits\dd_release.hpp
 	"DD_global_definitions.hpp"
 
-1443936518 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
+1453714344 source:d:\develop\repositories\libddcpp\src\test_meta.cpp
 	"test_meta.h"
 	"test_object.hpp"
 	"standard/DDMeta.hpp"
 	"standard/DDTrait.hpp"
+	"standard/DDHub.hpp"
 	"standard/bits/DD_TypeInfo.hpp"
 
 1449715095 d:\develop\repositories\libddcpp\src\standard\ddmeta.hpp
@@ -978,9 +980,11 @@
 	"DD_Or.hpp"
 	"DD_IsSame.hpp"
 
-1453616779 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
+1453713515 d:\develop\repositories\libddcpp\src\standard\ddtrait.hpp
+	"bits/DD_Trait.hpp"
 	"bits/DD_declare_value.hpp"
 	"bits/DD_Conditional.hpp"
+	"bits/DD_AlignedStorage.hpp"
 	"bits/DD_EnableIf.hpp"
 	"bits/DD_Not.hpp"
 	"bits/DD_Or.hpp"
@@ -1735,7 +1739,7 @@
 	"DD_construct.hpp"
 	"DD_destruct.hpp"
 
-1451929759 d:\develop\repositories\libddcpp\src\standard\bits\dd_alignmentof.hpp
+1453714398 d:\develop\repositories\libddcpp\src\standard\bits\dd_alignmentof.hpp
 	<type_traits>
 	"DD_IntegralConstant.hpp"
 

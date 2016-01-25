@@ -28,6 +28,7 @@
 #		include "DD_IsNoexceptMoveAssignable.hpp"
 #	endif
 #	include "DD_IsOriginalImplementation.hpp"
+#	include "DD_AlignmentOf.hpp"
 #	include "DD_AddCV.hpp"
 #	include "DD_RemovePointer.hpp"
 #	include "DD_RemoveAllExtents.hpp"

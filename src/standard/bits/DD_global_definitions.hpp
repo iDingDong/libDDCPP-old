@@ -81,6 +81,8 @@ DD_ALIAS(CStringType, char*);
 DD_ALIAS(CStringConstType, char const*);
 DD_ALIAS(PromptType, CStringConstType);
 
+DD_ALIAS(UnitStepPointerType, char*);
+
 
 
 #	if __cplusplus >= 201103L
@@ -158,6 +160,7 @@ using detail_::GlobalPointerType;
 using detail_::CStringType;
 using detail_::CStringConstType;
 using detail_::PromptType;
+using detail_::UnitStepPointerType;
 using detail_::Direction;
 
 

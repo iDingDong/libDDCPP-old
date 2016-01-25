@@ -2,6 +2,7 @@
 #include "test_object.hpp"
 #include "standard/DDMeta.hpp"
 #include "standard/DDTrait.hpp"
+#include "standard/DDHub.hpp"
 #include "standard/bits/DD_TypeInfo.hpp"
 
 struct Big {
