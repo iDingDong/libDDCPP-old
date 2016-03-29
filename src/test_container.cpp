@@ -71,13 +71,13 @@ void test_container() {
 			}
 			DD::swap(another_ves, ves);
 
-			DD::Vessel<DD::Variant<>> variant_ves = { 1, "haha", 1.0, Test() };
+			DD::Vessel<DD::Dynamic<>> dynamic_ves = { 1, "haha", 1.0, Test() };
 			if (
-				variant_ves.get_length() != 4 ||
-				variant_ves[0].get_type() != typeid(1) ||
-				variant_ves[1].get_type() != typeid(DD::DecayType<decltype("haha")>) ||
-				variant_ves[2].get_type() != typeid(1.0) ||
-				variant_ves[3].get_type() != typeid(Test)
+				dynamic_ves.get_length() != 4 ||
+				dynamic_ves[0].get_type() != typeid(1) ||
+				dynamic_ves[1].get_type() != typeid(DD::DecayType<decltype("haha")>) ||
+				dynamic_ves[2].get_type() != typeid(1.0) ||
+				dynamic_ves[3].get_type() != typeid(Test)
 			) {
 				throw "'DD::Vessel' test failed.";
 			}

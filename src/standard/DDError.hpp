@@ -4,8 +4,10 @@
 
 
 
+#	include "bits/DD_wrap_standard_excetion.hpp"
 #	include "bits/DD_AccessDenied.hpp"
 #	include "bits/DD_AllocationFailure.hpp"
+#	include "bits/DD_SystemException.hpp"
 
 
 

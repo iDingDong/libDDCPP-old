@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename IntegerT_>
 inline IntegerT_ DD_CONSTEXPR greatest_common_divisor(
 	IntegerT_ integer_1__,
@@ -26,6 +26,15 @@ inline IntegerT_ DD_CONSTEXPR greatest_common_divisor(
 	return (integer_1__ %= integer_2__) ? greatest_common_divisor(integer_2__, integer_1__) : integer_2__;
 #	endif
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::greatest_common_divisor;
 
 
 

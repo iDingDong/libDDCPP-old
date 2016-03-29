@@ -11,6 +11,7 @@
 
 #	include "DD_ValueTypeNested.hpp"
 #	include "DD_IntegralConstant.hpp"
+#	include "DD_wrap_standard_exception.hpp"
 #	include "DD_AllocationFailure.hpp"
 #	if __cplusplus >= 201103L
 #		include "DD_IsTriviallyDestructible.hpp"
@@ -44,8 +45,8 @@ class Allocator<void> {
 	static PointerType allocate(SizeType size_) {
 		try {
 			return ::operator new(size_);
-		} catch (std::bad_alloc& error_) {
-			throw AllocationFailure("'DD::Allocator' Failed to allocate.");
+		} catch (std::bad_alloc const& error_) {
+			throw ::DD::wrap_standard_exception<AllocationFailure>(error_);
 		}
 	}
 

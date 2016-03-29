@@ -939,7 +939,7 @@ struct Ring_ {
 	public:
 	static ProcessType erase_range(Iterator begin_, Iterator end_) {
 		DD_ASSERT(
-			::DD::address_of(begin_.get_container()) == ::DD::address_of(end.get_container()),
+			::DD::address_of(begin_.get_container()) == ::DD::address_of(end_.get_container()),
 			"Invalid range: 'DD::Ring::erase_range'"
 		);
 		begin_.get_container().erase_range(begin_.get_index(), end_.get_index());

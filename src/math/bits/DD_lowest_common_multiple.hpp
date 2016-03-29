@@ -8,7 +8,7 @@
 
 
 
-DD_BEGIN_
+DD_DETAIL_BEGIN_
 template <typename IntegerT_>
 inline IntegerT_ DD_CONSTEXPR lowest_common_multiple(
 	IntegerT_ const& integer_1__,
@@ -16,6 +16,15 @@ inline IntegerT_ DD_CONSTEXPR lowest_common_multiple(
 ) DD_NOEXCEPT_AS(static_cast<IntegerT_>(integer_1__ * integer_2__ / greatest_common_divisor(integer_1__, integer_2__))) {
 	return integer_1__ * integer_2__ / greatest_common_divisor(integer_1__, integer_2__);
 }
+
+
+
+DD_DETAIL_END_
+
+
+
+DD_BEGIN_
+using detail_::lowest_common_multiple;
 
 
 

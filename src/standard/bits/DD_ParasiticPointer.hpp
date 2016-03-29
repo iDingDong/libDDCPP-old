@@ -61,13 +61,13 @@ struct Parasitifer : protected Agent<DeleterT_> {
 	public:
 	DD_DELETE_MOVE_CONSTRUCTOR(Parasitifer)
 
-#	if __cplusplus >= 201103L
 	public:
-	constexpr Parasitifer(DeleterType const& deleter_) DD_NOEXCEPT_IF(
+	DD_CONSTEXPR Parasitifer(DeleterType const& deleter_) DD_NOEXCEPT_IF(
 		noexcept(DestroyAgent(deleter_)) && noexcept(ValueType())
 	) : DestroyAgent(deleter_) {
 	}
 
+#	if __cplusplus >= 201103L
 	public:
 	template <typename... ArgumentsT__>
 	constexpr Parasitifer(ConstructTag tag_, ArgumentsT__&&... arguments___) DD_NOEXCEPT_IF(
@@ -84,7 +84,7 @@ struct Parasitifer : protected Agent<DeleterT_> {
 #	else
 	public:
 	template <typename ValueT__>
-	Parasitifer(ValueT__ const& value___) : m_value_(value___) {
+	Parasitifer(ConstructTag tag_, ValueT__ const& value___) : m_value_(value___) {
 	}
 #	endif
 

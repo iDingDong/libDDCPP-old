@@ -13,7 +13,7 @@
 #	include "bits/DD_HashOf.hpp"
 #	include "bits/DD_Range.hpp"
 #	include "bits/DD_Bitset.hpp"
-#	include "bits/DD_Variant.hpp"
+#	include "bits/DD_Dynamic.hpp"
 #	if __cplusplus >= 201103L
 #		include "bits/DD_Optional.hpp"
 #		include "bits/DD_Predicate.hpp"

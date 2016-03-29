@@ -13,6 +13,19 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="../../src/concurrency/DDThread.hpp" />
+		<Unit filename="../../src/concurrency/bits/DD_Mutex.hpp" />
+		<Unit filename="../../src/concurrency/bits/DD_Thread.hpp" />
+		<Unit filename="../../src/concurrency/bits/DD_concurrency_definitions.hpp" />
+		<Unit filename="../../src/console/DDConsole.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_ConsoleFailure.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_clear_screen.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_definitions.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_flush.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_put_at.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_set_cursor_position.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_write.hpp" />
+		<Unit filename="../../src/console/bits/DD_console_write_at.hpp" />
 		<Unit filename="../../src/dummy/bits/DD_Identification.hpp" />
 		<Unit filename="../../src/dummy/bits/DD_Object.hpp" />
 		<Unit filename="../../src/dummy/bits/DD_dummy_definitions.hpp" />
@@ -29,6 +42,7 @@
 		<Unit filename="../../src/math/bits/DD_square_root.hpp" />
 		<Unit filename="../../src/standard/DDAlgorithm.hpp" />
 		<Unit filename="../../src/standard/DDArray.hpp" />
+		<Unit filename="../../src/standard/DDCommission.hpp" />
 		<Unit filename="../../src/standard/DDCompare.hpp" />
 		<Unit filename="../../src/standard/DDCompatibility.hpp" />
 		<Unit filename="../../src/standard/DDError.hpp" />
@@ -83,6 +97,8 @@
 		<Unit filename="../../src/standard/bits/DD_ConstantList.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ConstantSequence.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ContainedByPack.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Coord.hpp" />
+		<Unit filename="../../src/standard/bits/DD_CopyOnWrite.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Create.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Decay.hpp" />
 		<Unit filename="../../src/standard/bits/DD_DefaultDeleter.hpp" />
@@ -93,6 +109,7 @@
 		<Unit filename="../../src/standard/bits/DD_EnableIf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualTo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualityComparable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_ErrorCode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Exception.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ForRange.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Function.hpp" />
@@ -191,6 +208,7 @@
 		<Unit filename="../../src/standard/bits/DD_ParasiticPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Pool.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Predicate.hpp" />
+		<Unit filename="../../src/standard/bits/DD_Producer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Range.hpp" />
 		<Unit filename="../../src/standard/bits/DD_RangeWorkaround.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ReadOnlyCall.hpp" />
@@ -212,10 +230,14 @@
 		<Unit filename="../../src/standard/bits/DD_SingleStorage.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SizeTrait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_SpecificTypeNested.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StableVessel.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StackTracer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StaticConcatenate.hpp" />
+		<Unit filename="../../src/standard/bits/DD_StaticMax.hpp" />
 		<Unit filename="../../src/standard/bits/DD_String.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StrongPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_StronglyReferable.hpp" />
+		<Unit filename="../../src/standard/bits/DD_SystemException.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tags.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Trait.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Tuple.hpp" />
@@ -257,6 +279,7 @@
 		<Unit filename="../../src/standard/bits/DD_copy_overlapped_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count.hpp" />
 		<Unit filename="../../src/standard/bits/DD_count_if.hpp" />
+		<Unit filename="../../src/standard/bits/DD_cumulative_sum.hpp" />
 		<Unit filename="../../src/standard/bits/DD_debugger_definitions.hpp" />
 		<Unit filename="../../src/standard/bits/DD_declare_value.hpp" />
 		<Unit filename="../../src/standard/bits/DD_dereference.hpp" />
@@ -289,6 +312,7 @@
 		<Unit filename="../../src/standard/bits/DD_get_string_end.hpp" />
 		<Unit filename="../../src/standard/bits/DD_get_string_length.hpp" />
 		<Unit filename="../../src/standard/bits/DD_global_definitions.hpp" />
+		<Unit filename="../../src/standard/bits/DD_have_uncaught_exception.hpp" />
 		<Unit filename="../../src/standard/bits/DD_heap_sort.hpp" />
 		<Unit filename="../../src/standard/bits/DD_heapify.hpp" />
 		<Unit filename="../../src/standard/bits/DD_inplace_merge.hpp" />
@@ -322,7 +346,6 @@
 		<Unit filename="../../src/standard/bits/DD_next.hpp" />
 		<Unit filename="../../src/standard/bits/DD_next_permutation.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partial_sort.hpp" />
-		<Unit filename="../../src/standard/bits/DD_partial_sum.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_by.hpp" />
 		<Unit filename="../../src/standard/bits/DD_partition_point.hpp" />
@@ -352,10 +375,17 @@
 		<Unit filename="../../src/standard/bits/DD_transfer_backward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transfer_forward.hpp" />
 		<Unit filename="../../src/standard/bits/DD_transform.hpp" />
+		<Unit filename="../../src/standard/bits/DD_wrap_standard_exception.hpp" />
 		<Unit filename="../../src/standard/bits/experimental/DDLab_Find.hpp" />
 		<Unit filename="../../src/standard/bits/experimental/DDLab_experimental_definitions.hpp" />
 		<Unit filename="../../src/test_algorithm.cpp" />
 		<Unit filename="../../src/test_algorithm.h" />
+		<Unit filename="../../src/test_concurrency.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../src/test_concurrency.h" />
+		<Unit filename="../../src/test_console.cpp" />
+		<Unit filename="../../src/test_console.h" />
 		<Unit filename="../../src/test_container.cpp" />
 		<Unit filename="../../src/test_container.h" />
 		<Unit filename="../../src/test_math.cpp" />

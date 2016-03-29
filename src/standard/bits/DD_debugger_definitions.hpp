@@ -9,7 +9,7 @@
 
 
 #	if !defined(DDCPP_DEBUG)
-#		define DDCPP_DEBUG DD_OFF
+#		define DDCPP_DEBUG NDBUG
 #	endif
 
 #	if !defined(DDCPP_GUARD_DESTROY)
@@ -26,10 +26,12 @@
 
 
 
+#	define DD_CURRENT_DATE __DATE__
+#	define DD_CURRENT_TIME __TIME__
 #	if __cplusplus >= 201103L
 #		define DD_CURRENT_FUNCTION __func__
 #	else
-#		define DD_CURRENT_FUNCTION "(Unknown)"
+#		define DD_CURRENT_FUNCTION DD_UNKNOWN
 #	endif
 #	define DD_CURRENT_FILE __FILE__
 #	define DD_CURRENT_LINE __LINE__
@@ -84,8 +86,29 @@ inline GlobalPointerType get_invalid_address_() DD_NOEXCEPT {
 
 
 
+#	if __cplusplus >= 201103L
+using SourceFunctionType = decltype(&*DD_CURRENT_DATE);
+using SourceFileType = decltype(&*DD_CURRENT_DATE);
+using SourceLineType = decltype(DD_CURRENT_LINE);
+
+
+
+#	endif
 DD_DETAIL_END_
 
 
 
+#	if __cplusplus >= 201103L
+DD_BEGIN_
+using detail_::SourceFunctionType;
+using detail_::SourceFileType;
+using detail_::SourceLineType;
+
+
+
+DD_END_
+
+
+
+#	endif
 #endif

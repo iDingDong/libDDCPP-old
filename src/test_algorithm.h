@@ -3,6 +3,10 @@
 
 
 
+#	define DDCPP_DEBUG DD_ON
+
+
+
 #	include "standard/DDIterator.hpp"
 #	include "standard/DDUtility.hpp"
 #	include "standard/DDHub.hpp"

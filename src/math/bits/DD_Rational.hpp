@@ -4,247 +4,313 @@
 
 
 
-#	include "../../standard/bits/DD_Tags.hpp"
-#	include "../../standard/bits/DD_IsUnsigned.hpp"
-#	if __cplusplus >= 201103L
-#		include "../../standard/bits/DD_IsBaseOf.hpp"
-#		include "../../standard/bits/DD_Common.hpp"
-#		include "../../standard/bits/DD_move.hpp"
-#		include "../../standard/bits/DD_forward.hpp"
-#	else
-#		include "../../standard/bits/DD_NestedTypeCheck.hpp"
-#	endif
-#	include "../../standard/bits/DD_BinaryOperators.hpp"
-#	include "../../standard/bits/DD_Comparable.hpp"
-#	include "../../standard/bits/DD_Pair.hpp"
-#	include "DD_greatest_common_divisor.hpp"
+#	include <standard/bits/DD_SpecificTypeNested.hpp>
+#	include <standard/bits/DD_fabricate.hpp>
+#	include <standard/bits/DD_Pair.hpp>
 
-
-
-#	define DD_RATIONAL_BEGIN DD_BEGIN_ namespace rational {
-#	define DD_RATIONAL_END } DD_END_
-
-
-
-DD_RATIONAL_BEGIN
-struct Default : DefaultTag {
-	DD_ALIAS(NumeratorType, unsigned);
-	DD_ALIAS(Denominator, int);
-
-
-};
-
-
-
-struct DefaultAccurate : DefaultTag {
-	DD_ALIAS(NumeratorType, int);
-	DD_ALIAS(Denominator, unsigned);
-
-
-};
-
-
-
-struct DefaultChar : Default {
-	DD_ALIAS(NumeratorType, unsigned char);
-	DD_ALIAS(Denominator, signed char);
-
-
-};
-
-
-
-struct DefaultCharAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, signed char);
-	DD_ALIAS(Denominator, unsigned char);
-
-
-};
-
-
-
-struct DefaultShort : Default {
-	DD_ALIAS(NumeratorType, unsigned short);
-	DD_ALIAS(Denominator, short);
-
-
-};
-
-
-
-struct DefaultShortAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, short);
-	DD_ALIAS(Denominator, unsigned short);
-
-
-};
-
-
-
-struct DefaultLong : Default {
-	DD_ALIAS(NumeratorType, unsigned long);
-	DD_ALIAS(Denominator, long);
-
-
-};
-
-
-
-struct DefaultLongAccurate : DefaultAccurate {
-	DD_ALIAS(NumeratorType, long);
-	DD_ALIAS(Denominator, unsigned long);
-
-
-};
-
-
-
-#	if __cplusplus >= 201103L
-struct DefaultLongLong : Default {
-	using NumeratorType = unsigned long long;
-	using Denominator = long long;
-
-
-};
-
-
-
-struct DefaultLongLongAccurate : DefaultAccurate {
-	using NumeratorType = long long;
-	using Denominator = unsigned long long;
-
-
-};
-
-
-
-#	endif
-DD_RATIONAL_END
-
-
-
-#	undef DD_RATIONAL_BEGIN
-#	undef DD_RATIONAL_END
+#	include "DD_absolute.hpp"
+#	include "DD_lowest_common_multiple.hpp"
 
 
 
 DD_DETAIL_BEGIN_
-#	if __cplusplus >= 201402L
-template <typename NumeratorT_, typename DenominatorT_>
-Pair<NumeratorT_, DenominatorT_> constexpr normalize_(
-	Pair<NumeratorT_, DenominatorT_> const& pair_
-) noexcept(
-	noexcept(greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second)) &&
-	noexcept(Pair<NumeratorT_, DenominatorT_>(
-		pair_.first / fabricate<Pair<NumeratorT_, DenominatorT_>>(), pair_.second / fabricate<Pair<NumeratorT_, DenominatorT_>>()
-	))
-) {
-	auto temp__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second);
-	return Pair<NumeratorT_, DenominatorT_>(pair_.first / temp__, pair_.second / temp__);
-}
+template <typename NumberT_ = int, ValidityType auto_reduce_fraction_c_ = true>
+struct Rational :
+#	if __cplusplus >= 201103L
+	Comparable<Rational<NumberT_>>
 #	else
-template <typename NumeratorT_, typename DenominatorT_>
-Pair<NumeratorT_, DenominatorT_> constexpr normalize_(
-	Pair<NumeratorT_, DenominatorT_> const& pair_,
-	CommonType<NumeratorT_, DenominatorT_> workaround__ = CommonType<NumeratorT_, DenominatorT_>()
-) noexcept(noexcept(
-	workaround__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second),
-	Pair<NumeratorT_, DenominatorT_>(pair_.first / workaround__, pair_.second / workaround__)
-)) {
-	return
-		workaround__ = greatest_common_divisor<CommonType<NumeratorT_, DenominatorT_>>(pair_.first, pair_.second),
-		Pair<NumeratorT_, DenominatorT_>(pair_.first / workaround__, pair_.second / workaround__)
-	;
-}
+	Comparable<Rational<NumberT_> >
 #	endif
-
-
-
-template <typename NumeratorT_, typename DenominatorT_, ValidityType is_divided_by_unsigned_c_ = IsUnsigned<DenominatorT_>::value>
-struct Rational_ :
-	Addable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
-	Subtractable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
-	Multipliable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
-	Dividable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>,
-	Comparable<Rational_<NumeratorT_, DenominatorT_, is_divided_by_unsigned_c_>>
 {
 	public:
-	DD_ALIAS(ThisType, Rational_<NumeratorT_ DD_COMMA DenominatorT_ DD_COMMA is_divided_by_unsigned_c_>);
-	DD_ALIAS(NumeratorType, NumeratorT_);
-	DD_ALIAS(DenominatorType, DenominatorT_);
+	DD_ALIAS(ThisType, Rational<NumberT_ DD_COMMA auto_reduce_fraction_c_>);
+	DD_SPECIFIC_TYPE_NESTED(NumberType, NumberT_);
 
 	public:
-	DD_ALIAS(ValueType, Pair<NumeratorType DD_COMMA DenominatorType>);
+	DD_VALUE_TYPE_NESTED(Pair<NumberType>);
 
 
 	private:
-	ValueType m_value_ DD_IN_CLASS_INITIALIZE(ValueType(NumeratorType() DD_COMMA DenominatorType(1)));
+	ValueType m_value_ = ValueType(0, 1);
 
 
 #	if __cplusplus >= 201103L
 	public:
-	constexpr Rational_() = default;
+	constexpr Rational() = default;
 
 	public:
-	constexpr Rational_(ThisType const& origin_) = default;
+	constexpr Rational(ThisType const& origin_) = default;
 
 	public:
-	constexpr Rational_(ThisType&& origin_) = default;
-#	else
-	public:
-	Rational_() : m_numerator_(), m_value_(NumeratorType(), DenominatorType(1)) {
-	}
-#	endif
-
-	public:
-	DD_CONSTEXPR Rational_(ValueType const& value_) : m_value_(value_) {
-	}
-
-#	if __cplusplus >= 201103L
-	public:
-	constexpr Rational_(ValueType value_) noexcept(noexcept(ValueType(move(value_)))) : m_value_(move(value_)) {
-	};
+	constexpr Rational(ThisType&& origin_) = default;
 
 	public:
 	template <typename NumeratorT__, typename DenominatorT__>
-	constexpr Rational_(NumeratorT__&& numerator___, DenominatorT__&& denominator___) noexcept(
-		noexcept(Rational_(ValueType(forward<NumeratorT__>(numerator___) DD_COMMA forward<DenominatorT__>(denominator___))))
-	) : Rational_(ValueType(forward<NumeratorT__>(numerator___), forward<DenominatorT__>(denominator___))) {
+	constexpr Rational(NumeratorT__&& numerator___, DenominatorT__&& denominator___) noexcept(
+		noexcept(ValueType(::DD::forward<NumeratorT__>(numerator___), ::DD::forward<DenominatorT__>(denominator___)))
+	) : m_value_(::DD::forward<NumeratorT__>(numerator___), ::DD::forward<DenominatorT__>(denominator___)) {
+	}
+
+	public:
+	template <typename NumberT__>
+	constexpr Rational(NumberT__&& value___) noexcept(
+		noexcept(ThisType(::DD::forward<NumberT__>(value___), 1))
+	) : ThisType(::DD::forward<NumberT__>(value___), 1) {
 	}
 #	else
 	public:
-	Rational_(ValueType const& value_) : m_value_(value_) {
+	Rational() m_value_(0, 1) {
+	}
+
+	public:
+	template <typename NumberT__>
+	Rational(NumberT__ const& value___) : m_value_(value___, 1) {
 	}
 
 	public:
 	template <typename NumeratorT__, typename DenominatorT__>
-	Rational_ (NumeratorT__ const& numerator__, DenominatorT__ const& denominator___) : m_value_(numerator__, denominator___) {
+	Rational(
+		NumeratorT__ const& numerator___, DenominatorT__ const& denominator___
+	) : m_value_(numerator___, denominator___) {
 	}
 #	endif
 
+
 #	if __cplusplus >= 201103L
 	public:
-	~Rational_() = default;
+	~Rational() = default;
 
 
 #	endif
 	public:
+	NumberReferenceType get_numerator() DD_NOEXCEPT {
+		return m_value_.first;
+	}
 
+	public:
+	NumberConstReferenceType DD_CONSTEXPR get_numerator() const DD_NOEXCEPT {
+		return m_value_.first;
+	}
+
+
+	public:
+	NumberType& get_denominator() DD_NOEXCEPT {
+		return m_value_.second;
+	}
+
+	public:
+	NumberConstReferenceType DD_CONSTEXPR get_denominator() const DD_NOEXCEPT {
+		return m_value_.second;
+	}
+
+	public:
+	NumberType DD_UNCONSTRIANED_CONSTEXPR get_fraction_reduction_divisor() const DD_NOEXCEPT_AS(NumberType(
+		::DD::greatest_common_divisor(
+			::DD::absolute(::DD::fabricate<ThisType>().get_numerator()),
+			::DD::absolute(::DD::fabricate<ThisType>().get_denominator())
+		)
+	) {
+		return ::DD::greatest_common_divisor(::DD::absolute(get_numerator()), ::DD::absolute(get_denominator()));
+	}
+
+
+	public:
+	ThisType DD_UNCONSTRIANED_CONSTEXPR get_reduced(NumberType const& divisor_) const DD_NOEXCEPT_AS(ThisType(
+		::DD::fabricate<ThisType>().get_numerator() / divisor_ DD_COMMA
+		::DD::fabricate<ThisType>().get_denominator() / divisor_
+	)) {
+		return ThisType(get_numerator() / divisor_, get_denominator() / divisor_);
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType get_reduced(NumberType const& divisor_) && DD_NOEXCEPT_IF(
+		noexcept(::DD::fabricate<ThisType>().reduce(divisor_)) &&
+		noexcept(ThisType(::DD::move(::DD::fabricate<ThisType>())))
+	) {
+		reduce(divisor_);
+		return ThisType(::DD::move(*this));
+	}
+
+#	endif
+
+	public:
+	ThisType DD_UNCONSTRIANED_CONSTEXPR get_lowest_term() const DD_NOEXCEPT_AS(ThisType(
+		::DD::fabricate<ThisType>().get_reduced(::DD::fabricate<ThisType>().get_fraction_reduction_divisor())
+	)) {
+		return get_reduced(get_fraction_reduction_divisor());
+	}
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType get_lowest_term() && DD_NOEXCEPT_IF(
+		noexcept(::DD::fabricate<ThisType>().reduce_fraction()) &&
+		noexcept(ThisType(::DD::move(::DD::fabricate<ThisType>())))
+	) {
+		reduce_fraction();
+		return ThisType(::DD::move(*this));
+	}
+
+#	endif
+
+	public:
+	ProcessType reduce(NumberType const& divisor_) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().get_numerator() /= divisor_
+	) {
+		get_numerator() /= divisor_;
+		get_denominator() /= divisor_;
+	}
+
+
+	public:
+	ProcessType reduce_fraction() DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>().reduce(::DD::fabricate<ThisType>().get_fraction_reduction_divisor())
+	) {
+		reduce(get_fraction_reduction_divisor());
+	}
+
+
+	//public:
+	//static ProcessType add_with(ThisType& rational_1__, ThisType const& rational_2__) DD_NOEXCEPT_AS() {
+		//rational_1__.get_numerator()
+	//}
+
+
+	public:
+	template <typename IteratorT__>
+	IteratorT__ unguarded_write_to_string(IteratorT__ begin___) const DD_NOEXCEPT {
+		begin___ = ::DD::unguarded_write_to_string(get_numerator(), begin___);
+		*begin___ = DD_MODIFY_TRAIT(IteratorValue, IteratorT__)('/');
+		return ::DD::unguarded_write_to_string(get_denominator(), begin___ + 1);
+	}
+
+
+	public:
+	template <typename IteratorT__>
+	IteratorT__ write_to_string(IteratorT__ begin___, IteratorT__ end___) const DD_NOEXCEPT {
+		begin___ = ::DD::write_to_string(get_numerator(), begin___, end___);
+		if (begin__ != end__) {
+			*begin___ = DD_MODIFY_TRAIT(IteratorValue, IteratorT__)('/');
+			return ::DD::write_to_string(get_denominator(), begin___ + 1, end___);
+		}
+		return end___;
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType&& origin_) = default;
+#	else
+	public:
+	template <typename ValueT__>
+	ThisType& operator =(ValueT__ origin_) {
+
+	}
+#	endif
+
+
+	public:
+	ThisType operator -() const DD_CALLABLE_WITH_LVALUE_ONLY DD_NOEXCEPT_AS(ThisType(
+		-::DD::fabricate<ThisType>().get_numerator() DD_COMMA ::DD::fabricate<ThisType>().get_denominator()
+	)) {
+		return ThisType(-get_numerator(), get_denominator());
+	}
+
+#	if __cplusplus >= 201103L
+#	endif
 
 
 };
 
 
 
-template <typename NumeratorT_, typename DenominatorT_>
-struct Rational_<NumeratorT_, DenominatorT_, true> :
-	Addable<Rational_<NumeratorT_, DenominatorT_, true>>,
-	Subtractable<Rational_<NumeratorT_, DenominatorT_, true>>,
-	Multipliable<Rational_<NumeratorT_, DenominatorT_, true>>,
-	Dividable<Rational_<NumeratorT_, DenominatorT_, true>>,
-	Comparable<Rational_<NumeratorT_, DenominatorT_, true>>
-{
+template <typename NumberT_>
+struct Rational<NumberT_, true> : private Rational<NumberT_, false> {
 	public:
+	DD_ALIAS(SuperType, Rational<NumberT_ DD_COMMA false>)
+	DD_ALIAS(ThisType, Rational<NumberT_ DD_COMMA true>);
+	DD_SPECIFIC_TYPE_NESTED(NumberType, NumberT_);
+
+
+#	if __cplusplus >= 201103L
+    public:
+	constexpr Rational() = default;
+
+	public:
+	constexpr Rational(ThisType const& origin_) = default;
+
+	public:
+	constexpr Rational(ThisType&& origin_) = default;
+
+	public:
+	constexpr Rational(SuperType const& origin_) noexcept(
+		noexcept(SuperType(origin_.get_lowest_term()))
+	) : SuperType(origin_.get_lowest_term()) {
+	}
+
+	public:
+	constexpr Rational(SuperType&& origin_) noexcept(
+		noexcept(SuperType(::DD::move(origin_).get_lowest_term()))
+	) : SuperType(::DD::move(origin_).get_lowest_term()) {
+	}
+
+	public:
+	template <typename NumeratorT__, typename DenominatorT__>
+	constexpr Rational(NumeratorT__&& numerator___, DenominatorT__&& denominator___) noexcept(noexcept(
+		ThisType(SuperType(::DD::forward<NumeratorT__>(numerator___), ::DD::forward<DenominatorT__>(denominator___)))
+	)) : ThisType(SuperType(::DD::forward<NumeratorT__>(numerator___), ::DD::forward<DenominatorT__>(denominator___))) {
+	}
+#	else
+	public:
+	Rational() {
+	}
+#	endif
+
+
+	public:
+	NumberConstReferenceType DD_CONSTEXPR get_numerator() const DD_NOEXCEPT {
+		return SuperType::get_numerator();
+	}
+
+
+	public:
+	NumberConstReferenceType DD_CONSTEXPR get_denominator() const DD_NOEXCEPT {
+		return SuperType::get_denominator();
+	}
+
+
+#	if __cplusplus >= 201103L
+	public:
+	ThisType& operator =(ThisType const& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType&& origin_) = default;
+
+	public:
+	ThisType& operator =(ThisType& origin_) DD_NOEXCEPT_AS(
+		::DD::fabricate<ThisType>() = static_cast<ThisType const&>(origin_)
+	) {
+		*this = static_cast<ThisType const&>(origin_);
+	}
+
+	public:
+	template <typename ValueT__>
+	ThisType& operator =(ValueT__&& value___) noexcept(
+		noexcept((::DD::fabricate<SuperType>() = ::DD::forward<ValueT__>(value___)).reduce_fraction())
+	) {
+		static_cast<SuperType&>(*this) = ::DD::forward<ValueT__>(value___);
+		reduce_fraction();
+	}
+
+#	endif
+	public:
+	ThisType& operator =(SuperType const& origin_) {
+		static_cast<SuperType&>(*this) = origin_;
+		reduce_fraction();
+	}
 
 
 };
@@ -256,13 +322,7 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
-template <typename NumeratorT_, typename DenominatorT_ = NumeratorT_>
-#	if __cplusplus >= 201103L
-using Rational = detail_::Rational_<NumeratorT_, DenominatorT_>;
-#	else
-struct Rational : detail_::Rational_<NumeratorT_, DenominatorT_> {
-};
-#	endif
+using detail_::Rational;
 
 
 

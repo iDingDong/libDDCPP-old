@@ -1,17 +1,13 @@
 #ifndef TEST_OBJECT_HPP_
 #	define TEST_OBJECT_HPP_ 1
 
-
+#	define DDCPP_DEBUG DD_ON
 
 #	include <iostream>
-
-
 
 #	ifndef TEST_OBJECT_AUTO_PROMPT
 #		define TEST_OBJECT_AUTO_PROMPT 0
 #	endif
-
-
 
 template <int workaround = 0>
 struct TestImpl {

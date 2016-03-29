@@ -10,8 +10,15 @@
 
 #	define DD_CPP_LIBRARY 0000L
 
-#	define DD_ON 1
-#	define DD_OFF 0
+#	define DD_TRUE 1
+#	define DD_FALSE 0
+
+#	define DD_ON DD_TRUE
+#	define DD_OFF DD_FALSE
+
+#	define DD_ZERO 0
+
+#	define DD_UNKNOWN "(Unknown)"
 
 #	if !defined(DDCPP_COMPAT_DEPRECATION)
 #		define DDCPP_COMPAT_DEPRECATION DD_OFF

@@ -46,23 +46,23 @@ void test_utility() {
 	}
 	{
 		{
-			DD::Variant<> variant_1((Test()));
-			if (variant_1.get_type() != typeid(Test)) {
-				throw "'DD::Variant' test failed.";
+			DD::Dynamic<> dunamic_1((Test()));
+			if (dunamic_1.get_type() != typeid(Test)) {
+				throw "'DD::Dynamic' test failed.";
 			}
-			variant_1 = 2;
-			if (variant_1.to<int>() != 2) {
-				throw "'DD::Variant' test failed.";
+			dunamic_1 = 2;
+			if (dunamic_1.to<int>() != 2) {
+				throw "'DD::Dynamic' test failed.";
 			}
-			variant_1 = Test();
-			Test tst = variant_1.to<Test>();
-			variant_1 = 3.3;
-			if (variant_1.to<double>() < 3.0) {
-				throw "'DD::Variant' test failed.";
+			dunamic_1 = Test();
+			Test tst = dunamic_1.to<Test>();
+			dunamic_1 = 3.3;
+			if (dunamic_1.to<double>() < 3.0) {
+				throw "'DD::Dynamic' test failed.";
 			}
 		}
 		if (Test::count != 0) {
-			throw "'DD::Variant' test failed.";
+			throw "'DD::Dynamic' test failed.";
 		}
 	}
 	{
