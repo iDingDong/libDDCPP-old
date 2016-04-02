@@ -18,7 +18,7 @@
 	"bits/DD_BuildInTypes.hpp"
 	"bits/DD_Tags.hpp"
 
-1459596452 d:\develop\repositories\libddcpp\src\standard\bits\dd_typeinfo.hpp
+1459605729 d:\develop\repositories\libddcpp\src\standard\bits\dd_typeinfo.hpp
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
@@ -908,7 +908,7 @@
 1456737907 d:\develop\repositories\libddcpp\src\math\bits\dd_greatest_common_divisor.hpp
 	"DD_math_definitions.hpp"
 
-1451984894 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
+1459604867 source:d:\develop\repositories\libddcpp\src\test_memory.cpp
 	"test_memory.h"
 	"test_object.hpp"
 	"standard/DDMemory.hpp"
@@ -1751,7 +1751,7 @@
 	"DD_IsReferable.hpp"
 	"DD_global_definitions.hpp"
 
-1459604593 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
+1459604658 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
 	"DD_ValueTypeNested.hpp"
 	"DD_Comparable.hpp"
 	"DD_get_pointer.hpp"
