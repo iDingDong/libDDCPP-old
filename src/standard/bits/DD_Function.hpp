@@ -13,8 +13,10 @@
 #	include "DD_Decay.hpp"
 #	include "DD_NeedInstance.hpp"
 #	include "DD_TypeInfo.hpp"
-#	include "DD_move.hpp"
 #	include "DD_release.hpp"
+#	include "DD_construct.hpp"
+#	include "DD_destruct.hpp"
+#	include "DD_swap.hpp"
 #	include "DD_Allocateable.hpp"
 #	include "DD_Functor.hpp"
 

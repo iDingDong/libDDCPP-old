@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1459267157 source:d:\develop\repositories\libddcpp\src\main.cpp
+1459598001 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
+	"standard/DDFunctional.hpp"
 	"standard/DDHub.hpp"
-	"standard/DDCommission.hpp"
 	"test_meta.h"
 	"test_memory.h"
 	"test_algorithm.h"
@@ -18,7 +18,7 @@
 	"bits/DD_BuildInTypes.hpp"
 	"bits/DD_Tags.hpp"
 
-1443513053 d:\develop\repositories\libddcpp\src\standard\bits\dd_typeinfo.hpp
+1459596452 d:\develop\repositories\libddcpp\src\standard\bits\dd_typeinfo.hpp
 	<typeinfo>
 	"DD_global_definitions.hpp"
 
@@ -612,7 +612,7 @@
 
 1459267237 d:\develop\repositories\libddcpp\src\test_meta.h
 
-1459267231 d:\develop\repositories\libddcpp\src\test_memory.h
+1459596513 d:\develop\repositories\libddcpp\src\test_memory.h
 
 1459267190 d:\develop\repositories\libddcpp\src\test_algorithm.h
 	"standard/DDIterator.hpp"
@@ -916,16 +916,16 @@
 1459267252 d:\develop\repositories\libddcpp\src\test_object.hpp
 	<iostream>
 
-1452010986 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
+1459604526 d:\develop\repositories\libddcpp\src\standard\ddmemory.hpp
 	"bits/DD_size_distance.hpp"
 	"bits/DD_Deleter.hpp"
 	"bits/DD_Destroy.hpp"
 	"bits/DD_Pool.hpp"
+	"bits/DD_ObserverPointer.hpp"
 	"bits/DD_UniquePointer.hpp"
 	"bits/DD_ParasiticPointer.hpp"
 	"bits/DD_IntrusivePointer.hpp"
-	"bits/DD_WeakPointer.hpp"
-	"bits/DD_ObserverPointer.hpp"
+	"bits/DD_MonitorPointer.hpp"
 
 1451642152 d:\develop\repositories\libddcpp\src\standard\bits\dd_defaultdeleter.hpp
 	"DD_ValueTypeNested.hpp"
@@ -1035,12 +1035,14 @@
 1443513185 d:\develop\repositories\libddcpp\src\standard\bits\dd_runtimeerror.hpp
 	"DD_Exception.hpp"
 
-1451797455 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
+1459598320 d:\develop\repositories\libddcpp\src\standard\bits\dd_function.hpp
 	"DD_Decay.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_TypeInfo.hpp"
-	"DD_move.hpp"
 	"DD_release.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
+	"DD_swap.hpp"
 	"DD_Allocateable.hpp"
 	"DD_Functor.hpp"
 
@@ -1749,9 +1751,10 @@
 	"DD_IsReferable.hpp"
 	"DD_global_definitions.hpp"
 
-1452011175 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
-	"DD_WeakPointer.hpp"
-	"DD_SharedPointer.hpp"
+1459604593 d:\develop\repositories\libddcpp\src\standard\bits\dd_observerpointer.hpp
+	"DD_ValueTypeNested.hpp"
+	"DD_Comparable.hpp"
+	"DD_get_pointer.hpp"
 
 1452275794 d:\develop\repositories\libddcpp\src\standard\bits\dd_addassignwith.hpp
 	"DD_IntegralConstant.hpp"
@@ -1898,4 +1901,18 @@
 1459267063 d:\develop\repositories\libddcpp\src\standard\bits\dd_have_uncaught_exception.hpp
 	<exception>
 	"DD_global_definitions.hpp"
+
+1459596421 d:\develop\repositories\libddcpp\src\standard\bits\dd_monitorpointer.hpp
+	"DD_WeakPointer.hpp"
+	"DD_SharedPointer.hpp"
+
+1459601004 d:\develop\repositories\libddcpp\src\standard\ddfunctional.hpp
+	"bits/DD_EmptyPolicy.hpp"
+	"bits/DD_LessThan.hpp"
+	"bits/DD_GreaterThan.hpp"
+	"bits/DD_bind.hpp"
+	"bits/DD_Function.hpp"
+
+1459600989 d:\develop\repositories\libddcpp\src\standard\bits\dd_emptypolicy.hpp
+	"DD_forward.hpp"
 

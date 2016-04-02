@@ -4,8 +4,11 @@
 
 
 
-#	include "bits/DD_FunctorLess.hpp"
-#	include "bits/DD_FunctorGreater.hpp"
+#	include "bits/DD_EmptyPolicy.hpp"
+#	include "bits/DD_LessThan.hpp"
+#	include "bits/DD_GreaterThan.hpp"
+#	include "bits/DD_bind.hpp"
+#	include "bits/DD_Function.hpp"
 
 
 

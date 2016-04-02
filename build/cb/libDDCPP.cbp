@@ -106,6 +106,7 @@
 		<Unit filename="../../src/standard/bits/DD_Dereferenceable.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Destroy.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Dynamic.hpp" />
+		<Unit filename="../../src/standard/bits/DD_EmptyPolicy.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EnableIf.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualTo.hpp" />
 		<Unit filename="../../src/standard/bits/DD_EqualityComparable.hpp" />
@@ -197,6 +198,7 @@
 		<Unit filename="../../src/standard/bits/DD_ListIterator.hpp" />
 		<Unit filename="../../src/standard/bits/DD_ListNode.hpp" />
 		<Unit filename="../../src/standard/bits/DD_MemberFunctionCheck.hpp" />
+		<Unit filename="../../src/standard/bits/DD_MonitorPointer.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NeedInstance.hpp" />
 		<Unit filename="../../src/standard/bits/DD_NestedTypeCheck.hpp" />
 		<Unit filename="../../src/standard/bits/DD_Nil.hpp" />

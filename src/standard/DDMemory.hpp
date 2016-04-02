@@ -8,11 +8,11 @@
 #	include "bits/DD_Deleter.hpp"
 #	include "bits/DD_Destroy.hpp"
 #	include "bits/DD_Pool.hpp"
+#	include "bits/DD_ObserverPointer.hpp"
 #	include "bits/DD_UniquePointer.hpp"
 #	include "bits/DD_ParasiticPointer.hpp"
 #	include "bits/DD_IntrusivePointer.hpp"
-#	include "bits/DD_WeakPointer.hpp"
-#	include "bits/DD_ObserverPointer.hpp"
+#	include "bits/DD_MonitorPointer.hpp"
 
 
 

@@ -2,6 +2,7 @@
 
 #include "standard/DDGlobal.hpp"
 #include "standard/DDIterator.hpp"
+#include "standard/DDFunctional.hpp"
 #include "standard/DDHub.hpp"
 
 #include "test_meta.h"
