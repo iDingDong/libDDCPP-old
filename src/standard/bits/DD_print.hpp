@@ -29,14 +29,17 @@ struct EndLineTag : Tag {
 
 
 struct Print {
+	public:
 	DD_ALIAS(ThisType, Print);
 
 
 #	if __cplusplus >= 201103L
+	public:
 	ThisType const& operator ()() const DD_NOEXCEPT {
 		return *this;
 	}
 
+	public:
 	template <typename ValueT__, typename... ValuesT__>
 	ThisType const& operator ()(
 		ValueT__ const& value___,
@@ -47,22 +50,26 @@ struct Print {
 
 
 #	endif
+	public:
 	template <typename ValueT__>
 	ThisType const& operator ,(ValueT__ const& value___) const DD_NOEXCEPT_AS(std::cout << value___) {
 		std::cout << value___;
 		return *this;
 	}
 
+	public:
 	ThisType const& operator ,(FlushTag tag_) const DD_NOEXCEPT_AS(std::cout << std::flush) {
 		std::cout << std::flush;
 		return *this;
 	}
 
+	public:
 	ThisType const& operator ,(EndLineTag tag_) const DD_NOEXCEPT_AS(std::cout << std::endl) {
 		std::cout << std::endl;
 		return *this;
 	}
 
+	public:
 	ThisType const& operator ,(VersionTag tag_) const DD_NOEXCEPT_AS(
 		fabricate<ThisType>() DD_COMMA
 		"libDDCPP\nversion: " DD_COMMA

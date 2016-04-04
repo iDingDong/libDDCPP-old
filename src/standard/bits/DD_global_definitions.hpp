@@ -82,6 +82,8 @@ using PointerType = ValueT*;
 #	endif
 DD_ALIAS(GlobalPointerType, void*);
 DD_ALIAS(GlobalConstPointerType, void const*);
+DD_ALIAS(GlobalVolatilePointerType, void volatile*);
+DD_ALIAS(GlobalConstVolatilePointerType, void const volatile*);
 
 DD_ALIAS(CStringType, char*);
 
