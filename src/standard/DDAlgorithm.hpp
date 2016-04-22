@@ -8,6 +8,7 @@
 #	include "bits/DD_max.hpp"
 #	include "bits/DD_min_max.hpp"
 #	include "bits/DD_accumulate.hpp"
+#	include "bits/DD_product.hpp"
 #	include "bits/DD_cumulative_sum.hpp"
 #	include "bits/DD_equal.hpp"
 #	include "bits/DD_less.hpp"

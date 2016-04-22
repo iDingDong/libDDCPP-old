@@ -18,7 +18,7 @@ inline ProcessType put_at(CharactorType charactor_, RealLengthType count_, Coord
 		GetStdHandle(STD_OUTPUT_HANDLE),
 		charactor_,
 		count_,
-		COORD{ coord_.x, coord_.y },
+		::DD::console::detail_::convert_coord_(coord_),
 		::DD::address_of(workaround_)
 	)) {
 		throw ConsoleFailure("Unable to print: 'DD::console::put_at'", GetLastError());

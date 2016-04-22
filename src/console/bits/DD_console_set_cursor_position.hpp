@@ -13,7 +13,7 @@ inline ProcessType set_cursor_position(Coord coord_) {
 #	if DD_CONSOLE_IS_ON_WIN32
 	if (!SetConsoleCursorPosition(
 		GetStdHandle(STD_OUTPUT_HANDLE),
-		COORD{ coord_.x, coord_.y }
+		::DD::console::detail_::convert_coord_(coord_)
 	)) {
 		throw ConsoleFailure("Unable to print: 'DD::console::put_at'", GetLastError());
 	}

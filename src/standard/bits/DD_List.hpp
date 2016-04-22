@@ -122,7 +122,7 @@ struct List_<void> {
 
 
 	public:
-	LengthType get_length() const DD_NOEXCEPT {
+	LengthType count_element() const DD_NOEXCEPT {
 		return ::DD::length_difference(begin(), end());
 	}
 

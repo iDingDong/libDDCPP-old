@@ -5,7 +5,6 @@
 
 
 #	include "DD_InitializerList.hpp"
-#	include "DD_Allocator.hpp"
 #	include "DD_BatchRange.hpp"
 #	include "DD_UndirectionalListIterator.hpp"
 
@@ -101,7 +100,7 @@ struct UndirectionalList_<void> {
 
 
 	public:
-	LengthType get_length() const DD_NOEXCEPT {
+	LengthType count_element() const DD_NOEXCEPT {
 		return ::DD::length_difference(begin(), end());
 	}
 
@@ -614,7 +613,7 @@ struct UndirectionalList : protected Allocateable<AllocatorT_>, UndirectionalLis
 
 	public:
 	AllocatorType& get_allocator() const DD_NOEXCEPT {
-		return AllocateAgent::get_allocator;
+		return AllocateAgent::get_allocator();
 	}
 
 
@@ -637,22 +636,16 @@ struct UndirectionalList : protected Allocateable<AllocatorT_>, UndirectionalLis
 #	if __cplusplus >= 201103L
 	template <typename... ArgumentsT__>
 	Iterator create_node_(ArgumentsT__&&... arguments___) {
+		return Iterator(::DD::detail_::create_undirectional_list_node_<ValueType>(
+			get_allocator(), ::DD::forward<ArgumentsT__>(arguments___)...
+		));
+	}
 #	else
 	template <typename ValueT__>
 	Iterator create_node_(ValueT__ const& value___) {
-#	endif
-		NodePointerType new_node_ = static_cast<NodePointerType>(AllocateAgent::basic_allocate(sizeof(NodeType)));
-		try {
-#	if __cplusplus >= 201103L
-			::DD::construct(::DD::address_of(new_node_->value), ::DD::forward<ArgumentsT__>(arguments___)...);
-#	else
-			::DD::construct(::DD::address_of(new_node_->value), value___);
-#	endif
-		} catch(...) {
-			AllocateAgent::basic_deallocate(new_node_, sizeof(NodeType));
-		}
-		return Iterator(new_node_);
+		return Iterator(::DD::detail_::create_undirectional_list_node_<ValueType>(get_allocator(), value));
 	}
+#	endif
 
 
 	private:
@@ -687,8 +680,7 @@ struct UndirectionalList : protected Allocateable<AllocatorT_>, UndirectionalLis
 
 	private:
 	ProcessType destroy_node_(Iterator target_) DD_NOEXCEPT {
-		::DD::destruct(target_.unguarded_get_pointer());
-		AllocateAgent::basic_deallocate(target_.get_node_pointer(), sizeof(NodeType));
+		::DD::detail_::destroy_undirectional_list_node_(get_allocator(), target_.get_node_pointer());
 	}
 
 

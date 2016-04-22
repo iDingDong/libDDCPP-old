@@ -93,7 +93,7 @@ void test_container() {
 			DD::List<Test> lst_1{ Test(), Test() };
 			lst_1.push_back(Test());
 			if (
-				lst_1.get_length() != 3 ||
+				lst_1.count_element() != 3 ||
 				Test::count != 3
 			) {
 				throw "'DD::List' test failed.";
@@ -101,7 +101,7 @@ void test_container() {
 
 			DD::List<Test> lst_2(DD::batch_tag, 3);
 			if (
-				lst_2.get_length() != 3 ||
+				lst_2.count_element() != 3 ||
 				Test::count != 6
 			) {
 				throw "'DD::List' test failed.";
@@ -109,7 +109,7 @@ void test_container() {
 
 			DD::List<Test> lst_3(DD::Vessel<Test>(DD::batch_tag, 4));
 			if (
-				lst_3.get_length() != 4 ||
+				lst_3.count_element() != 4 ||
 				Test::count != 10
 			) {
 				throw "'DD::List' test failed.";
@@ -117,7 +117,7 @@ void test_container() {
 
 			lst_2.erase(DD::next(lst_2.begin()));
 			if (
-				lst_2.get_length() != 2 ||
+				lst_2.count_element() != 2 ||
 				Test::count != 9
 			) {
 				throw "'DD::List' test failed.";
@@ -125,7 +125,7 @@ void test_container() {
 
 			lst_3.erase_range(DD::next(lst_3.begin()), DD::previous(lst_3.end()));
 			if (
-				lst_3.get_length() != 2 ||
+				lst_3.count_element() != 2 ||
 				Test::count != 7
 			) {
 				throw "'DD::List' test failed.";
@@ -133,28 +133,28 @@ void test_container() {
 
 			DD::List<Test> lst_4 = lst_1;
 			if (
-				lst_4.get_length() != 3 ||
+				lst_4.count_element() != 3 ||
 				Test::count != 10
 			) {
 				throw "'DD::List' test failed.";
 			}
 			lst_4 = lst_3;
 			if (
-				lst_4.get_length() != 2 ||
+				lst_4.count_element() != 2 ||
 				Test::count != 9
 			) {
 				throw "'DD::List' test failed.";
 			}
 			lst_4 = DD::Vessel<Test>(DD::batch_tag, 1);
 			if (
-				lst_4.get_length() != 1 ||
+				lst_4.count_element() != 1 ||
 				Test::count != 8
 			) {
 				throw "'DD::List' test failed.";
 			}
 			DD::swap(lst_1, lst_4);
 			if (
-				lst_4.get_length() != 3 ||
+				lst_4.count_element() != 3 ||
 				Test::count != 8
 			) {
 				throw "'DD::List' test failed.";
@@ -162,7 +162,7 @@ void test_container() {
 
 			lst_1.splice(lst_1.end(), lst_4.begin(), lst_4.end());
 			if (
-				lst_1.get_length() != 4 ||
+				lst_1.count_element() != 4 ||
 				Test::count != 8
 			) {
 				throw "'DD::List' test failed.";

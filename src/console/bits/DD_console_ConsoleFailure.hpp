@@ -28,24 +28,24 @@ struct ConsoleFailure : ::DD::Exception {
 
 
 	public:
-	constexpr ConsoleFailure() = default;
+	ConsoleFailure() = default;
 
 	public:
-	constexpr ConsoleFailure(ThisType const& origin_) = default;
+	ConsoleFailure(ThisType const& origin_) = default;
 
 	public:
-	constexpr ConsoleFailure(ThisType&& origin_) = default;
+	ConsoleFailure(ThisType&& origin_) = default;
 
 	public:
-	constexpr ConsoleFailure(PromptType prompt_) noexcept : SuperType(prompt_) {
+	ConsoleFailure(PromptType prompt_) noexcept : SuperType(prompt_) {
 	}
 
 	public:
-	constexpr ConsoleFailure(ErrorCodeType code_) noexcept : m_code_(code_) {
+	ConsoleFailure(ErrorCodeType code_) noexcept : m_code_(code_) {
 	}
 
 	public:
-	constexpr ConsoleFailure(
+	ConsoleFailure(
 		PromptType prompt_, ErrorCodeType code_
 	) noexcept : SuperType(prompt_), m_code_(code_) {
 	}
@@ -53,6 +53,12 @@ struct ConsoleFailure : ::DD::Exception {
 
 	public:
 	~ConsoleFailure() override = default;
+
+
+	public:
+	ErrorCodeType get_code() const noexcept {
+		return m_code_;
+	}
 
 
 	public:

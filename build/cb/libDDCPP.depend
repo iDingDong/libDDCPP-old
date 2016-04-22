@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1459598001 source:d:\develop\repositories\libddcpp\src\main.cpp
+1459921112 source:d:\develop\repositories\libddcpp\src\main.cpp
 	"standard/DDGlobal.hpp"
 	"standard/DDIterator.hpp"
 	"standard/DDFunctional.hpp"
@@ -28,7 +28,7 @@
 
 1450100514 d:\develop\repositories\libddcpp\src\standard\bits\dd_compatibility_definitions.hpp
 
-1450096377 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
+1459848013 d:\develop\repositories\libddcpp\src\standard\bits\dd_buildintypes.hpp
 	<cstdint>
 	"DD_global_definitions.hpp"
 
@@ -41,11 +41,12 @@
 1451406770 d:\develop\repositories\libddcpp\src\standard\bits\dd_tags.hpp
 	"DD_Nil.hpp"
 
-1454170670 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
+1460789740 d:\develop\repositories\libddcpp\src\standard\ddalgorithm.hpp
 	"bits/DD_min.hpp"
 	"bits/DD_max.hpp"
 	"bits/DD_min_max.hpp"
 	"bits/DD_accumulate.hpp"
+	"bits/DD_product.hpp"
 	"bits/DD_cumulative_sum.hpp"
 	"bits/DD_equal.hpp"
 	"bits/DD_less.hpp"
@@ -825,10 +826,9 @@
 	"DD_destroy.hpp"
 	"DD_dereference.hpp"
 
-1454141798 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
+1460219946 d:\develop\repositories\libddcpp\src\standard\bits\dd_allocator.hpp
 	<cstdlib>
 	<new>
-	<iostream>
 	"DD_ValueTypeNested.hpp"
 	"DD_IntegralConstant.hpp"
 	"DD_wrap_standard_exception.hpp"
@@ -1211,7 +1211,7 @@
 	"bits/DD_UndirectionalList.hpp"
 	"bits/DD_List.hpp"
 
-1452442924 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
+1459921061 d:\develop\repositories\libddcpp\src\standard\bits\dd_list.hpp
 	"DD_IteratorNested.hpp"
 	"DD_NeedInstance.hpp"
 	"DD_IteratorReverse.hpp"
@@ -1359,7 +1359,7 @@
 
 1459267214 d:\develop\repositories\libddcpp\src\test_container.h
 
-1458981247 source:d:\develop\repositories\libddcpp\src\test_container.cpp
+1459921093 source:d:\develop\repositories\libddcpp\src\test_container.cpp
 	"test_container.h"
 	"test_object.hpp"
 	"test_algorithm.h"
@@ -1644,9 +1644,8 @@
 	"DD_NeedInstance.hpp"
 	"DD_get_instance.hpp"
 
-1452009051 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
+1461243985 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallist.hpp
 	"DD_InitializerList.hpp"
-	"DD_Allocator.hpp"
 	"DD_BatchRange.hpp"
 	"DD_UndirectionalListIterator.hpp"
 
@@ -1658,8 +1657,10 @@
 	"DD_address_of.hpp"
 	"DD_UndirectionalListNode.hpp"
 
-1451232234 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistnode.hpp
+1461243370 d:\develop\repositories\libddcpp\src\standard\bits\dd_undirectionallistnode.hpp
 	"DD_ValueStorage.hpp"
+	"DD_construct.hpp"
+	"DD_destruct.hpp"
 	"DD_swap.hpp"
 
 1451458553 d:\develop\repositories\libddcpp\src\standard\bits\dd_hashtable.hpp
@@ -1797,7 +1798,7 @@
 1453616852 d:\develop\repositories\libddcpp\src\standard\bits\dd_not.hpp
 	"DD_IntegralConstant.hpp"
 
-1453647714 d:\develop\repositories\libddcpp\src\standard\bits\dd_polymorphic_cast.hpp
+1459751048 d:\develop\repositories\libddcpp\src\standard\bits\dd_polymorphic_cast.hpp
 	"DD_debugger_definitions.hpp"
 	"DD_address_of.hpp"
 
@@ -1843,21 +1844,22 @@
 
 1459267207 d:\develop\repositories\libddcpp\src\test_console.h
 
-1458831324 source:d:\develop\repositories\libddcpp\src\test_console.cpp
+1461236697 source:d:\develop\repositories\libddcpp\src\test_console.cpp
 	"test_console.h"
-	<thread>
-	<chrono>
+	"standard/DDHub.hpp"
 	"console/DDConsole.hpp"
 
-1458821426 d:\develop\repositories\libddcpp\src\console\bits\dd_console_put_at.hpp
+1459919066 d:\develop\repositories\libddcpp\src\console\bits\dd_console_put_at.hpp
 	<standard/bits/DD_address_of.hpp>
 	"DD_console_ConsoleFailure.hpp"
 
-1458788460 d:\develop\repositories\libddcpp\src\console\bits\dd_console_consolefailure.hpp
+1459785947 d:\develop\repositories\libddcpp\src\console\bits\dd_console_consolefailure.hpp
 	<standard/bits/DD_Exception.hpp>
 	"DD_console_definitions.hpp"
 
-1458803206 d:\develop\repositories\libddcpp\src\console\bits\dd_console_definitions.hpp
+1459919084 d:\develop\repositories\libddcpp\src\console\bits\dd_console_definitions.hpp
+	<tchar.h>
+	<wchar.h>
 	<windows.h>
 	<standard/bits/DD_Coord.hpp>
 
@@ -1865,18 +1867,18 @@
 	"DD_console_definitions.hpp"
 	<cstdlib>
 
-1458829182 d:\develop\repositories\libddcpp\src\console\ddconsole.hpp
+1459784163 d:\develop\repositories\libddcpp\src\console\ddconsole.hpp
 	"bits/DD_console_set_cursor_position.hpp"
 	"bits/DD_console_write.hpp"
 	"bits/DD_console_put_at.hpp"
+	"bits/DD_console_put.hpp"
 	"bits/DD_console_clear_screen.hpp"
 
-1458828973 d:\develop\repositories\libddcpp\src\console\bits\dd_console_write.hpp
-	<standard/bits/DD_address_of.hpp>
+1459946646 d:\develop\repositories\libddcpp\src\console\bits\dd_console_write.hpp
 	<standard/bits/DD_get_string_length.hpp>
-	"DD_console_ConsoleFailure.hpp"
+	"DD_console_write_length.hpp"
 
-1458829100 d:\develop\repositories\libddcpp\src\console\bits\dd_console_set_cursor_position.hpp
+1459918238 d:\develop\repositories\libddcpp\src\console\bits\dd_console_set_cursor_position.hpp
 	"DD_console_ConsoleFailure.hpp"
 
 1458981206 d:\develop\repositories\libddcpp\src\standard\bits\dd_dynamic.hpp
@@ -1915,4 +1917,33 @@
 
 1459600989 d:\develop\repositories\libddcpp\src\standard\bits\dd_emptypolicy.hpp
 	"DD_forward.hpp"
+
+1459918523 d:\develop\repositories\libddcpp\src\console\bits\dd_console_put.hpp
+	<standard/bits/DD_address_of.hpp>
+	"DD_console_Pixel.hpp"
+	"DD_console_put_at.hpp"
+
+1459877291 d:\develop\repositories\libddcpp\src\console\bits\dd_console_pixel.hpp
+	"DD_console_TextAttribute.hpp"
+
+1459917874 d:\develop\repositories\libddcpp\src\console\bits\dd_console_textattribute.hpp
+	"DD_console_Color.hpp"
+
+1459917841 d:\develop\repositories\libddcpp\src\console\bits\dd_console_color.hpp
+	<standard/bits/DD_BuildInTypes.hpp>
+	<standard/bits/DD_ValueTypeNested.hpp>
+	<standard/bits/DD_EqualityComparable.hpp>
+	"DD_console_definitions.hpp"
+
+1459946694 d:\develop\repositories\libddcpp\src\console\bits\dd_console_write_length.hpp
+	<standard/bits/DD_address_of.hpp>
+	"DD_console_ConsoleFailure.hpp"
+
+1460789702 d:\develop\repositories\libddcpp\src\standard\bits\dd_product.hpp
+	"DD_Range.hpp"
+	"DD_MultiplyAssignWith.hpp"
+
+1460795873 d:\develop\repositories\libddcpp\src\standard\bits\dd_multiplyassignwith.hpp
+	"DD_IntegralConstant.hpp"
+	"DD_Functor.hpp"
 

@@ -30,30 +30,30 @@ DD_ALIAS(Double, double);
 DD_ALIAS(LongDouble, long double);
 
 #	if __cplusplus >= 201103L
-using UnsignedInt8 = std::uint8_t;
-using SignedInt8 = std::int8_t;
-using UnsignedInt16 = std::uint16_t;
-using SignedInt16 = std::int16_t;
-using UnsignedInt32 = std::uint32_t;
-using SignedInt32 = std::int32_t;
-using UnsignedInt64 = std::uint64_t;
-using SignedInt64 = std::int64_t;
+using UnsignedInt8Type = std::uint8_t;
+using SignedInt8Type = std::int8_t;
+using UnsignedInt16Type = std::uint16_t;
+using SignedInt16Type = std::int16_t;
+using UnsignedInt32Type = std::uint32_t;
+using SignedInt32Type = std::int32_t;
+using UnsignedInt64Type = std::uint64_t;
+using SignedInt64Type = std::int64_t;
 #	elif defined(WIN64_)
-typedef UnsignedChar UnsignedInt8;
-typedef SignedChar SignedInt8;
-typedef UnsignedShortInt UnsignedInt16;
-typedef SignedShortInt SignedInt16;
-typedef UnsignedInt UnsignedInt32;
-typedef SignedInt SignedInt32;
-typedef UnsignedLongInt UnsignedInt64;
-typedef SignedLongInt SignedInt64;
+typedef UnsignedChar UnsignedInt8Type;
+typedef SignedChar SignedInt8Type;
+typedef UnsignedShortInt UnsignedInt16Type;
+typedef SignedShortInt SignedInt16Type;
+typedef UnsignedInt UnsignedInt32Type;
+typedef SignedInt SignedInt32Type;
+typedef UnsignedLongInt UnsignedInt64Type;
+typedef SignedLongInt SignedInt64Type;
 #	else
-typedef UnsignedChar UnsignedInt8;
-typedef SignedChar SignedInt8;
-typedef UnsignedShortInt UnsignedInt16;
-typedef SignedShortInt SignedInt16;
-typedef UnsignedLongInt UnsignedInt32;
-typedef SignedLongInt SignedInt32;
+typedef UnsignedChar UnsignedInt8Type;
+typedef SignedChar SignedInt8Type;
+typedef UnsignedShortInt UnsignedInt16Type;
+typedef SignedShortInt SignedInt16Type;
+typedef UnsignedLongInt UnsignedInt32Type;
+typedef SignedLongInt SignedInt32Type;
 #	endif
 
 
@@ -63,6 +63,14 @@ DD_DETAIL_END_
 
 
 DD_BEGIN_
+using detail_::UnsignedInt8Type;
+using detail_::SignedInt8Type;
+using detail_::UnsignedInt16Type;
+using detail_::SignedInt16Type;
+using detail_::UnsignedInt32Type;
+using detail_::SignedInt32Type;
+using detail_::UnsignedInt64Type;
+using detail_::SignedInt64Type;
 
 
 

@@ -22,11 +22,7 @@ template <typename TargetT_, typename SourceClassT_>
 inline TargetT_ DD_UNCONSTRIANED_CONSTEXPR polymorphic_cast(SourceClassT_& source_) DD_NOEXCEPT_AS(
 	static_cast<TargetT_>(source_)
 ) {
-	DD_ASSERT(
-		dynamic_cast<TargetT_>(::DD::address_of(source_) == ::DD::address_of(source_)),
-		"Invalid cast: 'DD::polymorphic_cast'"
-	);
-	return static_cast<TargetT_>(source_);
+	return *polymorphic_cast<TargetT_*>(::DD::address_of(source_));
 }
 
 

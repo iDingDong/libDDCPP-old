@@ -5,6 +5,8 @@
 
 
 #	include "DD_ValueStorage.hpp"
+#	include "DD_construct.hpp"
+#	include "DD_destruct.hpp"
 #	include "DD_swap.hpp"
 
 
@@ -115,6 +117,65 @@ inline ProcessType swap_after_undirectional_list_node_(
 ) DD_NOEXCEPT {
 	::DD::swap(head_1_->next, head_2_->next);
 	::DD::swap(last_1_->next, last_2_->next);
+}
+
+
+
+#	if __cplusplus >= 201103L
+template <typename ValueT_, typename AllocatorT_, typename... ArgumentsT_>
+inline UndirectionalListNode<ValueT_>* create_undirectional_list_node_(
+	AllocatorT_& allocator__, ArgumentsT_&&... arguments__
+) {
+	UndirectionalListNode<ValueT_>* result_ = static_cast<UndirectionalListNode<ValueT_>*>(
+		allocator__.AllocatorT_::Basic::allocate(sizeof(*result_))
+	);
+	try {
+		::DD::construct(::DD::address_of(result_->value), ::DD::forward<ArgumentsT_>(arguments__)...);
+	} catch (...) {
+		allocator__.AllocatorT_::Basic::deallocate(result_, sizeof(*result_));
+		throw;
+	}
+	return result_;
+}
+#	else
+template <typename ValueT_, typename AllocatorT_>
+inline UndirectionalListNode<ValueT_>* create_undirectional_list_node_(AllocatorT_& allocator__) {
+	UndirectionalListNode<ValueT_>* result_ = static_cast<UndirectionalListNode<ValueT_>*>(
+		allocator__.AllocatorT_::Basic::allocate(sizeof(*result_))
+	);
+	try {
+		::DD::construct(::DD::address_of(result_->value));
+	} catch (...) {
+		allocator__.AllocatorT_::Basic::deallocate(result_, sizeof(*result_));
+		throw;
+	}
+	return result_;
+}
+
+template <typename ValueT_, typename AllocatorT_, typename... ArgumentT_>
+inline UndirectionalListNode<ValueT_>* create_undirectional_list_node_(
+	AllocatorT_& allocator__, ArgumentsT_ const& argument__
+) {
+	UndirectionalListNode<ValueT_>* result_ = static_cast<UndirectionalListNode<ValueT_>*>(
+		allocator__.AllocatorT_::Basic::allocate(sizeof(*result_))
+	);
+	try {
+		::DD::construct(::DD::address_of(result_->value), argument__);
+	} catch (...) {
+		allocator__.AllocatorT_::Basic::deallocate(result_, sizeof(*result_));
+		throw;
+	}
+	return result_;
+}
+#	endif
+
+
+template <typename AllocatorT_, typename ValueT_>
+inline void destroy_undirectional_list_node_(
+	AllocatorT_& allocator__, UndirectionalListNode<ValueT_>* node_
+) DD_NOEXCEPT {
+	::DD::destruct(::DD::address_of(node_->value));
+	allocator__.AllocatorT_::Basic::deallocate(node_, sizeof(*node_));
 }
 
 
